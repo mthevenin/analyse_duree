@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>PYTHON</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Accueil</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Données et théorie
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Introduction.html">Introduction</a>
+    </li>
+    <li>
+      <a href="Donnees.html">Les Données biographiques</a>
+    </li>
+    <li>
+      <a href="Theorie.html">Eléments théoriques</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="nonparam.html">Méthodes non paramétriques</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Modèles à risque proportionnel
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Intro_mod.html">Intro</a>
+    </li>
+    <li>
+      <a href="cox.html">Cox</a>
+    </li>
+    <li>
+      <a href="discret.html">Méthode à temps discret</a>
+    </li>
+    <li>
+      <a href="dynamiques.html">Variables dynamiques</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Compléments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="param.html">Modèles paramétriques</a>
+    </li>
+    <li>
+      <a href="concurrents.html">Risques concurrents</a>
+    </li>
+    <li>
+      <a href="cure.html">Modèles dits Cure</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="SAS.html">SAS</a>
+</li>
+<li>
+  <a href="Stata.html">Stata</a>
+</li>
+<li>
+  <a href="R.html">R</a>
+</li>
+<li>
+  <a href="Python.html">Python</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">PYTHON</h1>
+
+</div>
+
+
+<p>Deux paquets d’analyse: principalement<code>lifelines</code> (km, cox, aft…) et <code>statsmodels</code> (estimation logit en temps discret). <br> Le package <code>statsmodels</code> est également ne mesure d’estimer des courbes de séjour de type Kaplan-Meier et des modèles à risque proportionnel de Cox. Le package <code>lifelines</code> couvre la quasi totalité des méthodes standards. Il ne couvre pas (encore) les risques concurrents.</p>
+<pre class="python"><code>import numpy  as np
+import pandas as pd
+import patsy  as pt
+import lifelines as lf
+import matplotlib.pyplot as plt</code></pre>
+<pre class="python"><code>import os
+os.environ[&#39;QT_QPA_PLATFORM_PLUGIN_PATH&#39;] =&#39;C:/Users/thevenin_m/AppData/Local/Continuum/anaconda3/Library/plugins/platforms&#39;</code></pre>
+<pre class="python"><code>trans = pd.read_csv(&quot;D:/Marc/SMS/FORMATIONS/2019/analyse durees/a distribuer/transplantation.csv&quot;)
+trans.head(10)</code></pre>
+<pre><code>##    id  year  age  surgery  transplant  wait  died  stime  mois
+## 0   1    67   30        0           0     0     1     50     3
+## 1   2    68   51        0           0     0     1      6     1
+## 2   3    68   54        0           1     1     1     16     2
+## 3   4    68   40        0           1    36     1     39     2
+## 4   5    68   20        0           0     0     1     18     2
+## 5   6    68   54        0           0     0     1      3     1
+## 6   7    68   50        0           1    51     1    675    24
+## 7   8    68   45        0           0     0     1     40     2
+## 8   9    68   47        0           0     0     1     85     4
+## 9  10    68   42        0           1    12     1     58     3</code></pre>
+<pre class="python"><code>trans.info()</code></pre>
+<pre><code>## &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+## RangeIndex: 103 entries, 0 to 102
+## Data columns (total 9 columns):
+## id            103 non-null int64
+## year          103 non-null int64
+## age           103 non-null int64
+## surgery       103 non-null int64
+## transplant    103 non-null int64
+## wait          103 non-null int64
+## died          103 non-null int64
+## stime         103 non-null int64
+## mois          103 non-null int64
+## dtypes: int64(9)
+## memory usage: 7.3 KB</code></pre>
+<div id="package-lifelines" class="section level1">
+<h1><span class="header-section-number">1</span> Package lifelines</h1>
+<p><a href="https://lifelines.readthedocs.io/en/latest/" class="uri">https://lifelines.readthedocs.io/en/latest/</a></p>
+<div id="non-parametrique-kaplan-meier" class="section level2">
+<h2><span class="header-section-number">1.1</span> Non Paramétrique: Kaplan Meier</h2>
+<div id="estimateur-km-et-duree-mediane" class="section level3">
+<h3><span class="header-section-number">1.1.1</span> Estimateur KM et durée médiane</h3>
+<pre class="python"><code>T = trans[&#39;stime&#39;]
+E = trans[&#39;died&#39;]</code></pre>
+<pre class="python"><code>from lifelines import KaplanMeierFitter
+kmf = KaplanMeierFitter()
+kmf.fit(T,E)</code></pre>
+<pre><code>## &lt;lifelines.KaplanMeierFitter: fitted with 103 observations, 28 censored&gt;</code></pre>
+<pre class="python"><code>print(kmf.survival_function_)</code></pre>
+<pre><code>##           KM_estimate
+## timeline             
+## 0.0          1.000000
+## 1.0          0.990291
+## 2.0          0.961165
+## 3.0          0.932039
+## 5.0          0.912621
+## 6.0          0.893204
+## 8.0          0.883495
+## 9.0          0.873786
+## 11.0         0.873786
+## 12.0         0.863969
+## 16.0         0.834515
+## 17.0         0.824697
+## 18.0         0.814879
+## 21.0         0.795244
+## 28.0         0.785426
+## 30.0         0.775608
+## 31.0         0.775608
+## 32.0         0.765664
+## 35.0         0.755721
+## 36.0         0.745777
+## 37.0         0.735833
+## 39.0         0.725890
+## 40.0         0.705726
+## 43.0         0.695644
+## 45.0         0.685562
+## 50.0         0.675481
+## 51.0         0.665399
+## 53.0         0.655317
+## 58.0         0.645235
+## 61.0         0.635153
+## ...               ...
+## 340.0        0.332696
+## 342.0        0.321224
+## 370.0        0.321224
+## 397.0        0.321224
+## 427.0        0.321224
+## 445.0        0.321224
+## 482.0        0.321224
+## 515.0        0.321224
+## 545.0        0.321224
+## 583.0        0.305928
+## 596.0        0.305928
+## 620.0        0.305928
+## 670.0        0.305928
+## 675.0        0.287932
+## 733.0        0.269936
+## 841.0        0.269936
+## 852.0        0.250655
+## 915.0        0.250655
+## 941.0        0.250655
+## 979.0        0.227868
+## 995.0        0.205081
+## 1032.0       0.182295
+## 1141.0       0.182295
+## 1321.0       0.182295
+## 1386.0       0.151912
+## 1400.0       0.151912
+## 1407.0       0.151912
+## 1571.0       0.151912
+## 1586.0       0.151912
+## 1799.0       0.151912
+## 
+## [89 rows x 1 columns]</code></pre>
+<pre class="python"><code>a = &quot;DUREE MEDIANE:&quot;
+print(a, kmf.median_)</code></pre>
+<pre><code>## DUREE MEDIANE: 100.0</code></pre>
+<pre class="python"><code>kmf.plot()</code></pre>
+<p><img src="Python_files/figure-html/unnamed-chunk-7-1.png" /><!-- --></p>
+</div>
+<div id="comparaison-des-fonctions-de-survie" class="section level3">
+<h3><span class="header-section-number">1.1.2</span> Comparaison des fonctions de survie</h3>
+<pre class="python"><code>ax = plt.subplot(111)
+kmf = KaplanMeierFitter()
+for name, grouped_df in trans.groupby(&#39;surgery&#39;):
+    kmf.fit(grouped_df[&#39;stime&#39;], grouped_df[&#39;died&#39;], label=name)
+    kmf.plot(ax=ax)</code></pre>
+<p><img src="Python_files/figure-html/unnamed-chunk-8-1.png" /><!-- --></p>
+<pre class="python"><code>from lifelines.statistics import multivariate_logrank_test
+results = multivariate_logrank_test(trans[&#39;stime&#39;], trans[&#39;surgery&#39;], trans[&#39;died&#39;])
+results.print_summary()</code></pre>
+<pre><code>## &lt;lifelines.StatisticalResult&gt;
+##                t_0 = -1
+##  null_distribution = chi squared
+## degrees_of_freedom = 1
+## 
+## ---
+##  test_statistic    p  -log2(p)
+##            6.59 0.01      6.61</code></pre>
+</div>
+</div>
+<div id="semi-parametrique-cox" class="section level2">
+<h2><span class="header-section-number">1.2</span> Semi paramétrique: Cox</h2>
+<div id="estimation" class="section level3">
+<h3><span class="header-section-number">1.2.1</span> Estimation</h3>
+<pre class="python"><code>model = &#39;year + age + C(surgery) -1&#39;
+X = pt.dmatrix(model, trans, return_type=&#39;dataframe&#39;)
+design_info = X.design_info
+YX = X.join(trans[[&#39;stime&#39;,&#39;died&#39;]])
+YX.drop([&#39;C(surgery)[0]&#39;], axis=1, inplace=True)
+YX.head()</code></pre>
+<pre><code>##    C(surgery)[1]  year   age  stime  died
+## 0            0.0  67.0  30.0     50     1
+## 1            0.0  68.0  51.0      6     1
+## 2            0.0  68.0  54.0     16     1
+## 3            0.0  68.0  40.0     39     1
+## 4            0.0  68.0  20.0     18     1</code></pre>
+<pre class="python"><code>from lifelines import CoxPHFitter
+cph = CoxPHFitter()
+cph.fit(YX, duration_col=&#39;stime&#39;, event_col=&#39;died&#39;)</code></pre>
+<pre><code>## &lt;lifelines.CoxPHFitter: fitted with 103 observations, 28 censored&gt;</code></pre>
+<pre class="python"><code>cph.print_summary()</code></pre>
+<pre><code>## &lt;lifelines.CoxPHFitter: fitted with 103 observations, 28 censored&gt;
+##       duration col = &#39;stime&#39;
+##          event col = &#39;died&#39;
+## number of subjects = 103
+##   number of events = 75
+## partial log-likelihood = -289.31
+##   time fit was run = 2019-10-22 07:17:37 UTC
+## 
+## ---
+##                coef exp(coef)  se(coef)  coef lower 95%  coef upper 95% exp(coef) lower 95% exp(coef) upper 95%
+## C(surgery)[1] -0.99      0.37      0.44           -1.84           -0.13                0.16                0.88
+## year          -0.12      0.89      0.07           -0.25            0.01                0.78                1.01
+## age            0.03      1.03      0.01            0.00            0.06                1.00                1.06
+## 
+##                   z    p  -log2(p)
+## C(surgery)[1] -2.26 0.02      5.40
+## year          -1.78 0.08      3.72
+## age            2.19 0.03      5.12
+## ---
+## Concordance = 0.65
+## Log-likelihood ratio test = 17.63 on 3 df, -log2(p)=10.90</code></pre>
+<pre class="python"><code>cph.plot()</code></pre>
+<p><img src="Python_files/figure-html/unnamed-chunk-11-1.png" /><!-- --></p>
+</div>
+<div id="tests-hypothese-ph" class="section level3">
+<h3><span class="header-section-number">1.2.2</span> Tests hypothèse PH</h3>
+<p><strong>Test PH: Schoenfeld Méthode 1</strong></p>
+<pre class="python"><code>cph.check_assumptions(YX,p_value_threshold=0.05, show_plots=True)</code></pre>
+<pre><code>## The ``p_value_threshold`` is set at 0.05. Even under the null hypothesis of no violations, some
+## covariates will be below the threshold by chance. This is compounded when there are many covariates.
+## Similarly, when there are lots of observations, even minor deviances from the proportional hazard
+## assumption will be flagged.
+## 
+## With that in mind, it&#39;s best to use a combination of statistical tests and visual tests to determine
+## the most serious violations. Produce visual plots using ``check_assumptions(..., show_plots=True)``
+## and looking for non-constant lines. See link [A] below for a full example.
+## 
+## &lt;lifelines.StatisticalResult&gt;
+##          test_name = proportional_hazard_test
+##  null_distribution = chi squared
+## degrees_of_freedom = 1
+## 
+## ---
+##                     test_statistic    p  -log2(p)
+## C(surgery)[1] km              4.01 0.05      4.47
+##               rank            3.74 0.05      4.23
+## age           km              1.18 0.28      1.86
+##               rank            1.09 0.30      1.75
+## year          km              2.07 0.15      2.73
+##               rank            2.07 0.15      2.74
+## 
+## 
+## 1. Variable &#39;C(surgery)[1]&#39; failed the non-proportional test: p-value is 0.0452.
+## 
+##    Advice: with so few unique values (only 2), you can include `strata=[&#39;C(surgery)[1]&#39;, ...]` in
+## the call in `.fit`. See documentation in link [E] below.
+## 
+## ---
+## [A]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html
+## [B]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html#Bin-variable-and-stratify-on-it
+## [C]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html#Introduce-time-varying-covariates
+## [D]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html#Modify-the-functional-form
+## [E]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html#Stratification</code></pre>
+<p><strong>Test PH: Schoenfeld Méthode 2</strong></p>
+<pre class="python"><code>from lifelines.statistics import  proportional_hazard_test 
+zph = proportional_hazard_test(cph, YX, time_transform=&#39;all&#39;)
+zph.print_summary()</code></pre>
+<pre><code>## &lt;lifelines.StatisticalResult&gt;
+##          test_name = proportional_hazard_test
+##  null_distribution = chi squared
+## degrees_of_freedom = 1
+## 
+## ---
+##                         test_statistic    p  -log2(p)
+## C(surgery)[1] identity            5.54 0.02      5.75
+##               km                  4.01 0.05      4.47
+##               log                 3.69 0.05      4.19
+##               rank                3.74 0.05      4.23
+## age           identity            1.61 0.20      2.29
+##               km                  1.18 0.28      1.86
+##               log                 0.61 0.44      1.20
+##               rank                1.09 0.30      1.75
+## year          identity            0.80 0.37      1.43
+##               km                  2.07 0.15      2.73
+##               log                 1.34 0.25      2.02
+##               rank                2.07 0.15      2.74</code></pre>
+<p><strong>Test PH: intéraction</strong></p>
+<pre class="python"><code>from lifelines.utils import to_episodic_format
+from lifelines import CoxTimeVaryingFitter</code></pre>
+<p><em>Transformation de la base YX</em></p>
+<pre class="python"><code>long = to_episodic_format(YX, duration_col=&#39;stime&#39;, event_col=&#39;died&#39;)</code></pre>
+<p><em>Création de la variable d’intéraction</em></p>
+<pre class="python"><code>long[&#39;surgery_t&#39;] = long[&#39;C(surgery)[1]&#39;] * long[&#39;stop&#39;]</code></pre>
+<p><em>Estimation</em></p>
+<pre class="python"><code>ctv = CoxTimeVaryingFitter()
+ctv.fit(long,
+        id_col=&#39;id&#39;,
+        event_col=&#39;died&#39;,
+        start_col=&#39;start&#39;,
+        stop_col=&#39;stop&#39;,)</code></pre>
+<pre><code>## &lt;lifelines.CoxTimeVaryingFitter: fitted with 31938 periods, 103 subjects, 75 events&gt;</code></pre>
+<pre class="python"><code>ctv.print_summary(4)</code></pre>
+<pre><code>## &lt;lifelines.CoxTimeVaryingFitter: fitted with 31938 periods, 103 subjects, 75 events&gt;
+##          event col = &#39;died&#39;
+## number of subjects = 103
+##  number of periods = 31938
+##   number of events = 75
+##     log-likelihood = -287.3290
+##   time fit was run = 2019-10-22 07:17:38 UTC
+## 
+## ---
+##                  coef exp(coef)  se(coef)  coef lower 95%  coef upper 95% exp(coef) lower 95% exp(coef) upper 95%
+## C(surgery)[1] -1.7547    0.1730    0.6743         -3.0764         -0.4331              0.0461              0.6485
+## age            0.0289    1.0293    0.0134          0.0025          0.0552              1.0025              1.0568
+## year          -0.1231    0.8842    0.0668         -0.2541          0.0079              0.7756              1.0080
+## surgery_t      0.0022    1.0022    0.0011          0.0001          0.0044              1.0001              1.0044
+## 
+##                     z      p  -log2(p)
+## C(surgery)[1] -2.6022 0.0093    6.7542
+## age            2.1479 0.0317    4.9785
+## year          -1.8415 0.0656    3.9312
+## surgery_t      2.0239 0.0430    4.5402
+## ---
+## Log-likelihood ratio test = 21.5846 on 4 df, -log2(p)=12.0103</code></pre>
+</div>
+<div id="variable-dynamique-binaire" class="section level3">
+<h3><span class="header-section-number">1.2.3</span> Variable dynamique binaire</h3>
+</div>
+</div>
+<div id="temps-discret" class="section level2">
+<h2><span class="header-section-number">1.3</span> Temps discret</h2>
+<div id="ajustement-continu" class="section level3">
+<h3><span class="header-section-number">1.3.1</span> Ajustement continu</h3>
+<p>Modèle logistique estimé avec le paquet <code>statsmodel</code>. La fonction <code>to_episodic_format</code> de <code>lifelines</code> permet de mettre en forme la base.<br />
+Pour la durée, on utilisera ici la variable <strong>mois</strong> (regroupement de stime par intervalle de 30 jours).</p>
+<pre class="python"><code>import statsmodels.formula.api as smf #type R formule =&gt; ce qu&#39;on utilisera#
+import statsmodels.api as sm #type python#</code></pre>
+<p><strong>Transformation de la base en format long</strong></p>
+<pre class="python"><code>td = pd.read_csv(&quot;D:/Marc/SMS/FORMATIONS/2019/analyse durees/a distribuer/transplantation.csv&quot;)
+td.drop([&#39;id&#39;], axis=1, inplace=True)
+td[&#39;dur&#39;] = td[&#39;mois&#39;]
+td = to_episodic_format(td, duration_col=&#39;mois&#39;, event_col=&#39;died&#39;)</code></pre>
+<p><strong>Recherche de l’ajustement</strong><br />
+<br> <strong><span class="math inline">\(f(t)=a\times t\)</span></strong></p>
+<pre class="python"><code>td[&#39;t2&#39;] = td[&#39;stop&#39;]**2
+td[&#39;t3&#39;] = td[&#39;stop&#39;]**3
+fit1 = smf.glm(formula=  &quot;died ~ stop&quot;, data=td, family=sm.families.Binomial()).fit()
+fit2 = smf.glm(formula=  &quot;died ~ stop + t2&quot;, data=td, family=sm.families.Binomial()).fit()
+fit3 = smf.glm(formula=  &quot;died ~ stop + t2 + t3&quot;, data=td, family=sm.families.Binomial()).fit()</code></pre>
+<p><strong>Comparaison des AIC</strong></p>
+<pre class="python"><code>print(&quot;AIC pour ajustement t1&quot;)</code></pre>
+<pre><code>## AIC pour ajustement t1</code></pre>
+<pre class="python"><code>print(fit1.aic)</code></pre>
+<pre><code>## 516.1039235968562</code></pre>
+<pre class="python"><code>print(&quot;AIC pour ajustement durée t1 + t2&quot;)</code></pre>
+<pre><code>## AIC pour ajustement durée t1 + t2</code></pre>
+<pre class="python"><code>print(fit2.aic)</code></pre>
+<pre><code>## 508.1014573009212</code></pre>
+<pre class="python"><code>print(&quot;AIC pour ajustement durée t1 + t2 + t3&quot;)</code></pre>
+<pre><code>## AIC pour ajustement durée t1 + t2 + t3</code></pre>
+<pre class="python"><code>print(fit3.aic)</code></pre>
+<pre><code>## 506.18828095187644</code></pre>
+<p><strong>Estimation du modèle</strong></p>
+<pre class="python"><code>tdfit = smf.glm(formula=  &quot;died ~ stop + t2 + t3 + year + age + surgery&quot;, data=td, family=sm.families.Binomial()).fit()
+tdfit.summary()</code></pre>
+<pre><code>## &lt;class &#39;statsmodels.iolib.summary.Summary&#39;&gt;
+## &quot;&quot;&quot;
+##                  Generalized Linear Model Regression Results                  
+## ==============================================================================
+## Dep. Variable:                   died   No. Observations:                 1164
+## Model:                            GLM   Df Residuals:                     1157
+## Model Family:                Binomial   Df Model:                            6
+## Link Function:                  logit   Scale:                          1.0000
+## Method:                          IRLS   Log-Likelihood:                -240.20
+## Date:                Tue, 22 Oct 2019   Deviance:                       480.39
+## Time:                        09:17:42   Pearson chi2:                 1.30e+03
+## No. Iterations:                     7                                         
+## Covariance Type:            nonrobust                                         
+## ==============================================================================
+##                  coef    std err          z      P&gt;|z|      [0.025      0.975]
+## ------------------------------------------------------------------------------
+## Intercept      6.3097      5.201      1.213      0.225      -3.884      16.503
+## stop          -0.2807      0.077     -3.635      0.000      -0.432      -0.129
+## t2             0.0096      0.005      2.083      0.037       0.001       0.019
+## t3            -0.0001   6.97e-05     -1.493      0.135      -0.000    3.26e-05
+## year          -0.1263      0.072     -1.747      0.081      -0.268       0.015
+## age            0.0337      0.014      2.330      0.020       0.005       0.062
+## surgery       -1.0050      0.447     -2.250      0.024      -1.880      -0.130
+## ==============================================================================
+## &quot;&quot;&quot;</code></pre>
+</div>
+<div id="ajustement-discret" class="section level3">
+<h3><span class="header-section-number">1.3.2</span> Ajustement discret</h3>
+<p><em>Création des intervalles pour l’exemple (quantile de la durée en mois)</em></p>
+<pre class="python"><code>td[&#39;ct4&#39;] = pd.qcut(td[&#39;stop&#39;],[0, .25, .5, .75, 1.]) 
+td[&#39;ct4&#39;].value_counts(normalize=True)*100</code></pre>
+<pre><code>## (0.999, 4.0]    27.233677
+## (11.0, 23.0]    24.484536
+## (4.0, 11.0]     24.398625
+## (23.0, 61.0]    23.883162
+## Name: ct4, dtype: float64</code></pre>
+<pre class="python"><code>td.ct4 = pd.Categorical(td.ct4)
+td[&#39;ct4&#39;] = td.ct4.cat.codes</code></pre>
+<p>Pour chaque individu, on conserve une seule observation par intervalle</p>
+<pre class="python"><code>td2 = td 
+td2[&#39;t&#39;] = td2[&#39;ct4&#39;]
+td2 = td2.sort_values([&#39;id&#39;, &#39;stop&#39;])
+td2 =  td2.groupby([&#39;id&#39;,&#39;ct4&#39;]).last()
+td2.head(20)</code></pre>
+<pre><code>##         stop  start  died  age  dur  ...  wait  year     t2       t3  t
+## id ct4                               ...                               
+## 0  0     3.0    2.0     1   30    3  ...     0    67    9.0     27.0  0
+## 1  0     1.0    0.0     1   51    1  ...     0    68    1.0      1.0  0
+## 2  0     2.0    1.0     1   54    2  ...     1    68    4.0      8.0  0
+## 3  0     2.0    1.0     1   40    2  ...    36    68    4.0      8.0  0
+## 4  0     2.0    1.0     1   20    2  ...     0    68    4.0      8.0  0
+## 5  0     1.0    0.0     1   54    1  ...     0    68    1.0      1.0  0
+## 6  0     4.0    3.0     0   50   24  ...    51    68   16.0     64.0  0
+##    1    11.0   10.0     0   50   24  ...    51    68  121.0   1331.0  1
+##    2    23.0   22.0     0   50   24  ...    51    68  529.0  12167.0  2
+##    3    24.0   23.0     1   50   24  ...    51    68  576.0  13824.0  3
+## 7  0     2.0    1.0     1   45    2  ...     0    68    4.0      8.0  0
+## 8  0     4.0    3.0     1   47    4  ...     0    68   16.0     64.0  0
+## 9  0     3.0    2.0     1   42    3  ...    12    68    9.0     27.0  0
+## 10 0     4.0    3.0     0   47    6  ...    26    68   16.0     64.0  0
+##    1     6.0    5.0     1   47    6  ...    26    68   36.0    216.0  1
+## 11 0     1.0    0.0     1   53    1  ...     0    68    1.0      1.0  0
+## 12 0     4.0    3.0     1   54    4  ...    17    68   16.0     64.0  0
+## 13 0     4.0    3.0     0   53   47  ...    37    68   16.0     64.0  0
+##    1    11.0   10.0     0   53   47  ...    37    68  121.0   1331.0  1
+##    2    23.0   22.0     0   53   47  ...    37    68  529.0  12167.0  2
+## 
+## [20 rows x 13 columns]</code></pre>
+<p><strong>Estimation</strong></p>
+<pre class="python"><code>td2fit = smf.glm(formula=  &quot;died ~ C(t) +  year + age + surgery&quot;, data=td2, family=sm.families.Binomial()).fit()
+td2fit.summary()</code></pre>
+<pre><code>## &lt;class &#39;statsmodels.iolib.summary.Summary&#39;&gt;
+## &quot;&quot;&quot;
+##                  Generalized Linear Model Regression Results                  
+## ==============================================================================
+## Dep. Variable:                   died   No. Observations:                  200
+## Model:                            GLM   Df Residuals:                      193
+## Model Family:                Binomial   Df Model:                            6
+## Link Function:                  logit   Scale:                          1.0000
+## Method:                          IRLS   Log-Likelihood:                -112.26
+## Date:                Tue, 22 Oct 2019   Deviance:                       224.52
+## Time:                        09:17:43   Pearson chi2:                     229.
+## No. Iterations:                     5                                         
+## Covariance Type:            nonrobust                                         
+## ==============================================================================
+##                  coef    std err          z      P&gt;|z|      [0.025      0.975]
+## ------------------------------------------------------------------------------
+## Intercept     11.8018      6.617      1.784      0.074      -1.167      24.770
+## C(t)[T.1]     -0.9078      0.408     -2.227      0.026      -1.707      -0.109
+## C(t)[T.2]     -1.8451      0.587     -3.141      0.002      -2.996      -0.694
+## C(t)[T.3]     -0.3224      0.578     -0.557      0.577      -1.456       0.811
+## year          -0.1947      0.093     -2.104      0.035      -0.376      -0.013
+## age            0.0468      0.018      2.543      0.011       0.011       0.083
+## surgery       -1.1025      0.503     -2.192      0.028      -2.088      -0.117
+## ==============================================================================
+## &quot;&quot;&quot;</code></pre>
+</div>
+</div>
+<div id="modele-parametrique-de-type-aft" class="section level2">
+<h2><span class="header-section-number">1.4</span> Modèle paramétrique de type AFT</h2>
+<pre class="python"><code>from lifelines import WeibullAFTFitter, LogLogisticAFTFitter</code></pre>
+<p><strong>Weibull</strong></p>
+<pre class="python"><code>aftw = WeibullAFTFitter()
+aftw.fit(YX, duration_col=&#39;stime&#39;, event_col=&#39;died&#39;)</code></pre>
+<pre><code>## &lt;lifelines.WeibullAFTFitter: fitted with 103 observations, 28 censored&gt;</code></pre>
+<pre class="python"><code>aftw.print_summary()</code></pre>
+<pre><code>## &lt;lifelines.WeibullAFTFitter: fitted with 103 observations, 28 censored&gt;
+##          event col = &#39;died&#39;
+## number of subjects = 103
+##   number of events = 75
+##     log-likelihood = -488.17
+##   time fit was run = 2019-10-22 07:17:43 UTC
+## 
+## ---
+##                        coef exp(coef)  se(coef)  coef lower 95%  coef upper 95% exp(coef) lower 95% exp(coef) upper 95%
+## lambda_ C(surgery)[1]  1.97      7.17      0.78            0.44            3.50                1.56               33.05
+##         year           0.16      1.18      0.12           -0.08            0.40                0.93                1.49
+##         age           -0.06      0.94      0.02           -0.11           -0.01                0.90                0.99
+##         _intercept    -3.02      0.05      8.73          -20.13           14.09                0.00            1.31e+06
+## rho_    _intercept    -0.59      0.56      0.09           -0.77           -0.41                0.46                0.67
+## 
+##                           z      p  -log2(p)
+## lambda_ C(surgery)[1]  2.53   0.01      6.45
+##         year           1.33   0.18      2.44
+##         age           -2.49   0.01      6.28
+##         _intercept    -0.35   0.73      0.46
+## rho_    _intercept    -6.33 &lt;0.005     31.93
+## ---
+## Concordance = 0.65
+## Log-likelihood ratio test = 18.87 on 3 df, -log2(p)=11.75</code></pre>
+<pre class="python"><code>aftw.plot()</code></pre>
+<p><img src="Python_files/figure-html/unnamed-chunk-28-1.png" /><!-- --></p>
+<p><strong>Loglogistique</strong></p>
+<pre class="python"><code>aftl = LogLogisticAFTFitter()
+aftl.fit(YX, duration_col=&#39;stime&#39;, event_col=&#39;died&#39;)</code></pre>
+<pre><code>## &lt;lifelines.LogLogisticAFTFitter: fitted with 103 observations, 28 censored&gt;</code></pre>
+<pre class="python"><code>aftl.print_summary()</code></pre>
+<pre><code>## &lt;lifelines.LogLogisticAFTFitter: fitted with 103 observations, 28 censored&gt;
+##          event col = &#39;died&#39;
+## number of subjects = 103
+##   number of events = 75
+##     log-likelihood = -482.58
+##   time fit was run = 2019-10-22 07:17:44 UTC
+## 
+## ---
+##                        coef exp(coef)  se(coef)  coef lower 95%  coef upper 95% exp(coef) lower 95% exp(coef) upper 95%
+## alpha_ C(surgery)[1]   2.27      9.73      0.69            0.92            3.63                2.51               37.70
+##        year            0.24      1.27      0.12            0.01            0.47                1.01                1.60
+##        age            -0.04      0.96      0.02           -0.08           -0.00                0.92                1.00
+##        _intercept    -10.40      0.00      8.34          -26.75            5.94                0.00              381.80
+## beta_  _intercept     -0.18      0.83      0.10           -0.37            0.01                0.69                1.01
+## 
+##                          z      p  -log2(p)
+## alpha_ C(surgery)[1]  3.29 &lt;0.005      9.97
+##        year           2.05   0.04      4.64
+##        age           -2.00   0.04      4.47
+##        _intercept    -1.25   0.21      2.24
+## beta_  _intercept    -1.86   0.06      4.00
+## ---
+## Concordance = 0.66
+## Log-likelihood ratio test = 21.69 on 3 df, -log2(p)=13.69</code></pre>
+<pre class="python"><code>aftl.plot()</code></pre>
+<p><img src="Python_files/figure-html/unnamed-chunk-30-1.png" /><!-- --></p>
+</div>
+</div>
+<div id="package-statsmodels" class="section level1">
+<h1><span class="header-section-number">2</span> Package statsmodels</h1>
+<p><a href="https://www.statsmodels.org/dev/duration.html" class="uri">https://www.statsmodels.org/dev/duration.html</a></p>
+<p>Le package permet d’estimer des fonction de séjour de type Kaplan-Meier et des modèles de Cox.</p>
+<div id="fonctions-de-sejour-kaplan-meier" class="section level2">
+<h2><span class="header-section-number">2.1</span> Fonctions de séjour Kaplan-Meier</h2>
+<pre class="python"><code>km = sm.SurvfuncRight(trans[&quot;stime&quot;], trans[&quot;died&quot;])
+km.plot()
+km.summary()</code></pre>
+<pre><code>##       Surv prob  Surv prob SE  num at risk  num events
+## Time                                                  
+## 1      0.990291      0.009661          103         1.0
+## 2      0.961165      0.019037          102         3.0
+## 3      0.932039      0.024799           99         3.0
+## 5      0.912621      0.027825           96         2.0
+## 6      0.893204      0.030432           94         2.0
+## 8      0.883495      0.031612           92         1.0
+## 9      0.873786      0.032722           91         1.0
+## 12     0.863969      0.033795           89         1.0
+## 16     0.834515      0.036672           88         3.0
+## 17     0.824697      0.037532           85         1.0
+## 18     0.814879      0.038348           84         1.0
+## 21     0.795244      0.039858           83         2.0
+## 28     0.785426      0.040557           81         1.0
+## 30     0.775608      0.041222           80         1.0
+## 32     0.765664      0.041875           78         1.0
+## 35     0.755721      0.042496           77         1.0
+## 36     0.745777      0.043084           76         1.0
+## 37     0.735833      0.043642           75         1.0
+## 39     0.725890      0.044171           74         1.0
+## 40     0.705726      0.045186           72         2.0
+## 43     0.695644      0.045652           70         1.0
+## 45     0.685562      0.046090           69         1.0
+## 50     0.675481      0.046502           68         1.0
+## 51     0.665399      0.046888           67         1.0
+## 53     0.655317      0.047249           66         1.0
+## 58     0.645235      0.047585           65         1.0
+## 61     0.635153      0.047898           64         1.0
+## 66     0.625072      0.048187           63         1.0
+## 68     0.604908      0.048696           62         2.0
+## 69     0.594826      0.048917           60         1.0
+## ...         ...           ...          ...         ...
+## 78     0.554499      0.049583           56         1.0
+## 80     0.544417      0.049695           55         1.0
+## 81     0.534335      0.049787           54         1.0
+## 85     0.524254      0.049858           53         1.0
+## 90     0.514172      0.049908           52         1.0
+## 96     0.504090      0.049938           51         1.0
+## 100    0.494008      0.049946           50         1.0
+## 102    0.483926      0.049934           49         1.0
+## 110    0.473630      0.049922           47         1.0
+## 149    0.463105      0.049910           45         1.0
+## 153    0.452580      0.049873           44         1.0
+## 165    0.442055      0.049811           43         1.0
+## 186    0.431273      0.049750           41         1.0
+## 188    0.420491      0.049660           40         1.0
+## 207    0.409709      0.049544           39         1.0
+## 219    0.398928      0.049399           38         1.0
+## 263    0.388146      0.049227           37         1.0
+## 285    0.365966      0.048848           35         2.0
+## 308    0.354876      0.048610           33         1.0
+## 334    0.343786      0.048340           32         1.0
+## 340    0.332696      0.048036           31         1.0
+## 342    0.321224      0.047730           29         1.0
+## 583    0.305928      0.047845           21         1.0
+## 675    0.287932      0.048297           17         1.0
+## 733    0.269936      0.048515           16         1.0
+## 852    0.250655      0.048731           14         1.0
+## 979    0.227868      0.049341           11         1.0
+## 995    0.205081      0.049390           10         1.0
+## 1032   0.182295      0.048877            9         1.0
+## 1386   0.151912      0.049277            6         1.0
+## 
+## [62 rows x 4 columns]</code></pre>
+<pre class="python"><code>km.summary()</code></pre>
+<pre><code>##       Surv prob  Surv prob SE  num at risk  num events
+## Time                                                  
+## 1      0.990291      0.009661          103         1.0
+## 2      0.961165      0.019037          102         3.0
+## 3      0.932039      0.024799           99         3.0
+## 5      0.912621      0.027825           96         2.0
+## 6      0.893204      0.030432           94         2.0
+## 8      0.883495      0.031612           92         1.0
+## 9      0.873786      0.032722           91         1.0
+## 12     0.863969      0.033795           89         1.0
+## 16     0.834515      0.036672           88         3.0
+## 17     0.824697      0.037532           85         1.0
+## 18     0.814879      0.038348           84         1.0
+## 21     0.795244      0.039858           83         2.0
+## 28     0.785426      0.040557           81         1.0
+## 30     0.775608      0.041222           80         1.0
+## 32     0.765664      0.041875           78         1.0
+## 35     0.755721      0.042496           77         1.0
+## 36     0.745777      0.043084           76         1.0
+## 37     0.735833      0.043642           75         1.0
+## 39     0.725890      0.044171           74         1.0
+## 40     0.705726      0.045186           72         2.0
+## 43     0.695644      0.045652           70         1.0
+## 45     0.685562      0.046090           69         1.0
+## 50     0.675481      0.046502           68         1.0
+## 51     0.665399      0.046888           67         1.0
+## 53     0.655317      0.047249           66         1.0
+## 58     0.645235      0.047585           65         1.0
+## 61     0.635153      0.047898           64         1.0
+## 66     0.625072      0.048187           63         1.0
+## 68     0.604908      0.048696           62         2.0
+## 69     0.594826      0.048917           60         1.0
+## ...         ...           ...          ...         ...
+## 78     0.554499      0.049583           56         1.0
+## 80     0.544417      0.049695           55         1.0
+## 81     0.534335      0.049787           54         1.0
+## 85     0.524254      0.049858           53         1.0
+## 90     0.514172      0.049908           52         1.0
+## 96     0.504090      0.049938           51         1.0
+## 100    0.494008      0.049946           50         1.0
+## 102    0.483926      0.049934           49         1.0
+## 110    0.473630      0.049922           47         1.0
+## 149    0.463105      0.049910           45         1.0
+## 153    0.452580      0.049873           44         1.0
+## 165    0.442055      0.049811           43         1.0
+## 186    0.431273      0.049750           41         1.0
+## 188    0.420491      0.049660           40         1.0
+## 207    0.409709      0.049544           39         1.0
+## 219    0.398928      0.049399           38         1.0
+## 263    0.388146      0.049227           37         1.0
+## 285    0.365966      0.048848           35         2.0
+## 308    0.354876      0.048610           33         1.0
+## 334    0.343786      0.048340           32         1.0
+## 340    0.332696      0.048036           31         1.0
+## 342    0.321224      0.047730           29         1.0
+## 583    0.305928      0.047845           21         1.0
+## 675    0.287932      0.048297           17         1.0
+## 733    0.269936      0.048515           16         1.0
+## 852    0.250655      0.048731           14         1.0
+## 979    0.227868      0.049341           11         1.0
+## 995    0.205081      0.049390           10         1.0
+## 1032   0.182295      0.048877            9         1.0
+## 1386   0.151912      0.049277            6         1.0
+## 
+## [62 rows x 4 columns]</code></pre>
+<p>Les test du log-rank sont disponibles avec la fonction <code>survdiff</code> (nom idem R). Au niveau graphique, la programmation semble un peu lourde et mériterait d’être simplifiée (donc non traitée).</p>
+<p><strong>Comparaison de S(t) à partir des tests du log-rank</strong></p>
+<p><em>Test non pondéré</em></p>
+<pre class="python"><code>sm.duration.survdiff(trans.stime, trans.died, trans.surgery)</code></pre>
+<pre><code>## (6.590012323234387, 0.010255246157888975)</code></pre>
+<p><em>Breslow</em></p>
+<pre class="python"><code>sm.duration.survdiff(trans.stime, trans.died, trans.surgery, weight_type=&#39;gb&#39;)</code></pre>
+<pre><code>## (8.989753779902491, 0.0027149757927903417)</code></pre>
+<p><em>Tarone-Ware</em></p>
+<pre class="python"><code>sm.duration.survdiff(trans.stime, trans.died, trans.surgery, weight_type=&#39;tw&#39;)</code></pre>
+<pre><code>## (8.462352726451392, 0.0036257256194570653)</code></pre>
+</div>
+<div id="modele-de-cox" class="section level2">
+<h2><span class="header-section-number">2.2</span> Modèle de Cox</h2>
+<pre class="python"><code>mod = smf.phreg(&quot;stime ~  year + age + surgery &quot;,trans, status=&#39;died&#39;, ties=&quot;efron&quot;)
+rslt = mod.fit()
+print(rslt.summary())</code></pre>
+<pre><code>##                        Results: PHReg
+## =============================================================
+## Model:                    PH Reg       Sample size:       103
+## Dependent variable:       stime        Num. events:       75 
+## Ties:                     Efron                              
+## -------------------------------------------------------------
+##          log HR log HR SE   HR      t    P&gt;|t|  [0.025 0.975]
+## -------------------------------------------------------------
+## year    -0.1196    0.0673 0.8872 -1.7765 0.0757 0.7775 1.0124
+## age      0.0296    0.0135 1.0300  2.1872 0.0287 1.0031 1.0577
+## surgery -0.9873    0.4363 0.3726 -2.2632 0.0236 0.1584 0.8761
+## =============================================================
+## Confidence intervals are for the hazard ratios</code></pre>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

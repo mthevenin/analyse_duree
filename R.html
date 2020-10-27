@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>R</title>
+
+<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  { color: #cccccc; background-color: #303030; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ffcfaf; } /* Alert */
+code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
+code span.at { } /* Attribute */
+code span.bn { color: #dca3a3; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #f0dfaf; } /* ControlFlow */
+code span.ch { color: #dca3a3; } /* Char */
+code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
+code span.co { color: #7f9f7f; } /* Comment */
+code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
+code span.do { color: #7f9f7f; } /* Documentation */
+code span.dt { color: #dfdfbf; } /* DataType */
+code span.dv { color: #dcdccc; } /* DecVal */
+code span.er { color: #c3bf9f; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #c0bed1; } /* Float */
+code span.fu { color: #efef8f; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
+code span.kw { color: #f0dfaf; } /* Keyword */
+code span.op { color: #f0efd0; } /* Operator */
+code span.ot { color: #efef8f; } /* Other */
+code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
+code span.sc { color: #dca3a3; } /* SpecialChar */
+code span.ss { color: #cc9393; } /* SpecialString */
+code span.st { color: #cc9393; } /* String */
+code span.va { } /* Variable */
+code span.vs { color: #cc9393; } /* VerbatimString */
+code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Anayse des durées</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Données et théorie
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Introduction.html">Introduction</a>
+    </li>
+    <li>
+      <a href="Donnees.html">Les Données biographiques</a>
+    </li>
+    <li>
+      <a href="Theorie.html">Eléments théoriques</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="nonparam.html">Méthodes non paramétriques</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Modèles à risque proportionnel
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Intro_mod.html">Intro</a>
+    </li>
+    <li>
+      <a href="cox.html">Cox</a>
+    </li>
+    <li>
+      <a href="discret.html">Méthode à temps discret</a>
+    </li>
+    <li>
+      <a href="dynamiques.html">Variables dynamiques</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Compléments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="param.html">Modèles paramétriques</a>
+    </li>
+    <li>
+      <a href="concurrents.html">Risques concurrents</a>
+    </li>
+    <li>
+      <a href="cure.html">Récurrence et imunité</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Logiciels
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="SAS.html">SAS</a>
+    </li>
+    <li>
+      <a href="Stata.html">Stata</a>
+    </li>
+    <li>
+      <a href="R.html">R</a>
+    </li>
+    <li>
+      <a href="Python.html">Python</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">R</h1>
+
+</div>
+
+
+<div id="packages-utilisés-pour-lanalyse" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Packages utilisés pour l’analyse</h1>
+<ul>
+<li><em>Non Paramétrique</em>: <code>survival</code>, <code>discSurv</code>, <code>survRM2</code></li>
+<li><em>Semi paramétrique, temps discret</em>: <code>survival</code>, fonction <code>uncount</code> (package <code>tydir</code>) , fonction <code>glm</code>, fonction <code>quantcut</code> (package <code>gtools</code>)</li>
+<li><em>Paramétrique, Parmar Royston</em> (pour info, non traité): <code>survival</code> <code>flexsurv</code></li>
+<li><em>Risques concurrents</em>: <code>cmprsk</code><br />
+</li>
+<li><em>Modèle cure</em>: modèles mixtes <code>smcure</code>, modèles non mixtes <code>flexsurv</code></li>
+</ul>
+<p><br> <strong>Autres</strong>: <code>survminer</code> et <code>jtools</code> (+<code>RecordLinkage</code>) pour améliorer certains outputs (graphiques et résultats de régression).</p>
+<div id="installation" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Installation</h2>
+<p>Les dernières versions de certains package peuvent être installé via Github (ex: survminer). Pour les récupérer, passer par le package <code>devtools</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="co">#install.packages(&quot;survival&quot;)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="co">#install.packages(&quot;discSurv&quot;)</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="co">#install.packages(&quot;survminer&quot;)</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="co">#install.packages(&quot;survRM2&quot;)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="co">#install.packages(&quot;rms&quot;)</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="co">#install.packages(&quot;tidyr&quot;)</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="co">#install.packages(&quot;gtools&quot;)</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a><span class="co">#install.packages(&quot;jtools&quot;)</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="co">#install.packages(&quot;miceadds&quot;)</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a><span class="co">#install.packages(&quot;RecordLinkage&quot;)</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a><span class="co">#install.packages(&quot;cmprsk&quot;)</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a><span class="kw">library</span>(survival)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a><span class="kw">library</span>(discSurv)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a><span class="kw">library</span>(survminer)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a><span class="kw">library</span>(survRM2)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a><span class="kw">library</span>(tidyr)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a><span class="kw">library</span>(rms)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true"></a><span class="kw">library</span>(gtools)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true"></a><span class="kw">library</span>(jtools)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true"></a><span class="kw">library</span>(RecordLinkage)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true"></a><span class="kw">library</span>(cmprsk)</span></code></pre></div>
+</div>
+<div id="analyse-non-paramétrique" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Analyse Non paramétrique</h2>
+<p>Chargement de la base transplantation</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>trans &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/SMS/FORMATIONS/2019/analyse durees/a distribuer/transplantation.csv&quot;</span>)</span></code></pre></div>
+<div id="méthode-actuarielle" class="section level3" number="1.2.1">
+<h3 number="1.2.1"><span class="header-section-number">1.2.1</span> Méthode actuarielle</h3>
+<p>Les fonctions disponibles sur R ne permettent pas de définir des intervalles, contrairement à Sas ou Stata. Les etimateurs sont systématiquement calculés sur des largeurs d’intervalle égales à 1. On va donc discrétiser les données de la base sur des intervalles de 30 jours. Le graphique sera différent de celui du cours car il reportera sur l’abcisse les valeurs de la durée regroupée, et non les intervalles sur la durée d’origine. Les estimateurs devront donc être lu en mois (grosso modo). Par ailleurs, la durée médiane n’est pas calculée ce qui reduit fortement l’intérêt d’utiliser la méthode actuarielle avec R.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>trans<span class="op">$</span>mois=trans<span class="op">$</span>stime<span class="op">/</span><span class="dv">30</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>trans<span class="op">$</span>mois=<span class="kw">round</span>(trans<span class="op">$</span>m)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a><span class="kw">lifeTable</span>(<span class="dt">dataSet=</span>trans, <span class="dt">timeColumn=</span><span class="st">&quot;mois&quot;</span>, <span class="dt">censColumn=</span><span class="st">&quot;died&quot;</span>)</span></code></pre></div>
+<pre><code>##            n events dropouts atRisk hazard seHazard      S    seS cumHazard
+## [0, 1)   103     14        1  102.5 0.1366   0.0339 0.8634 0.0339    0.1366
+## [1, 2)    88     18        2   87.0 0.2069   0.0434 0.6848 0.0461    0.3435
+## [2, 3)    68     11        0   68.0 0.1618   0.0447 0.5740 0.0493    0.5052
+## [3, 4)    57      9        0   57.0 0.1579   0.0483 0.4834 0.0499    0.6631
+## [4, 5)    48      1        2   47.0 0.0213   0.0210 0.4731 0.0499    0.6844
+## [5, 6)    45      3        0   45.0 0.0667   0.0372 0.4415 0.0498    0.7511
+## [6, 7)    42      2        1   41.5 0.0482   0.0332 0.4203 0.0496    0.7993
+## [7, 8)    39      2        0   39.0 0.0513   0.0353 0.3987 0.0494    0.8506
+## [8, 9)    37      0        0   37.0 0.0000   0.0000 0.3987 0.0494    0.8506
+## [9, 10)   37      3        1   36.5 0.0822   0.0455 0.3659 0.0488    0.9328
+## [10, 11)  33      1        0   33.0 0.0303   0.0298 0.3549 0.0486    0.9631
+## [11, 12)  32      3        1   31.5 0.0952   0.0523 0.3211 0.0477    1.0583
+## [12, 13)  28      0        1   27.5 0.0000   0.0000 0.3211 0.0477    1.0583
+## [13, 14)  27      0        1   26.5 0.0000   0.0000 0.3211 0.0477    1.0583
+## [14, 15)  26      0        1   25.5 0.0000   0.0000 0.3211 0.0477    1.0583
+## [15, 16)  25      0        1   24.5 0.0000   0.0000 0.3211 0.0477    1.0583
+## [16, 17)  24      0        1   23.5 0.0000   0.0000 0.3211 0.0477    1.0583
+## [17, 18)  23      0        1   22.5 0.0000   0.0000 0.3211 0.0477    1.0583
+## [18, 19)  22      0        1   21.5 0.0000   0.0000 0.3211 0.0477    1.0583
+## [19, 20)  21      1        0   21.0 0.0476   0.0465 0.3058 0.0478    1.1059
+## [20, 21)  20      0        1   19.5 0.0000   0.0000 0.3058 0.0478    1.1059
+## [21, 22)  19      0        1   18.5 0.0000   0.0000 0.3058 0.0478    1.1059
+## [22, 23)  18      0        1   17.5 0.0000   0.0000 0.3058 0.0478    1.1059
+## [23, 24)  17      1        0   17.0 0.0588   0.0571 0.2878 0.0483    1.1647
+## [24, 25)  16      1        0   16.0 0.0625   0.0605 0.2698 0.0485    1.2272
+## [25, 26)  15      0        0   15.0 0.0000   0.0000 0.2698 0.0485    1.2272
+## [26, 27)  15      0        0   15.0 0.0000   0.0000 0.2698 0.0485    1.2272
+## [27, 28)  15      0        0   15.0 0.0000   0.0000 0.2698 0.0485    1.2272
+## [28, 29)  15      1        1   14.5 0.0690   0.0665 0.2512 0.0486    1.2962
+## [29, 30)  13      0        0   13.0 0.0000   0.0000 0.2512 0.0486    1.2962
+## [30, 31)  13      0        0   13.0 0.0000   0.0000 0.2512 0.0486    1.2962
+## [31, 32)  13      0        2   12.0 0.0000   0.0000 0.2512 0.0486    1.2962
+## [32, 33)  11      0        0   11.0 0.0000   0.0000 0.2512 0.0486    1.2962
+## [33, 34)  11      2        0   11.0 0.1818   0.1163 0.2055 0.0493    1.4780
+## [34, 35)   9      1        0    9.0 0.1111   0.1048 0.1827 0.0488    1.5891
+## [35, 36)   8      0        0    8.0 0.0000   0.0000 0.1827 0.0488    1.5891
+## [36, 37)   8      0        0    8.0 0.0000   0.0000 0.1827 0.0488    1.5891
+## [37, 38)   8      0        0    8.0 0.0000   0.0000 0.1827 0.0488    1.5891
+## [38, 39)   8      0        1    7.5 0.0000   0.0000 0.1827 0.0488    1.5891
+## [39, 40)   7      0        0    7.0 0.0000   0.0000 0.1827 0.0488    1.5891
+## [40, 41)   7      0        0    7.0 0.0000   0.0000 0.1827 0.0488    1.5891
+## [41, 42)   7      0        0    7.0 0.0000   0.0000 0.1827 0.0488    1.5891
+## [42, 43)   7      0        0    7.0 0.0000   0.0000 0.1827 0.0488    1.5891
+## [43, 44)   7      0        0    7.0 0.0000   0.0000 0.1827 0.0488    1.5891
+## [44, 45)   7      0        1    6.5 0.0000   0.0000 0.1827 0.0488    1.5891
+## [45, 46)   6      0        0    6.0 0.0000   0.0000 0.1827 0.0488    1.5891
+## [46, 47)   6      1        0    6.0 0.1667   0.1521 0.1522 0.0493    1.7558
+## [47, 48)   5      0        2    4.0 0.0000   0.0000 0.1522 0.0493    1.7558
+## [48, 49)   3      0        0    3.0 0.0000   0.0000 0.1522 0.0493    1.7558
+## [49, 50)   3      0        0    3.0 0.0000   0.0000 0.1522 0.0493    1.7558
+## [50, 51)   3      0        0    3.0 0.0000   0.0000 0.1522 0.0493    1.7558
+## [51, 52)   3      0        0    3.0 0.0000   0.0000 0.1522 0.0493    1.7558
+## [52, 53)   3      0        1    2.5 0.0000   0.0000 0.1522 0.0493    1.7558
+## [53, 54)   2      0        1    1.5 0.0000   0.0000 0.1522 0.0493    1.7558
+## [54, 55)   1      0        0    1.0 0.0000   0.0000 0.1522 0.0493    1.7558
+## [55, 56)   1      0        0    1.0 0.0000   0.0000 0.1522 0.0493    1.7558
+## [56, 57)   1      0        0    1.0 0.0000   0.0000 0.1522 0.0493    1.7558
+## [57, 58)   1      0        0    1.0 0.0000   0.0000 0.1522 0.0493    1.7558
+## [58, 59)   1      0        0    1.0 0.0000   0.0000 0.1522 0.0493    1.7558
+## [59, 60)   1      0        0    1.0 0.0000   0.0000 0.1522 0.0493    1.7558
+## [60, 61)   1      0        1    0.5 0.0000   0.0000 0.1522 0.0493    1.7558
+##          seCumHazard margProb
+## [0, 1)        0.0365   0.1366
+## [1, 2)        0.0609   0.1786
+## [2, 3)        0.0780   0.1108
+## [3, 4)        0.0941   0.0906
+## [4, 5)        0.0965   0.0103
+## [5, 6)        0.1039   0.0315
+## [6, 7)        0.1093   0.0213
+## [7, 8)        0.1152   0.0216
+## [8, 9)        0.1152   0.0000
+## [9, 10)       0.1246   0.0328
+## [10, 11)      0.1282   0.0111
+## [11, 12)      0.1395   0.0338
+## [12, 13)      0.1395   0.0000
+## [13, 14)      0.1395   0.0000
+## [14, 15)      0.1395   0.0000
+## [15, 16)      0.1395   0.0000
+## [16, 17)      0.1395   0.0000
+## [17, 18)      0.1395   0.0000
+## [18, 19)      0.1395   0.0000
+## [19, 20)      0.1474   0.0153
+## [20, 21)      0.1474   0.0000
+## [21, 22)      0.1474   0.0000
+## [22, 23)      0.1474   0.0000
+## [23, 24)      0.1587   0.0180
+## [24, 25)      0.1706   0.0180
+## [25, 26)      0.1706   0.0000
+## [26, 27)      0.1706   0.0000
+## [27, 28)      0.1706   0.0000
+## [28, 29)      0.1840   0.0186
+## [29, 30)      0.1840   0.0000
+## [30, 31)      0.1840   0.0000
+## [31, 32)      0.1840   0.0000
+## [32, 33)      0.1840   0.0000
+## [33, 34)      0.2245   0.0457
+## [34, 35)      0.2505   0.0228
+## [35, 36)      0.2505   0.0000
+## [36, 37)      0.2505   0.0000
+## [37, 38)      0.2505   0.0000
+## [38, 39)      0.2505   0.0000
+## [39, 40)      0.2505   0.0000
+## [40, 41)      0.2505   0.0000
+## [41, 42)      0.2505   0.0000
+## [42, 43)      0.2505   0.0000
+## [43, 44)      0.2505   0.0000
+## [44, 45)      0.2505   0.0000
+## [45, 46)      0.2505   0.0000
+## [46, 47)      0.3008   0.0304
+## [47, 48)      0.3008   0.0000
+## [48, 49)      0.3008   0.0000
+## [49, 50)      0.3008   0.0000
+## [50, 51)      0.3008   0.0000
+## [51, 52)      0.3008   0.0000
+## [52, 53)      0.3008   0.0000
+## [53, 54)      0.3008   0.0000
+## [54, 55)      0.3008   0.0000
+## [55, 56)      0.3008   0.0000
+## [56, 57)      0.3008   0.0000
+## [57, 58)      0.3008   0.0000
+## [58, 59)      0.3008   0.0000
+## [59, 60)      0.3008   0.0000
+## [60, 61)      0.3008   0.0000</code></pre>
+</div>
+<div id="méthode-kaplan-meier" class="section level3" number="1.2.2">
+<h3 number="1.2.2"><span class="header-section-number">1.2.2</span> Méthode Kaplan-Meier</h3>
+<p>Le package survival est le principal outil d’analyse des durée. Le package survminer permet d’améliorer la présentation des graphiques. <br></p>
+<p><strong>Estimation des fonctions de survie</strong><br />
+<br> Fonction <code>survfit</code><br />
+Syntaxe</p>
+<pre><code>fit &lt;- survfit(Surv(time, status) ~ x, data = base)</code></pre>
+<p>On peut renseigner les variables permettant de calculer la durée et non la variable de durée elle-même.</p>
+<pre><code>fit &lt;- survfit(Surv(variable start, variable end, status) ~ x, data = nom_base)</code></pre>
+<p>Sans comparaison de groupe:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(stime, died) <span class="op">~</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> trans)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>fit</span></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(stime, died) ~ 1, data = trans)
+## 
+##       n  events  median 0.95LCL 0.95UCL 
+##     103      75     100      72     263</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="kw">summary</span>(fit)</span></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(stime, died) ~ 1, data = trans)
+## 
+##  time n.risk n.event survival std.err lower 95% CI upper 95% CI
+##     1    103       1    0.990 0.00966       0.9715        1.000
+##     2    102       3    0.961 0.01904       0.9246        0.999
+##     3     99       3    0.932 0.02480       0.8847        0.982
+##     5     96       2    0.913 0.02782       0.8597        0.969
+##     6     94       2    0.893 0.03043       0.8355        0.955
+##     8     92       1    0.883 0.03161       0.8237        0.948
+##     9     91       1    0.874 0.03272       0.8119        0.940
+##    12     89       1    0.864 0.03379       0.8002        0.933
+##    16     88       3    0.835 0.03667       0.7656        0.910
+##    17     85       1    0.825 0.03753       0.7543        0.902
+##    18     84       1    0.815 0.03835       0.7431        0.894
+##    21     83       2    0.795 0.03986       0.7208        0.877
+##    28     81       1    0.785 0.04056       0.7098        0.869
+##    30     80       1    0.776 0.04122       0.6989        0.861
+##    32     78       1    0.766 0.04188       0.6878        0.852
+##    35     77       1    0.756 0.04250       0.6769        0.844
+##    36     76       1    0.746 0.04308       0.6659        0.835
+##    37     75       1    0.736 0.04364       0.6551        0.827
+##    39     74       1    0.726 0.04417       0.6443        0.818
+##    40     72       2    0.706 0.04519       0.6225        0.800
+##    43     70       1    0.696 0.04565       0.6117        0.791
+##    45     69       1    0.686 0.04609       0.6009        0.782
+##    50     68       1    0.675 0.04650       0.5902        0.773
+##    51     67       1    0.665 0.04689       0.5796        0.764
+##    53     66       1    0.655 0.04725       0.5690        0.755
+##    58     65       1    0.645 0.04759       0.5584        0.746
+##    61     64       1    0.635 0.04790       0.5479        0.736
+##    66     63       1    0.625 0.04819       0.5374        0.727
+##    68     62       2    0.605 0.04870       0.5166        0.708
+##    69     60       1    0.595 0.04892       0.5063        0.699
+##    72     59       2    0.575 0.04929       0.4857        0.680
+##    77     57       1    0.565 0.04945       0.4755        0.670
+##    78     56       1    0.554 0.04958       0.4654        0.661
+##    80     55       1    0.544 0.04970       0.4552        0.651
+##    81     54       1    0.534 0.04979       0.4451        0.641
+##    85     53       1    0.524 0.04986       0.4351        0.632
+##    90     52       1    0.514 0.04991       0.4251        0.622
+##    96     51       1    0.504 0.04994       0.4151        0.612
+##   100     50       1    0.494 0.04995       0.4052        0.602
+##   102     49       1    0.484 0.04993       0.3953        0.592
+##   110     47       1    0.474 0.04992       0.3852        0.582
+##   149     45       1    0.463 0.04991       0.3749        0.572
+##   153     44       1    0.453 0.04987       0.3647        0.562
+##   165     43       1    0.442 0.04981       0.3545        0.551
+##   186     41       1    0.431 0.04975       0.3440        0.541
+##   188     40       1    0.420 0.04966       0.3336        0.530
+##   207     39       1    0.410 0.04954       0.3233        0.519
+##   219     38       1    0.399 0.04940       0.3130        0.509
+##   263     37       1    0.388 0.04923       0.3027        0.498
+##   285     35       2    0.366 0.04885       0.2817        0.475
+##   308     33       1    0.355 0.04861       0.2713        0.464
+##   334     32       1    0.344 0.04834       0.2610        0.453
+##   340     31       1    0.333 0.04804       0.2507        0.442
+##   342     29       1    0.321 0.04773       0.2401        0.430
+##   583     21       1    0.306 0.04785       0.2252        0.416
+##   675     17       1    0.288 0.04830       0.2073        0.400
+##   733     16       1    0.270 0.04852       0.1898        0.384
+##   852     14       1    0.251 0.04873       0.1712        0.367
+##   979     11       1    0.228 0.04934       0.1491        0.348
+##   995     10       1    0.205 0.04939       0.1279        0.329
+##  1032      9       1    0.182 0.04888       0.1078        0.308
+##  1386      6       1    0.152 0.04928       0.0804        0.287</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="kw">plot</span>(fit)</span></code></pre></div>
+<p><img src="R_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Le premier output <code>fit</code> permet d’obtenir la durée médiane, ici égale à 100 (p=0.494). Le second output, avec la fonction <code>summary</code> permet d’obtenir une table des estimateur. La fonction de survie peut être tracée avec la fonction <code>plot</code> (en pointillés les intervalles de confiance).</p>
+<p><br> On peut obtenir des graphes de bien meilleurs qualité avec les fonction du package <code>survminer</code>.<br />
+Avec la fonction <code>ggsurvplot</code></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="kw">ggsurvplot</span>(fit, <span class="dt">conf.int =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="R_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>On peut ajouter la population encore soumise au risque à plusieurs points d’observation</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="kw">ggsurvplot</span>(fit, <span class="dt">conf.int =</span> <span class="ot">TRUE</span>, <span class="dt">risk.table =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="R_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><strong>Comparaison des fonctions de survie</strong></p>
+<p>On va comparer les fonctions de survie pour la variable surgery.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a>fit &lt;-<span class="st"> </span><span class="kw">survfit</span>(<span class="kw">Surv</span>(stime, died) <span class="op">~</span><span class="st"> </span>surgery, <span class="dt">data =</span> trans)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a>fit</span></code></pre></div>
+<pre><code>## Call: survfit(formula = Surv(stime, died) ~ surgery, data = trans)
+## 
+##            n events median 0.95LCL 0.95UCL
+## surgery=0 91     69     78      61     153
+## surgery=1 12      6    979     583      NA</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="kw">ggsurvplot</span>(fit, <span class="dt">conf.int =</span> <span class="ot">TRUE</span>, <span class="dt">risk.table =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<pre><code>## Warning: Vectorized input to `element_text()` is not officially supported.
+## Results may be unexpected or may change in future versions of ggplot2.</code></pre>
+<p><img src="R_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><em>Tests du log-rank</em>: on utilise la fonction <code>survdiff</code>, et on sélectionnera le test de Peto-Peto (<code>rho=1</code>).<br />
+La syntaxe est quasiment identique à la fonction <code>survdiff</code>.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="kw">survdiff</span>(<span class="kw">Surv</span>(stime, died) <span class="op">~</span><span class="st"> </span>surgery, <span class="dt">rho=</span><span class="dv">1</span>, <span class="dt">data =</span> trans)</span></code></pre></div>
+<pre><code>## Call:
+## survdiff(formula = Surv(stime, died) ~ surgery, data = trans, 
+##     rho = 1)
+## 
+##            N Observed Expected (O-E)^2/E (O-E)^2/V
+## surgery=0 91    45.28    39.12     0.968      8.65
+## surgery=1 12     2.03     8.18     4.630      8.65
+## 
+##  Chisq= 8.7  on 1 degrees of freedom, p= 0.003</code></pre>
+<p>Ici la variable est binaire. Si veux tester deux à deux les niveaux d’une variable catégorielle à plus de deux modalité, on utilise la fonction <code>pairwise_survdiff</code> (syntaxe identique que <code>survdiff</code>).</p>
+<p><em>Comparaison des RMST</em></p>
+<p>La fonction <code>rmst2</code> du package <code>survRM2</code> permet de comparer les RMST entre 2 groupes (et pas plus). La strate pour les comparaisons doit être renommée <em>arm</em>. La commande, issue d’une commande de Stata, n’est pas très souple.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a>trans<span class="op">$</span>arm=trans<span class="op">$</span>surgery</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a>a=<span class="kw">rmst2</span>(trans<span class="op">$</span>stime, trans<span class="op">$</span>died, trans<span class="op">$</span>arm, <span class="dt">tau=</span><span class="ot">NULL</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a><span class="kw">print</span>(a)</span></code></pre></div>
+<pre><code>## 
+## The truncation time, tau, was not specified. Thus, the default tau (the minimum of the largest observed time on each of the two groups) 1407  is used. 
+## 
+## Restricted Mean Survival Time (RMST) by arm 
+##                 Est.      se lower .95 upper .95
+## RMST (arm=1) 884.576 151.979   586.702  1182.450
+## RMST (arm=0) 379.148  58.606   264.283   494.012
+## 
+## 
+## Restricted Mean Time Lost (RMTL) by arm 
+##                  Est.      se lower .95 upper .95
+## RMTL (arm=1)  522.424 151.979   224.550   820.298
+## RMTL (arm=0) 1027.852  58.606   912.988  1142.717
+## 
+## 
+## Between-group contrast 
+##                         Est. lower .95 upper .95     p
+## RMST (arm=1)-(arm=0) 505.428   186.175   824.682 0.002
+## RMST (arm=1)/(arm=0)   2.333     1.483     3.670 0.000
+## RMTL (arm=1)/(arm=0)   0.508     0.284     0.909 0.022</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a><span class="kw">plot</span>(a)</span></code></pre></div>
+<p><img src="R_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true"></a>trans<span class="op">$</span>arm &lt;-<span class="st"> </span><span class="ot">NULL</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="modèle-semi-paramétrique-de-cox" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Modèle semi paramétrique de Cox</h1>
+<p>Ici tout est estimé avec des fonctions du package <code>survival</code>:</p>
+<ul>
+<li>Estimation du modèle: <code>coxph</code>.</li>
+<li>Test de Grambsch-Therneau: <code>cox.zph</code>.</li>
+<li>Introduction d’une variable dynamique: <code>survsplit</code>.</li>
+</ul>
+<div id="estimation-du-modèle" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Estimation du modèle</h2>
+<p>Par défaut, R utilise la correction d’Efron pour les évènements simultanés. Il est préférable de ne pas la modifier.</p>
+<p>Syntaxe:</p>
+<pre><code>coxph(Surv(time, status) ~ x1 + x2 + ....., data=base, ties=&quot;nom_correction&quot;))</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a>coxfit =<span class="st"> </span><span class="kw">coxph</span>(<span class="dt">formula =</span> <span class="kw">Surv</span>(stime, died) <span class="op">~</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>surgery, <span class="dt">data =</span> trans)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true"></a><span class="kw">summary</span>(coxfit)</span></code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(stime, died) ~ year + age + surgery, data = trans)
+## 
+##   n= 103, number of events= 75 
+## 
+##             coef exp(coef) se(coef)      z Pr(&gt;|z|)  
+## year    -0.11963   0.88725  0.06734 -1.776   0.0757 .
+## age      0.02958   1.03002  0.01352  2.187   0.0287 *
+## surgery -0.98732   0.37257  0.43626 -2.263   0.0236 *
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##         exp(coef) exp(-coef) lower .95 upper .95
+## year       0.8872     1.1271    0.7775    1.0124
+## age        1.0300     0.9709    1.0031    1.0577
+## surgery    0.3726     2.6840    0.1584    0.8761
+## 
+## Concordance= 0.653  (se = 0.032 )
+## Likelihood ratio test= 17.63  on 3 df,   p=5e-04
+## Wald test            = 15.76  on 3 df,   p=0.001
+## Score (logrank) test = 16.71  on 3 df,   p=8e-04</code></pre>
+<p>La table des résultats reporte le logarithme des RR (coef) ainsi que les RR (exp(coef)). Il est intéressant de regarder la valeur de concordance (Harrel’s) qui donne des indications sur la qualité de l’ajustement (proche de l’AUC/ROC).</p>
+<p>On peut représenter sous forme graphique les résultats avec la fonction <code>ggforest</code> de <code>survminer</code></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a><span class="kw">ggforest</span>(coxfit)</span></code></pre></div>
+<pre><code>## Warning in .get_data(model, data = data): The `data` argument is not provided.
+## Data will be extracted from model fit.</code></pre>
+<p><img src="R_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="tests-de-lhypothèse-ph" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Tests de l’hypothèse PH</h2>
+<p><strong>Résidus de Schoenfeld</strong><br />
+On utilise la fonction <code>cox.zph</code> pour le test de Grambsch-Therneau.<br />
+Le test peut utiliser plusieurs fonctions de la durée, pour réaliser le test. Par défaut la fonction utilise 1-KM, soit le complémentaire de l’estimateur de Kaplan-Meier (option transform=“km”).</p>
+<p>Avec <code>transform="km"</code></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a><span class="kw">cox.zph</span>(coxfit)</span></code></pre></div>
+<pre><code>##         chisq df     p
+## year    3.309  1 0.069
+## age     0.922  1 0.337
+## surgery 5.494  1 0.019
+## GLOBAL  8.581  3 0.035</code></pre>
+<p>Avec <code>transform="identity"</code> (<span class="math inline">\(f(t)=t\)</span>) [remarque: solution de Stata par défaut].</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true"></a><span class="kw">cox.zph</span>(coxfit, <span class="dt">transform=</span><span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<pre><code>##         chisq df     p
+## year     4.54  1 0.033
+## age      1.71  1 0.191
+## surgery  4.92  1 0.027
+## GLOBAL   9.47  3 0.024</code></pre>
+<p><strong>Introduction d’une intéraction</strong></p>
+<p>Lorsque la covariable n’est pas continue, elle doit être transformée en indicatrice. Vérifier que les résultats du modèle sont bien identiques avec le modèle estimé précédemment (ne pas oublier d’omettre le niveau en référence).<br />
+Ici la variable surgery est déjà sous forme d’indicatrice (0,1).<br />
+La variable d’intéraction est <code>tt(nom-variable)</code>, la fonction de la durée (ici forme linéaire simple) est indiquée en option de la fonction: <code>tt = function(x, t, ...) x*t</code>.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true"></a>coxfit2 =<span class="st"> </span><span class="kw">coxph</span>(<span class="dt">formula =</span> <span class="kw">Surv</span>(stime, died) <span class="op">~</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>surgery <span class="op">+</span><span class="st"> </span><span class="kw">tt</span>(surgery), <span class="dt">data =</span> trans, <span class="dt">tt =</span> <span class="cf">function</span>(x, t, ...) x<span class="op">*</span>t)</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true"></a><span class="kw">summary</span>(coxfit2)</span></code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(stime, died) ~ year + age + surgery + tt(surgery), 
+##     data = trans, tt = function(x, t, ...) x * t)
+## 
+##   n= 103, number of events= 75 
+## 
+##                  coef exp(coef)  se(coef)      z Pr(&gt;|z|)   
+## year        -0.123074  0.884198  0.066835 -1.841  0.06555 . 
+## age          0.028888  1.029310  0.013449  2.148  0.03172 * 
+## surgery     -1.754738  0.172953  0.674391 -2.602  0.00927 **
+## tt(surgery)  0.002231  1.002234  0.001102  2.024  0.04299 * 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##             exp(coef) exp(-coef) lower .95 upper .95
+## year           0.8842     1.1310   0.77564    1.0080
+## age            1.0293     0.9715   1.00253    1.0568
+## surgery        0.1730     5.7819   0.04612    0.6486
+## tt(surgery)    1.0022     0.9978   1.00007    1.0044
+## 
+## Concordance= 0.656  (se = 0.032 )
+## Likelihood ratio test= 21.58  on 4 df,   p=2e-04
+## Wald test            = 16.99  on 4 df,   p=0.002
+## Score (logrank) test = 19  on 4 df,   p=8e-04</code></pre>
+<p>Rappel: le paramètre estimé pour tt(surgery) ne reporte pas un RR, mais un rapport de RR.</p>
+</div>
+<div id="introduction-dune-variable-dynamique-binaire" class="section level2" number="2.3">
+<h2 number="2.3"><span class="header-section-number">2.3</span> Introduction d’une variable dynamique (binaire)</h2>
+<p>La dimension dynamique est le fait d’avoir été opéré pour une greffe du coeur.<br />
+<br></p>
+<ul>
+<li><strong>Etape 1</strong>: créer un vecteur donnant les durées aux temps d’évènement.</li>
+<li><strong>Etape 2</strong>: appliquer ce vecteurs de points de coupure à la fonction <code>survsplit</code>.</li>
+<li><strong>Etape 3</strong>: modifier la variable transplant (ou créer une nouvelle) à l’aide de la variable <strong>wait</strong> qui prend la valeur 1 à partir du jour de la greffe, 0 avant.</li>
+</ul>
+<p><em>Etape 1</em> Création de l’objet cut (vecteur)</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true"></a>cut=<span class="st"> </span><span class="kw">unique</span>(trans<span class="op">$</span>stime[trans<span class="op">$</span>died <span class="op">==</span><span class="st"> </span><span class="dv">1</span>])</span></code></pre></div>
+<p><em>Etape 2</em></p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true"></a>tvc =<span class="st"> </span><span class="kw">survSplit</span>(<span class="dt">data =</span> trans, <span class="dt">cut =</span> cut, <span class="dt">end =</span> <span class="st">&quot;stime&quot;</span>, <span class="dt">start =</span> <span class="st">&quot;stime0&quot;</span>, <span class="dt">event =</span> <span class="st">&quot;died&quot;</span>)</span></code></pre></div>
+<p>Remarque: pour estimer le modèle de Cox de départ avec cette base longue.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true"></a><span class="kw">coxph</span>(<span class="dt">formula =</span> <span class="kw">Surv</span>(stime0, stime, died) <span class="op">~</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>surgery, <span class="dt">data =</span> tvc)</span></code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(stime0, stime, died) ~ year + age + surgery, 
+##     data = tvc)
+## 
+##             coef exp(coef) se(coef)      z      p
+## year    -0.11963   0.88725  0.06734 -1.776 0.0757
+## age      0.02958   1.03002  0.01352  2.187 0.0287
+## surgery -0.98732   0.37257  0.43626 -2.263 0.0236
+## 
+## Likelihood ratio test=17.63  on 3 df, p=0.0005243
+## n= 3573, number of events= 75</code></pre>
+<p><em>Etape 3</em></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true"></a>tvc<span class="op">$</span>tvc=<span class="kw">ifelse</span>(tvc<span class="op">$</span>transplant<span class="op">==</span><span class="dv">1</span> <span class="op">&amp;</span><span class="st"> </span>tvc<span class="op">$</span>wait<span class="op">&lt;=</span>tvc<span class="op">$</span>stime,<span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div>
+<p><strong>Estimation du modèle</strong><br />
+En format long, on doit préciser dans la formule l’intervalle de durée avec les variables stime0 (début) et stime(fin)</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true"></a>tvcfit =<span class="st"> </span><span class="kw">coxph</span>(<span class="dt">formula =</span> <span class="kw">Surv</span>(stime0, stime, died) <span class="op">~</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>surgery <span class="op">+</span><span class="st"> </span>tvc, <span class="dt">data =</span> tvc)</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true"></a><span class="kw">summary</span>(tvcfit)</span></code></pre></div>
+<pre><code>## Call:
+## coxph(formula = Surv(stime0, stime, died) ~ year + age + surgery + 
+##     tvc, data = tvc)
+## 
+##   n= 3573, number of events= 75 
+## 
+##             coef exp(coef) se(coef)      z Pr(&gt;|z|)  
+## year    -0.12032   0.88664  0.06734 -1.787   0.0740 .
+## age      0.03044   1.03091  0.01390  2.190   0.0285 *
+## surgery -0.98289   0.37423  0.43655 -2.251   0.0244 *
+## tvc     -0.08221   0.92108  0.30484 -0.270   0.7874  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##         exp(coef) exp(-coef) lower .95 upper .95
+## year       0.8866      1.128    0.7770    1.0117
+## age        1.0309      0.970    1.0032    1.0594
+## surgery    0.3742      2.672    0.1591    0.8805
+## tvc        0.9211      1.086    0.5068    1.6741
+## 
+## Concordance= 0.659  (se = 0.032 )
+## Likelihood ratio test= 17.7  on 4 df,   p=0.001
+## Wald test            = 15.79  on 4 df,   p=0.003
+## Score (logrank) test = 16.74  on 4 df,   p=0.002</code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true"></a><span class="kw">ggforest</span>(tvcfit)</span></code></pre></div>
+<pre><code>## Warning in .get_data(model, data = data): The `data` argument is not provided.
+## Data will be extracted from model fit.</code></pre>
+<p><img src="R_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+</div>
+<div id="analyse-en-temps-discret-logistique" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Analyse en temps discret (logistique)</h1>
+<p>Pour la durée, on va utiliser la variable mois (en fait regroupement sur 30 jours).<br />
+La fonction <code>uncount</code> du package <code>tidy</code> permettra de splitter la base au temps d’observation.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true"></a><span class="kw">library</span>(<span class="st">&quot;tidyr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true"></a>dt =<span class="st"> </span><span class="kw">uncount</span>(trans,mois)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true"></a>dt =<span class="st"> </span>dt[<span class="kw">order</span>(dt<span class="op">$</span>id),]</span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true"></a><span class="kw">kable</span>(dt[<span class="dv">1</span><span class="op">:</span><span class="dv">11</span>, ],)</span></code></pre></div>
+<pre><code>## 
+## 
+##        id   year   age   surgery   transplant   wait   died   stime
+## ----  ---  -----  ----  --------  -----------  -----  -----  ------
+## 1       1     67    30         0            0      0      1      50
+## 1.1     1     67    30         0            0      0      1      50
+## 1.2     1     67    30         0            0      0      1      50
+## 2       2     68    51         0            0      0      1       6
+## 3       3     68    54         0            1      1      1      16
+## 3.1     3     68    54         0            1      1      1      16
+## 4       4     68    40         0            1     36      1      39
+## 4.1     4     68    40         0            1     36      1      39
+## 5       5     68    20         0            0      0      1      18
+## 5.1     5     68    20         0            0      0      1      18
+## 6       6     68    54         0            0      0      1       3</code></pre>
+<p>La variable mois a été supprimée, on va généré une variable type compteur pour mesurée la durée à chaque point d’observation. On va également recréer la variable (renommée T).</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true"></a>dt<span class="op">$</span>x=<span class="dv">1</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true"></a>dt<span class="op">$</span>t =<span class="st"> </span><span class="kw">ave</span>(dt<span class="op">$</span>x,dt<span class="op">$</span>id, <span class="dt">FUN=</span>cumsum)</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true"></a>dt<span class="op">$</span>T =<span class="st"> </span><span class="kw">ave</span>(dt<span class="op">$</span>x,dt<span class="op">$</span>id, <span class="dt">FUN=</span>sum)</span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true"></a><span class="kw">kable</span>(dt[<span class="dv">1</span><span class="op">:</span><span class="dv">11</span>, ],)</span></code></pre></div>
+<pre><code>## 
+## 
+##        id   year   age   surgery   transplant   wait   died   stime    x    t    T
+## ----  ---  -----  ----  --------  -----------  -----  -----  ------  ---  ---  ---
+## 1       1     67    30         0            0      0      1      50    1    1    3
+## 1.1     1     67    30         0            0      0      1      50    1    2    3
+## 1.2     1     67    30         0            0      0      1      50    1    3    3
+## 2       2     68    51         0            0      0      1       6    1    1    1
+## 3       3     68    54         0            1      1      1      16    1    1    2
+## 3.1     3     68    54         0            1      1      1      16    1    2    2
+## 4       4     68    40         0            1     36      1      39    1    1    2
+## 4.1     4     68    40         0            1     36      1      39    1    2    2
+## 5       5     68    20         0            0      0      1      18    1    1    2
+## 5.1     5     68    20         0            0      0      1      18    1    2    2
+## 6       6     68    54         0            0      0      1       3    1    1    1</code></pre>
+<p>Si un individu est décédé, died=1 est reporté sur toute les lignes (idem qu’avec la variable dynamique). On va modifier la variable tel que *died=0 si t&lt;T$**</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true"></a>dt<span class="op">$</span>died[dt<span class="op">$</span>t<span class="op">&lt;</span>dt<span class="op">$</span>T]=<span class="dv">0</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true"></a><span class="kw">kable</span>(dt[<span class="dv">1</span><span class="op">:</span><span class="dv">11</span>, ],)</span></code></pre></div>
+<pre><code>## 
+## 
+##        id   year   age   surgery   transplant   wait   died   stime    x    t    T
+## ----  ---  -----  ----  --------  -----------  -----  -----  ------  ---  ---  ---
+## 1       1     67    30         0            0      0      0      50    1    1    3
+## 1.1     1     67    30         0            0      0      0      50    1    2    3
+## 1.2     1     67    30         0            0      0      1      50    1    3    3
+## 2       2     68    51         0            0      0      1       6    1    1    1
+## 3       3     68    54         0            1      1      0      16    1    1    2
+## 3.1     3     68    54         0            1      1      1      16    1    2    2
+## 4       4     68    40         0            1     36      0      39    1    1    2
+## 4.1     4     68    40         0            1     36      1      39    1    2    2
+## 5       5     68    20         0            0      0      0      18    1    1    2
+## 5.1     5     68    20         0            0      0      1      18    1    2    2
+## 6       6     68    54         0            0      0      1       3    1    1    1</code></pre>
+<div id="estimation-avec-durée-comme-variable-continue" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Estimation avec durée comme variable continue</h2>
+<p>Avec un effet quadratique d’ordre 2.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true"></a>dt<span class="op">$</span>t2=dt<span class="op">$</span>t<span class="op">^</span><span class="dv">2</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true"></a>dtfit =<span class="st"> </span><span class="kw">glm</span>(died <span class="op">~</span><span class="st"> </span>t <span class="op">+</span><span class="st"> </span>t2 <span class="op">+</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>surgery, <span class="dt">data=</span>dt, <span class="dt">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true"></a><span class="kw">summ</span>(dtfit)</span></code></pre></div>
+<pre><code>## MODEL INFO:
+## Observations: 1160
+## Dependent Variable: died
+## Type: Generalized linear model
+##   Family: binomial 
+##   Link function: logit 
+## 
+## MODEL FIT:
+## &lt;U+03C7&gt;²(5) = 74.15, p = 0.00
+## Pseudo-R² (Cragg-Uhler) = 0.16
+## Pseudo-R² (McFadden) = 0.13
+## AIC = 493.70, BIC = 524.03 
+## 
+## Standard errors: MLE
+## ------------------------------------------------
+##                      Est.   S.E.   z val.      p
+## ----------------- ------- ------ -------- ------
+## (Intercept)          6.80   5.14     1.32   0.19
+## t                   -0.17   0.04    -4.98   0.00
+## t2                   0.00   0.00     3.28   0.00
+## year                -0.14   0.07    -1.92   0.05
+## age                  0.03   0.01     2.36   0.02
+## surgery             -0.99   0.45    -2.23   0.03
+## ------------------------------------------------</code></pre>
+<p>Remarque sur la présentation: la fonction <code>summ</code> est intégrée au package <code>jtools</code>. Elle ne fonctionne qu’avec le package <code>Recordlinkage</code> qui doit être installé et chargé.</p>
+</div>
+<div id="estimation-avec-durée-comme-variable-discrete" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Estimation avec durée comme variable discrete</h2>
+<p>On va créer une variable dicrète regroupant la variable t en quartile (pour l’exempe seulement, tous type de regroupement est envisageable).<br />
+On va utiliser la fonction <code>quantcut</code> du package <code>gtools</code>.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true"></a>dt<span class="op">$</span>ct4 &lt;-<span class="st"> </span><span class="kw">quantcut</span>(dt<span class="op">$</span>t)</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true"></a><span class="kw">table</span>(dt<span class="op">$</span>ct4) </span></code></pre></div>
+<pre><code>## 
+##   [1,4]  (4,11] (11,23] (23,61] 
+##     316     281     285     278</code></pre>
+<p>On va générer un compteur et un total d’observations sur la strate regroupant <em>id</em> et <em>ct4</em>.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true"></a>dt<span class="op">$</span>n =<span class="st"> </span><span class="kw">ave</span>(dt<span class="op">$</span>x,dt<span class="op">$</span>id, dt<span class="op">$</span>ct4, <span class="dt">FUN=</span>cumsum)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true"></a>dt<span class="op">$</span>N =<span class="st"> </span><span class="kw">ave</span>(dt<span class="op">$</span>x,dt<span class="op">$</span>id, dt<span class="op">$</span>ct4, <span class="dt">FUN=</span>sum)</span></code></pre></div>
+<p>On conserve la dernière observation dans la strate.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true"></a>dt2 =<span class="st"> </span><span class="kw">subset</span>(dt, n<span class="op">==</span>N)</span></code></pre></div>
+<p><strong>Estimation du modèle</strong></p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true"></a>fit =<span class="st"> </span><span class="kw">glm</span>(died <span class="op">~</span><span class="st"> </span>ct4 <span class="op">+</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>surgery, <span class="dt">data=</span>dt2, <span class="dt">family=</span>binomial)</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true"></a><span class="kw">summ</span>(fit)</span></code></pre></div>
+<pre><code>## MODEL INFO:
+## Observations: 200
+## Dependent Variable: died
+## Type: Generalized linear model
+##   Family: binomial 
+##   Link function: logit 
+## 
+## MODEL FIT:
+## &lt;U+03C7&gt;²(6) = 40.11, p = 0.00
+## Pseudo-R² (Cragg-Uhler) = 0.25
+## Pseudo-R² (McFadden) = 0.15
+## AIC = 238.52, BIC = 261.61 
+## 
+## Standard errors: MLE
+## ------------------------------------------------
+##                      Est.   S.E.   z val.      p
+## ----------------- ------- ------ -------- ------
+## (Intercept)         11.80   6.62     1.78   0.07
+## ct4(4,11]           -0.91   0.41    -2.23   0.03
+## ct4(11,23]          -1.85   0.59    -3.14   0.00
+## ct4(23,61]          -0.32   0.58    -0.56   0.58
+## year                -0.19   0.09    -2.10   0.04
+## age                  0.05   0.02     2.54   0.01
+## surgery             -1.10   0.50    -2.19   0.03
+## ------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="modèles-paramétrique-usuels" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Modèles paramétrique usuels</h1>
+<p>On utilise la fonction <code>survreg</code> du package <code>survival</code></p>
+<div id="modèle-de-weibull" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> Modèle de Weibull</h2>
+<p><strong>De type AFT</strong></p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true"></a>weibull =<span class="st"> </span><span class="kw">survreg</span>(<span class="dt">formula =</span> <span class="kw">Surv</span>(stime, died) <span class="op">~</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>surgery, <span class="dt">data =</span> trans, <span class="dt">dist=</span><span class="st">&quot;weibull&quot;</span>)</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true"></a><span class="kw">summary</span>(weibull)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## survreg(formula = Surv(stime, died) ~ year + age + surgery, data = trans, 
+##     dist = &quot;weibull&quot;)
+##               Value Std. Error     z       p
+## (Intercept) -3.0220     8.7284 -0.35   0.729
+## year         0.1620     0.1218  1.33   0.184
+## age         -0.0615     0.0247 -2.49   0.013
+## surgery      1.9703     0.7794  2.53   0.011
+## Log(scale)   0.5868     0.0927  6.33 2.5e-10
+## 
+## Scale= 1.8 
+## 
+## Weibull distribution
+## Loglik(model)= -488.2   Loglik(intercept only)= -497.6
+##  Chisq= 18.87 on 3 degrees of freedom, p= 0.00029 
+## Number of Newton-Raphson Iterations: 5 
+## n= 103</code></pre>
+<p><strong>De type PH</strong><br />
+<br> La paramétrisation PH n’est pas possible avec la fonction <code>survreg</code>.<br />
+Il faut utiliser le package <code>flexsurv</code>, qui permet également d’estimer les modèles paramétriques disponibles avec <code>survival</code>.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true"></a><span class="kw">library</span>(flexsurv)</span></code></pre></div>
+<pre><code>## Warning: package &#39;flexsurv&#39; was built under R version 3.4.4</code></pre>
+<p>Pour estimer le modèle de Weibull de type PH, on utilise en option <code>dist="weibull"</code>.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true"></a><span class="kw">flexsurvreg</span>(<span class="dt">formula =</span> <span class="kw">Surv</span>(stime, died) <span class="op">~</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>surgery, <span class="dt">data =</span> trans, <span class="dt">dist=</span><span class="st">&quot;weibullPH&quot;</span>)</span></code></pre></div>
+<pre><code>## Call:
+## flexsurvreg(formula = Surv(stime, died) ~ year + age + surgery, 
+##     data = trans, dist = &quot;weibullPH&quot;)
+## 
+## Estimates: 
+##          data mean  est        L95%       U95%       se         exp(est) 
+## shape           NA   5.56e-01   4.64e-01   6.67e-01   5.16e-02         NA
+## scale           NA   5.37e+00   4.27e-04   6.75e+04   2.59e+01         NA
+## year      7.06e+01  -9.01e-02  -2.20e-01   3.97e-02   6.62e-02   9.14e-01
+## age       4.46e+01   3.42e-02   7.09e-03   6.13e-02   1.38e-02   1.03e+00
+## surgery   1.17e-01  -1.10e+00  -1.95e+00  -2.45e-01   4.34e-01   3.34e-01
+##          L95%       U95%     
+## shape           NA         NA
+## scale           NA         NA
+## year      8.03e-01   1.04e+00
+## age       1.01e+00   1.06e+00
+## surgery   1.43e-01   7.83e-01
+## 
+## N = 103,  Events: 75,  Censored: 28
+## Total time at risk: 31938
+## Log-likelihood = -488.1683, df = 5
+## AIC = 986.3366</code></pre>
+</div>
+</div>
+<div id="risques-concurrents" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Risques concurrents</h1>
+<p>Package <code>cmprsk</code> pour l’analyse paramétrique et le modèle de Fine-Gray.</p>
+<p>La base utilisée est <em>compet</em>. Il sagit de la base transplant dont la variable d’interêt, <code>compet</code>, correspont à la variable died avec une modalité supplémentaire simulée. On suppose l’existence d’une cause supplémentaire au décès autre qu’une malformation cardiaque.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true"></a>compet &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;~/SMS/FORMATIONS/2019/analyse durees/a distribuer/compet.csv&quot;</span>)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true"></a><span class="co"># variable compet</span></span>
+<span id="cb65-3"><a href="#cb65-3" aria-hidden="true"></a><span class="kw">table</span>(compet<span class="op">$</span>compet) </span></code></pre></div>
+<pre><code>## 
+##  0  1  2 
+## 28 56 19</code></pre>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true"></a><span class="co"># variable died</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true"></a><span class="kw">table</span>(compet<span class="op">$</span>died) </span></code></pre></div>
+<pre><code>## 
+##  0  1 
+## 28 75</code></pre>
+<div id="non-paramétrique-incidences-cumulées" class="section level2" number="5.1">
+<h2 number="5.1"><span class="header-section-number">5.1</span> Non paramétrique: incidences cumulées</h2>
+<p>On utilise la fonction <code>cuminc</code> du package <code>cmprsk</code>.</p>
+<p><em>Pas de comparaison</em></p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true"></a>ic =<span class="st"> </span><span class="kw">cuminc</span>(compet<span class="op">$</span>stime, compet<span class="op">$</span>compet)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true"></a>ic </span></code></pre></div>
+<pre><code>## Estimates and Variances:
+## $est
+##           500      1000      1500
+## 1 1 0.5057836 0.5811437 0.6343129
+## 1 2 0.1729924 0.2137749 0.2137749
+## 
+## $var
+##             500        1000        1500
+## 1 1 0.002613465 0.003158443 0.003689041
+## 1 2 0.001489034 0.002176615 0.002176615</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true"></a><span class="kw">plot</span>(ic)</span></code></pre></div>
+<p><img src="R_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p><em>Comparaison</em></p>
+<p>Le test de Gray est automatiquement exécuté.</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true"></a>ic =<span class="st"> </span><span class="kw">cuminc</span>(compet<span class="op">$</span>stime, compet<span class="op">$</span>compet, <span class="dt">group=</span>compet<span class="op">$</span>surgery, <span class="dt">rho=</span><span class="dv">1</span>)</span>
+<span id="cb72-2"><a href="#cb72-2" aria-hidden="true"></a>ic </span></code></pre></div>
+<pre><code>## Tests:
+##         stat         pv df
+## 1 6.59623820 0.01021945  1
+## 2 0.04348037 0.83482338  1
+## Estimates and Variances:
+## $est
+##            500      1000      1500
+## 0 1 0.56009367 0.6074425 0.6738971
+## 1 1 0.09090909 0.3333333        NA
+## 0 2 0.17076543 0.1931938 0.1931938
+## 1 2 0.18181818 0.3030303        NA
+## 
+## $var
+##             500        1000        1500
+## 0 1 0.002938061 0.003399588 0.004176484
+## 1 1 0.008347107 0.031135712          NA
+## 0 2 0.001650185 0.002076694 0.002076694
+## 1 2 0.015060708 0.026432450          NA</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true"></a><span class="kw">plot</span>(ic)</span></code></pre></div>
+<p><img src="R_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+</div>
+<div id="modèles" class="section level2" number="5.2">
+<h2 number="5.2"><span class="header-section-number">5.2</span> Modèles</h2>
+<div id="modèle-de-fine-gray" class="section level3" number="5.2.1">
+<h3 number="5.2.1"><span class="header-section-number">5.2.1</span> Modèle de Fine-Gray</h3>
+<p>Attention à l’interprétation des “risks ratio”.</p>
+<p>Fonction <code>crr</code> du plackage <code>cmprsk</code>.<br />
+Peu pratique les covariables doivent être introduite sous forme de matrice (n observation * k variables). Pour les covariables discrètes, prévoir la forme binaire et l’omission de la catégorie de référence.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true"></a>c &lt;-<span class="st"> </span>compet[<span class="kw">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;surgery&quot;</span>)]</span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true"></a>c =<span class="st"> </span><span class="kw">as.matrix</span>(c)</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true"></a><span class="kw">summary</span>(<span class="kw">crr</span>(compet<span class="op">$</span>stime, compet<span class="op">$</span>compet, c))</span></code></pre></div>
+<pre><code>## Competing Risks Regression
+## 
+## Call:
+## crr(ftime = compet$stime, fstatus = compet$compet, cov1 = c)
+## 
+##            coef exp(coef) se(coef)     z p-value
+## year    -0.0817     0.922   0.0756 -1.08   0.280
+## age      0.0181     1.018   0.0142  1.28   0.200
+## surgery -1.1877     0.305   0.5198 -2.29   0.022
+## 
+##         exp(coef) exp(-coef)  2.5% 97.5%
+## year        0.922      1.085 0.795 1.069
+## age         1.018      0.982 0.990 1.047
+## surgery     0.305      3.280 0.110 0.844
+## 
+## Num. cases = 103
+## Pseudo Log-likelihood = -228 
+## Pseudo likelihood ratio test = 9.85  on 3 df,</code></pre>
+</div>
+<div id="modèle-logistique-multinomial-à-temps-discret" class="section level3" number="5.2.2">
+<h3 number="5.2.2"><span class="header-section-number">5.2.2</span> Modèle logistique multinomial à temps discret</h3>
+<p>On va de nouveau utiliser la variable mois (temps discret).<br />
+Le modèle sera estimé à l’aide la fonction <code>multinom</code> du package <code>nnet</code>, les p-values doivent-être programmées, l’output ne donnant que les erreurs-types.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true"></a><span class="co">#install.packages(&quot;nnet&quot;)</span></span>
+<span id="cb77-2"><a href="#cb77-2" aria-hidden="true"></a><span class="kw">library</span>(nnet)</span></code></pre></div>
+<p><em>Transformation de la base</em></p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true"></a>compet<span class="op">$</span>T =<span class="st"> </span>compet<span class="op">$</span>mois</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true"></a>td =<span class="st"> </span><span class="kw">uncount</span>(compet, mois)</span>
+<span id="cb78-3"><a href="#cb78-3" aria-hidden="true"></a>td<span class="op">$</span>x=<span class="dv">1</span></span>
+<span id="cb78-4"><a href="#cb78-4" aria-hidden="true"></a>td<span class="op">$</span>t =<span class="st"> </span><span class="kw">ave</span>(td<span class="op">$</span>x, td<span class="op">$</span>id, <span class="dt">FUN=</span>cumsum)</span>
+<span id="cb78-5"><a href="#cb78-5" aria-hidden="true"></a>td<span class="op">$</span>e =<span class="st"> </span><span class="kw">ifelse</span>(td<span class="op">$</span>t<span class="op">&lt;</span>td<span class="op">$</span>T,<span class="dv">0</span>, td<span class="op">$</span>compet)</span></code></pre></div>
+<p><em>Estimation</em></p>
+<p>Pour estimer le modèle, on utilise la fonction <code>mlogit</code> du package <code>nnet</code>. Les p-values seront calculées à partir d’un test bilatéral (statistique z).</p>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true"></a>competfit =<span class="st"> </span><span class="kw">multinom</span>(<span class="dt">formula =</span> e <span class="op">~</span><span class="st"> </span>t <span class="op">+</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>age <span class="op">+</span><span class="st"> </span>surgery, <span class="dt">data =</span> td)</span></code></pre></div>
+<pre><code>## # weights:  18 (10 variable)
+## initial  value 1278.784704 
+## iter  10 value 306.317268
+## iter  20 value 287.060455
+## iter  30 value 286.917733
+## iter  40 value 286.857225
+## final  value 286.855690 
+## converged</code></pre>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true"></a><span class="kw">summary</span>(competfit)</span></code></pre></div>
+<pre><code>## Call:
+## multinom(formula = e ~ t + year + age + surgery, data = td)
+## 
+## Coefficients:
+##   (Intercept)           t       year        age    surgery
+## 1    5.838832 -0.08336402 -0.1307944 0.03285515 -1.5256842
+## 2    8.189935 -0.09058311 -0.1859778 0.04069425 -0.2486917
+## 
+## Std. Errors:
+##   (Intercept)          t       year        age   surgery
+## 1    5.740774 0.01946830 0.07948619 0.01613904 0.6079708
+## 2   10.051901 0.03373892 0.13930527 0.02914088 0.6640635
+## 
+## Residual Deviance: 573.7114 
+## AIC: 593.7114</code></pre>
+<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true"></a>z =<span class="st"> </span><span class="kw">summary</span>(competfit)<span class="op">$</span>coefficients<span class="op">/</span><span class="kw">summary</span>(competfit)<span class="op">$</span>standard.errors</span>
+<span id="cb83-2"><a href="#cb83-2" aria-hidden="true"></a>p &lt;-<span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw">pnorm</span>(<span class="kw">abs</span>(z), <span class="dv">0</span>, <span class="dv">1</span>)) <span class="op">*</span><span class="st"> </span><span class="dv">2</span></span>
+<span id="cb83-3"><a href="#cb83-3" aria-hidden="true"></a>p</span></code></pre></div>
+<pre><code>##   (Intercept)            t       year        age    surgery
+## 1   0.3091149 1.851882e-05 0.09986707 0.04177487 0.01209127
+## 2   0.4152069 7.256775e-03 0.18186386 0.16257428 0.70803252</code></pre>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

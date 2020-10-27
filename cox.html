@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Méthode semi-paramétrique Cox</title>
+
+<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Anayse des durées</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Données et théorie
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Introduction.html">Introduction</a>
+    </li>
+    <li>
+      <a href="Donnees.html">Les Données biographiques</a>
+    </li>
+    <li>
+      <a href="Theorie.html">Eléments théoriques</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="nonparam.html">Méthodes non paramétriques</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Modèles à risque proportionnel
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Intro_mod.html">Intro</a>
+    </li>
+    <li>
+      <a href="cox.html">Cox</a>
+    </li>
+    <li>
+      <a href="discret.html">Méthode à temps discret</a>
+    </li>
+    <li>
+      <a href="dynamiques.html">Variables dynamiques</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Compléments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="param.html">Modèles paramétriques</a>
+    </li>
+    <li>
+      <a href="concurrents.html">Risques concurrents</a>
+    </li>
+    <li>
+      <a href="cure.html">Récurrence et imunité</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Logiciels
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="SAS.html">SAS</a>
+    </li>
+    <li>
+      <a href="Stata.html">Stata</a>
+    </li>
+    <li>
+      <a href="R.html">R</a>
+    </li>
+    <li>
+      <a href="Python.html">Python</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Méthode semi-paramétrique Cox</h1>
+
+</div>
+
+
+<div id="le-modèle-semi-paramétrique-de-cox" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Le modèle “semi-paramétrique de Cox”</h1>
+<div id="la-vraisemblance-partielle-et-estimation-des-paramètres" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> La vraisemblance partielle et estimation des paramètres</h2>
+<p>On se situe dans une situation où la durée est mesurée sur une échelle strictement continue. Il ne peut donc y avoir qu’un seul évènement observé en <span class="math inline">\(t_i\)</span> (idem pour les censures).<br />
+Pour une observation quelconque en <span class="math inline">\(t_i\)</span>, la vraisemblance s’écrit: <strong><span class="math inline">\(L_i=f(t_i)^{\delta_i}S(t_i)^{1-\delta_i}\)</span></strong>.<br />
+<br></p>
+<ul>
+<li><span class="math inline">\(f(t_i)\)</span> est la valeur de la fonction de densité en <span class="math inline">\(t_i\)</span>.</li>
+<li><span class="math inline">\(S(t_i)\)</span> est la valeur de la fonction de survie en <span class="math inline">\(t_i\)</span>.</li>
+<li><span class="math inline">\(\delta_i=1\)</span> si l’évènement est observé: <span class="math inline">\(L_i=f(t_i)\)</span>.</li>
+<li><span class="math inline">\(\delta_i=0\)</span> si l’observation est censurée: <span class="math inline">\(L_i=S(t_i)\)</span>.</li>
+</ul>
+<p><br> Comme <span class="math inline">\(f(t_i)=h(t_i)S(t_i)\)</span>, on obtient: <span class="math inline">\(L_i=[h(t_i)S(t_i)]^{\delta_i}S(t_i)^{1-\delta_i} = h(t_i)^{\delta_i}S(t_i)\)</span>.<br />
+Pour <span class="math inline">\(i=1,2,.....,n\)</span>, la vraisemblance totale s’ecrit: <span class="math inline">\(L_i=\prod_{i=1}^{n}h(t_i)^{\delta_i}S(t_i)\)</span>.</p>
+<p><br> On peut réecrire cette vraisemblance en la multipliant et en la divisant par: <span class="math inline">\(\sum_{j\in R_i}h(t_i)\)</span>, où <span class="math inline">\(j\in R_i\)</span> est l’ensemble des observation soumises au risque en <span class="math inline">\(t_i\)</span>.<br />
+<br></p>
+<p><span class="math display">\[L=\prod_{i=1}^{n}\left[h(t_i)\frac{\sum_{j\in R}h(t_i)}{\sum_{j\in R}h(t_i)}\right]^{\delta_i}S(t_i)= \prod_{i=1}^{n}\left[\frac{h(t_i)}{\sum_{j\in R_i}h(t_i)}\right]^{\delta_i}\sum_{j\in R_i}h(t_i)^{\delta_i}S(t_i)\]</span><br />
+<br> La vraisemblance partielle retient le premier terme de la vraisemblance, soit: <span class="math inline">\(PL=\prod_{i=1}^{n}\left[\frac{h(t_i)}{\sum_{j\in R}h(t_i)}\right]^{\delta_i}\)</span><br />
+<br> Une fois remplacée la valeur de <span class="math inline">\(h(t_i)\)</span> par son expression en tant que modèle à risque proportionnel, la vraisemblance partielle ne dépendra plus de la durée. <strong>Mais elle va dépendre de l’ordre d’arrivée des évènements</strong>. <br> <strong>Remarque: pour les observations censurées(<span class="math inline">\(\delta_i=0\)</span>), <span class="math inline">\(PL=1\)</span>. Toutefois, ces censures à droite entrent dans l’expression <span class="math inline">\(\sum_{j\in R}h(t_i)\)</span> tant qu’elles sont soumises au risque</strong>.<br />
+<br> En remplaçant <span class="math inline">\(h(t_i)\)</span> par l’expression <span class="math inline">\(h_0(t)e^{X_i^{&#39;}b}\)</span>:</p>
+<p><span class="math display">\[PL=\prod_{i=1}^{n}\left[\frac{h_0(t)e^{X_{i}^{&#39;}b}}{\sum_{j\in R_i}h_0(t)e^{X_{j}^{&#39;}b}}\right]^{\delta_i} =\prod_{i=1}^{n}\left[\frac{e^{X_i^{&#39;}b}}{\sum_{j\in R_i}e^{X_{i}^{&#39;}b}}\right]^{\delta_i}\]</span></p>
+<p>L’expression <span class="math inline">\(\frac{e^{Xb}}{\sum_{j\in R}e^{Xb}}\)</span> est une probabilité, la vraisemblance partielle est donc bien un produit de probabilités. Il s’agit de la probabilité qu’un individu observe l’évènement en <span class="math inline">\(t_i\)</span> sachant qu’un évènement s’est produit.<br />
+<br></p>
+<p><strong>Condition nécessaire: pas d’évènement simultané</strong><br />
+Ici le temps est strictement continu, il ne doit pas y avoir d’évènement simultané.<br />
+Dans les sciences sociales avec un recueil des données de type retrospectif, la collecte se fait généralement avec un temps discrétisé. On est donc souvent en présence d’évènements dont l’occurence s’observe de manière simultanée. <br></p>
+<p><strong>Correction de la vraisemblance avec des évènements simultanés</strong></p>
+<ul>
+<li>La méthode dite <strong>exacte</strong>: Comme en réalité il n’y a jamais d’évènement simultané, on va intégrer à la vraisemblance toutes les permutations possibles des évènements observés simultanéments: si en <span class="math inline">\(t_i\)</span> on observe simulatanément l’évènement pour A et B, une mesure plus présice de la durée nous permettrait de savair si A a eu lieu avant B ou B avant A.<br />
+Le nombre de permutation est donné par la factorielle. Si 3 évènement simultanés, il y a 6 permutations possibles (<span class="math inline">\(3\times2\times1)\)</span>.<br />
+Problème: le nombre de permutations pour chaque <span class="math inline">\(t_i\)</span> peut devenir très vite particulièrement élevé. Par exemple pour 10 évènements simultanés, le nombre de permutation est égal à 3.628.800 (<span class="math inline">\(!10=10\times9\times8\times7\times...\times2\times1\)</span>). Le temps de calcul devient particulièrement long.</li>
+<li>La méthode dite de **Breslow*: il s’agit d’une approximation de la méthode exacte permettant de ne pas avoir à intégrer chaque permutation. Cette approximation est utilisée par défaut par les logiciels Sas et Stata.</li>
+<li>La méthode dite d’<strong>Efron</strong>: elle cor+rige l’approximation de Breslow, et est jugée plus proche de la méthode exacte. Le temps de calcul avec les ordinateurs actuels est quasiment identique à celle de Breslow. C’est la méthode utilisée par défaut avec le logiciel R.</li>
+</ul>
+</div>
+<div id="estimation-des-paramètres" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Estimation des paramètres</h2>
+<p>On utilise la méthode habituelle, à savoir la maximisation de la log-vraisemblance (ici partielle).</p>
+<ul>
+<li>Conditions de premier ordre: calcul des équations de score à partir des dérivées partielles. Solution: <span class="math inline">\(\frac{\partial log(PL)}{\partial{b_k}}=0\)</span>. On ne peut pas obtenir de solution numériue directe.<br />
+Remarque: les équations de score sont utilisées pour tester la validiter de l’hypothèse de constance des rapports de risque (hazard ratio) pour calculer les <strong>résidus de Schoenfeld</strong> (voir plus bas).</li>
+<li>Conditions de second ordre: calcul des dérivées secondes qui permettent d’obtenir la matrice d’information de Fisher et la matrice des variances-covariances des paramètres.</li>
+<li>Comme il n’y a pas de solution numérique directe, on utilise un algorithme d’optimisation (ex: Newton-Raphson) à partir des équations de score et de la matrice d’information de Fisher.</li>
+</ul>
+<p><strong>Eléments de calcul</strong><br />
+<br> En logarithme, la vraisemblance partielle s’ecrit:<br />
+<span class="math display">\[pl(b)=log(pl(b))=log\left(\prod_{i=1}^{n}\left[\frac{e^{X_{i}^{&#39;}b}}{\sum_{j\in R_i}e^{X_jb}}\right]^{\delta_i}\right)\]</span><br />
+<span class="math display">\[pl(b)=\sum_{i=1}^n\delta_ilog\left(\frac{e^{X_{i}^{&#39;}b}}{\sum_{j\in R_i}e^{X_{j}^{&#39;}b}} \right)\]</span></p>
+<p><span class="math display">\[pl(b)=\sum_{i=1}^n\delta_i\left(log(e^{X_{i}^{&#39;}b})-log\sum_{j\in R_i}e^{X_{i}^{&#39;}b}\right)\]</span></p>
+<p><span class="math display">\[pl(b)=\sum_{i=1}^n\delta_i\left(X_{i}^{&#39;}b-log\sum_{j\in R_i}e^{X_{i}^{&#39;}b}\right)\]</span></p>
+<p>Calcul de l’équation de score pour une covariable <span class="math inline">\(X_k\)</span>:</p>
+<p><span class="math display">\[\frac{\partial lp(b)}{\partial{b_k}}=\sum_{i=1}^n\delta_i\left(X_{ik}-\sum_{j\in R_i}X_{ik}\frac{e^{X_{ik}^{&#39;}b_k}}{\sum_{j\in R_i}e^{X_{jk}^{&#39;}b_k}}\right)\]</span></p>
+<p><span class="math inline">\(\frac{e^{X_{ik}b}}{\sum_{j\in R}e^{X_{jk}b}}\)</span> est une probabilité (<span class="math inline">\(p_i\)</span>) et <span class="math inline">\(\sum{j\in R}X_{ik}p_i\)</span> est l’espérance (la moyenne) <span class="math inline">\(\bar{X_k}\)</span> d’avoir la caractéristique <span class="math inline">\(X_k\)</span> lorsqu’un évènement a été observé. Au final:</p>
+<p><span class="math display">\[\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - \bar{X_k} \right)\]</span></p>
+</div>
+<div id="lecture-des-résultats" class="section level2" number="1.3">
+<h2 number="1.3"><span class="header-section-number">1.3</span> Lecture des résultats</h2>
+<p>Comme il s’agit d’un modèle à risque proportionnel, <strong>les rapports de risque sont constants pendant toute la période d’observation</strong>.<br />
+<br> <strong>Covariable binaire</strong> <span class="math inline">\(X=(0,1)\)</span>: <span class="math inline">\(\frac{h(t |X=1)}{h(t |X=0)}=e^b\)</span>.<br />
+A chaque moment de la durée <span class="math inline">\(t\)</span>, le risque d’observer l’évènement est <span class="math inline">\(e^b\)</span> fois plus important/plus faible pour <span class="math inline">\(X=1\)</span> que pour <span class="math inline">\(X=0\)</span>.<br />
+<br> <strong>Covariable continue</strong> (mais fixe dans le temps): <span class="math inline">\(\frac{h(t |X=a+c)}{h(t |X=a)}=e^{c \times{b}}\)</span>. On prendra l’âge au début de l’exposition au risque. Si <span class="math inline">\(c=1\)</span> (résultat de l’estimation): A un âge donnée en début d’exposition, le risque de connaitre l’évènement est <span class="math inline">\(e^b\)</span> fois inférieur/supérieur à celui d’une personne qui a un an de moins . Si on regarde des différences de 5 ans en age (<span class="math inline">\(c=5\)</span>), le risque est <span class="math inline">\(e^{5\times b}\)</span> inférieur/supérieur à celui d’une personne qui a 5 ans de moins.<br />
+<br></p>
+<p><strong>Exemple</strong></p>
+<pre><code>&gt; lantation.dta&quot; , clear
+
+
+
+Cox regression -- Efron method for ties
+
+No. of subjects =          103                  Number of obs    =         103
+No. of failures =           75
+Time at risk    =        31938
+                                                LR chi2(3)       =       17.63
+Log likelihood  =   -289.30639                  Prob &gt; chi2      =      0.0005
+
+------------------------------------------------------------------------------
+          _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        year |    -0.1196     0.0673    -1.78   0.076      -0.2516      0.0124
+         age |     0.0296     0.0135     2.19   0.029       0.0031      0.0561
+     surgery |    -0.9873     0.4363    -2.26   0.024      -1.8424     -0.1323
+------------------------------------------------------------------------------
+
+
+Cox regression -- Efron method for ties
+
+No. of subjects =          103                  Number of obs    =         103
+No. of failures =           75
+Time at risk    =        31938
+                                                LR chi2(3)       =       17.63
+Log likelihood  =   -289.30639                  Prob &gt; chi2      =      0.0005
+
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        year |     0.8872     0.0597    -1.78   0.076       0.7775      1.0124
+         age |     1.0300     0.0139     2.19   0.029       1.0031      1.0577
+     surgery |     0.3726     0.1625    -2.26   0.024       0.1584      0.8761
+------------------------------------------------------------------------------</code></pre>
+<p>On retrouve les résultats des tests non paramétriques, à savoir que le pontage réduit les risques de décès pendant la période d’observation (augmente la durée de vie), ici de -62% (<span class="math inline">\(((0.37-1)\times 100)\)</span>.<br />
+Lorsque l’âge à l’entrée dans le registre d’attente augmente d’un an, le risque de décéder augmente/baisse de ???%.<br></p>
+</div>
+<div id="lhypothèse-de-constance-des-rapports-de-risque" class="section level2" number="1.4">
+<h2 number="1.4"><span class="header-section-number">1.4</span> L’hypothèse de constance des rapports de risque</h2>
+<ul>
+<li>Les rapports de risque (RR) estimés par le modèle sont contraints à être constant pendant toute la période d’observation. C’est une hypothèse forte.</li>
+<li>Le respect de cette hypothèse doit être testé, en particulier pour un modèle de Cox où la baseline du risque est habituellement estimée à l’aide des RR (méthode dite de Breslow, non traitée).</li>
+<li>Tester cette hypothèse revient à tester une interaction entre les RR et la durée (ou plutôt une fonction de la durée).</li>
+<li>Plusieurs méthodes disponibles, celle sur les résidus de martingales, réservée aux covariables continues, et le “test” graphique ne seront pas traités.</li>
+</ul>
+<div id="tests-sur-les-résidus-de-schoenfeld" class="section level3" number="1.4.1">
+<h3 number="1.4.1"><span class="header-section-number">1.4.1</span> Tests sur les résidus de Schoenfeld</h3>
+<ul>
+<li><p>Les résidus “bruts” sont directement calculés à partir des équations de scores (voir section estimation).</p></li>
+<li><p>Le résidu n’est calculé que pour les observation qui ont connues l’évènement durant la période d’observation.</p></li>
+<li><p>Il est calculé au moment où l’évènement s’est produit.</p></li>
+<li><p>La somme des résidus pour chaque covariable est égale à 0 (propriété de l’équation de score à l’équilibre).</p></li>
+<li><p>On utilise généralement les résidus de Schoenfeld “standardisés” (par leur variance) pour tenir compte du fait que le risk set diminue au cours du temps.<br />
+<br></p></li>
+<li><p>Pour une observation dont l’évènement s’est produit en <span class="math inline">\(t_i\)</span>, le résidu brut de Schoenfeld pour la covariable <span class="math inline">\(X_k\)</span>, après estimation du modèle, est égal à:</p></li>
+</ul>
+<p><span class="math display">\[rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{ik}\frac{e^{X_{ik}^{&#39;}b}}{\sum_{j\in R_i}e^{X_{jk}^{&#39;}b}}= X_{ik} -\bar{X_k}\]</span></p>
+<ul>
+<li>Ce résidu est formellement la contribution d’un individu au score. Il se lit comme la différence entre la valeur observée d’une covariable et sa valeur espérée au moment où un évènement se produit.</li>
+<li>Si l’hypothèse de constance des risques ratio est respectée, les résidus ne doivent pas suivre une tendance précise.</li>
+<li>Intuitivement (sans censure à droite): on a un RR strictement égal à 1, en début d’exposition <span class="math inline">\(R_i=100\)</span> avec 50 hommes et 50 femmes. Si l’hypothèse PH (strictement) respectée, lorsqu’il reste 90 personnes soumises au risque, on devrait avoit 45 hommes et 45 femmes. Avec <span class="math inline">\(R_i=50\)</span>, 25 hommes et 25 femmes,…….avec <span class="math inline">\(R_i=10\)</span>, 5 hommes et 5 femmes.</li>
+<li>On peut tester l’hypothèse sur les résidus par une régression entre ces résidus pour chaque covariable et la durée (ou fonction dérivée de la durée, par exemple <span class="math inline">\(log(t)\)</span>)). La solution la plus utilisée est le test paramétrique dit de <strong>Grambsch-Therneau</strong> implémenté dans tous les logiciels.</li>
+<li>On peut montrer que le test de Grambsch-Therneau consiste à introduire une interaction entre les covariables et une fonction de la durée dans le modèle. <br></li>
+</ul>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+      Test of proportional-hazards assumption
+
+      Time:  Time
+      ----------------------------------------------------------------
+                  |       rho            chi2       df       Prob&gt;chi2
+      ------------+---------------------------------------------------
+      year        |      0.10162         0.80        1         0.3720
+      age         |      0.12937         1.61        1         0.2043
+      surgery     |      0.29664         5.54        1         0.0186
+      ------------+---------------------------------------------------
+      global test |                      8.76        3         0.0327
+      ----------------------------------------------------------------</code></pre>
+<p>Ici l’hypothèse de proportionalité des risques peut être rejetée pour la variable <em>surgery</em>. Le risque ratio n’est pas constant dans le temps.</p>
+<p><br></p>
+</div>
+<div id="intéraction-avec-la-durée" class="section level3" number="1.4.2">
+<h3 number="1.4.2"><span class="header-section-number">1.4.2</span> Intéraction avec la durée</h3>
+<p><br> <em>Retour sur l’estimation du modèle</em></p>
+<p>Pour estimer le modèle, les données sont splitées au temps d’évènement.</p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+      +------------------------------+
+      | id   surgery   _d   _t   _t0 |
+      |------------------------------|
+  24. |  2         0    0    1     0 |
+  25. |  2         0    0    2     1 |
+  26. |  2         0    0    3     2 |
+  27. |  2         0    0    5     3 |
+  28. |  2         0    1    6     5 |
+      |------------------------------|
+  29. |  3         0    0    1     0 |
+  30. |  3         0    0    2     1 |
+  31. |  3         0    0    3     2 |
+  32. |  3         0    0    5     3 |
+  33. |  3         0    0    6     5 |
+      |------------------------------|
+  34. |  3         0    0    8     6 |
+  35. |  3         0    0    9     8 |
+  36. |  3         0    0   12     9 |
+  37. |  3         0    1   16    12 |
+      +------------------------------+</code></pre>
+<ul>
+<li>Les bornes des intervalles <span class="math inline">\([t_0 ;t]\)</span> ont des valeurs seulement lorsqu’un évènement s’est produit (principe de la vraisemblance partielle). Il n’y a donc pas de valeurs pour <span class="math inline">\(t\)</span> et <span class="math inline">\(t_0\)</span> en <span class="math inline">\(t=4\)</span> (<span class="math inline">\(id=2,3\)</span>), <span class="math inline">\(t=7,10,11,13,14,15\)</span> (<span class="math inline">\(id=3\)</span>).</li>
+<li>Les deux individus observent l’évènement en <span class="math inline">\(t=6\)</span> pour <span class="math inline">\(id=2\)</span>, et en <span class="math inline">\(t=16\)</span> pour <span class="math inline">\(id=3\)</span>. Avant ce moment la valeur de la variable prise par la variable d’évènement (ici <span class="math inline">\(d\)</span>) prend toujours la valeur 0, et prend la valeur 1 au moment de l’évènement.</li>
+</ul>
+<p>On vérifie que les paramètres estimés sont identiques</p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+
+
+Cox regression -- Breslow method for ties
+
+No. of subjects =          103                  Number of obs    =       3,573
+No. of failures =           75
+Time at risk    =        31938
+                                                LR chi2(3)       =       17.56
+Log likelihood  =   -289.54474                  Prob &gt; chi2      =      0.0005
+
+------------------------------------------------------------------------------
+          _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        year |  -.1195075   .0673691    -1.77   0.076    -.2515486    .0125336
+         age |   .0295539   .0135341     2.18   0.029     .0030275    .0560803
+   1.surgery |   -.984869   .4362881    -2.26   0.024    -1.839978   -.1297601
+------------------------------------------------------------------------------</code></pre>
+<p><em>Introduction d’une intéraction avec une fonction de la durée</em> On a une variable de durée (on prendra <span class="math inline">\(t\)</span> avec <span class="math inline">\(f(t)=t\)</span>) qui sera croisée avec la variable surgery. Le modèle va s’écrire:<br />
+<br> <span class="math inline">\(h(t | X,t) = h_0(t)e^{b_1age + b_2year + b_3 surgery + b_4 (surgery\times t)}\)</span></p>
+<p><strong>Estimation du modèle</strong><br />
+On présentera le modèle avec le log des paramètres estimées (le terme d’intération n’étant pas un rapport de risque mais un rapport de rapport de risque).<br />
+<br> <em>Important</em>: le modèle estimé n’est plus un modèle à risques proportionnels.</p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+
+
+
+Cox regression -- Breslow method for ties
+
+No. of subjects =          103                  Number of obs    =         103
+No. of failures =           75
+Time at risk    =        31938
+                                                LR chi2(4)       =       21.50
+Log likelihood  =   -287.57352                  Prob &gt; chi2      =      0.0003
+
+------------------------------------------------------------------------------
+          _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+main         |
+        year |  -.1229512   .0668619    -1.84   0.066    -.2539981    .0080958
+         age |   .0288597   .0134588     2.14   0.032      .002481    .0552384
+   1.surgery |  -1.751567   .6744632    -2.60   0.009    -3.073491   -.4296435
+-------------+----------------------------------------------------------------
+tvc          |
+     surgery |   .0022277   .0011025     2.02   0.043     .0000669    .0043886
+------------------------------------------------------------------------------
+Note: Variables in tvc equation interacted with _t.</code></pre>
+<p>L’intéraction <span class="math inline">\(surgery\times t\)</span> est ici significative (<span class="math inline">\(p&lt;0;05\)</span>). On retrouve le résultat du test sur les résidus de Schoenfeld.</p>
+<p><strong>Intreprétation</strong>:</p>
+<ul>
+<li>Le paramètre (logHR) pour surgery donne le risque ratio au début de l’exposition au risque (<span class="math inline">\(t=0+\epsilon\)</span>): le risque de décéder en début d’observation est <span class="math inline">\((e^{-1.27}-1)\times 100 = -82\%\)</span> plus faible pour les personnes qui ont eu un pontage avant leur inscription dans le registre.</li>
+<li>Le terme d’intéraction étant positif, le gain en survie pour les personnes qui ont eu un pontage va diminuer avec le temps. Le RR augmente donc avec le temps.</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(t\)</span></th>
+<th>Calcul</th>
+<th>Risk ratio</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(0+\epsilon\)</span></td>
+<td><span class="math inline">\(e^{-1.27 + 0.002\times 0}\)</span></td>
+<td><span class="math inline">\(0.28\)</span></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td><span class="math inline">\(e^{-1.27 + 0.002\times 1}\)</span></td>
+<td><span class="math inline">\(0.281\)</span></td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td><span class="math inline">\(e^{-1.27 + 0.002\times 2}\)</span></td>
+<td><span class="math inline">\(0.282\)</span></td>
+</tr>
+<tr class="even">
+<td>.</td>
+<td>.</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>.</td>
+<td>.</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td><span class="math inline">\(e^{-1.27 + 0.002\times 10}\)</span></td>
+<td><span class="math inline">\(0.286\)</span></td>
+</tr>
+<tr class="odd">
+<td>100</td>
+<td><span class="math inline">\(e^{-1.27 + 0.002\times 100}\)</span></td>
+<td><span class="math inline">\(0.34\)</span></td>
+</tr>
+<tr class="even">
+<td>365</td>
+<td><span class="math inline">\(e^{-1.27 + 0.002\times 365}\)</span></td>
+<td><span class="math inline">\(0.58\)</span></td>
+</tr>
+<tr class="odd">
+<td>730</td>
+<td><span class="math inline">\(e^{-1.27 + 0.002\times 365}\)</span></td>
+<td><span class="math inline">\(1.20\)</span></td>
+</tr>
+</tbody>
+</table>
+<p><br> Que faire si l’hypothèse n’est pas respectée?</p>
+<ul>
+<li><p>Ne rien faire, on interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison). Difficement soutenable por l’analyse des effets cliniques , elle peut être envisagée dans d’autres domaines de recherche. Attention au nombre de variables qui ne respecte pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme “moyenne”.</p></li>
+<li><p>Utiliser la méthode dite de “Cox stratifiée” (non traitée). Utile si l’objectif est de présenter des fonctions de survie ajustées, et si une seule covariable (binaire) présente un problème. Les RR ne sont donc pas estimés pour la variable.</p></li>
+<li><p>Introduire une interaction avec la durée comme précédemment. Cela peut permettre d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des RR. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’intéraction à être linéaire (strictement proportionnelle), ce qui est une hypothèse plutôt forte.</p></li>
+<li><p>Utiliser un modèle alternatif: modèles paramétriques de type PH, en particulier le modèle “flexible” de <strong>Parmar-Royston</strong> (non traité) ou un <strong>modèle à temps discret</strong>.</p></li>
+<li><p>Utiliser un modèle non paramétrique additif dit d’<em>Aalen</em> ou une de ses variantes (non traité).</p></li>
+</ul>
+<p><br> <strong>Remarque finale sur l’estimation du modèle de Cox</strong><br />
+Le modèle a été estimé par la méthode de la vraisemblance partielle. On peut montrer que le modèle de Cox est estimable à partir d’un modèle de Poisson. Cette estimation est appelée “Constant Piecewise Exponential PH model”.</p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+
+
+
+
+Iteration 0:   log likelihood = -393.44892  
+Iteration 1:   log likelihood = -347.00068  
+Iteration 2:   log likelihood = -345.06277  
+Iteration 3:   log likelihood = -344.95446  
+Iteration 4:   log likelihood = -344.95332  
+Iteration 5:   log likelihood =  -344.9532  
+Iteration 6:   log likelihood = -344.95318  
+
+Poisson regression                              Number of obs     =      3,573
+                                                LR chi2(90)       =     122.42
+                                                Prob &gt; chi2       =     0.0131
+Log likelihood = -344.95318                     Pseudo R2         =     0.1507
+
+------------------------------------------------------------------------------
+          _d |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        year |  -.1195204    .067374    -1.77   0.076     -.251571    .0125302
+         age |   .0295531    .013535     2.18   0.029      .003025    .0560811
+     surgery |    -.98486   .4363162    -2.26   0.024    -1.840024   -.1296961
+             |
+       stime |
+          2  |   .4223592   1.154708     0.37   0.715    -1.840826    2.685544
+          3  |   .0495983   1.154704     0.04   0.966     -2.21358    2.312776
+          5  |   -.828855   1.224781    -0.68   0.499    -3.229383    1.571673
+          6  |  -.9922643   1.224779    -0.81   0.418    -3.392786    1.408258
+          8  |  -1.940546   1.414215    -1.37   0.170    -4.712356    .8312648
+          9  |   -2.03868   1.414233    -1.44   0.149    -4.810526    .7331649
+         11  |  -12.59255   2179.957    -0.01   0.995     -4285.23    4260.045
+         12  |   -2.30438   1.414226    -1.63   0.103    -5.076213    .4674526
+         16  |  -1.481512   1.154713    -1.28   0.199    -3.744708    .7816839
+         17  |  -2.591968    1.41426    -1.83   0.067    -5.363868    .1799312
+         18  |  -2.642535   1.414254    -1.87   0.062    -5.414421    .1293516
+         21  |  -2.095489   1.224819    -1.71   0.087    -4.496091    .3051133
+         28  |  -3.055745   1.414246    -2.16   0.031    -5.827616   -.2838729
+         30  |  -3.103495    1.41426    -2.19   0.028    -5.875395   -.3315961
+         31  |  -13.89462   2179.957    -0.01   0.995    -4286.532    4258.743
+         32  |  -3.144133   1.414253    -2.22   0.026    -5.916018   -.3722474
+         35  |  -3.219157   1.414258    -2.28   0.023    -5.991053    -.447262
+         36  |  -3.227893   1.414267    -2.28   0.022    -5.999806   -.4559796
+         37  |  -3.246139   1.414263    -2.30   0.022    -6.018042   -.4742351
+         39  |   -3.26923   1.414303    -2.31   0.021    -6.041213   -.4972472
+         40  |  -2.581465   1.224839    -2.11   0.035    -4.982106   -.1808239
+         43  |  -3.311454   1.414341    -2.34   0.019    -6.083512   -.5393966
+         45  |  -3.327473   1.414407    -2.35   0.019    -6.099661   -.5552857
+         50  |  -3.421206   1.414399    -2.42   0.016    -6.193377   -.6490357
+         51  |  -3.425081   1.414444    -2.42   0.015    -6.197341   -.6528208
+         53  |   -3.44536   1.414475    -2.44   0.015     -6.21768    -.673039
+         58  |  -3.514664   1.414489    -2.48   0.013    -6.287011   -.7423175
+         61  |  -3.543748   1.414557    -2.51   0.012    -6.316229   -.7712681
+         66  |  -3.602062   1.414546    -2.55   0.011    -6.374522   -.8296028
+         68  |   -2.90779   1.225106    -2.37   0.018    -5.308954   -.5066257
+         69  |  -3.580111   1.414549    -2.53   0.011    -6.352577   -.8076461
+         72  |  -2.914206    1.22505    -2.38   0.017     -5.31526   -.5131524
+         77  |  -3.624716   1.414601    -2.56   0.010    -6.397284   -.8521489
+         78  |  -3.593983   1.414779    -2.54   0.011    -6.366898   -.8210686
+         80  |  -3.597845   1.414765    -2.54   0.011    -6.370734   -.8249558
+         81  |  -3.589639   1.414745    -2.54   0.011    -6.362489   -.8167895
+         85  |  -3.598044   1.414948    -2.54   0.011    -6.371291    -.824798
+         90  |   -3.62163   1.415099    -2.56   0.010    -6.395173   -.8480873
+         96  |  -3.658159   1.415134    -2.59   0.010     -6.43177    -.884548
+        100  |  -3.672641   1.415162    -2.60   0.009    -6.446308   -.8989739
+        102  |  -3.662767   1.415232    -2.59   0.010    -6.436571   -.8889631
+        109  |  -14.65089   2179.957    -0.01   0.995    -4287.288    4257.986
+        110  |  -3.704316   1.415125    -2.62   0.009     -6.47791   -.9307209
+        131  |  -14.68697   2179.957    -0.01   0.995    -4287.324     4257.95
+        149  |  -3.976368   1.415012    -2.81   0.005    -6.749742   -1.202995
+        153  |   -3.97938   1.414995    -2.81   0.005    -6.752718   -1.206041
+        165  |  -4.013449   1.415156    -2.84   0.005    -6.787104   -1.239793
+        180  |  -15.09339   2179.957    -0.01   0.994    -4287.731    4257.544
+        186  |  -4.112806   1.414994    -2.91   0.004    -6.886144   -1.339468
+        188  |   -4.11316   1.414915    -2.91   0.004    -6.886342   -1.339978
+        207  |  -4.178467   1.414929    -2.95   0.003    -6.951678   -1.405256
+        219  |  -4.206547    1.41493    -2.97   0.003     -6.97976   -1.433334
+        263  |  -4.342286   1.415099    -3.07   0.002     -7.11583   -1.568742
+        265  |  -16.10078   2179.957    -0.01   0.994    -4288.738    4256.536
+        285  |  -3.688074   1.225534    -3.01   0.003    -6.090076   -1.286072
+        308  |  -4.409256   1.414925    -3.12   0.002    -7.182459   -1.636054
+        334  |  -4.432237   1.415143    -3.13   0.002    -7.205866   -1.658607
+        340  |  -4.422918   1.415095    -3.13   0.002    -7.196453   -1.649383
+        342  |  -4.365805    1.41511    -3.09   0.002     -7.13937   -1.592239
+        370  |  -16.64142   2179.957    -0.01   0.994    -4289.279    4255.996
+        397  |  -16.53454   2179.957    -0.01   0.994    -4289.172    4256.103
+        427  |  -16.28492   2179.957    -0.01   0.994    -4288.922    4256.352
+        445  |  -16.76689   2179.957    -0.01   0.994    -4289.404     4255.87
+        482  |   -15.8041   2179.957    -0.01   0.994    -4288.441    4256.833
+        515  |  -16.91429   2179.957    -0.01   0.994    -4289.552    4255.723
+        545  |  -16.10426   2179.957    -0.01   0.994    -4288.742    4256.533
+        583  |  -4.641434   1.415524    -3.28   0.001     -7.41581   -1.867057
+        596  |  -16.41019   2179.957    -0.01   0.994    -4289.047    4256.227
+        620  |  -17.07029   2179.957    -0.01   0.994    -4289.708    4255.567
+        670  |  -17.14785   2179.957    -0.01   0.994    -4289.785    4255.489
+        675  |  -4.631958   1.416377    -3.27   0.001    -7.408006   -1.855911
+        733  |   -4.60698   1.416405    -3.25   0.001    -7.383082   -1.830878
+        841  |  -17.05138   2179.957    -0.01   0.994    -4289.689    4255.586
+        852  |  -4.566243   1.417712    -3.22   0.001    -7.344907   -1.787579
+        915  |  -17.40169   2179.957    -0.01   0.994    -4290.039    4255.236
+        941  |  -17.34105   2179.957    -0.01   0.994    -4289.978    4255.296
+        979  |  -4.426862   1.419414    -3.12   0.002    -7.208862   -1.644862
+        995  |  -4.401387   1.418922    -3.10   0.002    -7.182422   -1.620352
+       1032  |  -4.390393   1.418666    -3.09   0.002    -7.170928   -1.609859
+       1141  |   -16.4898   2179.957    -0.01   0.994    -4289.127    4256.148
+       1321  |  -17.02179   2179.957    -0.01   0.994    -4289.659    4255.616
+       1386  |  -4.427898    1.41857    -3.12   0.002    -7.208243   -1.647553
+       1400  |  -17.74095   2179.957    -0.01   0.994    -4290.378    4254.896
+       1407  |  -17.17352   2179.957    -0.01   0.994    -4289.811    4255.464
+       1571  |  -18.15173   2179.957    -0.01   0.993    -4290.789    4254.486
+       1586  |  -18.39765   2179.957    -0.01   0.993    -4291.035     4254.24
+       1799  |  -18.08037   2179.957    -0.01   0.993    -4290.718    4254.557
+             |
+       _cons |   2.482922   4.946271     0.50   0.616    -7.211591    12.17744
+   ln(stime) |          1  (exposure)
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

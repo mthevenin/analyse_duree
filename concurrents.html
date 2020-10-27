@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Risques concurrents</title>
+
+<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Anayse des durées</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Données et théorie
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Introduction.html">Introduction</a>
+    </li>
+    <li>
+      <a href="Donnees.html">Les Données biographiques</a>
+    </li>
+    <li>
+      <a href="Theorie.html">Eléments théoriques</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="nonparam.html">Méthodes non paramétriques</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Modèles à risque proportionnel
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Intro_mod.html">Intro</a>
+    </li>
+    <li>
+      <a href="cox.html">Cox</a>
+    </li>
+    <li>
+      <a href="discret.html">Méthode à temps discret</a>
+    </li>
+    <li>
+      <a href="dynamiques.html">Variables dynamiques</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Compléments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="param.html">Modèles paramétriques</a>
+    </li>
+    <li>
+      <a href="concurrents.html">Risques concurrents</a>
+    </li>
+    <li>
+      <a href="cure.html">Récurrence et imunité</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Logiciels
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="SAS.html">SAS</a>
+    </li>
+    <li>
+      <a href="Stata.html">Stata</a>
+    </li>
+    <li>
+      <a href="R.html">R</a>
+    </li>
+    <li>
+      <a href="Python.html">Python</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Risques concurrents</h1>
+
+</div>
+
+
+<div id="présentation-du-problème" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Présentation du problème</h1>
+<ul>
+<li>On étudie un processus dont l’échéance a plusieurs modalités (cause): la mortalité par cause, les types de sortie du chômage (formation, emploi, radiation), les types de sortie de l’emploi (chômage, longue maladie, sortie du marché du travail hors retraite) ,les lieux de migration, la mise en union par mariage ou cohabitation, type de rupture d’union (séparation-divorce, veuvage).</li>
+<li>L’analyse des risques concurrents est un cas particulier des modèle “multi-états” où les différents risques sont considérés comme absorbants.</li>
+<li>En présence de risques concurrents, l’estimation de Kaplan-Meier ne peut se faire que sous <strong>l’hypothèse d’indépendance entre chacun des risques</strong>. Sinon l’estimateur de Kaplan-Meier n’est plus une probabilité.</li>
+<li>Une estimation de type KM d’un évènement en concurrence avec d’autres impose que ces derniers soient traités comme des censures à droites non informatives. Mais il n’est pas possible de tester cette hypothèse.</li>
+</ul>
+<div id="risques-cause-specific-et-biais-sur-les-estimateurs-km" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Risques “cause-specific” et biais sur les estimateurs KM</h2>
+<ul>
+<li>Si les risques ne sont pas indépendants les uns par rapport aux autres, la somme des estimateurs de (1-KM) pour chaque risque n’est pas égale - elle est <strong>supérieure</strong> - à l’estimateur de (1-KM) où les risques concurrents sont regroupés en un évènement unique.</li>
+<li>Le risque calculé en considérant les risques concurrents comme des censures à droite est appelé “cause-specific risk”.</li>
+</ul>
+<p><strong>Cause specific risk</strong><br />
+Pour le risque de type <span class="math inline">\(k\)</span>, le risque “cause-spécifique” (traduction propre?) en <span class="math inline">\(t_i\)</span> est égal à:<br />
+<span class="math display">\[h_k(t_i)=\frac{d_{i,k}}{R_i}\]</span> Où <span class="math inline">\(d_{i,k}\)</span> est le nombre d’évènement de type <span class="math inline">\(k\)</span> survenu en <span class="math inline">\(t_i\)</span> et <span class="math inline">\(R_i\)</span> la population soumise en <span class="math inline">\(t_i\)</span>.</p>
+<p>Illustration du biais avec l’estimation standard: <span class="math inline">\(1-KM_k&gt;1\)</span></p>
+<p><img src="images/Image15.png" /></p>
+<p>Conséquence: si les risques ne sont pas indépendants, la fonction de survie n’exprime plus une probabilité.</p>
+<p><strong>Exemple sur les décès causés par une malformation cardiaque aigüe</strong><br />
+Dans la base d’origine, il n’y a pas cette dimension de risque concurrent. Une sortie concurrente a donc été simulée, qu’on labellisera “suicide” (problème tirer de l’analyse du registre mucoviscidose traité par l’Ined). Ce risque entre en concurrence avec le décès directement issu de la malformation (détresse respiratoire aigüe).</p>
+<pre><code>&gt; ear
+(Heart transplant data)
+
+           |    Survival Status
+           |       (1=dead)
+    compet |         0          1 |     Total
+-----------+----------------------+----------
+         0 |        28          0 |        28 
+         1 |         0         56 |        56 
+         2 |         0         19 |        19 
+-----------+----------------------+----------
+     Total |        28         75 |       103 </code></pre>
+<p>Variable compet: cause 1 =&gt; décès directement provoquer par la malformation, 2 =&gt; suicide.</p>
+<p>Lorsqu’on a analysé le décès par la méthode KM, la proportion de survivants était de 15%, soit une proportion de personnes décédées de 85%.</p>
+<p>Si on applique la méthode de Kaplan Meier à la cause 1 en traitant la cause 2 (suicide) comme une censure à droite, et en analyse la cause 2 en traitant la cause 1 comme une censure à droite:</p>
+<p>% de personnes décédées par insuffisance respiratoire: 83% % de personne décédées par sucide: 12%</p>
+<p>La somme de ces 2 proportion est égale à 95% soit 10 points au dessus de l’estimateur KM sur l’évènement unique.</p>
+<p><img src="images/Image16.png" /></p>
+<p>Les deux risques ne sont donc pas indépendants. Intuitivement le suicide a pu être causé, au moins en partie pour certaines personnes, par leur état de santé.</p>
+</div>
+</div>
+<div id="estimations-en-présence-de-risques-concurrents" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Estimations en présence de risques concurrents</h1>
+<div id="estimation-non-paramétrique" class="section level3" number="2.0.1">
+<h3 number="2.0.1"><span class="header-section-number">2.0.1</span> Estimation non paramétrique</h3>
+<ul>
+<li>Estimateur de Nelson Aalen: il s’agit du risque instantané cumulé. Comme il ne s’agit pas d’une probabilité, il a été longtemps utilisé pour mesurer l’incidence dans une logique de risques “cause spécifique”:</li>
+</ul>
+<p><span class="math display">\[H_k (t_i)=\sum_{t_i\leq t}\left(\frac{e_{i,k}}{n_i}\right) \]</span></p>
+<ul>
+<li>L’estimateur le plus utilisé est <strong>la fonction d’incidence cumulée</strong> (Kalbfleisch-Prentice, Marubini-Valscchi):
+<ul>
+<li>Il repose sur une probabilité tout en supportant la non indépendance des risques.</li>
+<li>Son interprétation est identique à la fonction de répartition <span class="math inline">\(F(t)=1-S(t)\)</span>. Cette fonction est donc croissante.</li>
+<li>Il est possible de tester les différences entres CIF: test de Gray ou test de Pepe-Mori.</li>
+</ul></li>
+</ul>
+<p><strong>La fonction d’incidence cumulée</strong><br />
+<br></p>
+<ul>
+<li>Si <span class="math inline">\(h_k(t_i)\)</span> est le risque “cause-spécifique” en <span class="math inline">\(t_i\)</span> et <span class="math inline">\(S(t_i-1)\)</span> l’estimateur de Kaplan-Meier en <span class="math inline">\(t_i-1\)</span> lorsque tous les risques sont regroupés en un évènement unique, l’incidence cumulée pour le risque <span class="math inline">\(k\)</span> en <span class="math inline">\(t_i\)</span> est égale à:</li>
+</ul>
+<p><span class="math display">\[IC_k(t_i)= \sum_{t_i\leq t}S(t_i-1)h_k(t_i)\]</span></p>
+<ul>
+<li>L’incidence cumumée de <span class="math inline">\(k\)</span> en <span class="math inline">\(t_i\)</span> ne dépend donc pas seulement des individus ayant observé ce risque, mais aussi du nombre de personnes qui n’ont pas encore observés les autres risques. Cette dernière information est donnée par <span class="math inline">\(S(t_i-1)\)</span>.</li>
+<li>L’incidence cumulée peut ainsi s’interpréter comme la proportion d’individus qui sont sorti du risque jusqu’en <span class="math inline">\(t_i\)</span> en raison de <span class="math inline">\(k\)</span>.</li>
+</ul>
+<p><img src="images/Image17.png" /></p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+
+(Heart transplant data)
+
+            failure:  compet == 1
+ competing failures:  compet == 2
+
+    Time       CIF         SE     [95% Conf. Int.]
+--------------------------------------------------
+       1    0.0097     0.0097     0.0009    0.0477
+       2    0.0194     0.0136     0.0038    0.0619
+       3    0.0485     0.0212     0.0181    0.1022
+       5    0.0680     0.0248     0.0300    0.1273
+       6    0.0874     0.0278     0.0429    0.1515
+       8    0.0971     0.0292     0.0497    0.1634
+       9    0.1068     0.0304     0.0566    0.1751
+      12    0.1166     0.0316     0.0638    0.1868
+      16    0.1264     0.0328     0.0711    0.1984
+      18    0.1362     0.0338     0.0785    0.2099
+      21    0.1559     0.0358     0.0937    0.2325
+      30    0.1657     0.0367     0.1014    0.2437
+      32    0.1756     0.0376     0.1093    0.2550
+      35    0.1856     0.0384     0.1173    0.2662
+      37    0.1955     0.0392     0.1253    0.2773
+      39    0.2055     0.0400     0.1335    0.2884
+      40    0.2156     0.0407     0.1418    0.2996
+      45    0.2256     0.0414     0.1502    0.3107
+      50    0.2357     0.0421     0.1586    0.3217
+      53    0.2458     0.0427     0.1671    0.3327
+      58    0.2559     0.0433     0.1757    0.3436
+      61    0.2660     0.0439     0.1843    0.3544
+      66    0.2761     0.0445     0.1930    0.3652
+      68    0.2861     0.0450     0.2018    0.3759
+      69    0.2962     0.0454     0.2106    0.3866
+      72    0.3063     0.0459     0.2195    0.3973
+      77    0.3164     0.0463     0.2284    0.4079
+      78    0.3265     0.0467     0.2374    0.4184
+      81    0.3365     0.0471     0.2464    0.4289
+      85    0.3466     0.0474     0.2554    0.4393
+      90    0.3567     0.0478     0.2645    0.4497
+      96    0.3668     0.0481     0.2737    0.4601
+     100    0.3769     0.0484     0.2829    0.4704
+     102    0.3870     0.0486     0.2921    0.4807
+     110    0.3972     0.0489     0.3016    0.4911
+     149    0.4078     0.0491     0.3112    0.5019
+     153    0.4183     0.0494     0.3209    0.5125
+     186    0.4291     0.0496     0.3309    0.5235
+     188    0.4399     0.0498     0.3409    0.5343
+     207    0.4506     0.0500     0.3509    0.5451
+     263    0.4614     0.0502     0.3610    0.5559
+     285    0.4836     0.0505     0.3818    0.5780
+     308    0.4947     0.0506     0.3923    0.5890
+     340    0.5058     0.0507     0.4028    0.5999
+     583    0.5211     0.0513     0.4162    0.6158
+     733    0.5391     0.0524     0.4313    0.6351
+     852    0.5584     0.0535     0.4475    0.6555
+     995    0.5811     0.0550     0.4657    0.6801
+    1032    0.6039     0.0561     0.4850    0.7036
+    1386    0.6343     0.0584     0.5084    0.7362
+
+            failure:  compet == 2
+ competing failures:  compet == 1
+
+    Time       CIF         SE     [95% Conf. Int.]
+--------------------------------------------------
+       2    0.0194     0.0136     0.0038    0.0619
+      16    0.0391     0.0191     0.0128    0.0897
+      17    0.0489     0.0213     0.0182    0.1029
+      28    0.0587     0.0232     0.0240    0.1157
+      36    0.0686     0.0250     0.0302    0.1286
+      40    0.0787     0.0267     0.0368    0.1413
+      43    0.0888     0.0283     0.0436    0.1539
+      51    0.0989     0.0297     0.0506    0.1663
+      68    0.1090     0.0310     0.0578    0.1785
+      72    0.1190     0.0323     0.0651    0.1905
+      80    0.1291     0.0334     0.0726    0.2024
+     165    0.1396     0.0346     0.0804    0.2149
+     219    0.1504     0.0358     0.0886    0.2276
+     334    0.1615     0.0370     0.0970    0.2406
+     342    0.1730     0.0383     0.1058    0.2540
+     675    0.1910     0.0414     0.1177    0.2777
+     979    0.2138     0.0457     0.1321    0.3086</code></pre>
+<p><strong>Compararaison des CIF</strong> <br></p>
+<ul>
+<li>Test de <strong>Pepe &amp; Mori</strong>: teste l’aire entre 2 courbes d’incidences et seulement 2. Disponible avec Stata (commande externe), pour SAS, il faut récupérer une macro externe (<a href="https://onlinelibrary.wiley.com/doi/pdf/10.1002/9780470870709.app2" class="uri">https://onlinelibrary.wiley.com/doi/pdf/10.1002/9780470870709.app2</a>).</li>
+<li>Test de <strong>Gray</strong>: est basé sur une autre mesure du risque en évènement concurrent. Il s’agit du “subdistribution risk” (“risque de sous-répartition”, A.Latouche). Son interprétation n’est pas aisé, mais il est directement lié à l’estimation des CIF. Disponible avec SAS et R.<br />
+</li>
+<li>On peut toujours tester les différences entre les risques “causes spécifiques” avec le test du log-rank (estimateur Nelson-Aalen). Mais on ne teste pas des différences entre CIF.<br />
+<br></li>
+</ul>
+<p><strong>Test de Gray (R)</strong></p>
+<pre><code>Warning: package &#39;cmprsk&#39; was built under R version 3.4.4</code></pre>
+<pre><code>Tests:
+       stat         pv df
+1 5.7834605 0.01617766  1
+2 0.1293076 0.71915098  1
+Estimates and Variances:
+$est
+           500      1000      1500
+0 1 0.56009367 0.6074425 0.6738971
+1 1 0.09090909 0.3333333        NA
+0 2 0.17076543 0.1931938 0.1931938
+1 2 0.18181818 0.3030303        NA
+
+$var
+            500        1000        1500
+0 1 0.002938061 0.003399588 0.004176484
+1 1 0.008347107 0.031135712          NA
+0 2 0.001650185 0.002076694 0.002076694
+1 2 0.015060708 0.026432450          NA</code></pre>
+</div>
+<div id="estimation-semi-paramétrique-et-paramétrique" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Estimation semi paramétrique et paramétrique</h2>
+<p><strong>Modélisation des risques ‘cause-specific’</strong><br />
+Modèle de Cox «standard» pour chaque évènement, les évènements concurrents sont traités comme des censures à droite. Aucune interprétation sur les incidences cumulées ne peut-être faite.</p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+         failure _d:  compet == 1
+   analysis time _t:  stime
+
+Iteration 0:   log likelihood = -222.54837
+Iteration 1:   log likelihood = -215.02113
+Iteration 2:   log likelihood = -214.60293
+Iteration 3:   log likelihood = -214.59123
+Iteration 4:   log likelihood = -214.59121
+Refining estimates:
+Iteration 0:   log likelihood = -214.59121
+
+Cox regression -- Breslow method for ties
+
+No. of subjects =          103                  Number of obs    =         103
+No. of failures =           56
+Time at risk    =        31938
+                                                LR chi2(3)       =       15.91
+Log likelihood  =   -214.59121                  Prob &gt; chi2      =      0.0012
+
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        year |   .8972419   .0690441    -1.41   0.159     .7716286    1.043304
+         age |   1.028731   .0158704     1.84   0.066     .9980913    1.060312
+     surgery |   .2421233   .1459256    -2.35   0.019     .0743062    .7889478
+------------------------------------------------------------------------------</code></pre>
+<p><strong>Modèle de Fine-Gray: subdistribution hazard regression</strong><br />
+Modèle de type semi-paramétrique avec une redéfinition du risque lié à l’estimation des incidences cumulées (voir test de Gray). La différence avec le Cox classique réside dans le calcul du risk-set : les évènements concurrents ne sont pas considérés comme des censures, on laisse les individus leur «survivre» jusqu’à la durée maximumale observée dans l’échantillon.</p>
+<p>Pour les questions liées à l’interprétation de ces deux types de modèles, se reporter à: <a href="https://onlinelibrary.wiley.com/doi/epdf/10.1002/sim.7501" class="uri">https://onlinelibrary.wiley.com/doi/epdf/10.1002/sim.7501</a></p>
+<p><strong>Modèle à temps discret</strong></p>
+<ul>
+<li>Il s’agit d’une extension du modèle à évènement unique (toutes causes regroupées) avec le modèle logistique multinomial à temps discret.</li>
+<li>S’il ne permet pas une interprétation dirigée sur les incidences cumulées, les risques concurrents ne sont pas traitées comme des censures à droite.</li>
+</ul>
+<p>Ici le modèle à temps discret a été estimé sur les jours d’exposition, en splittant la base aux temps d’évènement (cf Cox)</p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+
+
+
+
+
+
+
+Iteration 0:   log likelihood = -320.63742  
+Iteration 1:   log likelihood = -293.94986  
+Iteration 2:   log likelihood = -287.00623  
+Iteration 3:   log likelihood = -286.85587  
+Iteration 4:   log likelihood = -286.85569  
+Iteration 5:   log likelihood = -286.85569  
+
+Multinomial logistic regression                 Number of obs     =      1,164
+                                                LR chi2(8)        =      67.56
+                                                Prob &gt; chi2       =     0.0000
+Log likelihood = -286.85569                     Pseudo R2         =     0.1054
+
+------------------------------------------------------------------------------
+           e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+0            |  (base outcome)
+-------------+----------------------------------------------------------------
+1            |
+           t |  -.0833633   .0194683    -4.28   0.000    -.1215204   -.0452061
+        year |  -.1307793   .0794859    -1.65   0.100    -.2865688    .0250102
+         age |    .032855    .016139     2.04   0.042      .001223    .0644869
+     surgery |  -1.525699   .6079702    -2.51   0.012    -2.717299   -.3340998
+       _cons |   5.837775   5.740758     1.02   0.309    -5.413903    17.08945
+-------------+----------------------------------------------------------------
+2            |
+           t |  -.0905817   .0337391    -2.68   0.007     -.156709   -.0244543
+        year |  -.1859397   .1393032    -1.33   0.182     -.458969    .0870896
+         age |   .0406961   .0291411     1.40   0.163    -.0164195    .0978117
+     surgery |  -.2487657   .6640659    -0.37   0.708    -1.550311    1.052779
+       _cons |   8.187169   10.05178     0.81   0.415    -11.51396     27.8883
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="evènements-récurrents-et-modèles-dit-cure" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Evènements récurrents et modèles dit “Cure”</h1>
+<p><strong>[A FAIRE]</strong><br />
+<br> - Deuxième extention possible après les risques concurrents. Introduire les notions d’hétérogénéité non observable et de fragilité (frailty). - Modèle dit “Cure”: sur la première séquence, phénomène d’imunité; sur une séquence supérieure, présence d’observations définitivement traitées (Cure). S’observe lorsque les fonction de survie présente un longue asymptote (droite horizontale) et en particulier lorsque qu’il y a peu d’évènement observés (% de survivants élevés). Question: qui est réellement soumis au risque?</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

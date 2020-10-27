@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Modèles à temps discret</title>
+
+<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Anayse des durées</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Données et théorie
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Introduction.html">Introduction</a>
+    </li>
+    <li>
+      <a href="Donnees.html">Les Données biographiques</a>
+    </li>
+    <li>
+      <a href="Theorie.html">Eléments théoriques</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="nonparam.html">Méthodes non paramétriques</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Modèles à risque proportionnel
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Intro_mod.html">Intro</a>
+    </li>
+    <li>
+      <a href="cox.html">Cox</a>
+    </li>
+    <li>
+      <a href="discret.html">Méthode à temps discret</a>
+    </li>
+    <li>
+      <a href="dynamiques.html">Variables dynamiques</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Compléments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="param.html">Modèles paramétriques</a>
+    </li>
+    <li>
+      <a href="concurrents.html">Risques concurrents</a>
+    </li>
+    <li>
+      <a href="cure.html">Récurrence et imunité</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Logiciels
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="SAS.html">SAS</a>
+    </li>
+    <li>
+      <a href="Stata.html">Stata</a>
+    </li>
+    <li>
+      <a href="R.html">R</a>
+    </li>
+    <li>
+      <a href="Python.html">Python</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Modèles à temps discret</h1>
+
+</div>
+
+
+<ul>
+<li>On va principalement traité du modèle <strong>logistique à temps discret</strong>.</li>
+<li>Par définition ce n’est pas un modèle à risque proportionnel, mais à Odds proportionnels. Toutefois en situation de rareté, l’Odds converge vers une probabilité, qui est une mesure du risque (ici une probabilité conditionnelle).</li>
+<li>Le modèle à temps discret est de type paramétrique, il est moins contraignant que le modèle de Cox si l’hypothèse de proportionnalité n’est pas respectée, car le modèle est ajusté par une fonction de la durée.</li>
+<li>Formellement, le modèle est estimable avec des évènements mesurée à une durée nulle (même si cela n’a pas grand sens).</li>
+<li>La base de données doit être transformée en format long: aux temps d’observation ou sur des intervalles de temps.</li>
+<li>Permet d’introduire de manière plutôt souple un ensemble de covariables dynamiques.</li>
+</ul>
+<p>Avec un lien logistique, le modèle à temps discret, avec seulement des covariables fixes, peut s’écrire:</p>
+<p><span class="math display">\[log\left[\frac{P(Y=1 | t_p,X_k)}{1-P(Y=1 | t_p,X_k)}\right]= a_0 + \sum_{p}a_pf(t_p)+\sum_{k}b_kX_k\]</span></p>
+<div id="organisation-des-données" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Organisation des données</h1>
+<div id="format-long" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Format long</h2>
+<p>Les données doivent être en format long: pour chaque individu on a une ligne par durée observé ou par intevalle de durées jusqu’à l’évènement ou la censure. On retrouve le système de <em>splittage</em> des données du modèle de Cox, mais généralisé à des intervalles où aucun évènement n’est observé. Avec des données de type discrète, classique en science sociale, il y a souvent peu de différence entre un allongement aux temps d’évènement et aux temps d’observation.</p>
+<p><em>Warning</em>: Si on construit des intervalles, on doit s’assurer qu’au moins un évènement s’est produit dans chaque intervalle, sinon problème de séparabilité parfaite.</p>
+</div>
+<div id="durée" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Durée</h2>
+<p>La durée est dans un premier temps construite sous forme d’un simple compteur. La paramétrisation de la durée dans le modèle sera présentée par la suite.</p>
+</div>
+<div id="variable-évènementcensure" class="section level2" number="1.3">
+<h2 number="1.3"><span class="header-section-number">1.3</span> Variable évènement/censure</h2>
+<p>Si l’individu a connu l’évènement, elle prend la valeur 0 avant celui-ci. Au moment de l’évènement sa valeur est égale à 1. Pour les observations censurées, la variable prend toujours la valeur 0.</p>
+<p><br> <strong>Application</strong> On reprend les données de la base <em>transplantation</em>, mais les durées on été regroupées par période de 30 jours. Il n’y a pas de durée mesurée comme nulle, on a considéré que les 30 premiers jours représentaient le premier mois d’exposition. Cette variable de durée se nomme <em>mois</em>.</p>
+<p><strong>Format d’origine</strong></p>
+<pre><code>&gt; ion_m.dta&quot;, clear
+
+
+  +-----------------------------------------+
+  | id   year   age   surgery   mois   died |
+  |-----------------------------------------|
+  |  1     67    30         0      2      1 |
+  +-----------------------------------------+</code></pre>
+<p><strong>Format long et variables pour l’analyse</strong></p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+
+
+
+
+
+  +-------------------------------------------------+
+  | id   year   age   surgery   mois   died   t   e |
+  |-------------------------------------------------|
+  |  1     67    30         0      2      1   1   0 |
+  |  1     67    30         0      2      1   2   1 |
+  +-------------------------------------------------+</code></pre>
+</div>
+</div>
+<div id="ajustement-de-la-durée" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Ajustement de la durée</h1>
+<p>Un des principaux enjeux réside dans la paramétrisation de la durée:</p>
+<ul>
+<li>Elle peut-être modélisée sous forme de fonction d’une variable de type continue.</li>
+<li>Elle peut-être modélisée comme variable discrete, de type indicatrice (0,1), sur tous les points d’observation, ou sous forme de regroupements (rappel: au moins un évènement observé dans chaque intervalle).</li>
+</ul>
+<div id="ajustement-avec-une-durée-en-continu" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Ajustement avec une durée en continu</h2>
+<p>Le modèle étant paramétrique, on doit trouver une fonction qui ajuste le mieux les données. Toutes transformations de la variable est possible: <span class="math inline">\(f(t)=a\times t\)</span>, <span class="math inline">\(f(t)=a\times ln(t)\)</span>……formes quadratiques. Les ajustements sous forme de <strong>splines</strong> tendent à se développer ces dernières années (recommandé).<br />
+Pour sélectionner cette fonction, on peut tester différents modèles sans covariable additionnelle, et sélectionner la forme qui minimise un critère d’information de type <strong>AIC</strong> ou <strong>BIC</strong> (vraisemblance pénalisée).<br />
+<br> Exemple:<br />
+On va tester les paramétrisations suivante:s une forme linéraire stricte <span class="math inline">\(f(t)=a\times t\)</span> et des effets quadratiques d’ordres 2 et 3: <span class="math inline">\(f(t)=a_1\times t + a_2\times t^{2}\)</span> et <span class="math inline">\(f(t)=a_1\times t + a_2\times t^{2} + a_3\times t^{3}\)</span>.</p>
+<p><em>Remarques</em>:</p>
+<ul>
+<li>Les effets quadratiques consiste à introduires des intéractions entre une variable continue et elle même. Cela permet d’estimer des effets non linéaires.</li>
+<li><strong>Attention aux effets quadratiques d’ordre &gt;2</strong>: très sensible aux <em>outliers</em>. En analyse des durées en fin de la plage d’observation si peu de personnes restent soumises au risque, celui-ci peut-être surestimé. <br></li>
+</ul>
+<p><strong>Exemple</strong> Estimation des probabilités de décéder selon différents ajustements de la durée (modèle logistique à temps discret) <img src="images/Image11.png" /></p>
+<p><strong>Critères AIC</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th><span class="math inline">\(f(t)\)</span></th>
+<th>AIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(a\times t\)</span></td>
+<td>504</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(a_1\times t + a_2\times t^{2}\)</span></td>
+<td>492</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(a_1\times t + a_2\times t^{2} + a_3\times t^{3}\)</span></td>
+<td>486</td>
+</tr>
+</tbody>
+</table>
+<p>On peut utiliser la troisième forme à savoir <span class="math inline">\(a_1\times t + a_2\times t^{2} + a_3\times t^{3}\)</span>.<br />
+<BR></p>
+<p><strong>Estimation du modèle avec toutes les covariables</strong></p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+
+
+
+
+Logistic regression                             Number of obs     =      1,127
+                                                LR chi2(6)        =      90.69
+                                                Prob &gt; chi2       =     0.0000
+Log likelihood = -230.33671                     Pseudo R2         =     0.1645
+
+------------------------------------------------------------------------------
+           e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           t |  -.3720566   .0823946    -4.52   0.000    -.5335471   -.2105661
+          t2 |   .0142379    .005023     2.83   0.005     .0043929    .0240828
+          t3 |  -.0001659   .0000785    -2.11   0.035    -.0003198    -.000012
+        year |  -.1326693   .0737755    -1.80   0.072    -.2772666     .011928
+         age |   .0333413   .0146876     2.27   0.023     .0045541    .0621285
+     surgery |  -1.010918    .448598    -2.25   0.024    -1.890154   -.1316821
+       _cons |   7.082657   5.307737     1.33   0.182    -3.320316    17.48563
+------------------------------------------------------------------------------</code></pre>
+<p>Estimation du modèle de Cox avec des durées mesurées sur une échelle de 30 jours</p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+
+
+
+
+Cox regression -- Efron method for ties
+
+No. of subjects =          103                  Number of obs    =         103
+No. of failures =           75
+Time at risk    =         1127
+                                                LR chi2(3)       =       17.97
+Log likelihood  =   -289.81242                  Prob &gt; chi2      =      0.0004
+
+------------------------------------------------------------------------------
+          _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        year |  -.1304397   .0674344    -1.93   0.053    -.2626087    .0017293
+         age |   .0288141   .0134981     2.13   0.033     .0023583    .0552698
+     surgery |  -.9695805   .4361069    -2.22   0.026    -1.824334   -.1148266
+------------------------------------------------------------------------------</code></pre>
+<p>Que remarquez-vous?</p>
+</div>
+<div id="ajustement-discret" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Ajustement discret</h2>
+<ul>
+<li>Il s’agit d’introduire la variable de durée dans le modèle comme une variable catégorielle (factor).</li>
+<li>Pas conseillé si beaucoup de points d’observation, ce qui est le cas ici, et surtout si présence de points d’observation sans évènement.</li>
+<li>A l’inverse, si peu de points d’observation, la paramétrisation avec une durée continue n’est pas conseillé.</li>
+<li>La correction de la non proportionnalité peut être plus compliquée à réaliser (non traité).</li>
+</ul>
+<p>On va supposer que l’on ne dispose que de 4 points d’observations. Pour l’exemple, on va créer ces points à partir des quartiles de la durée, et conserver pour chaque personne une seule observation par intervalle.</p>
+<ul>
+<li>1: Entre le début de l’exposition et 4 mois.</li>
+<li>2: Entre 5 mois et 11 mois .</li>
+<li>3: Entre 12 mois et 23 mois.</li>
+<li>4: 24 mois et plus.</li>
+</ul>
+<p>On va estimer le risque globalement sur l’intervalle. La base sera plus courte que la précédente, on ne conserve qu’une ligne par intervalle d’exposition.</p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+
+(SAVASTATA created this dataset on 01AUG2019)
+
+         4 |
+ quantiles |           e
+      of t |         0          1 |     Total
+-----------+----------------------+----------
+         1 |        50         53 |       103 
+         2 |        35         11 |        46 
+         3 |        27          5 |        32 
+         4 |        10          6 |        16 
+-----------+----------------------+----------
+     Total |       122         75 |       197 
+
+
+Logistic regression                             Number of obs     =        197
+                                                LR chi2(6)        =      39.30
+                                                Prob &gt; chi2       =     0.0000
+Log likelihood = -111.23965                     Pseudo R2         =     0.1501
+
+------------------------------------------------------------------------------
+           e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+         ct4 |
+          2  |  -1.033368   .4188719    -2.47   0.014    -1.854342   -.2123944
+          3  |  -1.615245    .544858    -2.96   0.003    -2.683147   -.5473433
+          4  |  -.4789305   .5992969    -0.80   0.424    -1.653531    .6956698
+             |
+        year |  -.2032436   .0931956    -2.18   0.029    -.3859036   -.0205835
+         age |   .0468518   .0184958     2.53   0.011     .0106006     .083103
+     surgery |  -1.110163   .5025594    -2.21   0.027    -2.095161   -.1251644
+       _cons |   12.44666   6.653694     1.87   0.061      -.59434    25.48766
+------------------------------------------------------------------------------</code></pre>
+<p>Au niveau de l’interpretation, avec 37% d’évènements sur l’ensemble des observations, il n’est plus possible d’interpréter le modèle en terme de risque (probabilité). La lecture en termes d’Odds Ratio s’impose.</p>
+<p>Probabilités estimées à partir d’un modèle avec la durée seulement.<br />
+Risques sur la longueur de l’intervalle.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Durées</th>
+<th>p</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0 à 4 mois</td>
+<td>0.51</td>
+</tr>
+<tr class="even">
+<td>4 à 11 mois</td>
+<td>0.24</td>
+</tr>
+<tr class="odd">
+<td>11 à 23 mois</td>
+<td>0.16</td>
+</tr>
+<tr class="even">
+<td>23 à 61 mois</td>
+<td>0.37</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="modèle-à-temps-discret-et-hypothèse-ph" class="section level2" number="2.3">
+<h2 number="2.3"><span class="header-section-number">2.3</span> Modèle à temps discret et hypothèse PH</h2>
+<p>Formellement un modèle logistique à temps discret repose sur une hypothèse d’Odds proportionnel (Odds ratios constants pendant la durée d’observation). Contrairement au modèle de Cox, l’estimation des probabilités (risque) n’est pas biaisée si l’hypothèse PH n’est pas respectée.<br />
+Comme pour le modèle de Cox, la correction de la non proportionalité peut se faire en intégrant une interaction avec la durée dans le modèle</p>
+<p>On conseillera d’introduire l’intéraction sur un modèle avec une variable de durée traitée de manière continue.<br />
+Les variables year et age seront omises pour faciliter la représentation graphique.</p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+
+
+
+
+
+
+
+
+
+Logistic regression                             Number of obs     =      1,127
+                                                LR chi2(5)        =      84.78
+                                                Prob &gt; chi2       =     0.0000
+Log likelihood = -233.29204                     Pseudo R2         =     0.1538
+
+------------------------------------------------------------------------------
+           e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           t |   -.373826    .083913    -4.45   0.000    -.5382924   -.2093595
+   1.surgery |  -1.929061   .6920142    -2.79   0.005    -3.285383   -.5727377
+             |
+ surgery#c.t |
+          1  |   .0690069   .0333128     2.07   0.038      .003715    .1342987
+             |
+          t2 |   .0137676   .0052405     2.63   0.009     .0034964    .0240388
+          t3 |  -.0001596   .0000828    -1.93   0.054    -.0003218    2.62e-06
+       _cons |   -.723378   .2445386    -2.96   0.003    -1.202665   -.2440911
+------------------------------------------------------------------------------</code></pre>
+<p><img src="images/Image13.png" /></p>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

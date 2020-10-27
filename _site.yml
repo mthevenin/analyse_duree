@@ -1,0 +1,55 @@
+name: ""
+navbar:
+  title: ""
+  left:
+  - text: "Anayse des durées"
+    href: index.html
+  - text: "Données et théorie"
+    menu:
+    - text: "Introduction"
+      href:  Introduction.html
+    - text: "Les Données biographiques"
+      href: Donnees.html
+    - text: "Eléments théoriques"
+      href: Theorie.html
+  - text: "Méthodes non paramétriques"
+    href: nonparam.html
+  - text: "Modèles à risque proportionnel"
+    menu:
+    - text: "Intro"
+      href: Intro_mod.html
+    - text: "Cox"
+      href: cox.html    
+    - text: "Méthode à temps discret"
+      href: discret.html
+    - text: "Variables dynamiques"
+      href: dynamiques.html
+  - text: "Compléments"
+    menu:
+    - text: "Modèles paramétriques"
+      href: param.html
+    - text: "Risques concurrents"
+      href: concurrents.html   
+    - text: "Récurrence et imunité"
+      href: cure.html
+  - text: "Logiciels"
+    menu:
+    - text: "SAS"
+      href: SAS.html
+    - text: "Stata"
+      href: Stata.html
+    - text: "R"
+      href: R.html
+    - text: "Python"
+      href: Python.html
+
+
+output: 
+  html_document: 
+    theme: simplex
+    highlight: zenburn
+    number_sections: yes
+    toc: yes
+    toc_float: yes
+
+

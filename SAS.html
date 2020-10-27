@@ -1,0 +1,12344 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>SAS</title>
+
+<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Anayse des durées</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Données et théorie
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Introduction.html">Introduction</a>
+    </li>
+    <li>
+      <a href="Donnees.html">Les Données biographiques</a>
+    </li>
+    <li>
+      <a href="Theorie.html">Eléments théoriques</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="nonparam.html">Méthodes non paramétriques</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Modèles à risque proportionnel
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Intro_mod.html">Intro</a>
+    </li>
+    <li>
+      <a href="cox.html">Cox</a>
+    </li>
+    <li>
+      <a href="discret.html">Méthode à temps discret</a>
+    </li>
+    <li>
+      <a href="dynamiques.html">Variables dynamiques</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Compléments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="param.html">Modèles paramétriques</a>
+    </li>
+    <li>
+      <a href="concurrents.html">Risques concurrents</a>
+    </li>
+    <li>
+      <a href="cure.html">Récurrence et imunité</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Logiciels
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="SAS.html">SAS</a>
+    </li>
+    <li>
+      <a href="Stata.html">Stata</a>
+    </li>
+    <li>
+      <a href="R.html">R</a>
+    </li>
+    <li>
+      <a href="Python.html">Python</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">SAS</h1>
+
+</div>
+
+
+<p><br> <strong>Sélection des outputs</strong><br />
+Selon le type d’analyse la totalité des outputs ne seront pas reproduits (<code>ods include</code> ou <code>ods exclude</code> pour la sélection). Un problème spécifique s’observe pour le tableau des estimateurs de Kaplan-Meir qui est particulièrement illisible en présence d’un nombre important d’observation censurées à droite.</p>
+<p>exemple pour <code>proc lifetest</code>: noms des outputs récupérés dans la log</p>
+<pre><code>Output Added:
+-------------
+Name:       ProductLimitEstimates
+Label:      Product-Limit Estimates
+Template:   Stat.Lifetest.ProductLimitEstimates
+Path:       Lifetest.Stratum1.ProductLimitEstimates
+-------------
+
+Output Added:
+-------------
+Name:       Quartiles
+Label:      Quartiles of the Survival Distribution
+Template:   Stat.Lifetest.Quartiles
+Path:       Lifetest.Stratum1.TimeSummary.Quartiles
+-------------
+
+Output Added:
+-------------
+Name:       Means
+Label:      Mean
+Template:   Stat.Lifetest.Means
+Path:       Lifetest.Stratum1.TimeSummary.Means
+-------------
+
+Output Added:
+-------------
+Name:       SurvivalPlot
+Label:      Survival Curve
+Template:   Stat.Lifetest.Graphics.ProductLimitSurvival
+Path:       Lifetest.Stratum1.SurvivalPlot
+-------------
+
+Output Added:
+-------------
+Name:       CensoredSummary
+Label:      Censored Summary
+Template:   Stat.Lifetest.CensoredSummary
+Path:       Lifetest.CensoredSummary</code></pre>
+<p>Utiliser de préférence le nom figurant dans la ligne <strong>path:</strong> (si comparaison de deux strates, le nom figurant dans la ligne <strong>name</strong> est identique).</p>
+<div id="analyse-non-paramétrique" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Analyse non paramétrique</h1>
+<pre class="sashtml"><code>libname x &quot;D:\Marc\SMS\FORMATIONS\2019\analyse durees\a distribuer\&quot;;</code></pre>
+<div id="méthode-actuarielle" class="section level2" number="1.1">
+<h2 number="1.1"><span class="header-section-number">1.1</span> Méthode actuarielle</h2>
+<p>Avec une longueur d’intervalle fixe égale à 30 jours.</p>
+<pre class="sashtml"><code>proc lifetest data=x.transplantation method=lifetable width=30;
+time stime*died(0);run;</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Valeurs estimées de la table de survie">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="16" scope="colgroup">
+Valeurs estimées de survie de la table de survie
+</th>
+</tr>
+<tr>
+<th class="c b header" colspan="2" scope="colgroup">
+Intervalle
+</th>
+<th class="r b header" rowspan="2" scope="col">
+Nombre<br/>d'échecs
+</th>
+<th class="r b header" rowspan="2" scope="col">
+Nombre <br/>censuré
+</th>
+<th class="r b header" rowspan="2" scope="col">
+Taille <br/>effective de<br/>l'échantillon
+</th>
+<th class="r b header" rowspan="2" scope="col">
+Probabilité conditionnelle<br/>de défaillance
+</th>
+<th class="r b header" rowspan="2" scope="col">
+Erreur type<br/> de la probabilité<br/> conditionnelle
+</th>
+<th class="r b header" rowspan="2" scope="col">
+Survie
+</th>
+<th class="r b header" rowspan="2" scope="col">
+Echec
+</th>
+<th class="c b header" rowspan="2" scope="col">
+Erreur<br/>type<br/>de survie
+</th>
+<th class="c b header" rowspan="2" scope="col">
+Durée de vie<br/>Résidus<br/>Médiane
+</th>
+<th class="c b header" rowspan="2" scope="col">
+Erreur<br/>type<br/>de la médiane
+</th>
+<th class="c b header" colspan="4" scope="colgroup">
+Evalué(e) au centre de classe de l'intervalle
+</th>
+</tr>
+<tr>
+<th class="r b header" scope="col">
+[Inférieur,
+</th>
+<th class="r b header" scope="col">
+Supérieur)
+</th>
+<th class="c b header" scope="col">
+PDF
+</th>
+<th class="c b header" scope="col">
+Erreur<br/>type<br/>PDF
+</th>
+<th class="c b header" scope="col">
+Hasard
+</th>
+<th class="c b header" scope="col">
+Erreur<br/>type<br/>de hasard
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">
+0
+</th>
+<th class="r rowheader" scope="row">
+30
+</th>
+<td class="r data">
+22
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+102.5
+</td>
+<td class="r data">
+0.2146
+</td>
+<td class="r data">
+0.0406
+</td>
+<td class="r data">
+1.0000
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+104.7
+</td>
+<td class="r data">
+29.0660
+</td>
+<td class="r data">
+0.00715
+</td>
+<td class="r data">
+0.00135
+</td>
+<td class="r data">
+0.008015
+</td>
+<td class="r data">
+0.001696
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+30
+</th>
+<th class="r rowheader" scope="row">
+60
+</th>
+<td class="r data">
+14
+</td>
+<td class="r data">
+2
+</td>
+<td class="r data">
+79.0
+</td>
+<td class="r data">
+0.1772
+</td>
+<td class="r data">
+0.0430
+</td>
+<td class="r data">
+0.7854
+</td>
+<td class="r data">
+0.2146
+</td>
+<td class="r data">
+0.0406
+</td>
+<td class="r data">
+229.4
+</td>
+<td class="r data">
+121.0
+</td>
+<td class="r data">
+0.00464
+</td>
+<td class="r data">
+0.00115
+</td>
+<td class="r data">
+0.006481
+</td>
+<td class="r data">
+0.001724
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+60
+</th>
+<th class="r rowheader" scope="row">
+90
+</th>
+<td class="r data">
+12
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+64.0
+</td>
+<td class="r data">
+0.1875
+</td>
+<td class="r data">
+0.0488
+</td>
+<td class="r data">
+0.6462
+</td>
+<td class="r data">
+0.3538
+</td>
+<td class="r data">
+0.0475
+</td>
+<td class="r data">
+298.7
+</td>
+<td class="r data">
+35.7872
+</td>
+<td class="r data">
+0.00404
+</td>
+<td class="r data">
+0.00109
+</td>
+<td class="r data">
+0.006897
+</td>
+<td class="r data">
+0.00198
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+90
+</th>
+<th class="r rowheader" scope="row">
+120
+</th>
+<td class="r data">
+5
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+51.5
+</td>
+<td class="r data">
+0.0971
+</td>
+<td class="r data">
+0.0413
+</td>
+<td class="r data">
+0.5250
+</td>
+<td class="r data">
+0.4750
+</td>
+<td class="r data">
+0.0498
+</td>
+<td class="r data">
+762.7
+</td>
+<td class="r data">
+58.8416
+</td>
+<td class="r data">
+0.00170
+</td>
+<td class="r data">
+0.000740
+</td>
+<td class="r data">
+0.003401
+</td>
+<td class="r data">
+0.001519
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+120
+</th>
+<th class="r rowheader" scope="row">
+150
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+45.5
+</td>
+<td class="r data">
+0.0220
+</td>
+<td class="r data">
+0.0217
+</td>
+<td class="r data">
+0.4741
+</td>
+<td class="r data">
+0.5259
+</td>
+<td class="r data">
+0.0499
+</td>
+<td class="r data">
+859.3
+</td>
+<td class="r data">
+46.0561
+</td>
+<td class="r data">
+0.000347
+</td>
+<td class="r data">
+0.000345
+</td>
+<td class="r data">
+0.000741
+</td>
+<td class="r data">
+0.000741
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+150
+</th>
+<th class="r rowheader" scope="row">
+180
+</th>
+<td class="r data">
+2
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+44.0
+</td>
+<td class="r data">
+0.0455
+</td>
+<td class="r data">
+0.0314
+</td>
+<td class="r data">
+0.4636
+</td>
+<td class="r data">
+0.5364
+</td>
+<td class="r data">
+0.0499
+</td>
+<td class="r data">
+836.2
+</td>
+<td class="r data">
+45.8052
+</td>
+<td class="r data">
+0.000702
+</td>
+<td class="r data">
+0.000491
+</td>
+<td class="r data">
+0.00155
+</td>
+<td class="r data">
+0.001096
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+180
+</th>
+<th class="r rowheader" scope="row">
+210
+</th>
+<td class="r data">
+3
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+41.5
+</td>
+<td class="r data">
+0.0723
+</td>
+<td class="r data">
+0.0402
+</td>
+<td class="r data">
+0.4426
+</td>
+<td class="r data">
+0.5574
+</td>
+<td class="r data">
+0.0498
+</td>
+<td class="r data">
+820.0
+</td>
+<td class="r data">
+45.0209
+</td>
+<td class="r data">
+0.00107
+</td>
+<td class="r data">
+0.000605
+</td>
+<td class="r data">
+0.0025
+</td>
+<td class="r data">
+0.001442
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+210
+</th>
+<th class="r rowheader" scope="row">
+240
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+38.0
+</td>
+<td class="r data">
+0.0263
+</td>
+<td class="r data">
+0.0260
+</td>
+<td class="r data">
+0.4106
+</td>
+<td class="r data">
+0.5894
+</td>
+<td class="r data">
+0.0495
+</td>
+<td class="r data">
+810.9
+</td>
+<td class="r data">
+43.6474
+</td>
+<td class="r data">
+0.000360
+</td>
+<td class="r data">
+0.000358
+</td>
+<td class="r data">
+0.000889
+</td>
+<td class="r data">
+0.000889
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+240
+</th>
+<th class="r rowheader" scope="row">
+270
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+36.5
+</td>
+<td class="r data">
+0.0274
+</td>
+<td class="r data">
+0.0270
+</td>
+<td class="r data">
+0.3998
+</td>
+<td class="r data">
+0.6002
+</td>
+<td class="r data">
+0.0494
+</td>
+<td class="r data">
+788.0
+</td>
+<td class="r data">
+43.3633
+</td>
+<td class="r data">
+0.000365
+</td>
+<td class="r data">
+0.000363
+</td>
+<td class="r data">
+0.000926
+</td>
+<td class="r data">
+0.000926
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+270
+</th>
+<th class="r rowheader" scope="row">
+300
+</th>
+<td class="r data">
+2
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+35.0
+</td>
+<td class="r data">
+0.0571
+</td>
+<td class="r data">
+0.0392
+</td>
+<td class="r data">
+0.3888
+</td>
+<td class="r data">
+0.6112
+</td>
+<td class="r data">
+0.0492
+</td>
+<td class="r data">
+765.2
+</td>
+<td class="r data">
+43.0695
+</td>
+<td class="r data">
+0.000741
+</td>
+<td class="r data">
+0.000517
+</td>
+<td class="r data">
+0.001961
+</td>
+<td class="r data">
+0.001386
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+300
+</th>
+<th class="r rowheader" scope="row">
+330
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+33.0
+</td>
+<td class="r data">
+0.0303
+</td>
+<td class="r data">
+0.0298
+</td>
+<td class="r data">
+0.3666
+</td>
+<td class="r data">
+0.6334
+</td>
+<td class="r data">
+0.0488
+</td>
+<td class="r data">
+749.8
+</td>
+<td class="r data">
+41.8209
+</td>
+<td class="r data">
+0.000370
+</td>
+<td class="r data">
+0.000368
+</td>
+<td class="r data">
+0.001026
+</td>
+<td class="r data">
+0.001026
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+330
+</th>
+<th class="r rowheader" scope="row">
+360
+</th>
+<td class="r data">
+3
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+31.5
+</td>
+<td class="r data">
+0.0952
+</td>
+<td class="r data">
+0.0523
+</td>
+<td class="r data">
+0.3555
+</td>
+<td class="r data">
+0.6445
+</td>
+<td class="r data">
+0.0486
+</td>
+<td class="r data">
+1054.4
+</td>
+<td class="r data">
+25.9424
+</td>
+<td class="r data">
+0.00113
+</td>
+<td class="r data">
+0.000639
+</td>
+<td class="r data">
+0.003333
+</td>
+<td class="r data">
+0.001922
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+360
+</th>
+<th class="r rowheader" scope="row">
+390
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+27.5
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.3216
+</td>
+<td class="r data">
+0.6784
+</td>
+<td class="r data">
+0.0478
+</td>
+<td class="r data">
+1038.3
+</td>
+<td class="r data">
+25.1208
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+390
+</th>
+<th class="r rowheader" scope="row">
+420
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+26.5
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.3216
+</td>
+<td class="r data">
+0.6784
+</td>
+<td class="r data">
+0.0478
+</td>
+<td class="r data">
+1008.3
+</td>
+<td class="r data">
+25.5904
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+420
+</th>
+<th class="r rowheader" scope="row">
+450
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+2
+</td>
+<td class="r data">
+25.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.3216
+</td>
+<td class="r data">
+0.6784
+</td>
+<td class="r data">
+0.0478
+</td>
+<td class="r data">
+978.3
+</td>
+<td class="r data">
+26.3469
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+450
+</th>
+<th class="r rowheader" scope="row">
+480
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+24.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.3216
+</td>
+<td class="r data">
+0.6784
+</td>
+<td class="r data">
+0.0478
+</td>
+<td class="r data">
+948.3
+</td>
+<td class="r data">
+26.8902
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+480
+</th>
+<th class="r rowheader" scope="row">
+510
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+23.5
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.3216
+</td>
+<td class="r data">
+0.6784
+</td>
+<td class="r data">
+0.0478
+</td>
+<td class="r data">
+918.3
+</td>
+<td class="r data">
+27.1748
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+510
+</th>
+<th class="r rowheader" scope="row">
+540
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+22.5
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.3216
+</td>
+<td class="r data">
+0.6784
+</td>
+<td class="r data">
+0.0478
+</td>
+<td class="r data">
+888.3
+</td>
+<td class="r data">
+27.7721
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+540
+</th>
+<th class="r rowheader" scope="row">
+570
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+21.5
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.3216
+</td>
+<td class="r data">
+0.6784
+</td>
+<td class="r data">
+0.0478
+</td>
+<td class="r data">
+858.3
+</td>
+<td class="r data">
+28.4106
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+570
+</th>
+<th class="r rowheader" scope="row">
+600
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+20.5
+</td>
+<td class="r data">
+0.0488
+</td>
+<td class="r data">
+0.0476
+</td>
+<td class="r data">
+0.3216
+</td>
+<td class="r data">
+0.6784
+</td>
+<td class="r data">
+0.0478
+</td>
+<td class="r data">
+828.3
+</td>
+<td class="r data">
+29.0953
+</td>
+<td class="r data">
+0.000523
+</td>
+<td class="r data">
+0.000516
+</td>
+<td class="r data">
+0.001667
+</td>
+<td class="r data">
+0.001666
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+600
+</th>
+<th class="r rowheader" scope="row">
+630
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+18.5
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.3059
+</td>
+<td class="r data">
+0.6941
+</td>
+<td class="r data">
+0.0479
+</td>
+<td class="r data">
+804.7
+</td>
+<td class="r data">
+29.1337
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+630
+</th>
+<th class="r rowheader" scope="row">
+660
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+18.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.3059
+</td>
+<td class="r data">
+0.6941
+</td>
+<td class="r data">
+0.0479
+</td>
+<td class="r data">
+774.7
+</td>
+<td class="r data">
+29.5355
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+660
+</th>
+<th class="r rowheader" scope="row">
+690
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+17.5
+</td>
+<td class="r data">
+0.0571
+</td>
+<td class="r data">
+0.0555
+</td>
+<td class="r data">
+0.3059
+</td>
+<td class="r data">
+0.6941
+</td>
+<td class="r data">
+0.0479
+</td>
+<td class="r data">
+744.7
+</td>
+<td class="r data">
+29.9545
+</td>
+<td class="r data">
+0.000583
+</td>
+<td class="r data">
+0.000573
+</td>
+<td class="r data">
+0.001961
+</td>
+<td class="r data">
+0.00196
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+690
+</th>
+<th class="r rowheader" scope="row">
+720
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+16.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.2885
+</td>
+<td class="r data">
+0.7115
+</td>
+<td class="r data">
+0.0483
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+720
+</th>
+<th class="r rowheader" scope="row">
+750
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+16.0
+</td>
+<td class="r data">
+0.0625
+</td>
+<td class="r data">
+0.0605
+</td>
+<td class="r data">
+0.2885
+</td>
+<td class="r data">
+0.7115
+</td>
+<td class="r data">
+0.0483
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0.000601
+</td>
+<td class="r data">
+0.000590
+</td>
+<td class="r data">
+0.002151
+</td>
+<td class="r data">
+0.002149
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+750
+</th>
+<th class="r rowheader" scope="row">
+780
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+15.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.2704
+</td>
+<td class="r data">
+0.7296
+</td>
+<td class="r data">
+0.0485
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+780
+</th>
+<th class="r rowheader" scope="row">
+810
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+15.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.2704
+</td>
+<td class="r data">
+0.7296
+</td>
+<td class="r data">
+0.0485
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+810
+</th>
+<th class="r rowheader" scope="row">
+840
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+15.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.2704
+</td>
+<td class="r data">
+0.7296
+</td>
+<td class="r data">
+0.0485
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+840
+</th>
+<th class="r rowheader" scope="row">
+870
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+14.5
+</td>
+<td class="r data">
+0.0690
+</td>
+<td class="r data">
+0.0665
+</td>
+<td class="r data">
+0.2704
+</td>
+<td class="r data">
+0.7296
+</td>
+<td class="r data">
+0.0485
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0.000622
+</td>
+<td class="r data">
+0.000610
+</td>
+<td class="r data">
+0.002381
+</td>
+<td class="r data">
+0.002379
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+870
+</th>
+<th class="r rowheader" scope="row">
+900
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+13.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.2518
+</td>
+<td class="r data">
+0.7482
+</td>
+<td class="r data">
+0.0486
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+900
+</th>
+<th class="r rowheader" scope="row">
+930
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+12.5
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.2518
+</td>
+<td class="r data">
+0.7482
+</td>
+<td class="r data">
+0.0486
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+930
+</th>
+<th class="r rowheader" scope="row">
+960
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+11.5
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.2518
+</td>
+<td class="r data">
+0.7482
+</td>
+<td class="r data">
+0.0486
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+960
+</th>
+<th class="r rowheader" scope="row">
+990
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+11.0
+</td>
+<td class="r data">
+0.0909
+</td>
+<td class="r data">
+0.0867
+</td>
+<td class="r data">
+0.2518
+</td>
+<td class="r data">
+0.7482
+</td>
+<td class="r data">
+0.0486
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0.000763
+</td>
+<td class="r data">
+0.000742
+</td>
+<td class="r data">
+0.003175
+</td>
+<td class="r data">
+0.003171
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+990
+</th>
+<th class="r rowheader" scope="row">
+1020
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+10.0
+</td>
+<td class="r data">
+0.1000
+</td>
+<td class="r data">
+0.0949
+</td>
+<td class="r data">
+0.2289
+</td>
+<td class="r data">
+0.7711
+</td>
+<td class="r data">
+0.0493
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0.000763
+</td>
+<td class="r data">
+0.000742
+</td>
+<td class="r data">
+0.003509
+</td>
+<td class="r data">
+0.003504
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1020
+</th>
+<th class="r rowheader" scope="row">
+1050
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+9.0
+</td>
+<td class="r data">
+0.1111
+</td>
+<td class="r data">
+0.1048
+</td>
+<td class="r data">
+0.2060
+</td>
+<td class="r data">
+0.7940
+</td>
+<td class="r data">
+0.0494
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0.000763
+</td>
+<td class="r data">
+0.000742
+</td>
+<td class="r data">
+0.003922
+</td>
+<td class="r data">
+0.003915
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1050
+</th>
+<th class="r rowheader" scope="row">
+1080
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+8.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1831
+</td>
+<td class="r data">
+0.8169
+</td>
+<td class="r data">
+0.0489
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1080
+</th>
+<th class="r rowheader" scope="row">
+1110
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+8.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1831
+</td>
+<td class="r data">
+0.8169
+</td>
+<td class="r data">
+0.0489
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1110
+</th>
+<th class="r rowheader" scope="row">
+1140
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+8.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1831
+</td>
+<td class="r data">
+0.8169
+</td>
+<td class="r data">
+0.0489
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1140
+</th>
+<th class="r rowheader" scope="row">
+1170
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+7.5
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1831
+</td>
+<td class="r data">
+0.8169
+</td>
+<td class="r data">
+0.0489
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1170
+</th>
+<th class="r rowheader" scope="row">
+1200
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+7.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1831
+</td>
+<td class="r data">
+0.8169
+</td>
+<td class="r data">
+0.0489
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1200
+</th>
+<th class="r rowheader" scope="row">
+1230
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+7.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1831
+</td>
+<td class="r data">
+0.8169
+</td>
+<td class="r data">
+0.0489
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1230
+</th>
+<th class="r rowheader" scope="row">
+1260
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+7.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1831
+</td>
+<td class="r data">
+0.8169
+</td>
+<td class="r data">
+0.0489
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1260
+</th>
+<th class="r rowheader" scope="row">
+1290
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+7.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1831
+</td>
+<td class="r data">
+0.8169
+</td>
+<td class="r data">
+0.0489
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1290
+</th>
+<th class="r rowheader" scope="row">
+1320
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+7.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1831
+</td>
+<td class="r data">
+0.8169
+</td>
+<td class="r data">
+0.0489
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1320
+</th>
+<th class="r rowheader" scope="row">
+1350
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+6.5
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1831
+</td>
+<td class="r data">
+0.8169
+</td>
+<td class="r data">
+0.0489
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1350
+</th>
+<th class="r rowheader" scope="row">
+1380
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+6.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1831
+</td>
+<td class="r data">
+0.8169
+</td>
+<td class="r data">
+0.0489
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1380
+</th>
+<th class="r rowheader" scope="row">
+1410
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+2
+</td>
+<td class="r data">
+5.0
+</td>
+<td class="r data">
+0.2000
+</td>
+<td class="r data">
+0.1789
+</td>
+<td class="r data">
+0.1831
+</td>
+<td class="r data">
+0.8169
+</td>
+<td class="r data">
+0.0489
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0.00122
+</td>
+<td class="r data">
+0.00114
+</td>
+<td class="r data">
+0.007407
+</td>
+<td class="r data">
+0.007362
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1410
+</th>
+<th class="r rowheader" scope="row">
+1440
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+3.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1465
+</td>
+<td class="r data">
+0.8535
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1440
+</th>
+<th class="r rowheader" scope="row">
+1470
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+3.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1465
+</td>
+<td class="r data">
+0.8535
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1470
+</th>
+<th class="r rowheader" scope="row">
+1500
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+3.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1465
+</td>
+<td class="r data">
+0.8535
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1500
+</th>
+<th class="r rowheader" scope="row">
+1530
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+3.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1465
+</td>
+<td class="r data">
+0.8535
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1530
+</th>
+<th class="r rowheader" scope="row">
+1560
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+3.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1465
+</td>
+<td class="r data">
+0.8535
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1560
+</th>
+<th class="r rowheader" scope="row">
+1590
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+2
+</td>
+<td class="r data">
+2.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1465
+</td>
+<td class="r data">
+0.8535
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1590
+</th>
+<th class="r rowheader" scope="row">
+1620
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1465
+</td>
+<td class="r data">
+0.8535
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1620
+</th>
+<th class="r rowheader" scope="row">
+1650
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1465
+</td>
+<td class="r data">
+0.8535
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1650
+</th>
+<th class="r rowheader" scope="row">
+1680
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1465
+</td>
+<td class="r data">
+0.8535
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1680
+</th>
+<th class="r rowheader" scope="row">
+1710
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1465
+</td>
+<td class="r data">
+0.8535
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1710
+</th>
+<th class="r rowheader" scope="row">
+1740
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1465
+</td>
+<td class="r data">
+0.8535
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1740
+</th>
+<th class="r rowheader" scope="row">
+1770
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1465
+</td>
+<td class="r data">
+0.8535
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1770
+</th>
+<th class="r rowheader" scope="row">
+1800
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.5
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1465
+</td>
+<td class="r data">
+0.8535
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1800
+</th>
+<th class="r rowheader" scope="row">
+.
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0.1465
+</td>
+<td class="r data">
+0.8535
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX1"></a>
+<div>
+<div class="c">
+<p><img alt="Courbe de survie liée à la table de mortalité" src="unnamed-chunk-4.png" style=" height: 480px; width: 640px;" border="0" class="c"></p>
+</div>
+</div>
+<br> <a name="IDX2"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Synthèse de la censure">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Récapitulatif du nombre de valeurs censurées<br/>et non censurées
+</th>
+</tr>
+<tr>
+<th class="r b header" scope="col">
+Total
+</th>
+<th class="r b header" scope="col">
+A échoué
+</th>
+<th class="r b header" scope="col">
+Censuré
+</th>
+<th class="r b header" scope="col">
+Pourcentage<br/>censuré
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="r data">
+103
+</td>
+<td class="r data">
+75
+</td>
+<td class="r data">
+28
+</td>
+<td class="r data">
+27.18
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+<p>La durée médiane se lit sur la première ligne de la colonne de “Durée de vie résidus médiane” (Sas version française). Les lignes suivantes reporte la durée de séjour médiane sur la population restant soumise au risque à chaque intervalle.</p>
+</div>
+<div id="méthode-kaplan-meier" class="section level2" number="1.2">
+<h2 number="1.2"><span class="header-section-number">1.2</span> Méthode Kaplan-Meier</h2>
+<p>Le tableau des estimateurs ne sera pas reporté (voir intro du document).<br />
+Pour récupérer ces estimateurs, on peut les récupérer via l’instruction output et les exporter, par exemple, dans un tableur.</p>
+<pre class="sashtml"><code>ods exclude Lifetest.Stratum1.ProductLimitEstimates;
+proc lifetest data=x.transplantation;
+time stime*died(0); run;</code></pre>
+<div class="branch">
+<a name="IDX"></a> <br>
+<p>
+<div align="center">
+<table class="proctitle">
+<tr>
+<td class="c proctitle">
+Statistiques descriptives pour variable temps STIME
+</td>
+</tr>
+</table>
+</div>
+<p>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Quartiles de la distribution de survie">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">
+Estimations du quartile
+</th>
+</tr>
+<tr>
+<th class="r b header" rowspan="2" scope="col">
+Pourcentage
+</th>
+<th class="r b header" rowspan="2" scope="col">
+Valeur estimée<br/>du point
+</th>
+<th class="c b header" colspan="3" scope="colgroup">
+Intervalle de confiance à 95%
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Transformation
+</th>
+<th class="r b header" scope="col">
+[Inférieur
+</th>
+<th class="r b header" scope="col">
+Supérieur)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">
+75
+</th>
+<td class="r data">
+979.00
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+340.00
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+50
+</th>
+<td class="r data">
+100.00
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+69.00
+</td>
+<td class="r data">
+219.00
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+25
+</th>
+<td class="r data">
+36.00
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+16.00
+</td>
+<td class="r data">
+51.00
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX1"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Moyenne">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="r b header" scope="col">
+Moyenne
+</th>
+<th class="r b header" scope="col">
+Erreur<br/>type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="r data">
+431.30
+</td>
+<td class="r data">
+56.21
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+<br>
+<p>
+<div align="left">
+<table class="notecontent">
+<tr>
+<td class="l notebanner">
+<!--BEGINNOTE-->
+Note:
+</td>
+<td class="l notecontent">
+<!--BEGINNOTE-->
+Le temps de survie moyen et son erreur type ont été sous-estimés car l'observation la plus grande a été censurée et l'estimation a été limitée au temps d'événement le plus élevé.<!--ENDNOTE-->
+</td>
+</tr>
+</table>
+</div>
+<p>
+</div>
+<br> <a name="IDX2"></a>
+<div>
+<div class="c">
+<p><img alt="Courbe de survie de Kaplan-Meier" src="unnamed-chunk-5.png" style=" height: 480px; width: 640px;" border="0" class="c"></p>
+</div>
+</div>
+<br> <a name="IDX3"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Synthèse de la censure">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Récapitulatif du nombre de valeurs censurées<br/>et non censurées
+</th>
+</tr>
+<tr>
+<th class="r b header" scope="col">
+Total
+</th>
+<th class="r b header" scope="col">
+A échoué
+</th>
+<th class="r b header" scope="col">
+Censuré
+</th>
+<th class="r b header" scope="col">
+Pourcentage<br/>censuré
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="r data">
+103
+</td>
+<td class="r data">
+75
+</td>
+<td class="r data">
+28
+</td>
+<td class="r data">
+27.18
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+<p><strong>Warning sur la durée moyenne reportée</strong> Sauf exception ne pas interpréter le tableau donnant la durée moyenne. Se reporter à l’estimation des RMST plus bas.</p>
+<p><strong>Comparaison des fonctions de survie</strong></p>
+<p><em>Tests du log rank</em></p>
+<pre class="sashtml"><code>ods exclude Lifetest.Stratum1.ProductLimitEstimates Lifetest.Stratum2.ProductLimitEstimates ;
+proc lifetest data=x.transplantation;
+time stime*died(0);
+strata surgery / test=all;
+run;</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div class="c proctitle">
+Niveau de discrétisation 1 : Surgery (e.g. CABG
+</div>
+<p>
+<br>
+<p>
+<div align="center">
+<table class="proctitle">
+<tr>
+<td class="c proctitle">
+Statistiques descriptives pour variable temps STIME
+</td>
+</tr>
+</table>
+</div>
+<p>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Quartiles de la distribution de survie">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">
+Estimations du quartile
+</th>
+</tr>
+<tr>
+<th class="r b header" rowspan="2" scope="col">
+Pourcentage
+</th>
+<th class="r b header" rowspan="2" scope="col">
+Valeur estimée<br/>du point
+</th>
+<th class="c b header" colspan="3" scope="colgroup">
+Intervalle de confiance à 95%
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Transformation
+</th>
+<th class="r b header" scope="col">
+[Inférieur
+</th>
+<th class="r b header" scope="col">
+Supérieur)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">
+75
+</th>
+<td class="r data">
+675.00
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+219.00
+</td>
+<td class="r data">
+1386.00
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+50
+</th>
+<td class="r data">
+78.00
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+58.00
+</td>
+<td class="r data">
+149.00
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+25
+</th>
+<td class="r data">
+30.00
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+16.00
+</td>
+<td class="r data">
+43.00
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX1"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Moyenne">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="r b header" scope="col">
+Moyenne
+</th>
+<th class="r b header" scope="col">
+Erreur<br/>type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="r data">
+376.36
+</td>
+<td class="r data">
+58.31
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+<br>
+<p>
+<div align="left">
+<table class="notecontent">
+<tr>
+<td class="l notebanner">
+<!--BEGINNOTE-->
+Note:
+</td>
+<td class="l notecontent">
+<!--BEGINNOTE-->
+Le temps de survie moyen et son erreur type ont été sous-estimés car l'observation la plus grande a été censurée et l'estimation a été limitée au temps d'événement le plus élevé.<!--ENDNOTE-->
+</td>
+</tr>
+</table>
+</div>
+<p>
+</div>
+<br>
+<p style="page-break-after: always;">
+<br/>
+</p>
+<hr size="3"/>
+<a name="IDX2"></a>
+<div class="c proctitle">
+Niveau de discrétisation 2 : Surgery (e.g. CABG
+</div>
+<p>
+<br>
+<p>
+<div align="center">
+<table class="proctitle">
+<tr>
+<td class="c proctitle">
+Statistiques descriptives pour variable temps STIME
+</td>
+</tr>
+</table>
+</div>
+<p>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Quartiles de la distribution de survie">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">
+Estimations du quartile
+</th>
+</tr>
+<tr>
+<th class="r b header" rowspan="2" scope="col">
+Pourcentage
+</th>
+<th class="r b header" rowspan="2" scope="col">
+Valeur estimée<br/>du point
+</th>
+<th class="c b header" colspan="3" scope="colgroup">
+Intervalle de confiance à 95%
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Transformation
+</th>
+<th class="r b header" scope="col">
+[Inférieur
+</th>
+<th class="r b header" scope="col">
+Supérieur)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">
+75
+</th>
+<td class="r data">
+.
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+979.00
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+50
+</th>
+<td class="r data">
+979.00
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+186.00
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+25
+</th>
+<td class="r data">
+342.00
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+165.00
+</td>
+<td class="r data">
+995.00
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX3"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Moyenne">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="r b header" scope="col">
+Moyenne
+</th>
+<th class="r b header" scope="col">
+Erreur<br/>type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="r data">
+734.76
+</td>
+<td class="r data">
+114.13
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+<br>
+<p>
+<div align="left">
+<table class="notecontent">
+<tr>
+<td class="l notebanner">
+<!--BEGINNOTE-->
+Note:
+</td>
+<td class="l notecontent">
+<!--BEGINNOTE-->
+Le temps de survie moyen et son erreur type ont été sous-estimés car l'observation la plus grande a été censurée et l'estimation a été limitée au temps d'événement le plus élevé.<!--ENDNOTE-->
+</td>
+</tr>
+</table>
+</div>
+<p>
+</div>
+<br> <a name="IDX4"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Synthèse de la censure">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="6" scope="colgroup">
+Récapitulatif du nombre de valeurs censurées et non censurées
+</th>
+</tr>
+<tr>
+<th class="r b header" scope="col">
+Niveau de<br/>discrétisation
+</th>
+<th class="r b header" scope="col">
+SURGERY
+</th>
+<th class="r b header" scope="col">
+Total
+</th>
+<th class="r b header" scope="col">
+A échoué
+</th>
+<th class="r b header" scope="col">
+Censuré
+</th>
+<th class="r b header" scope="col">
+Pourcentage<br/>censuré
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">
+1
+</th>
+<th class="r data">
+0
+</th>
+<td class="r data">
+91
+</td>
+<td class="r data">
+69
+</td>
+<td class="r data">
+22
+</td>
+<td class="r data">
+24.18
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+2
+</th>
+<th class="r data">
+1
+</th>
+<td class="r data">
+12
+</td>
+<td class="r data">
+6
+</td>
+<td class="r data">
+6
+</td>
+<td class="r data">
+50.00
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+Total
+</th>
+<th class="r data">
+</th>
+<td class="r data">
+103
+</td>
+<td class="r data">
+75
+</td>
+<td class="r data">
+28
+</td>
+<td class="r data">
+27.18
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+<p style="page-break-after: always;">
+<br/>
+</p>
+<hr size="3"/>
+<a name="IDX5"></a> <br>
+<p>
+<div align="center">
+<table class="proctitle">
+<tr>
+<td class="c proctitle">
+Test de l'homogénéité des courbes de survie pour STIME sur les niveaux de discrétisation
+</td>
+</tr>
+</table>
+</div>
+<p>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Statistiques de rang">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="7" scope="colgroup">
+Statistiques de rang
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+SURGERY
+</th>
+<th class="r b header" scope="col">
+Log-rang
+</th>
+<th class="r b header" scope="col">
+Wilcoxon
+</th>
+<th class="r b header" scope="col">
+Tarone
+</th>
+<th class="r b header" scope="col">
+Peto
+</th>
+<th class="r b header" scope="col">
+PetoModifié
+</th>
+<th class="r b header" scope="col">
+Fleming
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+0
+</th>
+<td class="r data">
+8.6566
+</td>
+<td class="r data">
+623.00
+</td>
+<td class="r data">
+73.11
+</td>
+<td class="r data">
+6.0506
+</td>
+<td class="r data">
+5.9690
+</td>
+<td class="r data">
+6.1547
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data" nowrap>
+-8.6566
+</td>
+<td class="r data" nowrap>
+-623.00
+</td>
+<td class="r data" nowrap>
+-73.11
+</td>
+<td class="r data" nowrap>
+-6.0506
+</td>
+<td class="r data" nowrap>
+-5.9690
+</td>
+<td class="r data" nowrap>
+-6.1547
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX6"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Covariance log-rang">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Matrice de covariance<br/>pour la statistique de<br/>log-rang
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+SURGERY
+</th>
+<th class="r b header" scope="col">
+0
+</th>
+<th class="r b header" scope="col">
+1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+0
+</th>
+<td class="r data">
+11.3712
+</td>
+<td class="r data" nowrap>
+-11.3712
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data" nowrap>
+-11.3712
+</td>
+<td class="r data">
+11.3712
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX7"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Covariance de Wilcoxon">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Matrice de covariance<br/>pour la statistique de<br/>Wilcoxon
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+SURGERY
+</th>
+<th class="r b header" scope="col">
+0
+</th>
+<th class="r b header" scope="col">
+1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+0
+</th>
+<td class="r data">
+43174.6
+</td>
+<td class="r data" nowrap>
+-43174.6
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data" nowrap>
+-43174.6
+</td>
+<td class="r data">
+43174.6
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX8"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Covariance de Tarone">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Matrice de covariance<br/>pour la statistique de<br/>Tarone
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+SURGERY
+</th>
+<th class="r b header" scope="col">
+0
+</th>
+<th class="r b header" scope="col">
+1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+0
+</th>
+<td class="r data">
+631.550
+</td>
+<td class="r data" nowrap>
+-631.550
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data" nowrap>
+-631.550
+</td>
+<td class="r data">
+631.550
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX9"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Covariance de Peto">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Matrice de covariance<br/>pour la statistique de<br/>Peto
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+SURGERY
+</th>
+<th class="r b header" scope="col">
+0
+</th>
+<th class="r b header" scope="col">
+1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+0
+</th>
+<td class="r data">
+4.22545
+</td>
+<td class="r data" nowrap>
+-4.22545
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data" nowrap>
+-4.22545
+</td>
+<td class="r data">
+4.22545
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX10"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Covariance de Peto modifiée">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Matrice de covariance<br/>pour la statistique de<br/>Peto modifiées
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+SURGERY
+</th>
+<th class="r b header" scope="col">
+0
+</th>
+<th class="r b header" scope="col">
+1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+0
+</th>
+<td class="r data">
+4.09404
+</td>
+<td class="r data" nowrap>
+-4.09404
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data" nowrap>
+-4.09404
+</td>
+<td class="r data">
+4.09404
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX11"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Covariance de Fleming">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Matrice de covariance<br/>pour la statistique de<br/>Fleming
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+SURGERY
+</th>
+<th class="r b header" scope="col">
+0
+</th>
+<th class="r b header" scope="col">
+1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+0
+</th>
+<td class="r data">
+4.37875
+</td>
+<td class="r data" nowrap>
+-4.37875
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data" nowrap>
+-4.37875
+</td>
+<td class="r data">
+4.37875
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX12"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Tests d&apos;homogénéité">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Test d'égalité sur les niveaux de discrétisation
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Test
+</th>
+<th class="r b header" scope="col">
+khi-2
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="c b header" scope="col">
+Pr &gt;<br/>khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Log-rang
+</th>
+<td class="r data">
+6.5900
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.0103
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Wilcoxon
+</th>
+<td class="r data">
+8.9898
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.0027
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Tarone
+</th>
+<td class="r data">
+8.4624
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.0036
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Peto
+</th>
+<td class="r data">
+8.6641
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.0032
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Peto modifié
+</th>
+<td class="r data">
+8.7027
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.0032
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Fleming(1)
+</th>
+<td class="r data">
+8.6508
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.0033
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX13"></a>
+<div>
+<div class="c">
+<p><img alt="Courbes de survie de Kaplan-Meier" src="unnamed-chunk-6.png" style=" height: 480px; width: 640px;" border="0" class="c"></p>
+</div>
+</div>
+<br>
+</div>
+<p><em>Comparaison des RMST</em></p>
+<p>Disponible avec le dernier module stat de Sas base (Sas-Stat 15.1 novembre 2018).</p>
+<pre class="sashtml"><code>ods exclude Lifetest.Stratum1.ProductLimitEstimates;
+proc lifetest data=x.transplantation rmst plots=(rmst);
+time stime*died(0);
+strata surgery; run;</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div class="c proctitle">
+Niveau de discrétisation 1 : Surgery (e.g. CABG
+</div>
+<p>
+<br>
+<p>
+<div align="center">
+<table class="proctitle">
+<tr>
+<td class="c proctitle">
+Statistiques descriptives pour variable temps STIME
+</td>
+</tr>
+</table>
+</div>
+<p>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Quartiles de la distribution de survie">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">
+Estimations du quartile
+</th>
+</tr>
+<tr>
+<th class="r b header" rowspan="2" scope="col">
+Pourcentage
+</th>
+<th class="r b header" rowspan="2" scope="col">
+Valeur estimée<br/>du point
+</th>
+<th class="c b header" colspan="3" scope="colgroup">
+Intervalle de confiance à 95%
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Transformation
+</th>
+<th class="r b header" scope="col">
+[Inférieur
+</th>
+<th class="r b header" scope="col">
+Supérieur)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">
+75
+</th>
+<td class="r data">
+675.00
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+219.00
+</td>
+<td class="r data">
+1386.00
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+50
+</th>
+<td class="r data">
+78.00
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+58.00
+</td>
+<td class="r data">
+149.00
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+25
+</th>
+<td class="r data">
+30.00
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+16.00
+</td>
+<td class="r data">
+43.00
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX1"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Moyenne">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="r b header" scope="col">
+Moyenne
+</th>
+<th class="r b header" scope="col">
+Erreur<br/>type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="r data">
+376.36
+</td>
+<td class="r data">
+58.31
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+<br>
+<p>
+<div align="left">
+<table class="notecontent">
+<tr>
+<td class="l notebanner">
+<!--BEGINNOTE-->
+Note:
+</td>
+<td class="l notecontent">
+<!--BEGINNOTE-->
+Le temps de survie moyen et son erreur type ont été sous-estimés car l'observation la plus grande a été censurée et l'estimation a été limitée au temps d'événement le plus élevé.<!--ENDNOTE-->
+</td>
+</tr>
+</table>
+</div>
+<p>
+</div>
+<br>
+<p style="page-break-after: always;">
+<br/>
+</p>
+<hr size="3"/>
+<a name="IDX2"></a>
+<div class="c proctitle">
+Niveau de discrétisation 2 : Surgery (e.g. CABG
+</div>
+<p>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Valeurs estimées de Kaplan-Meier">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="7" scope="colgroup">
+Valeurs estimées de survie de Kaplan-Meier
+</th>
+</tr>
+<tr>
+<th class="r b header" scope="col">
+STIME
+</th>
+<th class="r b header" scope="col">
+</th>
+<th class="r b header" scope="col">
+Survie
+</th>
+<th class="r b header" scope="col">
+Echec
+</th>
+<th class="r b header" scope="col">
+Erreur type de<br/>survie
+</th>
+<th class="c b header" scope="col">
+Nombre<br/>d'échecs
+</th>
+<th class="c b header" scope="col">
+Nombre<br/>restant
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">
+0.00
+</th>
+<th class="r data">
+</th>
+<td class="r data">
+1.0000
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+12
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+39.00
+</th>
+<th class="r data">
+*
+</th>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+11
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+165.00
+</th>
+<th class="r data">
+</th>
+<td class="r data">
+0.9091
+</td>
+<td class="r data">
+0.0909
+</td>
+<td class="r data">
+0.0867
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+10
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+186.00
+</th>
+<th class="r data">
+</th>
+<td class="r data">
+0.8182
+</td>
+<td class="r data">
+0.1818
+</td>
+<td class="r data">
+0.1163
+</td>
+<td class="r data">
+2
+</td>
+<td class="r data">
+9
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+342.00
+</th>
+<th class="r data">
+</th>
+<td class="r data">
+0.7273
+</td>
+<td class="r data">
+0.2727
+</td>
+<td class="r data">
+0.1343
+</td>
+<td class="r data">
+3
+</td>
+<td class="r data">
+8
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+482.00
+</th>
+<th class="r data">
+*
+</th>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+3
+</td>
+<td class="r data">
+7
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+545.00
+</th>
+<th class="r data">
+*
+</th>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+3
+</td>
+<td class="r data">
+6
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+583.00
+</th>
+<th class="r data">
+</th>
+<td class="r data">
+0.6061
+</td>
+<td class="r data">
+0.3939
+</td>
+<td class="r data">
+0.1574
+</td>
+<td class="r data">
+4
+</td>
+<td class="r data">
+5
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+979.00
+</th>
+<th class="r data">
+</th>
+<td class="r data">
+0.4848
+</td>
+<td class="r data">
+0.5152
+</td>
+<td class="r data">
+0.1661
+</td>
+<td class="r data">
+5
+</td>
+<td class="r data">
+4
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+995.00
+</th>
+<th class="r data">
+</th>
+<td class="r data">
+0.3636
+</td>
+<td class="r data">
+0.6364
+</td>
+<td class="r data">
+0.1629
+</td>
+<td class="r data">
+6
+</td>
+<td class="r data">
+3
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1141.00
+</th>
+<th class="r data">
+*
+</th>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+6
+</td>
+<td class="r data">
+2
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1321.00
+</th>
+<th class="r data">
+*
+</th>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+6
+</td>
+<td class="r data">
+1
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1407.00
+</th>
+<th class="r data">
+*
+</th>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+6
+</td>
+<td class="r data">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+<br>
+<p>
+<div align="center">
+<table class="notecontent">
+<tr>
+<td class="c notebanner">
+<!--BEGINNOTE-->
+Note:
+</td>
+<td class="l notecontent">
+<!--BEGINNOTE-->
+Les temps de survie marqués sont des observations censurées.<!--ENDNOTE-->
+</td>
+</tr>
+</table>
+</div>
+<p>
+</div>
+<br> <br>
+<p>
+<div align="center">
+<table class="proctitle">
+<tr>
+<td class="c proctitle">
+Statistiques descriptives pour variable temps STIME
+</td>
+</tr>
+</table>
+</div>
+<p>
+<a name="IDX3"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Quartiles de la distribution de survie">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">
+Estimations du quartile
+</th>
+</tr>
+<tr>
+<th class="r b header" rowspan="2" scope="col">
+Pourcentage
+</th>
+<th class="r b header" rowspan="2" scope="col">
+Valeur estimée<br/>du point
+</th>
+<th class="c b header" colspan="3" scope="colgroup">
+Intervalle de confiance à 95%
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Transformation
+</th>
+<th class="r b header" scope="col">
+[Inférieur
+</th>
+<th class="r b header" scope="col">
+Supérieur)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">
+75
+</th>
+<td class="r data">
+.
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+979.00
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+50
+</th>
+<td class="r data">
+979.00
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+186.00
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+25
+</th>
+<td class="r data">
+342.00
+</td>
+<td class="l data">
+LOGLOG
+</td>
+<td class="r data">
+165.00
+</td>
+<td class="r data">
+995.00
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX4"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Moyenne">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="r b header" scope="col">
+Moyenne
+</th>
+<th class="r b header" scope="col">
+Erreur<br/>type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="r data">
+734.76
+</td>
+<td class="r data">
+114.13
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+<br>
+<p>
+<div align="left">
+<table class="notecontent">
+<tr>
+<td class="l notebanner">
+<!--BEGINNOTE-->
+Note:
+</td>
+<td class="l notecontent">
+<!--BEGINNOTE-->
+Le temps de survie moyen et son erreur type ont été sous-estimés car l'observation la plus grande a été censurée et l'estimation a été limitée au temps d'événement le plus élevé.<!--ENDNOTE-->
+</td>
+</tr>
+</table>
+</div>
+<p>
+</div>
+<br> <a name="IDX5"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Synthèse de la censure">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="6" scope="colgroup">
+Récapitulatif du nombre de valeurs censurées et non censurées
+</th>
+</tr>
+<tr>
+<th class="r b header" scope="col">
+Niveau de<br/>discrétisation
+</th>
+<th class="r b header" scope="col">
+SURGERY
+</th>
+<th class="r b header" scope="col">
+Total
+</th>
+<th class="r b header" scope="col">
+A échoué
+</th>
+<th class="r b header" scope="col">
+Censuré
+</th>
+<th class="r b header" scope="col">
+Pourcentage<br/>censuré
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">
+1
+</th>
+<th class="r data">
+0
+</th>
+<td class="r data">
+91
+</td>
+<td class="r data">
+69
+</td>
+<td class="r data">
+22
+</td>
+<td class="r data">
+24.18
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+2
+</th>
+<th class="r data">
+1
+</th>
+<td class="r data">
+12
+</td>
+<td class="r data">
+6
+</td>
+<td class="r data">
+6
+</td>
+<td class="r data">
+50.00
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+Total
+</th>
+<th class="r data">
+</th>
+<td class="r data">
+103
+</td>
+<td class="r data">
+75
+</td>
+<td class="r data">
+28
+</td>
+<td class="r data">
+27.18
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+<p style="page-break-after: always;">
+<br/>
+</p>
+<hr size="3"/>
+<a name="IDX6"></a> <br>
+<p>
+<div align="center">
+<table class="proctitle">
+<tr>
+<td class="c proctitle">
+Test de l'homogénéité des courbes de survie pour STIME sur les niveaux de discrétisation
+</td>
+</tr>
+</table>
+</div>
+<p>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Statistiques de rang">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Statistiques de rang
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+SURGERY
+</th>
+<th class="r b header" scope="col">
+Log-rang
+</th>
+<th class="r b header" scope="col">
+Wilcoxon
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+0
+</th>
+<td class="r data">
+8.6566
+</td>
+<td class="r data">
+623.00
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data" nowrap>
+-8.6566
+</td>
+<td class="r data" nowrap>
+-623.00
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX7"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Covariance log-rang">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Matrice de covariance<br/>pour la statistique de<br/>log-rang
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+SURGERY
+</th>
+<th class="r b header" scope="col">
+0
+</th>
+<th class="r b header" scope="col">
+1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+0
+</th>
+<td class="r data">
+11.3712
+</td>
+<td class="r data" nowrap>
+-11.3712
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data" nowrap>
+-11.3712
+</td>
+<td class="r data">
+11.3712
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX8"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Covariance de Wilcoxon">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Matrice de covariance<br/>pour la statistique de<br/>Wilcoxon
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+SURGERY
+</th>
+<th class="r b header" scope="col">
+0
+</th>
+<th class="r b header" scope="col">
+1
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+0
+</th>
+<td class="r data">
+43174.6
+</td>
+<td class="r data" nowrap>
+-43174.6
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data" nowrap>
+-43174.6
+</td>
+<td class="r data">
+43174.6
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX9"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Tests d&apos;homogénéité">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Test d'égalité sur les niveaux de discrétisation
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Test
+</th>
+<th class="r b header" scope="col">
+khi-2
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="c b header" scope="col">
+Pr &gt;<br/>khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Log-rang
+</th>
+<td class="r data">
+6.5900
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.0103
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Wilcoxon
+</th>
+<td class="r data">
+8.9898
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.0027
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+-2Log(LR)
+</th>
+<td class="r data">
+15.3826
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+&lt;.0001
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX10"></a>
+<div>
+<div class="c">
+<p><img alt="Courbes de survie de Kaplan-Meier" src="unnamed-chunk-7.png" style=" height: 480px; width: 640px;" border="0" class="c"></p>
+</div>
+</div>
+<br> <a name="IDX11"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Informations">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="2" scope="colgroup">
+Informations<br/>sur l'analyse<br/>RMST
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Tau
+</th>
+<td class="r data">
+1407
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX12"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Restricted Mean Survival Time (RMST)">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Estimations RMST
+</th>
+</tr>
+<tr>
+<th class="r b header" scope="col">
+Niveau de discrétisation
+</th>
+<th class="r b header" scope="col">
+Surgery (e.g. CABG)
+</th>
+<th class="r b header" scope="col">
+Estimation
+</th>
+<th class="r b header" scope="col">
+Erreur<br/>type
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">
+1
+</th>
+<th class="r data">
+0
+</th>
+<td class="r data">
+379.1476
+</td>
+<td class="r data">
+58.6055
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+2
+</th>
+<th class="r data">
+1
+</th>
+<td class="r data">
+884.5758
+</td>
+<td class="r data">
+151.9794
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX13"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Test global de Restricted Mean Survival Time">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Test RMST d'égalité
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Source
+</th>
+<th class="r b header" scope="col">
+khi-2
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Strata
+</th>
+<td class="r data">
+9.6282
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.0019
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX14"></a>
+<div>
+<div class="c">
+<p><img alt="Courbes Restricted Mean Survival Time" src="unnamed-chunk-71.png" style=" height: 480px; width: 640px;" border="0" class="c"></p>
+</div>
+</div>
+<br>
+</div>
+</div>
+</div>
+<div id="modèle-semi-parametrique-de-cox" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Modèle semi parametrique de Cox</h1>
+<div id="estimation-du-modèle" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Estimation du modèle</h2>
+<pre class="sashtml"><code>proc phreg data=x.transplantation;
+model stime*died(0) = year age surgery ;
+run;</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Informations sur le modèle">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Informations sur le modèle
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Table
+</th>
+<td class="l data">
+X.TRANSPLANTATION
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Variable dépendante
+</th>
+<td class="l data">
+STIME
+</td>
+<td class="l data">
+Survival Time (Days)
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Variable de censure
+</th>
+<td class="l data">
+DIED
+</td>
+<td class="l data">
+Survival Status (1=dead)
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Valeur(s) de censure
+</th>
+<td class="l data">
+0
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Ties Handling
+</th>
+<td class="l data">
+BRESLOW
+</td>
+<td class="l data">
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX1"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Nombre d&apos;observations">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="l stacked_cell rowheader" scope="row">
+<table width="100%" border="0" cellpadding="7" cellspacing="0">
+<tr>
+<td class="l rowheader top_stacked_value" scope="row">
+Nombre d'observations lues
+</td>
+</tr>
+<tr>
+<td class="l rowheader bottom_stacked_value" scope="row">
+Nombre d'observations utilisées
+</td>
+</tr>
+</table>
+</th>
+<td class="r stacked_cell data">
+<table width="100%" border="0" cellpadding="7" cellspacing="0">
+<tr>
+<td class="r data top_stacked_value">
+103
+</td>
+</tr>
+<tr>
+<td class="r data bottom_stacked_value">
+103
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX2"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Synthèse des événements et observations censurées">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Récapitulatif du nombre d'événements<br/>et de valeurs censurées
+</th>
+</tr>
+<tr>
+<th class="r b header" scope="col">
+Total
+</th>
+<th class="r b header" scope="col">
+Evénement
+</th>
+<th class="r b header" scope="col">
+Censuré
+</th>
+<th class="r b header" scope="col">
+Pourcentage<br/>censuré
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="r data">
+103
+</td>
+<td class="r data">
+75
+</td>
+<td class="r data">
+28
+</td>
+<td class="r data">
+27.18
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX3"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Etat de convergence">
+<colgroup>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" scope="col">
+Etat de convergence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="c data">
+Critère de convergence (GCONV=1E-8) respecté.
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX4"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Statistique d&apos;ajustement du modèle">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Statistique d'ajustement du modèle
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Critère
+</th>
+<th class="r b header" scope="col">
+Sans<br/>covariables
+</th>
+<th class="r b header" scope="col">
+Avec<br/>covariables
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+-2 LOG L
+</th>
+<td class="r data">
+596.651
+</td>
+<td class="r data">
+579.089
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AIC
+</th>
+<td class="r data">
+596.651
+</td>
+<td class="r data">
+585.089
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SBC
+</th>
+<td class="r data">
+596.651
+</td>
+<td class="r data">
+592.042
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX5"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Test de l&apos;hypothèse nulle globale">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Test de l'hypothèse nulle globale : BETA=0
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Test
+</th>
+<th class="r b header" scope="col">
+khi-2
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Rapport de vrais
+</th>
+<td class="r data">
+17.5617
+</td>
+<td class="r data">
+3
+</td>
+<td class="r data">
+0.0005
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Score
+</th>
+<td class="r data">
+16.6482
+</td>
+<td class="r data">
+3
+</td>
+<td class="r data">
+0.0008
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Wald
+</th>
+<td class="r data">
+15.7002
+</td>
+<td class="r data">
+3
+</td>
+<td class="r data">
+0.0013
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX6"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Estimations par maximum de vraisemblance des paramètres du modèle">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="8" scope="colgroup">
+Analyse des valeurs estimées du maximum de vraisemblance
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Paramètre
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Valeur estimée<br/>des paramètres
+</th>
+<th class="r b header" scope="col">
+Erreur<br/>type
+</th>
+<th class="r b header" scope="col">
+khi-2
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+<th class="r b header" scope="col">
+Rapport<br/>de risque
+</th>
+<th class="l b header" scope="col">
+Libellé
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.11951
+</td>
+<td class="r data">
+0.06737
+</td>
+<td class="r data">
+3.1468
+</td>
+<td class="r data">
+0.0761
+</td>
+<td class="r data">
+0.887
+</td>
+<td class="l data">
+Year of Acceptance
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.02955
+</td>
+<td class="r data">
+0.01353
+</td>
+<td class="r data">
+4.7683
+</td>
+<td class="r data">
+0.0290
+</td>
+<td class="r data">
+1.030
+</td>
+<td class="l data">
+Age
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.98469
+</td>
+<td class="r data">
+0.43626
+</td>
+<td class="r data">
+5.0946
+</td>
+<td class="r data">
+0.0240
+</td>
+<td class="r data">
+0.374
+</td>
+<td class="l data">
+Surgery (e.g. CABG)
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+</div>
+<div id="tests-de-lhypothèse-ph" class="section level2" number="2.2">
+<h2 number="2.2"><span class="header-section-number">2.2</span> Tests de l’hypothèse PH</h2>
+<div id="test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld" class="section level3" number="2.2.1">
+<h3 number="2.2.1"><span class="header-section-number">2.2.1</span> Test de Grambsch Therneau sur les résidus de Schoenfeld</h3>
+<p>Demande l’avant dernière version de Sas-Stat (2016?).</p>
+<p>Le test est exécuté directement dans l’instruction <code>phreg</code> (ajouter <code>zph</code>). L’option global permet de récupéré le résultat du test omnibus (attention rejette facilement <span class="math inline">\(H_0\)</span> - hypothèse ph respectée - lorsque le nombre de degré de liberté est élevé).</p>
+<pre class="sashtml"><code>ods select PHReg.zphTest;
+proc phreg data=x.transplantation zph(global noplot);
+model stime*died(0) = year age surgery ;
+run;</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Tests zph pour risques non proportionnels">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="7" scope="colgroup">
+Tests zph pour risques non proportionnels
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Transformation
+</th>
+<th class="l b header" scope="col">
+Variable<br/> Prédicteur
+</th>
+<th class="r b header" scope="col">
+Corrélation
+</th>
+<th class="r b header" scope="col">
+Khi-2
+</th>
+<th class="r b header" scope="col">
+Pr &gt; <br/>Khi-2
+</th>
+<th class="r b header" scope="col">
+Valeur du test t
+</th>
+<th class="r b header" scope="col">
+Pr &gt; |t|
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l data">
+RANK
+</th>
+<th class="l data">
+YEAR
+</th>
+<td class="r data">
+0.1626
+</td>
+<td class="r data">
+2.0370
+</td>
+<td class="r data">
+0.1535
+</td>
+<td class="r data">
+1.41
+</td>
+<td class="r data">
+0.1634
+</td>
+</tr>
+<tr>
+<th class="l data">
+RANK
+</th>
+<th class="l data">
+AGE
+</th>
+<td class="r data">
+0.1052
+</td>
+<td class="r data">
+1.0667
+</td>
+<td class="r data">
+0.3017
+</td>
+<td class="r data">
+0.90
+</td>
+<td class="r data">
+0.3690
+</td>
+</tr>
+<tr>
+<th class="l data">
+RANK
+</th>
+<th class="l data">
+SURGERY
+</th>
+<td class="r data">
+0.2435
+</td>
+<td class="r data">
+3.7290
+</td>
+<td class="r data">
+0.0535
+</td>
+<td class="r data">
+2.14
+</td>
+<td class="r data">
+0.0353
+</td>
+</tr>
+<tr>
+<th class="l data">
+RANK
+</th>
+<th class="l data">
+<em>Global</em>
+</th>
+<td class="r data">
+.
+</td>
+<td class="r data">
+7.7422
+</td>
+<td class="r data">
+0.0517
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+<p>Par défaut SAS utilise la transformation <span class="math inline">\(f(t)=t\)</span> (idem Stata). Pour obtenir l’option par défaut de R <span class="math inline">\(f(t) = 1 - KM(t)\)</span>:</p>
+<pre class="sashtml"><code>ods select PHReg.zphTest;
+proc phreg data=x.transplantation zph(global noplot transform=km);
+model stime*died(0) = year age surgery ;
+run;</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Tests zph pour risques non proportionnels">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="7" scope="colgroup">
+Tests zph pour risques non proportionnels
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Transformation
+</th>
+<th class="l b header" scope="col">
+Variable<br/> Prédicteur
+</th>
+<th class="r b header" scope="col">
+Corrélation
+</th>
+<th class="r b header" scope="col">
+Khi-2
+</th>
+<th class="r b header" scope="col">
+Pr &gt; <br/>Khi-2
+</th>
+<th class="r b header" scope="col">
+Valeur du test t
+</th>
+<th class="r b header" scope="col">
+Pr &gt; |t|
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l data">
+1-KM
+</th>
+<th class="l data">
+YEAR
+</th>
+<td class="r data">
+0.1634
+</td>
+<td class="r data">
+2.0576
+</td>
+<td class="r data">
+0.1515
+</td>
+<td class="r data">
+1.42
+</td>
+<td class="r data">
+0.1612
+</td>
+</tr>
+<tr>
+<th class="l data">
+1-KM
+</th>
+<th class="l data">
+AGE
+</th>
+<td class="r data">
+0.1114
+</td>
+<td class="r data">
+1.1957
+</td>
+<td class="r data">
+0.2742
+</td>
+<td class="r data">
+0.96
+</td>
+<td class="r data">
+0.3414
+</td>
+</tr>
+<tr>
+<th class="l data">
+1-KM
+</th>
+<th class="l data">
+SURGERY
+</th>
+<td class="r data">
+0.2520
+</td>
+<td class="r data">
+3.9943
+</td>
+<td class="r data">
+0.0457
+</td>
+<td class="r data">
+2.22
+</td>
+<td class="r data">
+0.0292
+</td>
+</tr>
+<tr>
+<th class="l data">
+1-KM
+</th>
+<th class="l data">
+<em>Global</em>
+</th>
+<td class="r data">
+.
+</td>
+<td class="r data">
+8.1906
+</td>
+<td class="r data">
+0.0422
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+</div>
+<div id="introduction-dune-interaction-avec-la-durée" class="section level3" number="2.2.2">
+<h3 number="2.2.2"><span class="header-section-number">2.2.2</span> Introduction d’une interaction avec la durée</h3>
+<p><strong>Estimation d’un modèle avec indicatrices</strong><br />
+La covariable doit être sous forme d’indicatrice (binaire: (0,1)). Ce qui est le cas ici avec la variable surgery.<br />
+<br> Exemple avec une covariable X à 3 modalités codée 1,2,3.<br />
+<br> Estimation du modèle de Cox avec l’instruction <code>class</code> (ref: X=1)</p>
+<pre><code>proc phreg data=base;
+class X(ref=&quot;1&quot;);
+model variable_dur*variable_cens(0) = X; run;</code></pre>
+<p>Estimation du modèle de Cox avec indicatrices</p>
+<pre><code>data base; set base;
+X1 = X=1;
+X2 = X=3;
+X3 = X=4; run;
+
+proc phreg data=base;
+model variable_dur*variable_cens(0) = X3 X3; run;</code></pre>
+<p>La variable d’intéraction (<span class="math inline">\(surgeryt = surgery\times stime\)</span>) est générée, le temps de l’estimation après l’instruction <code>model</code>.</p>
+<pre class="sashtml"><code>ods select PHReg.ParameterEstimates;
+proc phreg data=x.transplantation ;
+model stime*died(0) = year age surgery surgeryt ;
+surgeryt = surgery*stime;
+run;</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Estimations par maximum de vraisemblance des paramètres du modèle">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="8" scope="colgroup">
+Analyse des valeurs estimées du maximum de vraisemblance
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Paramètre
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Valeur estimée<br/>des paramètres
+</th>
+<th class="r b header" scope="col">
+Erreur<br/>type
+</th>
+<th class="r b header" scope="col">
+khi-2
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+<th class="r b header" scope="col">
+Rapport<br/>de risque
+</th>
+<th class="l b header" scope="col">
+Libellé
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.12295
+</td>
+<td class="r data">
+0.06686
+</td>
+<td class="r data">
+3.3815
+</td>
+<td class="r data">
+0.0659
+</td>
+<td class="r data">
+0.884
+</td>
+<td class="l data">
+Year of Acceptance
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.02886
+</td>
+<td class="r data">
+0.01346
+</td>
+<td class="r data">
+4.5980
+</td>
+<td class="r data">
+0.0320
+</td>
+<td class="r data">
+1.029
+</td>
+<td class="l data">
+Age
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-1.75154
+</td>
+<td class="r data">
+0.67446
+</td>
+<td class="r data">
+6.7442
+</td>
+<td class="r data">
+0.0094
+</td>
+<td class="r data">
+0.174
+</td>
+<td class="l data">
+Surgery (e.g. CABG)
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+surgeryt
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.00223
+</td>
+<td class="r data">
+0.00110
+</td>
+<td class="r data">
+4.0828
+</td>
+<td class="r data">
+0.0433
+</td>
+<td class="r data">
+1.002
+</td>
+<td class="l data">
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+</div>
+</div>
+<div id="introduction-dune-variable-dynamique-binaire" class="section level2" number="2.3">
+<h2 number="2.3"><span class="header-section-number">2.3</span> Introduction d’une variable dynamique (binaire)</h2>
+<p><strong>Warning: opération en ‘aveugle’</strong></p>
+<p>Contrairement à R et Stata, la base n’a pas à être splittée, on ne peux pas vérifier si la variable dynamique a été corectement créée. La variable dynamique, qui peut être appréhendée comme une variable en intéraction avec la durée, est générée après l’instruction <code>model</code>.<br />
+<br> Ici la tvc prendra la valeur doit prendre la valeur 0 lorsque stime&gt;wait, 1 sinon.</p>
+<pre class="sashtml"><code>ods select PHReg.ParameterEstimates;
+proc phreg data=x.transplantation ;
+model stime*died(0) = year age surgery tvc ;
+tvc = transplant=1 and stime&gt;=wait;
+run;</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Estimations par maximum de vraisemblance des paramètres du modèle">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="8" scope="colgroup">
+Analyse des valeurs estimées du maximum de vraisemblance
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Paramètre
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Valeur estimée<br/>des paramètres
+</th>
+<th class="r b header" scope="col">
+Erreur<br/>type
+</th>
+<th class="r b header" scope="col">
+khi-2
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+<th class="r b header" scope="col">
+Rapport<br/>de risque
+</th>
+<th class="l b header" scope="col">
+Libellé
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.12020
+</td>
+<td class="r data">
+0.06736
+</td>
+<td class="r data">
+3.1839
+</td>
+<td class="r data">
+0.0744
+</td>
+<td class="r data">
+0.887
+</td>
+<td class="l data">
+Year of Acceptance
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.03042
+</td>
+<td class="r data">
+0.01391
+</td>
+<td class="r data">
+4.7829
+</td>
+<td class="r data">
+0.0287
+</td>
+<td class="r data">
+1.031
+</td>
+<td class="l data">
+Age
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.98023
+</td>
+<td class="r data">
+0.43655
+</td>
+<td class="r data">
+5.0418
+</td>
+<td class="r data">
+0.0247
+</td>
+<td class="r data">
+0.375
+</td>
+<td class="l data">
+Surgery (e.g. CABG)
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+tvc
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.08305
+</td>
+<td class="r data">
+0.30484
+</td>
+<td class="r data">
+0.0742
+</td>
+<td class="r data">
+0.7853
+</td>
+<td class="r data">
+0.920
+</td>
+<td class="l data">
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+</div>
+</div>
+<div id="modèle-logistique-à-temps-discret" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Modèle (logistique à temps discret)</h1>
+<div id="mise-en-forme-de-la-base-et-variables-danalyse" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Mise en forme de la base et variables d’analyse</h2>
+<p>On utilise une boucle pour répliquer les lignes sur la valeur de la durée. La nouvelle variable de durée (t) sous forme de compteur est générée automatiquement.</p>
+<pre class="sashtml"><code>data td; set x.transplantation; 
+do t=1 to mois; 
+     output; 
+     end; run;
+data td; set td;
+if t&lt;mois then died=0;
+t2=t*t;
+t3=t2*t; run;</code></pre>
+</div>
+<div id="fonction-continue-de-la-durée" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Fonction continue de la durée</h2>
+<p><em>Recherche de la fonction qui ajuste le mieux</em></p>
+<p>A partir des formes quadratiques, on a seulement conservé le tableau</p>
+<pre class="sashtml"><code>ods select Logistic.FitStatistics;
+proc logistic data=td;
+model died(ref=&quot;0&quot;) = t ; run;
+
+ods select Logistic.FitStatistics;
+proc logistic data=td;
+model died(ref=&quot;0&quot;) = t t2 ; run;
+
+ods select Logistic.FitStatistics;
+proc logistic data=td;
+model died(ref=&quot;0&quot;) = t t2 t3 ; run;</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Statistiques d&apos;ajustement">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Statistique d'ajustement du modèle
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Critère
+</th>
+<th class="r b header" scope="col">
+Constante uniquement
+</th>
+<th class="r b header" scope="col">
+Constante et Covariables
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+AIC
+</th>
+<td class="r data">
+558.380
+</td>
+<td class="r data">
+516.104
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SC
+</th>
+<td class="r data">
+563.439
+</td>
+<td class="r data">
+526.223
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+-2 Log L
+</th>
+<td class="r data">
+556.380
+</td>
+<td class="r data">
+512.104
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+<div class="branch">
+<p style="page-break-after: always;">
+<br/>
+</p>
+<hr size="3"/>
+<a name="IDX1"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Statistiques d&apos;ajustement">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Statistique d'ajustement du modèle
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Critère
+</th>
+<th class="r b header" scope="col">
+Constante uniquement
+</th>
+<th class="r b header" scope="col">
+Constante et Covariables
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+AIC
+</th>
+<td class="r data">
+558.380
+</td>
+<td class="r data">
+508.101
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SC
+</th>
+<td class="r data">
+563.439
+</td>
+<td class="r data">
+523.280
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+-2 Log L
+</th>
+<td class="r data">
+556.380
+</td>
+<td class="r data">
+502.101
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+<div class="branch">
+<p style="page-break-after: always;">
+<br/>
+</p>
+<hr size="3"/>
+<a name="IDX2"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Statistiques d&apos;ajustement">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Statistique d'ajustement du modèle
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Critère
+</th>
+<th class="r b header" scope="col">
+Constante uniquement
+</th>
+<th class="r b header" scope="col">
+Constante et Covariables
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+AIC
+</th>
+<td class="r data">
+558.380
+</td>
+<td class="r data">
+506.188
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SC
+</th>
+<td class="r data">
+563.439
+</td>
+<td class="r data">
+526.427
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+-2 Log L
+</th>
+<td class="r data">
+556.380
+</td>
+<td class="r data">
+498.188
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+<p><em>Estimation du modèle</em></p>
+<pre class="sashtml"><code>ods select Logistic.FitStatistics;
+proc logistic data=td;
+model died(ref=&quot;0&quot;) = t t2 t3 year age surgery  ; run;</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Statistiques d&apos;ajustement">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Statistique d'ajustement du modèle
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Critère
+</th>
+<th class="r b header" scope="col">
+Constante uniquement
+</th>
+<th class="r b header" scope="col">
+Constante et Covariables
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+AIC
+</th>
+<td class="r data">
+558.380
+</td>
+<td class="r data">
+494.391
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SC
+</th>
+<td class="r data">
+563.439
+</td>
+<td class="r data">
+529.808
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+-2 Log L
+</th>
+<td class="r data">
+556.380
+</td>
+<td class="r data">
+480.391
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+</div>
+<div id="fonction-discrète-de-la-durée" class="section level2" number="3.3">
+<h2 number="3.3"><span class="header-section-number">3.3</span> Fonction discrète de la durée</h2>
+<p>Pour l’exemple on va regrouper la durée en foction de ses quartiles. Pour chaque individu, on conserve seulement une observation par quartile.</p>
+<pre class="sashtml"><code>proc rank data=td out=td2 groups=4;
+var t;
+ranks tq4;
+run;
+
+data td2; set td2;
+id2=put(id, 3.);
+tq42=put(tq4, 1.);
+g=id2 || tq42; run;
+
+proc sort data=td2; by id tq4; run;
+
+data td2; set td2;
+by g;
+if LAST.g; run;</code></pre>
+<p><em>Estimation</em></p>
+<pre class="sashtml"><code>proc logistic data=td2;
+class tq4 / param=ref;
+model died(ref=&quot;0&quot;) = tq4 year age surgery; run;</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Informations sur le modèle">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Informations sur le modèle
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Table
+</th>
+<td class="l data">
+WORK.TD2
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Variable de réponse
+</th>
+<td class="l data">
+DIED
+</td>
+<td class="l data">
+Survival Status (1=dead)
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Nombre de niveaux de réponse
+</th>
+<td class="l data">
+2
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Modèle
+</th>
+<td class="l data">
+logit binaire
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Technique d'optimisation
+</th>
+<td class="l data">
+Score de Fisher
+</td>
+<td class="l data">
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX1"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Synthèse des observations">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Nb d'observations lues
+</th>
+<td class="r data">
+204
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Nb d'observations utilisées
+</th>
+<td class="r data">
+204
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX2"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Profil de réponse">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Profil de réponse
+</th>
+</tr>
+<tr>
+<th class="r b header" scope="col">
+Valeur<br/>ordonnée
+</th>
+<th class="l b header" scope="col">
+DIED
+</th>
+<th class="r b header" scope="col">
+Fréquence<br/>totale
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">
+1
+</th>
+<td class="l data">
+0
+</td>
+<td class="r data">
+129
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+2
+</th>
+<td class="l data">
+1
+</td>
+<td class="r data">
+75
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+<br>
+<p>
+<div align="center">
+<table class="proctitle">
+<tr>
+<td class="c proctitle">
+La probabilité modélisée est DIED=‘1’.
+</td>
+</tr>
+</table>
+</div>
+<p>
+</div>
+<br> <a name="IDX3"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Informations sur les niveaux de classe">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">
+Informations sur<br/>les niveaux de<br/>classe
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Classe
+</th>
+<th class="l b header" scope="col">
+Valeur
+</th>
+<th class="c b header" colspan="3" scope="colgroup">
+Variables d'expérience
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+tq4
+</th>
+<th class="l rowheader" scope="row">
+0
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+</th>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+</th>
+<th class="l rowheader" scope="row">
+2
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+1
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+</th>
+<th class="l rowheader" scope="row">
+3
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX4"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Etat de convergence">
+<colgroup>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" scope="col">
+Etat de convergence du modèle
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="c data">
+Critère de convergence (GCONV=1E-8) respecté.
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX5"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Statistiques d&apos;ajustement">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Statistique d'ajustement du modèle
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Critère
+</th>
+<th class="r b header" scope="col">
+Constante uniquement
+</th>
+<th class="r b header" scope="col">
+Constante et Covariables
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+AIC
+</th>
+<td class="r data">
+270.338
+</td>
+<td class="r data">
+243.530
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SC
+</th>
+<td class="r data">
+273.656
+</td>
+<td class="r data">
+266.757
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+-2 Log L
+</th>
+<td class="r data">
+268.338
+</td>
+<td class="r data">
+229.530
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX6"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Tests globaux">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Test de l'hypothèse nulle globale : BETA=0
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Test
+</th>
+<th class="r b header" scope="col">
+khi-2
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Rapport de vrais
+</th>
+<td class="r data">
+38.8080
+</td>
+<td class="r data">
+6
+</td>
+<td class="r data">
+&lt;.0001
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Score
+</th>
+<td class="r data">
+35.7556
+</td>
+<td class="r data">
+6
+</td>
+<td class="r data">
+&lt;.0001
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Wald
+</th>
+<td class="r data">
+30.6343
+</td>
+<td class="r data">
+6
+</td>
+<td class="r data">
+&lt;.0001
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX7"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Tests Type 3">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Analyse des effets Type 3
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Effet
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Khi-2<br/>de Wald
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+tq4
+</th>
+<td class="r data">
+3
+</td>
+<td class="r data">
+13.2019
+</td>
+<td class="r data">
+0.0042
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+4.4768
+</td>
+<td class="r data">
+0.0344
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+6.0591
+</td>
+<td class="r data">
+0.0138
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+4.5273
+</td>
+<td class="r data">
+0.0334
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX8"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Paramètres estimés">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="7" scope="colgroup">
+Analyse des valeurs estimées du maximum de vraisemblance
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Paramètre
+</th>
+<th class="l b header" scope="col">
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Estimation
+</th>
+<th class="r b header" scope="col">
+Erreur<br/>type
+</th>
+<th class="r b header" scope="col">
+Khi-2<br/>de Wald
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Intercept
+</th>
+<th class="l rowheader" scope="row">
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+11.3099
+</td>
+<td class="r data">
+6.4455
+</td>
+<td class="r data">
+3.0790
+</td>
+<td class="r data">
+0.0793
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+tq4
+</th>
+<th class="l rowheader" scope="row">
+0
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.4347
+</td>
+<td class="r data">
+0.5615
+</td>
+<td class="r data">
+0.5995
+</td>
+<td class="r data">
+0.4388
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+tq4
+</th>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.8743
+</td>
+<td class="r data">
+0.6460
+</td>
+<td class="r data">
+1.8319
+</td>
+<td class="r data">
+0.1759
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+tq4
+</th>
+<th class="l rowheader" scope="row">
+2
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.8413
+</td>
+<td class="r data">
+0.6775
+</td>
+<td class="r data">
+1.5421
+</td>
+<td class="r data">
+0.2143
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<th class="l rowheader" scope="row">
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.1929
+</td>
+<td class="r data">
+0.0912
+</td>
+<td class="r data">
+4.4768
+</td>
+<td class="r data">
+0.0344
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<th class="l rowheader" scope="row">
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.0451
+</td>
+<td class="r data">
+0.0183
+</td>
+<td class="r data">
+6.0591
+</td>
+<td class="r data">
+0.0138
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<th class="l rowheader" scope="row">
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-1.0634
+</td>
+<td class="r data">
+0.4998
+</td>
+<td class="r data">
+4.5273
+</td>
+<td class="r data">
+0.0334
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX9"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Rapports de cotes">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Estimation du rapport de cotes
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Effet
+</th>
+<th class="r b header" scope="col">
+Estimation du<br/>point
+</th>
+<th class="c b header" colspan="2" scope="colgroup">
+Intervalle de confiance <br/> de Wald à95%
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+tq4 0 vs 3
+</th>
+<td class="r data">
+1.545
+</td>
+<td class="r data">
+0.514
+</td>
+<td class="r data">
+4.642
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+tq4 1 vs 3
+</th>
+<td class="r data">
+0.417
+</td>
+<td class="r data">
+0.118
+</td>
+<td class="r data">
+1.480
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+tq4 2 vs 3
+</th>
+<td class="r data">
+0.431
+</td>
+<td class="r data">
+0.114
+</td>
+<td class="r data">
+1.627
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<td class="r data">
+0.825
+</td>
+<td class="r data">
+0.690
+</td>
+<td class="r data">
+0.986
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<td class="r data">
+1.046
+</td>
+<td class="r data">
+1.009
+</td>
+<td class="r data">
+1.084
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<td class="r data">
+0.345
+</td>
+<td class="r data">
+0.130
+</td>
+<td class="r data">
+0.920
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX10"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Statistiques d&apos;association">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Association des probabilités prédites et des réponses observées
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Pourcentage concordant
+</th>
+<td class="r data">
+76.0
+</td>
+<th class="l rowheader" scope="row">
+D de Somers
+</th>
+<td class="r data">
+0.522
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Pourcentage discordant
+</th>
+<td class="r data">
+23.9
+</td>
+<th class="l rowheader" scope="row">
+Gamma
+</th>
+<td class="r data">
+0.522
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Pourcentage lié
+</th>
+<td class="r data">
+0.1
+</td>
+<th class="l rowheader" scope="row">
+Tau-a
+</th>
+<td class="r data">
+0.244
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Paires
+</th>
+<td class="r data">
+9675
+</td>
+<th class="l rowheader" scope="row">
+c
+</th>
+<td class="r data">
+0.761
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+</div>
+</div>
+<div id="modèles-paramétrique-de-type-aft" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Modèles paramétrique de type AFT</h1>
+<pre class="sashtml"><code>proc lifereg data=x.transplantation;
+model stime*died(0) = year age surgery /D=WEIBULL;
+run;</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifereg: Informations sur le modèle">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Informations sur le modèle
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Table
+</th>
+<td class="r data">
+X.TRANSPLANTATION
+</td>
+<td class="l data">
+-savasas- created dataset on 12AUG2019
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Variable dépendante
+</th>
+<td class="r data">
+Log(STIME)
+</td>
+<td class="l data">
+Survival Time (Days)
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Variable de censure
+</th>
+<td class="r data">
+DIED
+</td>
+<td class="l data">
+Survival Status (1=dead)
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Valeur(s) de censure
+</th>
+<td class="r data">
+0
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Nombre d'observations
+</th>
+<td class="r data">
+103
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Valeurs non censurées
+</th>
+<td class="r data">
+75
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Valeurs censurées à droite
+</th>
+<td class="r data">
+28
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Valeurs censurées à gauche
+</th>
+<td class="r data">
+0
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Valeurs censurées de l'intervalle
+</th>
+<td class="r data">
+0
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Nombre de paramètres
+</th>
+<td class="r data">
+5
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Nom de la distribution
+</th>
+<td class="r data">
+Weibull
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Logarithme de la vraisemblance
+</th>
+<td class="r data" nowrap>
+-188.6278016
+</td>
+<td class="l data">
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX1"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifereg: Synthèse des observations">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Nombre d'observations lues
+</th>
+<td class="r data">
+103
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Nombre d'observations utilisées
+</th>
+<td class="r data">
+103
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX2"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifereg: Statistique d&apos;ajustement du modèle">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="2" scope="colgroup">
+Tests d'ajustement
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="l data">
+-2 log-vraisemblance
+</td>
+<td class="r data">
+377.256
+</td>
+</tr>
+<tr>
+<td class="l data">
+AIC (préférer les petites valeurs)
+</td>
+<td class="r data">
+387.256
+</td>
+</tr>
+<tr>
+<td class="l data">
+AICC (préférer les petites valeurs)
+</td>
+<td class="r data">
+387.874
+</td>
+</tr>
+<tr>
+<td class="l data">
+BIC (préférer les petites valeurs)
+</td>
+<td class="r data">
+400.429
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX3"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifereg: Statistiques d&apos;ajustement du modèle (Réponse non enregistrée)">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="2" scope="colgroup">
+Statistique d'ajustement (Réponse non enregistrée)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="l data">
+-2 log-vraisemblance
+</td>
+<td class="r data">
+976.337
+</td>
+</tr>
+<tr>
+<td class="l data">
+WeibullAIC (préférer les petites valeurs)
+</td>
+<td class="r data">
+986.337
+</td>
+</tr>
+<tr>
+<td class="l data">
+WeibullAICC (préférer les petites valeurs)
+</td>
+<td class="r data">
+986.955
+</td>
+</tr>
+<tr>
+<td class="l data">
+WeibullBIC (préférer les petites valeurs)
+</td>
+<td class="r data">
+999.510
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX4"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifereg: Etat de convergence">
+<colgroup>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td class="l data">
+L'algorithme a convergé.
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX5"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifereg: Analyse Type 3">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Analyse des effets de Type III
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Effet
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Khi-2<br/>de Wald
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+1.7673
+</td>
+<td class="r data">
+0.1837
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+6.1828
+</td>
+<td class="r data">
+0.0129
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+6.3906
+</td>
+<td class="r data">
+0.0115
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX6"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifereg: Analyse des paramètres estimés">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="8" scope="colgroup">
+Analyse des paramètres estimés du maximum de vraisemblance
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Paramètre
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Estimation
+</th>
+<th class="r b header" scope="col">
+Erreur<br/>type
+</th>
+<th class="c b header" colspan="2" scope="colgroup">
+Intervalle de confiance<br/>à95%
+</th>
+<th class="r b header" scope="col">
+Khi-2
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Intercept
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-3.0220
+</td>
+<td class="r data">
+8.7284
+</td>
+<td class="r data" nowrap>
+-20.1294
+</td>
+<td class="r data">
+14.0854
+</td>
+<td class="r data">
+0.12
+</td>
+<td class="r data">
+0.7292
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.1620
+</td>
+<td class="r data">
+0.1218
+</td>
+<td class="r data" nowrap>
+-0.0768
+</td>
+<td class="r data">
+0.4008
+</td>
+<td class="r data">
+1.77
+</td>
+<td class="r data">
+0.1837
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.0615
+</td>
+<td class="r data">
+0.0247
+</td>
+<td class="r data" nowrap>
+-0.1100
+</td>
+<td class="r data" nowrap>
+-0.0130
+</td>
+<td class="r data">
+6.18
+</td>
+<td class="r data">
+0.0129
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+1.9703
+</td>
+<td class="r data">
+0.7794
+</td>
+<td class="r data">
+0.4427
+</td>
+<td class="r data">
+3.4980
+</td>
+<td class="r data">
+6.39
+</td>
+<td class="r data">
+0.0115
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Echelle
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+1.7983
+</td>
+<td class="r data">
+0.1667
+</td>
+<td class="r data">
+1.4995
+</td>
+<td class="r data">
+2.1566
+</td>
+<td class="r data">
+</td>
+<td class="r data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Forme de Weibull
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.5561
+</td>
+<td class="r data">
+0.0516
+</td>
+<td class="r data">
+0.4637
+</td>
+<td class="r data">
+0.6669
+</td>
+<td class="r data">
+</td>
+<td class="r data">
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+<pre class="sashtml"><code>proc lifereg data=x.transplantation;
+model stime*died(0) = year age surgery /D=LLOGISTIC;
+run;</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifereg: Informations sur le modèle">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Informations sur le modèle
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Table
+</th>
+<td class="r data">
+X.TRANSPLANTATION
+</td>
+<td class="l data">
+-savasas- created dataset on 12AUG2019
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Variable dépendante
+</th>
+<td class="r data">
+Log(STIME)
+</td>
+<td class="l data">
+Survival Time (Days)
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Variable de censure
+</th>
+<td class="r data">
+DIED
+</td>
+<td class="l data">
+Survival Status (1=dead)
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Valeur(s) de censure
+</th>
+<td class="r data">
+0
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Nombre d'observations
+</th>
+<td class="r data">
+103
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Valeurs non censurées
+</th>
+<td class="r data">
+75
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Valeurs censurées à droite
+</th>
+<td class="r data">
+28
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Valeurs censurées à gauche
+</th>
+<td class="r data">
+0
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Valeurs censurées de l'intervalle
+</th>
+<td class="r data">
+0
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Nombre de paramètres
+</th>
+<td class="r data">
+5
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Nom de la distribution
+</th>
+<td class="r data">
+LLogistic
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Logarithme de la vraisemblance
+</th>
+<td class="r data" nowrap>
+-183.0393686
+</td>
+<td class="l data">
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX1"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifereg: Synthèse des observations">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Nombre d'observations lues
+</th>
+<td class="r data">
+103
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Nombre d'observations utilisées
+</th>
+<td class="r data">
+103
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX2"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifereg: Statistique d&apos;ajustement du modèle">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="2" scope="colgroup">
+Tests d'ajustement
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="l data">
+-2 log-vraisemblance
+</td>
+<td class="r data">
+366.079
+</td>
+</tr>
+<tr>
+<td class="l data">
+AIC (préférer les petites valeurs)
+</td>
+<td class="r data">
+376.079
+</td>
+</tr>
+<tr>
+<td class="l data">
+AICC (préférer les petites valeurs)
+</td>
+<td class="r data">
+376.697
+</td>
+</tr>
+<tr>
+<td class="l data">
+BIC (préférer les petites valeurs)
+</td>
+<td class="r data">
+389.252
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX3"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifereg: Statistiques d&apos;ajustement du modèle (Réponse non enregistrée)">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="2" scope="colgroup">
+Statistique d'ajustement (Réponse non enregistrée)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="l data">
+-2 log-vraisemblance
+</td>
+<td class="r data">
+965.160
+</td>
+</tr>
+<tr>
+<td class="l data">
+LLogisticAIC (préférer les petites valeurs)
+</td>
+<td class="r data">
+975.160
+</td>
+</tr>
+<tr>
+<td class="l data">
+LLogisticAICC (préférer les petites valeurs)
+</td>
+<td class="r data">
+975.778
+</td>
+</tr>
+<tr>
+<td class="l data">
+LLogisticBIC (préférer les petites valeurs)
+</td>
+<td class="r data">
+988.333
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX4"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifereg: Etat de convergence">
+<colgroup>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<td class="l data">
+L'algorithme a convergé.
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX5"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifereg: Analyse Type 3">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Analyse des effets de Type III
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Effet
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Khi-2<br/>de Wald
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+4.2192
+</td>
+<td class="r data">
+0.0400
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+4.0189
+</td>
+<td class="r data">
+0.0450
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+10.8277
+</td>
+<td class="r data">
+0.0010
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX6"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifereg: Analyse des paramètres estimés">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="8" scope="colgroup">
+Analyse des paramètres estimés du maximum de vraisemblance
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Paramètre
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Estimation
+</th>
+<th class="r b header" scope="col">
+Erreur<br/>type
+</th>
+<th class="c b header" colspan="2" scope="colgroup">
+Intervalle de confiance<br/>à95%
+</th>
+<th class="r b header" scope="col">
+Khi-2
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Intercept
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-10.4034
+</td>
+<td class="r data">
+8.3410
+</td>
+<td class="r data" nowrap>
+-26.7515
+</td>
+<td class="r data">
+5.9446
+</td>
+<td class="r data">
+1.56
+</td>
+<td class="r data">
+0.2123
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.2408
+</td>
+<td class="r data">
+0.1172
+</td>
+<td class="r data">
+0.0110
+</td>
+<td class="r data">
+0.4705
+</td>
+<td class="r data">
+4.22
+</td>
+<td class="r data">
+0.0400
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.0427
+</td>
+<td class="r data">
+0.0213
+</td>
+<td class="r data" nowrap>
+-0.0845
+</td>
+<td class="r data" nowrap>
+-0.0010
+</td>
+<td class="r data">
+4.02
+</td>
+<td class="r data">
+0.0450
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+2.2747
+</td>
+<td class="r data">
+0.6913
+</td>
+<td class="r data">
+0.9198
+</td>
+<td class="r data">
+3.6296
+</td>
+<td class="r data">
+10.83
+</td>
+<td class="r data">
+0.0010
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Echelle
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+1.1979
+</td>
+<td class="r data">
+0.1161
+</td>
+<td class="r data">
+0.9906
+</td>
+<td class="r data">
+1.4486
+</td>
+<td class="r data">
+</td>
+<td class="r data">
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+</div>
+<div id="risques-concurrents" class="section level1" number="5">
+<h1 number="5"><span class="header-section-number">5</span> Risques concurrents</h1>
+<div id="non-paramétriques" class="section level2" number="5.1">
+<h2 number="5.1"><span class="header-section-number">5.1</span> Non paramétriques</h2>
+<pre class="sashtml"><code>6          proc lifetest data=x.compet plots=CIF;
+7          time stime*compet(0) / eventcode=1; run;
+
+NOTE: PROCEDURE LIFETEST a utilisé (Durée totale du traitement) :
+      real time           2.73 seconds
+      cpu time            0.40 seconds
+      
+
+8          
+9          proc lifetest data=x.compet plots=CIF;
+10         time stime*compet(0) / eventcode
+11         
+12         strata surgery; run;
+           ______
+           22
+           202
+
+ERROR 22-322: Erreur de syntaxe, l&#39;une des valeurs suivantes est attendue 
+              : ;, =, EVENTCODE, FAILCODE.  
+
+ERROR 202-322: The option or parameter is not recognized and will be 
+               ignored.
+
+NOTE: The SAS System stopped processing this step because of errors.
+NOTE: PROCEDURE LIFETEST a utilisé (Durée totale du traitement) :
+      real time           0.00 seconds
+      cpu time            0.01 seconds
+      
+
+ERROR: Errors printed on page 5.</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div class="c proctitle">
+Evénement en échec : COMPET=1
+</div>
+<p>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Synthèse des échecs">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Synthèse des résultats en échec
+</th>
+</tr>
+<tr>
+<th class="r b header" scope="col">
+Evénements<br/>en échec
+</th>
+<th class="r b header" scope="col">
+Evénements<br/>concurrents
+</th>
+<th class="r b header" scope="col">
+Censuré
+</th>
+<th class="r b header" scope="col">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="r data">
+56
+</td>
+<td class="r data">
+19
+</td>
+<td class="r data">
+28
+</td>
+<td class="r data">
+103
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX1"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Lifetest: Cumulative Incidence Function Estimates">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">
+Estimations de la fonction d'incidence cumulée
+</th>
+</tr>
+<tr>
+<th class="r b header" scope="col">
+STIME
+</th>
+<th class="r b header" scope="col">
+Incidence<br/>cumulée
+</th>
+<th class="r b header" scope="col">
+Erreur type
+</th>
+<th class="c b header" colspan="2" scope="colgroup">
+Intervalle de confiance<br/>à 95%
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">
+0
+</th>
+<td class="r data">
+0
+</td>
+<td class="r data">
+0
+</td>
+<td class="r data">
+.
+</td>
+<td class="r data">
+.
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1
+</th>
+<td class="r data">
+0.00971
+</td>
+<td class="r data">
+0.00971
+</td>
+<td class="r data">
+0.000847
+</td>
+<td class="r data">
+0.0480
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+2
+</th>
+<td class="r data">
+0.0194
+</td>
+<td class="r data">
+0.0137
+</td>
+<td class="r data">
+0.00372
+</td>
+<td class="r data">
+0.0622
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+3
+</th>
+<td class="r data">
+0.0485
+</td>
+<td class="r data">
+0.0213
+</td>
+<td class="r data">
+0.0180
+</td>
+<td class="r data">
+0.1026
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+5
+</th>
+<td class="r data">
+0.0680
+</td>
+<td class="r data">
+0.0249
+</td>
+<td class="r data">
+0.0298
+</td>
+<td class="r data">
+0.1277
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+6
+</th>
+<td class="r data">
+0.0874
+</td>
+<td class="r data">
+0.0280
+</td>
+<td class="r data">
+0.0427
+</td>
+<td class="r data">
+0.1519
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+8
+</th>
+<td class="r data">
+0.0971
+</td>
+<td class="r data">
+0.0293
+</td>
+<td class="r data">
+0.0495
+</td>
+<td class="r data">
+0.1638
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+9
+</th>
+<td class="r data">
+0.1068
+</td>
+<td class="r data">
+0.0306
+</td>
+<td class="r data">
+0.0564
+</td>
+<td class="r data">
+0.1755
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+12
+</th>
+<td class="r data">
+0.1166
+</td>
+<td class="r data">
+0.0318
+</td>
+<td class="r data">
+0.0636
+</td>
+<td class="r data">
+0.1872
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+16
+</th>
+<td class="r data">
+0.1264
+</td>
+<td class="r data">
+0.0329
+</td>
+<td class="r data">
+0.0708
+</td>
+<td class="r data">
+0.1988
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+18
+</th>
+<td class="r data">
+0.1362
+</td>
+<td class="r data">
+0.0340
+</td>
+<td class="r data">
+0.0782
+</td>
+<td class="r data">
+0.2103
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+21
+</th>
+<td class="r data">
+0.1559
+</td>
+<td class="r data">
+0.0360
+</td>
+<td class="r data">
+0.0934
+</td>
+<td class="r data">
+0.2330
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+30
+</th>
+<td class="r data">
+0.1657
+</td>
+<td class="r data">
+0.0369
+</td>
+<td class="r data">
+0.1011
+</td>
+<td class="r data">
+0.2442
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+32
+</th>
+<td class="r data">
+0.1756
+</td>
+<td class="r data">
+0.0378
+</td>
+<td class="r data">
+0.1090
+</td>
+<td class="r data">
+0.2555
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+35
+</th>
+<td class="r data">
+0.1856
+</td>
+<td class="r data">
+0.0386
+</td>
+<td class="r data">
+0.1169
+</td>
+<td class="r data">
+0.2667
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+37
+</th>
+<td class="r data">
+0.1955
+</td>
+<td class="r data">
+0.0394
+</td>
+<td class="r data">
+0.1250
+</td>
+<td class="r data">
+0.2778
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+39
+</th>
+<td class="r data">
+0.2055
+</td>
+<td class="r data">
+0.0402
+</td>
+<td class="r data">
+0.1331
+</td>
+<td class="r data">
+0.2889
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+40
+</th>
+<td class="r data">
+0.2156
+</td>
+<td class="r data">
+0.0410
+</td>
+<td class="r data">
+0.1414
+</td>
+<td class="r data">
+0.3000
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+45
+</th>
+<td class="r data">
+0.2256
+</td>
+<td class="r data">
+0.0417
+</td>
+<td class="r data">
+0.1498
+</td>
+<td class="r data">
+0.3112
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+50
+</th>
+<td class="r data">
+0.2357
+</td>
+<td class="r data">
+0.0423
+</td>
+<td class="r data">
+0.1582
+</td>
+<td class="r data">
+0.3222
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+53
+</th>
+<td class="r data">
+0.2458
+</td>
+<td class="r data">
+0.0430
+</td>
+<td class="r data">
+0.1667
+</td>
+<td class="r data">
+0.3332
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+58
+</th>
+<td class="r data">
+0.2559
+</td>
+<td class="r data">
+0.0436
+</td>
+<td class="r data">
+0.1753
+</td>
+<td class="r data">
+0.3441
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+61
+</th>
+<td class="r data">
+0.2660
+</td>
+<td class="r data">
+0.0442
+</td>
+<td class="r data">
+0.1839
+</td>
+<td class="r data">
+0.3549
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+66
+</th>
+<td class="r data">
+0.2761
+</td>
+<td class="r data">
+0.0447
+</td>
+<td class="r data">
+0.1926
+</td>
+<td class="r data">
+0.3657
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+68
+</th>
+<td class="r data">
+0.2861
+</td>
+<td class="r data">
+0.0452
+</td>
+<td class="r data">
+0.2013
+</td>
+<td class="r data">
+0.3765
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+69
+</th>
+<td class="r data">
+0.2962
+</td>
+<td class="r data">
+0.0457
+</td>
+<td class="r data">
+0.2101
+</td>
+<td class="r data">
+0.3872
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+72
+</th>
+<td class="r data">
+0.3063
+</td>
+<td class="r data">
+0.0462
+</td>
+<td class="r data">
+0.2190
+</td>
+<td class="r data">
+0.3978
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+77
+</th>
+<td class="r data">
+0.3164
+</td>
+<td class="r data">
+0.0466
+</td>
+<td class="r data">
+0.2279
+</td>
+<td class="r data">
+0.4084
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+78
+</th>
+<td class="r data">
+0.3265
+</td>
+<td class="r data">
+0.0470
+</td>
+<td class="r data">
+0.2368
+</td>
+<td class="r data">
+0.4190
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+81
+</th>
+<td class="r data">
+0.3365
+</td>
+<td class="r data">
+0.0474
+</td>
+<td class="r data">
+0.2458
+</td>
+<td class="r data">
+0.4295
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+85
+</th>
+<td class="r data">
+0.3466
+</td>
+<td class="r data">
+0.0478
+</td>
+<td class="r data">
+0.2549
+</td>
+<td class="r data">
+0.4399
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+90
+</th>
+<td class="r data">
+0.3567
+</td>
+<td class="r data">
+0.0481
+</td>
+<td class="r data">
+0.2640
+</td>
+<td class="r data">
+0.4503
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+96
+</th>
+<td class="r data">
+0.3668
+</td>
+<td class="r data">
+0.0484
+</td>
+<td class="r data">
+0.2731
+</td>
+<td class="r data">
+0.4607
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+100
+</th>
+<td class="r data">
+0.3769
+</td>
+<td class="r data">
+0.0487
+</td>
+<td class="r data">
+0.2823
+</td>
+<td class="r data">
+0.4710
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+102
+</th>
+<td class="r data">
+0.3870
+</td>
+<td class="r data">
+0.0489
+</td>
+<td class="r data">
+0.2915
+</td>
+<td class="r data">
+0.4813
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+110
+</th>
+<td class="r data">
+0.3972
+</td>
+<td class="r data">
+0.0492
+</td>
+<td class="r data">
+0.3009
+</td>
+<td class="r data">
+0.4918
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+149
+</th>
+<td class="r data">
+0.4078
+</td>
+<td class="r data">
+0.0495
+</td>
+<td class="r data">
+0.3106
+</td>
+<td class="r data">
+0.5025
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+153
+</th>
+<td class="r data">
+0.4183
+</td>
+<td class="r data">
+0.0497
+</td>
+<td class="r data">
+0.3202
+</td>
+<td class="r data">
+0.5132
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+186
+</th>
+<td class="r data">
+0.4291
+</td>
+<td class="r data">
+0.0500
+</td>
+<td class="r data">
+0.3302
+</td>
+<td class="r data">
+0.5241
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+188
+</th>
+<td class="r data">
+0.4399
+</td>
+<td class="r data">
+0.0502
+</td>
+<td class="r data">
+0.3401
+</td>
+<td class="r data">
+0.5350
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+207
+</th>
+<td class="r data">
+0.4506
+</td>
+<td class="r data">
+0.0504
+</td>
+<td class="r data">
+0.3501
+</td>
+<td class="r data">
+0.5458
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+263
+</th>
+<td class="r data">
+0.4614
+</td>
+<td class="r data">
+0.0506
+</td>
+<td class="r data">
+0.3602
+</td>
+<td class="r data">
+0.5566
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+285
+</th>
+<td class="r data">
+0.4836
+</td>
+<td class="r data">
+0.0509
+</td>
+<td class="r data">
+0.3809
+</td>
+<td class="r data">
+0.5788
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+308
+</th>
+<td class="r data">
+0.4947
+</td>
+<td class="r data">
+0.0510
+</td>
+<td class="r data">
+0.3914
+</td>
+<td class="r data">
+0.5897
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+340
+</th>
+<td class="r data">
+0.5058
+</td>
+<td class="r data">
+0.0511
+</td>
+<td class="r data">
+0.4019
+</td>
+<td class="r data">
+0.6007
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+583
+</th>
+<td class="r data">
+0.5211
+</td>
+<td class="r data">
+0.0518
+</td>
+<td class="r data">
+0.4151
+</td>
+<td class="r data">
+0.6167
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+733
+</th>
+<td class="r data">
+0.5391
+</td>
+<td class="r data">
+0.0530
+</td>
+<td class="r data">
+0.4299
+</td>
+<td class="r data">
+0.6362
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+852
+</th>
+<td class="r data">
+0.5584
+</td>
+<td class="r data">
+0.0543
+</td>
+<td class="r data">
+0.4457
+</td>
+<td class="r data">
+0.6569
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+995
+</th>
+<td class="r data">
+0.5811
+</td>
+<td class="r data">
+0.0562
+</td>
+<td class="r data">
+0.4632
+</td>
+<td class="r data">
+0.6820
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1032
+</th>
+<td class="r data">
+0.6039
+</td>
+<td class="r data">
+0.0576
+</td>
+<td class="r data">
+0.4817
+</td>
+<td class="r data">
+0.7060
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+1386
+</th>
+<td class="r data">
+0.6343
+</td>
+<td class="r data">
+0.0607
+</td>
+<td class="r data">
+0.5028
+</td>
+<td class="r data">
+0.7398
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX2"></a>
+<div>
+<div class="c">
+<p><img alt="Cumulative Incidence Plot" src="unnamed-chunk-20.png" style=" height: 480px; width: 640px;" border="0" class="c"></p>
+</div>
+</div>
+<br>
+</div>
+</div>
+<div id="modèles" class="section level2" number="5.2">
+<h2 number="5.2"><span class="header-section-number">5.2</span> Modèles</h2>
+<p><strong>Modèle de Fine-Gray</strong></p>
+<pre class="sashtml"><code>
+
+6          proc phreg data=x.compet;
+7          model stime*compet(0) = year age surgery / eventcode=1  ;
+8          run;
+
+NOTE: Convergence criterion (GCONV=1E-8) satisfied.
+NOTE: PROCEDURE PHREG a utilisé (Durée totale du traitement) :
+      real time           0.05 seconds
+      cpu time            0.01 seconds
+      
+
+ERROR: Errors printed on page 5.</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Informations sur le modèle">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Informations sur le modèle
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Table
+</th>
+<td class="l data">
+X.COMPET
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Variable dépendante
+</th>
+<td class="l data">
+STIME
+</td>
+<td class="l data">
+Survival Time (Days)
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Variable de statut
+</th>
+<td class="l data">
+COMPET
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Evénement d'intérêt
+</th>
+<td class="l data">
+1
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Evénement concurrent
+</th>
+<td class="l data">
+2
+</td>
+<td class="l data">
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Valeur censurée
+</th>
+<td class="l data">
+0
+</td>
+<td class="l data">
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX1"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Nombre d&apos;observations">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="l stacked_cell rowheader" scope="row">
+<table width="100%" border="0" cellpadding="7" cellspacing="0">
+<tr>
+<td class="l rowheader top_stacked_value" scope="row">
+Nombre d'observations lues
+</td>
+</tr>
+<tr>
+<td class="l rowheader bottom_stacked_value" scope="row">
+Nombre d'observations utilisées
+</td>
+</tr>
+</table>
+</th>
+<td class="r stacked_cell data">
+<table width="100%" border="0" cellpadding="7" cellspacing="0">
+<tr>
+<td class="r data top_stacked_value">
+103
+</td>
+</tr>
+<tr>
+<td class="r data bottom_stacked_value">
+103
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX2"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Synthèse des résultats en échec">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Synthèse des résultats en échec
+</th>
+</tr>
+<tr>
+<th class="r b header" scope="col">
+Total
+</th>
+<th class="r b header" scope="col">
+Evénement<br/>d'intérêt
+</th>
+<th class="r b header" scope="col">
+Evénement<br/>concurrent
+</th>
+<th class="r b header" scope="col">
+Censuré
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="r data">
+103
+</td>
+<td class="r data">
+56
+</td>
+<td class="r data">
+19
+</td>
+<td class="r data">
+28
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX3"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Etat de convergence">
+<colgroup>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" scope="col">
+Etat de convergence
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="c data">
+Critère de convergence (GCONV=1E-8) respecté.
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX4"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Statistique d&apos;ajustement du modèle">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Statistique d'ajustement du modèle
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Critère
+</th>
+<th class="r b header" scope="col">
+Sans<br/>covariables
+</th>
+<th class="r b header" scope="col">
+Avec<br/>covariables
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+-2 LOG L
+</th>
+<td class="r data">
+466.660
+</td>
+<td class="r data">
+456.805
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AIC
+</th>
+<td class="r data">
+466.660
+</td>
+<td class="r data">
+462.805
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SBC
+</th>
+<td class="r data">
+466.660
+</td>
+<td class="r data">
+468.881
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX5"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Test de l&apos;hypothèse nulle globale">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Test de l'hypothèse nulle globale : BETA=0
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Test
+</th>
+<th class="r b header" scope="col">
+khi-2
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Wald
+</th>
+<td class="r data">
+9.3025
+</td>
+<td class="r data">
+3
+</td>
+<td class="r data">
+0.0255
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX6"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure PHReg: Estimations par maximum de vraisemblance des paramètres du modèle">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="8" scope="colgroup">
+Analyse des valeurs estimées du maximum de vraisemblance
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Paramètre
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Valeur estimée<br/>des paramètres
+</th>
+<th class="r b header" scope="col">
+Erreur<br/>type
+</th>
+<th class="r b header" scope="col">
+khi-2
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+<th class="r b header" scope="col">
+Rapport<br/>de risque
+</th>
+<th class="l b header" scope="col">
+Libellé
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.08170
+</td>
+<td class="r data">
+0.07557
+</td>
+<td class="r data">
+1.1688
+</td>
+<td class="r data">
+0.2796
+</td>
+<td class="r data">
+0.922
+</td>
+<td class="l data">
+Year of Acceptance
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.01812
+</td>
+<td class="r data">
+0.01421
+</td>
+<td class="r data">
+1.6269
+</td>
+<td class="r data">
+0.2021
+</td>
+<td class="r data">
+1.018
+</td>
+<td class="l data">
+Age
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-1.18797
+</td>
+<td class="r data">
+0.51977
+</td>
+<td class="r data">
+5.2239
+</td>
+<td class="r data">
+0.0223
+</td>
+<td class="r data">
+0.305
+</td>
+<td class="l data">
+Surgery (e.g. CABG)
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+<p><strong>Modèle logistique multinomial à temps discret</strong></p>
+<pre class="sashtml"><code>6          data td; set x.compet;
+7          do t=1 to mois;
+8               output;
+9               end;
+10         run;
+
+NOTE: There were 103 observations read from the data set X.COMPET.
+NOTE: The data set WORK.TD has 1164 observations and 9 variables.
+NOTE: DATA statement a utilisé (Durée totale du traitement) :
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+11         data td; set td;
+12         if t&lt;mois then compet=0;
+13         run;
+
+NOTE: There were 1164 observations read from the data set WORK.TD.
+NOTE: The data set WORK.TD has 1164 observations and 9 variables.
+NOTE: DATA statement a utilisé (Durée totale du traitement) :
+      real time           0.00 seconds
+      cpu time            0.00 seconds
+      
+
+ERROR: Errors printed on page 5.</code></pre>
+<pre class="sashtml"><code>6          proc logistic data=td;
+7          model compet(ref=&quot;0&quot;) = t year age surgery / link=glogit;
+8          run;
+
+NOTE: PROC LOGISTIC is fitting the generalized logit model. The logits 
+      modeled contrast each response category against the reference 
+      category (COMPET=&#39;0&#39;).
+NOTE: Convergence criterion (GCONV=1E-8) satisfied.
+NOTE: There were 1164 observations read from the data set WORK.TD.
+NOTE: PROCEDURE LOGISTIC a utilisé (Durée totale du traitement) :
+      real time           0.03 seconds
+      cpu time            0.04 seconds
+      
+
+ERROR: Errors printed on page 5.</code></pre>
+<div class="branch">
+<a name="IDX"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Informations sur le modèle">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="2" scope="colgroup">
+Informations sur le modèle
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Table
+</th>
+<td class="l data">
+WORK.TD
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Variable de réponse
+</th>
+<td class="l data">
+COMPET
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Nombre de niveaux de réponse
+</th>
+<td class="l data">
+3
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Modèle
+</th>
+<td class="l data">
+logit généralisé
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Technique d'optimisation
+</th>
+<td class="l data">
+Newton-Raphson
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX1"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Synthèse des observations">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Nb d'observations lues
+</th>
+<td class="r data">
+1164
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Nb d'observations utilisées
+</th>
+<td class="r data">
+1164
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX2"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Profil de réponse">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Profil de réponse
+</th>
+</tr>
+<tr>
+<th class="r b header" scope="col">
+Valeur<br/>ordonnée
+</th>
+<th class="l b header" scope="col">
+COMPET
+</th>
+<th class="r b header" scope="col">
+Fréquence<br/>totale
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="r rowheader" scope="row">
+1
+</th>
+<td class="l data">
+0
+</td>
+<td class="r data">
+1089
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+2
+</th>
+<td class="l data">
+1
+</td>
+<td class="r data">
+56
+</td>
+</tr>
+<tr>
+<th class="r rowheader" scope="row">
+3
+</th>
+<td class="l data">
+2
+</td>
+<td class="r data">
+19
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+<br>
+<p>
+<div align="center">
+<table class="proctitle">
+<tr>
+<td class="c proctitle">
+Les logits modélisés utilisent COMPET=‘0’ comme catégorie de référence.
+</td>
+</tr>
+</table>
+</div>
+<p>
+</div>
+<br> <a name="IDX3"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Etat de convergence">
+<colgroup>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" scope="col">
+Etat de convergence du modèle
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="c data">
+Critère de convergence (GCONV=1E-8) respecté.
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX4"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Statistiques d&apos;ajustement">
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="3" scope="colgroup">
+Statistique d'ajustement du modèle
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Critère
+</th>
+<th class="r b header" scope="col">
+Constante uniquement
+</th>
+<th class="r b header" scope="col">
+Constante et Covariables
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+AIC
+</th>
+<td class="r data">
+645.275
+</td>
+<td class="r data">
+593.711
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SC
+</th>
+<td class="r data">
+655.394
+</td>
+<td class="r data">
+644.308
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+-2 Log L
+</th>
+<td class="r data">
+641.275
+</td>
+<td class="r data">
+573.711
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX5"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Tests globaux">
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Test de l'hypothèse nulle globale : BETA=0
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Test
+</th>
+<th class="r b header" scope="col">
+khi-2
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Rapport de vrais
+</th>
+<td class="r data">
+67.5635
+</td>
+<td class="r data">
+8
+</td>
+<td class="r data">
+&lt;.0001
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Score
+</th>
+<td class="r data">
+56.5683
+</td>
+<td class="r data">
+8
+</td>
+<td class="r data">
+&lt;.0001
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Wald
+</th>
+<td class="r data">
+46.4376
+</td>
+<td class="r data">
+8
+</td>
+<td class="r data">
+&lt;.0001
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX6"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Tests Type 3">
+<colgroup>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="4" scope="colgroup">
+Analyse des effets Type 3
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Effet
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Khi-2<br/>de Wald
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+t
+</th>
+<td class="r data">
+2
+</td>
+<td class="r data">
+24.9256
+</td>
+<td class="r data">
+&lt;.0001
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<td class="r data">
+2
+</td>
+<td class="r data">
+4.2540
+</td>
+<td class="r data">
+0.1192
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<td class="r data">
+2
+</td>
+<td class="r data">
+5.8336
+</td>
+<td class="r data">
+0.0541
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<td class="r data">
+2
+</td>
+<td class="r data">
+6.4026
+</td>
+<td class="r data">
+0.0407
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX7"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Paramètres estimés">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="7" scope="colgroup">
+Analyse des valeurs estimées du maximum de vraisemblance
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Paramètre
+</th>
+<th class="l b header" scope="col">
+COMPET
+</th>
+<th class="r b header" scope="col">
+DDL
+</th>
+<th class="r b header" scope="col">
+Estimation
+</th>
+<th class="r b header" scope="col">
+Erreur<br/>type
+</th>
+<th class="r b header" scope="col">
+Khi-2<br/>de Wald
+</th>
+<th class="r b header" scope="col">
+Pr &gt; khi-2
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+Intercept
+</th>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+5.8378
+</td>
+<td class="r data">
+5.7408
+</td>
+<td class="r data">
+1.0341
+</td>
+<td class="r data">
+0.3092
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+Intercept
+</th>
+<th class="l rowheader" scope="row">
+2
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+8.1872
+</td>
+<td class="r data">
+10.0518
+</td>
+<td class="r data">
+0.6634
+</td>
+<td class="r data">
+0.4154
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+t
+</th>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.0834
+</td>
+<td class="r data">
+0.0195
+</td>
+<td class="r data">
+18.3355
+</td>
+<td class="r data">
+&lt;.0001
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+t
+</th>
+<th class="l rowheader" scope="row">
+2
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.0906
+</td>
+<td class="r data">
+0.0337
+</td>
+<td class="r data">
+7.2080
+</td>
+<td class="r data">
+0.0073
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.1308
+</td>
+<td class="r data">
+0.0795
+</td>
+<td class="r data">
+2.7071
+</td>
+<td class="r data">
+0.0999
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<th class="l rowheader" scope="row">
+2
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.1859
+</td>
+<td class="r data">
+0.1393
+</td>
+<td class="r data">
+1.7816
+</td>
+<td class="r data">
+0.1819
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.0329
+</td>
+<td class="r data">
+0.0161
+</td>
+<td class="r data">
+4.1443
+</td>
+<td class="r data">
+0.0418
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<th class="l rowheader" scope="row">
+2
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data">
+0.0407
+</td>
+<td class="r data">
+0.0291
+</td>
+<td class="r data">
+1.9503
+</td>
+<td class="r data">
+0.1626
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-1.5257
+</td>
+<td class="r data">
+0.6080
+</td>
+<td class="r data">
+6.2976
+</td>
+<td class="r data">
+0.0121
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<th class="l rowheader" scope="row">
+2
+</th>
+<td class="r data">
+1
+</td>
+<td class="r data" nowrap>
+-0.2488
+</td>
+<td class="r data">
+0.6641
+</td>
+<td class="r data">
+0.1403
+</td>
+<td class="r data">
+0.7080
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br> <a name="IDX8"></a>
+<div>
+<div align="center">
+<!--BEGINTABLE-->
+<table class="table" cellspacing="0" cellpadding="7" rules="groups" frame="hsides" summary="Procedure Logistic: Rapports de cotes">
+<colgroup>
+<col>
+<col>
+</colgroup>
+<colgroup>
+<col>
+<col>
+<col>
+</colgroup>
+<thead>
+<tr>
+<th class="c b header" colspan="5" scope="colgroup">
+Estimation du rapport de cotes
+</th>
+</tr>
+<tr>
+<th class="l b header" scope="col">
+Effet
+</th>
+<th class="l b header" scope="col">
+COMPET
+</th>
+<th class="r b header" scope="col">
+Estimation du<br/>point
+</th>
+<th class="c b header" colspan="2" scope="colgroup">
+Intervalle de confiance <br/> de Wald à95%
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th class="l rowheader" scope="row">
+t
+</th>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data">
+0.920
+</td>
+<td class="r data">
+0.886
+</td>
+<td class="r data">
+0.956
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+t
+</th>
+<th class="l rowheader" scope="row">
+2
+</th>
+<td class="r data">
+0.913
+</td>
+<td class="r data">
+0.855
+</td>
+<td class="r data">
+0.976
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data">
+0.877
+</td>
+<td class="r data">
+0.751
+</td>
+<td class="r data">
+1.025
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+YEAR
+</th>
+<th class="l rowheader" scope="row">
+2
+</th>
+<td class="r data">
+0.830
+</td>
+<td class="r data">
+0.632
+</td>
+<td class="r data">
+1.091
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data">
+1.033
+</td>
+<td class="r data">
+1.001
+</td>
+<td class="r data">
+1.067
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+AGE
+</th>
+<th class="l rowheader" scope="row">
+2
+</th>
+<td class="r data">
+1.042
+</td>
+<td class="r data">
+0.984
+</td>
+<td class="r data">
+1.103
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<th class="l rowheader" scope="row">
+1
+</th>
+<td class="r data">
+0.217
+</td>
+<td class="r data">
+0.066
+</td>
+<td class="r data">
+0.716
+</td>
+</tr>
+<tr>
+<th class="l rowheader" scope="row">
+SURGERY
+</th>
+<th class="l rowheader" scope="row">
+2
+</th>
+<td class="r data">
+0.780
+</td>
+<td class="r data">
+0.212
+</td>
+<td class="r data">
+2.866
+</td>
+</tr>
+</tbody>
+</table>
+<!--ENDTABLE-->
+</div>
+</div>
+<br>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

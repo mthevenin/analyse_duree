@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Variables dynamiques</title>
+
+<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 41px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h2 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h3 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h4 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h5 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.section h6 {
+  padding-top: 46px;
+  margin-top: -46px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Anayse des durées</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Données et théorie
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Introduction.html">Introduction</a>
+    </li>
+    <li>
+      <a href="Donnees.html">Les Données biographiques</a>
+    </li>
+    <li>
+      <a href="Theorie.html">Eléments théoriques</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="nonparam.html">Méthodes non paramétriques</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Modèles à risque proportionnel
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="Intro_mod.html">Intro</a>
+    </li>
+    <li>
+      <a href="cox.html">Cox</a>
+    </li>
+    <li>
+      <a href="discret.html">Méthode à temps discret</a>
+    </li>
+    <li>
+      <a href="dynamiques.html">Variables dynamiques</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Compléments
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="param.html">Modèles paramétriques</a>
+    </li>
+    <li>
+      <a href="concurrents.html">Risques concurrents</a>
+    </li>
+    <li>
+      <a href="cure.html">Récurrence et imunité</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Logiciels
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="SAS.html">SAS</a>
+    </li>
+    <li>
+      <a href="Stata.html">Stata</a>
+    </li>
+    <li>
+      <a href="R.html">R</a>
+    </li>
+    <li>
+      <a href="Python.html">Python</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Variables dynamiques</h1>
+
+</div>
+
+
+<p>Cette section sera principalement traitée par l’exemple.</p>
+<ul>
+<li>Dans un modèle de durée, une variable dynamique peut-être appréhendée comme une intéraction entre la durée et une variable.</li>
+<li>Pour un modèle de Cox, l’hypothèse de risque proportionnel ne peut donc pas être testée.</li>
+<li>Ne pas tenir compte du caractère dynamique d’une dimension peut conduire à des interprétations erronées.</li>
+<li>La façon de modéliser les dimensions dynamiques en analyse de durée peut conduire à des biais de causalité, en particulier dans sciences sociales, en omettant les effets d’anticipation. C’est une situation classique avec des covariables dynamiques de type discrètes.Les techniques standards d’analyse des durées ne peuvent modéliser que des effets d’adaptation (la cause - observée - précède l’effet).</li>
+</ul>
+<p><br> Cette partie sera principalement traité par l’exemple, et on s’intéressera uniquement aux variables de type discrète.</p>
+<div id="facteur-dynamique-traitée-de-manière-fixe" class="section level2" number="0.1">
+<h2 number="0.1"><span class="header-section-number">0.1</span> Facteur dynamique traitée de manière fixe</h2>
+<p>On reprend l’exemple sur les transplantations cardiaques.<br />
+On a dans la base 2 variables: une variable binaire pour savoir si l’individu à été greffé , <strong>tranplant</strong>, et une variable continue tronquée donnant la durée en jour jusqu’à la greffe greffe (0 si pas de greffe), <strong>wait</strong>.<br />
+<br> On va estimer le modèle (de Cox) avec la variable fixe transplant.</p>
+<pre><code>&gt; lantation.dta&quot; , clear
+
+
+
+Cox regression -- Efron method for ties
+
+No. of subjects =          103                  Number of obs    =         103
+No. of failures =           75
+Time at risk    =        31938
+                                                LR chi2(4)       =       49.81
+Log likelihood  =   -273.21499                  Prob &gt; chi2      =      0.0000
+
+------------------------------------------------------------------------------
+          _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        year |    -0.0909     0.0659    -1.38   0.168      -0.2201      0.0383
+         age |     0.0579     0.0147     3.95   0.000       0.0292      0.0866
+   1.surgery |    -0.6547     0.4475    -1.46   0.143      -1.5318      0.2224
+1.transplant |    -1.6484     0.2792    -5.90   0.000      -2.1957     -1.1011
+------------------------------------------------------------------------------</code></pre>
+<p>Interprétation?</p>
+<p>Au niveau des données le modèle à été estimé, pour une personne greffée, à partir de ce mapping:</p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+
+
+
+
+
+
+  +--------------------------------------------------------------------------+
+  | id   year   age   surgery   transp~t   wait   _d          _t         _t0 |
+  |--------------------------------------------------------------------------|
+  | 10     68    42         0          1     12    0           1           0 |
+  | 10     68    42         0          1     12    0           2           1 |
+  | 10     68    42         0          1     12    0           3           2 |
+  | 10     68    42         0          1     12    0           5           3 |
+  | 10     68    42         0          1     12    0   5.0999999           5 |
+  |--------------------------------------------------------------------------|
+  | 10     68    42         0          1     12    0           6   5.0999999 |
+  | 10     68    42         0          1     12    0           8           6 |
+  | 10     68    42         0          1     12    0           9           8 |
+  | 10     68    42         0          1     12    0          12           9 |
+  | 10     68    42         0          1     12    0          16          12 |
+  |--------------------------------------------------------------------------|
+  | 10     68    42         0          1     12    0          17          16 |
+  | 10     68    42         0          1     12    0          18          17 |
+  | 10     68    42         0          1     12    0          21          18 |
+  | 10     68    42         0          1     12    0          28          21 |
+  | 10     68    42         0          1     12    0          30          28 |
+  |--------------------------------------------------------------------------|
+  | 10     68    42         0          1     12    0          32          30 |
+  | 10     68    42         0          1     12    0          35          32 |
+  | 10     68    42         0          1     12    0          36          35 |
+  | 10     68    42         0          1     12    0          37          36 |
+  | 10     68    42         0          1     12    0          39          37 |
+  |--------------------------------------------------------------------------|
+  | 10     68    42         0          1     12    0          40          39 |
+  | 10     68    42         0          1     12    0          43          40 |
+  | 10     68    42         0          1     12    0          45          43 |
+  | 10     68    42         0          1     12    0          50          45 |
+  | 10     68    42         0          1     12    0          51          50 |
+  |--------------------------------------------------------------------------|
+  | 10     68    42         0          1     12    0          53          51 |
+  | 10     68    42         0          1     12    1          58          53 |
+  +--------------------------------------------------------------------------+</code></pre>
+<p>Problème: une personne est codée transplantée avant le jour le la transplantation. L’effet causal est donc mal mesuré si sa dimension temporelle a été ignorée.<br />
+<br></p>
+</div>
+<div id="estimation-avec-une-variable-dynamique" class="section level2" number="0.2">
+<h2 number="0.2"><span class="header-section-number">0.2</span> Estimation avec une variable dynamique</h2>
+<p>Il convient donc de modifier l’information avec le délais d’attente jusqu’à la greffe:<br />
+<span class="math inline">\(tvc = transplant\)</span> , si <span class="math inline">\(transplant=1\)</span> et <span class="math inline">\(_t&lt;wait\)</span> alors <span class="math inline">\(tvc=0\)</span>.</p>
+<div id="modèle-de-cox" class="section level3" number="0.2.1">
+<h3 number="0.2.1"><span class="header-section-number">0.2.1</span> Modèle de Cox</h3>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+
+
+(1,080 real changes made)
+
+
+  +---------------------------------------------------------------------+
+  | id   year   age   surgery   tvc   wait   _d          _t         _t0 |
+  |---------------------------------------------------------------------|
+  | 10     68    42         0     0     12    0           1           0 |
+  | 10     68    42         0     0     12    0           2           1 |
+  | 10     68    42         0     0     12    0           3           2 |
+  | 10     68    42         0     0     12    0           5           3 |
+  | 10     68    42         0     0     12    0   5.0999999           5 |
+  |---------------------------------------------------------------------|
+  | 10     68    42         0     0     12    0           6   5.0999999 |
+  | 10     68    42         0     0     12    0           8           6 |
+  | 10     68    42         0     0     12    0           9           8 |
+  | 10     68    42         0     1     12    0          12           9 |
+  | 10     68    42         0     1     12    0          16          12 |
+  |---------------------------------------------------------------------|
+  | 10     68    42         0     1     12    0          17          16 |
+  | 10     68    42         0     1     12    0          18          17 |
+  | 10     68    42         0     1     12    0          21          18 |
+  | 10     68    42         0     1     12    0          28          21 |
+  | 10     68    42         0     1     12    0          30          28 |
+  |---------------------------------------------------------------------|
+  | 10     68    42         0     1     12    0          32          30 |
+  | 10     68    42         0     1     12    0          35          32 |
+  | 10     68    42         0     1     12    0          36          35 |
+  | 10     68    42         0     1     12    0          37          36 |
+  | 10     68    42         0     1     12    0          39          37 |
+  |---------------------------------------------------------------------|
+  | 10     68    42         0     1     12    0          40          39 |
+  | 10     68    42         0     1     12    0          43          40 |
+  | 10     68    42         0     1     12    0          45          43 |
+  | 10     68    42         0     1     12    0          50          45 |
+  | 10     68    42         0     1     12    0          51          50 |
+  |---------------------------------------------------------------------|
+  | 10     68    42         0     1     12    0          53          51 |
+  | 10     68    42         0     1     12    1          58          53 |
+  +---------------------------------------------------------------------+</code></pre>
+<p>Estimation du modèle avec la variable dynamique (Cox)</p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+
+
+Cox regression -- Efron method for ties
+
+No. of subjects =          103                  Number of obs    =       3,668
+No. of failures =           75
+Time at risk    =      31938.1
+                                                LR chi2(4)       =       17.70
+Log likelihood  =   -289.27058                  Prob &gt; chi2      =      0.0014
+
+------------------------------------------------------------------------------
+          _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        year |  -.1202612   .0673414    -1.79   0.074     -.252248    .0117256
+         age |   .0304498   .0138998     2.19   0.028     .0032068    .0576929
+   1.surgery |  -.9829386   .4365524    -2.25   0.024    -1.838566   -.1273116
+       1.tvc |  -.0826682   .3047751    -0.27   0.786    -.6800165      .51468
+------------------------------------------------------------------------------</code></pre>
+<p>Interprétation?</p>
+<p><strong>Solutions avec les logiciels</strong> :</p>
+<ul>
+<li>R, Stata, Python: la base doit être transformée en format long sur les temps d’évènement (<code>survsplit</code> avec R, <code>stsplit</code> avec Stata) avant la création de la variable dynamique.</li>
+<li>Sas: la base n’est pas modifiée et la création de la tvc est faite “en aveugle” dans la procédure <code>phreg</code></li>
+</ul>
+</div>
+<div id="modèle-à-temps-discret" class="section level3" number="0.2.2">
+<h3 number="0.2.2"><span class="header-section-number">0.2.2</span> Modèle à temps discret</h3>
+<p>Même principe pour la construction de la variable dynamique</p>
+<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  +---------------------------------------------+
+  | id   year   age   surgery   tvc   mwait   t |
+  |---------------------------------------------|
+  | 13     68    54         0     0       2   1 |
+  | 13     68    54         0     1       2   2 |
+  | 13     68    54         0     1       2   3 |
+  | 13     68    54         0     1       2   4 |
+  +---------------------------------------------+
+
+
+Logistic regression                             Number of obs     =      1,164
+                                                LR chi2(7)        =      76.84
+                                                Prob &gt; chi2       =     0.0000
+Log likelihood = -239.77126                     Pseudo R2         =     0.1381
+
+------------------------------------------------------------------------------
+           e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           t |  -.2464508   .0848681    -2.90   0.004    -.4127892   -.0801125
+          t2 |   .0080853   .0048067     1.68   0.093    -.0013358    .0175063
+          t3 |  -.0000859    .000071    -1.21   0.226    -.0002251    .0000532
+        year |  -.1260118   .0721469    -1.75   0.081    -.2674171    .0153935
+         age |   .0365245    .014788     2.47   0.014     .0075406    .0655084
+     surgery |  -.9868694   .4474235    -2.21   0.027    -1.863803   -.1099354
+         tvc |  -.2846162   .3084542    -0.92   0.356    -.8891753    .3199429
+       _cons |   6.229912   5.181099     1.20   0.229    -3.924856    16.38468
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="remarques-sur-les-problèmes-de-causalité-avec-les-variables-dynamiques" class="section level2" number="0.3">
+<h2 number="0.3"><span class="header-section-number">0.3</span> Remarques sur les problèmes de causalité avec les variables dynamiques</h2>
+<ul>
+<li>Rappel: la cause précède toujours l’effet.</li>
+<li>Lorsque l’évènement étudié n’est pas de type absorbant (décès), la “cause” peut se manifester après la survenue de l’évènement étudié.</li>
+<li>Les modèles de durée standards ne peuvent pas gérer ces situations car l’observation sort du risque après la survenue de l’évènement.</li>
+<li>Logique d’adaptation: la “cause” identifiée est mesurée avant l’évènement étudié [OK].</li>
+<li>Logique d’anticipation: la “cause” identifiée est mesurée après l’évènement étudié [Problème]. L’origine causale est bien antérieure à l’évènement, mais elle n’est pas observable.</li>
+</ul>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
