@@ -332,7 +332,7 @@ div.tocify {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Anayse des durées</a>
+  <a href="index.html">Analyse des durées</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -437,7 +437,7 @@ div.tocify {
 <li>Dans un modèle de durée, une variable dynamique peut-être appréhendée comme une intéraction entre la durée et une variable.</li>
 <li>Pour un modèle de Cox, l’hypothèse de risque proportionnel ne peut donc pas être testée.</li>
 <li>Ne pas tenir compte du caractère dynamique d’une dimension peut conduire à des interprétations erronées.</li>
-<li>La façon de modéliser les dimensions dynamiques en analyse de durée peut conduire à des biais de causalité, en particulier dans sciences sociales, en omettant les effets d’anticipation. C’est une situation classique avec des covariables dynamiques de type discrètes.Les techniques standards d’analyse des durées ne peuvent modéliser que des effets d’adaptation (la cause - observée - précède l’effet).</li>
+<li>La façon de modéliser les dimensions dynamiques en analyse des durées peut conduire à des biais de causalité, en particulier dans sciences sociales, en omettant les effets d’anticipation. C’est une situation classique avec des covariables dynamiques de type discrètes. Les techniques standards ne peuvent modéliser que des effets d’adaptation (la cause - observée - précède l’effet).</li>
 </ul>
 <p><br> Cette partie sera principalement traité par l’exemple, et on s’intéressera uniquement aux variables de type discrète.</p>
 <div id="facteur-dynamique-traitée-de-manière-fixe" class="section level2" number="0.1">
@@ -516,7 +516,7 @@ Log likelihood  =   -273.21499                  Prob &gt; chi2      =      0.000
 </div>
 <div id="estimation-avec-une-variable-dynamique" class="section level2" number="0.2">
 <h2 number="0.2"><span class="header-section-number">0.2</span> Estimation avec une variable dynamique</h2>
-<p>Il convient donc de modifier l’information avec le délais d’attente jusqu’à la greffe:<br />
+<p>Il convient donc de modifier l’information avec le délai d’attente jusqu’à la greffe:<br />
 <span class="math inline">\(tvc = transplant\)</span> , si <span class="math inline">\(transplant=1\)</span> et <span class="math inline">\(_t&lt;wait\)</span> alors <span class="math inline">\(tvc=0\)</span>.</p>
 <div id="modèle-de-cox" class="section level3" number="0.2.1">
 <h3 number="0.2.1"><span class="header-section-number">0.2.1</span> Modèle de Cox</h3>
@@ -587,8 +587,8 @@ Log likelihood  =   -289.27058                  Prob &gt; chi2      =      0.001
 <p>Interprétation?</p>
 <p><strong>Solutions avec les logiciels</strong> :</p>
 <ul>
-<li>R, Stata, Python: la base doit être transformée en format long sur les temps d’évènement (<code>survsplit</code> avec R, <code>stsplit</code> avec Stata) avant la création de la variable dynamique.</li>
-<li>Sas: la base n’est pas modifiée et la création de la tvc est faite “en aveugle” dans la procédure <code>phreg</code></li>
+<li>R, Stata, Python: la base doit être transformée en format long aux temps d’évènement (<code>survsplit</code> avec R, <code>stsplit</code> avec Stata) avant la création de la variable dynamique.</li>
+<li>Sas: la base n’est pas modifiée et la création de la TVC est faite “en aveugle” dans la procédure <code>phreg</code></li>
 </ul>
 </div>
 <div id="modèle-à-temps-discret" class="section level3" number="0.2.2">
@@ -616,37 +616,36 @@ Log likelihood  =   -289.27058                  Prob &gt; chi2      =      0.001
   | 13     68    54         0     0       2   1 |
   | 13     68    54         0     1       2   2 |
   | 13     68    54         0     1       2   3 |
-  | 13     68    54         0     1       2   4 |
   +---------------------------------------------+
 
 
-Logistic regression                             Number of obs     =      1,164
-                                                LR chi2(7)        =      76.84
+Logistic regression                             Number of obs     =      1,127
+                                                LR chi2(7)        =      90.73
                                                 Prob &gt; chi2       =     0.0000
-Log likelihood = -239.77126                     Pseudo R2         =     0.1381
+Log likelihood = -230.32152                     Pseudo R2         =     0.1645
 
 ------------------------------------------------------------------------------
            e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-           t |  -.2464508   .0848681    -2.90   0.004    -.4127892   -.0801125
-          t2 |   .0080853   .0048067     1.68   0.093    -.0013358    .0175063
-          t3 |  -.0000859    .000071    -1.21   0.226    -.0002251    .0000532
-        year |  -.1260118   .0721469    -1.75   0.081    -.2674171    .0153935
-         age |   .0365245    .014788     2.47   0.014     .0075406    .0655084
-     surgery |  -.9868694   .4474235    -2.21   0.027    -1.863803   -.1099354
-         tvc |  -.2846162   .3084542    -0.92   0.356    -.8891753    .3199429
-       _cons |   6.229912   5.181099     1.20   0.229    -3.924856    16.38468
+           t |   -.365048   .0915105    -3.99   0.000    -.5444052   -.1856907
+          t2 |   .0139226   .0053256     2.61   0.009     .0034846    .0243606
+          t3 |   -.000162   .0000815    -1.99   0.047    -.0003217   -2.27e-06
+        year |  -.1324928   .0737516    -1.80   0.072    -.2770433    .0120577
+         age |    .033829   .0149503     2.26   0.024      .004527    .0631311
+     surgery |  -1.007795   .4490177    -2.24   0.025    -1.887854   -.1277365
+         tvc |  -.0543011   .3114096    -0.17   0.862    -.6646528    .5560505
+       _cons |   7.060589   5.305278     1.33   0.183    -3.337566    17.45874
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="remarques-sur-les-problèmes-de-causalité-avec-les-variables-dynamiques" class="section level2" number="0.3">
-<h2 number="0.3"><span class="header-section-number">0.3</span> Remarques sur les problèmes de causalité avec les variables dynamiques</h2>
+<div id="quelques-remarques-sur-les-problèmes-de-causalité-avec-les-variables-dynamiques" class="section level2" number="0.3">
+<h2 number="0.3"><span class="header-section-number">0.3</span> Quelques remarques sur les problèmes de causalité avec les variables dynamiques</h2>
 <ul>
 <li>Rappel: la cause précède toujours l’effet.</li>
-<li>Lorsque l’évènement étudié n’est pas de type absorbant (décès), la “cause” peut se manifester après la survenue de l’évènement étudié.</li>
+<li>Lorsque l’évènement étudié n’est pas intrasèquement de type absorbant (décès), la “cause” peut se manifester après la survenue de l’évènement étudié.</li>
 <li>Les modèles de durée standards ne peuvent pas gérer ces situations car l’observation sort du risque après la survenue de l’évènement.</li>
-<li>Logique d’adaptation: la “cause” identifiée est mesurée avant l’évènement étudié [OK].</li>
-<li>Logique d’anticipation: la “cause” identifiée est mesurée après l’évènement étudié [Problème]. L’origine causale est bien antérieure à l’évènement, mais elle n’est pas observable.</li>
+<li>Logique d’adaptation: la “cause” identifiée est mesurée avant l’évènement étudié [<strong>OK</strong>].</li>
+<li>Logique d’anticipation: la “cause” identifiée est mesurée après l’évènement étudié [<strong>Problème</strong>]. L’origine causale est bien antérieure à l’évènement, mais elle n’est pas observable.</li>
 </ul>
 </div>
 
