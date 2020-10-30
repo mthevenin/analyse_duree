@@ -2,7 +2,7 @@ name: ""
 navbar:
   title: ""
   left:
-  - text: "Anayse des durées"
+  - text: "Analyse des durées"
     href: index.html
   - text: "Données et théorie"
     menu:
@@ -32,7 +32,7 @@ navbar:
       href: concurrents.html   
     - text: "Récurrence et imunité"
       href: cure.html
-  - text: "Logiciels"
+  - text: "Programmation"
     menu:
     - text: "SAS"
       href: SAS.html
