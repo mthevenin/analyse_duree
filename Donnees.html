@@ -13,7 +13,7 @@
 
 <title>Les données</title>
 
-<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -24,6 +24,17 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 
@@ -396,7 +407,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Logiciels
+    Programmation
      
     <span class="caret"></span>
   </a>
@@ -448,9 +459,9 @@ div.tocify {
 <ul>
 <li>Individus suivis à des dates successives.</li>
 <li>Instrument de mesure identique à chaque vague (si possible).</li>
-<li>Exemples: Panel, Suivi de cohorte, Registre de population, Système de suivi démographique.<br />
-<br> <strong>Avantages</strong>: qualité des données. <br> <strong>Inconvénients</strong>: coût important, délais pour mettre en oeuvre une analyse, mêmes hypothèses entre deux passages, problèmes d’attrition.</li>
+<li>Exemples: Panel, Suivi de cohorte, Registre de population, Système de suivi démographique. <br> <strong>Avantages</strong>: qualité des données. <br> <strong>Inconvénients</strong>: coût important, délais pour mettre en oeuvre une analyse, mêmes hypothèses entre deux passages, problèmes d’attrition.</li>
 </ul>
+<p>Maj 2020: exploitation de données RH par exemple (exemple: projet <strong>Worklife</strong> à l’Ined)</p>
 </div>
 <div id="les-données-rétrospectives" class="section level2" number="1.2">
 <h2 number="1.2"><span class="header-section-number">1.2</span> Les données rétrospectives</h2>
@@ -653,7 +664,7 @@ Exemple précédent:</li>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
