@@ -2,35 +2,35 @@ name: ""
 navbar:
   title: ""
   left:
-  - text: "Analyse des durÃ©es"
+  - text: "Analyse des durées"
     href: index.html
-  - text: "DonnÃ©es et thÃ©orie"
+  - text: "Données et théorie"
     menu:
     - text: "Introduction"
       href:  Introduction.html
-    - text: "Les DonnÃ©es biographiques"
+    - text: "Les Données biographiques"
       href: Donnees.html
-    - text: "ElÃ©ments thÃ©oriques"
+    - text: "Eléments théoriques"
       href: Theorie.html
-  - text: "MÃ©thodes non paramÃ©triques"
+  - text: "Méthodes non paramétriques"
     href: nonparam.html
-  - text: "ModÃ¨les Ã  risque proportionnel"
+  - text: "Modèles à risques proportionnels"
     menu:
     - text: "Intro"
       href: Intro_mod.html
     - text: "Cox"
       href: cox.html    
-    - text: "MÃ©thode Ã  temps discret"
+    - text: "Méthode à temps discret"
       href: discret.html
     - text: "Variables dynamiques"
       href: dynamiques.html
-  - text: "ComplÃ©ments"
+  - text: "Compléments"
     menu:
-    - text: "ModÃ¨les paramÃ©triques"
+    - text: "Modèles paramétriques"
       href: param.html
     - text: "Risques concurrents"
       href: concurrents.html   
-    - text: "RÃ©currence et imunitÃ©"
+    - text: "fragilité et imunité"
       href: cure.html
   - text: "Programmation"
     menu:
@@ -44,12 +44,11 @@ navbar:
       href: Python.html
 
 
-output: 
+output:
+
   html_document: 
     theme: simplex
     highlight: zenburn
     number_sections: yes
     toc: yes
     toc_float: yes
-
-
