@@ -368,7 +368,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Modèles à risque proportionnel
+    Modèles à risques proportionnels
      
     <span class="caret"></span>
   </a>
@@ -401,7 +401,7 @@ div.tocify {
       <a href="concurrents.html">Risques concurrents</a>
     </li>
     <li>
-      <a href="cure.html">Récurrence et imunité</a>
+      <a href="cure.html">fragilité et imunité</a>
     </li>
   </ul>
 </li>
@@ -443,19 +443,43 @@ div.tocify {
 </div>
 
 
+<style>
+p.comment {
+background-color: #DBDBDB;
+padding: 10px;
+border: 1px solid black;
+margin-left: 25px;
+border-radius: 5px;
+font-style: italic;
+}
+</style>
 <p>L’analyse des durées peut être vue comme l’étude d’une variable aléatoire <span class="math inline">\(T\)</span> qui décrit le temps d’attente jusqu’à l’occurence d’un évènement.</p>
 <ul>
 <li>La durée <span class="math inline">\(T=0\)</span> est le début de l’exposition au risque (entrée dans le <strong>Risk set</strong>).</li>
 <li><span class="math inline">\(T\)</span> est une mesure non négative de la durée.</li>
 </ul>
-<div id="le-risk-set" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Le Risk Set</h1>
+<p>La principale caractéristique de l’analyse des durées est le traitement des informations dites censurées, lorsque la durée d’observation est plus courte que la durée d’exposition au risque.</p>
+<div id="temps-et-durée" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Temps et durée</h1>
+<p>Le temps est une dimension (la quatrième), la durée est sa mesure. La durée est tout simplement calculer par la différence, pour une échelle temporelle donnée, entre la fin et le début d’une période d’exposition ou d’observation.<br />
+<br> On distingue généralement deux types de durée : la durée continue et la durée discrète (groupée). Ces deux notions ne possèdent pas réellement de définition, la différence s’explique plutôt par la présence ou non de simultanéité dans l’occurrence des évènements. Le temps étant intrasèquement strictement continu car deux évènements ne peuvent pas avoir lieu en « même temps ». C’est donc l’échelle temporelle choisie ou imposée par l’analyse et les données qui pourra rendre cette mesure continue ou discrète/groupée.<br />
+Pour un physicien de la théorie de la relativité, une minute (voire une seconde) est une mesure très discrète pour ne pas dire grossière du temps, pour un géologue c’est une mesure continue. Pour ces deux disciplines, cette échelle de mesure n’est pas adaptée à leur activité. Le choix de l’échelle temporelle doit être pertinent par rapport aux objectifs de l’analyse.<br />
+Il existe des situations où les durées sont par nature discrète, lorsqu’un évènement ne peut avoir lieu qu’à un moment précis. Mais plus généralement, et souvent en sciences sociales avec un recueil de données de type rétrospectif, les mesures discrètes sont plutôt de nature groupées, une même année on considèrera indifféremment des évènements qui se produiront un premier janvier et un 31 décembre d’une même année.</p>
+<br> <strong>A retenir</strong><br />
+
+<div class="alert alert-info">
+<p><strong>Durée continue</strong> : absence (ou très peu) d’évènements simultanés.<br />
+<strong>Durée discrète/groupée</strong> : présence d’évènements simultanés (en grand nombre).</p>
+</div>
+</div>
+<div id="le-risk-set" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Le Risk Set</h1>
 <ol style="list-style-type: decimal">
 <li>Il s’agit de la population “soumise” ou “exposée” au risque lorsque <span class="math inline">\(T=t_i\)</span>. <br></li>
 <li>Cette population varie dans le temps car:
 <ul>
 <li>Certaines personnes ont connu l’évènement, donc peuvent ne plus être soumises au risque (ex: décès si on analyse la mortalité).</li>
-<li>Certaines personnes sortent de l’observation sans avoir (encore) observé l’évènement: décès si on analyse un autre type d’évènement, perdus de vue, fin de l’observation à une durée peu avancée dans un recueil rétrospectif.</li>
+<li>Certaines personnes sortent de l’observation sans avoir (encore) observé l’évènement: décès si on analyse un autre type d’évènement, perdu.e.s de vue, fin de l’observation à une durée peu avancée dans un recueil rétrospectif.</li>
 </ul></li>
 </ol>
 <p><strong>Exemples</strong>:<br />
@@ -467,12 +491,14 @@ div.tocify {
 <li><p>Les individus vivants sont soumis au risque ………..[remplir]</p></li>
 </ul>
 </div>
-<div id="la-censure" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> La Censure</h1>
-<p>Définition de la censure:<br />
-<br> <strong>Une observation est dite censurée lorsque la durée d’observation est inférieure à la durée d’exposition au risque</strong>.</p>
-<div id="censure-à-droite" class="section level2" number="2.1">
-<h2 number="2.1"><span class="header-section-number">2.1</span> Censure à droite</h2>
+<div id="la-censure" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> La Censure</h1>
+<p><br></p>
+<div class="alert alert-info">
+<p><strong>Une observation est dite censurée lorsque la durée d’observation est inférieure à la durée d’exposition au risque</strong>.</p>
+</div>
+<div id="censure-à-droite" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Censure à droite</h2>
 <p><strong>Définition</strong><br />
 <br> Certains individus n’auront pas (encore) connu l’évènement à la date de l’enquête après une certaine durée d’exposition. On a donc besoin d’un marqueur permettant de déterminer que les individus n’ont pas observé l’évènement sur la période d’étude.</p>
 <p><strong>Pourquoi une information est-elle censurée (à droite)?</strong><br />
@@ -488,25 +514,38 @@ Cette information sera dite «censurée».<br />
 Elle est clairement encore soumise au risque après la date de l’enquête. Au niveau de l’analyse, elle sera soumise au risque à partir de ses premières règles jusqu’au moment de l’enquête.</p>
 <p><br></p>
 <p><strong>Hypothèse fondamentale</strong><br />
-Les observations censurées ont vis à vis du phénomène observé le même comportement que les observations non censurées. On dit que la <strong>censure est non informative</strong>. Elle ne dépend pas de l’évènement analysé.<br />
-<br> <em>Exemple de censure informative</em>: analyse des décès avec un recueil prospectif. Si un individu est perdu de vue en raison d’une dégradation de son état de santé, l’indépendance entre la cause de la censure et le décès ne peut plus être assurée.</p>
+Les observations censurées ont vis à vis du phénomène observé le même comportement que les observations non censurées. On dit que la <strong>censure est non informative</strong>. Elle ne dépend pas de l’évènement analysé. Normalement le problème ne se pose pas dans les recueil retrospectif. <br></p>
+<p><em>Problème posé par la censure informative</em><br />
+Par exemple en analysant des décès avec un recueil prospectif, si un individu est perdu de vue en raison d’une dégradation de son état de santé, l’indépendance entre la cause de la censure et le décès ne peut plus être assurée.<br />
+A l’Ined l’exploitation du registre des personnes atteintes de mucoviscidose (G.Bellis) donne une autre illustration de ce phénomène. Chaque année un nombre significatif personnes sortent du registre (pas de résultats aux examens annuels). Si certain.e.s perdu.e.s de vue s’expliquent par des déménagements, émigration ou par un simple problème d’enregistrement des informations, on note qu’ils/elles sont nombreu.se.s à présenter une forme « légère » de la maladie. L’information pouvant être donnée ici par la mutation du gène. Comme il n’est pas recommandé de supprimer ou de traiter ces observations comme des censures à droite non informative, on peut les appréhender comme un risque concurrent au décès ou à tout autre évènement analysé à partir de ce registre (voir section dédiée).</p>
+<p><br></p>
+<p>Les graphiques suivant représentent, en temps calendaire et après sa transformation en durée, la logique des censures à droite. Le recueil des informations est ici de nature prospectives.</p>
+<ul>
+<li>Trait plein : durée observée</li>
+<li>Pointillés : durée censurés</li>
+<li>Bulle : moment de l’évènement</li>
+</ul>
 <p><img src="images/cens1.png" /></p>
 <p><img src="images/cens2.png" /></p>
 </div>
-<div id="censure-à-gauche-troncature-et-censure-par-intervalle" class="section level2" number="2.2">
-<h2 number="2.2"><span class="header-section-number">2.2</span> Censure à gauche, troncature et censure par intervalle</h2>
+<div id="censure-à-gauche-troncature-et-censure-par-intervalle" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Censure à gauche, troncature et censure par intervalle</h2>
 <p><strong>Censure à gauche</strong><br />
-L’évènement s’est produit avant le début période d’observation.<br />
-<br> <strong>Troncature à gauche (late-entry)</strong><br />
-Exemple: on analyse la survie d’une population. Seule la survie des individus vivants à l’inclusion peut-être analysée.<br />
-<br> <strong>Censure par intervalle</strong> Un évènement peut avoir lieux entre 2 temps d’observations sans qu’on puisse les observer (ex: en criminologie récidive d’un delit entre deux arrestations).<br />
-<br> Ces situations sont généralement plutôt bien contrôlées dans les recueils rétrospectifs. Elles sont assez courantes lorsque le recueil est de type prospectif.</p>
+L’évènement s’est produit avant le début période d’observation. Typique des données prospectives, de type registre, avec des âges d’inclusion différenciés. <br></p>
+<p><strong>Censure par intervalle</strong> Un évènement peut avoir lieux entre 2 temps d’observations sans qu’on puisse les observer (ex: en criminologie récidive d’un delit entre deux arrestations). Un phénomène de censure à droite avec perdu.e de vue peut se transformer en censure par intervalle lorsque la personne réapparait et est de nouveau incluse dans les données. <br> <strong>Troncature</strong><br />
+Par l’exemple, on analyse la survie d’une population. Seule la survie des individus vivants à l’inclusion peut être analysée (<em>troncature à gauche</em>). On peut également trouver un phénomène de troncature lorsqu’on mesure la durée à partir ou jusqu’à un certain seuil niveau.<br />
+<br></p>
+<p>Ces situations sont généralement plutôt bien contrôlées dans les recueils rétrospectifs. Elles sont assez courantes lorsque le recueil est de type prospectif.</p>
+<p><br></p>
+<p><strong>Durée d’observation supérieure à la durée d’exposition</strong><br />
+A l’inverse des individus peuvent sortir de l’exposition avant la fin de la période d’observation, et il convient donc de corriger la durée de cette sortie.<br />
+Un exemple simple : si au moment de l’enquête une femme sans enfant a 70 ans, cela n’a pas de sens de continuer de l’exposer au risque au-delà d’un certain âge. Si on ne dispose pas d’information sur l’âge à la ménopause on peut tronquer la durée un peu au-delà de l’âge le plus élevé à la première naissance observée dans les données.</p>
 </div>
 </div>
-<div id="les-grandeurs" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Les grandeurs</h1>
-<div id="les-grandeurs-utilisées" class="section level2" number="3.1">
-<h2 number="3.1"><span class="header-section-number">3.1</span> Les grandeurs utilisées</h2>
+<div id="les-grandeurs" class="section level1" number="4">
+<h1 number="4"><span class="header-section-number">4</span> Les grandeurs</h1>
+<div id="les-grandeurs-utilisées" class="section level2" number="4.1">
+<h2 number="4.1"><span class="header-section-number">4.1</span> Les grandeurs utilisées</h2>
 <p><br></p>
 <p>La fonction de survie <strong><span class="math inline">\(S(t)\)</span></strong></p>
 <p>La fonction de répartition <strong><span class="math inline">\(F(t)\)</span></strong></p>
@@ -519,55 +558,60 @@ Exemple: on analyse la survie d’une population. Seule la survie des individus 
 <li>Toutes ces grandeurs sont mathématiquement liées les unes par rapport aux autres. En connaître une permet d’obtenir les autres.<br />
 </li>
 <li>Au niveau formel on se placera ici du point de vue où la durée mesurée est strictement continue. Cela se traduit, entre autre, par l’absence d’évènements dits “simultanés”.</li>
+<li>Les expressions qui vont suivre ne sont pas des techniques de calcul, mais des grandeurs dont on précisera seulement les propriétés et qui feront l’objet d’estimations, développées plus loin.</li>
 </ul>
 <p><br></p>
 </div>
-<div id="la-fonction-de-survie-st" class="section level2" number="3.2">
-<h2 number="3.2"><span class="header-section-number">3.2</span> La fonction de Survie <span class="math inline">\(S(t)\)</span></h2>
+<div id="la-fonction-de-survie-st" class="section level2" number="4.2">
+<h2 number="4.2"><span class="header-section-number">4.2</span> La fonction de Survie <span class="math inline">\(S(t)\)</span></h2>
 <p>Dans ce type d’analyse, il est courant d’analyser la courbe de survie (ou de séjour).</p>
 <p><strong>La fonction de survie donne la proportion de la population qui n’a pas encore connue l’évènement après une certaine durée <span class="math inline">\(t\)</span></strong>. Elle y a “survécu”.</p>
 <p>Formellement, la fonction de survie est la probabilité de survivre au-delà de <span class="math inline">\(t\)</span>, soit:<br />
 <br></p>
 <p><span class="math display">\[S(t) = P(T&gt;t)\]</span></p>
-<p><br> Propriétés: <span class="math inline">\(S(0)=1\)</span> et <span class="math inline">\(\lim\limits_{t\to{\propto}}S(t)=0\)</span></p>
+<p><br> Propriétés: <span class="math inline">\(S(0)=1\)</span> et <span class="math inline">\(\lim\limits_{t\to{\propto}}S(t)=0\)</span><br />
+<br> La fonction de survie est strictement non croissante.</p>
 </div>
-<div id="la-fonction-de-répartition-ft" class="section level2" number="3.3">
-<h2 number="3.3"><span class="header-section-number">3.3</span> La fonction de répartition <span class="math inline">\(F(t)\)</span></h2>
+<div id="la-fonction-de-répartition-ft" class="section level2" number="4.3">
+<h2 number="4.3"><span class="header-section-number">4.3</span> La fonction de répartition <span class="math inline">\(F(t)\)</span></h2>
 <p>C’est la probabilité de connaitre l’évènement jusqu’en <span class="math inline">\(t\)</span>, soit:<br />
 <br></p>
 <p><span class="math display">\[F(t)=P(T\leq{t})\]</span></p>
 <p><span class="math inline">\(t\geq{0}\)</span> Soit <span class="math inline">\(F(t) = 1 - S(t)\)</span></p>
-<p><br> Propriétés: <span class="math inline">\(F(0)=0\)</span> et <span class="math inline">\(\lim\limits_{t\to{\propto}}F(t)=1\)</span></p>
+<p><br> Comme <span class="math inline">\(t≤0\)</span> , <span class="math inline">\(F(t)=1-S(t)\)</span>, fonction de survie et fonction de répartition sont deux grandeurs strictement complémentaires.<br />
+<br> Propriétés: <span class="math inline">\(F(0)=0\)</span> et <span class="math inline">\(\lim\limits_{t\to{\propto}}F(t)=1\)</span></p>
 </div>
-<div id="la-fonction-de-densité-ft" class="section level2" number="3.4">
-<h2 number="3.4"><span class="header-section-number">3.4</span> La fonction de densité <span class="math inline">\(f(t)\)</span></h2>
+<div id="la-fonction-de-densité-ft" class="section level2" number="4.4">
+<h2 number="4.4"><span class="header-section-number">4.4</span> La fonction de densité <span class="math inline">\(f(t)\)</span></h2>
 <ul>
 <li>Pour une valeur de <span class="math inline">\(t\)</span> donnée, la fonction de densité de l’évènement donne la probabilité de connaitre l’évènement dans un petit intervalle de temps après <span class="math inline">\(t\)</span>. Si <span class="math inline">\(dt\)</span> est proche de 0 alors cette probabilité tend également vers 0. On norme donc cette probabilité par <span class="math inline">\(dt\)</span>.</li>
 <li>En temps continu, la fonction de densité est donnée par la dérivée de la fonction de répartition: <span class="math inline">\(f(t)=F&#39;(t)=-S&#39;(t)\)</span>. <br> Formellement la fonction de densité <span class="math inline">\(f(t)\)</span> s’écrit:</li>
 </ul>
 <p><span class="math display">\[f(t)=\lim\limits_{dt=0}\frac{P(t\leq{T}&lt; t + dt)}{dt}\]</span></p>
+<p><br> Dans les analyses on utilise pas ou peu les densités, qui sont plutôt mobilisées lors des calculs des estimateurs.</p>
 </div>
-<div id="le-risque-instantané-ht" class="section level2" number="3.5">
-<h2 number="3.5"><span class="header-section-number">3.5</span> Le risque instantané <span class="math inline">\(h(t)\)</span></h2>
+<div id="le-risque-instantané-ht" class="section level2" number="4.5">
+<h2 number="4.5"><span class="header-section-number">4.5</span> Le risque instantané <span class="math inline">\(h(t)\)</span></h2>
 <p>Concept fondamental de l’analyse des durées:</p>
 <p><span class="math display">\[h(t)=\lim\limits_{dt=0}\frac{P(t\leq{T}&lt; t + dt | T\geq{t})}{dt}\]</span> <br></p>
 <ul>
 <li><span class="math inline">\(P(t\leq{T}&lt; t + dt | T\geq{t})\)</span> donne la probabilité de survenue de l’évènement sur l’intervalle <span class="math inline">\([t,t+dt[\)</span> <em>conditionnellement à la survie au temps <span class="math inline">\(t\)</span></em>.<br />
 </li>
 <li>La quantité obtenue donne un nombre moyen d’évènements que connaîtrait un individu durant une unité de temps choisie.</li>
+<li>A priori cette quantité n’est pas une probabilité. C’est la nature de l’évènement, en particulier sa non récurrence, et la métrique temporelle choisie ou disponible qui peut la rendre assimilable à une probabilité.</li>
 </ul>
 <p><br> On peut écrire également: <span class="math inline">\(h(t)=\frac{f(t)}{S(t)}=\frac{F&#39;(t)}{S(t)}=-\frac{S&#39;(t)}{S(t)}\)</span></p>
 <p><br></p>
+<p>On voit ici clairement que la fonction de risque n’est pas une probabilité : <span class="math inline">\(\frac{f(t)}{S(t)}\)</span> ne peut pas contraindre la valeur à ne pas être supérieure à 1.</p>
 </div>
-<div id="le-risque-cumulé-ht" class="section level2" number="3.6">
-<h2 number="3.6"><span class="header-section-number">3.6</span> Le risque cumulé <span class="math inline">\(H(t)\)</span></h2>
+<div id="le-risque-cumulé-ht" class="section level2" number="4.6">
+<h2 number="4.6"><span class="header-section-number">4.6</span> Le risque cumulé <span class="math inline">\(H(t)\)</span></h2>
 <p>Le risque cumulé est égal à : <span class="math inline">\(H(t)=\int_{0}^{t} h(u)du = -log(S(t))\)</span><br />
 <br> On peut alors le réécrire toutes les autres quantités:<br />
 <br> - <span class="math inline">\(S(t)=e^{-H(t)}\)</span><br />
 - <span class="math inline">\(F(t)=1-e^{-H(t)}\)</span><br />
 - <span class="math inline">\(f(t)=h(t)\times{e^{-H(t)}}\)</span></p>
-<p><br></p>
-<p>Si on pose que le risque est strictement constant au cours du temps: <span class="math inline">\(h(t)=a\)</span> (on parle de <strong>loi exponentielle</strong> - cf partie sur les modèles AFT):</p>
+<p><br> <em>Exemple</em> Si on pose que le risque est strictement constant au cours du temps: <span class="math inline">\(h(t)=a\)</span> (on parle de <strong>loi exponentielle</strong> - cf partie sur les modèles AFT):</p>
 <ul>
 <li><span class="math inline">\(h(t)=a\)</span><br />
 </li>
@@ -581,14 +625,16 @@ Exemple: on analyse la survie d’une population. Seule la survie des individus 
 </ul>
 <p><img src="images/Image5.png" /></p>
 <p><strong>Application: risque et échelles temporelles</strong>:<br />
-<br> Fortement inspiré de l’<em>excellent</em> cours de <strong>Gilbert Colletaz</strong>: <a href="https://www.univ-orleans.fr/deg/masters/ESA/GC/sources/Econometrie%20des%20Donnees%20de%20Survie.pdf" class="uri">https://www.univ-orleans.fr/deg/masters/ESA/GC/sources/Econometrie%20des%20Donnees%20de%20Survie.pdf</a></p>
+<br> Fortement inspiré, pour ne pas dire copié, de l’excellent cours de Gilbert Colletaz: <a href="https://www.univ-orleans.fr/deg/masters/ESA/GC/sources/Econometrie%20des%20Donnees%20de%20Survie.pdf" class="uri">https://www.univ-orleans.fr/deg/masters/ESA/GC/sources/Econometrie%20des%20Donnees%20de%20Survie.pdf</a><br />
+Attention on sort ici très clairement du temps continu, il s’agit seulement de manipuler les concepts, et de voir la dépendance de la mesure du risque à l’échelle temporelle choisie/disponible. Par ailleurs on inverse plutôt la logique de « l’instantanéité » en augmentant les intervalles de durée (du mois au trimestre ou à l’année).<br />
+<br></p>
 <ol style="list-style-type: decimal">
 <li><p>Durant les mois d’hiver, entre le 1er janvier et le 1er avril (3 mois), la probabilité d’attraper un rhume chaque mois est de 48% (il s’agit bien d’un risque). Quelle est le risque d’attraper le rhume durant la saison froide?<br />
-<strong><span class="math inline">\(h(t)=\frac{0.48}{1/3}=1.44\)</span></strong>. On peut donc s’attendre a attraper 1.44 rhume durant la période d’hiver.</p></li>
-<li><p>On passe une année en vacances dans une région où la probabilité de décéder chaque mois est évaluée à 33%. Quelle est le risque de décéder pendant cette année sabbatique? <strong><span class="math inline">\(h(t)=\frac{0.33}{1/12}=3.96\)</span></strong><br />
+<strong>=1.44$</strong>. On peut donc s’attendre a attraper 1.44 rhume durant la période d’hiver.</p></li>
+<li><p>On passe une année en vacances dans une région où la probabilité de décéder chaque mois est évaluée à 33%. Quelle est le risque de décéder pendant cette année sabbatique? <strong>=3.96$</strong><br />
 <br></p></li>
 </ol>
-<p><em>Remarque</em>: le risque peut donc être supérieur à 1. En soit cela ne pose pas de problème comme il s’agit d’un nombre moyen d’évènements espérés (exemple: “taux” de fécondité), mais pour des évènements qui ne peuvent pas se répéter, évènements dits “absorbants”, l’interprétation n’est pas très intuitive.<br />
+<p>Le risque peut donc être supérieur à 1. En soit cela ne pose pas de problème comme il s’agit d’un nombre moyen d’évènements espérés (exemple: “taux” de fécondité), mais pour des évènements qui ne peuvent pas se répéter, évènements dits “absorbants”, l’interprétation n’est pas très intuitive.<br />
 <br> On peut donc prendre l’inverse du risque qui mesure la durée moyenne (espérée) jusqu’à l’occurence de l’évènement.<br />
 On retrouve donc un concept classique en analyse démographique comme l’espérance de vie (survie): la question n’est pas de savoir si “on” va mourir ou non, le risque indépendement du temps étant par définition égal à 1, mais jusqu’à quand on peut espérer survivre.<br />
 <br> - Pour le rhume, la durée moyenne est de <span class="math inline">\(1/1.44=0.69\)</span> du trimestre hivernal, soit approximativement le début du mois de mars. - Pour l’année sabbatique, la durée moyenne de survie (l’espérance de vie) est de <span class="math inline">\(1/3.96=0.25\)</span> d’une année soit 3 mois après l’arrivée dans la région.</p>
