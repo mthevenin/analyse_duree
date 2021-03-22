@@ -368,7 +368,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Modèles à risque proportionnel
+    Modèles à risques proportionnels
      
     <span class="caret"></span>
   </a>
@@ -401,7 +401,7 @@ div.tocify {
       <a href="concurrents.html">Risques concurrents</a>
     </li>
     <li>
-      <a href="cure.html">Récurrence et imunité</a>
+      <a href="cure.html">fragilité et imunité</a>
     </li>
   </ul>
 </li>
@@ -460,7 +460,7 @@ div.tocify {
 <br> Une seule covariable <span class="math inline">\(X\)</span> est introduite, et soit 2 individus <span class="math inline">\(A\)</span> et <span class="math inline">\(B\)</span>: <span class="math inline">\(h_A(t)=h_0(t)e^{bX_{A}}\)</span> et <span class="math inline">\(h_B(t)=h_0(t)e^{bX_{B}}\)</span>.<br />
 Les rapport des risques entre <span class="math inline">\(A\)</span> et <span class="math inline">\(B\)</span> est égal à:<br />
 <span class="math display">\[\frac{h_A(t)}{h_B(t)}= \frac{e^{bX_A}}{e^{bX_B}}=e^{b(X_A-X_B)}\]</span><br />
-<br> Pour une caractéristique binaire: <span class="math inline">\(X_A=1\)</span> et <span class="math inline">\(X_B=0\)</span>: <span class="math inline">\(\frac{h_A(t)}{h_B(t)}=e^b\)</span>. <br> Plus simplement, la proportionalité des risques va traduire l’absence d’une interaction significative entres les rapports de risque estimés et la durée.</p>
+<br> Pour une caractéristique binaire: <span class="math inline">\(X_A=1\)</span> et <span class="math inline">\(X_B=0\)</span>: <span class="math inline">\(\frac{h_A(t)}{h_B(t)}=e^b\)</span>. <br> Autrement dit, la proportionalité des risques va traduire l’absence d’une interaction significative entres les rapports de risques estimés et la durée (ou une fonction de celle-ci).</p>
 <p><strong>Illustration graphique</strong></p>
 <p><img src="images/Image18.png" /></p>
 <p>On part d’un modèle à risque constant avec <span class="math inline">\(h_0(t)=0.1\)</span>.</p>
@@ -470,19 +470,17 @@ Pour <span class="math inline">\(h_{1b}(t)\)</span>, le rapport de risque augmen
 <div id="les-modèles" class="section level1" number="2">
 <h1 number="2"><span class="header-section-number">2</span> Les modèles</h1>
 <p><strong>Modèle semi-paramétrique de Cox</strong><br />
-Le modèle estime directement les <span class="math inline">\(b\)</span> indépendement de <span class="math inline">\(h_0(t)\)</span>. Les rapports de risque (<span class="math inline">\(e^{b}\)</span>) seront utilisés pour estimer la baseline. Le respect de l’hypothèse de proportionalité va alors s’avérer importante et donc être testée.<br />
-<br></p>
+Le modèle estime directement les <span class="math inline">\(b\)</span> indépendement de <span class="math inline">\(h_0(t)\)</span>, c’est pour cela qu’il est semi-paramétrique. Les rapports de risque (<span class="math inline">\(e^{b}\)</span>) seront utilisés pour estimer la baseline <span class="math inline">\(h_0(t)\)</span>, qui peut s’avérer nécessaire pour calculer des fonctions de survie ajustées. Le respect de l’hypothèse de proportionalité est donc important et donc être testé. <br></p>
 <p><strong>Modèle à temps discret</strong></p>
-<ul>
-<li>De type paramétrique. Peut être estimé à l’aide d’un modèle logistique, probit ou complémentaire log-log. La première est la plus courante, la dernière a l’avantage d’être directement relié au modèle de Cox (modèle de Cox à temps discret).</li>
-<li>Cas particulier car sa forme diffère de la présentation précédente (cf la section “Théorie”). Toutefois, il est régit par une hypothèse de proportionalité. Le non respect de l’hypothèse est moins critique car la baseline est directement estimée.</li>
-<li>Avec une spécification logistique, les Odds vont sous certaines conditions, en particulier la rareté de l’évènement, se confondre avec des probabilités/risques.<br />
-<br></li>
-</ul>
+<p>De type paramétrique. Peut être estimé à l’aide d’un modèle logistique, probit ou complémentaire log-log. La première est la plus courante, la dernière a l’avantage d’être directement relié au modèle de Cox (modèle de Cox à temps discret).<br />
+<br> Sa forme diffère de la présentation usuelle d’un modèle à risque proportionnel. Toutefois, il est régi par une hypothèse de proportionnalité. Le non respect de l’hypothèse est moins critique car la baseline du « risque » est estimée simultanément. Il est comme son nom l’indique, particulièrement adapté au durées discrètes ou groupées. <br> Avec une spécification logistique, la plus courante, les Odds vont sous certaines conditions, se confondre avec des probabilités/risques.</p>
+<p><br></p>
 <p><strong>Les modèles paramétriques standard</strong><br />
-Les modèles dits de <strong>Weibull</strong>, <strong>exponentiel</strong> ou <strong>Gompertz</strong> ont une paramétrisation sous hypothèse de risque proportionnel (seulement cette spécification pour le dernier). Ils seront traités brièvement dans les compléments. <br></p>
-<p><strong>Modèle paramétrique de Parmar-Royston (non traité)</strong><br />
-<span class="math inline">\(h_0(t)\)</span> (via le risque cumulé <span class="math inline">\(H(t)\)</span>) est estimé simultanément avec les risques ratios en utilisant des splines cubiques. Il est implémenté dans les logiciels standards (R, Stata, Sas). Les rapports de risque sont très proches de ceux estimés par le modèle classique de Cox. Il offre donc une alternative particulièrement intéressante à celui-ci.</p>
+Les modèles dits de Weibull, exponentiel ou Gompertz ont une spécification sous hypothèse de risque proportionnel. Ils seront traités brièvement dans les compléments. Historiquement, le modèle de Cox est une réponse à une possible difficulté dans l’ajustement du risque par une loi de distribution du risque a priori.<br />
+<br></p>
+<p><strong>Modèle paramétrique de Parmar-Royston</strong> (non traité)<br />
+<span class="math inline">\(h_0(t)\)</span>, via le risque cumulé <span class="math inline">\(H(t)\)</span>, est estimé simultanément avec les risques ratios en utilisant la populaire méthode des <em>splines cubiques</em>. Il est implémenté dans les logiciels standards (R, Stata, Sas). Les rapports de risque sont très proches de ceux estimés par le modèle classique de Cox.<br />
+Il offre donc une alternative particulièrement intéressante à celui-ci, et il s’est maintenant largement diffusé dans l’analyse des effets cliniques.</p>
 </div>
 
 
