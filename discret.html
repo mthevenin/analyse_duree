@@ -368,7 +368,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Modèles à risque proportionnel
+    Modèles à risques proportionnels
      
     <span class="caret"></span>
   </a>
@@ -401,7 +401,7 @@ div.tocify {
       <a href="concurrents.html">Risques concurrents</a>
     </li>
     <li>
-      <a href="cure.html">Récurrence et imunité</a>
+      <a href="cure.html">fragilité et imunité</a>
     </li>
   </ul>
 </li>
@@ -443,55 +443,36 @@ div.tocify {
 </div>
 
 
-<ul>
-<li>On va principalement traité du modèle <strong>logistique à temps discret</strong>.</li>
-<li>Par définition ce n’est pas un modèle à risque proportionnel, mais à Odds proportionnels. Toutefois en situation de rareté, l’Odds converge vers une probabilité, qui est une mesure du risque (ici une probabilité conditionnelle).</li>
-<li>Le modèle à temps discret est de type paramétrique, il est moins contraignant que le modèle de Cox si l’hypothèse de proportionnalité n’est pas respectée, car le modèle est ajusté par une fonction de la durée.</li>
-<li>Formellement, le modèle est estimable avec des évènements mesurée à une durée nulle (même si cela n’a pas grand sens).</li>
-<li>La base de données doit être transformée en format long: aux temps d’observation ou sur des intervalles de temps.</li>
-<li>Permet d’introduire de manière plutôt souple un ensemble de covariables dynamiques.</li>
-</ul>
+<p>On va principalement traiter le <strong><em>modèle logistique à temps discret</em></strong>.<br />
+<br> * Par définition ce n’est pas un modèle à risque proportionnel, mais à Odds proportionnels. Toutefois en situation de rareté (p&lt;10%), l’Odds converge vers une probabilité, qui est une mesure du risque (ici une probabilité conditionnelle). * Le modèle à temps discret est de type paramétrique, il est moins contraignant que le modèle de Cox si l’hypothèse de proportionnalité n’est pas respectée, car le modèle est ajusté par une fonction de la durée. * Formellement, le modèle est estimable avec des évènements mesurés à une durée nulle (même si cela n’a pas grand sens). * La base de données doit être transformée en format long: aux temps d’observation ou sur des intervalles de temps. C’est une des principales différences avec le modèle de Cox qui est une estimation aux temps d’évènement. * Permet d’introduire de manière plutôt souple un ensemble de covariables dynamiques.</p>
 <p>Avec un lien logistique, le modèle à temps discret, avec seulement des covariables fixes, peut s’écrire:</p>
+<hr />
 <p><span class="math display">\[log\left[\frac{P(Y=1 | t_p,X_k)}{1-P(Y=1 | t_p,X_k)}\right]= a_0 + \sum_{p}a_pf(t_p)+\sum_{k}b_kX_k\]</span></p>
+<hr />
 <div id="organisation-des-données" class="section level1" number="1">
 <h1 number="1"><span class="header-section-number">1</span> Organisation des données</h1>
-<div id="format-long" class="section level2" number="1.1">
-<h2 number="1.1"><span class="header-section-number">1.1</span> Format long</h2>
-<p>Les données doivent être en format long: pour chaque individu on a une ligne par durée observé ou par intevalle de durées jusqu’à l’évènement ou la censure. On retrouve le système de <em>splittage</em> des données du modèle de Cox, mais généralisé à des intervalles où aucun évènement n’est observé. Avec des données de type discrète, classique en science sociale, il y a souvent peu de différence entre un allongement aux temps d’évènement et aux temps d’observation.</p>
-<p><em>Warning</em>: Si on construit des intervalles, on doit s’assurer qu’au moins un évènement s’est produit dans chaque intervalle, sinon problème de séparabilité parfaite.</p>
-</div>
-<div id="durée" class="section level2" number="1.2">
-<h2 number="1.2"><span class="header-section-number">1.2</span> Durée</h2>
-<p>La durée est dans un premier temps construite sous forme d’un simple compteur. La paramétrisation de la durée dans le modèle sera présentée par la suite.</p>
-</div>
-<div id="variable-évènementcensure" class="section level2" number="1.3">
-<h2 number="1.3"><span class="header-section-number">1.3</span> Variable évènement/censure</h2>
-<p>Si l’individu a connu l’évènement, elle prend la valeur 0 avant celui-ci. Au moment de l’évènement sa valeur est égale à 1. Pour les observations censurées, la variable prend toujours la valeur 0.</p>
-<p><br> <strong>Application</strong> On reprend les données de la base <em>transplantation</em>, mais les durées on été regroupées par période de 30 jours. Il n’y a pas de durée mesurée comme nulle, on a considéré que les 30 premiers jours représentaient le premier mois d’exposition. Cette variable de durée se nomme <em>mois</em>.</p>
+<p><strong>Format long</strong><br />
+<br> Les données doivent être en format long: pour chaque individu on a une ligne par durée observé ou par intevalle de durées jusqu’à l’évènement ou la censure. On retrouve le <em>split</em> des données du modèle de Cox, mais généralisé à des intervalles où aucun évènement n’est observé. Avec des données de type discrètes ou groupées, phénomène classique en science sociale, il y a souvent peu de différence entre un allongement aux temps d’évènement et aux temps d’observation.<br />
+<br> <em>A savoir</em>: si on construit des intervalles, on doit s’assurer qu’au moins un évènement s’est produit dans chaque intervalle, sinon on rencontrera un problème de séparabilité parfaite.</p>
+<p><strong>Durée</strong><br />
+<br> La durée est dans un premier temps construite sous forme d’un simple compteur. La paramétrisation de la durée dans le modèle sera présentée par la suite.</p>
+<p><strong>Variable évènement/censure</strong><br />
+<br> Si l’individu a connu l’évènement, elle prend la valeur 0 avant celui-ci. Au moment de l’évènement sa valeur est égale à 1. Pour les observations censurées, la variable prend toujours la valeur 0.</p>
+<p><br> <strong>Application</strong><br />
+On reprend les données de la base <em>transplantation</em>, mais les durées ont été regroupées par période de 30 jours. Il n’y a pas de durée mesurée comme nulle, on a considéré que les 30 premiers jours représentaient le premier mois d’exposition. Cette variable de durée se nomme <em>mois</em>.</p>
 <p><strong>Format d’origine</strong></p>
-<pre><code>&gt; ion_m.dta&quot;, clear
-
-
-  +-----------------------------------------+
+<pre><code>  +-----------------------------------------+
   | id   year   age   surgery   mois   died |
   |-----------------------------------------|
   |  1     67    30         0      2      1 |
   +-----------------------------------------+</code></pre>
 <p><strong>Format long et variables pour l’analyse</strong></p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-
-
-
-
-  +-------------------------------------------------+
-  | id   year   age   surgery   mois   died   t   e |
+<pre><code>  +-------------------------------------------------+
+  | id   year   age   surgery   mois   died   t   d |
   |-------------------------------------------------|
   |  1     67    30         0      2      1   1   0 |
   |  1     67    30         0      2      1   2   1 |
   +-------------------------------------------------+</code></pre>
-</div>
 </div>
 <div id="ajustement-de-la-durée" class="section level1" number="2">
 <h1 number="2"><span class="header-section-number">2</span> Ajustement de la durée</h1>
@@ -502,13 +483,13 @@ div.tocify {
 </ul>
 <div id="ajustement-avec-une-durée-en-continu" class="section level2" number="2.1">
 <h2 number="2.1"><span class="header-section-number">2.1</span> Ajustement avec une durée en continu</h2>
-<p>Le modèle étant paramétrique, on doit trouver une fonction qui ajuste le mieux les données. Toutes transformations de la variable est possible: <span class="math inline">\(f(t)=a\times t\)</span>, <span class="math inline">\(f(t)=a\times ln(t)\)</span>……formes quadratiques. Les ajustements sous forme de <strong>splines</strong> tendent à se développer ces dernières années (recommandé).<br />
+<p>Le modèle étant paramétrique, on doit trouver une fonction qui ajuste le mieux les données. Toutes transformations de la variable est possible: <span class="math inline">\(f(t)=a\times t\)</span>, <span class="math inline">\(f(t)=a\times ln(t)\)</span>……formes quadratiques. Les ajustements sous forme de <strong>splines</strong> tendent à se développer ces dernières années.<br />
 Pour sélectionner cette fonction, on peut tester différents modèles sans covariable additionnelle, et sélectionner la forme qui minimise un critère d’information de type <strong>AIC</strong> ou <strong>BIC</strong> (vraisemblance pénalisée).<br />
 <br> Exemple:<br />
 On va tester les paramétrisations suivante:s une forme linéraire stricte <span class="math inline">\(f(t)=a\times t\)</span> et des effets quadratiques d’ordres 2 et 3: <span class="math inline">\(f(t)=a_1\times t + a_2\times t^{2}\)</span> et <span class="math inline">\(f(t)=a_1\times t + a_2\times t^{2} + a_3\times t^{3}\)</span>.</p>
 <p><em>Remarques</em>:</p>
 <ul>
-<li>Les effets quadratiques consiste à introduires des intéractions entre une variable continue et elle même. Cela permet d’estimer des effets non linéaires.</li>
+<li>Les effets quadratiques consistent à introduire des interactions entre une variable continue et elle même. Cela permet d’estimer des effets non linéaires.</li>
 <li><strong>Attention aux effets quadratiques d’ordre &gt;2</strong>: très sensible aux <em>outliers</em>. En analyse des durées en fin de la plage d’observation si peu de personnes restent soumises au risque, celui-ci peut-être surestimé. <br></li>
 </ul>
 <p><strong>Exemple</strong> Estimation des probabilités de décéder selon différents ajustements de la durée (modèle logistique à temps discret) <img src="images/Image11.png" /></p>
@@ -538,36 +519,14 @@ On va tester les paramétrisations suivante:s une forme linéraire stricte <span
 <p>On peut utiliser la troisième forme à savoir <span class="math inline">\(a_1\times t + a_2\times t^{2} + a_3\times t^{3}\)</span>.<br />
 <BR></p>
 <p><strong>Estimation du modèle avec toutes les covariables</strong></p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+<pre><code>&gt; 7
+command Logistic not defined by Logistic.ado
+r(199);
 
-
-
-
-
-Logistic regression                             Number of obs     =      1,127
-                                                LR chi2(6)        =      90.69
-                                                Prob &gt; chi2       =     0.0000
-Log likelihood = -230.33671                     Pseudo R2         =     0.1645
-
-------------------------------------------------------------------------------
-           e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-           t |  -.3720566   .0823946    -4.52   0.000    -.5335471   -.2105661
-          t2 |   .0142379    .005023     2.83   0.005     .0043929    .0240828
-          t3 |  -.0001659   .0000785    -2.11   0.035    -.0003198    -.000012
-        year |  -.1326693   .0737755    -1.80   0.072    -.2772666     .011928
-         age |   .0333413   .0146876     2.27   0.023     .0045541    .0621285
-     surgery |  -1.010918    .448598    -2.25   0.024    -1.890154   -.1316821
-       _cons |   7.082657   5.307737     1.33   0.182    -3.320316    17.48563
-------------------------------------------------------------------------------</code></pre>
-<p>Estimation du modèle de Cox avec des durées mesurées sur une échelle de 30 jours</p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-
-
-
-Cox regression -- Efron method for ties
+end of do-file
+r(199);</code></pre>
+<p>Maintenant si on estime le modèle avec la méthode de Cox (avec des durées mesurées sur une échelle de 30 jours) :</p>
+<pre><code>Cox regression -- Efron method for ties
 
 No. of subjects =          103                  Number of obs    =         103
 No. of failures =           75
@@ -582,30 +541,25 @@ Log likelihood  =   -289.81242                  Prob &gt; chi2      =      0.000
          age |   .0288141   .0134981     2.13   0.033     .0023583    .0552698
      surgery |  -.9695805   .4361069    -2.22   0.026    -1.824334   -.1148266
 ------------------------------------------------------------------------------</code></pre>
-<p>Que remarquez-vous?</p>
+<p>On remarque que les coefficients estimés sont particulièrement proches.</p>
 </div>
 <div id="ajustement-discret" class="section level2" number="2.2">
 <h2 number="2.2"><span class="header-section-number">2.2</span> Ajustement discret</h2>
 <ul>
 <li>Il s’agit d’introduire la variable de durée dans le modèle comme une variable catégorielle (factor).</li>
-<li>Pas conseillé si beaucoup de points d’observation, ce qui est le cas ici, et surtout si présence de points d’observation sans évènement.</li>
+<li>Pas conseillé si on a beaucoup de points d’observation, ce qui est le cas ici.</li>
 <li>A l’inverse, si peu de points d’observation, la paramétrisation avec une durée continue n’est pas conseillé.</li>
 <li>La correction de la non proportionnalité peut être plus compliquée à réaliser (non traité).</li>
 </ul>
-<p>On va supposer que l’on ne dispose que de 4 points d’observations. Pour l’exemple, on va créer ces points à partir des quartiles de la durée, et conserver pour chaque personne une seule observation par intervalle.</p>
+<p>On va supposer que l’on ne dispose que de 4 intervalles d’observation. Pour l’exemple, on va créer ces points à partir des quartiles de la durée, et conserver pour chaque personne une seule observation par intervalle.</p>
 <ul>
-<li>1: Entre le début de l’exposition et 4 mois.</li>
-<li>2: Entre 5 mois et 11 mois .</li>
-<li>3: Entre 12 mois et 23 mois.</li>
-<li>4: 24 mois et plus.</li>
+<li>t=1: Entre le début de l’exposition et 4 mois.</li>
+<li>t=2: Entre 5 mois et 11 mois .</li>
+<li>t=3: Entre 12 mois et 23 mois.</li>
+<li>t=4: 24 mois et plus.</li>
 </ul>
-<p>On va estimer le risque globalement sur l’intervalle. La base sera plus courte que la précédente, on ne conserve qu’une ligne par intervalle d’exposition.</p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-(SAVASTATA created this dataset on 01AUG2019)
-
-         4 |
+<p>On va estimer le risque globalement sur l’intervalle. La base sera plus courte que la précédente (197 observations pour 103 individus).</p>
+<pre><code>         4 |
  quantiles |           e
       of t |         0          1 |     Total
 -----------+----------------------+----------
@@ -633,8 +587,9 @@ Log likelihood = -111.23965                     Pseudo R2         =     0.1501
         year |  -.2032436   .0931956    -2.18   0.029    -.3859036   -.0205835
          age |   .0468518   .0184958     2.53   0.011     .0106006     .083103
      surgery |  -1.110163   .5025594    -2.21   0.027    -2.095161   -.1251644
-       _cons |   12.44666   6.653694     1.87   0.061      -.59434    25.48766
-------------------------------------------------------------------------------</code></pre>
+------------------------------------------------------------------------------
+Remarque : la constante n’est pas reportée, les valeurs de la référence n’ayant pas grand  sens (année et âge à 0)
+</code></pre>
 <p>Au niveau de l’interpretation, avec 37% d’évènements sur l’ensemble des observations, il n’est plus possible d’interpréter le modèle en terme de risque (probabilité). La lecture en termes d’Odds Ratio s’impose.</p>
 <p>Probabilités estimées à partir d’un modèle avec la durée seulement.<br />
 Risques sur la longueur de l’intervalle.</p>
@@ -665,24 +620,15 @@ Risques sur la longueur de l’intervalle.</p>
 </tbody>
 </table>
 </div>
-<div id="modèle-à-temps-discret-et-hypothèse-ph" class="section level2" number="2.3">
-<h2 number="2.3"><span class="header-section-number">2.3</span> Modèle à temps discret et hypothèse PH</h2>
-<p>Formellement un modèle logistique à temps discret repose sur une hypothèse d’Odds proportionnel (Odds ratios constants pendant la durée d’observation). Contrairement au modèle de Cox, l’estimation des probabilités (risque) n’est pas biaisée si l’hypothèse PH n’est pas respectée.<br />
-Comme pour le modèle de Cox, la correction de la non proportionalité peut se faire en intégrant une interaction avec la durée dans le modèle</p>
-<p>On conseillera d’introduire l’intéraction sur un modèle avec une variable de durée traitée de manière continue.<br />
-Les variables year et age seront omises pour faciliter la représentation graphique.</p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-
-
-
-
-
-
-
-
-Logistic regression                             Number of obs     =      1,127
+</div>
+<div id="modèle-à-temps-discret-et-hypothèse-ph" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Modèle à temps discret et hypothèse PH</h1>
+<ul>
+<li><p>Formellement un modèle logistique à temps discret repose sur une hypothèse d’Odds proportionnel (Odds ratios constants pendant la durée d’observation). Contrairement au modèle de Cox, l’estimation des probabilités (risque) n’est pas biaisée si l’hypothèse PH n’est pas respectée.</p></li>
+<li><p>Comme pour le modèle de Cox, la correction de la non proportionnalité peut se faire en intégrant une interaction avec la durée dans le modèle.</p></li>
+</ul>
+<p>Les variables year et age seront omises pour faciliter la représentation graphique.</p>
+<pre><code>Logistic regression                             Number of obs     =      1,127
                                                 LR chi2(5)        =      84.78
                                                 Prob &gt; chi2       =     0.0000
 Log likelihood = -233.29204                     Pseudo R2         =     0.1538
@@ -698,10 +644,10 @@ Log likelihood = -233.29204                     Pseudo R2         =     0.1538
              |
           t2 |   .0137676   .0052405     2.63   0.009     .0034964    .0240388
           t3 |  -.0001596   .0000828    -1.93   0.054    -.0003218    2.62e-06
-       _cons |   -.723378   .2445386    -2.96   0.003    -1.202665   -.2440911
-------------------------------------------------------------------------------</code></pre>
+
+------------------------------------------------------------------------------
+Remarque : la constante n’est pas reportée, les valeurs de la référence n’ayant pas grand  sens (année et âge à 0)</code></pre>
 <p><img src="images/Image13.png" /></p>
-</div>
 </div>
 
 
