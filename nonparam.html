@@ -11,9 +11,9 @@
 
 
 
-<title>Analyse non paramétrique</title>
+<title>Méthodes non paramétrique</title>
 
-<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -24,6 +24,17 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 
@@ -357,7 +368,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Modèles à risque proportionnel
+    Modèles à risques proportionnels
      
     <span class="caret"></span>
   </a>
@@ -390,13 +401,13 @@ div.tocify {
       <a href="concurrents.html">Risques concurrents</a>
     </li>
     <li>
-      <a href="cure.html">Récurrence et imunité</a>
+      <a href="cure.html">fragilité et imunité</a>
     </li>
   </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Logiciels
+    Programmation
      
     <span class="caret"></span>
   </a>
@@ -427,11 +438,23 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Analyse non paramétrique</h1>
+<h1 class="title toc-ignore">Méthodes non paramétrique</h1>
 
 </div>
 
 
+<style>
+p.comment {
+background-color: #DBDBDB;
+padding: 10px;
+border: 1px solid black;
+margin-left: 25px;
+border-radius: 5px;
+font-style: italic;
+}
+</style>
+<p>Les méthodes non paramétriques portent généralement sur l’analyse des fonctions de survie (séjour) ou sur celle des fonctions de répartitions, plus rarement sur les mesures d’incidence données par le risque cumulé.<br />
+Deux méthodes d’estimations sont proposées : la méthode dite actuarielle et la méthode dite de Kaplan &amp; Meier. Ces deux méthodes sont adaptées à des mesures différentes de la durée : plutôt discrète pour la technique actuarielle et plutôt continue pour Kaplan-Meier (KM). Cela induit un traitement différent de la censure dans l’estimation. La seconde est de très très loin la plus diffusée, surement en raison des tests de comparaison qu’elle est en mesure de fournir.</p>
 <div id="introduction" class="section level1" number="1">
 <h1 number="1"><span class="header-section-number">1</span> Introduction</h1>
 <div id="les-variables-danalyse" class="section level2" number="1.1">
@@ -494,10 +517,12 @@ La fonction de survie rapporte donc des probabilités conditionnelles: survivre 
 <br></p>
 <p><span class="math display">\[S(t_i)=\displaystyle \prod_{t_i\leq{k}} (1-q(t_i))\]</span></p>
 <p><BR></p>
-<p><strong>Application pour la suite du cours (et jusqu’à la dernière section)</strong><br />
+<p class="comment">
+<strong>Application pour la suite de la formation</strong><br />
 On va analyser le risque de décéder (la survie) de personnes souffrant d’une insuffisance cardiaque. Le début de l’exposition est leur inscription dans un registre d’attente pour une greffe du coeur.<br />
-Les covariables sont dans un premier temps toutes fixes: l’année (<em>year</em>), l’âge à l’entrée dans le registre (<em>age</em>) , et le fait d’avoir été opéré pour un pontage aorto-coronarien avant l’inscription (<em>surgery</em>).<br />
-Le début de l’exposition au risque est l’entrée dans le registre, la durée est mesurée en jour (<em>stime</em>). La variable évènement est le décès (<em>died</em>).</p>
+Les covariables sont dans un premier temps toutes fixes: l’année (<em>year</em>) et l’âge (<em>age</em>) à l’entrée dans le registre, et le fait d’avoir été opéré pour un pontage aorto-coronarien avant l’inscription (<em>surgery</em>). Le début de l’exposition au risque est l’entrée dans le registre, la durée est mesurée en jour (<em>stime</em>). La variable évènement est le décès (<em>died</em>). <br> L’introduction d’une dimension dynamique, la greffe, sera donnée par les variable <em>transplant</em> et <em>wait</em>.
+</p>
+<p><br></p>
 </div>
 </div>
 <div id="la-méthode-actuarielle" class="section level1" number="2">
@@ -512,26 +537,30 @@ Le début de l’exposition au risque est l’entrée dans le registre, la duré
 <p><strong>Calcul du Risk set</strong></p>
 <ul>
 <li>A <span class="math inline">\(t_{min}=0\)</span>, <span class="math inline">\(n_0=n\)</span> individus soumis au risque: <span class="math inline">\(r_0=n_0\)</span>.</li>
-<li>Le nombre d’exposés au risque sur un intervalle est calculé en soustrayant la moitié des cas censurés sur la longueur de l’intervalle: <span class="math inline">\(r_i=n_i- 0.5\times{c_i}\)</span>, avec <span class="math inline">\(n_i\)</span> le nombre de personnes soumises au risque au début de l’intervalle et <span class="math inline">\(c_i\)</span> le nombre d’observations censurées sur la longueur de l’intervalle. On suppose donc que les observations censurées <span class="math inline">\(c_i\)</span> sont sorties de l’observation uniformément sur l’intervalle. Les cas censurés le sont en moyenne au millieu de l’intervalle. <br></li>
+<li>Le nombre d’exposé.e.s au risque sur un intervalle est calculé en soustrayant la moitié des cas censurés sur la longueur de l’intervalle: <span class="math inline">\(r_i=n_i- 0.5\times{c_i}\)</span>, avec <span class="math inline">\(n_i\)</span> le nombre de personnes soumises au risque au début de l’intervalle et <span class="math inline">\(c_i\)</span> le nombre d’observations censurées sur la longueur de l’intervalle. On suppose donc que les observations censurées <span class="math inline">\(c_i\)</span> sont sorties de l’observation uniformément sur l’intervalle. Les cas censurés le sont en moyenne au millieu de l’intervalle. <br></li>
 </ul>
 <p><strong>Calcul de <span class="math inline">\(S(t_i)\)</span></strong><br />
-On applique la méthode de la section précédente avec <span class="math inline">\(q(t_i)=\frac{d_i}{n_i - 0.5\times r_i}\)</span></p>
+On applique la méthode de la section précédente avec:</p>
+<p><span class="math display">\[q(t_i)=\frac{d_i}{n_i - 0.5\times r_i}\]</span></p>
 <p><strong>Calcul de la durée médiane (ou autre quantiles)</strong><br />
-<br> <strong>Rappel</strong>: compte tenu des censures à droite, le dernier intervalle étant ouvert, il n’est pas conseillé de calculer des durées moyennes. On préfère utiliser la médiane ou tout autre quantile lorsqu’ils sont définissables.<br />
-<strong>Définition</strong>: il s’agit de la durée telle que <span class="math inline">\(S(t_i)=0.5\)</span>.<br />
-<strong>Calcul</strong>: Comme on applique une méthode continue et monotone à l’intérieur dintervalles, on ne peut pas calculer directement un point de coupure qui correspond à 50% de survivants. On doit donc trouver ce point par interpolation linéaire dans l’intervalle<span class="math inline">\([t_i;t_{i+1}[\)</span> avec <span class="math inline">\(S(t_{i+1})\leq0.5\)</span> et <span class="math inline">\(S(t_{i})&gt;0.5\)</span>.</p>
-<p><br> <strong>Logiciels</strong></p>
+<br> <em>Rappel</em>: compte tenu des censures à droite, le dernier intervalle étant ouvert, il n’est pas conseillé de calculer des durées moyennes. On préfère utiliser la médiane ou tout autre quantile lorsqu’ils sont définissables.<br />
+*Définition**: il s’agit de la durée telle que <span class="math inline">\(S(t_i)=0.5\)</span>.<br />
+<em>Calcul</em>: Comme on applique une méthode continue et monotone à l’intérieur dintervalles, on ne peut pas calculer directement un point de coupure qui correspond à 50% de survivants. On doit donc trouver ce point par interpolation linéaire dans l’intervalle<span class="math inline">\([t_i;t_{i+1}[\)</span> avec <span class="math inline">\(S(t_{i+1})\leq0.5\)</span> et <span class="math inline">\(S(t_{i})&gt;0.5\)</span>.</p>
+<br> <strong>Logiciels</strong><br />
+
+<div class="alert alert-info">
 <ul>
 <li><strong>SAS</strong>: incluse dans <code>proc lifetest</code>.</li>
-<li><strong>Stata</strong>: commande <code>ltable</code>. Voir la commande externe <code>qlt</code> (MT) qui calcule les durées médianes (+ quartiles) et qui cale la définition des intervalles avec celle de Sas.</li>
-<li><strong>R</strong>: une fonction programmée par un utilisateur (package <code>discSurv</code> =&gt; fonction <code>lifeTable</code>), mais pas convaincante car pas d’estimation sur les quantiles, et estimation avec des intervalles toujours fixés à <span class="math inline">\(dt=1\)</span>.<br />
+<li><strong>Stata</strong>: commande <code>ltable</code>. Voir la commande externe <code>qlt</code> (MT) qui calcule les durées médianes (+ autres quartiles) et qui cale la définition des intervalles avec celle de SAS.</li>
+<li><strong>R</strong>: une fonction programmée par un utilisateur (package <code>discSurv</code> =&gt; fonction <code>lifeTable</code>), mais pas convaincante car pas d’estimation sur les quantiles, et estimation avec des intervalles toujours fixés à <span class="math inline">\(dt=1\)</span>. D’un intérêt très limité.<br />
 </li>
-<li><strong>Python</strong>: à l’heure actuelle, aucune fonction à ma connaissance. <br></li>
+<li><strong>Python</strong>: à l’heure actuelle, aucune fonction à ma connaissance.<br />
+</li>
 </ul>
+</div>
+<p><br></p>
 <p><em>Exemple</em></p>
-<pre><code>&gt; ribuer\transplantation.dta&quot; , clear
-
-                 Beg.                                 Std.
+<pre><code>                 Beg.                                 Std.
    Interval     Total   Deaths   Lost    Survival    Error     [95% Conf. Int.]
 -------------------------------------------------------------------------------
     0    10       103       13      0     0.8738    0.0327     0.7926    0.9247
@@ -586,16 +615,15 @@ On applique la méthode de la section précédente avec <span class="math inline
  1790  1800         1        0      1     0.1522    0.0493     0.0715    0.2609
 -------------------------------------------------------------------------------
 
-(Heart transplant data)
-
-Duree pour differents quantiles de la fonction de survie
-Definition des bornes Sas-lifetest
+Durée pour differents quantiles de la fonction de survie
+Définition des bornes Sas-lifetest
 S(t)=0.90: t=    7.923
 S(t)=0.75: t=   35.989
 S(t)=0.50: t=  102.068
 S(t)=0.25: t=  913.968
 S(t)=0.10: t=        .</code></pre>
 <p><img src="images/Image7.png" /></p>
+<p>102 jours après leur inscription dans le registre d’attente pour une greffe, 50% des malades sont toujours en vie. Au bout de 914 jours, 75% des personnes sont décédées.</p>
 <p><br></p>
 </div>
 <div id="la-méthode-de-kaplan-meier" class="section level1" number="3">
@@ -603,30 +631,24 @@ S(t)=0.10: t=        .</code></pre>
 <ul>
 <li>L’approche qui exploite toute l’information disponible est celle dite de <strong>Kaplan-Meier</strong> (<em>KM</em>).</li>
 <li>Il y a autant d’intervalles que de durées où l’on observe au moins un évènement.</li>
-<li>Au lieu d’utiliser des intervalles prédéterminés, l’estimateur KM va définir un intervalle pour chaque évènement enregistré.</li>
-<li>La fonction de survie estimée par la méthode KM est une fonction en escalier (stairstep), d’où une méthode dite “discrete”.</li>
+<li>Au lieu d’utiliser des intervalles prédéterminés, l’estimateur KM va définir un intervalle entre chaque évènement enregistré.</li>
+<li>La fonction de survie estimée par la méthode KM est une fonction en escalier (stairstep), d’où une méthode dite “discrète”.</li>
 <li>Pour chaque intervalle, on compte le nombe d’évènements et le nombre de censures.</li>
 <li>Méthode adaptée pour une mesure de la durée de type continue.</li>
 </ul>
 <p><strong>Définition du Risk Set (<span class="math inline">\(r_i\)</span>)</strong></p>
-<p>S’il y a à la fois des évènements et des censures à une durée <span class="math inline">\(t_i\)</span>, les observations censurées sont considérées comme exposées au risque à ce moment, comme si elles étaient censurées très rapidement après:</p>
+<p>S’il y a à la fois des évènements et des censures à une durée <span class="math inline">\(t_i\)</span>, les observations censurées sont considérées comme exposées au risque à ce moment, comme si elles étaient censurées très rapidement après. C’est la principale caractéristique de cette méthode, nommée également l’estimateur « product-limit »</p>
 <p><span class="math display">\[r_i=r_{i-1}-d_{i-1}-c_{i-1}\]</span><br />
 <br></p>
-<p><strong>Calcul de <span class="math inline">\(q_i\)</span></strong></p>
+<p><strong>Calcul de <span class="math inline">\(q_i\)</span></strong><br />
+<br> On applique la méthode de la section précédente avec:</p>
 <p><span class="math display">\[q_i=\frac{d_i}{r_{i-1}-d_{i-1}-c_{i-1}}\]</span></p>
-<p>La fonction de survie est ensuite calculée avec la formule vu précédemment.</p>
 <p><strong>Récupération de la médiane</strong><br />
 Il n’y a pas de méthode pour calculer directement la durée médiane (ou tout autre quantile).<br />
-On va prendre la valeur de la durée qui se situe juste “en dessous” de 50% de survivant.e.s. Elle est donc définie tel que <span class="math inline">\(S(t)\leq0.5\)</span>.</p>
+On va prendre la valeur de la durée qui se situe juste “en dessous” de 50% de survivant.e.s. Elle est donc définie tel que <span class="math inline">\(S(t)\leq0.5\)</span>. Pas de formule savante pour aboutir à ce résultat, c’est une convention. Attention, il n’est pas impossible que le % de survivant.e.s soit bien en deçà de 50% pour définir cette durée.</p>
 <p><strong>Exemple</strong><br />
 On reprend l’exemple précédent.</p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-         failure _d:  died
-   analysis time _t:  stime
-
-           Beg.          Net            Survivor      Std.
-  Time    Total   Fail   Lost           Function     Error     [95% Conf. Int.]
+<pre><code>Time    Total   Fail   Lost           Function     Error     [95% Conf. Int.]
 -------------------------------------------------------------------------------
      1      103      1      0             0.9903    0.0097     0.9331    0.9986
      2      102      3      0             0.9612    0.0190     0.8998    0.9852
@@ -719,14 +741,19 @@ On reprend l’exemple précédent.</p>
 -------------------------------------------------------------------------------</code></pre>
 <p>Durée médiane: <span class="math inline">\(t=100\)</span> (correspond à <span class="math inline">\(S(t)=0.4940\)</span>).</p>
 <p><img src="images/Image8.png" /></p>
+<strong>Logiciels</strong><br />
+
+<div class="alert alert-info">
+<ul>
+<li><strong>SAS</strong> : l’estimation de Kaplan-Meier est affichée par défaut par la <code>proc lifetest</code>. <strong>Attention : le tableau proposé par SAS est particulièrement pénible à lire voire illisible, en particulier lorsque le nombre de censures est élevé, une ligne est ajoutée pour chaque observation censurée. Je conseille de ne pas afficher cette partie de l’output (voir section SAS)</strong>. On récupère pour le reste de l’output les valeurs de la durée pour S(t) =(.75,.5,.25) ainsi que le graphique, ce qui est suffisant.</li>
+<li><strong>Stata</strong> : en mode survie (<strong><code>stset</code></strong>), le tableau des estimateurs est donné par la commande sts <strong><code>list</code></strong> et le graphique par <strong><code>sts graph</code></strong>.</li>
+<li><strong>R</strong> : les estimateurs sont donnés par la fonction <strong><code>survfit</code></strong> de la librairie <code>survival</code>.</li>
+<li><strong>Python</strong>: les resultats sont donnés dans la librairie <code>lifeline</code> par des fonctions dont le nom est interminable. Je conseille plutôt l’utilisation de la librairie <strong><code>statmodels</code></strong> (se reporter à la section dédiée à Python).</li>
+</ul>
+</div>
 <p><strong>Exercice</strong><br />
 Calculer la fonction de survie <span class="math inline">\(S\)</span> avec un tableur.</p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-
-
-----------------------------------------------------------------------
+<pre><code>----------------------------------------------------------------------
         t |          d           c           r           q           S
 ----------+-----------------------------------------------------------
         0 |          0           0                                    
@@ -748,7 +775,7 @@ Calculer la fonction de survie <span class="math inline">\(S\)</span> avec un ta
 Il est simplément égal à: <span class="math display">\[H(t)=\sum_{t_i\leq k}q(t_i)\]</span></p>
 <p><img src="images/Image19.png" /></p>
 <p><strong>Le risque instantané</strong><br />
-Nécessite l’estimateur de Nelson-Aalen. Le risque est obtenu en lissant les différences - toujours positive - entre <span class="math inline">\(H(t)\)</span> par la méthode dite du <strong>kernel</strong>. Elle permet d’obtenir une fonction de risque continue avec la durée. D’autres méthodes de lissage sont possibles, et de plus en plus utilisées, en particulier celles utilisant des splines restreintes.</p>
+Nécessite l’estimateur de Nelson-Aalen. Le risque est obtenu en lissant les différences - toujours positive - entre <span class="math inline">\(H(t)\)</span> par la méthode dite du <strong>kernel</strong>. Elle permet d’obtenir une fonction continue avec la durée (paramétrables sur les largeurs des fenêtres de lissage). D’autres méthodes de lissage sont maintenant possibles, et de plus en plus utilisées, en particulier celles utilisant des splines restreintes (paramétrable sur un nombre de degré de liberté – nœuds-).</p>
 <p><img src="images/Image20.png" /></p>
 </div>
 <div id="tester-légalité-des-courbes-de-survie-méthode-km" class="section level1" number="4">
@@ -766,10 +793,10 @@ Attention: pas de test possibles sur des variables continues. Prévoir des regro
 <p>Il s’agit d’une série de tests qui répondent à la même logique, la seule différence réside dans le poids accordé au début ou à la fin de la période d’observation. Par ailleurs ces différents tests sont plus ou moins sensibles à la distribution des censures à droites entre les sous échantillons.<br />
 <br> Ces tests entrent dans le cadre des tests d’ajustement dits du Chi2, même si formellement ils relèvent des techniques dites de rang.<br />
 Il s’agira donc de comparer des effectifs observés à des effectifs espérés à chaque temps d’évènement. La différence réside dans le calcul de la variance de la statistique du test qui, ici, suit une loi hypergéométrique.</p>
-<p>**Principe de calcul des effectifs - évènements - observés et espérés pour deux groupes</p>
+<p><strong>Principe de calcul des effectifs - évènements - observés et espérés pour deux groupes</strong></p>
 <ul>
 <li><strong>Effectifs observés en <span class="math inline">\(t_i\)</span></strong>: <span class="math inline">\(o_{i1}\)</span> et <span class="math inline">\(o_{i2}\)</span> sont égaux à <span class="math inline">\(d_{i1}\)</span> et <span class="math inline">\(d_{i2}\)</span>, et leur somme pour tous les temps d’évènement à <span class="math inline">\(O_1\)</span> et <span class="math inline">\(O_2\)</span>.</li>
-<li><strong>Effectifs expérés</strong> (hypothèse nulle <span class="math inline">\(H_0\)</span>): comme pour une statistique du <span class="math inline">\(\chi^2\)</span> on se base sur les marges, avec le risque set (<span class="math inline">\(R_i\)</span>) en <span class="math inline">\(t_i\)</span> pour dénombrer les effectifs, soit <span class="math inline">\(e_{i1}=R_{i1}\times\frac{d_i}{R_i}\)</span> et <span class="math inline">\(e_{i2}=R_{i2}\times\frac{d_2}{R_2}\)</span>. Leur somme pour tous les temps d’évènement est égale à <span class="math inline">\(E_1\)</span> et <span class="math inline">\(E_2\)</span>. Le principe de calcul des effectifs observés reposent donc sur l’hypothèse d’un rapport des risques toujours égal à 1 au cours du temps (<em>hypothèse fondamentale de risque proportionnel</em>).<br />
+<li><strong>Effectifs expérés</strong> (hypothèse nulle <span class="math inline">\(H_0\)</span>): comme pour une statistique du <span class="math inline">\(\chi^2\)</span> on se base sur les marges, avec le risque set (<span class="math inline">\(R_i\)</span>) en <span class="math inline">\(t_i\)</span> pour dénombrer les effectifs, soit <span class="math inline">\(e_{i1}=R_{i1}\times\frac{d_i}{R_i}\)</span> et <span class="math inline">\(e_{i2}=R_{i2}\times\frac{d_2}{R_2}\)</span>. Leur somme pour tous les temps d’évènement est égale à <span class="math inline">\(E_1\)</span> et <span class="math inline">\(E_2\)</span>. Le principe de calcul des effectifs observés reposent donc sur l’hypothèse d’un rapport des risques toujours égal à 1 au cours du temps (<em>hypothèse fondamentale de risques proportionnels</em>).<br />
 </li>
 <li><strong>Statistique du log-rank</strong>: <span class="math inline">\((O_1 - E_1) = -(O_2 - E_2)\)</span>.</li>
 <li><strong>Statistique de test</strong>: sous <span class="math inline">\(H_0\)</span>, <span class="math inline">\(\frac{(O_1 - E_1)^2}{\sum{v_i}}\)</span>, avec <span class="math inline">\(v_i\)</span> la variance de <span class="math inline">\((o_{i1} - e_{i2})\)</span>, suis un <span class="math inline">\(\chi^2(1)\)</span>.<br />
@@ -791,13 +818,7 @@ La pondération est une variante de la fonction de survie KM (avec <span class="
 </ul>
 <p><br><br />
 <strong>Exemple</strong> On compare ici l’effet du pontage sur le risque de décéder depuis l’inscription dans le registre de greffe. <img src="images/Image9.png" /></p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-         failure _d:  died
-   analysis time _t:  stime
-
-
-Log-rank test for equality of survivor functions
+<pre><code>Log-rank test for equality of survivor functions
 
         |   Events         Events
 surgery |  observed       expected
@@ -809,9 +830,6 @@ Total   |        75          75.00
 
               chi2(1) =       6.59
               Pr&gt;chi2 =     0.0103
-
-         failure _d:  died
-   analysis time _t:  stime
 
 
 Wilcoxon (Breslow) test for equality of survivor functions
@@ -827,9 +845,6 @@ Total   |        75          75.00            0
               chi2(1) =       8.99
               Pr&gt;chi2 =     0.0027
 
-         failure _d:  died
-   analysis time _t:  stime
-
 
 Tarone-Ware test for equality of survivor functions
 
@@ -844,9 +859,6 @@ Total   |        75          75.00            0
               chi2(1) =       8.46
               Pr&gt;chi2 =     0.0036
 
-         failure _d:  died
-   analysis time _t:  stime
-
 
 Peto-Peto test for equality of survivor functions
 
@@ -860,11 +872,22 @@ Total   |        75          75.00            0
 
               chi2(1) =       8.66
               Pr&gt;chi2 =     0.0033</code></pre>
-<p><strong>Remarques</strong>:</p>
+<p>Les résultats font apparaître, que l’opération permet d’allonger la durée de survie des personnes.</p>
+<p><br></p>
+<p><strong>Logiciels</strong></p>
+<div class="alert alert-info">
 <ul>
-<li>Les tests du log-rank sont sensibles à l’hypothèse de risque proportionnel (voir modèle <strong>Semi-paramétrique de Cox</strong>).</li>
-<li>Effectuer un test global (multiple/omnibus) sur un nombre important de groupes peut rendre le test très facilement significatif. Il peut être intéressant de tester des courbes deux à deux (idem qu’une regression avec covariable discrète).</li>
-<li>Des méthodes de correction du test multiple sont possibles (cf <code>survminer</code> avec <em>R</em>)</li>
+<li><strong>Sas</strong>: Le test non pondéré et la version Wilcoxon sont données avec l’option <strong><code>strata</code></strong> de la <code>proc lifetest</code>. Attention : ne jamais utiliser la version <em>LR Test</em> qui est biaisée. Pour obtenir d’autres versions du test du log-rank, on ajoute <strong><code>/test=all</code></strong> à l’option <code>strata</code>. Stata: on utilise la commande sts test avec le nom de la version du test si on ne souhaite pas récupère toutes les variantes.</li>
+<li><strong>R</strong>: on utilise la fonction <strong><code>survdiff</code></strong> de la librairie <code>survival</code>. Le résultat du test de Peto-Peto est affiché par défaut (<code>rho=1</code>). Si on souhaite utiliser le test non pondéré, on ajoute l’option <code>rho=0</code>. Pour obtenir le résultat d’un test multiple corrigé (plus d’un degré de liberté), on peut utiliser la fonction <strong><code>pairwise_survdiff</code></strong> de la librairie <strong><code>survminer</code></strong>.</li>
+<li><strong>Python</strong>: Avec la librairie lifelines, on utilise la fonction logrank_test. Quatre variantes sont disponibles (Wilcoxon, Tarone-Ware, Peto-Peto et Fleming-Harrigton). On peut également utiliser la fonction duration.survdiff de statmodels (non pondéré, Wilcoxon - appelé ici Breslow- et Tarone-Ware).<br />
+</li>
+</ul>
+</div>
+<p><br></p>
+<p><strong>En pratique/remarques</strong>:</p>
+<ul>
+<li>Les tests du log-rank sont sensibles à l’hypothèse de risques proportionnels (voir <strong>modèle semi-paramétrique de Cox</strong>). En pratique si des courbes de séjours se croisent, il est déconseillé de les utiliser. Cela ne signifie pas que si les courbes ne se croisent pas, l’hypothèse de proportionnalité des risques est respectée : des rapports de risque peuvent au cours du temps s’accentuer, se réduire ou le cas échant s’inverser (typique d’un croisement).</li>
+<li>Effectuer un test global (multiple/omnibus) sur un nombre important de groupes (ou &gt;2) peut rendre le test très facilement significatif. Il peut être intéressant de tester des courbes deux à deux (idem qu’une régression avec covariable discrète), en conservant un seul degré de liberté. Des méthodes de correction du test multiple sont possibles.</li>
 </ul>
 <p><br></p>
 </div>
@@ -873,26 +896,26 @@ Total   |        75          75.00            0
 <p><BR></p>
 <p><strong>RMST</strong>: <em>Restricted Mean of Survival Time</em><br />
 <br></p>
+<p>La comparaison des RMST est une alternative pertinente aux tests du log-rank car elle ne repose pas sur des hypothèses contraignantes (proportionnalité des risques, distribution des censures), et permet une lecture vivante basée sur des espérances de séjour et non sur la lecture d’une simple p-value traduisant l’homogénéité ou non des fonctions de séjour. Par ailleurs les comparaisons sont souples, on peut choisir un ou plusieurs points d’horizon pour alimenter l’analyse.</p>
+<p><br></p>
+<p><strong>Principe</strong></p>
 <ul>
-<li>L’aire sous la fonction de survie représente la durée moyenne d’attente de l’évènement, soit l’espérance de survie à l’évènement. On est proche d’une mesure démographique type “espérance de vie partielle”.</li>
+<li>L’aire sous la fonction de survie représente la durée moyenne d’attente de l’évènement, soit l’espérance de survie à l’évènement. On est très proche d’une mesure en analyse démographique type « espérance de vie partielle ».</li>
 <li>En présence de censure à droite, il faut borner la durée maximale <span class="math inline">\(t^*&lt;\infty\)</span>. L’espérance de survie s’interprète donc sur un horizon fini.</li>
 <li><span class="math inline">\(RMST =\int_0^{t^*}S(t)dt\)</span>.</li>
 <li>On peut facilement comparer les RMST de deux groupes, sous forme de différence de moyenne ou de ratio.</li>
-<li>Par défaut on définit généralement <span class="math inline">\(t*\)</span> à partir le temps du dernier évènement observé. Il est néanmoins possible de calculer le RMST sur des intervalles plus court. <br> <strong>Avantage</strong><br />
-</li>
-<li>N’est pas sensible au distribution des censures à droite.</li>
-<li>N’est pas sensible à l’hypothèse de proportionalité des risques.</li>
-<li>Permet une lecture en terme de différence des durées moyennes de séjour (survie). <br> <strong>Logiciels</strong><br />
-Implémentée dans Stata, R et SAS (fin 2018 maj 15.1). Implémentée encore plus recemment dans python, mais pas (encore) possibilité de tester les différences.<br />
-Lorsqu’on compare plusieurs caractéristiques, les logiciels n’optent pas, par défaut, pour la même durée maximale.</li>
+<li>Par défaut on définit généralement <span class="math inline">\(t*\)</span> à partir le temps du dernier évènement observé. Il est néanmoins possible de calculer le RMST sur des intervalles plus court, ce qui lui permet une véritable souplesse au niveau de l’analyse..</li>
 </ul>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
- 
- 
-
-Restricted Mean Survival Time (RMST) by arm
+<p><br> <strong>Logiciels</strong></p>
+<div class="alert alert-info">
+<ul>
+<li><p><strong>SAS</strong> : disponible depuis la version 15.1 de SAS/Stat (fin 2018). Les estimations et le résultat du test de comparaison sont récupérables très simplement dans une <code>proc lifetest</code>. Bien que sortie tardivement par rapport aux autres applications standards, les résultats sont particulièrement complets.</p></li>
+<li><p><strong>Stata</strong>: commande externe **<code>strmst2</code>*. La plus ancienne fonction proposée par les logiciels. Au final plus limitée que la solution Sas. J’ai programmé une commande, <code>diffrmst</code>, qui représente graphiquement les estimations des Rmst pour chaque temps d’évènement, leurs différences et les p-value issues des comparaisons.</p></li>
+</ul>
+<p><strong>R</strong> : librairie <strong><code>SurvRm2</code></strong>. Programmée par les mêmes personnes que la commande Stata, la fonction proposée n’est pas très souple.</p>
+<p><strong>Python</strong> : estimation avec une fonction de la librairie <code>lifelines</code>. Pas de test de comparaison.</p>
+</div>
+<pre><code>Restricted Mean Survival Time (RMST) by arm
 -----------------------------------------------------------
    Group |  Estimate    Std. Err.      [95% Conf. Interval]
 ---------+-------------------------------------------------
@@ -908,13 +931,9 @@ RMST (arm 1 - arm 0) |   424.589      149.641      699.537      0.002
 RMST (arm 1 / arm 0) |     2.369        1.513        3.710      0.000
 ------------------------------------------------------------------------</code></pre>
 <p>Ici <span class="math inline">\(t^*\)</span> est égal à 995 jours, soit la durée qui correspond au dernier décès observé lorsqu’une personne a été opérée pour un pontage (surgery=1).<br />
-Sur un horizon de 995 jours, les personnes qui ont été opéré pour un pontage peuvent espérer vivre 735 jours en moyenne, contre 310 jours pour les autres. La durée moyenne de survie est donc deux fois plus importante (rapport des rmst = 2.3 ), soit une différence de 424 jours.</p>
+Sur un horizon de 995 jours, ces individus peuvent espérer vivre 735 jours en moyenne, contre 310 jours pour les autres. La durée moyenne de survie est donc deux fois plus importante pour les personnes opérées d’un pontage (rapport des Rmst = 2.3 ), soit une différence de 424 jours.</p>
 <p><em>Rmst et différences de Rmst à tous les points d’évènement jusqu’à <span class="math inline">\(tmax\)</span></em></p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-
-  +--------------------------------------------------------------------------+
+<pre><code>  +--------------------------------------------------------------------------+
   | _time     _rmst1     _rmst0      _diff          _l         _u         _p |
   |--------------------------------------------------------------------------|
   |     1          1          1          0           0          0          . |
@@ -1028,7 +1047,7 @@ Sur un horizon de 995 jours, les personnes qui ont été opéré pour un pontage
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
