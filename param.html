@@ -13,7 +13,7 @@
 
 <title>Modèles paramétriques</title>
 
-<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -24,6 +24,17 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 
@@ -357,7 +368,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Modèles à risque proportionnel
+    Modèles à risques proportionnels
      
     <span class="caret"></span>
   </a>
@@ -390,13 +401,13 @@ div.tocify {
       <a href="concurrents.html">Risques concurrents</a>
     </li>
     <li>
-      <a href="cure.html">Récurrence et imunité</a>
+      <a href="cure.html">fragilité et imunité</a>
     </li>
   </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Logiciels
+    Programmation
      
     <span class="caret"></span>
   </a>
@@ -432,7 +443,7 @@ div.tocify {
 </div>
 
 
-<p><strong>Objectifs</strong>: présenter (rapidement) la logique des modèles de type AFT, pour Accelerated Failure Time, principalement le modèle de Weibull (et exponentiel).</p>
+<p><strong>Objectifs</strong>: présenter (très/trop rapidement) la logique des modèles de type AFT, pour <strong>Accelerated Failure Time</strong>, principalement le modèle de <em>Weibull</em> (et <em>exponentiel</em>).</p>
 <div id="les-modèles-paramétriques-usuels" class="section level1" number="1">
 <h1 number="1"><span class="header-section-number">1</span> Les modèles paramétriques usuels</h1>
 <ul>
@@ -453,7 +464,7 @@ On dit qu’une année de vie d’un être humain équivaut à 7 années de vie 
 <li>Avantage: l’interprétation des modèles est directement liée aux fonctions de survie. Pratique après une analyse non paramétrique.</li>
 <li>Inconvénient: ne permet pas l’introduction de variables dynamiques.</li>
 </ul>
-<p>Etre humain versus chien: la probabilité qu’un être humain survive 80 ans est égale à la probabilité qu’un chien survive 11 ans (80/7). Le temps s’écoule donc plus vite pour le chien que pour l’être humain. Ce raisonnement peut s’appliquer aux quantile du temps de survie: le temps de survie médian d’un être humain est 7 fois plus élevé que celui d’un chien. En terme d’interprétation des paramètre estimés, si le temps de survie est plus court le risque est plus élevé.</p>
+<p><em>Etre humain versus chien</em>: la probabilité qu’un être humain survive 80 ans est égale à la probabilité qu’un chien survive 11 ans (80/7). Le temps s’écoule donc plus vite pour le chien que pour l’être humain. Ce raisonnement peut s’appliquer aux quantile du temps de survie: le temps de survie médian d’un être humain est 7 fois plus élevé que celui d’un chien. En terme d’interprétation des paramètre estimés, si le temps de survie est plus court le risque est plus élevé.</p>
 </div>
 <div id="principe-de-construction-des-modèles-aft" class="section level2" number="1.2">
 <h2 number="1.2"><span class="header-section-number">1.2</span> Principe de construction des modèles AFT</h2>
@@ -489,10 +500,8 @@ On dit qu’une année de vie d’un être humain équivaut à 7 années de vie 
 <p><br></p>
 <p><strong>Autres lois</strong>: Gompertz (PH seulement), Gamma et Gamma généralisé…..</p>
 <p><strong>Sélection de la loi</strong> On peut sélectionner la loi en comprarant les AIC où les BIC des modèles. Pour le modèle de Weibull, on peut voir s’il ajuste bien les données si la transformation <span class="math inline">\(log(-log(S(t_i)))\)</span> est linéaire par rapport à <span class="math inline">\(log(t_i)\)</span>.</p>
-<p><strong>Exemple (transplantation)</strong><br />
-<br></p>
-<p>Estimation sans covariables <img src="images/Image14.png" /></p>
-<p><strong>Comparaison des AIC</strong><br />
+<p><strong>Exemple (transplantation)</strong></p>
+<p><strong>Comparaison des AIC (sans covariable)</strong><br />
 Weibull: 400.1<br />
 Exponentiel: 461.0<br />
 Gompertz: 409.6<br />
@@ -501,11 +510,7 @@ Gompertz: 409.6<br />
 <div id="exemple-avec-le-modèle-de-weibull" class="section level2" number="1.4">
 <h2 number="1.4"><span class="header-section-number">1.4</span> Exemple avec le modèle de Weibull</h2>
 <p><strong>AFT</strong></p>
-<pre><code>&gt; lantation.dta&quot; , clear
-
-
-
-Weibull AFT regression
+<pre><code>Weibull AFT regression
 
 No. of subjects =          103                  Number of obs    =         103
 No. of failures =           75
@@ -526,13 +531,9 @@ Log likelihood  =    -188.6278                  Prob &gt; chi2      =      0.000
            p |     0.5561     0.0516                        0.4637      0.6669
          1/p |     1.7983     0.1667                        1.4995      2.1566
 ------------------------------------------------------------------------------</code></pre>
-<p>Interprétation?</p>
+<p>Une journée de survie d’une personne qui n’a pas été opéré d’un pontage correspond à 7 jours (soit une semaine) de survie d’une personne opérée. Cette remise à l’échelle de la métrique temporelle entre les deux groupes exprime bien le gain en durée de survie médiane pour les personnes opérées, soit des risques journaliers de décès plus faibles (et plus faibles à valeurs constantes, proportionnalité oblige).</p>
 <p><br> <strong>PH</strong></p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-
-Weibull PH regression
+<pre><code>Weibull PH regression
 
 No. of subjects =          103                  Number of obs    =         103
 No. of failures =           75
@@ -552,14 +553,10 @@ Log likelihood  =    -188.6278                  Prob &gt; chi2      =      0.000
 -------------+----------------------------------------------------------------
            p |   .5560902   .0515523                      .4636974    .6668925
          1/p |   1.798269   .1667084                      1.499492    2.156579
-------------------------------------------------------------------------------</code></pre>
+--------------------------------------------------------------------</code></pre>
 <p>Remarque: <span class="math inline">\(b_{ph} = -\rho \times b_{aft}\)</span>. Ici <span class="math inline">\(-0.556 \times (1.97) = -1.096\)</span></p>
 <p><strong>Modèle de Cox précédemment estimé</strong></p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-
-Cox regression -- Breslow method for ties
+<pre><code>Cox regression -- Breslow method for ties
 
 No. of subjects =          103                  Number of obs    =         103
 No. of failures =           75
@@ -589,7 +586,7 @@ Log likelihood  =   -289.54474                  Prob &gt; chi2      =      0.000
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
