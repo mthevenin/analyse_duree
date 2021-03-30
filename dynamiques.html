@@ -11,7 +11,7 @@
 
 
 
-<title>Variables dynamiques</title>
+<title>Introduction de variables dynamiques</title>
 
 <script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
@@ -368,7 +368,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Modèles à risque proportionnel
+    Modèles à risques proportionnels
      
     <span class="caret"></span>
   </a>
@@ -401,7 +401,7 @@ div.tocify {
       <a href="concurrents.html">Risques concurrents</a>
     </li>
     <li>
-      <a href="cure.html">Récurrence et imunité</a>
+      <a href="cure.html">fragilité et imunité</a>
     </li>
   </ul>
 </li>
@@ -438,29 +438,24 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Variables dynamiques</h1>
+<h1 class="title toc-ignore">Introduction de variables dynamiques</h1>
 
 </div>
 
 
-<p>Cette section sera principalement traitée par l’exemple.</p>
+<p>Cette section sera principalement traitée par l’exemple, et on ne s’intéressera qu’aux variables de type discrète.</p>
 <ul>
-<li>Dans un modèle de durée, une variable dynamique peut-être appréhendée comme une intéraction entre la durée et une variable.</li>
+<li>Dans un modèle de durée, une variable dynamique peut-être appréhendée comme une interaction entre la durée et une variable.</li>
 <li>Pour un modèle de Cox, l’hypothèse de risque proportionnel ne peut donc pas être testée.</li>
 <li>Ne pas tenir compte du caractère dynamique d’une dimension peut conduire à des interprétations erronées.</li>
-<li>La façon de modéliser les dimensions dynamiques en analyse des durées peut conduire à des biais de causalité, en particulier dans sciences sociales, en omettant les effets d’anticipation. C’est une situation classique avec des covariables dynamiques de type discrètes. Les techniques standards ne peuvent modéliser que des effets d’adaptation (la cause - observée - précède l’effet).</li>
+<li>La façon de modéliser les dimensions dynamiques en analyse des durées peut conduire à des biais de causalité, en particulier dans les sciences sociales, en omettant les effets d’anticipation. C’est une situation classique avec des covariables dynamiques de type discrètes. Les techniques standards ne peuvent modéliser que des effets d’adaptation : la cause - observée - précède l’effet</li>
 </ul>
-<p><br> Cette partie sera principalement traité par l’exemple, et on s’intéressera uniquement aux variables de type discrète.</p>
-<div id="facteur-dynamique-traitée-de-manière-fixe" class="section level2" number="0.1">
-<h2 number="0.1"><span class="header-section-number">0.1</span> Facteur dynamique traitée de manière fixe</h2>
-<p>On reprend l’exemple sur les transplantations cardiaques.<br />
-On a dans la base 2 variables: une variable binaire pour savoir si l’individu à été greffé , <strong>tranplant</strong>, et une variable continue tronquée donnant la durée en jour jusqu’à la greffe greffe (0 si pas de greffe), <strong>wait</strong>.<br />
-<br> On va estimer le modèle (de Cox) avec la variable fixe transplant.</p>
-<pre><code>&gt; lantation.dta&quot; , clear
-
-
-
-Cox regression -- Efron method for ties
+<div id="facteur-dynamique-traitée-de-manière-fixe" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Facteur dynamique traitée de manière fixe</h1>
+<p>On reprend l’exemple sur malformation cardiaque, en ajoutant la variable relative à la greffe : la transplantation réduit-elle le risque journalier de décéder (ou augmente la durée de survie).<br />
+On a dans la base 2 variables: une variable binaire pour savoir si l’individu à été greffé, <strong>tranplant</strong>, et une variable continue tronquée donnant la durée en jour jusqu’à la greffe greffe (0 si pas de greffe), <strong>wait</strong>.<br />
+<br> On va dans un premier temps estimer le modèle (de Cox) avec la variable fixe <em>transplant</em>.</p>
+<pre><code>Cox regression -- Efron method for ties
 
 No. of subjects =          103                  Number of obs    =         103
 No. of failures =           75
@@ -476,18 +471,10 @@ Log likelihood  =   -273.21499                  Prob &gt; chi2      =      0.000
    1.surgery |    -0.6547     0.4475    -1.46   0.143      -1.5318      0.2224
 1.transplant |    -1.6484     0.2792    -5.90   0.000      -2.1957     -1.1011
 ------------------------------------------------------------------------------</code></pre>
-<p>Interprétation?</p>
+<p>Interprétation: traité de manière fixe, la greffe réduit le risque journalier de décéder de près de -81%: <span class="math inline">\((1-e^{-1.65})\times100\)</span></p>
 <p>Au niveau des données le modèle à été estimé, pour une personne greffée, à partir de ce mapping:</p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-
-
-
-
-
-  +--------------------------------------------------------------------------+
-  | id   year   age   surgery   transp~t   wait   _d          _t         _t0 |
+<pre><code>+----------------------------------------------------------------------------+
+  | id   year   age   surgery  transplant  wait   _d          _t         _t0 |
   |--------------------------------------------------------------------------|
   | 10     68    42         0          1     12    0           1           0 |
   | 10     68    42         0          1     12    0           2           1 |
@@ -522,23 +509,16 @@ Log likelihood  =   -273.21499                  Prob &gt; chi2      =      0.000
   | 10     68    42         0          1     12    0          53          51 |
   | 10     68    42         0          1     12    1          58          53 |
   +--------------------------------------------------------------------------+</code></pre>
-<p>Problème: une personne est codée transplantée avant le jour le la transplantation. L’effet causal est donc mal mesuré si sa dimension temporelle a été ignorée.<br />
+<p><strong>Problème</strong>: une personne est codée greffée avant le jour de la transplantation. L’effet causal est donc mal mesuré si sa dimension temporelle a été ignorée, ici le jour exact de la greffe. C’est le même principe pour l’évènement, la personne est codée décédée (1) le jour du décès, et vivante avant (0).<br />
 <br></p>
 </div>
-<div id="estimation-avec-une-variable-dynamique" class="section level2" number="0.2">
-<h2 number="0.2"><span class="header-section-number">0.2</span> Estimation avec une variable dynamique</h2>
-<p>Il convient donc de modifier l’information avec le délai d’attente jusqu’à la greffe:<br />
+<div id="estimation-avec-une-variable-dynamique" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Estimation avec une variable dynamique</h1>
+<p>Il convient donc de modifier l’information avec le délai d’attente jusqu’à la greffe. Quel que soit le logiciel, le principe de construction de la variable suit la logique suivante:<br />
 <span class="math inline">\(tvc = transplant\)</span> , si <span class="math inline">\(transplant=1\)</span> et <span class="math inline">\(_t&lt;wait\)</span> alors <span class="math inline">\(tvc=0\)</span>.</p>
-<div id="modèle-de-cox" class="section level3" number="0.2.1">
-<h3 number="0.2.1"><span class="header-section-number">0.2.1</span> Modèle de Cox</h3>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-
-(1,080 real changes made)
-
-
-  +---------------------------------------------------------------------+
+<div id="modèle-de-cox" class="section level3" number="2.0.1">
+<h3 number="2.0.1"><span class="header-section-number">2.0.1</span> Modèle de Cox</h3>
+<pre><code>  +---------------------------------------------------------------------+
   | id   year   age   surgery   tvc   wait   _d          _t         _t0 |
   |---------------------------------------------------------------------|
   | 10     68    42         0     0     12    0           1           0 |
@@ -574,12 +554,8 @@ Log likelihood  =   -273.21499                  Prob &gt; chi2      =      0.000
   | 10     68    42         0     1     12    0          53          51 |
   | 10     68    42         0     1     12    1          58          53 |
   +---------------------------------------------------------------------+</code></pre>
-<p>Estimation du modèle avec la variable dynamique (Cox)</p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-
-Cox regression -- Efron method for ties
+<p>Si on estime le modèle avec cette variable dynamique qui indique clairement le moment de la transition (jour de la greffe):</p>
+<pre><code>Cox regression -- Efron method for ties
 
 No. of subjects =          103                  Number of obs    =       3,668
 No. of failures =           75
@@ -595,33 +571,19 @@ Log likelihood  =   -289.27058                  Prob &gt; chi2      =      0.001
    1.surgery |  -.9829386   .4365524    -2.25   0.024    -1.838566   -.1273116
        1.tvc |  -.0826682   .3047751    -0.27   0.786    -.6800165      .51468
 ------------------------------------------------------------------------------</code></pre>
-<p>Interprétation?</p>
+<p>Interprétation: la greffe n’a plus d’impact significatif sur la survie des individus. Cela ne signifie pas non plus que des personnes ont pu être “sauvée” grâce à cette opération, mais des complications lors de l’opération ou post-opératoires ou des problèmes de rejet du greffon, surtout à une époque où ces techniques étaient à leurs balbutiements, ont été également la source d’une mortalité peut-être un peu plus précoce que si la personne n’avait pas été greffée.</p>
 <p><strong>Solutions avec les logiciels</strong> :</p>
+<div class="alert alert-info">
 <ul>
-<li>R, Stata, Python: la base doit être transformée en format long aux temps d’évènement (<code>survsplit</code> avec R, <code>stsplit</code> avec Stata) avant la création de la variable dynamique.</li>
-<li>Sas: la base n’est pas modifiée et la création de la TVC est faite “en aveugle” dans la procédure <code>phreg</code></li>
+<li><strong>Sas</strong>: la base n’est pas modifiée et la création de la TVC est faite “en aveugle” dans la procédure <code>phreg</code>, après l’instruction <code>model</code>.</li>
+<li><strong>R</strong>, Stata, Python: la base doit être transformée en format long aux temps d’évènement (<code>survsplit</code> avec R, <code>stsplit</code> avec Stata) avant la création de la variable dynamique.</li>
 </ul>
 </div>
-<div id="modèle-à-temps-discret" class="section level3" number="0.2.2">
-<h3 number="0.2.2"><span class="header-section-number">0.2.2</span> Modèle à temps discret</h3>
-<p>Même principe pour la construction de la variable dynamique</p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  +---------------------------------------------+
+</div>
+<div id="modèle-à-temps-discret" class="section level3" number="2.0.2">
+<h3 number="2.0.2"><span class="header-section-number">2.0.2</span> Modèle à temps discret</h3>
+<p>Même principe pour la construction de la variable dynamique. Pour rappel l’échelle temporelle est le mois, et on a créé en amont une variable qui transforme les jour d’attente en mois (<em>mwait</em>).</p>
+<pre><code>+---------------------------------------------+
   | id   year   age   surgery   tvc   mwait   t |
   |---------------------------------------------|
   | 13     68    54         0     0       2   1 |
@@ -645,19 +607,18 @@ Log likelihood = -230.32152                     Pseudo R2         =     0.1645
          age |    .033829   .0149503     2.26   0.024      .004527    .0631311
      surgery |  -1.007795   .4490177    -2.24   0.025    -1.887854   -.1277365
          tvc |  -.0543011   .3114096    -0.17   0.862    -.6646528    .5560505
-       _cons |   7.060589   5.305278     1.33   0.183    -3.337566    17.45874
-------------------------------------------------------------------------------</code></pre>
-</div>
-</div>
-<div id="quelques-remarques-sur-les-problèmes-de-causalité-avec-les-variables-dynamiques" class="section level2" number="0.3">
-<h2 number="0.3"><span class="header-section-number">0.3</span> Quelques remarques sur les problèmes de causalité avec les variables dynamiques</h2>
+------------------------------------------------------------------------------
+Remarque : la constante n’est pas reportée, les valeurs de la référence n’ayant pas grand  sens (année et âge à 0)
+</code></pre>
+<p><strong>Remarques (important) – à revoir -</strong></p>
 <ul>
-<li>Rappel: la cause précède toujours l’effet.</li>
-<li>Lorsque l’évènement étudié n’est pas intrasèquement de type absorbant (décès), la “cause” peut se manifester après la survenue de l’évènement étudié.</li>
-<li>Les modèles de durée standards ne peuvent pas gérer ces situations car l’observation sort du risque après la survenue de l’évènement.</li>
-<li>Logique d’adaptation: la “cause” identifiée est mesurée avant l’évènement étudié [<strong>OK</strong>].</li>
-<li>Logique d’anticipation: la “cause” identifiée est mesurée après l’évènement étudié [<strong>Problème</strong>]. L’origine causale est bien antérieure à l’évènement, mais elle n’est pas observable.</li>
+<li><p>Rappel: la cause doit précède l’effet.</p></li>
+<li><p>Lorsque l’évènement étudié n’est pas intrasèquement de type absorbant comme le décès, la « cause » peut se manifester ou être observée après la survenue de l’évènement étudié. Les modèles de durée standards ne peuvent pas gérer ces situations car l’observation sort du risque après la survenue de l’évènement. Même si la cause est bien mesurée avant l’évènement d’intérêt, un « choc » n’est peut-être qu’un point final d’un processus causal antérieur: une séparation est rarement un évènement ponctuel, une phase plus ou moins longue de mésentente dans le couple lui a vraisemblablement préexister. La datation du début d’un processus causal n’est donc pas toujours facile à mesurer.</p></li>
+<li><p><strong>Logique d’adaptation</strong>: la « cause » identifiée est mesurée avant l’évènement étudié.</p></li>
+<li><p><strong>Logique d’anticipation</strong>: la « cause » identifiée est mesurée après l’occurrence de l’évènement étudié. L’origine causale est bien antérieure à l’évènement, mais elle n’est pas directement observable.</p></li>
+<li><p>Lorsque les variables dynamiques sont de type continue, une partie de ces problèmes disparaissent, mais on doit aussi considérer des phénomènes d’anticipation sur les valeurs attendues de ces variables, postérieures à l’évènement étudié.</p></li>
 </ul>
+</div>
 </div>
 
 
