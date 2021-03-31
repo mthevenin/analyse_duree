@@ -444,10 +444,10 @@ div.tocify {
 
 
 <p><strong>Objectifs</strong>: présenter (très/trop rapidement) la logique des modèles de type AFT, pour <strong>Accelerated Failure Time</strong>, principalement le modèle de <em>Weibull</em> (et <em>exponentiel</em>).</p>
-<div id="les-modèles-paramétriques-usuels" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Les modèles paramétriques usuels</h1>
+<div id="principes" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Principes</h1>
 <ul>
-<li>Dans les modèles paramétriques, la durée de survie est distribuée selon une loi dont la densité <span class="math inline">\(f(t)\)</span> s’exprime en fonction de paramètres (de la loi).<br />
+<li>Dans les modèles paramétriques usuels, la durée de survie est distribuée selon une loi dont la densité <span class="math inline">\(f(t)\)</span> s’exprime en fonction de paramètres (de la loi).<br />
 </li>
 <li>Pour utiliser l’approche paramétrique, il faut avoir de bonnes raisons de penser que les temps de survie sont approximativement distribués selon une certaine loi connue plutôt qu’une autre.</li>
 <li>La majorité des distributions reposent sur une hypothèse dite AFT (<strong>Acceleretad Failure Time</strong>). Une autre repose seulement sur l’hypothèse PH (Gompertz), certaines peuvent selon la paramétrisation reposer sur les deux (exponentiel et Weibull).</li>
@@ -473,8 +473,9 @@ On dit qu’une année de vie d’un être humain équivaut à 7 années de vie 
 <p><span class="math inline">\(b\)</span> est un paramètre d’échelle identique pour toutes les observations et <span class="math inline">\(u_i\)</span> un terme terme d’erreur qui suit une loi de distribution de densité <span class="math inline">\(f(u)\)</span>. C’est la forme de <span class="math inline">\(f(u)\)</span> qui définie le type de modèle paramétrique.</p>
 <p>Par simple réecriture: <span class="math inline">\(f(u_i) = f(\frac{log(t_i)- \alpha_0 - \alpha_1X_i}{b})\)</span></p>
 </div>
-<div id="quelques-lois-de-distibution-théoriques" class="section level2" number="1.3">
-<h2 number="1.3"><span class="header-section-number">1.3</span> Quelques lois de distibution théoriques</h2>
+</div>
+<div id="quelques-modèles-paramétriques-usuels" class="section level1" number="2">
+<h1 number="2"><span class="header-section-number">2</span> Quelques modèles paramétriques usuels</h1>
 <p><strong>Modèle exponentiel et de Weibull</strong><br />
 <br></p>
 <p><strong>Weibull</strong></p>
@@ -507,8 +508,8 @@ Exponentiel: 461.0<br />
 Gompertz: 409.6<br />
 <em>Log-logistique: 391.8</em></p>
 </div>
-<div id="exemple-avec-le-modèle-de-weibull" class="section level2" number="1.4">
-<h2 number="1.4"><span class="header-section-number">1.4</span> Exemple avec le modèle de Weibull</h2>
+<div id="exemple-avec-le-modèle-de-weibull" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Exemple avec le modèle de Weibull</h1>
 <p><strong>AFT</strong></p>
 <pre><code>Weibull AFT regression
 
@@ -531,8 +532,8 @@ Log likelihood  =    -188.6278                  Prob &gt; chi2      =      0.000
            p |     0.5561     0.0516                        0.4637      0.6669
          1/p |     1.7983     0.1667                        1.4995      2.1566
 ------------------------------------------------------------------------------</code></pre>
-<p>Une journée de survie d’une personne qui n’a pas été opéré d’un pontage correspond à 7 jours (soit une semaine) de survie d’une personne opérée. Cette remise à l’échelle de la métrique temporelle entre les deux groupes exprime bien le gain en durée de survie médiane pour les personnes opérées, soit des risques journaliers de décès plus faibles (et plus faibles à valeurs constantes, proportionnalité oblige).</p>
-<p><br> <strong>PH</strong></p>
+<p>Une journée de survie d’une personne qui n’a pas été opéré d’un pontage correspond à 7 jours (soit une semaine) de survie d’une personne opérée. Cette remise à l’échelle de la métrique temporelle entre les deux groupes exprime bien le gain en durée de survie médiane pour les personnes opérées, soit des risques journaliers de décès plus faibles (et plus faibles à valeurs constantes, proportionnalité oblige). <br></p>
+<p><strong>PH</strong></p>
 <pre><code>Weibull PH regression
 
 No. of subjects =          103                  Number of obs    =         103
@@ -572,7 +573,6 @@ Log likelihood  =   -289.54474                  Prob &gt; chi2      =      0.000
      surgery |   -.984869   .4362881    -2.26   0.024    -1.839978   -.1297601
 ------------------------------------------------------------------------------</code></pre>
 <p>Attention: on ne peux pas comparer la qualité d’un modèle paramétrique à celle d’un modèle de Cox par des critères type AIC ou BIC. Les deux méthodes d’estimation diffèrent.</p>
-</div>
 </div>
 
 
