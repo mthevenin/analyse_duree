@@ -13,7 +13,7 @@
 
 <title>Risques concurrents</title>
 
-<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -24,6 +24,17 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 
 
@@ -357,7 +368,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Modèles à risque proportionnel
+    Modèles à risques proportionnels
      
     <span class="caret"></span>
   </a>
@@ -390,7 +401,7 @@ div.tocify {
       <a href="concurrents.html">Risques concurrents</a>
     </li>
     <li>
-      <a href="cure.html">Récurrence et imunité</a>
+      <a href="cure.html">fragilité et imunité</a>
     </li>
   </ul>
 </li>
@@ -432,32 +443,27 @@ div.tocify {
 </div>
 
 
-<div id="présentation-du-problème" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Présentation du problème</h1>
+<p>Le problème des événements multiples dans les analyses de survie a été posée dans les années 1970 avec la notion de “<strong>risques concurrents</strong>” (competing risks) : il s’agit d’événements survenant au cours du suivi et qui empêchent l’observation de l’événement d’intérêt ou modifient sa probabilité d’occurrence.</p>
 <ul>
-<li>On étudie un processus dont l’échéance a plusieurs modalités (cause): la mortalité par cause, les types de sortie du chômage (formation, emploi, radiation), les types de sortie de l’emploi (chômage, longue maladie, sortie du marché du travail hors retraite) ,les lieux de migration, la mise en union par mariage ou cohabitation, type de rupture d’union (séparation-divorce, veuvage).</li>
-<li>L’analyse des risques concurrents est un cas particulier des modèle “multi-états” où les différents risques sont considérés comme absorbants.</li>
-<li>En présence de risques concurrents, l’estimation de Kaplan-Meier ne peut se faire que sous <strong>l’hypothèse d’indépendance entre chacun des risques</strong>. Sinon l’estimateur de Kaplan-Meier n’est plus une probabilité.</li>
-<li>Une estimation de type KM d’un évènement en concurrence avec d’autres impose que ces derniers soient traités comme des censures à droites non informatives. Mais il n’est pas possible de tester cette hypothèse.</li>
+<li><p>On étudie un processus dont l’occurence a plusieurs modalités (causes): la mortalité par cause, les types de sortie du chômage (formation, emploi, radiation), les types de sortie de l’emploi (chômage, longue maladie, sortie du marché du travail hors retraite), les lieux de migration ou les espaces de mobilité résidentielle, type de rupture d’union (séparation-divorce, veuvage). Déjà abordé dans la partie théorie, avec un recueil de données de type prospectif les ou des “perdu.e.s de vue” peuvent difficilement être assimilés à des sorties d’observation non informatives (censures).</p></li>
+<li><p>L’analyse des risques concurrents est un cas particulier des modèles “multi-états” avec différents risques considérés comme absorbants.</p></li>
+<li><p>En présence de risques concurrents, l’estimation de Kaplan-Meier ne peut se faire que sous <strong>l’hypothèse d’indépendance entre chacun des risques</strong>. Sinon l’estimateur de Kaplan-Meier n’est plus une probabilité.</p></li>
+<li><p>Une estimation de type KM d’un évènement en concurrence avec d’autres impose que ces derniers soient traités comme des censures à droites non informatives. Mais il n’est pas possible de tester cette hypothèse.</p></li>
 </ul>
-<div id="risques-cause-specific-et-biais-sur-les-estimateurs-km" class="section level2" number="1.1">
-<h2 number="1.1"><span class="header-section-number">1.1</span> Risques “cause-specific” et biais sur les estimateurs KM</h2>
+<div id="risques-cause-specific-et-biais-sur-les-estimateurs-km" class="section level1" number="1">
+<h1 number="1"><span class="header-section-number">1</span> Risques “cause-specific” et biais sur les estimateurs KM</h1>
 <ul>
-<li>Si les risques ne sont pas indépendants les uns par rapport aux autres, la somme des estimateurs de (1-KM) pour chaque risque n’est pas égale - elle est <strong>supérieure</strong> - à l’estimateur de (1-KM) où les risques concurrents sont regroupés en un évènement unique.</li>
-<li>Le risque calculé en considérant les risques concurrents comme des censures à droite est appelé “cause-specific risk”.</li>
+<li>Si les risques ne sont pas indépendants les uns par rapport aux autres, la somme des estimateurs de (1-KM) pour chaque risque n’est pas égale - elle est <strong>supérieure</strong> - à l’estimateur de (1-KM) où les risques concurrents sont regroupés en un évènement unique (par exemple le décès).</li>
+<li>Le risque calculé en considérant les risques concurrents comme des censures à droite est appelé "<strong>cause-specific risk</strong>.</li>
 </ul>
 <p><strong>Cause specific risk</strong><br />
-Pour le risque de type <span class="math inline">\(k\)</span>, le risque “cause-spécifique” (traduction propre?) en <span class="math inline">\(t_i\)</span> est égal à:<br />
+Pour le risque de type <span class="math inline">\(k\)</span>, le risque <em>cause-spécifique</em> (traduction?) en <span class="math inline">\(t_i\)</span> est égal à:<br />
 <span class="math display">\[h_k(t_i)=\frac{d_{i,k}}{R_i}\]</span> Où <span class="math inline">\(d_{i,k}\)</span> est le nombre d’évènement de type <span class="math inline">\(k\)</span> survenu en <span class="math inline">\(t_i\)</span> et <span class="math inline">\(R_i\)</span> la population soumise en <span class="math inline">\(t_i\)</span>.</p>
-<p>Illustration du biais avec l’estimation standard: <span class="math inline">\(1-KM_k&gt;1\)</span></p>
-<p><img src="images/Image15.png" /></p>
-<p>Conséquence: si les risques ne sont pas indépendants, la fonction de survie n’exprime plus une probabilité.</p>
+<p>Illustration du biais avec l’estimation standard, “other causes of death” traitées comme des censures à droite : <span class="math inline">\(1-KM_k&gt;1\)</span></p>
+<p>Conséquence: si les risques ne sont pas indépendants, la fonction de survie estimée avec la méthode Kaplan Meier n’exprime plus une probabilité.</p>
 <p><strong>Exemple sur les décès causés par une malformation cardiaque aigüe</strong><br />
-Dans la base d’origine, il n’y a pas cette dimension de risque concurrent. Une sortie concurrente a donc été simulée, qu’on labellisera “suicide” (problème tirer de l’analyse du registre mucoviscidose traité par l’Ined). Ce risque entre en concurrence avec le décès directement issu de la malformation (détresse respiratoire aigüe).</p>
-<pre><code>&gt; ear
-(Heart transplant data)
-
-           |    Survival Status
+Dans la base d’origine, il n’y a pas directement cette dimension de risque concurrent, même si on trouve dans la littérature médicale des études prenant le décès post greffe comme un risque de ce type. Les données, avec beaucoup de décès post-opératoire, et mes connaissances ne me permettent de me « risquer » dans cette démarche. Une sortie concurrente a donc été simulée sans plus de précision (cause2), que l’on considèrera non strictement indépendante à la cause d’intérêt. Ce risque entre en concurrence avec la cause du décès directement reliée à la malformation cardiaque, que la personne ait été transplanté ou non.</p>
+<pre><code>           |    Survival Status
            |       (1=dead)
     compet |         0          1 |     Total
 -----------+----------------------+----------
@@ -465,26 +471,23 @@ Dans la base d’origine, il n’y a pas cette dimension de risque concurrent. U
          1 |         0         56 |        56 
          2 |         0         19 |        19 
 -----------+----------------------+----------
-     Total |        28         75 |       103 </code></pre>
-<p>Variable compet: cause 1 =&gt; décès directement provoquer par la malformation, 2 =&gt; suicide.</p>
-<p>Lorsqu’on a analysé le décès par la méthode KM, la proportion de survivants était de 15%, soit une proportion de personnes décédées de 85%.</p>
-<p>Si on applique la méthode de Kaplan Meier à la cause 1 en traitant la cause 2 (suicide) comme une censure à droite, et en analyse la cause 2 en traitant la cause 1 comme une censure à droite:</p>
-<p>% de personnes décédées par insuffisance respiratoire: 83% % de personne décédées par sucide: 12%</p>
-<p>La somme de ces 2 proportion est égale à 95% soit 10 points au dessus de l’estimateur KM sur l’évènement unique.</p>
+     Total |        28         75 |       103 
+</code></pre>
+<p>Variable compet: cause 1 =&gt; décès directement provoquer par la malformation, 2 =&gt; autre cause.</p>
+<p>Lorsqu’on a analysé le décès par la méthode KM, la proportion de survivant.e.s était de 15%.</p>
+<p>Si on applique la méthode de Kaplan Meier à la cause 1 en traitant la cause 2 comme une censure à droite, et à la cause 2 en traitant la cause 1 comme une censure à droite, puis en sommant les deux estimateurs, la fonction de répartition excède 100% au bout de 1000 jours environs. La proportion de survivant.e.s est donc négative.</p>
 <p><img src="images/Image16.png" /></p>
-<p>Les deux risques ne sont donc pas indépendants. Intuitivement le suicide a pu être causé, au moins en partie pour certaines personnes, par leur état de santé.</p>
-</div>
 </div>
 <div id="estimations-en-présence-de-risques-concurrents" class="section level1" number="2">
 <h1 number="2"><span class="header-section-number">2</span> Estimations en présence de risques concurrents</h1>
-<div id="estimation-non-paramétrique" class="section level3" number="2.0.1">
-<h3 number="2.0.1"><span class="header-section-number">2.0.1</span> Estimation non paramétrique</h3>
+<div id="estimation-non-paramétrique" class="section level2" number="2.1">
+<h2 number="2.1"><span class="header-section-number">2.1</span> Estimation non paramétrique</h2>
 <ul>
-<li>Estimateur de Nelson Aalen: il s’agit du risque instantané cumulé. Comme il ne s’agit pas d’une probabilité, il a été longtemps utilisé pour mesurer l’incidence dans une logique de risques “cause spécifique”:</li>
+<li>Utiliser l’estimateur de Nelson Aalen: il s’agit du risque instantané cumulé. Comme il ne s’agit pas d’une probabilité, il a été longtemps utilisé pour mesurer l’incidence en présence de risques concurrents dans une logique dite “cause spécifique”:</li>
 </ul>
 <p><span class="math display">\[H_k (t_i)=\sum_{t_i\leq t}\left(\frac{e_{i,k}}{n_i}\right) \]</span></p>
 <ul>
-<li>L’estimateur le plus utilisé est <strong>la fonction d’incidence cumulée</strong> (Kalbfleisch-Prentice, Marubini-Valscchi):
+<li>L’estimateur le plus utilisé est la fonction dite <strong>d’incidence cumulée</strong> (Kalbfleisch-Prentice, Marubini-Valscchi):
 <ul>
 <li>Il repose sur une probabilité tout en supportant la non indépendance des risques.</li>
 <li>Son interprétation est identique à la fonction de répartition <span class="math inline">\(F(t)=1-S(t)\)</span>. Cette fonction est donc croissante.</li>
@@ -498,16 +501,11 @@ Dans la base d’origine, il n’y a pas cette dimension de risque concurrent. U
 </ul>
 <p><span class="math display">\[IC_k(t_i)= \sum_{t_i\leq t}S(t_i-1)h_k(t_i)\]</span></p>
 <ul>
-<li>L’incidence cumumée de <span class="math inline">\(k\)</span> en <span class="math inline">\(t_i\)</span> ne dépend donc pas seulement des individus ayant observé ce risque, mais aussi du nombre de personnes qui n’ont pas encore observés les autres risques. Cette dernière information est donnée par <span class="math inline">\(S(t_i-1)\)</span>.</li>
-<li>L’incidence cumulée peut ainsi s’interpréter comme la proportion d’individus qui sont sorti du risque jusqu’en <span class="math inline">\(t_i\)</span> en raison de <span class="math inline">\(k\)</span>.</li>
+<li>Les vaurs prises par cette fonction pour la cause <span class="math inline">\(k\)</span> ne dépendent donc pas seulement des individus ayant observé l’évènement à partir de cette seule cause, mais aussi du nombre de personnes qui n’ont pas encore observés l’évènement à partir des autres causes identifiées. Cette dernière information est donnée par <span class="math inline">\(S(t_i-1)\)</span>.</li>
+<li>L’incidence cumulée peut ainsi s’interpréter comme la proportion d’individus qui sont sortis du risque jusqu’en <span class="math inline">\(t_i\)</span> en raison de la cause <span class="math inline">\(k\)</span>.</li>
 </ul>
 <p><img src="images/Image17.png" /></p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-(Heart transplant data)
-
-            failure:  compet == 1
+<pre><code> failure:  compet == 1
  competing failures:  compet == 2
 
     Time       CIF         SE     [95% Conf. Int.]
@@ -563,6 +561,7 @@ Dans la base d’origine, il n’y a pas cette dimension de risque concurrent. U
     1032    0.6039     0.0561     0.4850    0.7036
     1386    0.6343     0.0584     0.5084    0.7362
 
+
             failure:  compet == 2
  competing failures:  compet == 1
 
@@ -584,117 +583,110 @@ Dans la base d’origine, il n’y a pas cette dimension de risque concurrent. U
      334    0.1615     0.0370     0.0970    0.2406
      342    0.1730     0.0383     0.1058    0.2540
      675    0.1910     0.0414     0.1177    0.2777
-     979    0.2138     0.0457     0.1321    0.3086</code></pre>
+     979    0.2138     0.0457     0.1321    0.3086
+</code></pre>
+<p>En présence du risque concurrent, et traité comme tel, 50% des personnes sont décédées directement de la malformation cardiaque au bout de 308 jours (200 jours avec une estimation de type « cause specific »).</p>
+<p><br></p>
+<p>On peut vérifier que la somme des estimateurs permet d’obtenir la survie toutes causes confondues. Il n’y a pas de surprise à cela, dans l’estimateur Marubini-Valscchi la survie d’ensemble intervient comme un facteur de pondération de la mesure d’intensité dite « cause-specific ».</p>
+<p><br> <strong>Logiciels</strong><br />
+L’estimation avec des risques de type « cause-specific » demande juste de recoder la variable évènement/censure, en glissant les risques concurrents en censure à droite.</p>
+<div class="alert alert-info">
+<ul>
+<li><p><strong>Sas</strong>: maintenant directement estimable avec <code>proc lifetest</code>. Il suffit d’indiquer le ou les risques d’intérêt dans l’instruction indiquant la variable de durée et de censure avec l’option <strong><code>failcode=valeur</code></strong>.</p></li>
+<li><p><strong>Stata</strong>: Estimation avec la commande externe <strong><code>stcompet</code></strong>. La commande génère des variables qui demande des manipulations supplémentaires pour afficher les résultats sous forme de tableau par exemple. On peut utiliser et préférer la commande externe <strong><code>stcomlist</code></strong> pour afficher directement les résultats, ou <code>stcompet</code> (MT) qui permet également d’afficher le graphique des fonctions d’incidence.</p></li>
+<li><p><strong>R</strong>: la librairie <strong><code>cmprsk</code></strong> permet d’estimer simplement les incidences cumulées avec la fonction <strong><code>cuminc</code></strong>.</p></li>
+<li><p><strong>Python</strong> [pas encore testé – trouvé le 30-03-21]: visiblement un wrapper de la librairie R est disponible. Même nom de librairie <strong><code>cmprsk</code></strong>.</p></li>
+</ul>
+</div>
 <p><strong>Compararaison des CIF</strong> <br></p>
 <ul>
-<li>Test de <strong>Pepe &amp; Mori</strong>: teste l’aire entre 2 courbes d’incidences et seulement 2. Disponible avec Stata (commande externe), pour SAS, il faut récupérer une macro externe (<a href="https://onlinelibrary.wiley.com/doi/pdf/10.1002/9780470870709.app2" class="uri">https://onlinelibrary.wiley.com/doi/pdf/10.1002/9780470870709.app2</a>).</li>
-<li>Test de <strong>Gray</strong>: est basé sur une autre mesure du risque en évènement concurrent. Il s’agit du “subdistribution risk” (“risque de sous-répartition”, A.Latouche). Son interprétation n’est pas aisé, mais il est directement lié à l’estimation des CIF. Disponible avec SAS et R.<br />
-</li>
-<li>On peut toujours tester les différences entre les risques “causes spécifiques” avec le test du log-rank (estimateur Nelson-Aalen). Mais on ne teste pas des différences entre CIF.<br />
-<br></li>
+<li><p><strong>Test d’homogénéité de Gray</strong>: est basé sur une autre mesure du risque en évènement concurrent. Il s’agit du « subdistribution risks (« risque de sous-répartition », A.Latouche). Son interprétation n’est pas aisée car les personnes ayant observé un risque concurrent sont remises dans le Risk Set. Mais il est directement lié à l’estimation des CIF. Disponible avec SAS, R et Python. Il est également sensible l’hypothèse de proportionnalité et à la distribution des censures à droites entre les groupes comparés. A ma connaissance il n’y a pas de variantes pondérées.</p></li>
+<li><p><strong>Test de Pepe &amp; Mori</strong>: teste directement deux courbes d’incidences et seulement 2. Il y a une version du test qui repose sur une autre fonction directement tirée des incidences, la CPF (Conditional Propability Function), que je ne traite pas afin de ne pas rajouter un concept de supplémentaire.</p></li>
 </ul>
-<p><strong>Test de Gray (R)</strong></p>
-<pre><code>Warning: package &#39;cmprsk&#39; was built under R version 3.4.4</code></pre>
+<p><br></p>
+<p><strong>Test de Gray pour la variable surgery</strong></p>
 <pre><code>Tests:
-       stat         pv df
-1 5.7834605 0.01617766  1
-2 0.1293076 0.71915098  1
-Estimates and Variances:
-$est
-           500      1000      1500
-0 1 0.56009367 0.6074425 0.6738971
-1 1 0.09090909 0.3333333        NA
-0 2 0.17076543 0.1931938 0.1931938
-1 2 0.18181818 0.3030303        NA
+         stat      pv    df
+cause1 5.7834605 0.0161  1
+cause2 0.1293076 0.7191  1</code></pre>
+<p><img src="images/Image21.png" /></p>
+<p><strong>Test de Pepe-Mori pour la variable surgery</strong></p>
+<pre><code>Main event failure:  compet == 1
+Chi2(1) = 6.2028  -  p =  0.01275
 
-$var
-            500        1000        1500
-0 1 0.002938061 0.003399588 0.004176484
-1 1 0.008347107 0.031135712          NA
-0 2 0.001650185 0.002076694 0.002076694
-1 2 0.015060708 0.026432450          NA</code></pre>
-</div>
-<div id="estimation-semi-paramétrique-et-paramétrique" class="section level2" number="2.1">
-<h2 number="2.1"><span class="header-section-number">2.1</span> Estimation semi paramétrique et paramétrique</h2>
-<p><strong>Modélisation des risques ‘cause-specific’</strong><br />
-Modèle de Cox «standard» pour chaque évènement, les évènements concurrents sont traités comme des censures à droite. Aucune interprétation sur les incidences cumulées ne peut-être faite.</p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+Competing event failure:  compet == 2
+Chi2(1) = 1.8796  -  p =  0.17038</code></pre>
+<strong>Logiciels</strong><br />
 
-         failure _d:  compet == 1
-   analysis time _t:  stime
-
-Iteration 0:   log likelihood = -222.54837
-Iteration 1:   log likelihood = -215.02113
-Iteration 2:   log likelihood = -214.60293
-Iteration 3:   log likelihood = -214.59123
-Iteration 4:   log likelihood = -214.59121
-Refining estimates:
-Iteration 0:   log likelihood = -214.59121
-
-Cox regression -- Breslow method for ties
-
-No. of subjects =          103                  Number of obs    =         103
-No. of failures =           56
-Time at risk    =        31938
-                                                LR chi2(3)       =       15.91
-Log likelihood  =   -214.59121                  Prob &gt; chi2      =      0.0012
-
-------------------------------------------------------------------------------
-          _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-        year |   .8972419   .0690441    -1.41   0.159     .7716286    1.043304
-         age |   1.028731   .0158704     1.84   0.066     .9980913    1.060312
-     surgery |   .2421233   .1459256    -2.35   0.019     .0743062    .7889478
-------------------------------------------------------------------------------</code></pre>
-<p><strong>Modèle de Fine-Gray: subdistribution hazard regression</strong><br />
-Modèle de type semi-paramétrique avec une redéfinition du risque lié à l’estimation des incidences cumulées (voir test de Gray). La différence avec le Cox classique réside dans le calcul du risk-set : les évènements concurrents ne sont pas considérés comme des censures, on laisse les individus leur «survivre» jusqu’à la durée maximumale observée dans l’échantillon.</p>
-<p>Pour les questions liées à l’interprétation de ces deux types de modèles, se reporter à: <a href="https://onlinelibrary.wiley.com/doi/epdf/10.1002/sim.7501" class="uri">https://onlinelibrary.wiley.com/doi/epdf/10.1002/sim.7501</a></p>
-<p><strong>Modèle à temps discret</strong></p>
+<div class="alert alert-info">
 <ul>
-<li>Il s’agit d’une extension du modèle à évènement unique (toutes causes regroupées) avec le modèle logistique multinomial à temps discret.</li>
-<li>S’il ne permet pas une interprétation dirigée sur les incidences cumulées, les risques concurrents ne sont pas traitées comme des censures à droite.</li>
+<li><p><strong>Sas</strong>: le test de Gray est estimé si on ajoute l’option strata=nom_variable à la proc lifetest sous risque concurrent (voir encadré précédent). Le test de Pepe-Mori est disponible via une macro externe (<code>%compcif</code>: non testée) :</p></li>
+<li><p><strong>Stata</strong>: Le test de Gray n’est pas disponible, il faut passer par une exécution de la fonction cuminc de la librairie R cmprsk directement dans stata (voir la commande rsource). Pour faire plus simple, on peut estimer le modèle de Fine-Gray avec une seule variable (discrète). Le résultat est comparable à celui du test (voir plus bas). Le test de Pepe-Mori est disponible via la commande externe stpepemori.</p></li>
+<li><p><strong>R</strong>: On ajoute une variable à la fonction cuminc de la librairie cmprsk. Pas de test de Pepe-Mori sur les fonctions d’incidence à ma connaissance.</p></li>
+<li><p><strong>Python</strong>: même remarque que pour l’estimation des courbes, utiliser le wrapper de cmprsk [à tester]</p></li>
 </ul>
-<p>Ici le modèle à temps discret a été estimé sur les jours d’exposition, en splittant la base aux temps d’évènement (cf Cox)</p>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-
-
-
-
-
-
-Iteration 0:   log likelihood = -320.63742  
-Iteration 1:   log likelihood = -293.94986  
-Iteration 2:   log likelihood = -287.00623  
-Iteration 3:   log likelihood = -286.85587  
-Iteration 4:   log likelihood = -286.85569  
-Iteration 5:   log likelihood = -286.85569  
-
-Multinomial logistic regression                 Number of obs     =      1,164
-                                                LR chi2(8)        =      67.56
+</div>
+</div>
+</div>
+<div id="estimation-semi-paramétrique-et-à-temps-discret" class="section level1" number="3">
+<h1 number="3"><span class="header-section-number">3</span> Estimation semi paramétrique et à temps discret</h1>
+<div id="modèles-semi-paramétriques" class="section level2" number="3.1">
+<h2 number="3.1"><span class="header-section-number">3.1</span> Modèles Semi paramétriques</h2>
+<p>Cette présentation sera plutôt brève. Dans le domaine des sciences sociales, je préconise plutôt l’utilisation d’un modèle multinomial à temps discret de type logistique. Le modèle de Cox en présence de risques concurrent n’est valable que dans une logique de risques « cause-specific », le modèle de Fine et Gray bien que directement relié à l’estimation des incidences cumulées, repose sur une définition du risque (de sous répartition) dont l’interprétation n’est pas naturelle. Il est également soumis à l’hypothèse de proportionnalité des risques.<br />
+<br></p>
+<p><strong>Modélisation des risques « cause-specific » : Cox</strong><br />
+Modèle de Cox «standard» pour chaque évènement, les évènements concurrents sont traités comme des censures à droite. Aucune interprétation sur les fonctions d’incidence ne peut-être faite.</p>
+<p><br></p>
+<p><strong>Modèle de Fine-Gray: subdistribution hazard regression</strong><br />
+Modèle de type semi-paramétrique avec une redéfinition du risque lié à l’estimation des fonctions d’incidence (voir test de Gray). La différence avec le Cox classique réside dans le calcul du risk-set : les évènements concurrents ne sont pas considérés comme des censures, on laisse les individus leur « survivre » jusqu’à la durée maximale observée dans l’échantillon. L’interprétation n’est donc pas très intuitive (Fine et Gray le soulignent). Ce modèle est relativement contreversé.</p>
+<p><br></p>
+<p>Pour les questions liées à l’interprétation de ces deux types de modèles, se reporter à: <a href="https://onlinelibrary.wiley.com/doi/epdf/10.1002/sim.7501" class="uri">https://onlinelibrary.wiley.com/doi/epdf/10.1002/sim.7501</a></p>
+<p><strong>Logiciels (modèle de Fine &amp; Gray)</strong></p>
+<div class="alert alert-info">
+<ul>
+<li><p><strong>Sas</strong>: même principe que pour l’estimation non paramétrique, on ajoute l’option <code>eventcode=valeur</code> à l’instruction <code>model</code> de la <code>proc phreg</code>.</p></li>
+<li><p><strong>Stata</strong>: on utilise la commande interne <strong><code>stcrreg</code></strong>.</p></li>
+<li><p><strong>R</strong>: on utilise la fonction <strong><code>crr</code></strong> du package cmprsk.</p></li>
+<li><p><strong>Python</strong> : même remarque que pour les encadrés précédents pour le wrapper de la librairie R.</p></li>
+</ul>
+</div>
+</div>
+<div id="modèle-à-temps-discret" class="section level2" number="3.2">
+<h2 number="3.2"><span class="header-section-number">3.2</span> Modèle à temps discret</h2>
+<ul>
+<li><p>Il s’agit d’une extension du modèle à temps discret à évènement unique (toutes causes regroupées) avec ici le modèle logistique multinomial.</p></li>
+<li><p>S’il ne permet pas une interprétation sur les fonctions d’incidences, les risques concurrents ne sont pas traitées comme des censures à droite et sont estimés simultanément à la cause d’intérêt.</p></li>
+<li><p>Le modèle multinomial repose sur une hypothèse dite « d’indépendance » des alternatives non pertinentes » (IIA). Cela peut donc paraitre contradictoire d’utiliser ce modèle pour des évènements qui sont supposés non indépendants. Néanmoins la dépendance entre risques concurrents n’est pas non plus stricte. L’hypothèse d’IIA est souvent illustrée par l’exemple des couleurs des bus dans le choix du mode de transport (G.Debreu). On est loin ici d’un tel niveau de dépendance.</p></li>
+<li><p>En terme de lecture, le modèle logistique multinomial les estimateurs peuvent directement s’interpréter comme des rapports de risque (ou relative risk ratio). Ceci est l’objet d’une petite controverse liée à la lecture en Odds Ratio dans un modèle multinomial, qui devrait être strictement réservé pour certain.e.s à un signal binaire.</p></li>
+<li><p>En sciences sociales, il me semble que ce type de modèle soit à privilégier.</p></li>
+<li><p>On peut également envisager un modèle de type probit multinomial, mais on peut rencontrer des problèmes d’estimations (repose sur la loi normale multivariée). Prévoir un regroupement des causes concurrentes, et dans tous les cas de figure ne pas dépasser trois causes. Niveau lecture, il conviendra d’utiliser une méthode de standardisation, de type « effets marginaux ».</p></li>
+</ul>
+<p>Pour l’exemple, j’ai utilisé comme plus haut pour les modèles à temps discret à évènement unique, le mois comme métrique temporelle.</p>
+<pre><code>Multinomial logistic regression                 Number of obs     =      1,127
+                                                LR chi2(10)       =      86.25
                                                 Prob &gt; chi2       =     0.0000
-Log likelihood = -286.85569                     Pseudo R2         =     0.1054
+Log likelihood = -275.00542                     Pseudo R2         =     0.1356
 
 ------------------------------------------------------------------------------
-           e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+           e |        RRR   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
 0            |  (base outcome)
 -------------+----------------------------------------------------------------
 1            |
-           t |  -.0833633   .0194683    -4.28   0.000    -.1215204   -.0452061
-        year |  -.1307793   .0794859    -1.65   0.100    -.2865688    .0250102
-         age |    .032855    .016139     2.04   0.042      .001223    .0644869
-     surgery |  -1.525699   .6079702    -2.51   0.012    -2.717299   -.3340998
-       _cons |   5.837775   5.740758     1.02   0.309    -5.413903    17.08945
+           t |     0.8159     0.0338    -4.91   0.000       0.7522      0.8850
+          t2 |     1.0032     0.0009     3.53   0.000       1.0014      1.0049
+         age |     1.0449     0.0183     2.51   0.012       1.0097      1.0813
+        year |     0.8795     0.0718    -1.57   0.116       0.7494      1.0321
+     surgery |     0.3175     0.1711    -2.13   0.033       0.1104      0.9129
 -------------+----------------------------------------------------------------
 2            |
-           t |  -.0905817   .0337391    -2.68   0.007     -.156709   -.0244543
-        year |  -.1859397   .1393032    -1.33   0.182     -.458969    .0870896
-         age |   .0406961   .0291411     1.40   0.163    -.0164195    .0978117
-     surgery |  -.2487657   .6640659    -0.37   0.708    -1.550311    1.052779
-       _cons |   8.187169   10.05178     0.81   0.415    -11.51396     27.8883
-------------------------------------------------------------------------------</code></pre>
+           t |     0.8168     0.0565    -2.93   0.003       0.7134      0.9353
+          t2 |     1.0030     0.0015     1.94   0.052       1.0000      1.0060
+         age |     1.0111     0.0248     0.45   0.654       0.9635      1.0610
+        year |     0.8158     0.1127    -1.47   0.141       0.6223      1.0695
+     surgery |     0.5412     0.4221    -0.79   0.431       0.1173      2.4959
+------------------------------------------------------------------------------
+Remarque : les constantes ne sont pas reportées, les valeurs de la référence n’ayant pas grand  sens (année et âge à 0)</code></pre>
 </div>
 </div>
 
@@ -709,7 +701,7 @@ Log likelihood = -286.85569                     Pseudo R2         =     0.1054
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
