@@ -1,8 +1,7 @@
 .-
 Aide pour ^qlt^: Calcul des durées pour plusieurs quantiles de la fonction de survie
-estimée à partir de la ^methode actuarielle^
+estimée à partir de la ^méthode actuarielle^
 
-Rédige sans accent en raison du changement du systeme d'encodage lors du passage a la v14
 .-
 
 ^Syntaxe^
@@ -12,19 +11,19 @@ Rédige sans accent en raison du changement du systeme d'encodage lors du passag
 
 ^Description^
 ------------
-- Calcul des durees pour les quantiles de la fonction de survie (90% - 75% - 50% - 25% - 10%)
-estimee avec la methode actuarielle.
+- Calcul des durées pour les quantiles de la fonction de survie (90% - 75% - 50% - 25% - 10%)
+estimée avec la méthode actuarielle.
 - La commande ltable ne permettant pas de récupérer directement les estimations de la fonction
-  de survie, elles doivent etres enregistrees dans une base avec l'option ^saving()^
-- La definition des bornes étant par défaut differente entre Stata et Sas, les valeurs des quantiles pour une definition
-  alternative. On peut afficher la valeur des estimations de la fonctions de sejours pour cette definition avec la commande ^list^
+  de survie, elles doivent etres enregistrées dans une base avec l'option ^saving()^
+- La definition des bornes étant par défaut differente entre Stata et Sas, les valeurs des quantiles pour chaque definition
+  est possible. On peut afficher la valeur des estimations de la fonctions de séjours pour cette définition des bornes avec la commande ^list^
   Stata: t(i) <= t <  t(i+1)
   Sas  : t(i) <  t <= t(i+1)
 
 ^Option^
 -------
 
-^sas^: définition des bornes alternatives. Si on selectionne une strate avec if, on doit réouvrir la base enregistree avec ltable
+^sas^: définition des bornes alternatives. Si on selectionne une strate avec if, on doit réouvrir la base enregistrée avec ltable
      pour 
  
 
@@ -37,7 +36,7 @@ Ensemble des observations
 ^quiet ltable t died, saving(lt)^
 ^use lt^
 ^qlt^
-Duree pour differents quantiles de la fonction de survie
+Durée pour différents quantiles de la fonction de survie
 S(t)=0.90: t=  163.000
 S(t)=0.75: t=  198.000
 S(t)=0.50: t=  231.456
@@ -51,9 +50,8 @@ Pour chaque valeur de la variable group
 ^ltable t died, saving(lt,replace) by(group)^
 ^use lt, clear^
 ^qlt if group==1^
-
-Duree pour differents quantiles de la fonction de survie
-Definition des bornes Stata-ltable
+Durée pour differents quantiles de la fonction de survie
+Définition des bornes Stata-ltable
 S(t)=0.90: t=  161.900
 S(t)=0.75: t=  189.500
 S(t)=0.50: t=  214.425
@@ -61,8 +59,8 @@ S(t)=0.25: t=  233.012
 S(t)=0.10: t=  259.792
 
 ^qlt if group==2^
-Duree pour differents quantiles de la fonction de survie
-Definition des bornes Stata-ltable
+Durée pour differents quantiles de la fonction de survie
+Définition des bornes Stata-ltable
 S(t)=0.90: t=  156.700
 S(t)=0.75: t=  207.382
 S(t)=0.50: t=  232.779
