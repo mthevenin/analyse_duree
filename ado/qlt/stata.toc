@@ -1,0 +1,8 @@
+d 2017-10-11
+d commandes     : diverses (petites) commandes stata d'analyse ou autres
+d auteur        : Marc Thevenin
+d affiliation   : ined-sms
+d support       : marc.thevenin@ined.fr
+d                 https://mthevenin.github.io/stata_fr/
+
+p qlt                 : calcul des quantiles après ltable, et calcul pour la definition des bornes de sas
