@@ -13,7 +13,7 @@
 
 <title>Stata</title>
 
-<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -24,99 +24,19 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 
-
-<style type="text/css">code{white-space: pre;}</style>
-<style type="text/css" data-origin="pandoc">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  { color: #cccccc; background-color: #303030; }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ffcfaf; } /* Alert */
-code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
-code span.at { } /* Attribute */
-code span.bn { color: #dca3a3; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #f0dfaf; } /* ControlFlow */
-code span.ch { color: #dca3a3; } /* Char */
-code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
-code span.co { color: #7f9f7f; } /* Comment */
-code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
-code span.do { color: #7f9f7f; } /* Documentation */
-code span.dt { color: #dfdfbf; } /* DataType */
-code span.dv { color: #dcdccc; } /* DecVal */
-code span.er { color: #c3bf9f; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #c0bed1; } /* Float */
-code span.fu { color: #efef8f; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
-code span.kw { color: #f0dfaf; } /* Keyword */
-code span.op { color: #f0efd0; } /* Operator */
-code span.ot { color: #efef8f; } /* Other */
-code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
-code span.sc { color: #dca3a3; } /* SpecialChar */
-code span.ss { color: #cc9393; } /* SpecialString */
-code span.st { color: #cc9393; } /* String */
-code span.va { } /* Variable */
-code span.vs { color: #cc9393; } /* VerbatimString */
-code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
-
-</style>
-<script>
-// apply pandoc div.sourceCode style to pre.sourceCode instead
-(function() {
-  var sheets = document.styleSheets;
-  for (var i = 0; i < sheets.length; i++) {
-    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
-    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
-      var rule = rules[j];
-      // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
-      var style = rule.style.cssText;
-      // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
-      // replace div.sourceCode by a pre.sourceCode rule
-      sheets[i].deleteRule(j);
-      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
-    }
-  }
-})();
-</script>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
 
 
 <style type="text/css">
@@ -448,7 +368,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Modèles à risque proportionnel
+    Modèles à risques proportionnels
      
     <span class="caret"></span>
   </a>
@@ -481,13 +401,13 @@ div.tocify {
       <a href="concurrents.html">Risques concurrents</a>
     </li>
     <li>
-      <a href="cure.html">Récurrence et imunité</a>
+      <a href="cure.html">fragilité et imunité</a>
     </li>
   </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Logiciels
+    Programmation
      
     <span class="caret"></span>
   </a>
@@ -523,16 +443,35 @@ div.tocify {
 </div>
 
 
+<p>Ouverture de la base</p>
+<pre><code>webuse set &quot;https://raw.githubusercontent.com//mthevenin/analyse_duree/master/bases/&quot;
+webuse  &quot;transplantation_m&quot;, clear
+webuse set
+
+
+list in 1/10
+
+     +----------------------------------------------------------------------------+
+     | id   year   age   died   stime   surgery   transp~t   wait   mois   compet |
+     |----------------------------------------------------------------------------|
+  1. | 15     68    53      1       1         0          0      0      1        1 |
+  2. | 43     70    43      1       2         0          0      0      1        1 |
+  3. | 61     71    52      1       2         0          0      0      1        1 |
+  4. | 75     72    52      1       2         0          0      0      1        1 |
+  5. |  6     68    54      1       3         0          0      0      1        2 |
+     |----------------------------------------------------------------------------|
+  6. | 42     70    36      1       3         0          0      0      1        1 |
+  7. | 54     71    47      1       3         0          0      0      1        1 |
+  8. | 38     70    41      1       5         0          1      5      1        1 |
+  9. | 85     73    47      1       5         0          0      0      1        1 |
+ 10. |  2     68    51      1       6         0          0      0      1        1 |
+     +----------------------------------------------------------------------------+</code></pre>
 <div id="analyse-non-paramétrique" class="section level1" number="1">
 <h1 number="1"><span class="header-section-number">1</span> Analyse non paramétrique</h1>
 <div id="méthode-actuarielle" class="section level2" number="1.1">
 <h2 number="1.1"><span class="header-section-number">1.1</span> Méthode actuarielle</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">use</span> <span class="st">&quot;D:\Marc\SMS\FORMATIONS\2017</span><span class="ch">\a</span><span class="st">nalyse biographique\A distribuer</span><span class="ch">\t</span><span class="st">ransplantation.dta&quot;</span> , <span class="kw">clear</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="kw">ltable</span> stime died, interval(30) </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="kw">use</span> b, <span class="kw">clear</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>qlt, sas</span></code></pre></div>
-<pre><code>(Heart transplant data)
+<p>Contrairement à la formation, l’estimation sera faite sur des intervalles de 30 jours</p>
+<pre><code>ltable stime died, interval(30) graph
 
                  Beg.                                 Std.
    Interval     Total   Deaths   Lost    Survival    Error     [95% Conf. Int.]
@@ -570,23 +509,44 @@ div.tocify {
  1380  1410         6        1      2     0.1465    0.0510     0.0645    0.2602
  1560  1590         3        0      2     0.1465    0.0510     0.0645    0.2602
  1770  1800         1        0      1     0.1465    0.0510     0.0645    0.2602
--------------------------------------------------------------------------------
-
-file b.dta not found
-r(601);
-
-end of do-file
-r(601);</code></pre>
+-------------------------------------------------------------------------------</code></pre>
 <p><img src="images/Image7.png" /></p>
+<p><strong>Récupération des quartiles de la durée</strong><br />
+<br></p>
+<p>Installation de la commande <code>qlt</code></p>
+<pre><code>net install qlt, from(&quot;https://mthevenin.github.io/analyse_duree/ado/qlt/&quot;) replace
+
+* help qlt</code></pre>
+<pre><code>ltable stime died, interval(30) saving(base, replace)
+use base, clear</code></pre>
+<pre><code>qlt
+
+Duree pour differents quantiles de la fonction de survie
+Definition des bornes Stata-ltable
+S(t)=0.90: t=        .
+S(t)=0.75: t=    7.623
+S(t)=0.50: t=   74.729
+S(t)=0.25: t=  849.325
+S(t)=0.10: t=        .</code></pre>
+<p>Avec la définition des bornes des intervalles de Sas</p>
+<pre><code>qlt, sas
+
+Duree pour differents quantiles de la fonction de survie
+Definition des bornes Sas-lifetest
+S(t)=0.90: t=   13.977
+S(t)=0.75: t=   37.623
+S(t)=0.50: t=  104.729
+S(t)=0.25: t=  906.993
+S(t)=0.10: t=        .</code></pre>
 </div>
 <div id="méthode-kaplan-meier" class="section level2" number="1.2">
 <h2 number="1.2"><span class="header-section-number">1.2</span> Méthode Kaplan-Meier</h2>
 <p><strong>Mode analyse des durées: stset</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">qui</span> <span class="kw">use</span> <span class="st">&quot;D:\Marc\SMS\FORMATIONS\2017</span><span class="ch">\a</span><span class="st">nalyse biographique\A distribuer</span><span class="ch">\t</span><span class="st">ransplantation.dta&quot;</span> , <span class="kw">clear</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a><span class="kw">stset</span> stime, f(died)</span></code></pre></div>
-<pre><code>&gt; lantation.dta&quot; , clear
+<p>Les données doivent être mises en mode analyse de durée (<code>help stset</code>)</p>
+<pre><code>qui use &quot;D:\Marc\SMS\FORMATIONS\2017\analyse biographique\A distribuer\transplantation.dta&quot; , clear
+stset stime, f(died)
 
-     failure event:  died != 0 &amp; died &lt; .
+     failure event:  (assumed to fail at time=stime)
 obs. time interval:  (0, stime]
  exit on or before:  failure
 
@@ -595,124 +555,143 @@ obs. time interval:  (0, stime]
           0  exclusions
 ------------------------------------------------------------------------------
         103  observations remaining, representing
-         75  failures in single-record/single-failure data
+        103  failures in single-record/single-failure data
      31,938  total analysis time at risk and under observation
                                                 at risk from t =         0
                                      earliest observed entry t =         0
-                                          last observed exit t =     1,799</code></pre>
+                                          last observed exit t =     1,799
+
+list in 1/10
+
+     +-----------------------------------------------------------------------------------+
+     | id   year   age   died   stime   surgery   transp~t   wait   _st   _d    _t   _t0 |
+     |-----------------------------------------------------------------------------------|
+  1. |  1     67    30      1      50         0          0      0     1    1    50     0 |
+  2. |  2     68    51      1       6         0          0      0     1    1     6     0 |
+  3. |  3     68    54      1      16         0          1      1     1    1    16     0 |
+  4. |  4     68    40      1      39         0          1     36     1    1    39     0 |
+  5. |  5     68    20      1      18         0          0      0     1    1    18     0 |
+     |-----------------------------------------------------------------------------------|
+  6. |  6     68    54      1       3         0          0      0     1    1     3     0 |
+  7. |  7     68    50      1     675         0          1     51     1    1   675     0 |
+  8. |  8     68    45      1      40         0          0      0     1    1    40     0 |
+  9. |  9     68    47      1      85         0          0      0     1    1    85     0 |
+ 10. | 10     68    42      1      58         0          1     12     1    1    58     0 |
+     +-----------------------------------------------------------------------------------+
+</code></pre>
 <p><strong>Estimation de la fonction de survie</strong></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">sts</span> <span class="ot">list</span></span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+<pre><code>sts list
+
 
          failure _d:  died
    analysis time _t:  stime
 
-           Beg.          Net            Survivor      Std.
-  Time    Total   Fail   Lost           Function     Error     [95% Conf. Int.]
--------------------------------------------------------------------------------
-     1      103      1      0             0.9903    0.0097     0.9331    0.9986
-     2      102      3      0             0.9612    0.0190     0.8998    0.9852
-     3       99      3      0             0.9320    0.0248     0.8627    0.9670
-     5       96      2      0             0.9126    0.0278     0.8388    0.9535
-     6       94      2      0             0.8932    0.0304     0.8155    0.9394
-     8       92      1      0             0.8835    0.0316     0.8040    0.9321
-     9       91      1      0             0.8738    0.0327     0.7926    0.9247
-    11       90      0      1             0.8738    0.0327     0.7926    0.9247
-    12       89      1      0             0.8640    0.0338     0.7811    0.9171
-    16       88      3      0             0.8345    0.0367     0.7474    0.8937
-    17       85      1      0             0.8247    0.0375     0.7363    0.8857
-    18       84      1      0             0.8149    0.0383     0.7253    0.8777
-    21       83      2      0             0.7952    0.0399     0.7034    0.8614
-    28       81      1      0             0.7854    0.0406     0.6926    0.8531
-    30       80      1      0             0.7756    0.0412     0.6819    0.8448
-    31       79      0      1             0.7756    0.0412     0.6819    0.8448
-    32       78      1      0             0.7657    0.0419     0.6710    0.8363
-    35       77      1      0             0.7557    0.0425     0.6603    0.8278
-    36       76      1      0             0.7458    0.0431     0.6495    0.8192
-    37       75      1      0             0.7358    0.0436     0.6388    0.8106
-    39       74      1      1             0.7259    0.0442     0.6282    0.8019
-    40       72      2      0             0.7057    0.0452     0.6068    0.7842
-    43       70      1      0             0.6956    0.0457     0.5961    0.7752
-    45       69      1      0             0.6856    0.0461     0.5855    0.7662
-    50       68      1      0             0.6755    0.0465     0.5750    0.7572
-    51       67      1      0             0.6654    0.0469     0.5645    0.7481
-    53       66      1      0             0.6553    0.0472     0.5541    0.7390
-    58       65      1      0             0.6452    0.0476     0.5437    0.7298
-    61       64      1      0             0.6352    0.0479     0.5333    0.7206
-    66       63      1      0             0.6251    0.0482     0.5230    0.7113
-    68       62      2      0             0.6049    0.0487     0.5026    0.6926
-    69       60      1      0             0.5948    0.0489     0.4924    0.6832
-    72       59      2      0             0.5747    0.0493     0.4722    0.6643
-    77       57      1      0             0.5646    0.0494     0.4621    0.6548
-    78       56      1      0             0.5545    0.0496     0.4521    0.6453
-    80       55      1      0             0.5444    0.0497     0.4422    0.6357
-    81       54      1      0             0.5343    0.0498     0.4323    0.6261
-    85       53      1      0             0.5243    0.0499     0.4224    0.6164
-    90       52      1      0             0.5142    0.0499     0.4125    0.6067
-    96       51      1      0             0.5041    0.0499     0.4027    0.5969
-   100       50      1      0             0.4940    0.0499     0.3930    0.5872
-   102       49      1      0             0.4839    0.0499     0.3833    0.5773
-   109       48      0      1             0.4839    0.0499     0.3833    0.5773
-   110       47      1      0             0.4736    0.0499     0.3733    0.5673
-   131       46      0      1             0.4736    0.0499     0.3733    0.5673
-   149       45      1      0             0.4631    0.0499     0.3632    0.5571
-   153       44      1      0             0.4526    0.0499     0.3531    0.5468
-   165       43      1      0             0.4421    0.0498     0.3430    0.5364
-   180       42      0      1             0.4421    0.0498     0.3430    0.5364
-   186       41      1      0             0.4313    0.0497     0.3327    0.5258
-   188       40      1      0             0.4205    0.0497     0.3225    0.5152
-   207       39      1      0             0.4097    0.0495     0.3123    0.5045
-   219       38      1      0             0.3989    0.0494     0.3022    0.4938
-   263       37      1      0             0.3881    0.0492     0.2921    0.4830
-   265       36      0      1             0.3881    0.0492     0.2921    0.4830
-   285       35      2      0             0.3660    0.0488     0.2714    0.4608
-   308       33      1      0             0.3549    0.0486     0.2612    0.4496
-   334       32      1      0             0.3438    0.0483     0.2510    0.4383
-   340       31      1      1             0.3327    0.0480     0.2409    0.4270
-   342       29      1      0             0.3212    0.0477     0.2305    0.4153
-   370       28      0      1             0.3212    0.0477     0.2305    0.4153
-   397       27      0      1             0.3212    0.0477     0.2305    0.4153
-   427       26      0      1             0.3212    0.0477     0.2305    0.4153
-   445       25      0      1             0.3212    0.0477     0.2305    0.4153
-   482       24      0      1             0.3212    0.0477     0.2305    0.4153
-   515       23      0      1             0.3212    0.0477     0.2305    0.4153
-   545       22      0      1             0.3212    0.0477     0.2305    0.4153
-   583       21      1      0             0.3059    0.0478     0.2156    0.4008
-   596       20      0      1             0.3059    0.0478     0.2156    0.4008
-   620       19      0      1             0.3059    0.0478     0.2156    0.4008
-   670       18      0      1             0.3059    0.0478     0.2156    0.4008
-   675       17      1      0             0.2879    0.0483     0.1976    0.3844
-   733       16      1      0             0.2699    0.0485     0.1802    0.3676
-   841       15      0      1             0.2699    0.0485     0.1802    0.3676
-   852       14      1      0             0.2507    0.0487     0.1616    0.3497
-   915       13      0      1             0.2507    0.0487     0.1616    0.3497
-   941       12      0      1             0.2507    0.0487     0.1616    0.3497
-   979       11      1      0             0.2279    0.0493     0.1394    0.3295
-   995       10      1      0             0.2051    0.0494     0.1183    0.3085
-  1032        9      1      0             0.1823    0.0489     0.0985    0.2865
-  1141        8      0      1             0.1823    0.0489     0.0985    0.2865
-  1321        7      0      1             0.1823    0.0489     0.0985    0.2865
-  1386        6      1      0             0.1519    0.0493     0.0713    0.2606
-  1400        5      0      1             0.1519    0.0493     0.0713    0.2606
-  1407        4      0      1             0.1519    0.0493     0.0713    0.2606
-  1571        3      0      1             0.1519    0.0493     0.0713    0.2606
-  1586        2      0      1             0.1519    0.0493     0.0713    0.2606
-  1799        1      0      1             0.1519    0.0493     0.0713    0.2606
--------------------------------------------------------------------------------</code></pre>
+             At                  Survivor      Std.
+  Time     Risk   Fail   Lost    Function     Error     [95% Conf. Int.]
+------------------------------------------------------------------------
+     1      103      1      0      0.9903    0.0097     0.9331    0.9986
+     2      102      3      0      0.9612    0.0190     0.8998    0.9852
+     3       99      3      0      0.9320    0.0248     0.8627    0.9670
+     5       96      2      0      0.9126    0.0278     0.8388    0.9535
+     6       94      2      0      0.8932    0.0304     0.8155    0.9394
+     8       92      1      0      0.8835    0.0316     0.8040    0.9321
+     9       91      1      0      0.8738    0.0327     0.7926    0.9247
+    11       90      0      1      0.8738    0.0327     0.7926    0.9247
+    12       89      1      0      0.8640    0.0338     0.7811    0.9171
+    16       88      3      0      0.8345    0.0367     0.7474    0.8937
+    17       85      1      0      0.8247    0.0375     0.7363    0.8857
+    18       84      1      0      0.8149    0.0383     0.7253    0.8777
+    21       83      2      0      0.7952    0.0399     0.7034    0.8614
+    28       81      1      0      0.7854    0.0406     0.6926    0.8531
+    30       80      1      0      0.7756    0.0412     0.6819    0.8448
+    31       79      0      1      0.7756    0.0412     0.6819    0.8448
+    32       78      1      0      0.7657    0.0419     0.6710    0.8363
+    35       77      1      0      0.7557    0.0425     0.6603    0.8278
+    36       76      1      0      0.7458    0.0431     0.6495    0.8192
+    37       75      1      0      0.7358    0.0436     0.6388    0.8106
+    39       74      1      1      0.7259    0.0442     0.6282    0.8019
+    40       72      2      0      0.7057    0.0452     0.6068    0.7842
+    43       70      1      0      0.6956    0.0457     0.5961    0.7752
+    45       69      1      0      0.6856    0.0461     0.5855    0.7662
+    50       68      1      0      0.6755    0.0465     0.5750    0.7572
+    51       67      1      0      0.6654    0.0469     0.5645    0.7481
+    53       66      1      0      0.6553    0.0472     0.5541    0.7390
+    58       65      1      0      0.6452    0.0476     0.5437    0.7298
+    61       64      1      0      0.6352    0.0479     0.5333    0.7206
+    66       63      1      0      0.6251    0.0482     0.5230    0.7113
+    68       62      2      0      0.6049    0.0487     0.5026    0.6926
+    69       60      1      0      0.5948    0.0489     0.4924    0.6832
+    72       59      2      0      0.5747    0.0493     0.4722    0.6643
+    77       57      1      0      0.5646    0.0494     0.4621    0.6548
+    78       56      1      0      0.5545    0.0496     0.4521    0.6453
+    80       55      1      0      0.5444    0.0497     0.4422    0.6357
+    81       54      1      0      0.5343    0.0498     0.4323    0.6261
+    85       53      1      0      0.5243    0.0499     0.4224    0.6164
+    90       52      1      0      0.5142    0.0499     0.4125    0.6067
+    96       51      1      0      0.5041    0.0499     0.4027    0.5969
+   100       50      1      0      0.4940    0.0499     0.3930    0.5872
+   102       49      1      0      0.4839    0.0499     0.3833    0.5773
+   109       48      0      1      0.4839    0.0499     0.3833    0.5773
+   110       47      1      0      0.4736    0.0499     0.3733    0.5673
+   131       46      0      1      0.4736    0.0499     0.3733    0.5673
+   149       45      1      0      0.4631    0.0499     0.3632    0.5571
+   153       44      1      0      0.4526    0.0499     0.3531    0.5468
+   165       43      1      0      0.4421    0.0498     0.3430    0.5364
+   180       42      0      1      0.4421    0.0498     0.3430    0.5364
+   186       41      1      0      0.4313    0.0497     0.3327    0.5258
+   188       40      1      0      0.4205    0.0497     0.3225    0.5152
+   207       39      1      0      0.4097    0.0495     0.3123    0.5045
+   219       38      1      0      0.3989    0.0494     0.3022    0.4938
+   263       37      1      0      0.3881    0.0492     0.2921    0.4830
+   265       36      0      1      0.3881    0.0492     0.2921    0.4830
+   285       35      2      0      0.3660    0.0488     0.2714    0.4608
+   308       33      1      0      0.3549    0.0486     0.2612    0.4496
+   334       32      1      0      0.3438    0.0483     0.2510    0.4383
+   340       31      1      1      0.3327    0.0480     0.2409    0.4270
+   342       29      1      0      0.3212    0.0477     0.2305    0.4153
+   370       28      0      1      0.3212    0.0477     0.2305    0.4153
+   397       27      0      1      0.3212    0.0477     0.2305    0.4153
+   427       26      0      1      0.3212    0.0477     0.2305    0.4153
+   445       25      0      1      0.3212    0.0477     0.2305    0.4153
+   482       24      0      1      0.3212    0.0477     0.2305    0.4153
+   515       23      0      1      0.3212    0.0477     0.2305    0.4153
+   545       22      0      1      0.3212    0.0477     0.2305    0.4153
+   583       21      1      0      0.3059    0.0478     0.2156    0.4008
+   596       20      0      1      0.3059    0.0478     0.2156    0.4008
+   620       19      0      1      0.3059    0.0478     0.2156    0.4008
+   670       18      0      1      0.3059    0.0478     0.2156    0.4008
+   675       17      1      0      0.2879    0.0483     0.1976    0.3844
+   733       16      1      0      0.2699    0.0485     0.1802    0.3676
+   841       15      0      1      0.2699    0.0485     0.1802    0.3676
+   852       14      1      0      0.2507    0.0487     0.1616    0.3497
+   915       13      0      1      0.2507    0.0487     0.1616    0.3497
+   941       12      0      1      0.2507    0.0487     0.1616    0.3497
+   979       11      1      0      0.2279    0.0493     0.1394    0.3295
+   995       10      1      0      0.2051    0.0494     0.1183    0.3085
+  1032        9      1      0      0.1823    0.0489     0.0985    0.2865
+  1141        8      0      1      0.1823    0.0489     0.0985    0.2865
+  1321        7      0      1      0.1823    0.0489     0.0985    0.2865
+  1386        6      1      0      0.1519    0.0493     0.0713    0.2606
+  1400        5      0      1      0.1519    0.0493     0.0713    0.2606
+  1407        4      0      1      0.1519    0.0493     0.0713    0.2606
+  1571        3      0      1      0.1519    0.0493     0.0713    0.2606
+  1586        2      0      1      0.1519    0.0493     0.0713    0.2606
+  1799        1      0      1      0.1519    0.0493     0.0713    0.2606
+------------------------------------------------------------------------
+
+</code></pre>
 <pre><code>sts graph</code></pre>
 <p><img src="images/Image8.png" /></p>
 <p><strong>Comparaison des fonctions de survie</strong></p>
 <p><br> <em>Tests du log rank</em></p>
+<p>On va comparer les fonctions de survie pour la variable <em>surgery</em>.</p>
 <pre><code>sts graph, by(surgery)</code></pre>
 <p><img src="images/Image9.png" /></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="kw">local</span> <span class="kw">test</span> <span class="st">`&quot;</span> <span class="st">&quot;l&quot;</span> <span class="st">&quot;w&quot;</span> <span class="st">&quot;tw&quot;</span> <span class="st">&quot;p&quot;</span> <span class="st">&quot;&#39;</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a><span class="st">foreach test2 of local test {</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a><span class="st">sts test surgery, `test2&#39;</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a><span class="st">}</span></span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-         failure _d:  died
-   analysis time _t:  stime
+<p>Tests du log rank: fonction <strong><code>sts test</code></strong>. On affichera ici plusieurs variantes du test.</p>
+<pre><code>local test `&quot; &quot;l&quot; &quot;w&quot; &quot;tw&quot; &quot;p&quot; &quot;&#39;
+foreach test2 of local test {
+sts test surgery, `test2&#39;
+}
 
 
 Log-rank test for equality of survivor functions
@@ -777,16 +756,14 @@ surgery |  observed       expected        ranks
 Total   |        75          75.00            0
 
               chi2(1) =       8.66
-              Pr&gt;chi2 =     0.0032</code></pre>
+              Pr&gt;chi2 =     0.0032
+</code></pre>
 <p><em>Comparaison des rmst</em><br />
-<br> installation de la commande strmst2:</p>
+<br> Installation de la commande strmst2:</p>
 <pre><code>ssc install strmst2</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a>strmst2 surgery</span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
- 
- 
+<p>arm1 = opération<br />
+arm0 = pas d’opération</p>
+<pre><code>strmst2 surgery
 
 Restricted Mean Survival Time (RMST) by arm
 -----------------------------------------------------------
@@ -802,7 +779,8 @@ Between-group contrast (arm 1 versus arm 0)
 ---------------------+--------------------------------------------------
 RMST (arm 1 - arm 0) |   424.590      149.641      699.539      0.002
 RMST (arm 1 / arm 0) |     2.369        1.513        3.710      0.000
-------------------------------------------------------------------------</code></pre>
+------------------------------------------------------------------------
+</code></pre>
 </div>
 </div>
 <div id="risques-proportionnels" class="section level1" number="2">
@@ -812,10 +790,7 @@ RMST (arm 1 / arm 0) |     2.369        1.513        3.710      0.000
 <div id="estimation-du-modèle" class="section level3" number="2.1.1">
 <h3 number="2.1.1"><span class="header-section-number">2.1.1</span> Estimation du modèle</h3>
 <p>Avec la correction d’Efron</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="kw">stcox</span> <span class="fu">year</span> age surgery, <span class="kw">nolog</span> noshow efron</span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
+<pre><code>stcox year age surgery, nolog noshow efron
 
 Cox regression -- Efron method for ties
 
@@ -828,13 +803,12 @@ Log likelihood  =   -289.30639                  Prob &gt; chi2      =      0.000
 ------------------------------------------------------------------------------
           _t | Haz. Ratio   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-        year |   .8872469   .0597499    -1.78   0.076     .7775386    1.012435
-         age |   1.030024    .013931     2.19   0.029     1.003078    1.057693
-     surgery |   .3725733   .1625379    -2.26   0.024     .1584414    .8761021
-------------------------------------------------------------------------------</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="kw">stcox</span> <span class="fu">year</span> age surgery, <span class="kw">nolog</span> noshow efron nohr</span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
+        year |     0.8872     0.0597    -1.78   0.076       0.7775      1.0124
+         age |     1.0300     0.0139     2.19   0.029       1.0031      1.0577
+     surgery |     0.3726     0.1625    -2.26   0.024       0.1584      0.8761
+------------------------------------------------------------------------------
+</code></pre>
+<pre><code>stcox year age surgery, nolog noshow efron nohr
 
 
 Cox regression -- Efron method for ties
@@ -848,20 +822,19 @@ Log likelihood  =   -289.30639                  Prob &gt; chi2      =      0.000
 ------------------------------------------------------------------------------
           _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-        year |   -.119632   .0673431    -1.78   0.076     -.251622     .012358
-         age |   .0295819   .0135249     2.19   0.029     .0030735    .0560902
-     surgery |  -.9873215   .4362574    -2.26   0.024     -1.84237   -.1322726
-------------------------------------------------------------------------------</code></pre>
+        year |    -0.1196     0.0673    -1.78   0.076      -0.2516      0.0124
+         age |     0.0296     0.0135     2.19   0.029       0.0031      0.0561
+     surgery |    -0.9873     0.4363    -2.26   0.024      -1.8424     -0.1323
+------------------------------------------------------------------------------
+
+
+</code></pre>
 </div>
 <div id="test-de-lhypothèse-ph" class="section level3" number="2.1.2">
 <h3 number="2.1.2"><span class="header-section-number">2.1.2</span> Test de l’hypothèse PH</h3>
 <p><strong>Test Grambsch-Therneau sur les résidus de Schoenfeld</strong></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="co">/* f(t)=t - par défaut */</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a><span class="kw">estat</span> phtest, <span class="kw">detail</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true"></a></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true"></a><span class="co">/* f(t)= 1-km - solution par défaut de R */</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true"></a><span class="kw">estat</span> phtest, <span class="kw">detail</span> km</span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+<pre><code>* f(t)=t - par défaut 
+estat phtest, detail
 
       Test of proportional-hazards assumption
 
@@ -876,6 +849,12 @@ Log likelihood  =   -289.30639                  Prob &gt; chi2      =      0.000
       global test |                      8.76        3         0.0327
       ----------------------------------------------------------------
 
+
+
+* f(t)= 1-km - solution par défaut de R
+      
+estat phtest, detail km
+
       Test of proportional-hazards assumption
 
       Time:  Kaplan-Meier
@@ -887,14 +866,12 @@ Log likelihood  =   -289.30639                  Prob &gt; chi2      =      0.000
       surgery     |      0.25096         3.96        1         0.0465
       ------------+---------------------------------------------------
       global test |                      7.99        3         0.0462
-      ----------------------------------------------------------------</code></pre>
+      ----------------------------------------------------------------
+
+</code></pre>
 <p><strong>Intéraction avec une fonction de la durée</strong></p>
 <p><span class="math inline">\(f(t)=t\)</span></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a><span class="kw">stcox</span> <span class="fu">year</span> age surgery, <span class="kw">nolog</span> noshow efron nohr tvc(surgery) texp(_t)</span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-
+<pre><code>stcox year age surgery, nolog noshow efron nohr tvc(surgery) texp(_t)
 
 Cox regression -- Efron method for ties
 
@@ -908,22 +885,25 @@ Log likelihood  =   -287.32903                  Prob &gt; chi2      =      0.000
           _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
 main         |
-        year |  -.1230741    .066835    -1.84   0.066    -.2540684    .0079202
-         age |   .0288884   .0134493     2.15   0.032     .0025281    .0552486
-     surgery |  -1.754738   .6743907    -2.60   0.009     -3.07652   -.4329567
+        year |    -0.1231     0.0668    -1.84   0.066      -0.2541      0.0079
+         age |     0.0289     0.0134     2.15   0.032       0.0025      0.0552
+     surgery |    -1.7547     0.6744    -2.60   0.009      -3.0765     -0.4330
 -------------+----------------------------------------------------------------
 tvc          |
-     surgery |   .0022311   .0011024     2.02   0.043     .0000704    .0043917
+     surgery |     0.0022     0.0011     2.02   0.043       0.0001      0.0044
 ------------------------------------------------------------------------------
-Note: Variables in tvc equation interacted with _t.</code></pre>
+Note: Variables in tvc equation interacted with _t.
+
+
+
+</code></pre>
 </div>
 <div id="introduction-dune-variable-dynamique-binaire" class="section level3" number="2.1.3">
 <h3 number="2.1.3"><span class="header-section-number">2.1.3</span> Introduction d’une variable dynamique (binaire)</h3>
 <p><strong>Transformation de la base en format long aux temps d’évènement</strong><br />
-<br> * <strong>Etape 1</strong>: créer un vecteur donnant les durées au temps d’évènement. * <strong>Etape 2</strong>: appliquer ce vecteurs de points de coupure à la fonction <code>survsplit</code>. * <strong>Etape 3</strong>: modifier la variable transplant (ou créer une nouvelle) à l’aide de la variable <strong>wait</strong> qui prend la valeur 1 à partir du jour de la greffe, 0 avant.</p>
-<p><br> <em>Etape 1</em></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a><span class="kw">stset</span> stime, f(died) id(id)</span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+<br></p>
+<p><em>Etape 1</em></p>
+<pre><code>stset stime, f(died) id(id)
 
                 id:  id
      failure event:  died != 0 &amp; died &lt; .
@@ -940,23 +920,77 @@ obs. time interval:  (stime[_n-1], stime]
      31,938  total analysis time at risk and under observation
                                                 at risk from t =         0
                                      earliest observed entry t =         0
-                                          last observed exit t =     1,799</code></pre>
+                                          last observed exit t =     1,799
+</code></pre>
 <p><em>Etape 2</em></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a><span class="kw">stsplit</span>, <span class="fu">at</span>(failure)</span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+<pre><code>stsplit, at(failure)
 
+* sort id _t
+* list in 1/23
 
+stset stime, f(died) id(id)
+
+                id:  id
+     failure event:  died != 0 &amp; died &lt; .
+obs. time interval:  (stime[_n-1], stime]
+ exit on or before:  failure
+
+------------------------------------------------------------------------------
+        105  total observations
+          2  ignored because id missing
+------------------------------------------------------------------------------
+        103  observations remaining, representing
+        103  subjects
+         75  failures in single-failure-per-subject data
+     31,938  total analysis time at risk and under observation
+                                                at risk from t =         0
+                                     earliest observed entry t =         0
+                                          last observed exit t =     1,799
+
+stsplit, at(failure)
 (62 failure times)
-(3,470 observations (episodes) created)</code></pre>
+(3,470 observations (episodes) created)
+
+sort id _t
+
+list in 1/23
+
+     +--------------------------------------------------------------------------------------------------+
+     | id   year   age   died   stime   surgery   transp~t   wait   mois   compet   _st   _d   _t   _t0 |
+     |--------------------------------------------------------------------------------------------------|
+  1. |  1     67    30      .       1         0          0      0      2        1     1    0    1     0 |
+  2. |  1     67    30      .       2         0          0      0      2        1     1    0    2     1 |
+  3. |  1     67    30      .       3         0          0      0      2        1     1    0    3     2 |
+  4. |  1     67    30      .       5         0          0      0      2        1     1    0    5     3 |
+  5. |  1     67    30      .       6         0          0      0      2        1     1    0    6     5 |
+     |--------------------------------------------------------------------------------------------------|
+  6. |  1     67    30      .       8         0          0      0      2        1     1    0    8     6 |
+  7. |  1     67    30      .       9         0          0      0      2        1     1    0    9     8 |
+  8. |  1     67    30      .      12         0          0      0      2        1     1    0   12     9 |
+  9. |  1     67    30      .      16         0          0      0      2        1     1    0   16    12 |
+ 10. |  1     67    30      .      17         0          0      0      2        1     1    0   17    16 |
+     |--------------------------------------------------------------------------------------------------|
+ 11. |  1     67    30      .      18         0          0      0      2        1     1    0   18    17 |
+ 12. |  1     67    30      .      21         0          0      0      2        1     1    0   21    18 |
+ 13. |  1     67    30      .      28         0          0      0      2        1     1    0   28    21 |
+ 14. |  1     67    30      .      30         0          0      0      2        1     1    0   30    28 |
+ 15. |  1     67    30      .      32         0          0      0      2        1     1    0   32    30 |
+     |--------------------------------------------------------------------------------------------------|
+ 16. |  1     67    30      .      35         0          0      0      2        1     1    0   35    32 |
+ 17. |  1     67    30      .      36         0          0      0      2        1     1    0   36    35 |
+ 18. |  1     67    30      .      37         0          0      0      2        1     1    0   37    36 |
+ 19. |  1     67    30      .      39         0          0      0      2        1     1    0   39    37 |
+ 20. |  1     67    30      .      40         0          0      0      2        1     1    0   40    39 |
+     |--------------------------------------------------------------------------------------------------|
+ 21. |  1     67    30      .      43         0          0      0      2        1     1    0   43    40 |
+ 22. |  1     67    30      .      45         0          0      0      2        1     1    0   45    43 |
+ 23. |  1     67    30      1      50         0          0      0      2        1     1    1   50    45 |
+     +--------------------------------------------------------------------------------------------------+
+</code></pre>
 <p><em>Etape 3</em></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true"></a><span class="kw">gen</span> tvc = transplant==1 &amp; wait&lt;=_t</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true"></a><span class="kw">sort</span> id _t</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true"></a><span class="ot">list</span> id transplant wait tvc _d _t _t0 <span class="kw">if</span> id==10  , <span class="kw">noobs</span></span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-
-
+<pre><code>gen tvc = transplant==1 &amp; wait&lt;=_t
+sort id _t
+list id transplant wait tvc _d _t _t0 if id==10  , noobs
 
   +--------------------------------------------+
   | id   transp~t   wait   tvc   _d   _t   _t0 |
@@ -992,12 +1026,10 @@ obs. time interval:  (stime[_n-1], stime]
   | 10          1     12     1    0   53    51 |
   |--------------------------------------------|
   | 10          1     12     1    1   58    53 |
-  +--------------------------------------------+</code></pre>
+  +--------------------------------------------+
+</code></pre>
 <p><strong>Estimation du modèle</strong></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true"></a><span class="kw">stcox</span> <span class="fu">year</span> age surgery tvc, <span class="kw">nolog</span> noshow efron nohr</span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
+<pre><code>stcox year age surgery tvc, nolog noshow efron nohr
 
 Cox regression -- Efron method for ties
 
@@ -1010,65 +1042,79 @@ Log likelihood  =   -289.27014                  Prob &gt; chi2      =      0.001
 ------------------------------------------------------------------------------
           _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-        year |  -.1203194   .0673366    -1.79   0.074    -.2522968    .0116579
-         age |   .0304383   .0138999     2.19   0.029      .003195    .0576815
-     surgery |  -.9828934   .4365518    -2.25   0.024    -1.838519   -.1272675
-         tvc |  -.0822128   .3048425    -0.27   0.787    -.6796931    .5152675
+        year |    -0.1203     0.0673    -1.79   0.074      -0.2523      0.0117
+         age |     0.0304     0.0139     2.19   0.029       0.0032      0.0577
+     surgery |    -0.9829     0.4366    -2.25   0.024      -1.8385     -0.1273
+         tvc |    -0.0822     0.3048    -0.27   0.787      -0.6797      0.5153
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
 <div id="modèle-logistique-à-temps-discret" class="section level2" number="2.2">
 <h2 number="2.2"><span class="header-section-number">2.2</span> Modèle (logistique) à temps discret</h2>
+<p>Variable de durée = <em>mois</em></p>
 <div id="mise-en-forme" class="section level3" number="2.2.1">
 <h3 number="2.2.1"><span class="header-section-number">2.2.1</span> Mise en forme</h3>
-<div class="sourceCode" id="cb30"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true"></a><span class="kw">use</span> <span class="st">&quot;D:/Marc/SMS/FORMATIONS\2019/analyse durees/a distribuer/transplantation_m.dta&quot;</span>, <span class="kw">clear</span></span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true"></a><span class="ot">list</span> id <span class="fu">year</span> age surgery mois died <span class="kw">if</span> id==1, <span class="kw">noobs</span></span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+<pre><code>expand mois
+bysort id: gen t=_n
+gen e = died
+replace e=0 if t&lt;mois
+
+* list in 1/31
+
+     +-------------------------------------------------------------------------------------+
+     | id   year   age   died   stime   surgery   transp~t   wait   mois   compet    t   e |
+     |-------------------------------------------------------------------------------------|
+  1. |  1     67    30      1      50         0          0      0      2        1    1   0 |
+  2. |  1     67    30      1      50         0          0      0      2        1    2   1 |
+  3. |  2     68    51      1       6         0          0      0      1        1    1   1 |
+  4. |  3     68    54      1      16         0          1      1      1        1    1   1 |
+  5. |  4     68    40      1      39         0          1     36      2        2    1   0 |
+     |-------------------------------------------------------------------------------------|
+  6. |  4     68    40      1      39         0          1     36      2        2    2   1 |
+  7. |  5     68    20      1      18         0          0      0      1        1    1   1 |
+  8. |  6     68    54      1       3         0          0      0      1        2    1   1 |
+  9. |  7     68    50      1     675         0          1     51     23        1    1   0 |
+ 10. |  7     68    50      1     675         0          1     51     23        1    2   0 |
+     |-------------------------------------------------------------------------------------|
+ 11. |  7     68    50      1     675         0          1     51     23        1    3   0 |
+ 12. |  7     68    50      1     675         0          1     51     23        1    4   0 |
+ 13. |  7     68    50      1     675         0          1     51     23        1    5   0 |
+ 14. |  7     68    50      1     675         0          1     51     23        1    6   0 |
+ 15. |  7     68    50      1     675         0          1     51     23        1    7   0 |
+     |-------------------------------------------------------------------------------------|
+ 16. |  7     68    50      1     675         0          1     51     23        1    8   0 |
+ 17. |  7     68    50      1     675         0          1     51     23        1    9   0 |
+ 18. |  7     68    50      1     675         0          1     51     23        1   10   0 |
+ 19. |  7     68    50      1     675         0          1     51     23        1   11   0 |
+ 20. |  7     68    50      1     675         0          1     51     23        1   12   0 |
+     |-------------------------------------------------------------------------------------|
+ 21. |  7     68    50      1     675         0          1     51     23        1   13   0 |
+ 22. |  7     68    50      1     675         0          1     51     23        1   14   0 |
+ 23. |  7     68    50      1     675         0          1     51     23        1   15   0 |
+ 24. |  7     68    50      1     675         0          1     51     23        1   16   0 |
+ 25. |  7     68    50      1     675         0          1     51     23        1   17   0 |
+     |-------------------------------------------------------------------------------------|
+ 26. |  7     68    50      1     675         0          1     51     23        1   18   0 |
+ 27. |  7     68    50      1     675         0          1     51     23        1   19   0 |
+ 28. |  7     68    50      1     675         0          1     51     23        1   20   0 |
+ 29. |  7     68    50      1     675         0          1     51     23        1   21   0 |
+ 30. |  7     68    50      1     675         0          1     51     23        1   22   0 |
+     |-------------------------------------------------------------------------------------|
+ 31. |  7     68    50      1     675         0          1     51     23        1   23   1 |
+     +-------------------------------------------------------------------------------------+
 
 
-(SAVASTATA created this dataset on 01AUG2019)
-
-
-  +-----------------------------------------+
-  | id   year   age   surgery   mois   died |
-  |-----------------------------------------|
-  |  1     67    30         0      2      1 |
-  +-----------------------------------------+</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true"></a>expand mois</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true"></a><span class="kw">bysort</span> id: <span class="kw">gen</span> t=<span class="dt">_n</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true"></a><span class="kw">bysort</span> id: <span class="kw">gen</span> <span class="fu">e</span> = died==1 &amp; t==_N</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true"></a><span class="ot">list</span> id <span class="fu">year</span> age surgery mois died t <span class="fu">e</span> <span class="kw">if</span> id==1, <span class="kw">noobs</span></span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-(1,024 observations created)
-
-
-
-
-  +-------------------------------------------------+
-  | id   year   age   surgery   mois   died   t   e |
-  |-------------------------------------------------|
-  |  1     67    30         0      2      1   1   0 |
-  |  1     67    30         0      2      1   2   1 |
-  +-------------------------------------------------+</code></pre>
+</code></pre>
 </div>
 <div id="paramétrisation-avec-durée-continue" class="section level3" number="2.2.2">
 <h3 number="2.2.2"><span class="header-section-number">2.2.2</span> Paramétrisation avec durée continue</h3>
 <p>Les critères d’information</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true"></a><span class="kw">gen</span> t2=t^2</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true"></a><span class="kw">gen</span> t3=t^3</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true"></a><span class="kw">logit</span> <span class="fu">e</span>  t       ,  <span class="kw">nolog</span> </span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true"></a><span class="kw">estat</span> <span class="kw">ic</span></span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true"></a><span class="kw">logit</span> <span class="fu">e</span>  t t2    ,  <span class="kw">nolog</span> </span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true"></a><span class="kw">estat</span> <span class="kw">ic</span></span>
-<span id="cb34-7"><a href="#cb34-7" aria-hidden="true"></a><span class="kw">logit</span> <span class="fu">e</span>  t t2 t3 ,  <span class="kw">nolog</span> </span>
-<span id="cb34-8"><a href="#cb34-8" aria-hidden="true"></a><span class="kw">estat</span> <span class="kw">ic</span></span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+<pre><code>
+gen t2=t^2
+gen t3=t^3
 
-
-
-
+ 
+logit e  t       ,  nolog 
 
 Logistic regression                             Number of obs     =      1,127
                                                 LR chi2(1)        =      50.85
@@ -1078,20 +1124,24 @@ Log likelihood = -250.26058                     Pseudo R2         =     0.0922
 ------------------------------------------------------------------------------
            e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-           t |  -.1007349   .0184854    -5.45   0.000    -.1369656   -.0645042
-       _cons |  -1.643587    .172388    -9.53   0.000    -1.981461   -1.305712
+           t |    -0.1007     0.0185    -5.45   0.000      -0.1370     -0.0645
+       _cons |    -1.6436     0.1724    -9.53   0.000      -1.9815     -1.3057
 ------------------------------------------------------------------------------
 
+ 
+estat ic
 
 Akaike&#39;s information criterion and Bayesian information criterion
 
 -----------------------------------------------------------------------------
-       Model |        Obs  ll(null)  ll(model)      df         AIC        BIC
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
 -------------+---------------------------------------------------------------
-           . |      1,127 -275.6841  -250.2606       2    504.5212   514.5758
+           . |      1,127  -275.6841  -250.2606       2   504.5212   514.5758
 -----------------------------------------------------------------------------
-               Note: N=Obs used in calculating BIC; see [R] BIC note.
+Note: BIC uses N = number of observations. See [R] BIC note.
 
+ 
+logit e  t t2    ,  nolog 
 
 Logistic regression                             Number of obs     =      1,127
                                                 LR chi2(2)        =      65.25
@@ -1101,21 +1151,25 @@ Log likelihood = -243.05761                     Pseudo R2         =     0.1183
 ------------------------------------------------------------------------------
            e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-           t |  -.2171502   .0357159    -6.08   0.000    -.2871522   -.1471483
-          t2 |   .0034213    .000761     4.50   0.000     .0019297    .0049129
-       _cons |  -1.232559   .1924529    -6.40   0.000    -1.609759    -.855358
+           t |    -0.2172     0.0357    -6.08   0.000      -0.2872     -0.1471
+          t2 |     0.0034     0.0008     4.50   0.000       0.0019      0.0049
+       _cons |    -1.2326     0.1925    -6.40   0.000      -1.6098     -0.8554
 ------------------------------------------------------------------------------
 
+ 
+estat ic
 
 Akaike&#39;s information criterion and Bayesian information criterion
 
 -----------------------------------------------------------------------------
-       Model |        Obs  ll(null)  ll(model)      df         AIC        BIC
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
 -------------+---------------------------------------------------------------
-           . |      1,127 -275.6841  -243.0576       3    492.1152   507.1972
+           . |      1,127  -275.6841  -243.0576       3   492.1152   507.1972
 -----------------------------------------------------------------------------
-               Note: N=Obs used in calculating BIC; see [R] BIC note.
+Note: BIC uses N = number of observations. See [R] BIC note.
 
+ 
+logit e  t t2 t3 ,  nolog 
 
 Logistic regression                             Number of obs     =      1,127
                                                 LR chi2(3)        =      72.86
@@ -1125,67 +1179,27 @@ Log likelihood = -239.25267                     Pseudo R2         =     0.1321
 ------------------------------------------------------------------------------
            e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-           t |  -.4038479   .0818805    -4.93   0.000    -.5643307   -.2433651
-          t2 |   .0156598   .0049946     3.14   0.002     .0058706    .0254489
-          t3 |  -.0001819   .0000787    -2.31   0.021    -.0003362   -.0000277
-       _cons |  -.8250483   .2405503    -3.43   0.001    -1.296518   -.3535783
+           t |    -0.4038     0.0819    -4.93   0.000      -0.5643     -0.2434
+          t2 |     0.0157     0.0050     3.14   0.002       0.0059      0.0254
+          t3 |    -0.0002     0.0001    -2.31   0.021      -0.0003     -0.0000
+       _cons |    -0.8250     0.2406    -3.43   0.001      -1.2965     -0.3536
 ------------------------------------------------------------------------------
 
+ 
+estat ic
 
 Akaike&#39;s information criterion and Bayesian information criterion
 
 -----------------------------------------------------------------------------
-       Model |        Obs  ll(null)  ll(model)      df         AIC        BIC
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
 -------------+---------------------------------------------------------------
-           . |      1,127 -275.6841  -239.2527       4    486.5053   506.6146
+           . |      1,127  -275.6841  -239.2527       4   486.5053   506.6146
 -----------------------------------------------------------------------------
-               Note: N=Obs used in calculating BIC; see [R] BIC note.</code></pre>
-<p><em>Utilisation des splines cubiques restreintes</em> (à préférer à un effet quadratique d’ordre 3 mais limiter à 4 noeuds max)</p>
-<p>Installez la commande <code>rc_spline</code></p>
-<pre><code>ssc install rc_spline</code></pre>
-<p>Avec 3 noeuds:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true"></a>rc_spline t, nknots(3)</span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true"></a><span class="kw">logit</span> <span class="fu">e</span>  _St1 _St2 ,  <span class="kw">nolog</span> </span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true"></a><span class="kw">estat</span> <span class="kw">ic</span></span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
- number of knots = 3
- value of knot 1 = 2
- value of knot 2 = 11
- value of knot 3 = 35
-
-
-Logistic regression                             Number of obs     =      1,127
-                                                LR chi2(2)        =      70.10
-                                                Prob &gt; chi2       =     0.0000
-Log likelihood = -240.63646                     Pseudo R2         =     0.1271
-
-------------------------------------------------------------------------------
-           e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-        _St1 |  -.2354268   .0375071    -6.28   0.000    -.3089393   -.1619143
-        _St2 |   .3393925   .0731312     4.64   0.000      .196058     .482727
-       _cons |  -1.118498    .197322    -5.67   0.000    -1.505242   -.7317535
-------------------------------------------------------------------------------
-
-
-Akaike&#39;s information criterion and Bayesian information criterion
-
------------------------------------------------------------------------------
-       Model |        Obs  ll(null)  ll(model)      df         AIC        BIC
--------------+---------------------------------------------------------------
-           . |      1,127 -275.6841  -240.6365       3    487.2729   502.3549
------------------------------------------------------------------------------
-               Note: N=Obs used in calculating BIC; see [R] BIC note.</code></pre>
+Note: BIC uses N = number of observations. See [R] BIC note.
+</code></pre>
 <p><strong>Estimation du modèle</strong></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true"></a><span class="kw">logit</span> <span class="fu">e</span>  t t t2 t3 <span class="fu">year</span> age surgery, <span class="kw">nolog</span></span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true"></a>* ou</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true"></a><span class="kw">logit</span> <span class="fu">e</span>  _St1 _St2 <span class="fu">year</span> age surgery, <span class="kw">nolog</span></span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+<pre><code>logit e  t t2 t3 year age surgery, nolog
 
-
-note: t omitted because of collinearity
 
 Logistic regression                             Number of obs     =      1,127
                                                 LR chi2(6)        =      90.69
@@ -1195,46 +1209,25 @@ Log likelihood = -230.33671                     Pseudo R2         =     0.1645
 ------------------------------------------------------------------------------
            e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-           t |  -.3720566   .0823946    -4.52   0.000    -.5335471   -.2105661
-           t |          0  (omitted)
-          t2 |   .0142379    .005023     2.83   0.005     .0043929    .0240828
-          t3 |  -.0001659   .0000785    -2.11   0.035    -.0003198    -.000012
-        year |  -.1326693   .0737755    -1.80   0.072    -.2772666     .011928
-         age |   .0333413   .0146876     2.27   0.023     .0045541    .0621285
-     surgery |  -1.010918    .448598    -2.25   0.024    -1.890154   -.1316821
-       _cons |   7.082657   5.307737     1.33   0.182    -3.320316    17.48563
+           t |    -0.3721     0.0824    -4.52   0.000      -0.5335     -0.2106
+          t2 |     0.0142     0.0050     2.83   0.005       0.0044      0.0241
+          t3 |    -0.0002     0.0001    -2.11   0.035      -0.0003     -0.0000
+        year |    -0.1327     0.0738    -1.80   0.072      -0.2773      0.0119
+         age |     0.0333     0.0147     2.27   0.023       0.0046      0.0621
+     surgery |    -1.0109     0.4486    -2.25   0.024      -1.8902     -0.1317
+       _cons |     7.0827     5.3077     1.33   0.182      -3.3203     17.4856
 ------------------------------------------------------------------------------
-
-
-Logistic regression                             Number of obs     =      1,127
-                                                LR chi2(5)        =      88.64
-                                                Prob &gt; chi2       =     0.0000
-Log likelihood = -231.36455                     Pseudo R2         =     0.1608
-
-------------------------------------------------------------------------------
-           e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
--------------+----------------------------------------------------------------
-        _St1 |  -.2189922   .0375386    -5.83   0.000    -.2925664    -.145418
-        _St2 |   .3062123   .0735705     4.16   0.000     .1620167    .4504079
-        year |  -.1425472   .0729516    -1.95   0.051    -.2855296    .0004353
-         age |   .0338832   .0146548     2.31   0.021     .0051603    .0626062
-     surgery |  -.9935417   .4477076    -2.22   0.026    -1.871033   -.1160509
-       _cons |   7.487586   5.256425     1.42   0.154    -2.814818    17.78999
-------------------------------------------------------------------------------</code></pre>
+</code></pre>
 </div>
 </div>
 <div id="paramétrisation-avec-durée-discrète" class="section level2" number="2.3">
 <h2 number="2.3"><span class="header-section-number">2.3</span> Paramétrisation avec durée discrète</h2>
 <p>Pour l’exemple seulement, on prendra des intervalles découpés sur les quartiles de la durée</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true"></a><span class="kw">xtile</span> ct4=t, n(4)</span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true"></a><span class="kw">bysort</span> id ct4: <span class="kw">keep</span> <span class="kw">if</span> <span class="dt">_n</span>==_N</span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true"></a><span class="kw">tab</span>  ct4 <span class="fu">e</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true"></a><span class="kw">logit</span> <span class="fu">e</span> i.ct4  <span class="fu">year</span> age surgery,  <span class="kw">nolog</span></span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+<pre><code>xtile ct4=t, n(4)
+bysort id ct4: keep if _n==_N
 
+tab  ct4 e
 
-
-(930 observations deleted)
 
          4 |
  quantiles |           e
@@ -1248,6 +1241,8 @@ Log likelihood = -231.36455                     Pseudo R2         =     0.1608
      Total |       122         75 |       197 
 
 
+logit e i.ct4  year age surgery,  nolog
+
 Logistic regression                             Number of obs     =        197
                                                 LR chi2(6)        =      39.30
                                                 Prob &gt; chi2       =     0.0000
@@ -1257,15 +1252,16 @@ Log likelihood = -111.23965                     Pseudo R2         =     0.1501
            e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
          ct4 |
-          2  |  -1.033368   .4188719    -2.47   0.014    -1.854342   -.2123944
-          3  |  -1.615245    .544858    -2.96   0.003    -2.683147   -.5473433
-          4  |  -.4789305   .5992969    -0.80   0.424    -1.653531    .6956698
+          2  |    -1.0334     0.4189    -2.47   0.014      -1.8543     -0.2124
+          3  |    -1.6152     0.5449    -2.96   0.003      -2.6831     -0.5473
+          4  |    -0.4789     0.5993    -0.80   0.424      -1.6535      0.6957
              |
-        year |  -.2032436   .0931956    -2.18   0.029    -.3859036   -.0205835
-         age |   .0468518   .0184958     2.53   0.011     .0106006     .083103
-     surgery |  -1.110163   .5025594    -2.21   0.027    -2.095161   -.1251644
-       _cons |   12.44666   6.653694     1.87   0.061      -.59434    25.48766
-------------------------------------------------------------------------------</code></pre>
+        year |    -0.2032     0.0932    -2.18   0.029      -0.3859     -0.0206
+         age |     0.0469     0.0185     2.53   0.011       0.0106      0.0831
+     surgery |    -1.1102     0.5026    -2.21   0.027      -2.0952     -0.1252
+       _cons |    12.4467     6.6537     1.87   0.061      -0.5943     25.4877
+------------------------------------------------------------------------------
+</code></pre>
 </div>
 </div>
 <div id="modèles-paramétriques" class="section level1" number="3">
@@ -1275,30 +1271,13 @@ Log likelihood = -111.23965                     Pseudo R2         =     0.1501
 <h2 number="3.1"><span class="header-section-number">3.1</span> Modèle AFT</h2>
 <p><strong>Weibull</strong></p>
 <p>Par défaut, le modèle de Weibull est exécuté sous paramétrisation PH. Pour une paramétrisation type AFT, ajouter l’option <em>time</em>.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true"></a><span class="kw">use</span> <span class="st">&quot;D:\Marc\SMS\FORMATIONS\2017</span><span class="ch">\a</span><span class="st">nalyse biographique\A distribuer</span><span class="ch">\t</span><span class="st">ransplantation.dta&quot;</span> , <span class="kw">clear</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true"></a><span class="kw">stset</span> stime, f(died)</span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true"></a><span class="kw">streg</span> <span class="fu">year</span> age surgery , dist(<span class="kw">weibull</span>) time <span class="kw">nolog</span> noshow </span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true"></a><span class="kw">estat</span> <span class="kw">ic</span></span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+<pre><code>webuse set &quot;https://raw.githubusercontent.com//mthevenin/analyse_duree/master/bases/&quot;
+webuse  &quot;transplantation_m&quot;, clear
+webuse set
 
-
-(Heart transplant data)
-
-     failure event:  died != 0 &amp; died &lt; .
-obs. time interval:  (0, stime]
- exit on or before:  failure
-
-------------------------------------------------------------------------------
-        103  total observations
-          0  exclusions
-------------------------------------------------------------------------------
-        103  observations remaining, representing
-         75  failures in single-record/single-failure data
-     31,938  total analysis time at risk and under observation
-                                                at risk from t =         0
-                                     earliest observed entry t =         0
-                                          last observed exit t =     1,799
-
+stset stime, f(died)
+streg year age surgery , dist(weibull) time nolog noshow
+estat ic
 
 Weibull AFT regression
 
@@ -1311,51 +1290,29 @@ Log likelihood  =    -188.6278                  Prob &gt; chi2      =      0.000
 ------------------------------------------------------------------------------
           _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-        year |   .1619765    .121842     1.33   0.184    -.0768295    .4007825
-         age |  -.0615259   .0247438    -2.49   0.013    -.1100229   -.0130289
-     surgery |   1.970336   .7794141     2.53   0.011      .442713     3.49796
-       _cons |  -3.022011   8.728433    -0.35   0.729    -20.12943     14.0854
+        year |     0.1620     0.1218     1.33   0.184      -0.0768      0.4008
+         age |    -0.0615     0.0247    -2.49   0.013      -0.1100     -0.0130
+     surgery |     1.9703     0.7794     2.53   0.011       0.4427      3.4980
+       _cons |    -3.0220     8.7284    -0.35   0.729     -20.1294     14.0854
 -------------+----------------------------------------------------------------
-       /ln_p |  -.5868247   .0927049    -6.33   0.000     -.768523   -.4051264
+       /ln_p |    -0.5868     0.0927    -6.33   0.000      -0.7685     -0.4051
 -------------+----------------------------------------------------------------
-           p |   .5560902   .0515523                      .4636974    .6668925
-         1/p |   1.798269   .1667084                      1.499492    2.156579
+           p |     0.5561     0.0516                        0.4637      0.6669
+         1/p |     1.7983     0.1667                        1.4995      2.1566
 ------------------------------------------------------------------------------
-
 
 Akaike&#39;s information criterion and Bayesian information criterion
 
 -----------------------------------------------------------------------------
-       Model |        Obs  ll(null)  ll(model)      df         AIC        BIC
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
 -------------+---------------------------------------------------------------
-           . |        103 -198.0632  -188.6278       5    387.2556   400.4292
+           . |        103  -198.0632  -188.6278       5   387.2556   400.4292
 -----------------------------------------------------------------------------
-               Note: N=Obs used in calculating BIC; see [R] BIC note.</code></pre>
+Note: BIC uses N = number of observations. See [R] BIC note.
+</code></pre>
 <p><strong>Loglogistique</strong></p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true"></a><span class="kw">use</span> <span class="st">&quot;D:\Marc\SMS\FORMATIONS\2017</span><span class="ch">\a</span><span class="st">nalyse biographique\A distribuer</span><span class="ch">\t</span><span class="st">ransplantation.dta&quot;</span> , <span class="kw">clear</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true"></a><span class="kw">stset</span> stime, f(died)</span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true"></a><span class="kw">streg</span> <span class="fu">year</span> age surgery , dist(loglog) <span class="kw">nolog</span> noshow </span>
-<span id="cb45-4"><a href="#cb45-4" aria-hidden="true"></a><span class="kw">estat</span> <span class="kw">ic</span></span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
-
-
-(Heart transplant data)
-
-     failure event:  died != 0 &amp; died &lt; .
-obs. time interval:  (0, stime]
- exit on or before:  failure
-
-------------------------------------------------------------------------------
-        103  total observations
-          0  exclusions
-------------------------------------------------------------------------------
-        103  observations remaining, representing
-         75  failures in single-record/single-failure data
-     31,938  total analysis time at risk and under observation
-                                                at risk from t =         0
-                                     earliest observed entry t =         0
-                                          last observed exit t =     1,799
-
+<pre><code>streg year age surgery , dist(loglog) nolog noshow 
+estat ic
 
 Loglogistic AFT regression
 
@@ -1368,55 +1325,38 @@ Log likelihood  =   -183.03937                  Prob &gt; chi2      =      0.000
 ------------------------------------------------------------------------------
           _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-        year |   .2407722   .1172173     2.05   0.040     .0110304    .4705139
-         age |  -.0427039   .0213016    -2.00   0.045    -.0844542   -.0009536
-     surgery |   2.274735   .6912947     3.29   0.001     .9198221    3.629647
-       _cons |  -10.40344   8.341015    -1.25   0.212    -26.75153    5.944649
+        year |     0.2408     0.1172     2.05   0.040       0.0110      0.4705
+         age |    -0.0427     0.0213    -2.00   0.045      -0.0845     -0.0010
+     surgery |     2.2747     0.6913     3.29   0.001       0.9198      3.6296
+       _cons |   -10.4034     8.3410    -1.25   0.212     -26.7515      5.9446
 -------------+----------------------------------------------------------------
-    /lngamma |   .1805421   .0969528     1.86   0.063     -.009482    .3705661
+    /lngamma |     0.1805     0.0970     1.86   0.063      -0.0095      0.3706
 -------------+----------------------------------------------------------------
-       gamma |   1.197866   .1161366                      .9905628    1.448554
+       gamma |     1.1979     0.1161                        0.9906      1.4486
 ------------------------------------------------------------------------------
 
 
 Akaike&#39;s information criterion and Bayesian information criterion
 
 -----------------------------------------------------------------------------
-       Model |        Obs  ll(null)  ll(model)      df         AIC        BIC
+       Model |          N   ll(null)  ll(model)      df        AIC        BIC
 -------------+---------------------------------------------------------------
-           . |        103 -193.8865  -183.0394       5    376.0787   389.2524
+           . |        103  -193.8865  -183.0394       5   376.0787   389.2524
 -----------------------------------------------------------------------------
-               Note: N=Obs used in calculating BIC; see [R] BIC note.</code></pre>
+</code></pre>
 </div>
 </div>
 <div id="risques-concurrents" class="section level1" number="4">
 <h1 number="4"><span class="header-section-number">4</span> Risques concurrents</h1>
 <div id="non-paramétrique-estimation-des-ic" class="section level2" number="4.1">
 <h2 number="4.1"><span class="header-section-number">4.1</span> Non paramétrique: estimation des IC</h2>
-<p>Installer les commandes <code>stcompet</code> et <code>stcomlist</code> (éventuellement <code>competout</code>: <a href="https://mthevenin.github.io/stata_fr/commandes.html" class="uri">https://mthevenin.github.io/stata_fr/commandes.html</a> pour exécuter le test de Gray avec Stata via R)</p>
+<p>Installer les commandes <code>stcompet</code> et <code>stcomlist</code></p>
+<pre><code>ssc install stcompet
+ssc install stcomlist</code></pre>
 <p>Le risque d’intérêt est compet=1, le risque concurrent est compet=2</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true"></a><span class="kw">use</span> <span class="st">&quot;D:\Marc\SMS\FORMATIONS\2019</span><span class="ch">\a</span><span class="st">nalyse durees</span><span class="ch">\a</span><span class="st"> distribuer\compet.dta&quot;</span> , <span class="kw">clear</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true"></a><span class="kw">stset</span> stime, failure(compet==1)</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true"></a>stcomlist, compet1(2)</span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+<pre><code>stset stime, failure(compet==1)
+stcomlist, compet1(2)
 
-
-(Heart transplant data)
-
-     failure event:  compet == 1
-obs. time interval:  (0, stime]
- exit on or before:  failure
-
-------------------------------------------------------------------------------
-        103  total observations
-          0  exclusions
-------------------------------------------------------------------------------
-        103  observations remaining, representing
-         56  failures in single-record/single-failure data
-     31,938  total analysis time at risk and under observation
-                                                at risk from t =         0
-                                     earliest observed entry t =         0
-                                          last observed exit t =     1,799
 
             failure:  compet == 1
  competing failures:  compet == 2
@@ -1424,125 +1364,122 @@ obs. time interval:  (0, stime]
     Time       CIF         SE     [95% Conf. Int.]
 --------------------------------------------------
        1    0.0097     0.0097     0.0009    0.0477
-       2    0.0194     0.0136     0.0038    0.0619
-       3    0.0485     0.0212     0.0181    0.1022
-       5    0.0680     0.0248     0.0300    0.1273
+       2    0.0388     0.0190     0.0127    0.0892
+       3    0.0583     0.0231     0.0239    0.1149
+       5    0.0777     0.0264     0.0363    0.1395
        6    0.0874     0.0278     0.0429    0.1515
        8    0.0971     0.0292     0.0497    0.1634
        9    0.1068     0.0304     0.0566    0.1751
       12    0.1166     0.0316     0.0638    0.1868
-      16    0.1264     0.0328     0.0711    0.1984
-      18    0.1362     0.0338     0.0785    0.2099
-      21    0.1559     0.0358     0.0937    0.2325
-      30    0.1657     0.0367     0.1014    0.2437
+      16    0.1362     0.0338     0.0785    0.2099
+      18    0.1461     0.0349     0.0860    0.2212
+      21    0.1657     0.0367     0.1014    0.2437
       32    0.1756     0.0376     0.1093    0.2550
-      35    0.1856     0.0384     0.1173    0.2662
-      37    0.1955     0.0392     0.1253    0.2773
-      39    0.2055     0.0400     0.1335    0.2884
-      40    0.2156     0.0407     0.1418    0.2996
-      45    0.2256     0.0414     0.1502    0.3107
-      50    0.2357     0.0421     0.1586    0.3217
-      53    0.2458     0.0427     0.1671    0.3327
-      58    0.2559     0.0433     0.1757    0.3436
-      61    0.2660     0.0439     0.1843    0.3544
-      66    0.2761     0.0445     0.1930    0.3652
-      68    0.2861     0.0450     0.2018    0.3759
-      69    0.2962     0.0454     0.2106    0.3866
-      72    0.3063     0.0459     0.2195    0.3973
-      77    0.3164     0.0463     0.2284    0.4079
-      78    0.3265     0.0467     0.2374    0.4184
-      81    0.3365     0.0471     0.2464    0.4289
-      85    0.3466     0.0474     0.2554    0.4393
-      90    0.3567     0.0478     0.2645    0.4497
-      96    0.3668     0.0481     0.2737    0.4601
-     100    0.3769     0.0484     0.2829    0.4704
-     102    0.3870     0.0486     0.2921    0.4807
-     110    0.3972     0.0489     0.3016    0.4911
-     149    0.4078     0.0491     0.3112    0.5019
-     153    0.4183     0.0494     0.3209    0.5125
-     186    0.4291     0.0496     0.3309    0.5235
-     188    0.4399     0.0498     0.3409    0.5343
-     207    0.4506     0.0500     0.3509    0.5451
-     263    0.4614     0.0502     0.3610    0.5559
-     285    0.4836     0.0505     0.3818    0.5780
-     308    0.4947     0.0506     0.3923    0.5890
-     340    0.5058     0.0507     0.4028    0.5999
-     583    0.5211     0.0513     0.4162    0.6158
-     733    0.5391     0.0524     0.4313    0.6351
-     852    0.5584     0.0535     0.4475    0.6555
-     995    0.5811     0.0550     0.4657    0.6801
-    1032    0.6039     0.0561     0.4850    0.7036
-    1386    0.6343     0.0584     0.5084    0.7362
+      37    0.1856     0.0384     0.1173    0.2662
+      40    0.1957     0.0393     0.1254    0.2775
+      43    0.2058     0.0400     0.1337    0.2888
+      45    0.2158     0.0408     0.1420    0.2999
+      50    0.2259     0.0415     0.1503    0.3110
+      51    0.2360     0.0422     0.1588    0.3221
+      53    0.2461     0.0428     0.1673    0.3330
+      58    0.2562     0.0434     0.1759    0.3439
+      61    0.2662     0.0440     0.1845    0.3548
+      66    0.2763     0.0445     0.1932    0.3656
+      69    0.2864     0.0450     0.2020    0.3763
+      72    0.3066     0.0459     0.2197    0.3976
+      77    0.3167     0.0464     0.2286    0.4082
+      78    0.3267     0.0467     0.2376    0.4187
+      81    0.3368     0.0471     0.2466    0.4292
+      85    0.3469     0.0475     0.2556    0.4396
+      90    0.3570     0.0478     0.2648    0.4500
+      96    0.3671     0.0481     0.2739    0.4604
+     102    0.3771     0.0484     0.2831    0.4707
+     110    0.3874     0.0487     0.2925    0.4812
+     149    0.3980     0.0489     0.3021    0.4920
+     165    0.4085     0.0492     0.3118    0.5027
+     186    0.4193     0.0495     0.3217    0.5137
+     188    0.4301     0.0497     0.3316    0.5246
+     207    0.4408     0.0499     0.3417    0.5354
+     219    0.4516     0.0501     0.3517    0.5462
+     263    0.4624     0.0502     0.3618    0.5570
+     285    0.4846     0.0505     0.3826    0.5791
+     308    0.4957     0.0506     0.3931    0.5900
+     340    0.5068     0.0507     0.4037    0.6009
+     583    0.5221     0.0514     0.4171    0.6168
+     675    0.5401     0.0524     0.4322    0.6361
+     733    0.5580     0.0532     0.4477    0.6548
+     995    0.5808     0.0548     0.4659    0.6795
+    1032    0.6036     0.0559     0.4851    0.7031
+    1386    0.6340     0.0583     0.5083    0.7357
+
 
             failure:  compet == 2
  competing failures:  compet == 1
 
     Time       CIF         SE     [95% Conf. Int.]
 --------------------------------------------------
-       2    0.0194     0.0136     0.0038    0.0619
-      16    0.0391     0.0191     0.0128    0.0897
-      17    0.0489     0.0213     0.0182    0.1029
-      28    0.0587     0.0232     0.0240    0.1157
-      36    0.0686     0.0250     0.0302    0.1286
-      40    0.0787     0.0267     0.0368    0.1413
-      43    0.0888     0.0283     0.0436    0.1539
-      51    0.0989     0.0297     0.0506    0.1663
-      68    0.1090     0.0310     0.0578    0.1785
-      72    0.1190     0.0323     0.0651    0.1905
-      80    0.1291     0.0334     0.0726    0.2024
-     165    0.1396     0.0346     0.0804    0.2149
-     219    0.1504     0.0358     0.0886    0.2276
-     334    0.1615     0.0370     0.0970    0.2406
-     342    0.1730     0.0383     0.1058    0.2540
-     675    0.1910     0.0414     0.1177    0.2777
-     979    0.2138     0.0457     0.1321    0.3086</code></pre>
+       3    0.0097     0.0097     0.0009    0.0477
+       6    0.0194     0.0136     0.0038    0.0619
+      16    0.0292     0.0166     0.0079    0.0761
+      17    0.0391     0.0191     0.0128    0.0897
+      28    0.0489     0.0213     0.0182    0.1029
+      30    0.0587     0.0232     0.0240    0.1157
+      35    0.0686     0.0250     0.0302    0.1286
+      36    0.0786     0.0267     0.0367    0.1411
+      39    0.0885     0.0282     0.0435    0.1534
+      40    0.0986     0.0296     0.0504    0.1658
+      68    0.1188     0.0322     0.0650    0.1901
+      80    0.1288     0.0334     0.0724    0.2020
+     100    0.1389     0.0345     0.0800    0.2138
+     153    0.1495     0.0356     0.0880    0.2261
+     334    0.1605     0.0368     0.0964    0.2392
+     342    0.1720     0.0381     0.1052    0.2526
+     852    0.1913     0.0417     0.1175    0.2787
+     979    0.2141     0.0460     0.1320    0.3094
+</code></pre>
 </div>
 <div id="modèle-cause-specific-cox" class="section level2" number="4.2">
 <h2 number="4.2"><span class="header-section-number">4.2</span> Modèle cause-specific (Cox)</h2>
 <p>Attention: non relié aux IC</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true"></a><span class="kw">stcox</span> <span class="fu">year</span> age surgery,  nohr</span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+<pre><code>stcox year age surgery,  nohr
 
-         failure _d:  compet == 1
-   analysis time _t:  stime
-
-Iteration 0:   log likelihood = -222.54837
-Iteration 1:   log likelihood = -215.02113
-Iteration 2:   log likelihood = -214.60293
-Iteration 3:   log likelihood = -214.59123
-Iteration 4:   log likelihood = -214.59121
+Iteration 0:   log likelihood = -222.40766
+Iteration 1:   log likelihood = -214.66912
+Iteration 2:   log likelihood = -214.47069
+Iteration 3:   log likelihood = -214.46905
+Iteration 4:   log likelihood = -214.46905
 Refining estimates:
-Iteration 0:   log likelihood = -214.59121
+Iteration 0:   log likelihood = -214.46905
 
 Cox regression -- Breslow method for ties
 
 No. of subjects =          103                  Number of obs    =         103
 No. of failures =           56
 Time at risk    =        31938
-                                                LR chi2(3)       =       15.91
-Log likelihood  =   -214.59121                  Prob &gt; chi2      =      0.0012
+                                                LR chi2(3)       =       15.88
+Log likelihood  =   -214.46905                  Prob &gt; chi2      =      0.0012
 
 ------------------------------------------------------------------------------
           _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-        year |  -.1084298   .0769515    -1.41   0.159     -.259252    .0423923
-         age |   .0283261   .0154272     1.84   0.066    -.0019106    .0585628
-     surgery |  -1.418308   .6026912    -2.35   0.019    -2.599561   -.2370552
-------------------------------------------------------------------------------</code></pre>
+        year |    -0.1033     0.0774    -1.33   0.182      -0.2550      0.0485
+         age |     0.0385     0.0163     2.36   0.018       0.0065      0.0704
+     surgery |    -1.1099     0.5290    -2.10   0.036      -2.1468     -0.0730
+------------------------------------------------------------------------------
+</code></pre>
 </div>
-<div id="modèle-fine-gray" class="section level2" number="4.3">
-<h2 number="4.3"><span class="header-section-number">4.3</span> Modèle Fine-Gray</h2>
-<p>La commande stcrreg est installé avec les commandes de base. Relié directement aux IC, la définition du risque diffère du risque instantané usuel (risque de sous répartition)</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true"></a>stcrreg <span class="fu">year</span> age surgery, compete(compet=2) nohr</span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+<div id="modèle-de-fine-gray" class="section level2" number="4.3">
+<h2 number="4.3"><span class="header-section-number">4.3</span> Modèle de Fine-Gray</h2>
+<p>La commande <em><code>stcrreg</code></em> est installée avec les commandes de base. Relié directement aux IC, la définition du risque diffère du risque instantané usuel (risque de sous répartition).</p>
+<pre><code>stcrreg year age surgery, compete(compet=2) nohr
 
          failure _d:  compet == 1
    analysis time _t:  stime
 
-Iteration 0:   log pseudolikelihood =  -228.8496  
-Iteration 1:   log pseudolikelihood =  -228.4185  
-Iteration 2:   log pseudolikelihood = -228.41665  
-Iteration 3:   log pseudolikelihood = -228.41665  
+Iteration 0:   log pseudolikelihood = -227.92407  
+Iteration 1:   log pseudolikelihood = -227.69764  
+Iteration 2:   log pseudolikelihood = -227.69531  
+Iteration 3:   log pseudolikelihood = -227.69531  
 
 Competing-risks regression                       No. of obs       =        103
                                                  No. of subjects  =        103
@@ -1550,69 +1487,64 @@ Failure event  : compet == 1                     No. failed       =         56
 Competing event: compet == 2                     No. competing    =         19
                                                  No. censored     =         28
 
-                                                 Wald chi2(3)     =       9.21
-Log pseudolikelihood = -228.41665                Prob &gt; chi2      =     0.0267
+                                                 Wald chi2(3)     =      11.42
+Log pseudolikelihood = -227.69531                Prob &gt; chi2      =     0.0097
 
 ------------------------------------------------------------------------------
              |               Robust
           _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
-        year |  -.0816725   .0759449    -1.08   0.282    -.2305218    .0671768
-         age |   .0181178    .014278     1.27   0.204    -.0098666    .0461022
-     surgery |  -1.187722   .5222951    -2.27   0.023    -2.211401   -.1640423
-------------------------------------------------------------------------------</code></pre>
+        year |    -0.0724     0.0716    -1.01   0.312      -0.2128      0.0679
+         age |     0.0370     0.0177     2.09   0.037       0.0022      0.0718
+     surgery |    -0.8688     0.4510    -1.93   0.054      -1.7528      0.0153
+------------------------------------------------------------------------------
+</code></pre>
 </div>
 <div id="modèle-logistique-multinomial" class="section level2" number="4.4">
 <h2 number="4.4"><span class="header-section-number">4.4</span> Modèle logistique multinomial</h2>
-<p>Attention: non relié aux IC</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode stata"><code class="sourceCode stata"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true"></a>expand mois</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true"></a><span class="kw">bysort</span> id: <span class="kw">gen</span> t=<span class="dt">_n</span></span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true"></a><span class="kw">sort</span> id t</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true"></a><span class="kw">gen</span> <span class="fu">e</span> = compet</span>
-<span id="cb53-5"><a href="#cb53-5" aria-hidden="true"></a><span class="kw">bysort</span> id: <span class="kw">replace</span> <span class="fu">e</span>=0 <span class="kw">if</span> t&lt;_N</span>
-<span id="cb53-6"><a href="#cb53-6" aria-hidden="true"></a><span class="kw">mlogit</span> <span class="fu">e</span> t <span class="fu">year</span> age surgery</span></code></pre></div>
-<pre><code>running D:\Marc\SMS\FORMATIONS\2020\analyse duree Ined\analyse durees\profil&gt; o ...
+<p>Attention: non relié aux IC Pour la variable de durée on utilise la variable <em>mois</em></p>
+<pre><code>expand mois
+bysort id: gen t=_n
+gen t2=t*t
 
+gen e = compet
+replace e=0 if t&lt;mois
+mlogit e t t2 year age surgery
 
-(1,061 observations created)
+Iteration 0:   log likelihood = -318.13171  
+Iteration 1:   log likelihood = -285.78811  
+Iteration 2:   log likelihood = -275.20206  
+Iteration 3:   log likelihood = -275.00574  
+Iteration 4:   log likelihood = -275.00542  
+Iteration 5:   log likelihood = -275.00542  
 
-
-
-
-(426 real changes made)
-
-
-Iteration 0:   log likelihood = -320.63742  
-Iteration 1:   log likelihood = -293.94986  
-Iteration 2:   log likelihood = -287.00623  
-Iteration 3:   log likelihood = -286.85587  
-Iteration 4:   log likelihood = -286.85569  
-Iteration 5:   log likelihood = -286.85569  
-
-Multinomial logistic regression                 Number of obs     =      1,164
-                                                LR chi2(8)        =      67.56
+Multinomial logistic regression                 Number of obs     =      1,127
+                                                LR chi2(10)       =      86.25
                                                 Prob &gt; chi2       =     0.0000
-Log likelihood = -286.85569                     Pseudo R2         =     0.1054
+Log likelihood = -275.00542                     Pseudo R2         =     0.1356
 
 ------------------------------------------------------------------------------
-           e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+           e |        RRR   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
 0            |  (base outcome)
 -------------+----------------------------------------------------------------
 1            |
-           t |  -.0833633   .0194683    -4.28   0.000    -.1215204   -.0452061
-        year |  -.1307793   .0794859    -1.65   0.100    -.2865688    .0250102
-         age |    .032855    .016139     2.04   0.042      .001223    .0644869
-     surgery |  -1.525699   .6079702    -2.51   0.012    -2.717299   -.3340998
-       _cons |   5.837775   5.740758     1.02   0.309    -5.413903    17.08945
+           t |     0.8159     0.0338    -4.91   0.000       0.7522      0.8850
+          t2 |     1.0032     0.0009     3.53   0.000       1.0014      1.0049
+        year |     0.8795     0.0718    -1.57   0.116       0.7494      1.0321
+         age |     1.0449     0.0183     2.51   0.012       1.0097      1.0813
+     surgery |     0.3175     0.1711    -2.13   0.033       0.1104      0.9129
+* Constante non reportée     
 -------------+----------------------------------------------------------------
 2            |
-           t |  -.0905817   .0337391    -2.68   0.007     -.156709   -.0244543
-        year |  -.1859397   .1393032    -1.33   0.182     -.458969    .0870896
-         age |   .0406961   .0291411     1.40   0.163    -.0164195    .0978117
-     surgery |  -.2487657   .6640659    -0.37   0.708    -1.550311    1.052779
-       _cons |   8.187169   10.05178     0.81   0.415    -11.51396     27.8883
-------------------------------------------------------------------------------</code></pre>
+           t |     0.8168     0.0565    -2.93   0.003       0.7134      0.9353
+          t2 |     1.0030     0.0015     1.94   0.052       1.0000      1.0060
+        year |     0.8158     0.1127    -1.47   0.141       0.6223      1.0695
+         age |     1.0111     0.0248     0.45   0.654       0.9635      1.0610
+     surgery |     0.5412     0.4221    -0.79   0.431       0.1173      2.4959
+* Constante non reportée      
+------------------------------------------------------------------------------
+</code></pre>
 </div>
 </div>
 
@@ -1627,7 +1559,7 @@ Log likelihood = -286.85569                     Pseudo R2         =     0.1054
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
