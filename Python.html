@@ -13,7 +13,7 @@
 
 <title>PYTHON</title>
 
-<script src="site_libs/header-attrs-2.2/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -24,99 +24,19 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 
-
-<style type="text/css">code{white-space: pre;}</style>
-<style type="text/css" data-origin="pandoc">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  { color: #cccccc; background-color: #303030; }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ffcfaf; } /* Alert */
-code span.an { color: #7f9f7f; font-weight: bold; } /* Annotation */
-code span.at { } /* Attribute */
-code span.bn { color: #dca3a3; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #f0dfaf; } /* ControlFlow */
-code span.ch { color: #dca3a3; } /* Char */
-code span.cn { color: #dca3a3; font-weight: bold; } /* Constant */
-code span.co { color: #7f9f7f; } /* Comment */
-code span.cv { color: #7f9f7f; font-weight: bold; } /* CommentVar */
-code span.do { color: #7f9f7f; } /* Documentation */
-code span.dt { color: #dfdfbf; } /* DataType */
-code span.dv { color: #dcdccc; } /* DecVal */
-code span.er { color: #c3bf9f; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #c0bed1; } /* Float */
-code span.fu { color: #efef8f; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #7f9f7f; font-weight: bold; } /* Information */
-code span.kw { color: #f0dfaf; } /* Keyword */
-code span.op { color: #f0efd0; } /* Operator */
-code span.ot { color: #efef8f; } /* Other */
-code span.pp { color: #ffcfaf; font-weight: bold; } /* Preprocessor */
-code span.sc { color: #dca3a3; } /* SpecialChar */
-code span.ss { color: #cc9393; } /* SpecialString */
-code span.st { color: #cc9393; } /* String */
-code span.va { } /* Variable */
-code span.vs { color: #cc9393; } /* VerbatimString */
-code span.wa { color: #7f9f7f; font-weight: bold; } /* Warning */
-
-</style>
-<script>
-// apply pandoc div.sourceCode style to pre.sourceCode instead
-(function() {
-  var sheets = document.styleSheets;
-  for (var i = 0; i < sheets.length; i++) {
-    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
-    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
-    for (var j = 0; j < rules.length; j++) {
-      var rule = rules[j];
-      // check if there is a div.sourceCode rule
-      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
-      var style = rule.style.cssText;
-      // check if color or background-color is set
-      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
-      // replace div.sourceCode by a pre.sourceCode rule
-      sheets[i].deleteRule(j);
-      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
-    }
-  }
-})();
-</script>
 <style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
 
 
 <style type="text/css">
@@ -448,7 +368,7 @@ div.tocify {
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Modèles à risque proportionnel
+    Modèles à risques proportionnels
      
     <span class="caret"></span>
   </a>
@@ -481,13 +401,13 @@ div.tocify {
       <a href="concurrents.html">Risques concurrents</a>
     </li>
     <li>
-      <a href="cure.html">Récurrence et imunité</a>
+      <a href="cure.html">fragilité et imunité</a>
     </li>
   </ul>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Logiciels
+    Programmation
      
     <span class="caret"></span>
   </a>
@@ -523,44 +443,18 @@ div.tocify {
 </div>
 
 
-<p>Deux paquets d’analyse: principalement<code>lifelines</code> (km, cox, aft…) et <code>statsmodels</code> (estimation logit en temps discret). <br> Le package <code>statsmodels</code> est également ne mesure d’estimer des courbes de séjour de type Kaplan-Meier et des modèles à risque proportionnel de Cox. Le package <code>lifelines</code> couvre la quasi totalité des méthodes standards. Il ne couvre pas (encore) les risques concurrents.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="im">import</span> numpy  <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a><span class="im">import</span> patsy  <span class="im">as</span> pt</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a><span class="im">import</span> lifelines <span class="im">as</span> lf</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="im">import</span> os</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>os.environ[<span class="st">&#39;QT_QPA_PLATFORM_PLUGIN_PATH&#39;</span>] <span class="op">=</span><span class="st">&#39;C:/Users/thevenin_m/AppData/Local/Continuum/anaconda3/Library/plugins/platforms&#39;</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a>trans <span class="op">=</span> pd.read_csv(<span class="st">&quot;D:/Marc/SMS/FORMATIONS/2019/analyse durees/a distribuer/transplantation.csv&quot;</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>trans.head(<span class="dv">10</span>)</span></code></pre></div>
-<pre><code>##    id  year  age  surgery  transplant  wait  died  stime  mois
-## 0   1    67   30        0           0     0     1     50     3
-## 1   2    68   51        0           0     0     1      6     1
-## 2   3    68   54        0           1     1     1     16     2
-## 3   4    68   40        0           1    36     1     39     2
-## 4   5    68   20        0           0     0     1     18     2
-## 5   6    68   54        0           0     0     1      3     1
-## 6   7    68   50        0           1    51     1    675    24
-## 7   8    68   45        0           0     0     1     40     2
-## 8   9    68   47        0           0     0     1     85     4
-## 9  10    68   42        0           1    12     1     58     3</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a>trans.info()</span></code></pre></div>
-<pre><code>## &lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
-## RangeIndex: 103 entries, 0 to 102
-## Data columns (total 9 columns):
-##  #   Column      Non-Null Count  Dtype
-## ---  ------      --------------  -----
-##  0   id          103 non-null    int64
-##  1   year        103 non-null    int64
-##  2   age         103 non-null    int64
-##  3   surgery     103 non-null    int64
-##  4   transplant  103 non-null    int64
-##  5   wait        103 non-null    int64
-##  6   died        103 non-null    int64
-##  7   stime       103 non-null    int64
-##  8   mois        103 non-null    int64
-## dtypes: int64(9)
-## memory usage: 7.4 KB</code></pre>
+<p>Deux paquets d’analyse: principalement<code>lifelines</code> (km, cox, aft…) et <code>statsmodels</code> (estimation logit en temps discret, kaplan-Meier, Cox). <br> Le package <code>statsmodels</code> est également ne mesure d’estimer des courbes de séjour de type Kaplan-Meier et des modèles à risque proportionnel de Cox. Le package <code>lifelines</code> couvre la quasi totalité des méthodes standards, à l’exception des les risques concurrents.</p>
+<pre><code>import numpy  as np
+import pandas as pd
+import patsy  as pt
+import lifelines as lf
+import matplotlib.pyplot as plt
+import statsmodels as sm</code></pre>
+<pre><code>import os
+os.environ[&#39;QT_QPA_PLATFORM_PLUGIN_PATH&#39;] =&#39;C:/Users/thevenin_m/AppData\Local/Continuum/anaconda3/Lib/site-packages/PyQt5/Qt5/plugins/platforms&#39;</code></pre>
+<pre><code>trans = pd.read_csv(&quot;https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv&quot;)
+trans.head(10)
+trans.info()</code></pre>
 <div id="package-lifelines" class="section level1" number="1">
 <h1 number="1"><span class="header-section-number">1</span> Package lifelines</h1>
 <p><a href="https://lifelines.readthedocs.io/en/latest/" class="uri">https://lifelines.readthedocs.io/en/latest/</a></p>
@@ -568,218 +462,214 @@ div.tocify {
 <h2 number="1.1"><span class="header-section-number">1.1</span> Non Paramétrique: Kaplan Meier</h2>
 <div id="estimateur-km-et-durée-médiane" class="section level3" number="1.1.1">
 <h3 number="1.1.1"><span class="header-section-number">1.1.1</span> Estimateur KM et durée médiane</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a>T <span class="op">=</span> trans[<span class="st">&#39;stime&#39;</span>]</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>E <span class="op">=</span> trans[<span class="st">&#39;died&#39;</span>]</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="im">from</span> lifelines <span class="im">import</span> KaplanMeierFitter</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>kmf <span class="op">=</span> KaplanMeierFitter()</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>kmf.fit(T,E)</span></code></pre></div>
-<pre><code>## &lt;lifelines.KaplanMeierFitter:&quot;KM_estimate&quot;, fitted with 103 total observations, 28 right-censored observations&gt;
-## 
-## C:\Users\THEVEN~1\AppData\Local\Programs\Python\Python38\lib\site-packages\lifelines\fitters\kaplan_meier_fitter.py:346: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
-##   self.confidence_interval_ = self._bounds(cumulative_sq_[:, None], alpha, ci_labels)</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="bu">print</span>(kmf.survival_function_)</span></code></pre></div>
-<pre><code>##           KM_estimate
-## timeline             
-## 0.0          1.000000
-## 1.0          0.990291
-## 2.0          0.961165
-## 3.0          0.932039
-## 5.0          0.912621
-## ...               ...
-## 1400.0       0.151912
-## 1407.0       0.151912
-## 1571.0       0.151912
-## 1586.0       0.151912
-## 1799.0       0.151912
-## 
-## [89 rows x 1 columns]</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a>a <span class="op">=</span> <span class="st">&quot;DUREE MEDIANE:&quot;</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>b <span class="op">=</span> kmf.median_survival_time_</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a><span class="bu">print</span>(a,b)</span></code></pre></div>
-<pre><code>## DUREE MEDIANE: 100.0</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a>kmf.plot()</span></code></pre></div>
-<p><img src="Python_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre><code>T = trans[&#39;stime&#39;]
+E = trans[&#39;died&#39;]</code></pre>
+<pre><code>from lifelines import KaplanMeierFitter
+kmf = KaplanMeierFitter()
+kmf.fit(T,E)
+print(kmf.survival_function_)
+a = &quot;DUREE MEDIANE:&quot;
+b = kmf.median_survival_time_
+print(a,b)
+
+          KM_estimate
+timeline             
+0.0          1.000000
+1.0          0.990291
+2.0          0.961165
+3.0          0.932039
+5.0          0.912621
+...               ...
+1400.0       0.151912
+1407.0       0.151912
+1571.0       0.151912
+1586.0       0.151912
+1799.0       0.151912
+
+[89 rows x 1 columns]
+DUREE MEDIANE: 100.0
+
+</code></pre>
+<pre><code>kmf.plot()</code></pre>
+<p><img src="python/1.png" /></p>
 </div>
 <div id="comparaison-des-fonctions-de-survie" class="section level3" number="1.1.2">
 <h3 number="1.1.2"><span class="header-section-number">1.1.2</span> Comparaison des fonctions de survie</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a>ax <span class="op">=</span> plt.subplot(<span class="dv">111</span>)</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a>kmf <span class="op">=</span> KaplanMeierFitter()</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a><span class="cf">for</span> name, grouped_df <span class="kw">in</span> trans.groupby(<span class="st">&#39;surgery&#39;</span>):</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a>    kmf.fit(grouped_df[<span class="st">&#39;stime&#39;</span>], grouped_df[<span class="st">&#39;died&#39;</span>], label<span class="op">=</span>name)</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a>    kmf.plot(ax<span class="op">=</span>ax)</span></code></pre></div>
-<p><img src="Python_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="im">from</span> lifelines.statistics <span class="im">import</span> multivariate_logrank_test</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a>results <span class="op">=</span> multivariate_logrank_test(trans[<span class="st">&#39;stime&#39;</span>], trans[<span class="st">&#39;surgery&#39;</span>], trans[<span class="st">&#39;died&#39;</span>])</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a>results.print_summary()</span></code></pre></div>
-<pre><code>## &lt;lifelines.StatisticalResult: multivariate_logrank_test&gt;
-##                t_0 = -1
-##  null_distribution = chi squared
-## degrees_of_freedom = 1
-##          test_name = multivariate_logrank_test
-## 
-## ---
-##  test_statistic    p  -log2(p)
-##            6.59 0.01      6.61</code></pre>
+<pre><code>ax = plt.subplot(111)
+kmf = KaplanMeierFitter()
+for name, grouped_df in trans.groupby(&#39;surgery&#39;):
+    kmf.fit(grouped_df[&#39;stime&#39;], grouped_df[&#39;died&#39;], label=name)
+    kmf.plot(ax=ax)</code></pre>
+<p><img src="python/2.png" /></p>
+<pre><code>from lifelines.statistics import multivariate_logrank_test
+results = multivariate_logrank_test(trans[&#39;stime&#39;], trans[&#39;surgery&#39;], trans[&#39;died&#39;])
+results.print_summary()
+
+
+&lt;lifelines.StatisticalResult: multivariate_logrank_test&gt;
+               t_0 = -1
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = multivariate_logrank_test
+
+---
+ test_statistic    p  -log2(p)
+           6.59 0.01      6.61
+
+
+</code></pre>
 </div>
 </div>
 <div id="semi-paramétrique-cox" class="section level2" number="1.2">
 <h2 number="1.2"><span class="header-section-number">1.2</span> Semi paramétrique: Cox</h2>
 <div id="estimation" class="section level3" number="1.2.1">
 <h3 number="1.2.1"><span class="header-section-number">1.2.1</span> Estimation</h3>
-<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a>model <span class="op">=</span> <span class="st">&#39;year + age + C(surgery) -1&#39;</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a>X <span class="op">=</span> pt.dmatrix(model, trans, return_type<span class="op">=</span><span class="st">&#39;dataframe&#39;</span>)</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true"></a>design_info <span class="op">=</span> X.design_info</span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true"></a>YX <span class="op">=</span> X.join(trans[[<span class="st">&#39;stime&#39;</span>,<span class="st">&#39;died&#39;</span>]])</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true"></a>YX.drop([<span class="st">&#39;C(surgery)[0]&#39;</span>], axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true"></a>YX.head()</span></code></pre></div>
-<pre><code>##    C(surgery)[1]  year   age  stime  died
-## 0            0.0  67.0  30.0     50     1
-## 1            0.0  68.0  51.0      6     1
-## 2            0.0  68.0  54.0     16     1
-## 3            0.0  68.0  40.0     39     1
-## 4            0.0  68.0  20.0     18     1</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a><span class="im">from</span> lifelines <span class="im">import</span> CoxPHFitter</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a>cph <span class="op">=</span> CoxPHFitter()</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a>cph.fit(YX, duration_col<span class="op">=</span><span class="st">&#39;stime&#39;</span>, event_col<span class="op">=</span><span class="st">&#39;died&#39;</span>)</span></code></pre></div>
-<pre><code>## &lt;lifelines.CoxPHFitter: fitted with 103 total observations, 28 right-censored observations&gt;</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true"></a>cph.print_summary()</span></code></pre></div>
-<pre><code>## &lt;lifelines.CoxPHFitter: fitted with 103 total observations, 28 right-censored observations&gt;
-##              duration col = &#39;stime&#39;
-##                 event col = &#39;died&#39;
-##       baseline estimation = breslow
-##    number of observations = 103
-## number of events observed = 75
-##    partial log-likelihood = -289.31
-##          time fit was run = 2020-10-30 10:29:13 UTC
-## 
-## ---
-##                 coef  exp(coef)   se(coef)   coef lower 95%   coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%
-## C(surgery)[1]  -0.99       0.37       0.44            -1.84            -0.13                 0.16                 0.88
-## year           -0.12       0.89       0.07            -0.25             0.01                 0.78                 1.01
-## age             0.03       1.03       0.01             0.00             0.06                 1.00                 1.06
-## 
-##                   z    p   -log2(p)
-## C(surgery)[1] -2.26 0.02       5.40
-## year          -1.78 0.08       3.72
-## age            2.19 0.03       5.12
-## ---
-## Concordance = 0.65
-## Partial AIC = 584.61
-## log-likelihood ratio test = 17.63 on 3 df
-## -log2(p) of ll-ratio test = 10.90</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true"></a>cph.plot()</span></code></pre></div>
-<p><img src="Python_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre><code>model = &#39;year + age + C(surgery) -1&#39;
+X = pt.dmatrix(model, trans, return_type=&#39;dataframe&#39;)
+design_info = X.design_info
+YX = X.join(trans[[&#39;stime&#39;,&#39;died&#39;]])
+YX.drop([&#39;C(surgery)[0]&#39;], axis=1, inplace=True)
+YX.head()</code></pre>
+<pre><code>from lifelines import CoxPHFitter
+cph = CoxPHFitter()
+cph.fit(YX, duration_col=&#39;stime&#39;, event_col=&#39;died&#39;)
+cph.print_summary()
+cph.plot()
+
+
+&lt;lifelines.CoxPHFitter: fitted with 103 total observations, 28 right-censored observations&gt;
+             duration col = &#39;stime&#39;
+                event col = &#39;died&#39;
+      baseline estimation = breslow
+   number of observations = 103
+number of events observed = 75
+   partial log-likelihood = -289.31
+         time fit was run = 2021-04-21 13:24:52 UTC
+
+---
+                coef  exp(coef)   se(coef)   coef lower 95%   coef upper 95%  exp(coef) lower 95%  exp(coef) upper
+&gt;  95%
+C(surgery)[1]  -0.99       0.37       0.44            -1.84            -0.13                 0.16                 
+&gt; 0.88
+year           -0.12       0.89       0.07            -0.25             0.01                 0.78                 
+&gt; 1.01
+age             0.03       1.03       0.01             0.00             0.06                 1.00                 
+&gt; 1.06
+
+                  z    p   -log2(p)
+C(surgery)[1] -2.26 0.02       5.40
+year          -1.78 0.08       3.72
+age            2.19 0.03       5.12
+---
+Concordance = 0.65
+Partial AIC = 584.61
+log-likelihood ratio test = 17.63 on 3 df
+-log2(p) of ll-ratio test = 10.90
+</code></pre>
+<p><img src="python/3.png" /></p>
 </div>
 <div id="tests-hypothèse-ph" class="section level3" number="1.2.2">
 <h3 number="1.2.2"><span class="header-section-number">1.2.2</span> Tests hypothèse PH</h3>
 <p><strong>Test PH: Schoenfeld Méthode 1</strong></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true"></a>cph.check_assumptions(YX,p_value_threshold<span class="op">=</span><span class="fl">0.05</span>, show_plots<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
-<pre><code>## The ``p_value_threshold`` is set at 0.05. Even under the null hypothesis of no violations, some
-## covariates will be below the threshold by chance. This is compounded when there are many covariates.
-## Similarly, when there are lots of observations, even minor deviances from the proportional hazard
-## assumption will be flagged.
-## 
-## With that in mind, it&#39;s best to use a combination of statistical tests and visual tests to determine
-## the most serious violations. Produce visual plots using ``check_assumptions(..., show_plots=True)``
-## and looking for non-constant lines. See link [A] below for a full example.
-## 
-## &lt;lifelines.StatisticalResult: proportional_hazard_test&gt;
-##  null_distribution = chi squared
-## degrees_of_freedom = 1
-##          test_name = proportional_hazard_test
-## 
-## ---
-##                     test_statistic    p  -log2(p)
-## C(surgery)[1] km              4.01 0.05      4.47
-##               rank            3.72 0.05      4.21
-## age           km              1.18 0.28      1.86
-##               rank            1.03 0.31      1.69
-## year          km              2.07 0.15      2.73
-##               rank            2.18 0.14      2.83
-## 
-## 
-## 1. Variable &#39;C(surgery)[1]&#39; failed the non-proportional test: p-value is 0.0452.
-## 
-##    Advice: with so few unique values (only 2), you can include `strata=[&#39;C(surgery)[1]&#39;, ...]` in
-## the call in `.fit`. See documentation in link [E] below.
-## 
-## ---
-## [A]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html
-## [B]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html#Bin-variable-and-stratify-on-it
-## [C]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html#Introduce-time-varying-covariates
-## [D]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html#Modify-the-functional-form
-## [E]  https://lifelines.readthedocs.io/en/latest/jupyter_notebooks/Proportional%20hazard%20assumption.html#Stratification
-## 
-## 
-## C:\Users\THEVEN~1\AppData\Local\Programs\Python\Python38\lib\site-packages\lifelines\fitters\kaplan_meier_fitter.py:346: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
-##   self.confidence_interval_ = self._bounds(cumulative_sq_[:, None], alpha, ci_labels)
-## C:\Users\THEVEN~1\AppData\Local\Programs\Python\Python38\lib\site-packages\lifelines\fitters\kaplan_meier_fitter.py:346: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
-##   self.confidence_interval_ = self._bounds(cumulative_sq_[:, None], alpha, ci_labels)</code></pre>
+<pre><code>cph.check_assumptions(YX,p_value_threshold=0.05)
+
+
+The ``p_value_threshold`` is set at 0.05. Even under the null hypothesis of no violations, some
+covariates will be below the threshold by chance. This is compounded when there are many covariates.
+Similarly, when there are lots of observations, even minor deviances from the proportional hazard
+assumption will be flagged.
+
+With that in mind, it&#39;s best to use a combination of statistical tests and visual tests to determine
+the most serious violations. Produce visual plots using ``check_assumptions(..., show_plots=True)``
+and looking for non-constant lines. See link [A] below for a full example.
+
+&lt;lifelines.StatisticalResult: proportional_hazard_test&gt;
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = proportional_hazard_test
+
+---
+                    test_statistic    p  -log2(p)
+C(surgery)[1] km              4.01 0.05      4.47
+              rank            3.74 0.05      4.23
+age           km              1.18 0.28      1.86
+              rank            1.06 0.30      1.72
+year          km              2.07 0.15      2.73
+              rank            2.08 0.15      2.75
+
+
+1. Variable &#39;C(surgery)[1]&#39; failed the non-proportional test: p-value is 0.0452.</code></pre>
 <p><strong>Test PH: Schoenfeld Méthode 2</strong></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true"></a><span class="im">from</span> lifelines.statistics <span class="im">import</span>  proportional_hazard_test </span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true"></a>zph <span class="op">=</span> proportional_hazard_test(cph, YX, time_transform<span class="op">=</span><span class="st">&#39;all&#39;</span>)</span></code></pre></div>
-<pre><code>## C:\Users\THEVEN~1\AppData\Local\Programs\Python\Python38\lib\site-packages\lifelines\fitters\kaplan_meier_fitter.py:346: FutureWarning: Support for multi-dimensional indexing (e.g. `obj[:, None]`) is deprecated and will be removed in a future version.  Convert to a numpy array before indexing instead.
-##   self.confidence_interval_ = self._bounds(cumulative_sq_[:, None], alpha, ci_labels)</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true"></a>zph.print_summary()</span></code></pre></div>
-<pre><code>## &lt;lifelines.StatisticalResult: proportional_hazard_test&gt;
-##  null_distribution = chi squared
-## degrees_of_freedom = 1
-##          test_name = proportional_hazard_test
-## 
-## ---
-##                         test_statistic    p  -log2(p)
-## C(surgery)[1] identity            5.54 0.02      5.75
-##               km                  4.01 0.05      4.47
-##               log                 3.69 0.05      4.19
-##               rank                3.72 0.05      4.21
-## age           identity            1.61 0.20      2.29
-##               km                  1.18 0.28      1.86
-##               log                 0.61 0.44      1.20
-##               rank                1.03 0.31      1.69
-## year          identity            0.80 0.37      1.43
-##               km                  2.07 0.15      2.73
-##               log                 1.34 0.25      2.02
-##               rank                2.18 0.14      2.83</code></pre>
+<pre><code>from lifelines.statistics import  proportional_hazard_test 
+zph = proportional_hazard_test(cph, YX, time_transform=&#39;all&#39;)
+zph.print_summary()
+
+
+&lt;lifelines.StatisticalResult: proportional_hazard_test&gt;
+ null_distribution = chi squared
+degrees_of_freedom = 1
+         test_name = proportional_hazard_test
+
+---
+                        test_statistic    p  -log2(p)
+C(surgery)[1] identity            5.54 0.02      5.75
+              km                  4.01 0.05      4.47
+              log                 3.69 0.05      4.19
+              rank                3.74 0.05      4.23
+age           identity            1.61 0.20      2.29
+              km                  1.18 0.28      1.86
+              log                 0.61 0.44      1.20
+              rank                1.06 0.30      1.72
+year          identity            0.80 0.37      1.43
+              km                  2.07 0.15      2.73
+              log                 1.34 0.25      2.02
+              rank                2.08 0.15      2.75
+
+
+</code></pre>
 <p><strong>Test PH: intéraction</strong></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true"></a><span class="im">from</span> lifelines.utils <span class="im">import</span> to_episodic_format</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true"></a><span class="im">from</span> lifelines <span class="im">import</span> CoxTimeVaryingFitter</span></code></pre></div>
+<pre><code>from lifelines.utils import to_episodic_format
+from lifelines import CoxTimeVaryingFitter</code></pre>
 <p><em>Transformation de la base YX</em></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true"></a><span class="bu">long</span> <span class="op">=</span> to_episodic_format(YX, duration_col<span class="op">=</span><span class="st">&#39;stime&#39;</span>, event_col<span class="op">=</span><span class="st">&#39;died&#39;</span>)</span></code></pre></div>
+<pre><code>long = to_episodic_format(YX, duration_col=&#39;stime&#39;, event_col=&#39;died&#39;)</code></pre>
 <p><em>Création de la variable d’intéraction</em></p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true"></a><span class="bu">long</span>[<span class="st">&#39;surgery_t&#39;</span>] <span class="op">=</span> <span class="bu">long</span>[<span class="st">&#39;C(surgery)[1]&#39;</span>] <span class="op">*</span> <span class="bu">long</span>[<span class="st">&#39;stop&#39;</span>]</span></code></pre></div>
+<pre><code>long[&#39;surgery_t&#39;] = long[&#39;C(surgery)[1]&#39;] * long[&#39;stop&#39;]</code></pre>
 <p><em>Estimation</em></p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true"></a>ctv <span class="op">=</span> CoxTimeVaryingFitter()</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true"></a>ctv.fit(<span class="bu">long</span>,</span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true"></a>        id_col<span class="op">=</span><span class="st">&#39;id&#39;</span>,</span>
-<span id="cb34-4"><a href="#cb34-4" aria-hidden="true"></a>        event_col<span class="op">=</span><span class="st">&#39;died&#39;</span>,</span>
-<span id="cb34-5"><a href="#cb34-5" aria-hidden="true"></a>        start_col<span class="op">=</span><span class="st">&#39;start&#39;</span>,</span>
-<span id="cb34-6"><a href="#cb34-6" aria-hidden="true"></a>        stop_col<span class="op">=</span><span class="st">&#39;stop&#39;</span>,)</span></code></pre></div>
-<pre><code>## &lt;lifelines.CoxTimeVaryingFitter: fitted with 31938 periods, 103 subjects, 75 events&gt;</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true"></a>ctv.print_summary(<span class="dv">4</span>)</span></code></pre></div>
-<pre><code>## &lt;lifelines.CoxTimeVaryingFitter: fitted with 31938 periods, 103 subjects, 75 events&gt;
-##          event col = &#39;died&#39;
-## number of subjects = 103
-##  number of periods = 31938
-##   number of events = 75
-## partial log-likelihood = -287.3290
-##   time fit was run = 2020-10-30 10:29:15 UTC
-## 
-## ---
-##                  coef  exp(coef)   se(coef)   coef lower 95%   coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%
-## C(surgery)[1] -1.7547     0.1730     0.6743          -3.0764          -0.4331               0.0461               0.6485
-## age            0.0289     1.0293     0.0134           0.0025           0.0552               1.0025               1.0568
-## year          -0.1231     0.8842     0.0668          -0.2541           0.0079               0.7756               1.0080
-## surgery_t      0.0022     1.0022     0.0011           0.0001           0.0044               1.0001               1.0044
-## 
-##                     z      p   -log2(p)
-## C(surgery)[1] -2.6022 0.0093     6.7542
-## age            2.1479 0.0317     4.9785
-## year          -1.8415 0.0656     3.9312
-## surgery_t      2.0239 0.0430     4.5402
-## ---
-## Partial AIC = 582.6581
-## log-likelihood ratio test = 21.5846 on 4 df
-## -log2(p) of ll-ratio test = 12.0103</code></pre>
+<pre><code>ctv = CoxTimeVaryingFitter()
+ctv.fit(long,
+        id_col=&#39;id&#39;,
+        event_col=&#39;died&#39;,
+        start_col=&#39;start&#39;,
+        stop_col=&#39;stop&#39;,)
+ctv.print_summary(4)
+
+&lt;lifelines.CoxTimeVaryingFitter: fitted with 31938 periods, 103 subjects, 75 events&gt;
+         event col = &#39;died&#39;
+number of subjects = 103
+ number of periods = 31938
+  number of events = 75
+partial log-likelihood = -287.3290
+  time fit was run = 2021-04-21 13:32:40 UTC
+
+---
+                 coef  exp(coef)   se(coef)   coef lower 95%   coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%
+C(surgery)[1] -1.7547     0.1730     0.6743          -3.0764          -0.4331               0.0461               0.6485
+age            0.0289     1.0293     0.0134           0.0025           0.0552               1.0025               1.0568
+year          -0.1231     0.8842     0.0668          -0.2541           0.0079               0.7756               1.0080
+surgery_t      0.0022     1.0022     0.0011           0.0001           0.0044               1.0001               1.0044
+
+                    z      p   -log2(p)
+C(surgery)[1] -2.6022 0.0093     6.7542
+age            2.1479 0.0317     4.9785
+year          -1.8415 0.0656     3.9312
+surgery_t      2.0239 0.0430     4.5402
+---
+Partial AIC = 582.6581
+log-likelihood ratio test = 21.5846 on 4 df
+-log2(p) of ll-ratio test = 12.0103
+
+
+</code></pre>
 </div>
 <div id="variable-dynamique-binaire" class="section level3" number="1.2.3">
 <h3 number="1.2.3"><span class="header-section-number">1.2.3</span> Variable dynamique binaire</h3>
@@ -791,201 +681,194 @@ div.tocify {
 <h3 number="1.3.1"><span class="header-section-number">1.3.1</span> Ajustement continu</h3>
 <p>Modèle logistique estimé avec le paquet <code>statsmodel</code>. La fonction <code>to_episodic_format</code> de <code>lifelines</code> permet de mettre en forme la base.<br />
 Pour la durée, on utilisera ici la variable <strong>mois</strong> (regroupement de stime par intervalle de 30 jours).</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true"></a><span class="im">import</span> statsmodels.formula.api <span class="im">as</span> smf <span class="co">#type R formule =&gt; ce qu&#39;on utilisera#</span></span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm <span class="co">#type python#</span></span></code></pre></div>
+<pre><code>import statsmodels.formula.api as smf #type R formule =&gt; ce qu&#39;on utilisera#
+import statsmodels.api as sm #type python#</code></pre>
 <p><strong>Transformation de la base en format long</strong></p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true"></a>td <span class="op">=</span> pd.read_csv(<span class="st">&quot;D:/Marc/SMS/FORMATIONS/2019/analyse durees/a distribuer/transplantation.csv&quot;</span>)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true"></a>td.drop([<span class="st">&#39;id&#39;</span>], axis<span class="op">=</span><span class="dv">1</span>, inplace<span class="op">=</span><span class="va">True</span>)</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true"></a>td[<span class="st">&#39;dur&#39;</span>] <span class="op">=</span> td[<span class="st">&#39;mois&#39;</span>]</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true"></a>td <span class="op">=</span> to_episodic_format(td, duration_col<span class="op">=</span><span class="st">&#39;mois&#39;</span>, event_col<span class="op">=</span><span class="st">&#39;died&#39;</span>)</span></code></pre></div>
+<pre><code>td = pd.read_csv(&quot;D:/Marc/SMS/FORMATIONS/2019/analyse durees/a distribuer/transplantation.csv&quot;)
+td.drop([&#39;id&#39;], axis=1, inplace=True)
+td[&#39;dur&#39;] = td[&#39;mois&#39;]
+td = to_episodic_format(td, duration_col=&#39;mois&#39;, event_col=&#39;died&#39;)</code></pre>
 <p><strong>Recherche de l’ajustement</strong><br />
-<br> <strong><span class="math inline">\(f(t)=a\times t\)</span></strong></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true"></a>td[<span class="st">&#39;t2&#39;</span>] <span class="op">=</span> td[<span class="st">&#39;stop&#39;</span>]<span class="op">**</span><span class="dv">2</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true"></a>td[<span class="st">&#39;t3&#39;</span>] <span class="op">=</span> td[<span class="st">&#39;stop&#39;</span>]<span class="op">**</span><span class="dv">3</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true"></a>fit1 <span class="op">=</span> smf.glm(formula<span class="op">=</span>  <span class="st">&quot;died ~ stop&quot;</span>, data<span class="op">=</span>td, family<span class="op">=</span>sm.families.Binomial()).fit()</span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true"></a>fit2 <span class="op">=</span> smf.glm(formula<span class="op">=</span>  <span class="st">&quot;died ~ stop + t2&quot;</span>, data<span class="op">=</span>td, family<span class="op">=</span>sm.families.Binomial()).fit()</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true"></a>fit3 <span class="op">=</span> smf.glm(formula<span class="op">=</span>  <span class="st">&quot;died ~ stop + t2 + t3&quot;</span>, data<span class="op">=</span>td, family<span class="op">=</span>sm.families.Binomial()).fit()</span></code></pre></div>
+<br></p>
+<pre><code>td[&#39;t2&#39;] = td[&#39;stop&#39;]**2
+td[&#39;t3&#39;] = td[&#39;stop&#39;]**3
+fit1 = smf.glm(formula=  &quot;died ~ stop&quot;, data=td, family=sm.families.Binomial()).fit()
+fit2 = smf.glm(formula=  &quot;died ~ stop + t2&quot;, data=td, family=sm.families.Binomial()).fit()
+fit3 = smf.glm(formula=  &quot;died ~ stop + t2 + t3&quot;, data=td, family=sm.families.Binomial()).fit()</code></pre>
 <p><strong>Comparaison des AIC</strong></p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;AIC pour ajustement t1&quot;</span>)</span></code></pre></div>
-<pre><code>## AIC pour ajustement t1</code></pre>
-<div class="sourceCode" id="cb43"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true"></a><span class="bu">print</span>(fit1.aic)</span></code></pre></div>
-<pre><code>## 516.1039235968562</code></pre>
-<div class="sourceCode" id="cb45"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;AIC pour ajustement durée t1 + t2&quot;</span>)</span></code></pre></div>
-<pre><code>## AIC pour ajustement durée t1 + t2</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true"></a><span class="bu">print</span>(fit2.aic)</span></code></pre></div>
-<pre><code>## 508.1014573009212</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true"></a><span class="bu">print</span>(<span class="st">&quot;AIC pour ajustement durée t1 + t2 + t3&quot;</span>)</span></code></pre></div>
-<pre><code>## AIC pour ajustement durée t1 + t2 + t3</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true"></a><span class="bu">print</span>(fit3.aic)</span></code></pre></div>
-<pre><code>## 506.1882809518765</code></pre>
+<pre><code>print(&quot;AIC pour ajustement t1&quot;)
+print(fit1.aic)
+print(&quot;AIC pour ajustement durée t1 + t2&quot;)
+print(fit2.aic)
+print(&quot;AIC pour ajustement durée t1 + t2 + t3&quot;)
+print(fit3.aic)
+
+
+AIC pour ajustement t1
+512.1039235968562
+
+AIC pour ajustement durée t1 + t2
+508.1014573009212
+
+AIC pour ajustement durée t1 + t2 + t3
+506.1882809518765</code></pre>
 <p><strong>Estimation du modèle</strong></p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true"></a>tdfit <span class="op">=</span> smf.glm(formula<span class="op">=</span>  <span class="st">&quot;died ~ stop + t2 + t3 + year + age + surgery&quot;</span>, data<span class="op">=</span>td, family<span class="op">=</span>sm.families.Binomial()).fit()</span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true"></a>tdfit.summary()</span></code></pre></div>
-<pre><code>## &lt;class &#39;statsmodels.iolib.summary.Summary&#39;&gt;
-## &quot;&quot;&quot;
-##                  Generalized Linear Model Regression Results                  
-## ==============================================================================
-## Dep. Variable:                   died   No. Observations:                 1164
-## Model:                            GLM   Df Residuals:                     1157
-## Model Family:                Binomial   Df Model:                            6
-## Link Function:                  logit   Scale:                          1.0000
-## Method:                          IRLS   Log-Likelihood:                -240.20
-## Date:                Fri, 30 Oct 2020   Deviance:                       480.39
-## Time:                        11:29:17   Pearson chi2:                 1.30e+03
-## No. Iterations:                     7                                         
-## Covariance Type:            nonrobust                                         
-## ==============================================================================
-##                  coef    std err          z      P&gt;|z|      [0.025      0.975]
-## ------------------------------------------------------------------------------
-## Intercept      6.3097      5.201      1.213      0.225      -3.884      16.503
-## stop          -0.2807      0.077     -3.635      0.000      -0.432      -0.129
-## t2             0.0096      0.005      2.083      0.037       0.001       0.019
-## t3            -0.0001   6.97e-05     -1.493      0.135      -0.000    3.26e-05
-## year          -0.1263      0.072     -1.747      0.081      -0.268       0.015
-## age            0.0337      0.014      2.330      0.020       0.005       0.062
-## surgery       -1.0050      0.447     -2.250      0.024      -1.880      -0.130
-## ==============================================================================
-## &quot;&quot;&quot;</code></pre>
+<pre><code>tdfit = smf.glm(formula=  &quot;died ~ stop + t2 + t3 + year + age + surgery&quot;, data=td, family=sm.families.Binomial()).fit()
+tdfit.summary()
+
+&lt;class &#39;statsmodels.iolib.summary.Summary&#39;&gt;
+&quot;&quot;&quot;
+                 Generalized Linear Model Regression Results                  
+==============================================================================
+Dep. Variable:                   died   No. Observations:                 1164
+Model:                            GLM   Df Residuals:                     1157
+Model Family:                Binomial   Df Model:                            6
+Link Function:                  logit   Scale:                          1.0000
+Method:                          IRLS   Log-Likelihood:                -240.20
+Date:                Wed, 21 Apr 2021   Deviance:                       480.39
+Time:                        15:44:21   Pearson chi2:                 1.30e+03
+No. Iterations:                     7                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      6.3097      5.201      1.213      0.225      -3.884      16.503
+stop          -0.2807      0.077     -3.635      0.000      -0.432      -0.129
+t2             0.0096      0.005      2.083      0.037       0.001       0.019
+t3            -0.0001   6.97e-05     -1.493      0.135      -0.000    3.26e-05
+year          -0.1263      0.072     -1.747      0.081      -0.268       0.015
+age            0.0337      0.014      2.330      0.020       0.005       0.062
+surgery       -1.0050      0.447     -2.250      0.024      -1.880      -0.130
+==============================================================================
+&quot;&quot;&quot;
+
+</code></pre>
 </div>
 <div id="ajustement-discret" class="section level3" number="1.3.2">
 <h3 number="1.3.2"><span class="header-section-number">1.3.2</span> Ajustement discret</h3>
 <p><em>Création des intervalles pour l’exemple (quantile de la durée en mois)</em></p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true"></a>td[<span class="st">&#39;ct4&#39;</span>] <span class="op">=</span> pd.qcut(td[<span class="st">&#39;stop&#39;</span>],[<span class="dv">0</span>, <span class="fl">.25</span>, <span class="fl">.5</span>, <span class="fl">.75</span>, <span class="fl">1.</span>]) </span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true"></a>td[<span class="st">&#39;ct4&#39;</span>].value_counts(normalize<span class="op">=</span><span class="va">True</span>)<span class="op">*</span><span class="dv">100</span></span></code></pre></div>
-<pre><code>## (0.999, 4.0]    27.233677
-## (11.0, 23.0]    24.484536
-## (4.0, 11.0]     24.398625
-## (23.0, 61.0]    23.883162
-## Name: ct4, dtype: float64</code></pre>
-<div class="sourceCode" id="cb57"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true"></a>td.ct4 <span class="op">=</span> pd.Categorical(td.ct4)</span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true"></a>td[<span class="st">&#39;ct4&#39;</span>] <span class="op">=</span> td.ct4.cat.codes</span></code></pre></div>
-<p>Pour chaque individu, on conserve une seule observation par intervalle</p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true"></a>td2 <span class="op">=</span> td </span>
-<span id="cb58-2"><a href="#cb58-2" aria-hidden="true"></a>td2[<span class="st">&#39;t&#39;</span>] <span class="op">=</span> td2[<span class="st">&#39;ct4&#39;</span>]</span>
-<span id="cb58-3"><a href="#cb58-3" aria-hidden="true"></a>td2 <span class="op">=</span> td2.sort_values([<span class="st">&#39;id&#39;</span>, <span class="st">&#39;stop&#39;</span>])</span>
-<span id="cb58-4"><a href="#cb58-4" aria-hidden="true"></a>td2 <span class="op">=</span>  td2.groupby([<span class="st">&#39;id&#39;</span>,<span class="st">&#39;ct4&#39;</span>]).last()</span>
-<span id="cb58-5"><a href="#cb58-5" aria-hidden="true"></a>td2.head(<span class="dv">20</span>)</span></code></pre></div>
-<pre><code>##         stop  start  died  age  dur  ...  wait  year     t2       t3  t
-## id ct4                               ...                               
-## 0  0     3.0    2.0     1   30    3  ...     0    67    9.0     27.0  0
-## 1  0     1.0    0.0     1   51    1  ...     0    68    1.0      1.0  0
-## 2  0     2.0    1.0     1   54    2  ...     1    68    4.0      8.0  0
-## 3  0     2.0    1.0     1   40    2  ...    36    68    4.0      8.0  0
-## 4  0     2.0    1.0     1   20    2  ...     0    68    4.0      8.0  0
-## 5  0     1.0    0.0     1   54    1  ...     0    68    1.0      1.0  0
-## 6  0     4.0    3.0     0   50   24  ...    51    68   16.0     64.0  0
-##    1    11.0   10.0     0   50   24  ...    51    68  121.0   1331.0  1
-##    2    23.0   22.0     0   50   24  ...    51    68  529.0  12167.0  2
-##    3    24.0   23.0     1   50   24  ...    51    68  576.0  13824.0  3
-## 7  0     2.0    1.0     1   45    2  ...     0    68    4.0      8.0  0
-## 8  0     4.0    3.0     1   47    4  ...     0    68   16.0     64.0  0
-## 9  0     3.0    2.0     1   42    3  ...    12    68    9.0     27.0  0
-## 10 0     4.0    3.0     0   47    6  ...    26    68   16.0     64.0  0
-##    1     6.0    5.0     1   47    6  ...    26    68   36.0    216.0  1
-## 11 0     1.0    0.0     1   53    1  ...     0    68    1.0      1.0  0
-## 12 0     4.0    3.0     1   54    4  ...    17    68   16.0     64.0  0
-## 13 0     4.0    3.0     0   53   47  ...    37    68   16.0     64.0  0
-##    1    11.0   10.0     0   53   47  ...    37    68  121.0   1331.0  1
-##    2    23.0   22.0     0   53   47  ...    37    68  529.0  12167.0  2
-## 
-## [20 rows x 13 columns]</code></pre>
+<pre><code>td[&#39;ct4&#39;] = pd.qcut(td[&#39;stop&#39;],[0, .25, .5, .75, 1.]) 
+td[&#39;ct4&#39;].value_counts(normalize=True)*100
+td.ct4 = pd.Categorical(td.ct4)
+td[&#39;ct4&#39;] = td.ct4.cat.codes
+
+
+(0.999, 4.0]    27.233677
+(11.0, 23.0]    24.484536
+(4.0, 11.0]     24.398625
+(23.0, 61.0]    23.883162
+Name: ct4, dtype: float64
+</code></pre>
+<p>Pour chaque individu, on conserve une seule observation par intervalle.</p>
+<pre><code>td2 = td 
+td2[&#39;t&#39;] = td2[&#39;ct4&#39;]
+td2 = td2.sort_values([&#39;id&#39;, &#39;stop&#39;])
+td2 =  td2.groupby([&#39;id&#39;,&#39;ct4&#39;]).last()
+td2.head(20)</code></pre>
 <p><strong>Estimation</strong></p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true"></a>td2fit <span class="op">=</span> smf.glm(formula<span class="op">=</span>  <span class="st">&quot;died ~ C(t) +  year + age + surgery&quot;</span>, data<span class="op">=</span>td2, family<span class="op">=</span>sm.families.Binomial()).fit()</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true"></a>td2fit.summary()</span></code></pre></div>
-<pre><code>## &lt;class &#39;statsmodels.iolib.summary.Summary&#39;&gt;
-## &quot;&quot;&quot;
-##                  Generalized Linear Model Regression Results                  
-## ==============================================================================
-## Dep. Variable:                   died   No. Observations:                  200
-## Model:                            GLM   Df Residuals:                      193
-## Model Family:                Binomial   Df Model:                            6
-## Link Function:                  logit   Scale:                          1.0000
-## Method:                          IRLS   Log-Likelihood:                -112.26
-## Date:                Fri, 30 Oct 2020   Deviance:                       224.52
-## Time:                        11:29:17   Pearson chi2:                     229.
-## No. Iterations:                     5                                         
-## Covariance Type:            nonrobust                                         
-## ==============================================================================
-##                  coef    std err          z      P&gt;|z|      [0.025      0.975]
-## ------------------------------------------------------------------------------
-## Intercept     11.8018      6.617      1.784      0.074      -1.167      24.770
-## C(t)[T.1]     -0.9078      0.408     -2.227      0.026      -1.707      -0.109
-## C(t)[T.2]     -1.8451      0.587     -3.141      0.002      -2.996      -0.694
-## C(t)[T.3]     -0.3224      0.578     -0.557      0.577      -1.456       0.811
-## year          -0.1947      0.093     -2.104      0.035      -0.376      -0.013
-## age            0.0468      0.018      2.543      0.011       0.011       0.083
-## surgery       -1.1025      0.503     -2.192      0.028      -2.088      -0.117
-## ==============================================================================
-## &quot;&quot;&quot;</code></pre>
+<pre><code>td2fit = smf.glm(formula=  &quot;died ~ C(t) +  year + age + surgery&quot;, data=td2, family=sm.families.Binomial()).fit()
+td2fit.summary()
+
+
+&lt;class &#39;statsmodels.iolib.summary.Summary&#39;&gt;
+&quot;&quot;&quot;
+                 Generalized Linear Model Regression Results                  
+==============================================================================
+Dep. Variable:                   died   No. Observations:                  200
+Model:                            GLM   Df Residuals:                      200
+Model Family:                Binomial   Df Model:                           -1
+Link Function:                  logit   Scale:                          1.0000
+Method:                          IRLS   Log-Likelihood:                -112.26
+Date:                Wed, 21 Apr 2021   Deviance:                       224.52
+Time:                        15:54:03   Pearson chi2:                     229.
+No. Iterations:                     5                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          z      P&gt;|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept     11.8018      6.617      1.784      0.074      -1.167      24.770
+C(t)[T.1]     -0.9078      0.408     -2.227      0.026      -1.707      -0.109
+C(t)[T.2]     -1.8451      0.587     -3.141      0.002      -2.996      -0.694
+C(t)[T.3]     -0.3224      0.578     -0.557      0.577      -1.456       0.811
+year          -0.1947      0.093     -2.104      0.035      -0.376      -0.013
+age            0.0468      0.018      2.543      0.011       0.011       0.083
+surgery       -1.1025      0.503     -2.192      0.028      -2.088      -0.117
+==============================================================================
+&quot;&quot;&quot;</code></pre>
 </div>
 </div>
 <div id="modèle-paramétrique-de-type-aft" class="section level2" number="1.4">
 <h2 number="1.4"><span class="header-section-number">1.4</span> Modèle paramétrique de type AFT</h2>
-<div class="sourceCode" id="cb62"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true"></a><span class="im">from</span> lifelines <span class="im">import</span> WeibullAFTFitter, LogLogisticAFTFitter</span></code></pre></div>
+<pre><code>from lifelines import WeibullAFTFitter, LogLogisticAFTFitter</code></pre>
 <p><strong>Weibull</strong></p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true"></a>aftw <span class="op">=</span> WeibullAFTFitter()</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true"></a>aftw.fit(YX, duration_col<span class="op">=</span><span class="st">&#39;stime&#39;</span>, event_col<span class="op">=</span><span class="st">&#39;died&#39;</span>)</span></code></pre></div>
-<pre><code>## &lt;lifelines.WeibullAFTFitter: fitted with 103 total observations, 28 right-censored observations&gt;</code></pre>
-<div class="sourceCode" id="cb65"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true"></a>aftw.print_summary()</span></code></pre></div>
-<pre><code>## &lt;lifelines.WeibullAFTFitter: fitted with 103 total observations, 28 right-censored observations&gt;
-##              duration col = &#39;stime&#39;
-##                 event col = &#39;died&#39;
-##    number of observations = 103
-## number of events observed = 75
-##            log-likelihood = -488.17
-##          time fit was run = 2020-10-30 10:29:17 UTC
-## 
-## ---
-##                         coef  exp(coef)   se(coef)   coef lower 95%   coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%
-## lambda_ C(surgery)[1]   1.97       7.17       0.78             0.44             3.50                 1.56                33.05
-##         year            0.16       1.18       0.12            -0.08             0.40                 0.93                 1.49
-##         age            -0.06       0.94       0.02            -0.11            -0.01                 0.90                 0.99
-##         _intercept     -3.02       0.05       8.73           -20.13            14.09                 0.00             1.31e+06
-## rho_    _intercept     -0.59       0.56       0.09            -0.77            -0.41                 0.46                 0.67
-## 
-##                           z      p   -log2(p)
-## lambda_ C(surgery)[1]  2.53   0.01       6.45
-##         year           1.33   0.18       2.44
-##         age           -2.49   0.01       6.28
-##         _intercept    -0.35   0.73       0.46
-## rho_    _intercept    -6.33 &lt;0.005      31.93
-## ---
-## Concordance = 0.65
-## AIC = 986.34
-## log-likelihood ratio test = 18.87 on 3 df
-## -log2(p) of ll-ratio test = 11.75</code></pre>
+<pre><code>aftw = WeibullAFTFitter()
+aftw.fit(YX, duration_col=&#39;stime&#39;, event_col=&#39;died&#39;)
+aftw.print_summary()
+
+&lt;lifelines.WeibullAFTFitter: fitted with 103 total observations, 28 right-censored observations&gt;
+             duration col = &#39;stime&#39;
+                event col = &#39;died&#39;
+   number of observations = 103
+number of events observed = 75
+           log-likelihood = -488.17
+         time fit was run = 2021-04-21 13:55:14 UTC
+
+---
+                        coef  exp(coef)   se(coef)   coef lower 95%   coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%
+lambda_ C(surgery)[1]   1.97       7.17       0.78             0.44             3.50                 1.56                33.05
+        year            0.16       1.18       0.12            -0.08             0.40                 0.93                 1.49
+        age            -0.06       0.94       0.02            -0.11            -0.01                 0.90                 0.99
+        _intercept     -3.02       0.05       8.73           -20.13            14.09                 0.00             1.31e+06
+rho_    _intercept     -0.59       0.56       0.09            -0.77            -0.41                 0.46                 0.67
+
+                          z      p   -log2(p)
+lambda_ C(surgery)[1]  2.53   0.01       6.45
+        year           1.33   0.18       2.44
+        age           -2.49   0.01       6.28
+        _intercept    -0.35   0.73       0.46
+rho_    _intercept    -6.33 &lt;0.005      31.93
+---
+Concordance = 0.65
+AIC = 986.34
+log-likelihood ratio test = 18.87 on 3 df
+-log2(p) of ll-ratio test = 11.75
+
+
+</code></pre>
 <p><strong>Loglogistique</strong></p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true"></a>aftl <span class="op">=</span> LogLogisticAFTFitter()</span>
-<span id="cb67-2"><a href="#cb67-2" aria-hidden="true"></a>aftl.fit(YX, duration_col<span class="op">=</span><span class="st">&#39;stime&#39;</span>, event_col<span class="op">=</span><span class="st">&#39;died&#39;</span>)</span></code></pre></div>
-<pre><code>## &lt;lifelines.LogLogisticAFTFitter: fitted with 103 total observations, 28 right-censored observations&gt;</code></pre>
-<div class="sourceCode" id="cb69"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true"></a>aftl.print_summary()</span></code></pre></div>
-<pre><code>## &lt;lifelines.LogLogisticAFTFitter: fitted with 103 total observations, 28 right-censored observations&gt;
-##              duration col = &#39;stime&#39;
-##                 event col = &#39;died&#39;
-##    number of observations = 103
-## number of events observed = 75
-##            log-likelihood = -482.58
-##          time fit was run = 2020-10-30 10:29:17 UTC
-## 
-## ---
-##                        coef  exp(coef)   se(coef)   coef lower 95%   coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%
-## alpha_ C(surgery)[1]   2.27       9.72       0.69             0.92             3.63                 2.51                37.68
-##        year            0.24       1.27       0.12             0.01             0.47                 1.01                 1.60
-##        age            -0.04       0.96       0.02            -0.08            -0.00                 0.92                 1.00
-##        _intercept    -10.41       0.00       8.34           -26.76             5.94                 0.00               381.76
-## beta_  _intercept     -0.18       0.83       0.10            -0.37             0.01                 0.69                 1.01
-## 
-##                          z      p   -log2(p)
-## alpha_ C(surgery)[1]  3.29 &lt;0.005       9.96
-##        year           2.05   0.04       4.65
-##        age           -2.01   0.04       4.49
-##        _intercept    -1.25   0.21       2.24
-## beta_  _intercept    -1.86   0.06       4.00
-## ---
-## Concordance = 0.66
-## AIC = 975.16
-## log-likelihood ratio test = 21.69 on 3 df
-## -log2(p) of ll-ratio test = 13.69</code></pre>
+<pre><code>aftl = LogLogisticAFTFitter()
+aftl.fit(YX, duration_col=&#39;stime&#39;, event_col=&#39;died&#39;)
+aftl.print_summary()
+
+
+&lt;lifelines.LogLogisticAFTFitter: fitted with 103 total observations, 28 right-censored observations&gt;
+             duration col = &#39;stime&#39;
+                event col = &#39;died&#39;
+   number of observations = 103
+number of events observed = 75
+           log-likelihood = -482.58
+         time fit was run = 2021-04-21 13:55:58 UTC
+
+---
+                       coef  exp(coef)   se(coef)   coef lower 95%   coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%
+alpha_ C(surgery)[1]   2.27       9.72       0.69             0.92             3.63                 2.51                37.68
+       year            0.24       1.27       0.12             0.01             0.47                 1.01                 1.60
+       age            -0.04       0.96       0.02            -0.08            -0.00                 0.92                 1.00
+       _intercept    -10.41       0.00       8.34           -26.76             5.94                 0.00               381.76
+beta_  _intercept     -0.18       0.83       0.10            -0.37             0.01                 0.69                 1.01
+
+                         z      p   -log2(p)
+alpha_ C(surgery)[1]  3.29 &lt;0.005       9.96
+       year           2.05   0.04       4.65
+       age           -2.01   0.04       4.49
+       _intercept    -1.25   0.21       2.24
+beta_  _intercept    -1.86   0.06       4.00
+---
+Concordance = 0.66
+AIC = 975.16
+log-likelihood ratio test = 21.69 on 3 df
+-log2(p) of ll-ratio test = 13.69
+</code></pre>
 </div>
 </div>
 <div id="package-statsmodels" class="section level1" number="2">
@@ -994,70 +877,61 @@ Pour la durée, on utilisera ici la variable <strong>mois</strong> (regroupement
 <p>Le package permet d’estimer des fonction de séjour de type Kaplan-Meier et des modèles de Cox.</p>
 <div id="fonctions-de-séjour-kaplan-meier" class="section level2" number="2.1">
 <h2 number="2.1"><span class="header-section-number">2.1</span> Fonctions de séjour Kaplan-Meier</h2>
-<div class="sourceCode" id="cb71"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true"></a>km <span class="op">=</span> sm.SurvfuncRight(trans[<span class="st">&quot;stime&quot;</span>], trans[<span class="st">&quot;died&quot;</span>])</span>
-<span id="cb71-2"><a href="#cb71-2" aria-hidden="true"></a>km.plot()</span>
-<span id="cb71-3"><a href="#cb71-3" aria-hidden="true"></a>km.summary()</span></code></pre></div>
-<pre><code>##       Surv prob  Surv prob SE  num at risk  num events
-## Time                                                  
-## 1      0.990291      0.009661          103         1.0
-## 2      0.961165      0.019037          102         3.0
-## 3      0.932039      0.024799           99         3.0
-## 5      0.912621      0.027825           96         2.0
-## 6      0.893204      0.030432           94         2.0
-## ...         ...           ...          ...         ...
-## 852    0.250655      0.048731           14         1.0
-## 979    0.227868      0.049341           11         1.0
-## 995    0.205081      0.049390           10         1.0
-## 1032   0.182295      0.048877            9         1.0
-## 1386   0.151912      0.049277            6         1.0
-## 
-## [62 rows x 4 columns]</code></pre>
-<div class="sourceCode" id="cb73"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true"></a>km.summary()</span></code></pre></div>
-<pre><code>##       Surv prob  Surv prob SE  num at risk  num events
-## Time                                                  
-## 1      0.990291      0.009661          103         1.0
-## 2      0.961165      0.019037          102         3.0
-## 3      0.932039      0.024799           99         3.0
-## 5      0.912621      0.027825           96         2.0
-## 6      0.893204      0.030432           94         2.0
-## ...         ...           ...          ...         ...
-## 852    0.250655      0.048731           14         1.0
-## 979    0.227868      0.049341           11         1.0
-## 995    0.205081      0.049390           10         1.0
-## 1032   0.182295      0.048877            9         1.0
-## 1386   0.151912      0.049277            6         1.0
-## 
-## [62 rows x 4 columns]</code></pre>
+<pre><code>km = sm.SurvfuncRight(trans[&quot;stime&quot;], trans[&quot;died&quot;])
+km.summary()
+
+      Surv prob  Surv prob SE  num at risk  num events
+Time                                                  
+1      0.990291      0.009661          103         1.0
+2      0.961165      0.019037          102         3.0
+3      0.932039      0.024799           99         3.0
+5      0.912621      0.027825           96         2.0
+6      0.893204      0.030432           94         2.0
+...         ...           ...          ...         ...
+852    0.250655      0.048731           14         1.0
+979    0.227868      0.049341           11         1.0
+995    0.205081      0.049390           10         1.0
+1032   0.182295      0.048877            9         1.0
+1386   0.151912      0.049277            6         1.0</code></pre>
 <p>Les test du log-rank sont disponibles avec la fonction <code>survdiff</code> (nom idem R). Au niveau graphique, la programmation semble un peu lourde et mériterait d’être simplifiée (donc non traitée).</p>
 <p><strong>Comparaison de S(t) à partir des tests du log-rank</strong></p>
+<p><br> Résultat: (statistique de test, p-value)</p>
 <p><em>Test non pondéré</em></p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true"></a>sm.duration.survdiff(trans.stime, trans.died, trans.surgery)</span></code></pre></div>
-<pre><code>## (6.590012323234387, 0.010255246157888975)</code></pre>
+<pre><code>sm.duration.survdiff(trans.stime, trans.died, trans.surgery)
+
+(6.590012323234387, 0.010255246157888975)</code></pre>
 <p><em>Breslow</em></p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true"></a>sm.duration.survdiff(trans.stime, trans.died, trans.surgery, weight_type<span class="op">=</span><span class="st">&#39;gb&#39;</span>)</span></code></pre></div>
-<pre><code>## (8.989753779902495, 0.0027149757927903417)</code></pre>
+<pre><code>sm.duration.survdiff(trans.stime, trans.died, trans.surgery, weight_type=&#39;gb&#39;)
+
+(8.989753779902495, 0.0027149757927903417)</code></pre>
 <p><em>Tarone-Ware</em></p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true"></a>sm.duration.survdiff(trans.stime, trans.died, trans.surgery, weight_type<span class="op">=</span><span class="st">&#39;tw&#39;</span>)</span></code></pre></div>
-<pre><code>## (8.462352726451392, 0.0036257256194570653)</code></pre>
+<pre><code>sm.duration.survdiff(trans.stime, trans.died, trans.surgery, weight_type=&#39;tw&#39;)
+
+(8.462352726451392, 0.0036257256194570653)
+</code></pre>
 </div>
 <div id="modèle-de-cox" class="section level2" number="2.2">
 <h2 number="2.2"><span class="header-section-number">2.2</span> Modèle de Cox</h2>
-<div class="sourceCode" id="cb81"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true"></a>mod <span class="op">=</span> smf.phreg(<span class="st">&quot;stime ~  year + age + surgery &quot;</span>,trans, status<span class="op">=</span><span class="st">&#39;died&#39;</span>, ties<span class="op">=</span><span class="st">&quot;efron&quot;</span>)</span>
-<span id="cb81-2"><a href="#cb81-2" aria-hidden="true"></a>rslt <span class="op">=</span> mod.fit()</span>
-<span id="cb81-3"><a href="#cb81-3" aria-hidden="true"></a><span class="bu">print</span>(rslt.summary())</span></code></pre></div>
-<pre><code>##                        Results: PHReg
-## =============================================================
-## Model:                    PH Reg       Sample size:       103
-## Dependent variable:       stime        Num. events:       75 
-## Ties:                     Efron                              
-## -------------------------------------------------------------
-##          log HR log HR SE   HR      t    P&gt;|t|  [0.025 0.975]
-## -------------------------------------------------------------
-## year    -0.1196    0.0673 0.8872 -1.7765 0.0757 0.7775 1.0124
-## age      0.0296    0.0135 1.0300  2.1872 0.0287 1.0031 1.0577
-## surgery -0.9873    0.4363 0.3726 -2.2632 0.0236 0.1584 0.8761
-## =============================================================
-## Confidence intervals are for the hazard ratios</code></pre>
+<pre><code>mod = smf.phreg(&quot;stime ~  year + age + surgery &quot;,trans, status=&#39;died&#39;, ties=&quot;efron&quot;)
+rslt = mod.fit()
+print(rslt.summary())
+
+
+
+                       Results: PHReg
+=============================================================
+Model:                    PH Reg       Sample size:       103
+Dependent variable:       stime        Num. events:       75 
+Ties:                     Efron                              
+-------------------------------------------------------------
+         log HR log HR SE   HR      t    P&gt;|t|  [0.025 0.975]
+-------------------------------------------------------------
+year    -0.1196    0.0673 0.8872 -1.7765 0.0757 0.7775 1.0124
+age      0.0296    0.0135 1.0300  2.1872 0.0287 1.0031 1.0577
+surgery -0.9873    0.4363 0.3726 -2.2632 0.0236 0.1584 0.8761
+=============================================================
+Confidence intervals are for the hazard ratios
+</code></pre>
 </div>
 </div>
 
@@ -1072,7 +946,7 @@ Pour la durée, on utilisera ici la variable <strong>mois</strong> (regroupement
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
