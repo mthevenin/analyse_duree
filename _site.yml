@@ -2,35 +2,35 @@ name: ""
 navbar:
   title: ""
   left:
-  - text: "Analyse des durées"
+  - text: "Analyse des durÃ©es"
     href: index.html
-  - text: "Données et théorie"
+  - text: "DonnÃ©es et thÃ©orie"
     menu:
     - text: "Introduction"
       href:  Introduction.html
-    - text: "Les Données biographiques"
+    - text: "Les DonnÃ©es biographiques"
       href: Donnees.html
-    - text: "Eléments théoriques"
+    - text: "ElÃ©ments thÃ©oriques"
       href: Theorie.html
-  - text: "Méthodes non paramétriques"
+  - text: "MÃ©thodes non paramÃ©triques"
     href: nonparam.html
-  - text: "Modèles à risques proportionnels"
+  - text: "ModÃ¨les Ã  risques proportionnels"
     menu:
     - text: "Intro"
       href: Intro_mod.html
     - text: "Cox"
       href: cox.html    
-    - text: "Méthode à temps discret"
+    - text: "MÃ©thode Ã  temps discret"
       href: discret.html
     - text: "Variables dynamiques"
       href: dynamiques.html
-  - text: "Compléments"
+  - text: "ComplÃ©ments"
     menu:
-    - text: "Modèles paramétriques"
+    - text: "ModÃ¨les paramÃ©triques"
       href: param.html
     - text: "Risques concurrents"
       href: concurrents.html   
-    - text: "fragilité et imunité"
+    - text: "fragilitÃ© et imunitÃ©"
       href: cure.html
   - text: "Programmation"
     menu:
