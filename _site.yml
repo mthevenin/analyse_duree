@@ -8,7 +8,7 @@ navbar:
     menu:
     - text: "Introduction"
       href:  Introduction.html
-    - text: "Les Données biographiques"
+    - text: "Les Donnéees biographiques"
       href: Donnees.html
     - text: "Eléments théoriques"
       href: Theorie.html
@@ -51,4 +51,4 @@ output:
     highlight: zenburn
     number_sections: yes
     toc: yes
-    toc_float: yes
+    #toc_float: yes

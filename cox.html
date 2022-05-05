@@ -13,19 +13,23 @@
 
 <title>Méthode semi-paramétrique Cox</title>
 
-<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -39,32 +43,8 @@
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -74,10 +54,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -94,40 +70,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 41px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h2 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h3 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h4 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h5 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h6 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -155,7 +107,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -167,7 +119,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -178,10 +130,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -193,7 +158,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -246,69 +210,6 @@ $(document).ready(function () {
 
 
 
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-@media print {
-.toc-content {
-  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
-  float: right;
-}
-}
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-
 
 </head>
 
@@ -318,22 +219,12 @@ div.tocify {
 <div class="container-fluid main-container">
 
 
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
-
-
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -346,7 +237,7 @@ div.tocify {
   <a href="index.html">Analyse des durées</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Données et théorie
      
     <span class="caret"></span>
@@ -356,7 +247,7 @@ div.tocify {
       <a href="Introduction.html">Introduction</a>
     </li>
     <li>
-      <a href="Donnees.html">Les Données biographiques</a>
+      <a href="Donnees.html">Les DonnÃ©es biographiques</a>
     </li>
     <li>
       <a href="Theorie.html">Eléments théoriques</a>
@@ -367,7 +258,7 @@ div.tocify {
   <a href="nonparam.html">Méthodes non paramétriques</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Modèles à risques proportionnels
      
     <span class="caret"></span>
@@ -388,7 +279,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Compléments
      
     <span class="caret"></span>
@@ -406,7 +297,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Programmation
      
     <span class="caret"></span>
@@ -434,7 +325,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -442,6 +333,17 @@ div.tocify {
 
 </div>
 
+<div id="TOC">
+<ul>
+<li><a href="#le-modèle-semi-paramétrique-de-cox"><span class="toc-section-number">1</span> Le modèle “semi-paramétrique de Cox”</a>
+<ul>
+<li><a href="#la-vraisemblance-partielle-et-estimation-des-paramètres"><span class="toc-section-number">1.1</span> La vraisemblance partielle et estimation des paramètres</a></li>
+<li><a href="#estimation-des-paramètres"><span class="toc-section-number">1.2</span> Estimation des paramètres</a></li>
+<li><a href="#lecture-des-résultats"><span class="toc-section-number">1.3</span> Lecture des résultats</a></li>
+<li><a href="#lhypothèse-de-constance-des-rapports-de-risque"><span class="toc-section-number">1.4</span> L’hypothèse de constance des rapports de risque</a></li>
+</ul></li>
+</ul>
+</div>
 
 <style>
 p.comment {
@@ -454,48 +356,49 @@ font-style: italic;
 }
 </style>
 <div id="le-modèle-semi-paramétrique-de-cox" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Le modèle “semi-paramétrique de Cox”</h1>
-<p>La partie sur l’estimation peut être passée. On retiendra tout de même que si on ne souhaite pas utiliser la <em>méthode de Breslow</em> pour la correction de la vraisemblance, il est déconseillé de tester la méthode dite exacte qui ne peut fonctionner qu’avec un nombre très limité d’évènements observés simultanément, ce qui est plutôt rare avec des données à durées discrètes ou groupées.</p>
+<h1><span class="header-section-number">1</span> Le modèle “semi-paramétrique de Cox”</h1>
+<p>On peut ignorer la partie sur l’estimation du modèle. On retiendra tout de même que si on ne souhaite pas utiliser la <em>méthode de Breslow</em> pour la correction de la vraisemblance, il est déconseillé de tester la méthode dite exacte qui ne peut matériellement fonctionner qu’avec un nombre très limité d’évènements observés simultanément, ce qui est plutôt rare avec des données à durées discrètes ou groupées, classique dans les sciences sociales.</p>
 <div id="la-vraisemblance-partielle-et-estimation-des-paramètres" class="section level2" number="1.1">
-<h2 number="1.1"><span class="header-section-number">1.1</span> La vraisemblance partielle et estimation des paramètres</h2>
+<h2><span class="header-section-number">1.1</span> La vraisemblance partielle et estimation des paramètres</h2>
 <p>On se situe dans une situation où la durée est mesurée sur une échelle strictement continue. Il ne peut donc y avoir qu’un seul évènement observé en <span class="math inline">\(t_i\)</span> (idem pour les censures).<br />
-Pour une observation quelconque en <span class="math inline">\(t_i\)</span>, la vraisemblance s’écrit: <strong><span class="math inline">\(L_i=f(t_i)^{\delta_i}S(t_i)^{1-\delta_i}\)</span></strong>.<br />
-<br></p>
-<p><strong>Vraisemblance partielle</strong></p>
+Pour une observation quelconque en <span class="math inline">\(t_i\)</span> qui, pour uniquement un seul individu correspond à un évènement ou une censure, la vraisemblance peut s’écrire:</p>
+<p><span class="math display">\[L_i=f(t_i)^{\delta_i}S(t_i)^{1-\delta_i}\]</span></p>
+<p><br></p>
+<p><strong>Vraisemblance partielle de Cox</strong></p>
 <ul>
 <li><span class="math inline">\(f(t_i)\)</span> est la valeur de la fonction de densité en <span class="math inline">\(t_i\)</span>.</li>
 <li><span class="math inline">\(S(t_i)\)</span> est la valeur de la fonction de survie en <span class="math inline">\(t_i\)</span>.</li>
 <li><span class="math inline">\(\delta_i=1\)</span> si l’évènement est observé: <span class="math inline">\(L_i=f(t_i)\)</span>.</li>
 <li><span class="math inline">\(\delta_i=0\)</span> si l’observation est censurée: <span class="math inline">\(L_i=S(t_i)\)</span>.</li>
 </ul>
-<p><br> Comme <span class="math inline">\(f(t_i)=h(t_i)S(t_i)\)</span>, on obtient: <span class="math inline">\(L_i=[h(t_i)S(t_i)]^{\delta_i}S(t_i)^{1-\delta_i} = h(t_i)^{\delta_i}S(t_i)\)</span>.<br />
-Pour <span class="math inline">\(i=1,2,.....,n\)</span>, la vraisemblance totale s’ecrit: <span class="math inline">\(L_i=\prod_{i=1}^{n}h(t_i)^{\delta_i}S(t_i)\)</span>.</p>
+<p><br> Comme <span class="math inline">\(f(t_i)=h(t_i)\times S(t_i)\)</span>, on obtient: <span class="math inline">\(L_i=[h(t_i)S(t_i)]^{\delta_i}S(t_i)^{1-\delta_i} = h(t_i)^{\delta_i}S(t_i)\)</span>.<br />
+Pour <span class="math inline">\(i=1,2,.....,n\)</span>, la vraisemblance totale s’ecrit donc: <span class="math inline">\(L_i=\prod_{i=1}^{n}h(t_i)^{\delta_i}S(t_i)\)</span>.</p>
 <p><br> On peut réécrire cette vraisemblance en la multipliant et en la divisant par: <span class="math inline">\(\sum_{j\in R_i}h(t_i)\)</span>, où <span class="math inline">\(j\in R_i\)</span> est l’ensemble des observation soumises au risque en <span class="math inline">\(t_i\)</span>.<br />
 <br></p>
 <p><span class="math display">\[L=\prod_{i=1}^{n}\left[h(t_i)\frac{\sum_{j\in R}h(t_i)}{\sum_{j\in R}h(t_i)}\right]^{\delta_i}S(t_i)= \prod_{i=1}^{n}\left[\frac{h(t_i)}{\sum_{j\in R_i}h(t_i)}\right]^{\delta_i}\sum_{j\in R_i}h(t_i)^{\delta_i}S(t_i)\]</span><br />
-<br> La vraisemblance partielle retient le premier terme de la vraisemblance, , qui intervient comme un paramètre de nuisance, soit:</p>
+<br> La vraisemblance partielle retient le premier terme de la vraisemblance, soit:</p>
 <p><span class="math inline">\(PL=\prod_{i=1}^{n}\left[\frac{h(t_i)}{\sum_{j\in R}h(t_i)}\right]^{\delta_i}\)</span></p>
-<p><br> Une fois remplacée la valeur de <span class="math inline">\(h(t_i)\)</span> par son expression en tant que modèle à risques proportionnels, la vraisemblance partielle ne dépendra plus de la durée. <strong>Mais elle va dépendre de l’ordre d’arrivée des évènements</strong>. <br> <em>Remarque</em>: pour les observations censurées(<span class="math inline">\(\delta_i=0\)</span>), <span class="math inline">\(PL=1\)</span>. Toutefois, ces censures à droite entrent dans l’expression <span class="math inline">\(\sum_{j\in R}h(t_i)\)</span> tant qu’elles sont soumises au risque.<br />
-<br> En remplaçant <span class="math inline">\(h(t_i)\)</span> par l’expression <span class="math inline">\(h_0(t)e^{X_i^{&#39;}b}\)</span>:</p>
-<p><span class="math display">\[PL=\prod_{i=1}^{n}\left[\frac{h_0(t)e^{X_{i}^{&#39;}b}}{\sum_{j\in R_i}h_0(t)e^{X_{j}^{&#39;}b}}\right]^{\delta_i} =\prod_{i=1}^{n}\left[\frac{e^{X_i^{&#39;}b}}{\sum_{j\in R_i}e^{X_{i}^{&#39;}b}}\right]^{\delta_i}\]</span></p>
-<p>L’expression <span class="math inline">\(\frac{e^{Xb}}{\sum_{j\in R}e^{Xb}}\)</span> est une probabilité, la vraisemblance partielle est donc bien un produit de probabilités. Il s’agit de la probabilité qu’un individu observe l’évènement en <span class="math inline">\(t_i\)</span> sachant qu’un évènement s’est produit.<br />
+<p><br> Une fois remplacée la valeur de <span class="math inline">\(h(t_i)\)</span> par son expression en tant que modèle à risques proportionnels, la vraisemblance partielle ne dépendra plus de la durée. <strong>Mais elle va dépendre de l’ordre d’arrivée des évènements, c’est à dire leur rang</strong>. <br> <em>Remarque</em>: pour les observations censurées(<span class="math inline">\(\delta_i=0\)</span>), <span class="math inline">\(PL=1\)</span>. Toutefois, ces censures à droite entrent dans l’expression <span class="math inline">\(\sum_{j\in R}h(t_i)\)</span> tant qu’elles sont soumises au risque.<br />
+<br> En remplaçant donc <span class="math inline">\(h(t_i)\)</span> par l’expression <span class="math inline">\(h_0(t)e^{X_i^{&#39;}b}\)</span>:</p>
+<p><span class="math display">\[PL=\prod_{i=1}^{n}\left[\frac{h_0(t)e^{X_{i}^{&#39;}b}}{\sum_{j\in R_i}h_0(t)e^{X_{j}^{&#39;}b}}\right]^{\delta_i} =\prod_{i=1}^{n}\left[\frac{e^{X_i^{&#39;}b}}{\sum_{j\in R_i}e^{X_{j}^{&#39;}b}}\right]^{\delta_i}\]</span></p>
+<p>L’expression <span class="math inline">\(\frac{e^{Xb}}{\sum_{j\in R}e^{Xb}}\)</span> est une probabilité, la vraisemblance partielle est donc bien un produit de probabilités. <strong>Il s’agit de la probabilité qu’un individu observe l’évènement en <span class="math inline">\(t_i\)</span> sachant qu’un évènement s’est produit</strong>.<br />
 <br></p>
 <p><em>Condition nécessaire: pas d’évènement simultané</em>:<br />
-Ici le temps est strictement continu, il ne doit pas y avoir d’évènement simultané.L’estimation de la vraisemblance doit alors être corrigée. <br></p>
+On rappelle que le temps est mesuré de manière strictement continue, il ne doit pas y avoir d’évènement simultané.Sinon, l’estimation de la vraisemblance doit alors être corrigée. <br></p>
 <p><em>Correction de la vraisemblance avec des évènements simultanés</em>:</p>
 <ul>
-<li>La méthode dite exacte: Comme en réalité il n’y a pas d’évènement simultané, on va intégrer à la vraisemblance toutes les permutations possibles des évènements observés simultanément: si en <span class="math inline">\(t_i\)</span> on observe au « même moment » l’évènement pour A et B, une échelle temporelle plus précise nous permettrait de savoir si A a eu lieu avant B ou B avant A. Comme le nombre de permutations est calculé par la factorielle, avec 3 évènements mesurés simultanément, il y a 6 permutations possibles (<span class="math inline">\(3\times2\times1\)</span>).<br />
-Problème: le nombre de permutations pour chaque <span class="math inline">\(t_i\)</span> peut devenir très vite particulièrement élevé. Par exemple pour 10 évènements simultanés, le nombre de permutations étant calculé par la factorielle est égal à 3.628.800. Le temps de calcul devient particulièrement long, et ce type de correction totalement inopérant.</li>
+<li>La méthode dite exacte: Comme en réalité il n’y a pas d’évènement simultané, on va intégrer à la vraisemblance toutes les permutations possibles des évènements observés simultanément: si en <span class="math inline">\(t_i\)</span> on observe au « même moment » l’évènement pour A et B, une échelle temporelle plus précise nous permettrait de savoir si A s’est produit avant B ou B s’est produit avant A. Comme le nombre de permutations est calculé par une factorielle, avec 3 évènements mesurés simultanément, il y a 6 permutations possibles (<span class="math inline">\(3\times2\times1\)</span>).<br />
+Problème: le nombre de permutations pour chaque <span class="math inline">\(t_i\)</span> peut devenir très vite particulièrement élevé. Par exemple pour 10 évènements simultanés, le nombre de permutations est égal à 3.628.800. Le temps de calcul devient particulièrement long, et ce type de correction totalement inopérant.</li>
 <li>La méthode dite de <strong>Breslow</strong>: il s’agit d’une approximation de la méthode exacte permettant de ne pas avoir à intégrer chaque permutation. Cette approximation est utilisée par défaut par les logiciels Sas et Stata.</li>
-<li>La méthode dite d’<strong>Efron</strong>: elle corrige l’approximation de Breslow, et est jugée plus proche de la méthode exacte. Le temps de calcul avec les ordinateurs actuels est quasiment identique à celle de Breslow. C’est la méthode utilisée par défaut avec le logiciel R.</li>
+<li>La méthode dite d’<strong>Efron</strong>: elle corrige l’approximation de Breslow, et est jugée plus proche de la méthode exacte. C’est la méthode utilisée par défaut avec le logiciel R, et elle est disponible avec les autres applications .</li>
 </ul>
 </div>
 <div id="estimation-des-paramètres" class="section level2" number="1.2">
-<h2 number="1.2"><span class="header-section-number">1.2</span> Estimation des paramètres</h2>
+<h2><span class="header-section-number">1.2</span> Estimation des paramètres</h2>
 <p>On utilise la méthode habituelle, à savoir la maximisation de la log-vraisemblance (ici partielle).</p>
 <ul>
-<li>Conditions de premier ordre: calcul des équations de score à partir des dérivées partielles. Solution: <span class="math inline">\(\frac{\partial log(PL)}{\partial{b_k}}=0\)</span>. On ne peut pas obtenir de solution numériue directe.<br />
-Remarque: les équations de score sont utilisées pour tester la validité de l’hypothèse de constance des rapports de risque (hazard ratio) pour calculer les <strong>résidus de Schoenfeld</strong> (voir plus bas).</li>
+<li>Conditions de premier ordre: calcul des équations de score à partir des dérivées partielles. Solution: <span class="math inline">\(\frac{\partial log(PL)}{\partial{b_k}}=0\)</span>. On ne peut pas obtenir de solution numérique directe.<br />
+Remarque: les équations de score sont utilisées pour tester la validité de l’hypothèse de constance des rapports de risque pour calculer les <strong>résidus de Schoenfeld</strong> (voir plus bas).</li>
 <li>Conditions de second ordre: calcul des dérivées secondes qui permettent d’obtenir la matrice d’information de Fisher et la matrice des variances-covariances des paramètres.</li>
 <li>Comme il n’y a pas de solution numérique directe, on utilise un algorithme d’optimisation (ex: Newton-Raphson) à partir des équations de score et de la matrice d’information de Fisher.</li>
 </ul>
@@ -506,26 +409,27 @@ Remarque: les équations de score sont utilisées pour tester la validité de l�
 <p><span class="math display">\[pl(b)=\sum_{i=1}^n\delta_i\left(log(e^{X_{i}^{&#39;}b})-log\sum_{j\in R_i}e^{X_{i}^{&#39;}b}\right)\]</span></p>
 <p><span class="math display">\[pl(b)=\sum_{i=1}^n\delta_i\left(X_{i}^{&#39;}b-log\sum_{j\in R_i}e^{X_{i}^{&#39;}b}\right)\]</span></p>
 <p>Calcul de l’équation de score pour une covariable <span class="math inline">\(X_k\)</span>:</p>
-<p><span class="math display">\[\frac{\partial lp(b)}{\partial{b_k}}=\sum_{i=1}^n\delta_i\left(X_{ik}-\sum_{j\in R_i}X_{ik}\frac{e^{X_{ik}^{&#39;}b_k}}{\sum_{j\in R_i}e^{X_{jk}^{&#39;}b_k}}\right)\]</span></p>
-<p>Comme <span class="math inline">\(\frac{e^{X_{ik}b}}{\sum_{j\in R}e^{X_{jk}b}}\)</span> est une probabilité, <span class="math inline">\(\sum{j\in R}X_{ik}p_i\)</span> est l’espérance (la moyenne) <span class="math inline">\(\bar{X_k}\)</span> d’avoir la caractéristique <span class="math inline">\(X_k\)</span> lorsqu’un évènement a été observé. Au final:</p>
+<p><span class="math display">\[\frac{\partial pl(b)}{\partial{b_k}}=\sum_{i=1}^n\delta_i\left(X_{ik}-\sum_{j\in R_i}X_{ik}\frac{e^{X_{i}^{&#39;}b}}{\sum_{j\in R_i}e^{X_{j}^{&#39;}b}}\right)\]</span></p>
+<p>Comme <span class="math inline">\(\frac{e^{X_{ik}b}}{\sum_{j\in R}e^{X_{jk}b}}\)</span> est une probabilité, <span class="math inline">\(\sum{j\in R}X_{ik}p_i\)</span> est l’espérance (la moyenne) <span class="math inline">\(E(X_k)\)</span> d’avoir la caractéristique <span class="math inline">\(X_k\)</span> lorsqu’un évènement a été observé. Au final:</p>
 <hr />
-<p><span class="math display">\[\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - \bar{X_k} \right)\]</span></p>
-<hr />
-<p>Cette expression permet de tester le respect ou non de l’hypothèse de risques proportionnels.</p>
+<p><span class="math display">\[\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - E(X_{k}) \right)\]</span></p>
+<p>Cette expression va permettre de tester le respect ou non de l’hypothèse de risques proportionnels.</p>
 </div>
 <div id="lecture-des-résultats" class="section level2" number="1.3">
-<h2 number="1.3"><span class="header-section-number">1.3</span> Lecture des résultats</h2>
-<p>Comme il s’agit d’un modèle à risque proportionnel, <strong>leurs rapports sont constants pendant toute la période d’observation</strong>.<br />
+<h2><span class="header-section-number">1.3</span> Lecture des résultats</h2>
+<p>Comme il s’agit d’un modèle à risque proportionnel, <strong>les rapports de risques sont constants pendant toute la période d’observation</strong>. Il s’agit d’une propriété de l’estimation.<br />
 <br></p>
-<strong><em>Covariable binaire</em></strong>
+<strong><em>Covariable binaire (indicatrice)</em></strong>
 <p class="comment">
-<span class="math inline">\(X=(0,1)\)</span>: <span class="math inline">\(\frac{h(t |X=1)}{h(t |X=0)}=e^b\)</span>.<br />
+<span class="math inline">\(X=(0,1)\)</span>: <span class="math inline">\(RR=\frac{h(t\ |\ X=1)}{h(t\ |\ X=0)}=e^b\)</span>.<br />
 A chaque moment de la durée <span class="math inline">\(t\)</span>, le risque d’observer l’évènement est <span class="math inline">\(e^b\)</span> fois plus important/plus faible pour <span class="math inline">\(X=1\)</span> que pour <span class="math inline">\(X=0\)</span>.
 </p>
 <p><br></p>
 <strong><em>Covariable continue</em></strong> (mais fixe dans le temps):
 <p class="comment">
-<span class="math inline">\(\frac{h(t |X=a+c)}{h(t |X=a)}=e^{c \times{b}}\)</span>. On prendra l’âge au début de l’exposition au risque. Si <span class="math inline">\(c=1\)</span> (résultat de l’estimation): A un âge donnée en début d’exposition, le risque de connaitre l’évènement est <span class="math inline">\(e^b\)</span> fois inférieur/supérieur à celui d’une personne qui a un an de moins .
+<p>On prendra pour illustrer une variable type âge au début de l’exposition au risque (a)* et un delta de comparaison avec un âge inférieur (c).</p>
+<p><span class="math inline">\(RR=\frac{h(t\ |\ X=a+c)}{h(t\ |\ X=a)}=e^{c \times{b}}\)</span>.</p>
+Si <span class="math inline">\(c=1\)</span> (résultat de l’estimation): A un âge donnée en début d’exposition, le risque de connaitre l’évènement est <span class="math inline">\(e^b\)</span> fois inférieur/supérieur à celui d’une personne qui a un an de moins .
 </p>
 <p><br></p>
 <p><strong>Exemple pour les insuffisances cardiaques</strong></p>
@@ -561,11 +465,9 @@ Log likelihood  =   -289.30639                  Prob &gt; chi2      =      0.000
          age |     1.0300     0.0139     2.19   0.029       1.0031      1.0577
      surgery |     0.3726     0.1625    -2.26   0.024       0.1584      0.8761
 ------------------------------------------------------------------------------</code></pre>
-<p>On retrouve les résultats des tests non paramétriques, à savoir que le pontage réduit le risque de décès pendant la période d’observation (augmente la durée de vie), de -62% (<span class="math inline">\(((0.37-1)\times 100)\)</span>.<br />
-De la même manière, plus on entre à un âge élevé dans le registre d’attente plus le risque journalier de survie baisse (HR = 1.3 =&gt; +3% chaque jour pour une différence d’âge d’un an). La variable year, qui traduit les améliorations en médecines n’est quant à elle que très faiblement significative.</p>
+<p>On retrouve les résultats des tests non paramétriques, à savoir qu’un pontage réduit les risques journaliers de décès pendant la période d’observation (augmente la durée de survie).<br />
+De la même manière, plus on entre à un âge élevé dans la liste d’attente plus le risque de décès augmente. La variable year, qui traduit des progrès en médecine, implique une réduction relativement modérée du risque de décès durant l’attende de la greffe.</p>
 <p><br></p>
-<p><strong>En pratique / à savoir</strong><br />
-Avec les modèles de durée, les valeurs estimées peuvent en lecture faire apparaître de forts gradient en terme de risque. Il ne faut jamais oublier que ces rapports de sont lus par rapport à une baseline, conditionnelle à l’échelle temporelle, dont les valeurs sont souvent très faibles, en particulier lorsque on travaille en temps continue. Si on part d’un risque de base de 0.1%, le multiplier par 3 (rapport de risque) on obtient un risque de 0.3%. C’est une lecture des survies ou de l’incidence cumulée ajustée qui permet d’appréhender les résultats sur une périodicité plus longue.</p>
 <p><strong>Logiciels</strong></p>
 <div class="alert alert-info">
 <ul>
@@ -577,30 +479,30 @@ Avec les modèles de durée, les valeurs estimées peuvent en lecture faire appa
 </div>
 </div>
 <div id="lhypothèse-de-constance-des-rapports-de-risque" class="section level2" number="1.4">
-<h2 number="1.4"><span class="header-section-number">1.4</span> L’hypothèse de constance des rapports de risque</h2>
+<h2><span class="header-section-number">1.4</span> L’hypothèse de constance des rapports de risque</h2>
 <ul>
 <li>Les rapports de risque (RR) estimés par le modèle sont contraints à être constant pendant toute la période d’observation. C’est une hypothèse forte.</li>
-<li>Le respect de cette hypothèse doit être testé, en particulier pour un modèle de Cox où la baseline du risque est habituellement estimée à l’aide de ces rapports (méthode dite de Breslow, non traitée). En post estimations, les valeurs estimées du risque pourront présenter des valeurs aberrantes, en particulier négatives.</li>
+<li>Le respect de cette hypothèse doit être testé, en particulier pour un modèle de Cox où la baseline du risque est habituellement estimée à l’aide de ces rapports (méthode dite de Breslow, non traitée). En post-estimation, les valeurs estimées du risque pourront présenter des valeurs aberrantes, en particulier négatives.</li>
 <li>Tester cette hypothèse revient à tester une interaction entre les rapports et la durée (ou plutôt une fonction de la durée).</li>
-<li>Plusieurs méthodes disponibles, celle sur les résidus de martingales, réservée aux covariables continues, et le « test » graphique ne seront pas traités.</li>
+<li>Plusieurs méthodes disponibles, celle sur les résidus de martingales, réservée aux covariables continues, et le « test » graphique ne seront pas traités. On traitera seulement celle basée sur les résidus de Schoenfeld.</li>
+<li>Si on se limite aux courbes de Kaplan-Meier, leurs croisement impliquera nécessairement un problème sur cette hypothèse.</li>
 </ul>
 <p><br></p>
 <p><strong>Tests sur les résidus de Schoenfeld</strong></p>
 <ul>
 <li>Les résidus « bruts » sont directement calculés à partir des équations de scores (voir section estimation).</li>
-<li>Ce résidu n’est calculé que pour les observations qui ont observées l’évènement.</li>
+<li>Ce résidu n’est calculé que pour les observations qui ont connues l’évènement.</li>
 <li>Il est calculé au moment où l’évènement s’est produit.</li>
 <li>La somme des résidus pour chaque covariable est égale à 0 (propriété de l’équation de score à l’équilibre).</li>
 <li>On utilise généralement les résidus de Schoenfeld « standardisés » - par leur variance - pour tenir compte du fait que le risk set diminue au cours du temps.</li>
 <li>Pour une observation dont l’évènement s’est produit en t_i, le <em>résidu brut de Schoenfeld</em> pour la covariable <span class="math inline">\(X_k\)</span>, après estimation du modèle, est égal à:</li>
 </ul>
-<p><span class="math display">\[rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{ik}\frac{e^{X_{ik}^{&#39;}b}}{\sum_{j\in R_i}e^{X_{jk}^{&#39;}b}}= X_{ik} -\bar{X_k}\]</span></p>
+<p><span class="math display">\[rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{ik}\frac{e^{X_{i}^{&#39;}b}}{\sum_{j\in R_i}e^{X_{j}^{&#39;}b}}= X_{ik} - E(X_k)\]</span></p>
 <ul>
-<li>Ce résidu est formellement la contribution d’un individu au score. Il se lit comme la différence entre la valeur observée d’une covariable et sa valeur espérée au moment où un évènement se produit.</li>
-<li>Si l’hypothèse de constance des risques ratio est respectée, les résidus ne doivent pas suivre une tendance précise.</li>
-<li>Intuitivement sans censure à droite et en ne considérant que les résidus bruts: on a un RR strictement égal à 1 en début d’exposition <span class="math inline">\(R_i=100\)</span> avec 50 hommes et 50 femmes. Si l’hypothèse PH (strictement) respectée, lorsqu’il reste 90 personnes soumises au risque, on devrait avoit 45 hommes et 45 femmes. Avec <span class="math inline">\(R_i=50\)</span>, 25 hommes et 25 femmes,…….avec <span class="math inline">\(R_i=10\)</span>, 5 hommes et 5 femmes. Au final <span class="math inline">\(X_k\)</span> est toujours égal à 0.5 et les résidus brut prendront toujours la valeur -.5 si <span class="math inline">\(X=0\)</span> et .5 si <span class="math inline">\(X=1\)</span>. En faisant une simple régression linéaire entre les résidus qui alternent ces deux valeurs et <span class="math inline">\(t\)</span>, le coefficient estimé sera non significativement différent de 0.<br />
-</li>
-<li>On peut tester l’hypothèse sur les résidus par une régression entre ces résidus pour chaque covariable et la durée (ou fonction dérivée de la durée, par exemple <span class="math inline">\(log(t)\)</span>)). La solution la plus utilisée est le test paramétrique dit de <strong>Grambsch-Therneau</strong> implémenté dans tous les logiciels. On peut montrer que ce test consiste à introduire une interaction entre les covariables et une fonction de la durée dans le modèle. <br></li>
+<li><p>Ce résidu est formellement la contribution d’un individu au score. Il se lit comme la différence entre la valeur observée d’une covariable et sa valeur espérée au moment où un évènement se produit.</p></li>
+<li><p>Si l’hypothèse de constance des risk ratios est respectée, les résidus ne doivent pas suivre une tendance précise.</p></li>
+<li><p>Intuitivement sans censure à droite et en ne considérant que les résidus bruts: on a un RR strictement égal à 1 en début d’exposition <span class="math inline">\(R_i=100\)</span> avec 50 hommes et 50 femmes. Si l’hypothèse PH (strictement) respectée, lorsqu’il reste 90 personnes soumises au risque, on devrait avoir 45 hommes et 45 femmes. Avec <span class="math inline">\(R_i=50\)</span>, 25 hommes et 25 femmes,…….avec <span class="math inline">\(R_i=10\)</span>, 5 hommes et 5 femmes. Au final <span class="math inline">\(X_k\)</span> est toujours égal à 0.5 et les résidus bruts prendront toujours la valeur -.5 si <span class="math inline">\(X=0\)</span> et .5 si <span class="math inline">\(X=1\)</span>. En faisant une simple régression linéaire entre les résidus, qui alternent ces deux valeurs, et <span class="math inline">\(t\)</span>, le coefficient estimé sera non significativement différent de 0.</p></li>
+<li><p>On peut tester l’hypothèse sur les résidus par une régression entre ces résidus pour chaque covariable et la durée (ou fonction dérivée de la durée, par exemple <span class="math inline">\(log(t)\)</span>)). La solution la plus utilisée est le test paramétrique dit de <strong>Grambsch-Therneau</strong> implémenté dans tous les logiciels. On peut montrer que ce test consiste à introduire une interaction entre les covariables et une fonction de la durée dans le modèle. <br></p></li>
 </ul>
 <pre><code>      Test of proportional-hazards assumption
 
@@ -614,12 +516,13 @@ Avec les modèles de durée, les valeurs estimées peuvent en lecture faire appa
       ------------+---------------------------------------------------
       global test |                      8.76        3         0.0327
       ----------------------------------------------------------------</code></pre>
-<p>Ici l’hypothèse de proportionalité des risques peut être rejetée pour la variable <em>surgery</em>. Le risque ratio n’est pas constant dans le temps.<br />
+<p>Ici l’hypothèse de proportionalité des risques est questionnable pour la variable <em>surgery</em>. Le risque ratio n’est vraisemblablement pas constant dans le temps.<br />
 <br></p>
 <p><strong>Remarques / à savoir</strong></p>
 <ul>
-<li><strong>Test multiple</strong>: de nouveau il convient de se méfier du résultat du test multiple lorsque le nombre de degrés de liberté est élevé. Le risque de premier espèce peut être inférieur à 5% alors que les tests pour chaque covariables présentent des p-value élevées (&gt;.05). Le résultat de ce test multiple est considéré par certain.e.s comme un indicateur de l’ampleur du biais qui affecte la baseline du risque.</li>
-<li><strong>Transformations de la durée</strong>: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: <span class="math inline">\(f(t)=t\)</span> (« identity »), <span class="math inline">\(f(t)=log(t)\)</span>, <span class="math inline">\(f(t)=KM(t)\)</span> ou <span class="math inline">\(f(t)=1- KMa(t\)</span>) où <span class="math inline">\(KMa(t\)</span>) est l’estimateur de Kaplan-Meier, et enfin une transformation appelée par les logiciels « rank » utile seulement pour les durées strictement continue. Par exemple <span class="math inline">\(t=(0.1,0.5,1,2.6,3)\)</span> donne une transformation <span class="math inline">\(t=(1,2,3,4)\)</span>. A savoir : la fonction « identity » est sensible sensibles aux évènements très tardifs et rares (outliers).</li>
+<li><p><strong>Test multiple</strong>: de nouveau il convient de se méfier du résultat du test multiple lorsque le nombre de degrés de liberté est élevé (ou tout simplement supérieur à 1). Le risque de premier espèce peut-être assez faible alors que les tests pour chaque covariables prises une à une présentent élevées (&gt;.1 par exemple). Dans l’exemple sur les trois variables, seulement une est questionnable et le test sur un seuil courant de 5% pourrait être jugé significatif.</p></li>
+<li><p>Le résultat de ce test est considéré par certain.e.s comme un indicateur de l’ampleur du biais qui affecte la baseline du risque.</p></li>
+<li><p><strong>Transformations de la durée</strong>: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: <span class="math inline">\(f(t)=t\)</span> (« identity »), <span class="math inline">\(f(t)=log(t)\)</span>, <span class="math inline">\(f(t)=KM(t)\)</span> ou <span class="math inline">\(f(t)=1- KMa(t\)</span>) où <span class="math inline">\(KMa(t\)</span>) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank », est utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple <span class="math inline">\(t=(0.1,0.5,1,2.6,3)\)</span> donne une transformation <span class="math inline">\(t=(1,2,3,4)\)</span>. A savoir : la fonction « identity » rend le test relativement sensible aux évènements très tardifs et rares (outliers).</p></li>
 </ul>
 <strong>Logiciels</strong><br />
 
@@ -627,12 +530,12 @@ Avec les modèles de durée, les valeurs estimées peuvent en lecture faire appa
 <ul>
 <li><strong>SAS</strong>: le test est disponible depuis quelques années avec l’argument <strong><code>zph</code></strong> sur la ligne <code>proc lifetest</code>. Par défaut SAS utilise <span class="math inline">\(f(t)=t\)</span>. On peut modifier cette fonction.</li>
 <li><strong>Stata</strong>: le test est donné par la commande <strong><code>estat phtest, d</code></strong>. Par défaut Stata utilise <span class="math inline">\(f(t)=t\)</span>. On peut modifier cette fonction.</li>
-<li><strong>R</strong>: après avoir créer un objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>cox.zph</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=1-KM(t)\)</span> où <span class="math inline">\(KM(t)\)</span> sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction.</li>
+<li><strong>R</strong>: après avoir créer un objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>cox.zph</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=1-KM(t)\)</span> où <span class="math inline">\(KM(t)\)</span> sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut</li>
 <li><strong>Python</strong>: après avoir créer l’objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>proportional_hazard_test</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=t\)</span>, mais on peut afficher les résultats pour toutes les transformations de <span class="math inline">\(t\)</span> disponibles avec l’option <code>time_transform=’all’</code>.</li>
 </ul>
 </div>
 <p><strong>Intéraction avec la durée</strong> <br></p>
-<p>Petit retour sur l’estimation du modèleµ.</p>
+<p>Petit retour sur l’estimation du modèle.</p>
 <p>Pour estimer le modèle de Cox, les données sont dans un premier temps splitées au temps d’évènement. A l’exception de <em>Sas</em>, les autres logiciels disposent d’une fonction qui effectue cette opération (<em>R</em>: <code>survsplit</code> - <em>Stata</em>: <code>stsplit</code>).</p>
 <pre><code>      +------------------------------+
       | id   surgery    d    t    t0 |
@@ -659,30 +562,49 @@ Avec les modèles de durée, les valeurs estimées peuvent en lecture faire appa
 <li>Les deux individus observent l’évènement en <span class="math inline">\(t=6\)</span> pour <span class="math inline">\(id=2\)</span>, et en <span class="math inline">\(t=16\)</span> pour <span class="math inline">\(id=3\)</span>. Avant ce moment la valeur de la variable évènement/censure (ici <span class="math inline">\(d\)</span>) prend toujours la valeur 0, et prend la valeur 1 le jour du décès.</li>
 </ul>
 <p>On vérifie que les paramètres estimés sont identiques</p>
-<pre><code>command Cox is unrecognized
-r(199);
+<pre><code>Cox regression -- Breslow method for ties
 
-end of do-file
-r(199);</code></pre>
+No. of subjects =          103                  Number of obs    =       3,573
+No. of failures =           75
+Time at risk    =        31938
+                                                LR chi2(3)       =       17.56
+Log likelihood  =   -289.54474                  Prob &gt; chi2      =      0.0005
+
+------------------------------------------------------------------------------
+          _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        year |  -.1195075   .0673691    -1.77   0.076    -.2515486    .0125336
+         age |   .0295539   .0135341     2.18   0.029     .0030275    .0560803
+   1.surgery |   -.984869   .4362881    -2.26   0.024    -1.839978   -.1297601</code></pre>
 <p><em>Introduction d’une intéraction avec une fonction de la durée</em></p>
 <p>On a une variable de durée (on prendra <span class="math inline">\(f(t)=t\)</span>) qui sera croisée avec la variable surgery. Le modèle va s’écrire:</p>
 <p><span class="math display">\[h(t | X,t) = h_0(t)e^{b_1age + b_2year + b_3 surgery + b_4 (surgery\times t)}\]</span></p>
 <p><strong>Exemple</strong></p>
-<pre><code>Running D:\Marc\SMS\FORMATIONS\2021\analyse duree Ined\analyse durees\profil&gt; o ...
-command Cox is unrecognized
-r(199);
+<pre><code>Cox regression -- Breslow method for ties
 
+No. of subjects =          103                  Number of obs    =         103
+No. of failures =           75
+Time at risk    =        31938
+                                                LR chi2(4)       =       21.50
+Log likelihood  =   -287.57352                  Prob &gt; chi2      =      0.0003
 
-command Cox is unrecognized
-r(199);
-
-end of do-file
-r(199);</code></pre>
+------------------------------------------------------------------------------
+          _t |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+main         |
+        year |  -.1229512   .0668619    -1.84   0.066    -.2539981    .0080958
+         age |   .0288597   .0134588     2.14   0.032      .002481    .0552384
+   1.surgery |  -1.751567   .6744632    -2.60   0.009    -3.073491   -.4296435
+-------------+----------------------------------------------------------------
+tvc [interaction]          |
+   t*surgery |   .0022277   .0011025     2.02   0.043     .0000669    .0043886
+------------------------------------------------------------------------------
+Note: Variables in tvc equation interacted with _t.</code></pre>
 <p>L’intéraction <span class="math inline">\(surgery\times t\)</span> est ici significative (<span class="math inline">\(p&lt;0;05\)</span>). On retrouve le résultat du test sur les résidus de Schoenfeld.</p>
 <p><strong>Intreprétation</strong>:</p>
 <ul>
 <li>Le paramètre (logHR) pour surgery donne le risque ratio au début de l’exposition au risque (<span class="math inline">\(t=0+\epsilon\)</span>): le risque de décéder en début d’observation, le premier jour après l’inscription dans le registre, est <span class="math inline">\((e^{-1.27}-1)\times 100 = -82\%\)</span> plus faible pour les personnes qui ont eu un pontage.</li>
-<li>Le terme d’intéraction étant positif, le gain en survie pour les personnes qui ont eu un pontage va diminuer avec le temps. Le RR augmente donc avec le temps, ici de 0.2% par jour.</li>
+<li>Le terme d’intéraction étant positif, le gain en survie pour les personnes qui ont eu un pontage va diminuer avec le temps. Le RR augmente donc avec le temps, il est multiplié par 1.002 par jour.</li>
 </ul>
 <table>
 <thead>
@@ -733,31 +655,30 @@ r(199);</code></pre>
 <td><span class="math inline">\(e^{-1.27 + 0.002\times 365}\)</span></td>
 <td><span class="math inline">\(0.58\)</span></td>
 </tr>
-<tr class="odd">
-<td>730</td>
-<td><span class="math inline">\(e^{-1.27 + 0.002\times 365}\)</span></td>
-<td><span class="math inline">\(1.20\)</span></td>
-</tr>
 </tbody>
 </table>
-<p><strong>Important</strong>: - le modèle n’est plus un modèle à risque proportionnel. La variable surgery n’est plus une variable <em>fixe</em> mais une variable tronquée dynamique qui prend la valeur de t pour les personnes qui ont été opérées d’un pontage avant leur entrée dans le registre de greffe. - L’altération des rapports de risque dépend de la forme fonctionnelle de l’intéraction choisie. Ici la modification dans le temps du rapport des risque est constante, ce qui est une hypothèse assez forte. On a, en quelques sorte, réintroduit une hypothèse de proportionnalité, ici sur les niveaux d’altération des écarts de risque dans le temps.</p>
+<p><strong>Important</strong>:</p>
+<ul>
+<li>Le modèle n’est plus un modèle à risque proportionnel. La variable <em>surgery</em> n’est plus une variable <strong>fixe</strong> mais une variable tronquée dynamique qui prend la valeur de t pour les personnes qui ont été opérées d’un pontage avant leur entrée dans le registre de greffe.</li>
+<li>L’altération des rapports de risque dépend de la forme fonctionnelle de l’intéraction choisie. Ici la modification dans le temps du rapport des risque est constante, ce qui est une hypothèse assez forte. On a, en quelques sorte, réintroduit une hypothèse de proportionnalité, ici sur le degré d’altération des écarts de risques dans le temps.</li>
+</ul>
 <p><br> <strong>Que faire si l’hypothèse n’est pas respectée?</strong><br />
 <br></p>
 <p><strong><em>Ne rien faire</em></strong> On interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison). Difficilement soutenable pour l’analyse des effets cliniques, elle peut être envisagée dans d’autres domaines. Attention au nombre de variables qui ne respecte pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme « moyenne » sur la période d’observation.<br />
 On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps les écarts déjà significatifs en début d’observation s’accentuent, à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais si l’effet est modéré : <span class="math inline">\(RR&gt;1\)</span> qui baisse ou <span class="math inline">\(RR&lt;1\)</span> qui augmente au cours du temps, je suis bien moins convaincu de la pertinence de cette option.<br />
 Egalement il faut tenir compte de l’intérêt portée par les variables qui présentent un problème par rapport à l’hypothèse. Il n’est peut-être pas nécessaire de complexifier le modèle pour des variables introduites comme contrôle.<br />
-Mais plus problématique… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables non observables omises. En analyse de durée ce problème prend le nom de frailty (fragilité). Des estimations, plutôt complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème (voir section fragilité et immunité). Si l’hypothèse est sensible aux problèmes d’omission, il convient donc de bien spécifier le modèle au niveau des variables de contrôle.</p>
+Mais plus problématique… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de frailty (fragilité) lorsque une non homogénéité n’est pas observables. Des estimations, plutôt complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Si l’hypothèse est sensible aux problèmes d’omission, il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.</p>
 <p><br></p>
-<p><strong><em>Modèle de Cox stratifié</em></strong> Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie ajustées, et si une seule covariable (binaire) présente un problème. Les RR ne seront pas estimés pour la variable.<br />
-<br></p>
+<p><strong><em>Modèle de Cox stratifié</em></strong> Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie ajustées, et si une seule covariable (binaire) présente un problème. Les RR ne seront pas estimés pour la variable.</p>
 <p><strong><em>Interaction</em></strong><br />
-Introduire une interaction avec la durée comme ce qui a été fait plus haut. Cela peut permettre d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des RR. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être linéaire (strictement proportionnelle), ce qui est une hypothèse plutôt forte.</p>
+Introduire une interaction avec la durée, ce qui a été fait plus haut. Cela peut permettre d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des RR, dans l’idéal une seule variable. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être linéaire, ce qui est une hypothèse plutôt forte.</p>
 <p><strong><em>Modèles alternatifs</em></strong><br />
 Utiliser un modèle alternatif: modèles paramétriques à risques proportionnels si la distribution du risque s’ajuste bien, le modèle paramétrique « flexible » de Parmar-Royston (non traité) ou un modèle à temps discret.<br />
 Utiliser un modèle non paramétrique additif dit d’Aalen ou une de ses variantes (non traité). Mais ces modèles, dont les résultats sont des visuels graphiques, se commentent difficilement.</p>
-<p><strong>Forêt alétaoire</strong> Sujet à ajouter rapidement à ce support de formation.</p>
-<p><br> <strong>Remarque finale sur l’estimation du modèle de Cox</strong><br />
-Le modèle a été estimé par la méthode de la vraisemblance partielle. On peut montrer que le modèle de Cox est estimable à partir d’un modèle de Poisson. Cette estimation est appelée « <strong><em>Constant Piecewise Exponential PH model</em></strong> ».</p>
+<p><strong>Forêt alétaoire</strong><br />
+Autre méthode : les forêts aléatoires [à présenter un jour tout de même]. Leo Breiman a dès le départ proposé une estimation des modèles de survie par cette méthode. Par définition, pas sensible à l’hypothèse PH. Mais cela reste des méthodes à finalité prédictive, moins riche en interprétation si ce n’est sur les facteurs d’importance. <br></p>
+<p><strong>Remarque finale sur l’estimation du modèle de Cox</strong><br />
+Le modèle a été estimé par la méthode de la vraisemblance partielle. On peut montrer que le modèle de Cox est estimable à partir d’un simple modèle de Poisson. Cette estimation est appelée « <strong><em>Constant Piecewise Exponential PH model</em></strong>».</p>
 <pre><code>Poisson regression                              Number of obs     =      3,573
                                                 LR chi2(90)       =     122.42
                                                 Prob &gt; chi2       =     0.0131
@@ -866,8 +787,6 @@ Log likelihood = -344.95318                     Pseudo R2         =     0.1507
 
 
 
-</div>
-</div>
 
 </div>
 
@@ -893,39 +812,13 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
 
 <!-- code folding -->
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
