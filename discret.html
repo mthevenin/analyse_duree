@@ -13,19 +13,26 @@
 
 <title>Modèles à temps discret</title>
 
-<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -39,32 +46,8 @@
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -74,10 +57,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -94,40 +73,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 41px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h2 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h3 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h4 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h5 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h6 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -155,7 +110,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -167,7 +122,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -178,10 +133,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -193,7 +161,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -319,7 +286,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -333,7 +300,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -346,7 +313,7 @@ div.tocify {
   <a href="index.html">Analyse des durées</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Données et théorie
      
     <span class="caret"></span>
@@ -356,7 +323,7 @@ div.tocify {
       <a href="Introduction.html">Introduction</a>
     </li>
     <li>
-      <a href="Donnees.html">Les Données biographiques</a>
+      <a href="Donnees.html">Les Donnéees biographiques</a>
     </li>
     <li>
       <a href="Theorie.html">Eléments théoriques</a>
@@ -367,7 +334,7 @@ div.tocify {
   <a href="nonparam.html">Méthodes non paramétriques</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Modèles à risques proportionnels
      
     <span class="caret"></span>
@@ -388,7 +355,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Compléments
      
     <span class="caret"></span>
@@ -406,7 +373,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Programmation
      
     <span class="caret"></span>
@@ -434,7 +401,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -443,23 +410,22 @@ div.tocify {
 </div>
 
 
-<p>On va principalement traiter le <strong><em>modèle logistique à temps discret</em></strong>.<br />
-<br> * Par définition ce n’est pas un modèle à risque proportionnel, mais à Odds proportionnels. Toutefois en situation de rareté (p&lt;10%), l’Odds converge vers une probabilité, qui est une mesure du risque (ici une probabilité conditionnelle). * Le modèle à temps discret est de type paramétrique, il est moins contraignant que le modèle de Cox si l’hypothèse de proportionnalité n’est pas respectée, car le modèle est ajusté par une fonction de la durée. * Formellement, le modèle est estimable avec des évènements mesurés à une durée nulle (même si cela n’a pas grand sens). * La base de données doit être transformée en format long: aux temps d’observation ou sur des intervalles de temps. C’est une des principales différences avec le modèle de Cox qui est une estimation aux temps d’évènement. * Permet d’introduire de manière plutôt souple un ensemble de covariables dynamiques.</p>
+<p>On va principalement traiter du <strong><em>modèle logistique à temps discret</em></strong>.<br />
+<br> * Par définition ce n’est pas un modèle à risques proportionnels, mais à Odds proportionnels. Toutefois en situation de rareté (p&lt;10%), l’Odds converge vers une probabilité, qui est une mesure du risque (ici une probabilité conditionnelle). * Le modèle à temps discret est de type paramétrique, il est moins contraignant que le modèle de Cox si l’hypothèse de proportionnalité n’est pas respectée, car le modèle est ajusté par une fonction de la durée. Il est donc pleinement paramétrique. * Formellement, le modèle est estimable avec des évènements mesurés à une durée nulle (même si cela n’a pas grand sens). * La base de données doit être transformée en format long: aux temps d’observation ou sur des intervalles de temps. C’est une des principales différences avec le modèle de Cox qui est une estimation aux temps d’évènement. Néanmoins avec une bonne forme fonctionnelle de la durée traitée de manière continue, les deux modèles aboutissent à des résultats quasiment identiques. * Permet d’introduire de manière plutôt souple un ensemble de covariables dynamiques.</p>
 <p>Avec un lien logistique, le modèle à temps discret, avec seulement des covariables fixes, peut s’écrire:</p>
 <hr />
-<p><span class="math display">\[log\left[\frac{P(Y=1 | t_p,X_k)}{1-P(Y=1 | t_p,X_k)}\right]= a_0 + \sum_{p}a_pf(t_p)+\sum_{k}b_kX_k\]</span></p>
-<hr />
+<p><span class="math display">\[log\left[\frac{P(Y=1\ |\ t_p,X_k)}{1-P(Y=1\ |\ t_p,X_k)}\right]= a_0 + \sum_{p}a_pf(t_p)+\sum_{k}b_kX_k\]</span></p>
 <div id="organisation-des-données" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Organisation des données</h1>
+<h1><span class="header-section-number">1</span> Organisation des données</h1>
 <p><strong>Format long</strong><br />
-<br> Les données doivent être en format long: pour chaque individu on a une ligne par durée observé ou par intevalle de durées jusqu’à l’évènement ou la censure. On retrouve le <em>split</em> des données du modèle de Cox, mais généralisé à des intervalles où aucun évènement n’est observé. Avec des données de type discrètes ou groupées, phénomène classique en science sociale, il y a souvent peu de différence entre un allongement aux temps d’évènement et aux temps d’observation.<br />
-<br> <em>A savoir</em>: si on construit des intervalles, on doit s’assurer qu’au moins un évènement s’est produit dans chaque intervalle, sinon on rencontrera un problème de séparabilité parfaite.</p>
+<br> Les données doivent être en format long: pour chaque individu on a une ligne par durée observée ou par intevalle de durées jusqu’à l’évènement ou la censure. On retrouve le <em>split</em> des données du modèle de Cox, mais généralisé à des intervalles où aucun évènement n’est observé. Avec des données de type discrètes ou groupées, phénomène classique en sciences sociales, il y a souvent peu de différence entre un allongement aux temps d’évènement et aux temps d’observation.<br />
+<br></p>
 <p><strong>Durée</strong><br />
-<br> La durée est dans un premier temps construite sous forme d’un simple compteur. La paramétrisation de la durée dans le modèle sera présentée par la suite.</p>
+<br> La durée est dans un premier temps construite sous forme d’un simple compteur, par exemple <span class="math inline">\(t=1,2,3,4,5...\)</span> (des valeurs non entières sont possibles). Le choix de la forme fonctionnelle de la durée sera présenté par la suite.</p>
 <p><strong>Variable évènement/censure</strong><br />
 <br> Si l’individu a connu l’évènement, elle prend la valeur 0 avant celui-ci. Au moment de l’évènement sa valeur est égale à 1. Pour les observations censurées, la variable prend toujours la valeur 0.</p>
 <p><br> <strong>Application</strong><br />
-On reprend les données de la base <em>transplantation</em>, mais les durées ont été regroupées par période de 30 jours. Il n’y a pas de durée mesurée comme nulle, on a considéré que les 30 premiers jours représentaient le premier mois d’exposition. Cette variable de durée se nomme <em>mois</em>.</p>
+On reprend les données de la base <em>transplantation</em>, mais les durées ont été regroupées par période de 30 jours. Il n’y a pas de durée mesurée comme nulle, on a considéré que les 30 premiers jours représentaient, en gros, le premier mois d’exposition. Cette variable de durée se nomme <em>mois</em>.</p>
 <p><strong>Format d’origine</strong></p>
 <pre><code>  +-----------------------------------------+
   | id   year   age   surgery   mois   died |
@@ -475,23 +441,18 @@ On reprend les données de la base <em>transplantation</em>, mais les durées on
   +-------------------------------------------------+</code></pre>
 </div>
 <div id="ajustement-de-la-durée" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Ajustement de la durée</h1>
+<h1><span class="header-section-number">2</span> Ajustement de la durée</h1>
 <p>Un des principaux enjeux réside dans la paramétrisation de la durée:</p>
 <ul>
 <li>Elle peut-être modélisée sous forme de fonction d’une variable de type continue.</li>
 <li>Elle peut-être modélisée comme variable discrete, de type indicatrice (0,1), sur tous les points d’observation, ou sous forme de regroupements (rappel: au moins un évènement observé dans chaque intervalle).</li>
 </ul>
 <div id="ajustement-avec-une-durée-en-continu" class="section level2" number="2.1">
-<h2 number="2.1"><span class="header-section-number">2.1</span> Ajustement avec une durée en continu</h2>
-<p>Le modèle étant paramétrique, on doit trouver une fonction qui ajuste le mieux les données. Toutes transformations de la variable est possible: <span class="math inline">\(f(t)=a\times t\)</span>, <span class="math inline">\(f(t)=a\times ln(t)\)</span>……formes quadratiques. Les ajustements sous forme de <strong>splines</strong> tendent à se développer ces dernières années.<br />
+<h2><span class="header-section-number">2.1</span> Ajustement avec une durée en continu</h2>
+<p>Le modèle étant paramétrique, on doit trouver une fonction qui ajuste le mieux les données. Toutes transformations de la variable est possible: <span class="math inline">\(f(t)=a\times t\)</span>, <span class="math inline">\(f(t)=a\times ln(t)\)</span>……formes quadratiques. Les ajustements sous forme de <strong>splines</strong> (cubiques) tendent à se développer ces dernières années.<br />
 Pour sélectionner cette fonction, on peut tester différents modèles sans covariable additionnelle, et sélectionner la forme qui minimise un critère d’information de type <strong>AIC</strong> ou <strong>BIC</strong> (vraisemblance pénalisée).<br />
 <br> Exemple:<br />
 On va tester les paramétrisations suivante:s une forme linéraire stricte <span class="math inline">\(f(t)=a\times t\)</span> et des effets quadratiques d’ordres 2 et 3: <span class="math inline">\(f(t)=a_1\times t + a_2\times t^{2}\)</span> et <span class="math inline">\(f(t)=a_1\times t + a_2\times t^{2} + a_3\times t^{3}\)</span>.</p>
-<p><em>Remarques</em>:</p>
-<ul>
-<li>Les effets quadratiques consistent à introduire des interactions entre une variable continue et elle même. Cela permet d’estimer des effets non linéaires.</li>
-<li><strong>Attention aux effets quadratiques d’ordre &gt;2</strong>: très sensible aux <em>outliers</em>. En analyse des durées en fin de la plage d’observation si peu de personnes restent soumises au risque, celui-ci peut-être surestimé. <br></li>
-</ul>
 <p><strong>Exemple</strong> Estimation des probabilités de décéder selon différents ajustements de la durée (modèle logistique à temps discret) <img src="images/Image11.png" /></p>
 <p><strong>Critères AIC</strong></p>
 <table>
@@ -519,12 +480,22 @@ On va tester les paramétrisations suivante:s une forme linéraire stricte <span
 <p>On peut utiliser la troisième forme à savoir <span class="math inline">\(a_1\times t + a_2\times t^{2} + a_3\times t^{3}\)</span>.<br />
 <BR></p>
 <p><strong>Estimation du modèle avec toutes les covariables</strong></p>
-<pre><code>&gt; 7
-command Logistic not defined by Logistic.ado
-r(199);
+<pre><code>Logistic regression                             Number of obs     =      1,127
+                                                LR chi2(6)        =      90.69
+                                                Prob &gt; chi2       =     0.0000
+Log likelihood = -230.33671                     Pseudo R2         =     0.1645
 
-end of do-file
-r(199);</code></pre>
+------------------------------------------------------------------------------
+           e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+           t |  -.3720566   .0823946    -4.52   0.000    -.5335471   -.2105661
+          t2 |   .0142379    .005023     2.83   0.005     .0043929    .0240828
+          t3 |  -.0001659   .0000785    -2.11   0.035    -.0003198    -.000012
+        year |  -.1326693   .0737755    -1.80   0.072    -.2772666     .011928
+         age |   .0333413   .0146876     2.27   0.023     .0045541    .0621285
+     surgery |  -1.010918    .448598    -2.25   0.024    -1.890154   -.1316821
+------------------------------------------------------------------------------
+Remarque : la constante n’est pas reportée, les valeurs de la référence n’ayant pas grand  sens (année et âge à 0)</code></pre>
 <p>Maintenant si on estime le modèle avec la méthode de Cox (avec des durées mesurées sur une échelle de 30 jours) :</p>
 <pre><code>Cox regression -- Efron method for ties
 
@@ -544,11 +515,11 @@ Log likelihood  =   -289.81242                  Prob &gt; chi2      =      0.000
 <p>On remarque que les coefficients estimés sont particulièrement proches.</p>
 </div>
 <div id="ajustement-discret" class="section level2" number="2.2">
-<h2 number="2.2"><span class="header-section-number">2.2</span> Ajustement discret</h2>
+<h2><span class="header-section-number">2.2</span> Ajustement discret</h2>
 <ul>
 <li>Il s’agit d’introduire la variable de durée dans le modèle comme une variable catégorielle (factor).</li>
 <li>Pas conseillé si on a beaucoup de points d’observation, ce qui est le cas ici.</li>
-<li>A l’inverse, si peu de points d’observation, la paramétrisation avec une durée continue n’est pas conseillé.</li>
+<li>A l’inverse, si peu de points d’observation la paramétrisation avec une durée continue n’est pas conseillé, , avec en plus un nombre très (trop) élevé de degrés de liberté.</li>
 <li>La correction de la non proportionnalité peut être plus compliquée à réaliser (non traité).</li>
 </ul>
 <p>On va supposer que l’on ne dispose que de 4 intervalles d’observation. Pour l’exemple, on va créer ces points à partir des quartiles de la durée, et conserver pour chaque personne une seule observation par intervalle.</p>
@@ -622,12 +593,12 @@ Risques sur la longueur de l’intervalle.</p>
 </div>
 </div>
 <div id="modèle-à-temps-discret-et-hypothèse-ph" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Modèle à temps discret et hypothèse PH</h1>
+<h1><span class="header-section-number">3</span> Modèle à temps discret et hypothèse PH</h1>
 <ul>
 <li><p>Formellement un modèle logistique à temps discret repose sur une hypothèse d’Odds proportionnel (Odds ratios constants pendant la durée d’observation). Contrairement au modèle de Cox, l’estimation des probabilités (risque) n’est pas biaisée si l’hypothèse PH n’est pas respectée.</p></li>
 <li><p>Comme pour le modèle de Cox, la correction de la non proportionnalité peut se faire en intégrant une interaction avec la durée dans le modèle.</p></li>
 </ul>
-<p>Les variables year et age seront omises pour faciliter la représentation graphique.</p>
+<p>Les variables year et age seront omises pour faciliter la représentation graphique (on repart sur le modèle avec la durée mesurée continue).</p>
 <pre><code>Logistic regression                             Number of obs     =      1,127
                                                 LR chi2(5)        =      84.78
                                                 Prob &gt; chi2       =     0.0000
@@ -637,6 +608,7 @@ Log likelihood = -233.29204                     Pseudo R2         =     0.1538
            e |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]
 -------------+----------------------------------------------------------------
            t |   -.373826    .083913    -4.45   0.000    -.5382924   -.2093595
+           
    1.surgery |  -1.929061   .6920142    -2.79   0.005    -3.285383   -.5727377
              |
  surgery#c.t |
@@ -646,7 +618,7 @@ Log likelihood = -233.29204                     Pseudo R2         =     0.1538
           t3 |  -.0001596   .0000828    -1.93   0.054    -.0003218    2.62e-06
 
 ------------------------------------------------------------------------------
-Remarque : la constante n’est pas reportée, les valeurs de la référence n’ayant pas grand  sens (année et âge à 0)</code></pre>
+Remarque : la constante n’est pas reportée.</code></pre>
 <p><img src="images/Image13.png" /></p>
 </div>
 
@@ -679,7 +651,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -688,6 +660,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
