@@ -13,21 +13,28 @@
 
 <title>Introduction</title>
 
-<script src="site_libs/header-attrs-2.5/header-attrs.js"></script>
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
-<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
-<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -41,32 +48,8 @@
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
+
 
 
 
@@ -76,10 +59,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -96,40 +75,16 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 41px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h2 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h3 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h4 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h5 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
-.section h6 {
-  padding-top: 46px;
-  margin-top: -46px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -157,7 +112,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -169,7 +124,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -180,10 +135,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -195,7 +163,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -321,7 +288,7 @@ div.tocify {
 
 
 <!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
+<div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
 <div id="TOC" class="tocify">
 </div>
@@ -335,7 +302,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -348,7 +315,7 @@ div.tocify {
   <a href="index.html">Analyse des durées</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Données et théorie
      
     <span class="caret"></span>
@@ -358,7 +325,7 @@ div.tocify {
       <a href="Introduction.html">Introduction</a>
     </li>
     <li>
-      <a href="Donnees.html">Les Données biographiques</a>
+      <a href="Donnees.html">Les Donnéees biographiques</a>
     </li>
     <li>
       <a href="Theorie.html">Eléments théoriques</a>
@@ -369,7 +336,7 @@ div.tocify {
   <a href="nonparam.html">Méthodes non paramétriques</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Modèles à risques proportionnels
      
     <span class="caret"></span>
@@ -390,7 +357,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Compléments
      
     <span class="caret"></span>
@@ -408,7 +375,7 @@ div.tocify {
   </ul>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Programmation
      
     <span class="caret"></span>
@@ -436,7 +403,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -445,16 +412,8 @@ div.tocify {
 </div>
 
 
-<p><strong>En raison d’une mobilité professionnelle, ce document de formation n’ont pas pu être totalement achevé. Cela concerne la partie, plutôt technique mais très importante, sur les questions de fragilité (frailty) et d’immunité (cure). La partie sur la programmation a été rédigée en mode très accélérée, mais des supports sont très facilement accessibles sur internet.</strong><br />
-<br></p>
-<p><strong>Bibliographie (langue française – hors visée biostatistique)</strong></p>
-<ul>
-<li>Le cours de Gilbert Colletaz (Université d’Orléans) n’est visiblement plus accessible actuellement. Une ancienne version (2016) est néanmoins consultable sur internet ( <a href="https://docplayer.fr/69359088-Modeles-de-survie-notes-de-cours-master-2-esa-voies-professionnelle-et-recherche-gilbert-colletaz.html" class="uri">https://docplayer.fr/69359088-Modeles-de-survie-notes-de-cours-master-2-esa-voies-professionnelle-et-recherche-gilbert-colletaz.html</a> ). Je le conseille vivement.<br />
-</li>
-<li>On peut également se reporter sur l’excellent document de travail de Simon Quantin de l’Insee, « Modèles semi paramétriques de survie en temps continu » : <a href="https://www.insee.fr/fr/statistiques/3695681" class="uri">https://www.insee.fr/fr/statistiques/3695681</a></li>
-</ul>
 <div id="questions" class="section level1" number="1">
-<h1 number="1"><span class="header-section-number">1</span> Questions</h1>
+<h1><span class="header-section-number">1</span> <strong>Questions</strong></h1>
 <p>On dispose de données dites “longitudinales”, et on cherche à appréhender l’occurence d’un évènement au sein d’une population. Les problématiques se basent sur les questions suivantes:<br />
 <br></p>
 <ul>
@@ -464,8 +423,12 @@ div.tocify {
 </ul>
 </div>
 <div id="terminologies" class="section level1" number="2">
-<h1 number="2"><span class="header-section-number">2</span> Terminologies</h1>
+<h1><span class="header-section-number">2</span> <strong>Terminologies</strong></h1>
 <table>
+<colgroup>
+<col width="33%" />
+<col width="66%" />
+</colgroup>
 <thead>
 <tr class="header">
 <th>Français</th>
@@ -479,11 +442,11 @@ div.tocify {
 </tr>
 <tr class="even">
 <td>Analyse de survie</td>
-<td>Failure time data analysis (Statistiques industrielles)</td>
+<td>Survival analysis (Epidémiologie, médecine, démographie)</td>
 </tr>
 <tr class="odd">
 <td>Analyse de fiabilité</td>
-<td>Survival analysis (Epidémiologie, d?mographie)</td>
+<td>Failure time data analysis (Statistiques industrielles)</td>
 </tr>
 <tr class="even">
 <td>Analyse des transitions</td>
@@ -499,17 +462,20 @@ div.tocify {
 </tr>
 </tbody>
 </table>
+<p>Failure time data analysis (Statistiques industrielles)</p>
+<p><br></p>
 </div>
 <div id="exemples-danalyse" class="section level1" number="3">
-<h1 number="3"><span class="header-section-number">3</span> Exemples d’analyse</h1>
+<h1><span class="header-section-number">3</span> <strong>Exemples d’analyse</strong></h1>
 <p><strong>Nuptialité, Mise en couple</strong>: cohabiter, décohabiter, se marier, Rompre une union …<br />
 <br> <strong>Logement</strong>: Changement de statut (locataire &lt;=&gt; propriétaire), mobilité résidentielle …<br />
 <br> <strong>Emploi</strong>: Trouver un 1er emploi, changer d’emploi, entrée ou sortie du chômage …<br />
 <br> <strong>Fécondité</strong>: Avoir un premier enfant, avoir un nouvel enfant …<br />
 <br> <strong>Mortalité</strong>: Décéder après diagnostic, survivre après l’administration un traitement…</p>
+<p><br></p>
 </div>
 <div id="elements-nécessaire-à-lanalyse" class="section level1" number="4">
-<h1 number="4"><span class="header-section-number">4</span> Elements nécessaire à l’analyse</h1>
+<h1><span class="header-section-number">4</span> <strong>Elements nécessaire à l’analyse</strong></h1>
 <ol style="list-style-type: decimal">
 <li><p><strong>Un processus temporel</strong></p>
 <ul>
@@ -518,15 +484,22 @@ div.tocify {
 </li>
 <li>Une définition précise de l’évènement d’étude.<br />
 </li>
-<li>Une durée entre le début et la fin de la période d’observation.</li>
+<li>Une durée entre le début et la fin de la période d’observation et si nécessaire la fin de la période d’exposition au risque.</li>
 </ul></li>
 <li><p><strong>Une population soumise au risque</strong> de connaître l’évènement (<strong>Risk Set</strong>)</p></li>
-<li><p><strong>Des variables explicatives</strong> ou <strong>covariables</strong></p>
+<li><p><strong><em>Des variables explicatives</em></strong> ou <strong><em>covariables</em></strong></p>
 <ul>
 <li>Fixes: genre, génération, niveau de diplôme, csp,……</li>
-<li>Dynamiques (TVC): Mesurées à tout moment entre le début et la sortie de l’observation: statut matrimonial, taille du ménage, statut d’activité…</li>
+<li>Dynamiques (TVC: <em>Time varying covariates</em>): Mesurées à tout moment entre le début et la sortie de l’observation: statut matrimonial, taille du ménage, statut d’activité…</li>
 </ul></li>
 </ol>
+<p><br></p>
+</div>
+<div id="bibliographie" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> <strong>Bibliographie</strong></h1>
+<p>Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales ou de l’économie. Quelle que soit la langue, le nombre de cours ou documents sont très nombreux dans le domaine de la médecine.</p>
+<p><br> <strong>Cours Gilbert Colletaz</strong> (Université d’Orléans). Le cours est mis à jour tous les ans. Il n’est plus possible d’accéder directement à la dernière version du document, mais il est néanmoins possible de télécharger la version 2016 ( <a href="https://docplayer.fr/69359088-Modeles-de-survie-notes-de-cours-master-2-esa-voies-professionnelle-et-recherche-gilbert-colletaz.html" class="uri">https://docplayer.fr/69359088-Modeles-de-survie-notes-de-cours-master-2-esa-voies-professionnelle-et-recherche-gilbert-colletaz.html</a> ). Applications avec Sas.</p>
+<p><br> <strong>Document de travail de Simon Quantin</strong> (Insee). Egalement un excellent document, qui couvre l’ensemble des techniques de base d’analyse des durées en temps dit continu (<a href="https://www.insee.fr/fr/statistiques/3695681" class="uri">https://www.insee.fr/fr/statistiques/3695681</a> ). Il propose surement la meilleure introduction en langue française à la problématique de la fragilité. Applications avec R. On peut juste regretter que les risques concurrents ne soient pas abordés.</p>
 </div>
 
 
@@ -558,7 +531,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
@@ -567,6 +540,9 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
 
     // move toc-ignore selectors from section div to header
     $('div.section.toc-ignore')
