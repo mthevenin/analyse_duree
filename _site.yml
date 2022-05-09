@@ -1,6 +1,6 @@
-name: ""
+
+
 navbar:
-  title: ""
   left:
   - text: "Analyse des durées"
     href: index.html
@@ -41,9 +41,8 @@ navbar:
     - text: "R"
       href: R.html
     - text: "Python"
-      href: Python.html
-
-
+      href: Python.htm
+      
 output:
 
   html_document: 
@@ -51,4 +50,4 @@ output:
     highlight: zenburn
     number_sections: yes
     toc: yes
-    #toc_float: yes
+    toc_float: yes
