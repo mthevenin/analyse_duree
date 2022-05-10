@@ -576,13 +576,15 @@ Log likelihood = -230.32152                     Pseudo R2         =     0.1645
          tvc |  -.0543011   .3114096    -0.17   0.862    -.6646528    .5560505
 ------------------------------------------------------------------------------
 Remarque : la constante n’est pas reportée, les valeurs de la référence n’ayant pas grand  sens (année et âge à 0)</code></pre>
-<p><strong>Remarques (important)-</strong></p>
+<p><strong>Remarques (important)</strong></p>
 <ul>
-<li><p>Rappel: la cause doit précède l’effet.</p></li>
-<li><p>Lorsque l’évènement étudié n’est pas intrinsèquement de type absorbant comme le décès, la « cause » peut se manifester ou être observée après la survenue de l’évènement étudié. Les modèles de durée standards ne peuvent pas gérer ces situations car l’observation sort du risque après la survenue de l’évènement. Même si la cause est bien mesurée avant l’évènement d’intérêt, un « choc » n’est peut-être qu’un point final d’un processus causal antérieur: une séparation est rarement un évènement ponctuel, une phase plus ou moins longue de mésentente dans le couple lui a vraisemblablement préexister. La datation du début d’un processus causal n’est donc pas toujours facile à mesurer.</p></li>
-<li><p><strong>Logique d’adaptation</strong>: la « cause » identifiée est mesurée avant l’évènement étudié.</p></li>
-<li><p><strong>Logique d’anticipation</strong>: la « cause » identifiée est mesurée après l’occurrence de l’évènement étudié. L’origine causale est bien antérieure à l’évènement, mais elle n’est pas directement observable.</p></li>
-<li><pre><code>  Lorsque les variables dynamiques sont de type quantitatives/continues, le problème on doit aussi considérer avec des phénomènes d’anticipation sur les valeurs attendues de ces variables, observées postérieurement à l’évènement étudié. On peut introduire des « lags » dans le modèle pour saisir ce phénomène : par exemple $x_t= x_{t+1}$. Ce décalage des temps d’occurrence peut être également faite pour les variables discrètes (naissance d’un enfant par exemple).</code></pre></li>
+<li>Rappel: la cause doit précède l’effet.</li>
+<li>Lorsque l’évènement étudié n’est pas intrinsèquement de type absorbant comme le décès, la « cause » peut se manifester ou plutôt être observée après la survenue de l’évènement étudié.Les modèles de durée standards ne peuvent pas gérer ces situations car l’observation sort du risque après la survenue de l’évènement. Même si la cause est bien mesurée avant l’évènement d’intérêt, un « choc » n’est peut-être qu’un point final d’un processus causal antérieur: une séparation est rarement un évènement ponctuel, une phase plus ou moins longue de mésentente dans le couple lui a vraisemblablement préexister. La datation du début d’un processus causal n’est donc pas toujours facile à mesurer.<br />
+</li>
+<li><strong>Logique d’adaptation</strong>: la « cause » identifiée est mesurée avant l’évènement étudié.</li>
+<li><strong>Logique d’anticipation</strong>: la « cause » identifiée est mesurée après l’occurrence de l’évènement étudié. L’origine causale est bien antérieure à l’évènement, mais elle n’est pas directement observable.<br />
+</li>
+<li>Lorsque les variables dynamiques sont de type quantitatives/continues, le problème on doit aussi considérer avec des phénomènes d’anticipation sur les valeurs attendues de ces variables, observées postérieurement à l’évènement étudié. On peut introduire des « lags » dans le modèle pour saisir ce phénomène : par exemple <span class="math inline">\(x_t= x_{t+1}\)</span>. Ce décalage des temps d’occurrence peut être également faite pour les variables discrètes (naissance d’un enfant par exemple).</li>
 </ul>
 </div>
 </div>
