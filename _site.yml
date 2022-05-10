@@ -28,7 +28,7 @@ navbar:
       href: param.html
     - text: "Risques concurrents"
       href: concurrents.html   
-    - text: "fragilité et imunité"
+    - text: "Fragilité et Immunité"
       href: cure.html
   - text: "Programmation"
     menu:
