@@ -323,7 +323,7 @@ div.tocify {
       <a href="Introduction.html">Introduction</a>
     </li>
     <li>
-      <a href="Donnees.html">Les Donnéees biographiques</a>
+      <a href="Donnees.html">Les Données biographiques</a>
     </li>
     <li>
       <a href="Theorie.html">Eléments théoriques</a>
@@ -411,7 +411,14 @@ div.tocify {
 
 
 <p>On va principalement traiter du <strong><em>modèle logistique à temps discret</em></strong>.<br />
-<br> * Par définition ce n’est pas un modèle à risques proportionnels, mais à Odds proportionnels. Toutefois en situation de rareté (p&lt;10%), l’Odds converge vers une probabilité, qui est une mesure du risque (ici une probabilité conditionnelle). * Le modèle à temps discret est de type paramétrique, il est moins contraignant que le modèle de Cox si l’hypothèse de proportionnalité n’est pas respectée, car le modèle est ajusté par une fonction de la durée. Il est donc pleinement paramétrique. * Formellement, le modèle est estimable avec des évènements mesurés à une durée nulle (même si cela n’a pas grand sens). * La base de données doit être transformée en format long: aux temps d’observation ou sur des intervalles de temps. C’est une des principales différences avec le modèle de Cox qui est une estimation aux temps d’évènement. Néanmoins avec une bonne forme fonctionnelle de la durée traitée de manière continue, les deux modèles aboutissent à des résultats quasiment identiques. * Permet d’introduire de manière plutôt souple un ensemble de covariables dynamiques.</p>
+<br></p>
+<ul>
+<li>Par définition ce n’est pas un modèle à risques proportionnels, mais à Odds proportionnels. Toutefois en situation de rareté (p&lt;10%), l’Odds converge vers une probabilité, qui est une mesure du risque (ici une probabilité conditionnelle).</li>
+<li>Le modèle à temps discret est de type paramétrique, il est moins contraignant que le modèle de Cox si l’hypothèse de proportionnalité n’est pas respectée, car le modèle est ajusté par une fonction de la durée. Il est donc pleinement paramétrique.</li>
+<li>Formellement, le modèle est estimable avec des évènements mesurés à une durée nulle (même si cela n’a pas grand sens).</li>
+<li>La base de données doit être transformée en format long: aux temps d’observation ou sur des intervalles de temps. C’est une des principales différences avec le modèle de Cox qui est une estimation aux temps d’évènement. Néanmoins avec une bonne forme fonctionnelle de la durée traitée de manière continue, les deux modèles aboutissent à des résultats quasiment identiques.</li>
+<li>Permet d’introduire de manière plutôt souple un ensemble de covariables dynamiques.</li>
+</ul>
 <p>Avec un lien logistique, le modèle à temps discret, avec seulement des covariables fixes, peut s’écrire:</p>
 <hr />
 <p><span class="math display">\[log\left[\frac{P(Y=1\ |\ t_p,X_k)}{1-P(Y=1\ |\ t_p,X_k)}\right]= a_0 + \sum_{p}a_pf(t_p)+\sum_{k}b_kX_k\]</span></p>
