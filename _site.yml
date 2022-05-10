@@ -1,5 +1,3 @@
-
-
 navbar:
   left:
   - text: "Analyse des durées"
@@ -7,8 +5,8 @@ navbar:
   - text: "Données et théorie"
     menu:
     - text: "Introduction"
-      href:  Introduction.html
-    - text: "Les Donnéees biographiques"
+      href: Introduction.html
+    - text: "Les Données biographiques"
       href: Donnees.html
     - text: "Eléments théoriques"
       href: Theorie.html
@@ -41,10 +39,9 @@ navbar:
     - text: "R"
       href: R.html
     - text: "Python"
-      href: Python.htm
-      
-output:
+      href: Python.html
 
+output:
   html_document: 
     theme: simplex
     highlight: zenburn
