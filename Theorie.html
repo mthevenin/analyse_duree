@@ -368,7 +368,7 @@ div.tocify {
       <a href="concurrents.html">Risques concurrents</a>
     </li>
     <li>
-      <a href="cure.html">fragilité et imunité</a>
+      <a href="cure.html">Fragilité et Immunité</a>
     </li>
   </ul>
 </li>
@@ -621,6 +621,32 @@ On retrouve donc un concept classique en analyse démographique comme l’espér
 </ul>
 <p><img src="images/Image6.png" /></p>
 <p>A quel âge le risque de mourir des cochons d’Inde est-il le plus élevé? Quelle est la valeur de ce risque?</p>
+</div>
+</div>
+<div id="compléments" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> <strong>Compléments</strong></h1>
+<div id="forme-des-fonctions-de-survie" class="section level2" number="5.1">
+<h2><span class="header-section-number">5.1</span> <strong>Forme des fonctions de survie</strong></h2>
+<p>Une des propriétés de la fonction de survie ou de séjour est qu’elles tendent vers 0. A la lecture du graphique suivant, cela peut correspondre à la forme de la courbe S2, bien que le % de survivant tend à baisser de moins en moins à mesure que la durée augmente. Deux cas limites doivent être considéré.</p>
+<p><img src="images/Image5b.png" /> <br></p>
+<ul>
+<li>La survie tombe à 0 très/trop rapidement (courbe S3): il n’y a donc pas ou presque pas de durée (par exemple presque tout l’échantillon observe l’évènement la première année de l’exposition). Les méthodes en temps continue ne sont a priori pas adaptées à ce genre de situation. Si on dispose d’une information plus fine pour dater les évènements, la fonction de séjour pourra reprendre une forme plus “standard”. Dans le graphique, <span class="math inline">\(S(t=1)=0.4\)</span> , <span class="math inline">\(S(t=2)=0.025\)</span>, mais si on dispose par exemple de 10 points d’observations supplémentaires dans chaque durée groupée:</li>
+</ul>
+<p><img src="images/Image5c.png" /></p>
+<p><br></p>
+<ul>
+<li>Très peu d’évènements et la fonction de séjour suit une asymptote nettement supérieur à 0 ( <span class="math inline">\(\lim\limits_{t\to{\propto}}S(t)=a\)</span> avec <span class="math inline">\(a&gt;0\)</span>). La question est plus délicate car on interroge l’exposition au risque d’une partie de l’échantillon ou, dit autrement on peut penser qu’une fraction est immunisé au risque. Cette problématique est rapidement posée en fin de formation.</li>
+</ul>
+<p><br></p>
+</div>
+<div id="absence-de-censures-à-droites" class="section level2" number="5.2">
+<h2><span class="header-section-number">5.2</span> <strong>Absence de censures à droites</strong></h2>
+<p>Les méthodes qui vont être présentées <strong><em>gèrent</em></strong> la présence de censures à droite. En leur absence, elle restent néanmoins parfaitement valables. L’absence de censure facilite certaines analyses, par exemple celles des fonctions de séjour où le calcul direct des durées moyennes est rendu possible.</p>
+<p><br></p>
+</div>
+<div id="utilisation-des-pondérations" class="section level2" number="5.3">
+<h2><span class="header-section-number">5.3</span> <strong>Utilisation des pondérations</strong></h2>
+<p>Une question assez récurrente concerne l’utilisation des poids de sondage dans les analyses de durées avec longueurs biographiques souvent assez longues. Appartenant à l’<em>école du bon sens</em> (Eva Levièvre), leur utilisation ne me semble pas recommandée voire à exclure sauf exceptions. En effet les pondérations sont générées au moment de l’enquête, alors que les évènements étudiés peuvent remonter dans un passé plus ou moins lointain pour une partie de la population analysée. Si on regarde de plus près, la création de poids longitudinaux ne résoudrait pas grand chose ,les pondérations devant être recalculées à chaque moment d’observation ou à chaque moment où des évènements se produisent. Par ailleurs on mélangerait à un instant donné des personnes issues de générations différentes ce qui rend impossible tout calage sur des caractéristiques d’un population. Supposons une personne âgée de 25 ans et un personne âgée de 70 ans au moment de l’enquête en 2022, avec un début d’observation à l’âge de 18 ans . A 20 ans (<span class="math inline">\(t=2\)</span>), pour la première personne les caractéristiques de la population sont celles de 2017, pour celle de 70 ans celles de 1972. On fait comment??????</p>
 </div>
 </div>
 
