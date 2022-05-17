@@ -368,7 +368,7 @@ div.tocify {
       <a href="concurrents.html">Risques concurrents</a>
     </li>
     <li>
-      <a href="cure.html">fragilité et imunité</a>
+      <a href="cure.html">Fragilité et Immunité</a>
     </li>
   </ul>
 </li>
@@ -567,8 +567,9 @@ De la même manière, plus on entre à un âge élevé dans la liste d’attente
 <li><p>Ce résidu est formellement la contribution d’un individu au score. Il se lit comme la différence entre la valeur observée d’une covariable et sa valeur espérée au moment où un évènement se produit.</p></li>
 <li><p>Si l’hypothèse de constance des risk ratios est respectée, les résidus ne doivent pas suivre une tendance précise.</p></li>
 <li><p>Intuitivement sans censure à droite et en ne considérant que les résidus bruts: on a un RR strictement égal à 1 en début d’exposition <span class="math inline">\(R_i=100\)</span> avec 50 hommes et 50 femmes. Si l’hypothèse PH (strictement) respectée, lorsqu’il reste 90 personnes soumises au risque, on devrait avoir 45 hommes et 45 femmes. Avec <span class="math inline">\(R_i=50\)</span>, 25 hommes et 25 femmes,…….avec <span class="math inline">\(R_i=10\)</span>, 5 hommes et 5 femmes. Au final <span class="math inline">\(X_k\)</span> est toujours égal à 0.5 et les résidus bruts prendront toujours la valeur -.5 si <span class="math inline">\(X=0\)</span> et .5 si <span class="math inline">\(X=1\)</span>. En faisant une simple régression linéaire entre les résidus, qui alternent ces deux valeurs, et <span class="math inline">\(t\)</span>, le coefficient estimé sera non significativement différent de 0.</p></li>
-<li><p>On peut tester l’hypothèse sur les résidus par une régression entre ces résidus pour chaque covariable et la durée (ou fonction dérivée de la durée, par exemple <span class="math inline">\(log(t)\)</span>)). La solution la plus utilisée est le test paramétrique dit de <strong>Grambsch-Therneau</strong> implémenté dans tous les logiciels. On peut montrer que ce test consiste à introduire une interaction entre les covariables et une fonction de la durée dans le modèle. <br></p></li>
+<li><p>On peut tester l’hypothèse sur les résidus par une régression entre ces résidus pour chaque covariable et la durée (ou fonction dérivée de la durée, par exemple <span class="math inline">\(log(t)\)</span>)). La solution la plus utilisée est le test paramétrique dit de <strong>Grambsch-Therneau</strong>. <br><br></p></li>
 </ul>
+<p><span style="color:red"><strong>Résultat cohérent entre SAS - STATA - Survival v2 (R) - Lifelines (PYTHON)</strong>&lt;/&gt;</p>
 <pre><code>      Test of proportional-hazards assumption
 
       Time:  Time
@@ -589,13 +590,17 @@ De la même manière, plus on entre à un âge élevé dans la liste d’attente
 <li><p>Le résultat de ce test est considéré par certain.e.s comme un indicateur de l’ampleur du biais qui affecte la baseline du risque.</p></li>
 <li><p><strong>Transformations de la durée</strong>: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: <span class="math inline">\(f(t)=t\)</span> (« identity »), <span class="math inline">\(f(t)=log(t)\)</span>, <span class="math inline">\(f(t)=KM(t)\)</span> ou <span class="math inline">\(f(t)=1- KMa(t\)</span>) où <span class="math inline">\(KMa(t\)</span>) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank », est utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple <span class="math inline">\(t=(0.1,0.5,1,2.6,3)\)</span> donne une transformation <span class="math inline">\(t=(1,2,3,4)\)</span>. A savoir : la fonction « identity » rend le test relativement sensible aux évènements très tardifs et rares (outliers).</p></li>
 </ul>
+<p><span style="color:red"><strong>Utilisateurs et utilisatrices de R: lire attentivement car les résultats du tests sont modifiés depuis la version 3 de la librairie Survival. Je ne suis pas encore en mesure de dire clairement pourquoi, un piste donnée par une courte note dans le fichier d’aide, et d’évaluer la sensibilité de ce changement à des échantillons de grande taille, avec un nombre important de degrés de liberté dans les modèles et surtout des estimations avec des durées discrètes/groupées. Bref évaluer cette nouvelle estimation a des données typiques des sciences sociales (T.Therneau est un biostatisticien en poste dans un des établissements de la fameuse <em>mayo clinic</em>)</strong></span></p>
 <strong>Logiciels</strong><br />
 
 <div class="alert alert-info">
 <ul>
 <li><strong>SAS</strong>: le test est disponible depuis quelques années avec l’argument <strong><code>zph</code></strong> sur la ligne <code>proc lifetest</code>. Par défaut SAS utilise <span class="math inline">\(f(t)=t\)</span>. On peut modifier cette fonction.</li>
 <li><strong>Stata</strong>: le test est donné par la commande <strong><code>estat phtest, d</code></strong>. Par défaut Stata utilise <span class="math inline">\(f(t)=t\)</span>. On peut modifier cette fonction.</li>
-<li><strong>R</strong>: après avoir créer un objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>cox.zph</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=1-KM(t)\)</span> où <span class="math inline">\(KM(t)\)</span> sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut</li>
+<li><span style="color:red"><strong>R</strong>: [17-05-2022: attention test visiblement modifié depuis le v3 de survival] après avoir créer un objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>cox.zph</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=1-KM(t)\)</span> où <span class="math inline">\(KM(t)\)</span> sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.
+<ul>
+<li>Pour avoir des résultats cohérents avec les autres applications, une méthode via une regression linéaire entre les résidus standardisés et la durée est proposée dans la partie programmation dédiée à R.</li>
+</ul></li>
 <li><strong>Python</strong>: après avoir créer l’objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>proportional_hazard_test</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=t\)</span>, mais on peut afficher les résultats pour toutes les transformations de <span class="math inline">\(t\)</span> disponibles avec l’option <code>time_transform=’all’</code>.</li>
 </ul>
 </div>
