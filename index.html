@@ -335,6 +335,14 @@ $(document).ready(function () {
 
 <p><br> <strong>FORMATION INED 2022: ANALYSE DES DUREES</strong><br />
 <br></p>
+<p><span style="color:red"><strong>WARNING 17-05-2022: test proportionnalité des risques (test Grambsch-Therneau) entre les versions 2 et 3 de la librairie survival</strong><br />
+Les précédentes versions de la formation utilisaient la version de <strong><code>survival</code></strong>. La procédure proposée pour tester la constance des rapports de risques était le test dits de <em>Grambsch-Therneau</em> exécuté avec la fonction <strong><code>cox.zph()</code></strong>. Les résultats étaientt identiques à ceux exécutés avec SAS, Stata et Python. Avec la nouvelle version de <strong><code>survival</code></strong> les résultats affichés par le tests sont différents, et pas qu’un peu. Je ne suis pas en mesure de l’expliquer à ce jour, mais un indice est donné dans une note de l’aide de la fonction: “<em>In versions of the package before survival3.0 the function computed a fast approximation to the score test. Later versions compute the actual score test</em>” (<a href="https://runebook.dev/en/docs/r/library/survival/html/cox.zph"><strong>lien</strong></a>).<br />
+<br> Je n’ai pas le temps de modifier en profondeur le document (et le tp de la formation). A très court terme:</p>
+<ul>
+<li><span style="color:red">La section sur R sera exécuté avec les version 2.44-1 de Survival pour garder des résulats homogènes entre les applications. Une procédure d’installation de cette version est donnée.</li>
+<li><span style="color:red">Pour les personnes qui chargeront la version 3 de survival, la marche a suivre pour tester différemment l’hypothèse, via une regression linéaire entre les résidus de Schoenfeld et une fonction de la durée sera ajoutée. Elle permet d’avoir des résultats comparables entre les différents logiciels. C’est un peu plus long que la seule utilisation de la fonction <code>cox.zph</code>, mais pas très compliqué non plus (dans un premier temps avec seulement la fonction <span class="math inline">\(f(t)=t\)</span>. </span></li>
+</ul>
+<p><br></p>
 <p><strong>MAJ 11-05-22</strong>:</p>
 <ul>
 <li>Document ok pour cette version 2022. Je n’ai toujours pas eu le temps de faire la partie sur la fragilité et l’immunité, reportée donc à une date ultérieure, je l’espère en 2023.</li>
@@ -345,7 +353,7 @@ $(document).ready(function () {
 <p><strong>Bibliographie</strong></p>
 <ul>
 <li><strong>Cours de Gilbert Colletaz (version 2016)</strong>: <a href="https://docplayer.fr/69359088-Modeles-de-survie-notes-de-cours-master-2-esa-voies-professionnelle-et-recherche-gilbert-colletaz.html"><strong>lien</strong></a></li>
-<li><strong>Document de travail Insee de Simon Quantin (2019)</strong>: <a href="https://www.insee.fr/fr/statistiques/3695681"><strong>lien</strong></a></li>
+<li><strong>Document de travail Insee de Simon Quantin (2019)</strong>: <a href="https://www.insee.fr/fr/statistiques/3695681"><strong>lien</strong></a> [avec version 2 de la librarie <em><code>survival</code></em>]</li>
 </ul>
 <p><br> <em>Liens Ined</em></p>
 <ul>
