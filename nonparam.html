@@ -368,7 +368,7 @@ div.tocify {
       <a href="concurrents.html">Risques concurrents</a>
     </li>
     <li>
-      <a href="cure.html">fragilité et imunité</a>
+      <a href="cure.html">Fragilité et Immunité</a>
     </li>
   </ul>
 </li>
@@ -473,9 +473,8 @@ Les covariables sont dans un premier temps toutes fixes: l’année (<em>year</e
 On applique la méthode de la section précédente avec:</p>
 <p><span class="math display">\[q(t_i)=\frac{d_i}{n_i - 0.5\times c_i}\]</span></p>
 <p><strong>Calcul de la durée médiane (ou autre quantiles)</strong><br />
-<br> <em>Rappel</em>: compte tenu des censures à droite, le dernier intervalle étant ouvert, il n’est pas conseillé de calculer des durées moyennes. On préfère utiliser la médiane ou tout autre quantile lorsqu’ils sont définissables.<br />
-*Définition**: il s’agit de la durée telle que <span class="math inline">\(S(t_i)=0.5\)</span>.<br />
-<em>Calcul</em>: Comme on applique une méthode continue et monotone à l’intérieur dintervalles, on ne peut pas calculer directement un point de coupure qui correspond à 50% de survivants. On doit donc trouver ce point par interpolation linéaire dans l’intervalle<span class="math inline">\([t_i;t_{i+1}[\)</span> avec <span class="math inline">\(S(t_{i+1})\leq0.5\)</span> et <span class="math inline">\(S(t_{i})&gt;0.5\)</span>.</p>
+<br> <em>Rappel</em>: en raison de la présence de censures à droite, le dernier intervalle étant ouvert jusqu’à la dernière sortie d’observation, il n’est pas conseillé de calculer des durées moyennes. On préfère utiliser la médiane ou tout autre quantile lorsqu’ils sont calculables. <br> <strong>Définition</strong>: il s’agit de la durée telle que <span class="math inline">\(S(t_i)=0.5\)</span>.<br />
+<br> <em>Calcul</em>: Comme on applique une méthode continue et monotone à l’intérieur d’intervalles, on ne peut pas calculer directement un point de coupure qui correspond à 50% de survivants. On doit donc trouver ce point par interpolation linéaire dans l’intervalle <span class="math inline">\([t_i;t_{i+1}[\)</span> avec <span class="math inline">\(S(t_{i+1})\leq0.5\)</span> et <span class="math inline">\(S(t_{i})&gt;0.5\)</span>.</p>
 <br> <strong>Logiciels</strong><br />
 
 <div class="alert alert-info">
@@ -707,6 +706,7 @@ Il est simplément égal à: <span class="math display">\[H(t)=\sum_{t_i\leq k}q
 <p><strong>Le risque instantané</strong><br />
 Nécessite l’estimateur de Nelson-Aalen. Le risque est obtenu en lissant les différences - toujours positive - entre <span class="math inline">\(H(t)\)</span> par la méthode dite du <strong>kernel</strong>. Elle permet d’obtenir une fonction continue avec la durée (paramétrables sur les largeurs des fenêtres de lissage). D’autres méthodes de lissage sont maintenant possibles, et de plus en plus utilisées, en particulier celles utilisant des splines restreintes (paramétrable sur un nombre de degré de liberté – nœuds-).</p>
 <p><img src="images/Image20.png" /></p>
+<p><br></p>
 </div>
 <div id="tester-légalité-des-courbes-de-survie-méthode-km" class="section level1" number="4">
 <h1><span class="header-section-number">4</span> <strong>Tester l’égalité des courbes de survie (méthode KM)</strong></h1>
@@ -716,8 +716,9 @@ Attention: pas de test possibles sur des variables continues. Prévoir des regro
 <BR> Deux méthodes sont utilisées:</p>
 <ul>
 <li>La plus ancienne et la plus diffusée: test sur les rangs (tests dits du <strong>log-rank</strong>).</li>
-<li>Plus récente et moins difusée: comparaison des <strong>RMST</strong> (<em>Restricted Mean of Survival Time</em>). <br></li>
+<li>Plus récente et moins difusée: comparaison des <strong>RMST</strong> (<em>Restricted Mean of Survival Time</em>).</li>
 </ul>
+<p><br></p>
 <div id="tests-du-log-rank" class="section level2" number="4.1">
 <h2><span class="header-section-number">4.1</span> Tests du log-rank</h2>
 <p>Il s’agit d’une série de tests qui répondent à la même logique, la seule différence réside dans le poids accordé au début ou à la fin de la période d’observation. Par ailleurs ces différents tests sont plus ou moins sensibles à la distribution des censures à droites entre les sous échantillons.<br />
@@ -726,13 +727,11 @@ Il s’agira donc de comparer des effectifs observés à des effectifs espérés
 <p><strong>Principe de calcul des effectifs - évènements - observés et espérés pour deux groupes</strong></p>
 <ul>
 <li><strong>Effectifs observés en <span class="math inline">\(t_i\)</span></strong>: <span class="math inline">\(o_{i1}\)</span> et <span class="math inline">\(o_{i2}\)</span> sont égaux à <span class="math inline">\(d_{i1}\)</span> et <span class="math inline">\(d_{i2}\)</span>, et leur somme pour tous les temps d’évènement à <span class="math inline">\(O_1\)</span> et <span class="math inline">\(O_2\)</span>.</li>
-<li><strong>Effectifs expérés</strong> (hypothèse nulle <span class="math inline">\(H_0\)</span>): comme pour une statistique du <span class="math inline">\(\chi^2\)</span> on se base sur les marges, avec le risque set (<span class="math inline">\(R_i\)</span>) en <span class="math inline">\(t_i\)</span> pour dénombrer les effectifs, soit <span class="math inline">\(e_{i1}=R_{i1}\times\frac{d_i}{R_i}\)</span> et <span class="math inline">\(e_{i2}=R_{i2}\times\frac{d_2}{R_2}\)</span>. Leur somme pour tous les temps d’évènement est égale à <span class="math inline">\(E_1\)</span> et <span class="math inline">\(E_2\)</span>. Le principe de calcul des effectifs observés reposent donc sur l’hypothèse d’un rapport des risques toujours égal à 1 au cours du temps (<em>hypothèse fondamentale de risques proportionnels</em>).<br />
-</li>
+<li><strong>Effectifs expérés</strong> (hypothèse nulle <span class="math inline">\(H_0\)</span>): comme pour une statistique du <span class="math inline">\(\chi^2\)</span> on se base sur les marges, avec le risque set (<span class="math inline">\(R_i\)</span>) en <span class="math inline">\(t_i\)</span> pour dénombrer les effectifs, soit <span class="math inline">\(e_{i1}=R_{i1}\times\frac{d_i}{R_i}\)</span> et <span class="math inline">\(e_{i2}=R_{i2}\times\frac{d_2}{R_2}\)</span>. Leur somme pour tous les temps d’évènement est égale à <span class="math inline">\(E_1\)</span> et <span class="math inline">\(E_2\)</span>. Le principe de calcul des effectifs observés reposent donc sur l’hypothèse d’un rapport des risques toujours égal à 1 au cours du temps (<em>hypothèse fondamentale de risques proportionnels</em>).</li>
 <li><strong>Statistique du log-rank</strong>: <span class="math inline">\((O_1 - E_1) = -(O_2 - E_2)\)</span>.</li>
-<li><strong>Statistique de test</strong>: sous <span class="math inline">\(H_0\)</span>, <span class="math inline">\(\frac{(O_1 - E_1)^2}{\sum{v_i}}\)</span>, avec <span class="math inline">\(v_i\)</span> la variance de <span class="math inline">\((o_{i1} - e_{i2})\)</span>, suis un <span class="math inline">\(\chi^2(1)\)</span>.<br />
-Si on teste la différence de <span class="math inline">\(g\)</span> fonctions de survie, la statistique de test suis un <span class="math inline">\(\chi^2(g-1)\)</span>.</li>
+<li><strong>Statistique de test</strong>: sous <span class="math inline">\(H_0\)</span>, <span class="math inline">\(\frac{(O_1 - E_1)^2}{\sum{v_i}}\)</span>, avec <span class="math inline">\(v_i\)</span> la variance de <span class="math inline">\((o_{i1} - e_{i2})\)</span>, suis un <span class="math inline">\(\chi^2(1)\)</span>. Si on teste la différence de <span class="math inline">\(g\)</span> fonctions de survie, la statistique de test suis un <span class="math inline">\(\chi^2(g-1)\)</span>.</li>
 </ul>
-<p><strong>Les principaux tests de type log-rank</strong></p>
+<p><br> <strong>Les principaux tests de type log-rank</strong></p>
 <p>Le principe de construction des effectifs observés et espérés reste le même dans chaque test, les différences résident dans les pondérations (<span class="math inline">\(w_i\)</span>) qui prennent en compte, de manière différente, la taille de la population soumise au risque à chaque durée où au moins un évènement est observé.<br />
 <br></p>
 <ul>
@@ -823,7 +822,7 @@ Total   |        75          75.00            0
 </div>
 <div id="comparaison-des-rmst" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> Comparaison des RMST</h2>
-<p><BR></p>
+<p><br></p>
 <p><strong>RMST</strong>: <em>Restricted Mean of Survival Time</em><br />
 <br></p>
 <p>La comparaison des RMST est une alternative pertinente aux tests du log-rank car elle ne repose pas sur des hypothèses contraignantes (proportionnalité des risques, distribution des censures), et permet une lecture vivante basée sur des espérances de séjour et non sur la lecture d’une simple p-value traduisant l’homogénéité ou non des fonctions de séjour. Par ailleurs les comparaisons sont souples, on peut choisir un ou plusieurs points d’horizon pour alimenter l’analyse.</p>
