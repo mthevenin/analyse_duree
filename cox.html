@@ -475,8 +475,7 @@ Remarque: les équations de score sont utilisées pour tester la validité de l�
 <p><span class="math display">\[pl(b)=\sum_{i=1}^n\delta_i\left(X_{i}^{&#39;}b-log\sum_{j\in R_i}e^{X_{i}^{&#39;}b}\right)\]</span></p>
 <p>Calcul de l’équation de score pour une covariable <span class="math inline">\(X_k\)</span>:</p>
 <p><span class="math display">\[\frac{\partial pl(b)}{\partial{b_k}}=\sum_{i=1}^n\delta_i\left(X_{ik}-\sum_{j\in R_i}X_{ik}\frac{e^{X_{i}^{&#39;}b}}{\sum_{j\in R_i}e^{X_{j}^{&#39;}b}}\right)\]</span></p>
-<p>Comme <span class="math inline">\(\frac{e^{X_{ik}b}}{\sum_{j\in R}e^{X_{jk}b}}\)</span> est une probabilité, <span class="math inline">\(\sum{j\in R}X_{ik}p_i\)</span> est l’espérance (la moyenne) <span class="math inline">\(E(X_k)\)</span> d’avoir la caractéristique <span class="math inline">\(X_k\)</span> lorsqu’un évènement a été observé. Au final:</p>
-<hr />
+<p>Comme <span class="math inline">\(\frac{e^{X_{ik}b}}{\sum_{j\in R}e^{X_{jk}b}}\)</span> est une probabilité, <span class="math inline">\(\sum_{j\in R}X_{ik}\times p_i\)</span> est l’espérance (la moyenne) <span class="math inline">\(E(X_k)\)</span> d’avoir la caractéristique <span class="math inline">\(X_k\)</span> lorsqu’un évènement a été observé. Au final:</p>
 <p><span class="math display">\[\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - E(X_{k}) \right)\]</span></p>
 <p>Cette expression va permettre de tester le respect ou non de l’hypothèse de risques proportionnels.</p>
 </div>
@@ -490,10 +489,9 @@ Remarque: les équations de score sont utilisées pour tester la validité de l�
 A chaque moment de la durée <span class="math inline">\(t\)</span>, le risque d’observer l’évènement est <span class="math inline">\(e^b\)</span> fois plus important/plus faible pour <span class="math inline">\(X=1\)</span> que pour <span class="math inline">\(X=0\)</span>.
 </p>
 <p><br></p>
-<strong><em>Covariable continue</em></strong> (mais fixe dans le temps):
+<strong><em>Covariable continue</em></strong> (mais fixe dans le temps)
 <p class="comment">
-<p>On prendra pour illustrer une variable type âge au début de l’exposition au risque (a)* et un delta de comparaison avec un âge inférieur (c).</p>
-<p><span class="math inline">\(RR=\frac{h(t\ |\ X=a+c)}{h(t\ |\ X=a)}=e^{c \times{b}}\)</span>.</p>
+<span class="math inline">\(RR=\frac{h(t\ |\ X=a+c)}{h(t\ |\ X=a)}=e^{c \times{b}}\)</span>. On prendra pour illustrer une variable type âge au début de l’exposition au risque (a)* et un delta de comparaison avec un âge inférieur (c).<br />
 Si <span class="math inline">\(c=1\)</span> (résultat de l’estimation): A un âge donnée en début d’exposition, le risque de connaitre l’évènement est <span class="math inline">\(e^b\)</span> fois inférieur/supérieur à celui d’une personne qui a un an de moins .
 </p>
 <p><br></p>
@@ -590,16 +588,16 @@ De la même manière, plus on entre à un âge élevé dans la liste d’attente
 <li><p>Le résultat de ce test est considéré par certain.e.s comme un indicateur de l’ampleur du biais qui affecte la baseline du risque.</p></li>
 <li><p><strong>Transformations de la durée</strong>: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: <span class="math inline">\(f(t)=t\)</span> (« identity »), <span class="math inline">\(f(t)=log(t)\)</span>, <span class="math inline">\(f(t)=KM(t)\)</span> ou <span class="math inline">\(f(t)=1- KMa(t\)</span>) où <span class="math inline">\(KMa(t\)</span>) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank », est utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple <span class="math inline">\(t=(0.1,0.5,1,2.6,3)\)</span> donne une transformation <span class="math inline">\(t=(1,2,3,4)\)</span>. A savoir : la fonction « identity » rend le test relativement sensible aux évènements très tardifs et rares (outliers).</p></li>
 </ul>
-<p><span style="color:red"><strong>Utilisateurs et utilisatrices de R: lire attentivement car les résultats du tests sont modifiés depuis la version 3 de la librairie Survival. Je ne suis pas encore en mesure de dire clairement pourquoi, un piste donnée par une courte note dans le fichier d’aide, et d’évaluer la sensibilité de ce changement à des échantillons de grande taille, avec un nombre important de degrés de liberté dans les modèles et surtout des estimations avec des durées discrètes/groupées. Bref évaluer cette nouvelle estimation a des données typiques des sciences sociales (T.Therneau est un biostatisticien en poste dans un des établissements de la fameuse <em>mayo clinic</em>)</strong></span></p>
+<p><span style="color:red"><strong>Utilisatrices et utilisateurs de R: lire attentivement car les résultats du tests sont modifiés depuis la version 3 de la librairie Survival. Je ne suis pas encore en mesure de dire clairement pourquoi, un piste donnée par une courte note dans le fichier d’aide, et d’évaluer la sensibilité de ce changement à des échantillons de grande taille, avec un nombre important de degrés de liberté dans les modèles et surtout des estimations avec des durées discrètes/groupées. Bref évaluer cette nouvelle estimation a des données typiques des sciences sociales (T.Therneau est un biostatisticien en poste dans un des établissements de la fameuse <em>mayo clinic</em>)</strong></span></p>
 <strong>Logiciels</strong><br />
 
 <div class="alert alert-info">
 <ul>
 <li><strong>SAS</strong>: le test est disponible depuis quelques années avec l’argument <strong><code>zph</code></strong> sur la ligne <code>proc lifetest</code>. Par défaut SAS utilise <span class="math inline">\(f(t)=t\)</span>. On peut modifier cette fonction.</li>
 <li><strong>Stata</strong>: le test est donné par la commande <strong><code>estat phtest, d</code></strong>. Par défaut Stata utilise <span class="math inline">\(f(t)=t\)</span>. On peut modifier cette fonction.</li>
-<li><span style="color:red"><strong>R</strong>: [17-05-2022: attention test visiblement modifié depuis le v3 de survival] après avoir créer un objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>cox.zph</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=1-KM(t)\)</span> où <span class="math inline">\(KM(t)\)</span> sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.
+<li><span style="color:red"><strong>R</strong>: [17-05-2022: attention test modifié depuis le v3 de survival] après avoir créer un objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>cox.zph</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=1-KM(t)\)</span> où <span class="math inline">\(KM(t)\)</span> sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.
 <ul>
-<li>Pour avoir des résultats cohérents avec les autres applications, une méthode via une regression linéaire entre les résidus standardisés et la durée est proposée dans la partie programmation dédiée à R.</li>
+<li>Pour avoir des résultats cohérents avec les autres applications, une méthode via une régression linéaire entre les résidus standardisés et la durée est proposée dans la partie programmation dédiée à R.</li>
 </ul></li>
 <li><strong>Python</strong>: après avoir créer l’objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>proportional_hazard_test</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=t\)</span>, mais on peut afficher les résultats pour toutes les transformations de <span class="math inline">\(t\)</span> disponibles avec l’option <code>time_transform=’all’</code>.</li>
 </ul>
@@ -748,7 +746,7 @@ Utiliser un modèle non paramétrique additif dit d’Aalen ou une de ses varian
 <p><strong>Forêt alétaoire</strong><br />
 Autre méthode : les forêts aléatoires [à présenter un jour tout de même]. Leo Breiman a dès le départ proposé une estimation des modèles de survie par cette méthode. Par définition, pas sensible à l’hypothèse PH. Mais cela reste des méthodes à finalité prédictive, moins riche en interprétation si ce n’est sur les facteurs d’importance. <br></p>
 <p><strong>Remarque finale sur l’estimation du modèle de Cox</strong><br />
-Le modèle a été estimé par la méthode de la vraisemblance partielle. On peut montrer que le modèle de Cox est estimable à partir d’un simple modèle de Poisson. Cette estimation est appelée « <strong><em>Constant Piecewise Exponential PH model</em></strong>».</p>
+Le modèle a été estimé par la méthode de la vraisemblance partielle. On peut montrer que le modèle de Cox est estimable à partir d’un simple modèle de Poisson. Cette estimation est appelée «<strong><em>Constant Piecewise Exponential PH model</em></strong>».</p>
 <pre><code>Poisson regression                              Number of obs     =      3,573
                                                 LR chi2(90)       =     122.42
                                                 Prob &gt; chi2       =     0.0131
