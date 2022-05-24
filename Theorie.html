@@ -472,8 +472,11 @@ Il existe des situations où les durées sont par nature discrète, lorsqu’un 
 <h2><span class="header-section-number">3.1</span> <strong>Censure à droite</strong></h2>
 <p><strong>Définition</strong><br />
 <br> Certains individus n’auront pas (encore) connu l’évènement à la date de l’enquête après une certaine durée d’exposition. On a donc besoin d’un marqueur permettant de déterminer que les individus n’ont pas observé l’évènement sur la période d’étude.</p>
-<p><strong>Pourquoi une information est-elle censurée (à droite)?</strong><br />
-- Fin de l’étude, date de l’enquête. - Perdu de vue, décès si autre évènement étudié.</p>
+<p><strong>Pourquoi une information est-elle censurée (à droite)?</strong></p>
+<ul>
+<li>Fin de l’étude, date de l’enquête.</li>
+<li>Perdu de vue, décès si autre évènement étudié.</li>
+</ul>
 <p>En pratique (important)</p>
 <ul>
 <li><strong>Ne pas exclure ces observations</strong>, sinon on surestime la survenue de l’évènement.</li>
@@ -559,18 +562,18 @@ Un exemple simple : si au moment de l’enquête une femme sans enfant a 70 ans,
 </li>
 <li>En temps continu, la fonction de densité est donnée par la dérivée de la fonction de répartition: <span class="math inline">\(f(t)=F&#39;(t)=-S&#39;(t)\)</span>. <br> Formellement la fonction de densité <span class="math inline">\(f(t)\)</span> s’écrit:</li>
 </ul>
-<p><span class="math display">\[f(t)=\lim\limits_{dt=0}\frac{P(t\leq{T}&lt; t + dt)}{dt}\]</span></p>
+<p><span class="math display">\[f(t)=\frac{P(t\leq{T}&lt; t + dt)}{dt}\]</span></p>
 <p><br></p>
 </div>
 <div id="le-risque-instantané-ht" class="section level2" number="4.5">
 <h2><span class="header-section-number">4.5</span> <strong>Le risque instantané <span class="math inline">\(h(t)\)</span></strong></h2>
 <p>Concept fondamental de l’analyse des durées:</p>
-<p><span class="math display">\[h(t)=\lim\limits_{dt=0}\frac{P(t\leq{T}&lt; t + dt | T\geq{t})}{dt}\]</span> <br></p>
+<p><span class="math display">\[h(t)=\frac{P(t\leq{T}&lt; t + dt | T\geq{t})}{dt}\]</span> <br></p>
 <ul>
 <li><span class="math inline">\(P(t\leq{T}&lt; t + dt | T\geq{t})\)</span> donne la probabilité de survenue de l’évènement sur l’intervalle <span class="math inline">\([t,t+dt[\)</span> <em>conditionnellement à la survie au temps <span class="math inline">\(t\)</span></em>.<br />
 </li>
 <li>La quantité obtenue donne alors un nombre moyen d’évènements que connaîtrait un individu durant une unité de temps choisie.</li>
-<li>A priori cette quantité n’est pas une probabilité. C’est la nature de l’évènement, en particulier sa non récurrence, et la métrique temporelle choisie ou disponible qui peut la rendre assimilable à une probabilité.</li>
+<li>A priori cette quantité n’est pas une probabilité. C’est la nature de l’évènement, en particulier sa non récurrence, et la métrique temporelle choisie ou disponible qui peut la rendre assimilable à une probabilité. Tout comme la densité, on est plutôt dans la définition d’un <em>taux</em> (d’où l’expression <strong><em>hazard rate</em></strong> en anglais).</li>
 </ul>
 <p><br> On peut écrire également: <span class="math inline">\(h(t)=\frac{f(t)}{S(t)}=\frac{F&#39;(t)}{S(t)}=-\frac{S&#39;(t)}{S(t)}\)</span></p>
 <p><br></p>
@@ -580,9 +583,14 @@ Un exemple simple : si au moment de l’enquête une femme sans enfant a 70 ans,
 <h2><span class="header-section-number">4.6</span> <strong>Le risque cumulé <span class="math inline">\(H(t)\)</span></strong></h2>
 <p>Le risque cumulé est égal à : <span class="math inline">\(H(t)=\int_{0}^{t} h(u)du = -log(S(t))\)</span><br />
 <br> On peut alors le réécrire toutes les autres quantités:<br />
-<br> - <span class="math inline">\(S(t)=e^{-H(t)}\)</span><br />
-- <span class="math inline">\(F(t)=1-e^{-H(t)}\)</span><br />
-- <span class="math inline">\(f(t)=h(t)\times{e^{-H(t)}}\)</span></p>
+<br></p>
+<ul>
+<li><span class="math inline">\(S(t)=e^{-H(t)}\)</span><br />
+</li>
+<li><span class="math inline">\(F(t)=1-e^{-H(t)}\)</span><br />
+</li>
+<li><span class="math inline">\(f(t)=h(t)\times{e^{-H(t)}}\)</span></li>
+</ul>
 <p><br> <em>Exemple</em> Si on pose que le risque est strictement constant au cours du temps: <span class="math inline">\(h(t)=a\)</span> (on parle de <strong>loi exponentielle</strong> - cf partie sur les modèles AFT - typique des processus sans mémoire comme la durée de vie des ampoules):</p>
 <ul>
 <li><span class="math inline">\(h(t)=a\)</span><br />
@@ -602,14 +610,15 @@ Attention on sort ici très clairement du temps continu, il s’agit seulement d
 <br></p>
 <ol style="list-style-type: decimal">
 <li><p>Durant les mois d’hiver, entre le 1er janvier et le 1er avril (3 mois), la probabilité d’attraper un rhume chaque mois est de 48% (il s’agit bien d’un risque). Quelle est le risque d’attraper le rhume durant la saison froide?<br />
-<strong>=1.44$</strong>. On peut donc s’attendre a attraper 1.44 rhume durant la période d’hiver.</p></li>
-<li><p>On passe une année en vacances dans une région où la probabilité de décéder chaque mois est évaluée à 33%. Quelle est le risque de décéder pendant cette année sabbatique? <strong>=3.96$</strong><br />
+<span class="math inline">\(\frac{0.48}{1/3}=1.44\)</span>. On peut donc s’attendre a attraper 1.44 rhume durant la période d’hiver.</p></li>
+<li><p>On passe une année en vacances dans une région où la probabilité de décéder chaque mois est évaluée à 33%. Quelle est le risque de décéder pendant cette année sabbatique? <span class="math inline">\(\frac{0.33}{1/12}=3.96\)</span><br />
 <br></p></li>
 </ol>
 <p>Le risque peut donc être supérieur à 1 (c’est donc plutôt un taux tel qu’on le défini généralement). En soit cela ne pose pas de problème comme il s’agit d’un nombre moyen d’évènements espérés (exemple: “taux” de fécondité), mais pour des évènements qui ne peuvent pas se répéter, évènements dits “absorbants”, l’interprétation n’est pas très intuitive.<br />
 <br> On peut donc prendre l’inverse du risque qui mesure la durée moyenne (espérée) jusqu’à l’occurence de l’évènement.<br />
 On retrouve donc un concept classique en analyse démographique comme l’espérance de vie (survie): la question n’est pas de savoir si “on” va mourir ou non, le risque indépendement du temps étant par définition égal à 1, mais jusqu’à quand on peut espérer survivre.<br />
 <br> - Pour le rhume, la durée moyenne est de <span class="math inline">\(1/1.44=0.69\)</span> du trimestre hivernal, soit approximativement le début du mois de mars. - Pour l’année sabbatique, la durée moyenne de survie (l’espérance de vie) est de <span class="math inline">\(1/3.96=0.25\)</span> d’une année soit 3 mois après l’arrivée dans la région.</p>
+<p><br></p>
 <p><strong>Exercice</strong> <br></p>
 <ul>
 <li>On a une population de 100 cochons d’Inde.</li>
@@ -621,10 +630,12 @@ On retrouve donc un concept classique en analyse démographique comme l’espér
 </ul>
 <p><img src="images/Image6.png" /></p>
 <p>A quel âge le risque de mourir des cochons d’Inde est-il le plus élevé? Quelle est la valeur de ce risque?</p>
+<p><br></p>
 </div>
 </div>
 <div id="compléments" class="section level1" number="5">
 <h1><span class="header-section-number">5</span> <strong>Compléments</strong></h1>
+<p><br></p>
 <div id="forme-des-fonctions-de-survie" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> <strong>Forme des fonctions de survie</strong></h2>
 <p>Une des propriétés de la fonction de survie ou de séjour est qu’elles tendent vers 0. A la lecture du graphique suivant, cela peut correspondre à la forme de la courbe S2, bien que le % de survivant tend à baisser de moins en moins à mesure que la durée augmente. Deux cas limites doivent être considéré.</p>
