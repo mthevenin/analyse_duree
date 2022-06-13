@@ -13,7 +13,7 @@
 
 <title>R</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -555,7 +555,9 @@ div.tocify {
 
 require(remotes)
 install_version(&quot;survival&quot;, version = &quot;2.44-1&quot;, repos = &quot;http://cran.us.r-project.org&quot;)</code></pre>
-<p><br></p>
+<div class="alert alert-info">
+<p><strong>Maj juin 2022</strong>: pour le problème du test de Grambsch-Therneau, j’ai récupéré le programme de la version 2 de survival, renommé la fonction cox.zphold. Une fois chargé avec la fonction source(…path/cox.zphold.R), on peut l’exécuter directement.</p>
+</div>
 </div>
 <div id="analyse-non-paramétrique" class="section level1" number="3">
 <h1><span class="header-section-number">3</span> <strong>Analyse Non paramétrique</strong></h1>
@@ -719,7 +721,6 @@ La syntaxe est quasiment identique à la fonction <code>survdiff</code>.</p>
 ## RMTL (arm=1)/(arm=0)   0.508     0.284     0.909 0.022</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(a)</span></code></pre></div>
 <p><img src="R_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>trans<span class="sc">$</span>arm <span class="ot">&lt;-</span> <span class="cn">NULL</span></span></code></pre></div>
 <p><br></p>
 </div>
 </div>
@@ -736,8 +737,8 @@ La syntaxe est quasiment identique à la fonction <code>survdiff</code>.</p>
 <p>Par défaut, R utilise la correction d’Efron pour les évènements simultanés. Il est préférable de ne pas la modifier.</p>
 <p>Syntaxe:</p>
 <pre><code>coxph(Surv(time, status) ~ x1 + x2 + ....., data=base, ties=&quot;nom_correction&quot;))</code></pre>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>coxfit <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> trans)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(coxfit)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>coxfit <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> trans)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(coxfit)</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(stime, died) ~ year + age + surgery, data = trans)
 ## 
@@ -761,28 +762,28 @@ La syntaxe est quasiment identique à la fonction <code>survdiff</code>.</p>
 ## Score (logrank) test = 16.71  on 3 df,   p=8e-04</code></pre>
 <p>La table des résultats reporte le logarithme des Risques Ratios (coef) ainsi que les RR (exp(coef)). Il est intéressant de regarder la valeur de concordance (Harrel’s) qui donne des indications sur la qualité de l’ajustement (proche de l’AUC/ROC).</p>
 <p>On peut représenter sous forme graphique les résultats avec la fonction <strong><code>ggforest</code></strong> de <code>survminer</code></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggforest</span>(coxfit)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggforest</span>(coxfit)</span></code></pre></div>
 <pre><code>## Warning in .get_data(model, data = data): The `data` argument is not provided.
 ## Data will be extracted from model fit.</code></pre>
 <p><img src="R_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 </div>
 <div id="tests-de-lhypothèse-ph" class="section level2" number="4.2">
 <h2><span class="header-section-number">4.2</span> <strong>Tests de l’hypothèse PH</strong></h2>
-<p><span style="color:red"> Attention aux résultats entre la v2 et la v3 de survival. Les deux sont présentés, avec un test reposant sur une régression linéaire entre les résidus de Schoenfeld et une fonction de la durée (ici f(t)=t), et fait rapidement le 17 mai. Pour illustrer la question les résultats du test de Grambsch-Therneau sont donnés pour les deux versions. </span></p>
+<p><span style="color:red"> Attention aux résultats entre la v2 et la v3 de survival. Les deux sont présentés, avec un test reposant sur une régression linéaire (OLS même si GLS préférable) entre les résidus de Schoenfeld et une fonction de la durée (ici f(t)=t), et fait rapidement le 17 mai. Pour illustrer la question les résultats du test de Grambsch-Therneau sont donnés pour les deux versions. </span></p>
 <p><strong>Résidus de Schoenfeld</strong><br />
 On utilise la fonction <strong><code>cox.zph</code></strong> pour le test de <em>Grambsch-Therneau</em>.<br />
 Le test peut utiliser plusieurs fonctions de la durée. Par défaut la fonction utilise <span class="math inline">\(1-KM\)</span>, soit le complémentaire de l’estimateur de Kaplan-Meier (option <code>transform="km"</code>).</p>
 <p><strong><em>Test Grambsch-Therneau</em></strong></p>
 <p><strong><span style="color:red">Résultat du test avec la v2 de survival</span></strong></p>
 <p>Avec <code>transform="km"</code></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(coxfit)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(coxfit)</span></code></pre></div>
 <pre><code>##           rho chisq      p
 ## year    0.159  1.96 0.1620
 ## age     0.109  1.15 0.2845
 ## surgery 0.251  3.96 0.0465
 ## GLOBAL     NA  7.99 0.0462</code></pre>
 <p>Avec <code>transform="identity"</code> (<span class="math inline">\(f(t)=t\)</span>) [remarque: solution de Stata par défaut].</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(coxfit, <span class="at">transform=</span><span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(coxfit, <span class="at">transform=</span><span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
 <pre><code>##           rho chisq      p
 ## year    0.102 0.797 0.3720
 ## age     0.129 1.612 0.2043
@@ -806,6 +807,29 @@ GLOBAL   9.47  3 0.02
 </code></pre>
 <p>La différence est flagrante, en particulier pour la variable <em>year</em>.<br />
 <br> Remarque: avec la v3, quelques options ont été ajoutées tel que <em><code>terms</code></em> qui permet pour une variable catégorielle à plus de deux modalités de choisir entre un sous test multiple sur la variable (k modalités =&gt; k-1 degré de liberté) et une série de tests à 1 degré de liberté sur chaque modalité (k-1 tests). De mon point de vue préférer la seconde solution avec <strong><code>terms=FALSE</code></strong>.</p>
+<strong>MAJ JUIN 2022 : cox.zphold</strong>
+<div class="alert alert-danger">
+<p><span style="color:red"> J’ai récupéré la fonction de la version précédente de survival (identique Sas, Stata, Python) et renommé cox.zphold. Elle est téléchargeable à cette adresse :(<a href="https://github.com/mthevenin/analyse_duree/tree/main/cox.zphold" class="uri">https://github.com/mthevenin/analyse_duree/tree/main/cox.zphold</a>).</p>
+<ul>
+<li>Une fois enregistré, charger dans le programme d’analyse la fonction</li>
+<li>Après avoir estimé le modèle de Cox, exécuter la fonction <strong><code>cox.zphold()</code></strong> </span></li>
+</ul>
+</div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;D:/D/Marc/SMS/FORMATIONS/2022/Durée2/a distribuer/cox.zphold.R&quot;</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>coxfit <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery,   <span class="at">data =</span> trans)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zphold</span>(coxfit)</span></code></pre></div>
+<pre><code>##           rho chisq      p
+## year    0.159  1.96 0.1620
+## age     0.109  1.15 0.2845
+## surgery 0.251  3.96 0.0465
+## GLOBAL     NA  7.99 0.0462</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zphold</span>(coxfit, <span class="at">transform=</span><span class="st">&quot;identity&quot;</span>)</span></code></pre></div>
+<pre><code>##           rho chisq      p
+## year    0.102 0.797 0.3720
+## age     0.129 1.612 0.2043
+## surgery 0.297 5.539 0.0186
+## GLOBAL     NA 8.756 0.0327</code></pre>
 <p><strong><em>Régression linéaire entre les résidus standardisés et la durée</em></strong></p>
 <ul>
 <li>Seulement eu le temps pour <span class="math inline">\(ft(t)=t\)</span></li>
@@ -814,47 +838,47 @@ GLOBAL   9.47  3 0.02
 </ul>
 <p>Etapes:</p>
 <ul>
-<li>Récupérer les résidus standardosés de Schoenfeld avec la fonction <strong><code>resid()</code></strong></li>
+<li>Récupérer les résidus standardisés de Schoenfeld avec la fonction <strong><code>resid()</code></strong></li>
 <li>Transformer la matrice en base, basculer les valeurs des rangs en variable (librairie <strong><code>tibble</code></strong>)</li>
 <li>Transformer cette dernière variable en variable de durée (librairie <strong><code>stringr</code></strong>: extraction de la durée)</li>
-<li>Exécuter une régression linéaire sur chaque variable: $ residu_{x_i}= a_0 + bt$</li>
+<li>Exécuter une régression linéaire sur chaque variable: $ residu_{x_i}= a_0 + bt$ [ici une OLS, mais GLS préférable]</li>
 </ul>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupération des résidus</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>resid<span class="ot">=</span> <span class="fu">resid</span>(coxfit, <span class="at">type=</span><span class="st">&quot;scaledsch&quot;</span>)</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>resid <span class="ot">=</span> <span class="fu">data.frame</span>(resid)</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupération des rangs en variable pour générer la durée</span></span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>resid<span class="ot">=</span> <span class="fu">rownames_to_column</span>(resid, <span class="at">var =</span> <span class="st">&quot;Z&quot;</span>)</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Création de la variable de durée</span></span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>resid<span class="sc">$</span>t <span class="ot">=</span> <span class="fu">str_sub</span>(resid<span class="sc">$</span>Z, <span class="dv">2</span>, )</span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>resid<span class="sc">$</span>t<span class="ot">=</span><span class="fu">as.numeric</span>(resid<span class="sc">$</span>t)</span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>resid<span class="sc">$</span>t<span class="ot">=</span><span class="fu">round</span>(resid<span class="sc">$</span>t, <span class="at">digits=</span><span class="dv">0</span>)</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ols entre les résidus et la durée</span></span>
-<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>year    <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">lm</span>(X1<span class="sc">~</span>t, <span class="at">data=</span>resid))</span>
-<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>age     <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">lm</span>(X2<span class="sc">~</span>t, <span class="at">data=</span>resid))</span>
-<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>surgery <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">lm</span>(X3<span class="sc">~</span>t, <span class="at">data=</span>resid))</span>
-<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>year<span class="sc">$</span>coefficients[,<span class="dv">4</span>] </span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupération des résidus</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>resid<span class="ot">=</span> <span class="fu">resid</span>(coxfit, <span class="at">type=</span><span class="st">&quot;scaledsch&quot;</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>resid <span class="ot">=</span> <span class="fu">data.frame</span>(resid)</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Récupération des rangs en variable pour générer la durée</span></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>resid<span class="ot">=</span> <span class="fu">rownames_to_column</span>(resid, <span class="at">var =</span> <span class="st">&quot;Z&quot;</span>)</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Création de la variable de durée</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>resid<span class="sc">$</span>t <span class="ot">=</span> <span class="fu">str_sub</span>(resid<span class="sc">$</span>Z, <span class="dv">2</span>, )</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>resid<span class="sc">$</span>t<span class="ot">=</span><span class="fu">as.numeric</span>(resid<span class="sc">$</span>t)</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>resid<span class="sc">$</span>t<span class="ot">=</span><span class="fu">round</span>(resid<span class="sc">$</span>t, <span class="at">digits=</span><span class="dv">0</span>)</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ols entre les résidus et la durée</span></span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>year    <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">lm</span>(X1<span class="sc">~</span>t, <span class="at">data=</span>resid))</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>age     <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">lm</span>(X2<span class="sc">~</span>t, <span class="at">data=</span>resid))</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>surgery <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">lm</span>(X3<span class="sc">~</span>t, <span class="at">data=</span>resid))</span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>year<span class="sc">$</span>coefficients[,<span class="dv">4</span>] </span></code></pre></div>
 <pre><code>## (Intercept)           t 
 ##  0.05664549  0.38565337</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>age<span class="sc">$</span>coefficients[,<span class="dv">4</span>] </span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>age<span class="sc">$</span>coefficients[,<span class="dv">4</span>] </span></code></pre></div>
 <pre><code>## (Intercept)           t 
 ##   0.2953778   0.2686404</code></pre>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>surgery<span class="sc">$</span>coefficients[,<span class="dv">4</span>] </span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>surgery<span class="sc">$</span>coefficients[,<span class="dv">4</span>] </span></code></pre></div>
 <pre><code>## (Intercept)           t 
 ##  0.00065017  0.00975821</code></pre>
 <p><strong>Introduction d’une intéraction</strong></p>
 <p>Lorsque la covariable n’est pas continue, elle doit être transformée en indicatrice. Vérifier que les résultats du modèle sont bien identiques avec le modèle estimé précédemment (ne pas oublier d’omettre le niveau en référence).<br />
 Ici la variable surgery est déjà sous forme d’indicatrice (0,1).<br />
 La variable d’intéraction est <strong><code>tt(nom-variable)</code></strong>, la fonction de la durée (ici forme linéaire simple) est indiquée en option de la fonction: <strong><code>tt = function(x, t, ...) x*t</code></strong>.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>coxfit2 <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery <span class="sc">+</span> <span class="fu">tt</span>(surgery), <span class="at">data =</span> trans, <span class="at">tt =</span> <span class="cf">function</span>(x, t, ...) x<span class="sc">*</span>t)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(coxfit2)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>coxfit2 <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery <span class="sc">+</span> <span class="fu">tt</span>(surgery), <span class="at">data =</span> trans, <span class="at">tt =</span> <span class="cf">function</span>(x, t, ...) x<span class="sc">*</span>t)</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(coxfit2)</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(stime, died) ~ year + age + surgery + tt(surgery), 
 ##     data = trans, tt = function(x, t, ...) x * t)
@@ -892,11 +916,11 @@ La variable d’intéraction est <strong><code>tt(nom-variable)</code></strong>,
 <li><strong>Etape 3</strong>: modifier la variable transplant (ou créer une nouvelle) à l’aide de la variable <strong>wait</strong> qui prend la valeur 1 à partir du jour de la greffe, 0 avant.</li>
 </ul>
 <p><em>Etape 1</em> Création de l’objet cut (vecteur)</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>cut<span class="ot">=</span> <span class="fu">unique</span>(trans<span class="sc">$</span>stime[trans<span class="sc">$</span>died <span class="sc">==</span> <span class="dv">1</span>])</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>cut<span class="ot">=</span> <span class="fu">unique</span>(trans<span class="sc">$</span>stime[trans<span class="sc">$</span>died <span class="sc">==</span> <span class="dv">1</span>])</span></code></pre></div>
 <p><em>Etape 2</em></p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>tvc <span class="ot">=</span> <span class="fu">survSplit</span>(<span class="at">data =</span> trans, <span class="at">cut =</span> cut, <span class="at">end =</span> <span class="st">&quot;stime&quot;</span>, <span class="at">start =</span> <span class="st">&quot;stime0&quot;</span>, <span class="at">event =</span> <span class="st">&quot;died&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>tvc <span class="ot">=</span> <span class="fu">survSplit</span>(<span class="at">data =</span> trans, <span class="at">cut =</span> cut, <span class="at">end =</span> <span class="st">&quot;stime&quot;</span>, <span class="at">start =</span> <span class="st">&quot;stime0&quot;</span>, <span class="at">event =</span> <span class="st">&quot;died&quot;</span>)</span></code></pre></div>
 <p>Remarque: pour estimer le modèle de Cox de départ avec cette base longue.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime0, stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> tvc)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime0, stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> tvc)</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(stime0, stime, died) ~ year + age + surgery, 
 ##     data = tvc)
@@ -909,11 +933,11 @@ La variable d’intéraction est <strong><code>tt(nom-variable)</code></strong>,
 ## Likelihood ratio test=17.63  on 3 df, p=0.0005243
 ## n= 3573, number of events= 75</code></pre>
 <p><em>Etape 3</em></p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>tvc<span class="sc">$</span>tvc<span class="ot">=</span><span class="fu">ifelse</span>(tvc<span class="sc">$</span>transplant<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> tvc<span class="sc">$</span>wait<span class="sc">&lt;=</span>tvc<span class="sc">$</span>stime,<span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>tvc<span class="sc">$</span>tvc<span class="ot">=</span><span class="fu">ifelse</span>(tvc<span class="sc">$</span>transplant<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> tvc<span class="sc">$</span>wait<span class="sc">&lt;=</span>tvc<span class="sc">$</span>stime,<span class="dv">1</span>,<span class="dv">0</span>)</span></code></pre></div>
 <p><strong>Estimation du modèle</strong><br />
 En format long, on doit préciser dans la formule l’intervalle de durée avec les variables stime0 (début) et stime(fin)</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>tvcfit <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime0, stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery <span class="sc">+</span> tvc, <span class="at">data =</span> tvc)</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tvcfit)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>tvcfit <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime0, stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery <span class="sc">+</span> tvc, <span class="at">data =</span> tvc)</span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tvcfit)</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(stime0, stime, died) ~ year + age + surgery + 
 ##     tvc, data = tvc)
@@ -938,10 +962,10 @@ En format long, on doit préciser dans la formule l’intervalle de durée avec 
 ## Likelihood ratio test= 17.7  on 4 df,   p=0.001
 ## Wald test            = 15.79  on 4 df,   p=0.003
 ## Score (logrank) test = 16.74  on 4 df,   p=0.002</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggforest</span>(tvcfit)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggforest</span>(tvcfit)</span></code></pre></div>
 <pre><code>## Warning in .get_data(model, data = data): The `data` argument is not provided.
 ## Data will be extracted from model fit.</code></pre>
-<p><img src="R_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="R_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p><br></p>
 </div>
 </div>
@@ -949,71 +973,71 @@ En format long, on doit préciser dans la formule l’intervalle de durée avec 
 <h1><span class="header-section-number">5</span> <strong>Analyse en temps discret (regression logistique)</strong></h1>
 <p>Pour la durée, on va utiliser la variable mois (en fait regroupement sur 30 jours).<br />
 La fonction <code>uncount</code> du package <code>tidy</code> permettra de splitter la base au temps d’observation.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;tidyr&quot;</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">=</span> <span class="fu">uncount</span>(trans,mois)</span>
-<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">=</span> dt[<span class="fu">order</span>(dt<span class="sc">$</span>id),]</span>
-<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>, ],)</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">&quot;tidyr&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">=</span> <span class="fu">uncount</span>(trans,mois)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">=</span> dt[<span class="fu">order</span>(dt<span class="sc">$</span>id),]</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>, ],)</span></code></pre></div>
 <pre><code>## 
 ## 
-## | id| year| age| died| stime| surgery| transplant| wait| compet|
-## |--:|----:|---:|----:|-----:|-------:|----------:|----:|------:|
-## |  1|   67|  30|    1|    50|       0|          0|    0|      1|
-## |  1|   67|  30|    1|    50|       0|          0|    0|      1|
-## |  2|   68|  51|    1|     6|       0|          0|    0|      1|
-## |  3|   68|  54|    1|    16|       0|          1|    1|      1|
-## |  4|   68|  40|    1|    39|       0|          1|   36|      2|
-## |  4|   68|  40|    1|    39|       0|          1|   36|      2|
-## |  5|   68|  20|    1|    18|       0|          0|    0|      1|
-## |  6|   68|  54|    1|     3|       0|          0|    0|      2|
-## |  7|   68|  50|    1|   675|       0|          1|   51|      1|
-## |  7|   68|  50|    1|   675|       0|          1|   51|      1|
-## |  7|   68|  50|    1|   675|       0|          1|   51|      1|</code></pre>
+## | id| year| age| died| stime| surgery| transplant| wait| compet| arm|
+## |--:|----:|---:|----:|-----:|-------:|----------:|----:|------:|---:|
+## |  1|   67|  30|    1|    50|       0|          0|    0|      1|   0|
+## |  1|   67|  30|    1|    50|       0|          0|    0|      1|   0|
+## |  2|   68|  51|    1|     6|       0|          0|    0|      1|   0|
+## |  3|   68|  54|    1|    16|       0|          1|    1|      1|   0|
+## |  4|   68|  40|    1|    39|       0|          1|   36|      2|   0|
+## |  4|   68|  40|    1|    39|       0|          1|   36|      2|   0|
+## |  5|   68|  20|    1|    18|       0|          0|    0|      1|   0|
+## |  6|   68|  54|    1|     3|       0|          0|    0|      2|   0|
+## |  7|   68|  50|    1|   675|       0|          1|   51|      1|   0|
+## |  7|   68|  50|    1|   675|       0|          1|   51|      1|   0|
+## |  7|   68|  50|    1|   675|       0|          1|   51|      1|   0|</code></pre>
 <p>La variable mois a été supprimée, on va générer une variable type compteur pour mesurer la durée à chaque point d’observation. On va également recréer la variable (renommée T).</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>x<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>t <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, <span class="at">FUN=</span>cumsum)</span>
-<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>T <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, <span class="at">FUN=</span>sum)</span>
-<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>, ],)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>x<span class="ot">=</span><span class="dv">1</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>t <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, <span class="at">FUN=</span>cumsum)</span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>T <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, <span class="at">FUN=</span>sum)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>, ],)</span></code></pre></div>
 <pre><code>## 
 ## 
-## | id| year| age| died| stime| surgery| transplant| wait| compet|  x|  t|  T|
-## |--:|----:|---:|----:|-----:|-------:|----------:|----:|------:|--:|--:|--:|
-## |  1|   67|  30|    1|    50|       0|          0|    0|      1|  1|  1|  2|
-## |  1|   67|  30|    1|    50|       0|          0|    0|      1|  1|  2|  2|
-## |  2|   68|  51|    1|     6|       0|          0|    0|      1|  1|  1|  1|
-## |  3|   68|  54|    1|    16|       0|          1|    1|      1|  1|  1|  1|
-## |  4|   68|  40|    1|    39|       0|          1|   36|      2|  1|  1|  2|
-## |  4|   68|  40|    1|    39|       0|          1|   36|      2|  1|  2|  2|
-## |  5|   68|  20|    1|    18|       0|          0|    0|      1|  1|  1|  1|
-## |  6|   68|  54|    1|     3|       0|          0|    0|      2|  1|  1|  1|
-## |  7|   68|  50|    1|   675|       0|          1|   51|      1|  1|  1| 23|
-## |  7|   68|  50|    1|   675|       0|          1|   51|      1|  1|  2| 23|
-## |  7|   68|  50|    1|   675|       0|          1|   51|      1|  1|  3| 23|</code></pre>
+## | id| year| age| died| stime| surgery| transplant| wait| compet| arm|  x|  t|  T|
+## |--:|----:|---:|----:|-----:|-------:|----------:|----:|------:|---:|--:|--:|--:|
+## |  1|   67|  30|    1|    50|       0|          0|    0|      1|   0|  1|  1|  2|
+## |  1|   67|  30|    1|    50|       0|          0|    0|      1|   0|  1|  2|  2|
+## |  2|   68|  51|    1|     6|       0|          0|    0|      1|   0|  1|  1|  1|
+## |  3|   68|  54|    1|    16|       0|          1|    1|      1|   0|  1|  1|  1|
+## |  4|   68|  40|    1|    39|       0|          1|   36|      2|   0|  1|  1|  2|
+## |  4|   68|  40|    1|    39|       0|          1|   36|      2|   0|  1|  2|  2|
+## |  5|   68|  20|    1|    18|       0|          0|    0|      1|   0|  1|  1|  1|
+## |  6|   68|  54|    1|     3|       0|          0|    0|      2|   0|  1|  1|  1|
+## |  7|   68|  50|    1|   675|       0|          1|   51|      1|   0|  1|  1| 23|
+## |  7|   68|  50|    1|   675|       0|          1|   51|      1|   0|  1|  2| 23|
+## |  7|   68|  50|    1|   675|       0|          1|   51|      1|   0|  1|  3| 23|</code></pre>
 <p><em>Remarque : j’utilise ici le code standard de R, on peut faire la même chose avec dplyr de manière plus rapide (mise à jour à prévoir)</em>.<br />
 <br> Si un individu est décédé, died=1 est reporté sur toute les lignes (idem qu’avec la variable dynamique). On va modifier la variable tel que <em>died=0 si t&lt;T$</em>.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>died[dt<span class="sc">$</span>t<span class="sc">&lt;</span>dt<span class="sc">$</span>T]<span class="ot">=</span><span class="dv">0</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>, ],)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>died[dt<span class="sc">$</span>t<span class="sc">&lt;</span>dt<span class="sc">$</span>T]<span class="ot">=</span><span class="dv">0</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>, ],)</span></code></pre></div>
 <pre><code>## 
 ## 
-## | id| year| age| died| stime| surgery| transplant| wait| compet|  x|  t|  T|
-## |--:|----:|---:|----:|-----:|-------:|----------:|----:|------:|--:|--:|--:|
-## |  1|   67|  30|    0|    50|       0|          0|    0|      1|  1|  1|  2|
-## |  1|   67|  30|    1|    50|       0|          0|    0|      1|  1|  2|  2|
-## |  2|   68|  51|    1|     6|       0|          0|    0|      1|  1|  1|  1|
-## |  3|   68|  54|    1|    16|       0|          1|    1|      1|  1|  1|  1|
-## |  4|   68|  40|    0|    39|       0|          1|   36|      2|  1|  1|  2|
-## |  4|   68|  40|    1|    39|       0|          1|   36|      2|  1|  2|  2|
-## |  5|   68|  20|    1|    18|       0|          0|    0|      1|  1|  1|  1|
-## |  6|   68|  54|    1|     3|       0|          0|    0|      2|  1|  1|  1|
-## |  7|   68|  50|    0|   675|       0|          1|   51|      1|  1|  1| 23|
-## |  7|   68|  50|    0|   675|       0|          1|   51|      1|  1|  2| 23|
-## |  7|   68|  50|    0|   675|       0|          1|   51|      1|  1|  3| 23|</code></pre>
+## | id| year| age| died| stime| surgery| transplant| wait| compet| arm|  x|  t|  T|
+## |--:|----:|---:|----:|-----:|-------:|----------:|----:|------:|---:|--:|--:|--:|
+## |  1|   67|  30|    0|    50|       0|          0|    0|      1|   0|  1|  1|  2|
+## |  1|   67|  30|    1|    50|       0|          0|    0|      1|   0|  1|  2|  2|
+## |  2|   68|  51|    1|     6|       0|          0|    0|      1|   0|  1|  1|  1|
+## |  3|   68|  54|    1|    16|       0|          1|    1|      1|   0|  1|  1|  1|
+## |  4|   68|  40|    0|    39|       0|          1|   36|      2|   0|  1|  1|  2|
+## |  4|   68|  40|    1|    39|       0|          1|   36|      2|   0|  1|  2|  2|
+## |  5|   68|  20|    1|    18|       0|          0|    0|      1|   0|  1|  1|  1|
+## |  6|   68|  54|    1|     3|       0|          0|    0|      2|   0|  1|  1|  1|
+## |  7|   68|  50|    0|   675|       0|          1|   51|      1|   0|  1|  1| 23|
+## |  7|   68|  50|    0|   675|       0|          1|   51|      1|   0|  1|  2| 23|
+## |  7|   68|  50|    0|   675|       0|          1|   51|      1|   0|  1|  3| 23|</code></pre>
 <p><br></p>
 <div id="estimation-avec-la-durée-comme-variable-continue" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> <strong>Estimation avec la durée comme variable continue</strong></h2>
 <p>Avec un effet quadratique d’ordre 2.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>t2<span class="ot">=</span>dt<span class="sc">$</span>t<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>dtfit <span class="ot">=</span> <span class="fu">glm</span>(died <span class="sc">~</span> t <span class="sc">+</span> t2 <span class="sc">+</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data=</span>dt, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
-<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summ</span>(dtfit)</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>t2<span class="ot">=</span>dt<span class="sc">$</span>t<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>dtfit <span class="ot">=</span> <span class="fu">glm</span>(died <span class="sc">~</span> t <span class="sc">+</span> t2 <span class="sc">+</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data=</span>dt, <span class="at">family=</span><span class="st">&quot;binomial&quot;</span>)</span>
+<span id="cb61-3"><a href="#cb61-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summ</span>(dtfit)</span></code></pre></div>
 <pre><code>## MODEL INFO:
 ## Observations: 1127
 ## Dependent Variable: died
@@ -1045,19 +1069,19 @@ La fonction <code>uncount</code> du package <code>tidy</code> permettra de split
 <h2><span class="header-section-number">5.2</span> <strong>Estimation avec la durée comme variable discrete</strong></h2>
 <p>On va créer une variable de type dicrète regroupant la variable <em>t</em> en quartile (pour l’exemple seulement, tous types de regroupement est envisageable).<br />
 On va utiliser la fonction <code>quantcut</code> du package <code>gtools</code>.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>ct4 <span class="ot">&lt;-</span> <span class="fu">quantcut</span>(dt<span class="sc">$</span>t)</span>
-<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dt<span class="sc">$</span>ct4) </span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>ct4 <span class="ot">&lt;-</span> <span class="fu">quantcut</span>(dt<span class="sc">$</span>t)</span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dt<span class="sc">$</span>ct4) </span></code></pre></div>
 <pre><code>## 
 ##   [1,4]  (4,11] (11,23] (23,60] 
 ##     299     275     282     271</code></pre>
 <p>On va générer un compteur et un total d’observations sur la strate regroupant <em>id</em> et <em>ct4</em>.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>n <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, dt<span class="sc">$</span>ct4, <span class="at">FUN=</span>cumsum)</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>N <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, dt<span class="sc">$</span>ct4, <span class="at">FUN=</span>sum)</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>n <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, dt<span class="sc">$</span>ct4, <span class="at">FUN=</span>cumsum)</span>
+<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>N <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, dt<span class="sc">$</span>ct4, <span class="at">FUN=</span>sum)</span></code></pre></div>
 <p>On conserve la dernière observation dans la strate.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a>dt2 <span class="ot">=</span> <span class="fu">subset</span>(dt, n<span class="sc">==</span>N)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a>dt2 <span class="ot">=</span> <span class="fu">subset</span>(dt, n<span class="sc">==</span>N)</span></code></pre></div>
 <p><strong>Estimation du modèle</strong></p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">glm</span>(died <span class="sc">~</span> ct4 <span class="sc">+</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data=</span>dt2, <span class="at">family=</span>binomial)</span>
-<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summ</span>(fit)</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">glm</span>(died <span class="sc">~</span> ct4 <span class="sc">+</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data=</span>dt2, <span class="at">family=</span>binomial)</span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summ</span>(fit)</span></code></pre></div>
 <pre><code>## MODEL INFO:
 ## Observations: 197
 ## Dependent Variable: died
@@ -1092,8 +1116,8 @@ On va utiliser la fonction <code>quantcut</code> du package <code>gtools</code>.
 <div id="modèle-de-weibull" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> <strong>Modèle de Weibull</strong></h2>
 <p><strong>De type AFT</strong></p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" aria-hidden="true" tabindex="-1"></a>weibull <span class="ot">=</span> <span class="fu">survreg</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> trans, <span class="at">dist=</span><span class="st">&quot;weibull&quot;</span>)</span>
-<span id="cb65-2"><a href="#cb65-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(weibull)</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a>weibull <span class="ot">=</span> <span class="fu">survreg</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> trans, <span class="at">dist=</span><span class="st">&quot;weibull&quot;</span>)</span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(weibull)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## survreg(formula = Surv(stime, died) ~ year + age + surgery, data = trans, 
@@ -1115,9 +1139,9 @@ On va utiliser la fonction <code>quantcut</code> du package <code>gtools</code>.
 <p><strong>De type PH</strong><br />
 <br> La paramétrisation PH n’est pas possible avec la fonction <code>survreg</code>.<br />
 Il faut utiliser le package <code>flexsurv</code>, qui permet également d’estimer les modèles paramétriques disponibles avec <code>survival</code>.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flexsurv)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flexsurv)</span></code></pre></div>
 <p>Pour estimer le modèle de Weibull de type PH, on utilise en option <code>dist="weibullPH"</code>.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" aria-hidden="true" tabindex="-1"></a><span class="fu">flexsurvreg</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> trans, <span class="at">dist=</span><span class="st">&quot;weibullPH&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="fu">flexsurvreg</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> trans, <span class="at">dist=</span><span class="st">&quot;weibullPH&quot;</span>)</span></code></pre></div>
 <pre><code>## Call:
 ## flexsurvreg(formula = Surv(stime, died) ~ year + age + surgery, 
 ##     data = trans, dist = &quot;weibullPH&quot;)
@@ -1147,14 +1171,14 @@ Il faut utiliser le package <code>flexsurv</code>, qui permet également d’est
 <h1><span class="header-section-number">7</span> <strong>Risques concurrents</strong></h1>
 <p>Package <code>cmprsk</code> pour l’analyse paramétrique et le modèle de Fine-Gray.</p>
 <p>Package cmprsk pour l’analyse non paramétrique et le modèle de Fine-Gray. La variable de censure/évènement, <em>compet</em>, correspond à la variable died avec une modalité supplémentaire simulée. On suppose l’existence d’une cause supplémentaire au décès autre qu’une malformation cardiaque et non strictement indépendante de cell-ci.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" aria-hidden="true" tabindex="-1"></a>compet <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv&quot;</span>)</span>
-<span id="cb70-2"><a href="#cb70-2" aria-hidden="true" tabindex="-1"></a><span class="co"># variable compet</span></span>
-<span id="cb70-3"><a href="#cb70-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(compet<span class="sc">$</span>compet) </span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>compet <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv&quot;</span>)</span>
+<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a><span class="co"># variable compet</span></span>
+<span id="cb74-3"><a href="#cb74-3" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(compet<span class="sc">$</span>compet) </span></code></pre></div>
 <pre><code>## 
 ##  0  1  2 
 ## 28 56 19</code></pre>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variable died</span></span>
-<span id="cb72-2"><a href="#cb72-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(compet<span class="sc">$</span>died) </span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variable died</span></span>
+<span id="cb76-2"><a href="#cb76-2" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(compet<span class="sc">$</span>died) </span></code></pre></div>
 <pre><code>## 
 ##  0  1 
 ## 28 75</code></pre>
@@ -1162,8 +1186,8 @@ Il faut utiliser le package <code>flexsurv</code>, qui permet également d’est
 <h2><span class="header-section-number">7.1</span> <strong>Non paramétrique: incidences cumulées</strong></h2>
 <p>On utilise la fonction <code>cuminc</code> du package <code>cmprsk</code>.</p>
 <p><em>Pas de comparaison</em></p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">=</span> <span class="fu">cuminc</span>(compet<span class="sc">$</span>stime, compet<span class="sc">$</span>compet)</span>
-<span id="cb74-2"><a href="#cb74-2" aria-hidden="true" tabindex="-1"></a>ic </span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">=</span> <span class="fu">cuminc</span>(compet<span class="sc">$</span>stime, compet<span class="sc">$</span>compet)</span>
+<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>ic </span></code></pre></div>
 <pre><code>## Estimates and Variances:
 ## $est
 ##           500      1000      1500
@@ -1174,15 +1198,15 @@ Il faut utiliser le package <code>flexsurv</code>, qui permet également d’est
 ##             500        1000        1500
 ## 1 1 0.002619449 0.003131847 0.003676516
 ## 1 2 0.001473283 0.002203770 0.002203770</code></pre>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ic)</span></code></pre></div>
-<p><img src="R_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ic)</span></code></pre></div>
+<p><img src="R_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <p>Avec survminer</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcompetingrisks</span>(<span class="at">fit =</span> ic)</span></code></pre></div>
-<p><img src="R_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcompetingrisks</span>(<span class="at">fit =</span> ic)</span></code></pre></div>
+<p><img src="R_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p><em>Comparaison</em></p>
 <p>Le test de Gray est automatiquement exécuté.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">=</span> <span class="fu">cuminc</span>(compet<span class="sc">$</span>stime, compet<span class="sc">$</span>compet, <span class="at">group=</span>compet<span class="sc">$</span>surgery, <span class="at">rho=</span><span class="dv">1</span>)</span>
-<span id="cb78-2"><a href="#cb78-2" aria-hidden="true" tabindex="-1"></a>ic </span></code></pre></div>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">=</span> <span class="fu">cuminc</span>(compet<span class="sc">$</span>stime, compet<span class="sc">$</span>compet, <span class="at">group=</span>compet<span class="sc">$</span>surgery, <span class="at">rho=</span><span class="dv">1</span>)</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a>ic </span></code></pre></div>
 <pre><code>## Tests:
 ##       stat         pv df
 ## 1 4.604792 0.03188272  1
@@ -1201,13 +1225,13 @@ Il faut utiliser le package <code>flexsurv</code>, qui permet également d’est
 ## 1 1 0.014958678 0.033339569          NA
 ## 0 2 0.001727112 0.002271242 0.002271242
 ## 1 2 0.008449138 0.022024737          NA</code></pre>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ic)</span></code></pre></div>
-<p><img src="R_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ic)</span></code></pre></div>
+<p><img src="R_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>Avec survminer. Pour avoir un seul graphique pour toutes les courbes ajouter l’option <strong><code>multiple_panels = F</code></strong></p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcompetingrisks</span>(<span class="at">fit =</span> ic)</span></code></pre></div>
-<p><img src="R_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcompetingrisks</span>(<span class="at">fit =</span> ic, <span class="at">multiple_panels =</span> F)</span></code></pre></div>
-<p><img src="R_files/figure-html/unnamed-chunk-37-2.png" width="672" /></p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcompetingrisks</span>(<span class="at">fit =</span> ic)</span></code></pre></div>
+<p><img src="R_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcompetingrisks</span>(<span class="at">fit =</span> ic, <span class="at">multiple_panels =</span> F)</span></code></pre></div>
+<p><img src="R_files/figure-html/unnamed-chunk-39-2.png" width="672" /></p>
 <p><br></p>
 </div>
 <div id="modèles" class="section level2" number="7.2">
@@ -1217,9 +1241,9 @@ Il faut utiliser le package <code>flexsurv</code>, qui permet également d’est
 <p>Attention à l’interprétation des “risks ratio”.</p>
 <p>Fonction <code>crr</code> du plackage <code>cmprsk</code>.<br />
 Peu pratique les covariables doivent être introduites sous forme de matrice (n observation * k variables). Pour les covariables discrètes, prévoir la forme binaire et l’omission de la catégorie de référence.</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> compet[<span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;surgery&quot;</span>)]</span>
-<span id="cb83-2"><a href="#cb83-2" aria-hidden="true" tabindex="-1"></a>c <span class="ot">=</span> <span class="fu">as.matrix</span>(c)</span>
-<span id="cb83-3"><a href="#cb83-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">crr</span>(compet<span class="sc">$</span>stime, compet<span class="sc">$</span>compet, c))</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> compet[<span class="fu">c</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;age&quot;</span>, <span class="st">&quot;surgery&quot;</span>)]</span>
+<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>c <span class="ot">=</span> <span class="fu">as.matrix</span>(c)</span>
+<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">crr</span>(compet<span class="sc">$</span>stime, compet<span class="sc">$</span>compet, c))</span></code></pre></div>
 <pre><code>## Competing Risks Regression
 ## 
 ## Call:
@@ -1243,19 +1267,19 @@ Peu pratique les covariables doivent être introduites sous forme de matrice (n 
 <h3><span class="header-section-number">7.2.2</span> <strong>Modèle logistique multinomial à temps discret</strong></h3>
 <p>On va de nouveau utiliser la variable mois (temps discret).<br />
 Le modèle sera estimé à l’aide la fonction <code>multinom</code> du package <code>nnet</code>, les p-values doivent-être programmées, l’output ne donnant que les erreurs-types.</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;nnet&quot;)</span></span>
-<span id="cb85-2"><a href="#cb85-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nnet)</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages(&quot;nnet&quot;)</span></span>
+<span id="cb89-2"><a href="#cb89-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nnet)</span></code></pre></div>
 <pre><code>## Warning: le package &#39;nnet&#39; a été compilé avec la version R 4.1.3</code></pre>
 <p><em>Transformation de la base</em></p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1" aria-hidden="true" tabindex="-1"></a>compet<span class="sc">$</span>T <span class="ot">=</span> compet<span class="sc">$</span>mois</span>
-<span id="cb87-2"><a href="#cb87-2" aria-hidden="true" tabindex="-1"></a>td <span class="ot">=</span> <span class="fu">uncount</span>(compet, mois)</span>
-<span id="cb87-3"><a href="#cb87-3" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>x<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb87-4"><a href="#cb87-4" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>t <span class="ot">=</span> <span class="fu">ave</span>(td<span class="sc">$</span>x, td<span class="sc">$</span>id, <span class="at">FUN=</span>cumsum)</span>
-<span id="cb87-5"><a href="#cb87-5" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>t2 <span class="ot">=</span> td<span class="sc">$</span>t<span class="sc">*</span>td<span class="sc">$</span>t</span>
-<span id="cb87-6"><a href="#cb87-6" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>e <span class="ot">=</span> <span class="fu">ifelse</span>(td<span class="sc">$</span>t<span class="sc">&lt;</span>td<span class="sc">$</span>T,<span class="dv">0</span>, td<span class="sc">$</span>compet)</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1" aria-hidden="true" tabindex="-1"></a>compet<span class="sc">$</span>T <span class="ot">=</span> compet<span class="sc">$</span>mois</span>
+<span id="cb91-2"><a href="#cb91-2" aria-hidden="true" tabindex="-1"></a>td <span class="ot">=</span> <span class="fu">uncount</span>(compet, mois)</span>
+<span id="cb91-3"><a href="#cb91-3" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>x<span class="ot">=</span><span class="dv">1</span></span>
+<span id="cb91-4"><a href="#cb91-4" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>t <span class="ot">=</span> <span class="fu">ave</span>(td<span class="sc">$</span>x, td<span class="sc">$</span>id, <span class="at">FUN=</span>cumsum)</span>
+<span id="cb91-5"><a href="#cb91-5" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>t2 <span class="ot">=</span> td<span class="sc">$</span>t<span class="sc">*</span>td<span class="sc">$</span>t</span>
+<span id="cb91-6"><a href="#cb91-6" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>e <span class="ot">=</span> <span class="fu">ifelse</span>(td<span class="sc">$</span>t<span class="sc">&lt;</span>td<span class="sc">$</span>T,<span class="dv">0</span>, td<span class="sc">$</span>compet)</span></code></pre></div>
 <p><em>Estimation</em></p>
 <p>Pour estimer le modèle, on utilise la fonction <code>mlogit</code> du package <code>nnet</code>. Les p-values seront calculées à partir d’un test bilatéral (statistique z).</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>competfit <span class="ot">=</span> <span class="fu">multinom</span>(<span class="at">formula =</span> e <span class="sc">~</span> t <span class="sc">+</span> t2 <span class="sc">+</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> td)</span></code></pre></div>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>competfit <span class="ot">=</span> <span class="fu">multinom</span>(<span class="at">formula =</span> e <span class="sc">~</span> t <span class="sc">+</span> t2 <span class="sc">+</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> td)</span></code></pre></div>
 <pre><code>## # weights:  21 (12 variable)
 ## initial  value 1238.136049 
 ## iter  10 value 579.836377
@@ -1265,7 +1289,7 @@ Le modèle sera estimé à l’aide la fonction <code>multinom</code> du package
 ## iter  50 value 275.005454
 ## final  value 275.005419 
 ## converged</code></pre>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(competfit)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(competfit)</span></code></pre></div>
 <pre><code>## Call:
 ## multinom(formula = e ~ t + t2 + year + age + surgery, data = td)
 ## 
@@ -1281,9 +1305,9 @@ Le modèle sera estimé à l’aide la fonction <code>multinom</code> du package
 ## 
 ## Residual Deviance: 550.0108 
 ## AIC: 574.0108</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">=</span> <span class="fu">summary</span>(competfit)<span class="sc">$</span>coefficients<span class="sc">/</span><span class="fu">summary</span>(competfit)<span class="sc">$</span>standard.errors</span>
-<span id="cb92-2"><a href="#cb92-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(z), <span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">*</span> <span class="dv">2</span></span>
-<span id="cb92-3"><a href="#cb92-3" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a>z <span class="ot">=</span> <span class="fu">summary</span>(competfit)<span class="sc">$</span>coefficients<span class="sc">/</span><span class="fu">summary</span>(competfit)<span class="sc">$</span>standard.errors</span>
+<span id="cb96-2"><a href="#cb96-2" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> (<span class="dv">1</span> <span class="sc">-</span> <span class="fu">pnorm</span>(<span class="fu">abs</span>(z), <span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">*</span> <span class="dv">2</span></span>
+<span id="cb96-3"><a href="#cb96-3" aria-hidden="true" tabindex="-1"></a>p</span></code></pre></div>
 <pre><code>##   (Intercept)            t           t2 year         age    surgery
 ## 1           0 8.396729e-07 0.0004090588    0 0.009318953 0.03104129
 ## 2           0 3.359389e-03 0.0519462468    0 0.647310003 0.42008041</code></pre>
