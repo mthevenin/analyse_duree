@@ -13,7 +13,7 @@
 
 <title>Méthode semi-paramétrique Cox</title>
 
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
@@ -588,18 +588,20 @@ De la même manière, plus on entre à un âge élevé dans la liste d’attente
 <li><p>Le résultat de ce test est considéré par certain.e.s comme un indicateur de l’ampleur du biais qui affecte la baseline du risque.</p></li>
 <li><p><strong>Transformations de la durée</strong>: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: <span class="math inline">\(f(t)=t\)</span> (« identity »), <span class="math inline">\(f(t)=log(t)\)</span>, <span class="math inline">\(f(t)=KM(t)\)</span> ou <span class="math inline">\(f(t)=1- KMa(t\)</span>) où <span class="math inline">\(KMa(t\)</span>) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank », est utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple <span class="math inline">\(t=(0.1,0.5,1,2.6,3)\)</span> donne une transformation <span class="math inline">\(t=(1,2,3,4)\)</span>. A savoir : la fonction « identity » rend le test relativement sensible aux évènements très tardifs et rares (outliers).</p></li>
 </ul>
-<p><span style="color:red"><strong>Utilisatrices et utilisateurs de R: lire attentivement car les résultats du tests sont modifiés depuis la version 3 de la librairie Survival. Je ne suis pas encore en mesure de dire clairement pourquoi, un piste donnée par une courte note dans le fichier d’aide, et d’évaluer la sensibilité de ce changement à des échantillons de grande taille, avec un nombre important de degrés de liberté dans les modèles et surtout des estimations avec des durées discrètes/groupées. Bref évaluer cette nouvelle estimation a des données typiques des sciences sociales (T.Therneau est un biostatisticien en poste dans un des établissements de la fameuse <em>mayo clinic</em>)</strong></span></p>
+<p><span style="color:red">Utilisatrices et utilisateurs de R: lire attentivement car les résultats du tests sont modifiés depuis la version 3 de la librairie Survival. Je ne suis pas encore en mesure de dire clairement pourquoi, un piste donnée par une courte note dans le fichier d’aide, et d’évaluer la sensibilité de ce changement à des échantillons de grande taille, et surtout à des estimations avec des durées discrètes/groupées. Bref évaluer cette nouvelle estimation a des données typiques des sciences sociales (T.Therneau est un biostatisticien en poste dans un des établissements de la fameuse <em>mayo clinic</em>).<br />
+<strong>Maj juin 2022</strong>: le programme de l’ancienne fonction a été récupéré. La marche à suivre pour l’utiliser est donné dans le chapitre dédié à R. </span></p>
 <strong>Logiciels</strong><br />
 
 <div class="alert alert-info">
 <ul>
-<li><strong>SAS</strong>: le test est disponible depuis quelques années avec l’argument <strong><code>zph</code></strong> sur la ligne <code>proc lifetest</code>. Par défaut SAS utilise <span class="math inline">\(f(t)=t\)</span>. On peut modifier cette fonction.</li>
-<li><strong>Stata</strong>: le test est donné par la commande <strong><code>estat phtest, d</code></strong>. Par défaut Stata utilise <span class="math inline">\(f(t)=t\)</span>. On peut modifier cette fonction.</li>
-<li><span style="color:red"><strong>R</strong>: [17-05-2022: attention test modifié depuis le v3 de survival] après avoir créer un objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>cox.zph</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=1-KM(t)\)</span> où <span class="math inline">\(KM(t)\)</span> sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.
+<li><p><strong>SAS</strong>: le test est disponible depuis quelques années avec l’argument <strong><code>zph</code></strong> sur la ligne <code>proc lifetest</code>. Par défaut SAS utilise <span class="math inline">\(f(t)=t\)</span>. On peut modifier cette fonction.</p></li>
+<li><p><strong>Stata</strong>: le test est donné par la commande <strong><code>estat phtest, d</code></strong>. Par défaut Stata utilise <span class="math inline">\(f(t)=t\)</span>. On peut modifier cette fonction.</p></li>
+<li><p><span style="color:red"><strong>R</strong>: [17-05-2022: attention test modifié depuis le v3 de survival] après avoir créer un objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>cox.zph</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=1-KM(t)\)</span> où <span class="math inline">\(KM(t)\)</span> sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.</p>
 <ul>
-<li>Pour avoir des résultats cohérents avec les autres applications, une méthode via une régression linéaire entre les résidus standardisés et la durée est proposée dans la partie programmation dédiée à R.</li>
+<li><strong>Juin 2022</strong>: j’ai récupéré le programme du test antérieur, renommé <strong><code>cox.zphold</code></strong>. On peut le télécharger, et il est facilement exécutable.</li>
+<li>Autre solution: Pour avoir des résultats cohérents avec les autres applications, une méthode via une régression linéaire entre les résidus standardisés et la durée est proposée dans la partie programmation dédiée à R.</li>
 </ul></li>
-<li><strong>Python</strong>: après avoir créer l’objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>proportional_hazard_test</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=t\)</span>, mais on peut afficher les résultats pour toutes les transformations de <span class="math inline">\(t\)</span> disponibles avec l’option <code>time_transform=’all’</code>.</li>
+<li><p><strong>Python</strong>: après avoir créer l’objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>proportional_hazard_test</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=t\)</span>, mais on peut afficher les résultats pour toutes les transformations de <span class="math inline">\(t\)</span> disponibles avec l’option <code>time_transform=’all’</code>.</p></li>
 </ul>
 </div>
 <p><strong>Intéraction avec la durée</strong> <br></p>
