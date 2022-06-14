@@ -1,5 +1,5 @@
-d 2017-10-11
-d commandes     : diverses (petites) commandes stata d'analyse ou autres
+d 2019-10-11
+d commandes     : qlt pour analyse durée
 d auteur        : Marc Thevenin
 d affiliation   : ined-sms
 d support       : marc.thevenin@ined.fr
