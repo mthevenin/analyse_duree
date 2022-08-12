@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Modèles paramétriques</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./concurrent.html" rel="next">
+<link href="./dynamiques.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"><strong>ANALYSE DES DUREES 2022</strong></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mthevenin/analyse_duree"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+              </div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Modèles paramétriques</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Données et théorie</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Donnees.html" class="sidebar-item-text sidebar-link">Les Données</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Theorie.html" class="sidebar-item-text sidebar-link">La théorie</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true"><strong>Méthodes non paramétriques</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fsurvie.html" class="sidebar-item-text sidebar-link">Les fonctions de survie</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./comp_fsurvie.html" class="sidebar-item-text sidebar-link">Tests de comparaison</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true"><strong>Modèles à risques proportionnels</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_mod.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cox.html" class="sidebar-item-text sidebar-link">Modèle de Cox</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./discret.html" class="sidebar-item-text sidebar-link">Modèle temps discret</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dynamiques.html" class="sidebar-item-text sidebar-link">Variables dynamiques</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Compléments</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parametrique.html" class="sidebar-item-text sidebar-link active">Modèles paramétriques</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./concurrent.html" class="sidebar-item-text sidebar-link">Risques concurrents</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./frailty.html" class="sidebar-item-text sidebar-link">Fragilité et immunité</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true"><strong>Programmation</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R.html" class="sidebar-item-text sidebar-link">R</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  Stata.qmd
+  </li>
+          <li class="sidebar-item">
+  Sas.qmd
+  </li>
+          <li class="sidebar-item">
+  Python.qmd
+  </li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Plan</h2>
+   
+  <ul>
+  <li><a href="#principes" id="toc-principes" class="nav-link active" data-scroll-target="#principes">Principes</a>
+  <ul class="collapse">
+  <li><a href="#hypothèse-aft-accelerated-failure-time" id="toc-hypothèse-aft-accelerated-failure-time" class="nav-link" data-scroll-target="#hypothèse-aft-accelerated-failure-time">Hypothèse AFT: Accelerated Failure Time</a></li>
+  <li><a href="#principe-de-construction-des-modèles-aft" id="toc-principe-de-construction-des-modèles-aft" class="nav-link" data-scroll-target="#principe-de-construction-des-modèles-aft">Principe de construction des modèles AFT</a></li>
+  </ul></li>
+  <li><a href="#quelques-modèles-paramétriques-usuels" id="toc-quelques-modèles-paramétriques-usuels" class="nav-link" data-scroll-target="#quelques-modèles-paramétriques-usuels">Quelques modèles paramétriques usuels</a></li>
+  <li><a href="#exemple-avec-le-modèle-de-weibull" id="toc-exemple-avec-le-modèle-de-weibull" class="nav-link" data-scroll-target="#exemple-avec-le-modèle-de-weibull">Exemple avec le modèle de Weibull</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Modèles paramétriques</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p><strong>Objectifs</strong>: présenter (très/trop rapidement) la logique des modèles de type <strong>AFT</strong> (<strong>Accelerated Failure Time</strong>), principalement le modèle de <em>Weibull</em> (et <em>exponentiel</em>). Je n’ai pas forcément de pratique sur les modèles paramétriques, et à terme plutôt intéressé pour explorer de manière approfondie et présenter le modèle de Parmar-Royston.</p>
+<section id="principes" class="level1">
+<h1>Principes</h1>
+<ul>
+<li>Dans les modèles paramétriques usuels, la durée de survie est distribuée selon une loi dont la densité <span class="math inline">\(f(t)\)</span> s’exprime en fonction de paramètres (de la loi).<br>
+</li>
+<li>Pour utiliser l’approche paramétrique, il faut avoir de bonnes raisons de penser que les temps de survie sont approximativement distribués selon une certaine loi connue plutôt qu’une autre.</li>
+<li>La majorité des distributions reposent sur une hypothèse dite AFT (<strong>Acceleretad Failure Time</strong>). Une autre repose seulement sur l’hypothèse PH (Gompertz), certaines peuvent selon la paramétrisation reposer sur les deux (exponentiel et Weibull).</li>
+</ul>
+<section id="hypothèse-aft-accelerated-failure-time" class="level2">
+<h2 class="anchored" data-anchor-id="hypothèse-aft-accelerated-failure-time">Hypothèse AFT: Accelerated Failure Time</h2>
+<p>L’hypothèse <strong>AFT</strong> signifie que l’effet des covariables est multiplicatif par rapport au temps de survie. Par opposition, les modèles PH décrivent un effet multiplicatif par rapport au risque. <br> Selon les caractérisques des individus, le temps <em>ne s’écoulent pas à la même vitesse</em>, ils ne partagent plus la même métrique temporelle. Remarque: on a souvent des explications de type <em>dilation/contraction</em> du temps, par analogie à la théorie de la relativité.<br>
+<br> Exemple simple: la durée de vie d’un être humain et d’un chien.<br>
+On dit qu’une année de vie d’un être humain équivaut à 7 années de vie d’un chien. C’est typiquement une hypothèse d’AFT.<br>
+<span class="math inline">\(S_h(t) = S_c(7\times t)\)</span>. C’est ce facteur multiplicatif qu’estime un modèle paramétrique de type AFT.</p>
+<p><span class="math display">\[S(t_i | X_1)=  S(\phi t_i | X_0)\]</span></p>
+<p>Remarque: si un modèle s’estime sous hypothèse PH (ex Weibull): <span class="math inline">\(h(t_i | X_1)= -\rho \phi h(t_i | X_0)\)</span></p>
+<ul>
+<li>Avantage: l’interprétation des modèles est directement liée aux fonctions de survie. Pratique après une analyse non paramétrique.</li>
+<li>Inconvénient: ne permet pas l’introduction de variables dynamiques.</li>
+</ul>
+<p><em>Etre humain versus chien</em>: la probabilité qu’un être humain survive 80 ans est égale à la probabilité qu’un chien survive 11 ans (80/7). Le temps s’écoulerait donc plus vite pour le chien que pour l’être humain (du point de vue d’un référentiel extérieur). Ce raisonnement peut s’appliquer aux quantile du temps de survie: le temps de survie médian d’un être humain est 7 fois plus élevé que celui d’un chien. En terme d’interprétation des paramètres estimés, si le temps de survie est plus court le risque est plus élevé.</p>
+</section>
+<section id="principe-de-construction-des-modèles-aft" class="level2">
+<h2 class="anchored" data-anchor-id="principe-de-construction-des-modèles-aft">Principe de construction des modèles AFT</h2>
+<p>Le raisonnement mathématique est ici bien plus complexe. On donnera juste quelques pistes en début de raisonnement. On part d’une expression proche du modèle linéaire (à une transformation logarithmique près de la variable dépendante). En imposant la contrainte <span class="math inline">\(t_i&gt;0\)</span>, en ne posant qu’une seule covariable <span class="math inline">\(X\)</span> de type binaire, et en se situant de nouveau dans une logique de temps continu (pas d’évènement simultané):</p>
+<p><span class="math display">\[log(t_i)= \alpha_0 +  \alpha_1X_i + bu_i\]</span></p>
+<p><span class="math inline">\(b\)</span> est un paramètre d’échelle identique pour toutes les observations et <span class="math inline">\(u_i\)</span> un terme terme d’erreur qui suit une loi de distribution de densité <span class="math inline">\(f(u)\)</span>. La combinaison linéaire définira le paramètre de position. C’est la forme de <span class="math inline">\(f(u)\)</span> qui définie le type de modèle paramétrique.</p>
+<p>On peut écrire: <span class="math inline">\(f(u_i) = f(\frac{log(t_i)- \alpha_0 - \alpha_1X_i}{b})\)</span>.</p>
+<p>Remarque: pour une distibution normale/gaussienne, le paramètre de position est l’espérance et le paramètre d’échelle l’écart-type.</p>
+</section>
+</section>
+<section id="quelques-modèles-paramétriques-usuels" class="level1">
+<h1>Quelques modèles paramétriques usuels</h1>
+<p><strong>Modèle exponentiel et de Weibull</strong><br>
+<br></p>
+<p><strong>Weibull</strong></p>
+<ul>
+<li>Peut estimer un modèle PH ou AFT, d’où sa popularité.</li>
+<li>Distribution monotone des temps d’évènement (toujours croissante/décroissante).</li>
+<li><span class="math inline">\(f(t)=\lambda\alpha t^{\alpha - 1}e^{-\alpha t^\lambda}\)</span> et <span class="math inline">\(h(t)=\lambda\alpha(\lambda t)^{\alpha - 1}\)</span>, <span class="math inline">\(\alpha&gt;0\)</span> et <span class="math inline">\(\lambda&gt;0\)</span>. Si <span class="math inline">\(\lambda&gt;1\)</span> le risque est croissant, décroissant si <span class="math inline">\(\lambda&lt;1\)</span>, et est égal à la loi exponentielle si <span class="math inline">\(\lambda=1\)</span>.</li>
+</ul>
+<p><em>Exponentiel</em></p>
+<ul>
+<li>Processus sans mémoire, utilisé pour étudier par exemple la durée de vie composants électriques ou électroniques.</li>
+<li>La fonction de risque est une constante.</li>
+<li>Cas limite de la loi de Weibull. Un modèle de type exponentiel peut-être de type AFT ou PH.</li>
+<li>Pour contourner la constance du risque dans le temps, on peut estimer un modèle en scindant la durée en plusieurs intervalles. Le risque sera constant à l’intérieur de ces intervalles, il s’agit d’un modèle “exponential piecewise” (exponentiel par morceau).</li>
+</ul>
+<p><br></p>
+<p><strong>Log-logistique</strong></p>
+<ul>
+<li>Estime un modèle de type AFT seulement. Proche du modèle log-normal (plus difficile à estimer).</li>
+<li>Permet une interprétation en terme d’Odds de survie.</li>
+<li>La fontion du risque peut-être “U-shaped” (unimodale croissante puis décroissante).</li>
+</ul>
+<p><br></p>
+<p><strong>Autres lois</strong>: Gompertz (PH seulement), Gamma et Gamma généralisé…..</p>
+<p><strong>Sélection de la loi</strong> On peut sélectionner la loi en comprarant les AIC où les BIC des modèles. Pour le modèle de Weibull, on peut voir s’il ajuste bien les données si la transformation <span class="math inline">\(log(-log(S(t_i)))\)</span> est linéaire par rapport à <span class="math inline">\(log(t_i)\)</span>.</p>
+<p><strong>Exemple (transplantation)</strong></p>
+<p><strong>Comparaison des AIC (sans covariable)</strong><br>
+Weibull: 400.1<br>
+Exponentiel: 461.0<br>
+Gompertz: 409.6<br>
+<em>Log-logistique: 391.8</em></p>
+</section>
+<section id="exemple-avec-le-modèle-de-weibull" class="level1">
+<h1>Exemple avec le modèle de Weibull</h1>
+<p><strong>AFT</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Weibull AFT regression</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>No. of subjects <span class="ot">=</span>          <span class="dv">103</span>                  Number of obs    <span class="ot">=</span>         <span class="dv">103</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>No. of failures <span class="ot">=</span>           <span class="dv">75</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Time at risk    <span class="ot">=</span>        <span class="dv">31938</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                                                LR <span class="fu">chi2</span>(<span class="dv">3</span>)       <span class="ot">=</span>       <span class="fl">18.87</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Log likelihood  <span class="ot">=</span>    <span class="sc">-</span><span class="fl">188.6278</span>                  Prob <span class="sc">&gt;</span> chi2      <span class="ot">=</span>      <span class="fl">0.0003</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>          _t <span class="sc">|</span>      Coef.   Std. Err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% Conf. Interval]</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>     <span class="fl">0.1620</span>     <span class="fl">0.1218</span>     <span class="fl">1.33</span>   <span class="fl">0.184</span>      <span class="sc">-</span><span class="fl">0.0768</span>      <span class="fl">0.4008</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>    <span class="sc">-</span><span class="fl">0.0615</span>     <span class="fl">0.0247</span>    <span class="sc">-</span><span class="fl">2.49</span>   <span class="fl">0.013</span>      <span class="sc">-</span><span class="fl">0.1100</span>     <span class="sc">-</span><span class="fl">0.0130</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>     surgery <span class="sc">|</span>     <span class="fl">1.9703</span>     <span class="fl">0.7794</span>     <span class="fl">2.53</span>   <span class="fl">0.011</span>       <span class="fl">0.4427</span>      <span class="fl">3.4980</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>       _cons <span class="sc">|</span>    <span class="sc">-</span><span class="fl">3.0220</span>     <span class="fl">8.7284</span>    <span class="sc">-</span><span class="fl">0.35</span>   <span class="fl">0.729</span>     <span class="sc">-</span><span class="fl">20.1294</span>     <span class="fl">14.0854</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>       <span class="er">/</span>ln_p <span class="sc">|</span>    <span class="sc">-</span><span class="fl">0.5868</span>     <span class="fl">0.0927</span>    <span class="sc">-</span><span class="fl">6.33</span>   <span class="fl">0.000</span>      <span class="sc">-</span><span class="fl">0.7685</span>     <span class="sc">-</span><span class="fl">0.4051</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>           p <span class="sc">|</span>     <span class="fl">0.5561</span>     <span class="fl">0.0516</span>                        <span class="fl">0.4637</span>      <span class="fl">0.6669</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>         <span class="dv">1</span><span class="sc">/</span>p <span class="sc">|</span>     <span class="fl">1.7983</span>     <span class="fl">0.1667</span>                        <span class="fl">1.4995</span>      <span class="fl">2.1566</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Une journée de survie d’une personne qui n’a pas été opérée d’un pontage correspond environ à 7 jours - <span class="math inline">\(e^{1.9707}\)</span> - de survie d’une personne opérée. Cette remise à l’échelle de la métrique temporelle entre les deux groupes exprime bien le gain en durée de survie médiane pour les personnes opérées, soit des risques journaliers de décès plus faibles (et plus faibles à valeurs constantes, proportionnalité oblige). <br></p>
+<p><strong>PH</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Weibull PH regression</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>No. of subjects <span class="ot">=</span>          <span class="dv">103</span>                  Number of obs    <span class="ot">=</span>         <span class="dv">103</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>No. of failures <span class="ot">=</span>           <span class="dv">75</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>Time at risk    <span class="ot">=</span>        <span class="dv">31938</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                                                LR <span class="fu">chi2</span>(<span class="dv">3</span>)       <span class="ot">=</span>       <span class="fl">18.87</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>Log likelihood  <span class="ot">=</span>    <span class="sc">-</span><span class="fl">188.6278</span>                  Prob <span class="sc">&gt;</span> chi2      <span class="ot">=</span>      <span class="fl">0.0003</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>          _t <span class="sc">|</span>      Coef.   Std. Err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% Conf. Interval]</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>  <span class="sc">-</span>.<span class="dv">0900736</span>   .<span class="dv">0663972</span>    <span class="sc">-</span><span class="fl">1.36</span>   <span class="fl">0.175</span>    <span class="sc">-</span>.<span class="dv">2202097</span>    .<span class="dv">0400626</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>    .<span class="dv">034214</span>   .<span class="dv">0138509</span>     <span class="fl">2.47</span>   <span class="fl">0.014</span>     .<span class="dv">0070667</span>    .<span class="dv">0613613</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>     surgery <span class="sc">|</span>  <span class="sc">-</span><span class="fl">1.095685</span>   .<span class="dv">4341312</span>    <span class="sc">-</span><span class="fl">2.52</span>   <span class="fl">0.012</span>    <span class="sc">-</span><span class="fl">1.946566</span>   <span class="sc">-</span>.<span class="dv">2448033</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>       _cons <span class="sc">|</span>   <span class="fl">1.680511</span>   <span class="fl">4.823645</span>     <span class="fl">0.35</span>   <span class="fl">0.728</span>     <span class="sc">-</span><span class="fl">7.77366</span>    <span class="fl">11.13468</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>       <span class="er">/</span>ln_p <span class="sc">|</span>  <span class="sc">-</span>.<span class="dv">5868247</span>   .<span class="dv">0927049</span>    <span class="sc">-</span><span class="fl">6.33</span>   <span class="fl">0.000</span>     <span class="sc">-</span>.<span class="dv">768523</span>   <span class="sc">-</span>.<span class="dv">4051264</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>           p <span class="sc">|</span>   .<span class="dv">5560902</span>   .<span class="dv">0515523</span>                      .<span class="dv">4636974</span>    .<span class="dv">6668925</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>         <span class="dv">1</span><span class="sc">/</span>p <span class="sc">|</span>   <span class="fl">1.798269</span>   .<span class="dv">1667084</span>                      <span class="fl">1.499492</span>    <span class="fl">2.156579</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a><span class="sc">--------------------------------------------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Remarque: <span class="math inline">\(b_{ph} = -\rho \times b_{aft}\)</span>. Ici <span class="math inline">\(-0.556 \times (1.97) = -1.096\)</span></p>
+<p><strong>Modèle de Cox précédemment estimé</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Cox regression <span class="sc">--</span> Breslow method <span class="cf">for</span> ties</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>No. of subjects <span class="ot">=</span>          <span class="dv">103</span>                  Number of obs    <span class="ot">=</span>         <span class="dv">103</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>No. of failures <span class="ot">=</span>           <span class="dv">75</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>Time at risk    <span class="ot">=</span>        <span class="dv">31938</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>                                                LR <span class="fu">chi2</span>(<span class="dv">3</span>)       <span class="ot">=</span>       <span class="fl">17.56</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>Log likelihood  <span class="ot">=</span>   <span class="sc">-</span><span class="fl">289.54474</span>                  Prob <span class="sc">&gt;</span> chi2      <span class="ot">=</span>      <span class="fl">0.0005</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>          _t <span class="sc">|</span>      Coef.   Std. Err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% Conf. Interval]</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>  <span class="sc">-</span>.<span class="dv">1195075</span>   .<span class="dv">0673691</span>    <span class="sc">-</span><span class="fl">1.77</span>   <span class="fl">0.076</span>    <span class="sc">-</span>.<span class="dv">2515486</span>    .<span class="dv">0125336</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>   .<span class="dv">0295539</span>   .<span class="dv">0135341</span>     <span class="fl">2.18</span>   <span class="fl">0.029</span>     .<span class="dv">0030275</span>    .<span class="dv">0560803</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>     surgery <span class="sc">|</span>   <span class="sc">-</span>.<span class="dv">984869</span>   .<span class="dv">4362881</span>    <span class="sc">-</span><span class="fl">2.26</span>   <span class="fl">0.024</span>    <span class="sc">-</span><span class="fl">1.839978</span>   <span class="sc">-</span>.<span class="dv">1297601</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Attention: on ne peux pas comparer la qualité d’un modèle paramétrique à celle d’un modèle de Cox par des critères type AIC ou BIC. Les deux méthodes d’estimation diffèrent.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./dynamiques.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Variables dynamiques</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./concurrent.html" class="pagination-link">
+        <span class="nav-page-text">Risques concurrents</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Marc Thévenin - Ined-Sms - Août 2022</div>
+  </div>
+</footer>
+
+
+
+</body></html>

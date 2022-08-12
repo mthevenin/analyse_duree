@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Les Données</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./Theorie.html" rel="next">
+<link href="./introduction.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"><strong>ANALYSE DES DUREES 2022</strong></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mthevenin/analyse_duree"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+              </div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Les Données</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true"><strong>Données et théorie</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Donnees.html" class="sidebar-item-text sidebar-link active">Les Données</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Theorie.html" class="sidebar-item-text sidebar-link">La théorie</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false"><strong>Méthodes non paramétriques</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fsurvie.html" class="sidebar-item-text sidebar-link">Les fonctions de survie</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./comp_fsurvie.html" class="sidebar-item-text sidebar-link">Tests de comparaison</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false"><strong>Modèles à risques proportionnels</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_mod.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cox.html" class="sidebar-item-text sidebar-link">Modèle de Cox</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./discret.html" class="sidebar-item-text sidebar-link">Modèle temps discret</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dynamiques.html" class="sidebar-item-text sidebar-link">Variables dynamiques</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false"><strong>Compléments</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parametrique.html" class="sidebar-item-text sidebar-link">Modèles paramétriques</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./concurrent.html" class="sidebar-item-text sidebar-link">Risques concurrents</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./frailty.html" class="sidebar-item-text sidebar-link">Fragilité et immunité</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false"><strong>Programmation</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R.html" class="sidebar-item-text sidebar-link">R</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Stata.html" class="sidebar-item-text sidebar-link">Stata</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Sas.html" class="sidebar-item-text sidebar-link">SAS</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Python.html" class="sidebar-item-text sidebar-link">PYTHON</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Plan</h2>
+   
+  <ul>
+  <li><a href="#données-prospectives-et-rétrospectives" id="toc-données-prospectives-et-rétrospectives" class="nav-link active" data-scroll-target="#données-prospectives-et-rétrospectives"><strong>Données prospectives et rétrospectives</strong></a>
+  <ul class="collapse">
+  <li><a href="#les-données-prospectives" id="toc-les-données-prospectives" class="nav-link" data-scroll-target="#les-données-prospectives"><strong>Les données prospectives</strong></a></li>
+  <li><a href="#les-données-rétrospectives" id="toc-les-données-rétrospectives" class="nav-link" data-scroll-target="#les-données-rétrospectives"><strong>Les données rétrospectives</strong></a></li>
+  </ul></li>
+  <li><a href="#grille-ageven" id="toc-grille-ageven" class="nav-link" data-scroll-target="#grille-ageven"><strong>Grille AGEVEN</strong></a></li>
+  <li><a href="#enregistrement-des-données" id="toc-enregistrement-des-données" class="nav-link" data-scroll-target="#enregistrement-des-données"><strong>Enregistrement des données</strong></a>
+  <ul class="collapse">
+  <li><a href="#large-format-individu" id="toc-large-format-individu" class="nav-link" data-scroll-target="#large-format-individu"><strong>Large [format individu]</strong></a></li>
+  <li><a href="#semi-long-format-individu-évènements" id="toc-semi-long-format-individu-évènements" class="nav-link" data-scroll-target="#semi-long-format-individu-évènements"><strong>Semi-long [format individu-évènements]</strong></a></li>
+  <li><a href="#long-format-individu-périodes" id="toc-long-format-individu-périodes" class="nav-link" data-scroll-target="#long-format-individu-périodes"><strong>Long [format individu-périodes]</strong></a></li>
+  </ul></li>
+  <li><a href="#exemples-de-mise-à-disposition" id="toc-exemples-de-mise-à-disposition" class="nav-link" data-scroll-target="#exemples-de-mise-à-disposition"><strong>Exemples de mise à disposition</strong></a>
+  <ul class="collapse">
+  <li><a href="#enquête-biographie-et-entourage-ined" id="toc-enquête-biographie-et-entourage-ined" class="nav-link" data-scroll-target="#enquête-biographie-et-entourage-ined"><strong>Enquête biographie et entourage (Ined)</strong></a></li>
+  <li><a href="#enquête-mafe-ined" id="toc-enquête-mafe-ined" class="nav-link" data-scroll-target="#enquête-mafe-ined"><strong>Enquête MAFE (Ined)</strong></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Les Données</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>On distingue deux types de données : les données prospectives et rétrospectives:</p>
+<p><br></p>
+<section id="données-prospectives-et-rétrospectives" class="level1">
+<h1><strong>Données prospectives et rétrospectives</strong></h1>
+<p><br></p>
+<section id="les-données-prospectives" class="level2">
+<h2 class="anchored" data-anchor-id="les-données-prospectives"><strong>Les données prospectives</strong></h2>
+<ul>
+<li>Individus suivis à des dates successives.</li>
+<li>Instrument de mesure identique à chaque vague (si possible).</li>
+<li>Avantages: qualité des données (moins de biais de mémoire).<br>
+</li>
+<li>Inconvénients: coût important, délais pour les exploiter dans une analyse, mêmes hypothèses entre deux passages pas forcément respectées, problèmes d’attrition, problèmes liés aux âges d’inclusion.</li>
+</ul>
+<p>A noter l’exploitation croissante des données administratives qui peuvent regorger d’informations biographiques. Déjà disponibles, le problème du coût de collecte est contourné. Ce type de données comprend par exemple les informations issues des fichiers des Ressources Humaines des entreprises, qui sont par exemples actuellement exploitées à l’Ined, par exemple dans le cadre du projet « worklife » (<a href="https://worklife.site.ined.fr/" class="uri">https://worklife.site.ined.fr/</a>). Elles engendrent en revanche des questionnements techniques liésà l’inférence ((on ne travaille directement pas sur des échantillons).</p>
+<p><br></p>
+</section>
+<section id="les-données-rétrospectives" class="level2">
+<h2 class="anchored" data-anchor-id="les-données-rétrospectives"><strong>Les données rétrospectives</strong></h2>
+<ul>
+<li>Individus interrogés une seule fois.</li>
+<li>Recueil de biographies thématiques depuis une origine jusqu’au moment de l’enquête.</li>
+<li>Recueil d’informations complémentaires à la date de l’enquête (âge, sexe, csp au moment de l’enquête et/ou csp représentative).</li>
+<li>Avantages: Information longitudinale immédiatement disponible, “faible” coût.</li>
+<li>Inconvénients Questionnaire long, informations datées qui font appel à la mémoire de l’enquêté.e. A de rares exceptions (enfant, mariage), il est difficile d’aller chercher des datations trop fines avec une retrospectivité assez longue.</li>
+</ul>
+<p>Les deux types de recueil peuvent être mixés avec des enquêtes à passages répétés comprenant des informations retrospectives entre 2 vagues (Exemple: la cohorte Elfe de l’Ined-Inserm ou la Millenium-Cohort-Study en Grande Bretagne).</p>
+<p><br></p>
+</section>
+</section>
+<section id="grille-ageven" class="level1">
+<h1><strong>Grille AGEVEN</strong></h1>
+<p>Pour recueillir des informations biographiques retrospectives, on utilise généralement la méthode des grilles AGEVEN.<br>
+Il s’agit d’une grille âge-évènement, de type chronologique, avec des repères temporels en ligne (âge, année). En colonne, sont complétés de manière progressive et relative, les évènements relatifs à des domaines, par exemple la biographie professionnelle, familiale, résidentielle…</p>
+<p><br></p>
+<p><em>Références</em>:</p>
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Antoine P., X. Bry and P.D. Diouf, 1987 “<strong>La fiche Ageven : un outil pour la collecte des données rétrospectives</strong>”, Statistiques Canada 13(2).</li>
+<li>Vivier G, “<strong>Comment collecter des biographies ? De la fiche Ageven aux grilles biographiques, Principes de collecte et Innovations récentes</strong>”, Acte des colloques de l’AIDELF, 2006.</li>
+<li>GRAB, 1999, “<strong>Biographies d’enquêtes : bilan de 14 collectes biographiques</strong>”, Paris, INED.</li>
+</ul>
+<p>Exemple grille Ageven page 121: &lt;http://retro.erudit.org/livre/aidelf/2006/001404co.pdf&lt;</p>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="enregistrement-des-données" class="level1">
+<h1><strong>Enregistrement des données</strong></h1>
+<p>La question du format des fichiers biographiques mis à disposition n’est pas neutre, en particulier au niveau des manipulations pour la créer le fichier d’analyse, opération qui pourra s’avérer particulièrement chronophage et complexe si plusieurs modules doivent être appariés. On distingue trois formats d’enregistrement.</p>
+<p><br></p>
+<section id="large-format-individu" class="level2">
+<h2 class="anchored" data-anchor-id="large-format-individu"><strong>Large [format individu]</strong></h2>
+<p>Une ligne par individu, qui renseigne sur une même ligne tous les évènements liés à un domaine : les datations et les caractéristiques des évènements.</p>
+<p><em>Exemple</em>: domaine : unions - échelle temporelle: année - fin de l’observation en 1986:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>id</th>
+<th>debut1</th>
+<th>fin1</th>
+<th>cause1</th>
+<th>début2</th>
+<th>fin2</th>
+<th>cause2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>1979</td>
+<td>1982</td>
+<td>décès conjoint</td>
+<td>1985</td>
+<td>.</td>
+<td>.</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>1983</td>
+<td>1984</td>
+<td>Séparation</td>
+<td>.</td>
+<td>.</td>
+<td>.</td>
+</tr>
+</tbody>
+</table>
+<p>Inconvénients: peut générer beaucoup de vecteurs colonnes avec de nombreuses valeurs manquantes. Le nombre de colonnes va dépendre du nombre maximum d’évènements. Si ce nombre concerne un seul individu, on va multiplier le nombre de colonnes pour un niveau d’information très limité. Situation classique, le nombre d’enfants, où les naissances de rang élevé deviennent de plus en plus rares.</p>
+<p><br></p>
+</section>
+<section id="semi-long-format-individu-évènements" class="level2">
+<h2 class="anchored" data-anchor-id="semi-long-format-individu-évènements"><strong>Semi-long [format individu-évènements]</strong></h2>
+<p>C’est le format le plus courant de mise à disposition des enquêtes biographiques. Si l’évènement est de type continu, par exemple le lieu de résidence, la date de fin de la séquence correspond à la date de début de la séquence suivante. Les dates de fin ne sont pas forcément renseignées sur une ligne pour des trajectoires continues, l’information peut être donnée sur la ligne suivante avec la date de début.<br>
+Pour la séquence en cours au moment de l’enquête, la date de fin est souvent une valeur manquante, une fin de séquence pouvant se produire juste avant l’enquête au cours d’une même année. Il est également possible d’avoir une information qui ne s’est pas encore produite au moment de l’enquête, mais qui aura lieu peu de temps après (personne enceinte, donc une naissance probable la même année).</p>
+<p>Exemple précédent (trajectoires discontinues):</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>id</th>
+<th>debut</th>
+<th>fin</th>
+<th>cause</th>
+<th>Numero séquence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>1979</td>
+<td>1982</td>
+<td>décès conjoint</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>A</td>
+<td>1985</td>
+<td>.</td>
+<td>.</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>B</td>
+<td>1983</td>
+<td>1984</td>
+<td>Séparation</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</section>
+<section id="long-format-individu-périodes" class="level2">
+<h2 class="anchored" data-anchor-id="long-format-individu-périodes"><strong>Long [format individu-périodes]</strong></h2>
+<p>Typique des recueils prospectifs. Ils engendrent des lignes sans information supplémentaire par rapport à la ligne précédente.</p>
+<p>Exemple précédent:</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>id</th>
+<th>Année</th>
+<th>cause</th>
+<th>Numero séquence</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>A</td>
+<td>1979</td>
+<td>.</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>A</td>
+<td>1980</td>
+<td>.</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>A</td>
+<td>1981</td>
+<td>.</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>A</td>
+<td>1982</td>
+<td>Décès conjoint</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>A</td>
+<td>1985</td>
+<td>.</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>A</td>
+<td>1986</td>
+<td>.</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>B</td>
+<td>1983</td>
+<td>.</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>B</td>
+<td>1984</td>
+<td>Séparation</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Ici les trajectoires ne sont pas continues. Une forme continue présenterait toute la trajectoire, avec l’ajout d’un statut du type être en couple ou non. Pour ID=A, en 1983 et 1984, deux lignes « pas couple » (cohabitant ou non) pourraient être insérées avec au total 3 séquences.<br>
+<br> Remarque : pour certaines analyses (par exemple analyse en temps discret), on doit transformer passer d’un format large ou semi-long à un format long, sur les durées observées ou sur des intervalles de durées construits.</p>
+<p><br></p>
+</section>
+</section>
+<section id="exemples-de-mise-à-disposition" class="level1">
+<h1><strong>Exemples de mise à disposition</strong></h1>
+<p>Deux enquêtes biographiques de type rétrospectives produite par l’Ined, avec un fichier qui fournit des informations générales sur les individus (une ligne par individu), et une série de modules biographiques en format individus-évènements.</p>
+<p><br></p>
+<section id="enquête-biographie-et-entourage-ined" class="level2">
+<h2 class="anchored" data-anchor-id="enquête-biographie-et-entourage-ined"><strong>Enquête biographie et entourage (Ined)</strong></h2>
+<p><a href="https://grab.site.ined.fr/fr/enquetes/france/biographie_entourage/" class="uri">https://grab.site.ined.fr/fr/enquetes/france/biographie_entourage/</a></p>
+<p><em>Base sur les caractéristiques individuelles</em></p>
+<p><img src="images/Image1.png" class="img-fluid"></p>
+<p><em>Module biographique sur le logement et les lieux de résidence</em> <img src="images/Image2.png" class="img-fluid"></p>
+<p><br></p>
+</section>
+<section id="enquête-mafe-ined" class="level2">
+<h2 class="anchored" data-anchor-id="enquête-mafe-ined"><strong>Enquête MAFE (Ined)</strong></h2>
+<p><a href="https://mafeproject.site.ined.fr/" class="uri">https://mafeproject.site.ined.fr/</a></p>
+<p><em>Base sur les caractéristiques individuelles</em></p>
+<p><img src="images/Image3.png" class="img-fluid"></p>
+<p><em>Module biographique sur les lieux de résidence</em></p>
+<p><img src="images/Image4.png" class="img-fluid"></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } 
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./introduction.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./Theorie.html" class="pagination-link">
+        <span class="nav-page-text">La théorie</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Marc Thévenin - Ined-Sms - Août 2022</div>
+  </div>
+</footer>
+
+
+
+</body></html>
