@@ -1,0 +1,626 @@
+---
+title: "R"
+
+format:
+  html:
+    #highlight-style: zenburn
+    code-block-bg: true
+    code-block-border-left: "#31BAE9"
+   
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, render = knitr::normal_print)
+library(knitr)
+library (shiny)
+library (rsconnect)
+library(haven)
+library(pander)
+library(memisc)
+```
+
+
+# **Packages utilisés pour l'analyse**
+
+* *Non Paramétrique*: ```survival```, ```discSurv```, ```survRM2```
+* *Semi paramétrique, temps discret*: ```survival```, fonction ```uncount``` (package ```tydir```) ,  fonction ```glm```, fonction ```quantcut``` (package ```gtools```)
+* *Paramétrique, Parmar Royston* (pour info, non traité): ```survival``` ```flexsurv```
+* *Risques concurrents*: ```cmprsk```  
+* *Modèle cure (npour info, non traité)*: modèles mixtes ```smcure```, modèles non mixtes ```flexsurv```
+
+<br>
+**Autres**: `survminer`, `jtools`,  `gtsummary` (+`RecordLinkage`) pour améliorer certains outputs (graphiques et résultats de régression).     
+
+## **Installation**
+
+Les dernières versions de certains packages peuvent être installées via Github (ex: survminer). Pour les récupérer, passer par le package ```devtools```.  
+
+
+```{r, message=FALSE, warning=FALSE}
+#install.packages("survival")
+#install.packages("survminer")
+#install.packages("flexsurv")
+#install.packages("survRM2")
+#install.packages("tidyr")
+#install.packages("gtools")
+#install.packages("jtools")
+#install.packages("miceadds")
+#install.packages("RecordLinkage")
+#install.packages("cmprsk")
+#install.packages("tibble")
+#install.packages("stringr")
+#install.packages("gtsummary")
+library(survival)
+library(survminer)
+library(flexsurv)
+library(survRM2)
+library(gtools)
+library(tidyr)
+library(jtools)
+library(RecordLinkage)
+library(cmprsk)
+library(tibble)
+library(stringr)
+```
+
+<br>
+
+# **Survival v2 versus v3**
+
+**MAJ MAI 2022**  
+
+<br>
+Se reporter à l'index ou à la partie sur les risques proportionnels.   
+
+Pour avoir des résultats cohérents avec les autres applications, j'ai conservé la version 2 de la librairie `survival`. J'ai donné une alternative au test avec une ancienne méthode, consistant à faire une régression linéaire entre les residus standardisés de Schoenfeld et une fonction de la durée, à ce jour limité à $f(t)=t$. Le code n'est pas trop compliqué, manque juste la récupération des noms des variables. Ici ce n'est pas trop grave car il y a seulement 3 variables pour autant de degrés de liberté, mais cela risque de devenir un peu plus lourd pour un modèle plus riche.  
+
+Au cas où je donne les instructions pour installer la dernière mise à jour de la version 2 de survival (penser à désinstaller la v3 si nécessaire). La dernière version de **`Rtools`** doit être installée.
+
+```{r eval=FALSE}
+# installation survival 2.44-1 (30 mars 2019)
+
+require(remotes)
+install_version("survival", version = "2.44-1", repos = "http://cran.us.r-project.org")
+```
+
+::: callout-note
+**Maj juin 2022**: pour le problème du test de Grambsch-Therneau, j’ai récupéré le programme de la version 2 de survival, renommé la fonction cox.zphold. Une fois chargé avec la fonction source(…path/cox.zphold.R), on peut l’exécuter directement. 
+:::
+
+<br>
+
+
+# **Analyse Non paramétrique**
+
+Chargement de la base transplantation
+
+```{R}
+library(readr)
+trans <- read_csv("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv")
+```
+
+<br>
+
+### **Méthode actuarielle**
+
+La fonction disponible du paquet `discsurv`, *`lifetable`*,  ne permet pas de définir des intervalles, contrairement à Sas ou Stata. Les estimateurs sont systématiquement calculés sur des largeurs d'intervalle égales à 1, et il ni a pas de calcul des durées sur les différents quantiles de la courbe de survie. Elle ne sera donc pas présentée.
+
+<br>
+
+### **Méthode Kaplan-Meier**
+
+Le package survival est le principal outil d'analyse des durée. Le package survminer permet d'améliorer la présentation des graphiques. 
+<br>
+
+**Estimation des fonctions de survie**  
+<br>
+Fonction ```survfit```  
+Syntaxe
+```{}
+fit <- survfit(Surv(time, status) ~ x, data = base)
+```
+
+On peut renseigner les variables permettant de calculer la durée et non la variable de durée elle-même.
+
+```{}
+fit <- survfit(Surv(variable start, variable end, status) ~ x, data = nom_base)
+```
+
+Sans comparaison de groupes:  
+
+```{R}
+fit <- survfit(Surv(stime, died) ~ 1, data = trans)
+fit
+summary(fit)
+plot(fit)
+```
+
+Le premier output `fit` permet d'obtenir la durée médiane, ici égale à 100 ($S(100)=0.494$). Le second , avec la fonction **`summary`** permet d'obtenir une table des estimateurs. La fonction de survie peut être tracée avec la fonction **`plot`** (en pointillés les intervalles de confiance).  
+
+<br>
+On peut obtenir des graphes de  meilleurs qualité avec la librairie **`survminer`**.  
+Avec la fonction **`ggsurvplot`**
+
+```{R}
+ggsurvplot(fit, conf.int = TRUE)
+```
+
+On peut ajouter la population encore soumise au risque à plusieurs points d'observation
+
+```{R}
+ggsurvplot(fit, conf.int = TRUE, risk.table = TRUE)
+```
+
+
+**Comparaison des fonctions de survie** 
+
+On va comparer les fonctions de survie pour la variable *surgery*.  
+
+```{R}
+fit <- survfit(Surv(stime, died) ~ surgery, data = trans)
+fit
+ggsurvplot(fit, conf.int = TRUE, risk.table = TRUE)
+```
+
+
+**Tests du log-rank**
+
+On utilise la fonction **`survdiff`**, avec comme variante le test de Peto-Peto (`rho=1`).  
+La syntaxe est quasiment identique à la fonction `survdiff`.  
+
+```{R}
+survdiff(Surv(stime, died) ~ surgery, rho=1, data = trans)
+```
+
+Ici la variable est binaire. Si on veux tester deux à deux les niveaux d'une variable catégorielle à plus de deux modalités, on utilise la fonction **`pairwise_survdiff`** de `survminer` (syntaxe identique que ```survdiff```).  
+
+**Comparaison des RMST**
+
+La fonction **`rmst2`** du package **`survRM2`** permet de comparer les RMST entre 2 groupes (et pas plus). La strate
+pour les comparaisons doit être renommée *arm*. La fonction, issue d'une commande de Stata, n'est pas très souple.
+
+```{R}
+trans$arm=trans$surgery
+a=rmst2(trans$stime, trans$died, trans$arm, tau=NULL)
+print(a)
+plot(a)
+```
+
+<br>
+
+# **Modèle de Cox**
+
+Ici tout est estimé avec des fonctions du package ```survival```:  
+
+* Estimation du modèle: ```coxph```.
+* Test de Grambsch-Therneau: ```cox.zph```.
+* Introduction d'une variable dynamique: ```survsplit```.
+
+## **Estimation du modèle**
+
+Par défaut, R utilise la correction d'Efron pour les évènements simultanés. Il est préférable de ne pas la modifier.
+
+Syntaxe:
+
+```
+coxph(Surv(time, status) ~ x1 + x2 + ....., data=base, ties="nom_correction"))
+```
+
+
+```{R}
+coxfit = coxph(formula = Surv(stime, died) ~ year + age + surgery, data = trans)
+summary(coxfit)
+```
+
+La table des résultats reporte le logarithme des Risques Ratios (coef) ainsi que les RR (exp(coef)). Il est intéressant de regarder la valeur de concordance (Harrel's) qui donne des indications sur la qualité de l'ajustement (proche de l'AUC/ROC).  
+
+On peut représenter sous forme graphique les résultats avec la fonction **`ggforest`** de `survminer`
+
+```{R}
+ggforest(coxfit)
+```
+
+## **Hypothèse PH**
+
+::: callout-warning   
+Attention aux résultats entre la v2 et la v3 de survival. Les deux sont présentés, avec un test reposant sur une régression linéaire (OLS même si GLS préférable) entre les résidus de Schoenfeld et une fonction de la durée (ici f(t)=t), et fait rapidement le 17 mai. Pour illustrer la question les résultats du test de Grambsch-Therneau sont donnés pour les deux versions.
+:::
+
+
+**Résidus de Schoenfeld**  
+On utilise la fonction **`cox.zph`** pour le test de *Grambsch-Therneau*.  
+Le test peut utiliser plusieurs fonctions de la durée. Par défaut la fonction utilise $1-KM$, soit le complémentaire de l'estimateur de Kaplan-Meier (option `transform="km"`).
+
+
+***Test Grambsch-Therneau***
+
+**<span style="color:red">Résultat du test avec la v2 de survival</span>**
+
+Avec `transform="km"`
+```{R}
+cox.zph(coxfit)
+```
+
+Avec `transform="identity"` ($f(t)=t$) [remarque: solution de Stata par défaut].
+```{R}
+cox.zph(coxfit, transform="identity")
+```
+
+
+**<span style="color:red">Résultat du test avec la v3 de survival</span>**
+
+```{}
+ cox.zph(coxfit)
+        chisq df     p
+year    3.309  1 0.069
+age     0.922  1 0.337
+surgery 5.494  1 0.019
+GLOBAL  8.581  3 0.035
+
+
+cox.zph(coxfit, transform="identity")
+        chisq df     p
+year     4.54  1 0.033
+age      1.71  1 0.191
+surgery  4.92  1 0.027
+GLOBAL   9.47  3 0.02
+
+```
+
+La différence est flagrante, en particulier pour la variable *year*.  
+<br>
+Remarque: avec la v3, quelques options ont été ajoutées tel que *`terms`* qui permet pour une variable catégorielle à plus de deux modalités de choisir entre un sous test multiple sur la variable (k modalités => k-1 degré de liberté) et une série de tests à 1 degré de liberté sur chaque modalité (k-1 tests). De mon point de vue préférer la seconde solution avec **`terms=FALSE`**.
+
+
+
+**MAJ JUIN 2022 : cox.zphold**
+
+::: callout-warning   
+<span style="color:red">
+J’ai récupéré la fonction de la version précédente de survival (identique Sas, Stata, Python) et renommé cox.zphold. Elle est téléchargeable à cette adresse :(https://github.com/mthevenin/analyse_duree/tree/main/cox.zphold).  
+
+
+- Une fois enregistré, charger dans le programme d’analyse la fonction
+- Après avoir estimé le modèle de Cox, exécuter la fonction **`cox.zphold()`**
+:::  
+  
+```{r}
+source("D:/D/Marc/SMS/FORMATIONS/2022/Durée2/a distribuer/cox.zphold.R")
+
+coxfit = coxph(formula = Surv(stime, died) ~ year + age + surgery,   data = trans)
+```
+
+```{r}
+cox.zphold(coxfit)
+cox.zphold(coxfit, transform="identity")
+```
+
+
+***Régression linéaire entre les résidus standardisés et la durée***  
+
+* Seulement eu le temps pour $ft(t)=t$.
+* Pas trop pénalisant pour cette application, mais trouver un moyen de récupérer les noms des variables du modèle.
+* Testé parallèlement avec Stata: ok.
+
+Etapes:  
+
+- Récupérer les résidus standardisés de Schoenfeld avec la fonction **`resid()`**.
+- Transformer la matrice en base, basculer les valeurs des rangs en variable (librairie **`tibble`**).
+- Transformer cette dernière variable en variable de durée (librairie **`stringr`**: extraction de la durée).
+- Exécuter une régression linéaire sur chaque variable: $ residu_{x_i}= a_0 + b\times t$  [ici une OLS, mais GLS préférable].
+
+```{r}
+# Récupération des résidus
+resid= resid(coxfit, type="scaledsch")
+resid = data.frame(resid)
+
+library(tibble)
+library(stringr)
+
+# Récupération des rangs en variable pour générer la durée
+
+resid= rownames_to_column(resid, var = "Z")
+
+# Création de la variable de durée
+resid$t = str_sub(resid$Z, 2, )
+resid$t=as.numeric(resid$t)
+resid$t=round(resid$t, digits=0)
+
+# ols entre les résidus et la durée
+year    = summary(lm(X1~t, data=resid))
+age     = summary(lm(X2~t, data=resid))
+surgery = summary(lm(X3~t, data=resid))
+
+year$coefficients[,4] 
+age$coefficients[,4] 
+surgery$coefficients[,4] 
+```
+
+
+**Introduction d'une intéraction**
+
+Lorsque la covariable n'est pas continue, elle doit être transformée en indicatrice. Vérifier que les résultats du modèle sont bien identiques avec le modèle estimé précédemment (ne pas oublier d'omettre le niveau en référence).  
+Ici la variable surgery est déjà sous forme d'indicatrice (0,1).  
+La variable d'intéraction est **`tt(nom-variable)`**, la fonction de la durée (ici forme linéaire simple) est indiquée en option de la fonction: **`tt = function(x, t, ...) x*t`**.
+
+```{R}
+coxfit2 = coxph(formula = Surv(stime, died) ~ year + age + surgery + tt(surgery), data = trans, tt = function(x, t, ...) x*t)
+summary(coxfit2)
+```
+
+**Rappel**: le paramètre estimé pour **`tt(surgery)`** ne reporte pas un Risques Ratio, mais un rapport de Risques Ratio.  
+
+<br>
+
+## **Variable dynamique (binaire)**
+
+La dimension dynamique est le fait d'avoir été opéré pour une greffe du coeur.  
+<br>
+
+* **Etape 1**: créer un vecteur donnant les durées aux temps d'évènement.
+* **Etape 2**: appliquer ce vecteurs de points de coupure à la fonction ```survsplit```.
+* **Etape 3**: modifier la variable transplant (ou créer une nouvelle) à l'aide de la variable **wait** qui prend la valeur 1 à partir du jour de la greffe, 0 avant.
+
+*Etape 1*
+Création de l'objet cut (vecteur)
+```{R}
+cut= unique(trans$stime[trans$died == 1])
+```
+
+*Etape 2*
+```{R}
+tvc = survSplit(data = trans, cut = cut, end = "stime", start = "stime0", event = "died")
+```
+
+Remarque: pour estimer le modèle de Cox de départ avec cette base longue.
+```{R}
+coxph(formula = Surv(stime0, stime, died) ~ year + age + surgery, data = tvc)
+```
+
+*Etape 3*
+```{R}
+tvc$tvc=ifelse(tvc$transplant==1 & tvc$wait<=tvc$stime,1,0)
+```
+
+**Estimation du modèle**  
+En format long, on doit préciser dans la formule l'intervalle de durée avec les variables stime0 (début) et stime(fin) 
+```{R}
+tvcfit = coxph(formula = Surv(stime0, stime, died) ~ year + age + surgery + tvc, data = tvc)
+summary(tvcfit)
+```
+
+
+```{R}
+ggforest(tvcfit)
+```
+
+<br>
+
+# **Analyse en temps discret**
+
+Pour la durée, on va utiliser la variable mois (en fait regroupement sur 30 jours).  
+La fonction ```uncount``` du package ```tidy``` permettra de splitter la base au temps d'observation.  
+
+```{R, message=FALSE}
+library("tidyr")
+```
+
+```{R}
+dt = uncount(trans,mois)
+dt = dt[order(dt$id),]
+kable(dt[1:11, ],)
+```
+
+
+La variable mois a été supprimée, on va générer une variable type compteur pour mesurer la durée à chaque point d'observation. On va également recréer la variable (renommée T).    
+
+```{R}
+dt$x=1
+dt$t = ave(dt$x,dt$id, FUN=cumsum)
+dt$T = ave(dt$x,dt$id, FUN=sum)
+kable(dt[1:11, ],)
+```
+
+*Remarque : j’utilise ici le code standard de R, on peut faire la même chose avec dplyr de manière plus rapide (mise à jour à prévoir)*.   
+<br>
+Si un individu est décédé, died=1 est reporté sur toute les lignes (idem qu'avec la variable dynamique). On va modifier la variable tel que *died=0 si t<T$*.
+
+```{R}
+dt$died[dt$t<dt$T]=0
+kable(dt[1:11, ],)
+```
+
+<br>
+
+## **Durée continue**
+
+Avec un effet quadratique d'ordre 2.  
+
+```{R}
+dt$t2=dt$t^2
+dtfit = glm(died ~ t + t2 + year + age + surgery, data=dt, family="binomial")
+summ(dtfit)
+```
+
+Remarque sur la présentation: la fonction ```summ``` est intégrée au package ```jtools```. Elle ne fonctionne qu'avec le package ```Recordlinkage``` qui doit être installé et chargé.
+
+<br>
+
+## **Durée discrète**
+
+On va créer une variable de type dicrète regroupant la variable *t* en quartile (pour l'exemple seulement, tous types de regroupement est envisageable).  
+On va utiliser la fonction `quantcut` du package `gtools`.
+
+
+```{R, message=FALSE}
+dt$ct4 <- quantcut(dt$t)
+table(dt$ct4) 
+```
+
+On va générer un compteur et un total d'observations sur la strate regroupant *id* et *ct4*.
+
+```{r}
+dt$n = ave(dt$x,dt$id, dt$ct4, FUN=cumsum)
+dt$N = ave(dt$x,dt$id, dt$ct4, FUN=sum)
+```
+
+On conserve la dernière observation dans la strate.  
+
+```{r}
+dt2 = subset(dt, n==N)
+```
+
+
+**Estimation du modèle**
+
+```{r}
+fit = glm(died ~ ct4 + year + age + surgery, data=dt2, family=binomial)
+summ(fit)
+```
+
+<br>
+
+# **Modèles pusuels**
+
+On utilise la fonction ```survreg``` du package ```survival```
+
+## **Modèle de Weibull**
+
+**De type AFT**  
+```{R, message=FALSE}
+weibull = survreg(formula = Surv(stime, died) ~ year + age + surgery, data = trans, dist="weibull")
+summary(weibull)
+```
+
+**De type PH**  
+<br>
+La paramétrisation PH n'est pas possible avec la fonction ```survreg```.  
+Il faut utiliser le package ```flexsurv```, qui permet également d'estimer les modèles paramétriques disponibles avec ```survival```.  
+
+```{R, message=FALSE}
+library(flexsurv)
+```
+
+Pour estimer le modèle de Weibull de type PH, on utilise en option ```dist="weibullPH"```.  
+
+```{R, message=FALSE}
+flexsurvreg(formula = Surv(stime, died) ~ year + age + surgery, data = trans, dist="weibullPH")
+```
+
+<br>
+
+# **Risques concurrents**
+
+Package ```cmprsk``` pour l'analyse paramétrique et le modèle de Fine-Gray.  
+
+Package cmprsk pour l’analyse non paramétrique et le modèle de Fine-Gray.
+La variable de censure/évènement, *compet*, correspond à la variable died avec une modalité supplémentaire simulée. On suppose l’existence d’une cause supplémentaire au décès autre qu’une malformation cardiaque et non strictement indépendante de cell-ci.
+
+
+```{R, message=FALSE}
+compet <- read_csv("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv")
+# variable compet
+table(compet$compet) 
+# variable died
+table(compet$died) 
+```
+
+
+## **Incidences cumulées**
+
+On utilise la fonction ```cuminc``` du package ```cmprsk```.  
+
+*Pas de comparaison*
+
+```{R, message=FALSE}
+ic = cuminc(compet$stime, compet$compet)
+ic 
+plot(ic)
+```
+
+Avec survminer
+
+```{R, message=FALSE}
+ggcompetingrisks(fit = ic)
+```
+
+*Comparaison*
+
+Le test de Gray est automatiquement exécuté.
+
+```{R, message=FALSE}
+ic = cuminc(compet$stime, compet$compet, group=compet$surgery, rho=1)
+ic 
+plot(ic)
+```
+
+Avec survminer. Pour avoir un seul graphique pour toutes les courbes ajouter l'option **`multiple_panels = F`**
+
+```{R, message=FALSE}
+ggcompetingrisks(fit = ic)
+
+ggcompetingrisks(fit = ic, multiple_panels = F)
+```
+
+
+<br>
+
+## **Modèles**
+
+### ** Fine-Gray**
+
+Attention à l'interprétation des "risks ratio".  
+
+Fonction ```crr``` du plackage ```cmprsk```.  
+Peu pratique les covariables doivent être introduites sous forme de matrice (n observation * k variables). Pour les covariables discrètes, prévoir la forme binaire et l'omission de la catégorie de référence.
+
+```{R, message=FALSE}
+c <- compet[c("year", "age", "surgery")]
+c = as.matrix(c)
+summary(crr(compet$stime, compet$compet, c))
+```
+
+
+### **Modèle multinomial**
+
+On va de nouveau utiliser la variable mois (temps discret).  
+Le modèle sera estimé à l'aide la fonction ```multinom``` du package ```nnet```, les p-values doivent-être programmées, l'output ne donnant que les erreurs-types.  
+
+```{R, message=FALSE}
+#install.packages("nnet")
+library(nnet)
+```
+
+*Transformation de la base*  
+
+```{R, message=FALSE}
+compet$T = compet$mois
+td = uncount(compet, mois)
+td$x=1
+td$t = ave(td$x, td$id, FUN=cumsum)
+td$t2 = td$t*td$t
+td$e = ifelse(td$t<td$T,0, td$compet)
+```
+
+*Estimation*
+
+Pour estimer le modèle, on utilise la fonction ```mlogit``` du package ```nnet```. Les p-values seront calculées à partir d'un test bilatéral (statistique z).
+
+```{R, message=FALSE}
+competfit = multinom(formula = e ~ t + t2 + year + age + surgery, data = td)
+summary(competfit)
+z = summary(competfit)$coefficients/summary(competfit)$standard.errors
+p <- (1 - pnorm(abs(z), 0, 1)) * 2
+p
+```
+
+
+
+
+
+
+
+
+

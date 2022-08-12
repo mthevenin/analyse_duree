@@ -1,0 +1,75 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Analyse des durées"
+  search: 
+    location: sidebar
+  page-navigation: true
+  reader-mode: true
+  page-footer: 
+    center: "Marc Thévenin - Ined-Sms - Août 2022" 
+    background: light
+
+
+  navbar:
+    collapse-below: lg
+    left:
+      - text: "**ANALYSE DES DUREES 2022**"
+        href: index.qmd
+      - icon: github
+        href: https://github.com/mthevenin/analyse_duree
+      - icon: envelope
+        href: mailto:marc.thevenin@ined.fr          
+
+  sidebar:
+      title: "PLAN"
+      style: "docked"
+      background: "info"
+      collapse-level: 1
+      contents:
+        - section: "**Données et théorie**"
+          contents:
+          - introduction.qmd
+          - Donnees.qmd
+          - theorie.qmd
+        - text: "---"      
+        - section: "**Méthodes non paramétriques**"
+          contents:
+          - fsurvie.qmd
+          - comp_fsurvie.qmd
+        - text: "---"  
+        - section: "**Modèles à risques proportionnels**"
+          contents:
+          - intro_mod.qmd
+          - cox.qmd
+          - discret.qmd
+          - dynamiques.qmd
+        - text: "---"  
+        - section: "**Compléments**"
+          contents:
+          - parametrique.qmd
+          - concurrent.qmd
+          - frailty.qmd
+        - text: "---"  
+        - section: "**Programmation**"
+          contents:
+          - R.qmd
+          - Stata.qmd
+          - Sas.qmd
+          - Python.qmd
+
+format:
+  html:
+    theme: 
+      light: [yeti]
+      dark:  [yeti, theme-dark.scss]    
+    code-background: true
+    code-copy: true
+    toc: true
+    toc-depth: 3
+    toc-title: Sections
+    highlight-style: monochrome
+
+

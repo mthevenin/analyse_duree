@@ -1,0 +1,74 @@
+---
+Title: "FORMATION INED 2022: ANALYSE DES DUREES"
+format:
+  html:
+    toc: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, render = knitr::normal_print)
+library(knitr)
+library (shiny)
+library (rsconnect)
+library(haven)
+library(pander)
+library(memisc)
+library(fontawesome)
+```
+
+
+
+::: {.callout-tip appearance="simple" icon=false}
+## **MAJ-JUIN 2022**
+
+-  Document ok pour cette version 2022 
+- Lien vers pdf: [`r fa("file-pdf")`](https://github.com/mthevenin/analyse_duree/blob/main/ANALYSE%20DES%20DUREES%20-%202022.pdf)   
+:::
+
+::: callout-warning   
+**Test proportionnalité des risques (Grambsch-Therneau) entre les versions 2 et 3 de la librairie survival**  
+Les précédentes versions de la formation utilisaient la version 2 de **`survival`** (dernière maj 2019). La procédure proposée pour tester la constance des rapports de risques était le test dit de *Grambsch-Therneau* exécuté avec la fonction **`cox.zph()`**. Les résultats étaient identiques à ceux exécutés avec SAS, Stata et Python. Avec la nouvelle version de **`survival`** les résultats affichés par le tests sont différents, et pas qu'un peu. Un indice est donné dans une note de l'aide de la fonction: "*In versions of the package before survival3.0 the function computed a fast approximation to the score test. Later versions compute the actual score test*" ([`r fa("link")`](https://runebook.dev/en/docs/r/library/survival/html/cox.zph)).  
+<br>
+**[Maj Juin]** A consolider... Le terme exclu de la statistique de test semble assez sensible à la présence d'évènements simultanés, généralement en grand nombre dans les données discrètes/groupées exploitées en sciences sociales. L'utilisation du test antérieur, utilisé par les autres logiciels, me semble donc être la solution à privilégier.
+
+- J'ai donc récupéré le programme de la fonction de la v2, renommée **`cox.zphold()`**. Son exécution est identique, la seule étape supplémentaire est de le charger. La marche à suivre est donnée dans le chapitré dédié à R. On peut le télécharger sur le dépôt à cette adresse: **<https://github.com/mthevenin/analyse_duree/tree/main/cox.zphold>** 
+:::
+
+
+<br>
+
+
+::: {.callout-note icon=false}  
+## Bibliographie
+
+- **Cours de Gilbert Colletaz (version 2016)**: [`r fa("link", fill = "steelblue")`](https://docplayer.fr/69359088-Modeles-de-survie-notes-de-cours-master-2-esa-voies-professionnelle-et-recherche-gilbert-colletaz.html) 
+- **Document de travail Insee de Simon Quantin (2019)**: [`r fa("link", fill = "steelblue")`](https://www.insee.fr/fr/statistiques/3695681) [avec version 2 de la librarie *`survival`*]  
+:::
+
+
+::: {.callout-note icon=false}  
+## Liens INED
+
+* **Site de l'Ined**: <https://www.ined.fr>  
+* **Site du Service Méthodes Statistiques**: <https://sms.site.ined.fr> 
+* **Site des Rencontres de Statistique Appliquée**: <https://statapp.site.ined.fr>
+* **Site du séminaire R à l'Usage des Sciences Sociales (RUSS)**: <https://russ.site.ined.fr> 
+:::
+
+
+::: {.callout-note icon=false}  
+## Autres supports
+
+* <https://github.com/mthevenin>
+* **Visualisation des données avec Stata (2020-2022)**: [`r fa("link", fill = "steelblue")`](https://mthevenin.github.io/stata_fr/index.html)
+* **Introduction à Stata (2018 - un peu ancien)**: [`r fa("link", fill = "steelblue")`](https://mthevenin.github.io/formation_stata/)
+* **Introduction à la regression logistique (v1 2022)**: [`r fa("link", fill = "steelblue")`](https://github.com/mthevenin/intro_logit/blob/main/mod%C3%A8le%20logit%20v1%20-%20final.pdf) 
+:::
+
+
+<br>
+`r fa("address-card")` <mailto:marc.thevenin@ined.fr> - Service Méthodes Statistiques - Ined -  
+<br>
+`r fa("r-project")` Support réalisé avec [Rstudio](href:https://www.rstudio.com) - [Quarto](https://quarto.org/)  
+`r fa("code")` Langages utilisés pour la partie programmation: [R](https://www.r-project.org/) - [Stata](https://www.stata.com/) - [Sas](https://www.sas.com/fr_fr/home.html) - [Python](https://www.python.org/) 
+
