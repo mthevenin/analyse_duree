@@ -18,10 +18,12 @@ website:
       - text: "**ANALYSE DES DUREES 2022**"
         href: index.qmd
       - icon: github
-        href: https://github.com/mthevenin/analyse_duree 
-
+        href: https://github.com/mthevenin/analyse_duree
+      - icon: envelope
+        href: mailto:marc.thevenin@ined.fr          
 
   sidebar:
+      title: "PLAN"
       style: "docked"
       background: "info"
       collapse-level: 1
