@@ -3,6 +3,7 @@ project:
   output-dir: _site
 
 website:
+  title: "Analyse des durées"
   search: 
     location: sidebar
   page-navigation: true
