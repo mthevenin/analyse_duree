@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>SAS</title>
+<title>Analyse des durées - SAS</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,6 +131,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Analyse des durées</span>
+  </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -427,8 +430,8 @@ Selon le type d’analyse la totalité des outputs ne seront pas reproduits (<co
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>proc lifetest data<span class="ot">=</span>trans method<span class="ot">=</span>lifetable width<span class="ot">=</span><span class="dv">30</span>;</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>time stime<span class="sc">*</span><span class="fu">died</span>(<span class="dv">0</span>);run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/1a.png" class="img-fluid"></p>
-<p><img src="sas/1b.png" class="img-fluid"></p>
+<p><img src="sas/1a.PNG" class="img-fluid"></p>
+<p><img src="sas/1b.PNG" class="img-fluid"></p>
 <p><img src="sas/1c.png" class="img-fluid"></p>
 </section>
 <section id="méthode-kaplan-meier" class="level2">
@@ -440,7 +443,7 @@ Pour récupérer ces estimateurs, on peut les récupérer via l’instruction ou
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>proc lifetest data<span class="ot">=</span>trans;</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>time stime<span class="sc">*</span><span class="fu">died</span>(<span class="dv">0</span>); run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/2a.png" class="img-fluid"></p>
+<p><img src="sas/2a.PNG" class="img-fluid"></p>
 <p><img src="sas/2b.png" class="img-fluid"></p>
 <p><img src="sas/2c.png" class="img-fluid"></p>
 <p><strong>Warning sur la durée moyenne reportée</strong> Sauf exception ne pas interpréter le tableau donnant la durée moyenne. Se reporter à l’estimation des RMST plus bas.</p>
