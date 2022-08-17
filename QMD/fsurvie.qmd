@@ -1,25 +1,24 @@
 ---
 title: "Les fonctions de survie"
+editor: 
+  markdown: 
+    wrap: 72
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-library(knitr)
-library (shiny)
-library (rsconnect)
-library(haven)
-library(pander)
-library(memisc)
-library(Statamarkdown)
 ```
 
-
-
-
-Les méthodes non paramétriques portent généralement sur l’analyse des fonctions de survie (séjour) ou sur celle des fonctions de répartitions, plus rarement sur les mesures d’incidence données par le risque cumulé.   
-Deux méthodes d’estimations sont proposées : la méthode dite actuarielle et la méthode dite de Kaplan & Meier. Ces deux méthodes sont adaptées à des mesures différentes de la durée : plutôt discrète pour la technique actuarielle et plutôt continue pour Kaplan-Meier (KM). Cela induit un traitement différent de la censure dans l’estimation. La seconde est de très très loin la plus diffusée, surement en raison des tests de comparaison qu’elle est en mesure de fournir.
-
-
+Les méthodes non paramétriques portent généralement sur l'analyse des
+fonctions de survie (séjour) ou sur celle des fonctions de répartitions,
+plus rarement sur les mesures d'incidence données par le risque cumulé.\
+Deux méthodes d'estimations sont proposées : la méthode dite actuarielle
+et la méthode dite de Kaplan & Meier. Ces deux méthodes sont adaptées à
+des mesures différentes de la durée : plutôt discrète pour la technique
+actuarielle et plutôt continue pour Kaplan-Meier (KM). Cela induit un
+traitement différent de la censure dans l'estimation. La seconde est de
+très très loin la plus diffusée, surement en raison des tests de
+comparaison qu'elle est en mesure de fournir.
 
 # **Introduction**
 
@@ -29,26 +28,37 @@ Deux méthodes d’estimations sont proposées : la méthode dite actuarielle et
 
 On a un échantillon aléatoire de $n$ individus avec:
 
-* Des indicateurs de fin d'épisode $e_1,e_2,....,e_k$ avec $e_i=0$ si censure à droite et $e_i=1$ si évènement observé pendant la période d'observation. 
-* Des durées d'exposition au risque $t_1,t_2,....,t_k$ jusqu'à l'évènement ou la censure.
-* En théorie, il ne peut pas y avoir d'évènement en $t=0$. 
+-   Des indicateurs de fin d'épisode $e_1,e_2,....,e_k$ avec $e_i=0$ si
+    censure à droite et $e_i=1$ si évènement observé pendant la période
+    d'observation.
+-   Des durées d'exposition au risque $t_1,t_2,....,t_k$ jusqu'à
+    l'évènement ou la censure.
+-   En théorie, il ne peut pas y avoir d'évènement en $t=0$.
 
 <br>
-
 
 ## **Calcul de la fonction de survie**
 
-Rappel: La fonction de survie donne la probabilité que l'évènement survienne après $t_i$, soit $S(t_i)=P(T>t_i)$.  
-Pour survivre en $t_i$, il faut avoir survécu en $t_{i-1}$, $t_{i-2}$, ...., $t_{1}$.  
-La fonction de survie rapporte donc des probabilités conditionnelles: survivre en $t_i$ conditionnellement au fait d'y avoir survécu avant. Il s'agit donc d'un produit de probabilités:    
+Rappel: La fonction de survie donne la probabilité que l'évènement
+survienne après $t_i$, soit $S(t_i)=P(T>t_i)$.\
+Pour survivre en $t_i$, il faut avoir survécu en $t_{i-1}$, $t_{i-2}$,
+...., $t_{1}$.\
+La fonction de survie rapporte donc des probabilités conditionnelles:
+survivre en $t_i$ conditionnellement au fait d'y avoir survécu avant. Il
+s'agit donc d'un produit de probabilités:\
 <br>
 
-Soit $d_i=\sum e_i$ le nombre d'évènements observé en $t_i$  et $r_i$ la population encore soumise au risque en $i$. On peut mesurer l'intensité de l'évènement en $t_i$ en calculant le quotient $q(t_i)=\frac{d_i}{r_i}$. Si le temps est strictement continu on devrait toujours avoir $q(t_i)=\frac{1}{r_i}$. 
+Soit $d_i=\sum e_i$ le nombre d'évènements observé en $t_i$ et $r_i$ la
+population encore soumise au risque en $i$. On peut mesurer l'intensité
+de l'évènement en $t_i$ en calculant le quotient
+$q(t_i)=\frac{d_i}{r_i}$. Si le temps est strictement continu on devrait
+toujours avoir $q(t_i)=\frac{1}{r_i}$.
 
-$S(t_i) = (1 - \frac{d_i}{r_i})\times{S(t_{i-1})} = S(t_i) = (1 - q(t_i))\times{S(t_{i-1})}$. 
-En remplaçant $S(t_{i-1})$ par sa valeur: $S(t_i) = (1 - \frac{d_i}{r_i})\times(1 - \frac{d_{i-1}}{r_{i-1}})\times{S(t_{i-2})}$.  
-<br>
-En remplaçant toutes les expressions de la survie jusqu'en $t_0$ ($S(0)=1$):  
+$S(t_i) = (1 - \frac{d_i}{r_i})\times{S(t_{i-1})} = S(t_i) = (1 - q(t_i))\times{S(t_{i-1})}$.
+En remplaçant $S(t_{i-1})$ par sa valeur:
+$S(t_i) = (1 - \frac{d_i}{r_i})\times(1 - \frac{d_{i-1}}{r_{i-1}})\times{S(t_{i-2})}$.\
+<br> En remplaçant toutes les expressions de la survie jusqu'en $t_0$
+($S(0)=1$):\
 <br>
 
 $$S(t_i)=\displaystyle \prod_{t_i\leq{k}} (1-q(t_i))$$
@@ -56,67 +66,112 @@ $$S(t_i)=\displaystyle \prod_{t_i\leq{k}} (1-q(t_i))$$
 <BR>
 
 ::: callout-note
-**Application pour la suite de la formation**   
+**Application pour la suite de la formation**
 
-* On va analyser le risque de décéder (la survie) de personnes souffrant d'une insuffisance cardiaque. Le début de l'exposition est leur inscription dans un registre d'attente pour une greffe du coeur.
+-   On va analyser le risque de décéder (la survie) de personnes
+    souffrant d'une insuffisance cardiaque. Le début de l'exposition est
+    leur inscription dans un registre d'attente pour une greffe du
+    coeur.
 
-* Les covariables sont dans un premier temps toutes fixes: l'année (*year*) et l'âge (*age*) à l'entrée dans le registre, et le fait d'avoir été opéré pour un pontage aorto-coronarien avant l'inscription (*surgery*).  Le début de l'exposition au risque est l'entrée dans le registre, la durée est mesurée en jour (*stime*). La variable évènement est le décès (*died*).
-* L'introduction d'une dimension dynamique, la greffe, sera donnée par les variable *transplant* et *wait*.  
+-   Les covariables sont dans un premier temps toutes fixes: l'année
+    (*year*) et l'âge (*age*) à l'entrée dans le registre, et le fait
+    d'avoir été opéré pour un pontage aorto-coronarien avant
+    l'inscription (*surgery*). Le début de l'exposition au risque est
+    l'entrée dans le registre, la durée est mesurée en jour (*stime*).
+    La variable évènement est le décès (*died*).
 
-* [Mettre liens git avec la base en .csv, .dta, .sas7bdat]
+-   L'introduction d'une dimension dynamique, la greffe, sera donnée par
+    les variable *transplant* et *wait*.
+
+-   \[Mettre liens git avec la base en .csv, .dta, .sas7bdat\]
 :::
 
 <br>
 
 # **La méthode actuarielle**
 
-* Estimation sur des intervalles définies par l'utilisateur. 
-* Approche dite «continue», estimation en milieu d'intevalle.
-* Méthode apropriée lorsque la durée est mesurée de manière discrète.
-* Méthode, hélas, de plus en plus abandonnée dans les sciences sociales
-
+-   Estimation sur des intervalles définies par l'utilisateur.
+-   Approche dite «continue», estimation en milieu d'intevalle.
+-   Méthode apropriée lorsque la durée est mesurée de manière discrète.
+-   Méthode, hélas, de plus en plus abandonnée dans les sciences
+    sociales
 
 ## Estimation
 
 **Echelle temporelle**
 
-La durée est divisée en $J$ intervalles, en choisissant $J$ points:  $t_0<t_1<...<t_J$ avec $t_{J+1}=\infty$. 
+La durée est divisée en $J$ intervalles, en choisissant $J$ points:
+$t_0<t_1<...<t_J$ avec $t_{J+1}=\infty$.
 
 **Calcul du Risk set**
 
-* A $t_{min}=0$, $n_0=n$ individus soumis au risque: $r_0=n_0$. 
-* Le nombre d'exposé.e.s au risque sur un intervalle est calculé en soustrayant la moitié des cas censurés sur la longueur de l'intervalle:  $r_i=n_i- 0.5\times{c_i}$, avec $n_i$ le nombre de personnes soumises au risque au début de l'intervalle et $c_i$ le nombre d'observations censurées sur la longueur de l'intervalle.  On suppose donc que les observations censurées $c_i$ sont sorties de l'observation uniformément sur l'intervalle. Les cas censurés le sont en moyenne au millieu de l'intervalle. 
-<br>
+-   A $t_{min}=0$, $n_0=n$ individus soumis au risque: $r_0=n_0$.
+-   Le nombre d'exposé.e.s au risque sur un intervalle est calculé en
+    soustrayant la moitié des cas censurés sur la longueur de
+    l'intervalle: $r_i=n_i- 0.5\times{c_i}$, avec $n_i$ le nombre de
+    personnes soumises au risque au début de l'intervalle et $c_i$ le
+    nombre d'observations censurées sur la longueur de l'intervalle. On
+    suppose donc que les observations censurées $c_i$ sont sorties de
+    l'observation uniformément sur l'intervalle. Les cas censurés le
+    sont en moyenne au millieu de l'intervalle. <br>
 
-**Calcul de $S(t_i)$**  
-On applique la méthode de la section précédente avec:  
+**Calcul de** $S(t_i)$\
+On applique la méthode de la section précédente avec:
 
 $$q(t_i)=\frac{d_i}{n_i - 0.5\times c_i}$$
 
+**Calcul de la durée médiane (ou autre quantiles)**\
+<br> *Rappel*: en raison de la présence de censures à droite, le dernier
+intervalle étant ouvert jusqu'à la dernière sortie d'observation, il
+n'est pas conseillé de calculer des durées moyennes. On préfère utiliser
+la médiane ou tout autre quantile lorsqu'ils sont calculables. <br>
+**Définition**: il s'agit de la durée telle que $S(t_i)=0.5$.\
+<br> *Calcul*: Comme on applique une méthode continue et monotone à
+l'intérieur d'intervalles, on ne peut pas calculer directement un point
+de coupure qui correspond à 50% de survivants. On doit donc trouver ce
+point par interpolation linéaire dans l'intervalle $[t_i;t_{i+1}[$ avec
+$S(t_{i+1})\leq0.5$ et $S(t_{i})>0.5$.
 
-**Calcul de la durée médiane (ou autre quantiles)**  
-<br>
-*Rappel*: en raison de la présence de censures à droite, le dernier intervalle étant ouvert jusqu'à la dernière sortie d'observation, il n'est pas conseillé de calculer des durées moyennes. On préfère utiliser la médiane ou tout autre quantile lorsqu'ils sont calculables.
-<br>
-**Définition**: il s'agit de la durée telle que $S(t_i)=0.5$.  
-<br>
-*Calcul*: Comme on applique une méthode continue et monotone à l'intérieur d'intervalles, on ne peut pas calculer directement un point de coupure qui correspond à 50% de survivants. On doit donc trouver ce point par interpolation linéaire dans l'intervalle $[t_i;t_{i+1}[$ avec $S(t_{i+1})\leq0.5$ et $S(t_{i})>0.5$.  
+## R-Stata-Sas-Python
 
+::: panel-tabset
+### R
 
- 
-## R-Stata-Sas-Python   
-  
+Une fonction programmée par un utilisateur (package `discSurv` =\>
+fonction `lifeTable`), mais pas convaincante car pas d'estimation des
+valeurs de la fonction de séjour sur les quartiles de la durée, et
+estimation avec des intervalles toujours fixés à $dt=1$. D'un intérêt
+très limité, voire nul.
 
-::: {.callout-important appearance="simple"  icon=false}
+### Stata
 
-* **SAS**: incluse dans ```proc lifetest```.
-* **Stata**: commande ```ltable```. Voir la commande externe ```qlt``` (MT) qui calcule les durées médianes (+ autres quartiles) et qui cale la définition des intervalles avec celle de SAS.
-* **R**: une fonction programmée par un utilisateur (package ```discSurv``` => fonction ```lifeTable```), mais pas convaincante car pas d'estimation sur les quantiles, et estimation avec des intervalles toujours fixés à $dt=1$. D'un intérêt très limité, voire nul.    
-* **Python**: à l'heure actuelle, aucune fonction à ma connaissance.
+Commande `ltable`, avec en option la paramétrisation des intervalles de
+durées. Voir la commande externe `qlt` (MT) qui calcule les durées
+médianes (+ autres quartiles) et qui recalcule la fonction de séjour
+avec une définition des intervalles de durées identique à celle de SAS.
+
+### Sas
+
+Sous une `proc lifetest` avec en option `method=lifetable`. On peut
+paramétrer les intervalles d'estimation avec l'option `width`.
+
+### Python
+
+A l'heure actuelle, aucune fonction à ma connaissance
 :::
 
-## Application
+-   **Stata**: commande `ltable`. Voir la commande externe `qlt` (MT)
+    qui calcule les durées médianes (+ autres quartiles) et qui cale la
+    définition des intervalles avec celle de SAS.
 
+-   **R**: une fonction programmée par un utilisateur (package
+    `discSurv` =\> fonction `lifeTable`), mais pas convaincante car pas
+    d'estimation sur les quantiles, et estimation avec des intervalles
+    toujours fixés à $dt=1$. D'un intérêt très limité, voire nul.\
+
+-   **Python**: à l'heure actuelle, aucune fonction à ma connaissance.
+
+## Application
 
 ```{r eval=FALSE}
                  Beg.                                 Std.
@@ -183,50 +238,85 @@ S(t)=0.25: t=  913.968
 S(t)=0.10: t=        .
 ```
 
-![](images/Image7.png){width=70%}
+![](images/Image7.png){width="70%"}
 
-102 jours après leur inscription dans le registre d’attente pour une greffe, 50% des malades sont toujours en vie. Au bout de 914 jours, 75% des personnes sont décédées.
-
+102 jours après leur inscription dans le registre d'attente pour une
+greffe, 50% des malades sont toujours en vie. Au bout de 914 jours, 75%
+des personnes sont décédées.
 
 # **La méthode de Kaplan-Meier**
 
-* L'approche qui exploite toute l'information disponible est celle dite de **Kaplan-Meier** (*KM*). 
-* Il y a autant d'intervalles que de durées où l'on observe au moins un évènement. 
-* Au lieu d'utiliser des intervalles prédéterminés, l'estimateur KM va définir un intervalle entre chaque évènement enregistré. 
-* La fonction de survie estimée par la méthode KM est une fonction en escalier (stairstep), d'où une méthode dite "discrète". 
-* Pour chaque intervalle, on compte le nombe d'évènements et le nombre de censures. 
-* Méthode adaptée pour une mesure de la durée de type continue.   
+-   L'approche qui exploite toute l'information disponible est celle
+    dite de **Kaplan-Meier** (*KM*).
+-   Il y a autant d'intervalles que de durées où l'on observe au moins
+    un évènement.
+-   Au lieu d'utiliser des intervalles prédéterminés, l'estimateur KM va
+    définir un intervalle entre chaque évènement enregistré.
+-   La fonction de survie estimée par la méthode KM est une fonction en
+    escalier (stairstep), d'où une méthode dite "discrète".
+-   Pour chaque intervalle, on compte le nombe d'évènements et le nombre
+    de censures.
+-   Méthode adaptée pour une mesure de la durée de type continue.
 
 ## Estimation
 
-**Définition du Risk Set ($r_i$)**  
+**Définition du Risk Set (**$r_i$)
 
-S'il y a à la fois des évènements et des censures à une durée $t_i$, les observations censurées sont considérées comme exposées au risque à ce moment, comme si elles étaient censurées très rapidement après. C’est la principale caractéristique de cette méthode, nommée  également l’estimateur « product-limit »  
+S'il y a à la fois des évènements et des censures à une durée $t_i$, les
+observations censurées sont considérées comme exposées au risque à ce
+moment, comme si elles étaient censurées très rapidement après. C'est la
+principale caractéristique de cette méthode, nommée également
+l'estimateur « product-limit »
 
-$$r_i=r_{i-1}-d_{i-1}-c_{i-1}$$  
+$$r_i=r_{i-1}-d_{i-1}-c_{i-1}$$\
 <br>
 
-**Calcul de $q_i$**    
-<br>
-On applique la méthode de la section précédente avec:  
+**Calcul de** $q_i$\
+<br> On applique la méthode de la section précédente avec:
 
 $$q_i=\frac{d_i}{r_{i-1}-d_{i-1}-c_{i-1}}$$
 
+**Récupération de la médiane**\
+Il n'y a pas de méthode pour calculer directement la durée médiane (ou
+tout autre quantile).\
+On va prendre la valeur de la durée qui se situe juste "en dessous" de
+50% de survivant.e.s. Elle est donc définie tel que $S(t)\leq0.5$. Pas
+de formule savante pour obtenir ce résultat, c'est une convention.
+Attention, il n'est pas impossible que le % de survivant.e.s soit bien
+en deçà de 50% pour obtenir cette durée médiane.
 
-**Récupération de la médiane**    
-Il n'y a pas de méthode pour calculer directement la durée médiane (ou tout autre quantile).  
-On va prendre la valeur de la durée qui se situe juste "en dessous" de 50% de survivant.e.s. Elle est donc définie tel que $S(t)\leq0.5$. Pas de formule savante pour obtenir ce résultat, c’est une convention. Attention, il n’est pas impossible que le % de survivant.e.s soit bien en deçà de 50% pour obtenir cette durée médiane.    
+## R-Stata-Sas-Python
 
+::: panel-tabset
+### R
 
-## R-Stata-Sas-Python   
-  
+Les estimateurs sont obtenus avec fonction **`survfit`** de la librairie
+`survival`. On peut obtenir des rendus graphiques supérieurs avec la
+librairie `survminer` (fonction `ggsurvplot`)
 
-::: {.callout-important appearance="simple"  icon=false}
+### Stata
 
-* **R** : les estimateurs sont donnés par la fonction **`survfit`** de la librairie `survival`.
-* **SAS** : l’estimation de Kaplan-Meier est affichée par défaut par la `proc lifetest`. **Attention : le tableau donné par SAS est particulièrement pénible à lire voire illisible, en particulier lorsque le nombre de censures est élevé, une ligne est ajoutée pour chaque observation censurée. Je conseille de ne pas afficher cette partie de l’output (voir section SAS)**. On récupère pour le reste de l’output les valeurs de la durée pour S(t) =(.75,.5,.25) ainsi que le graphique, ce qui est suffisant.
-* **Stata** : en mode survie (**`stset`**), le tableau des estimateurs est donné par la commande **`sts list`** et le graphique par **`sts graph`**.
-* **Python**: les resultats sont donnés dans la librairie `lifeline` par des fonctions dont le nom est tout bonnement interminable. Je conseille plutôt l’utilisation de la librairie **`statmodels`** (se reporter à la section dédiée à Python).
+Après avoir appelé les variables de durée et de censure en mode
+**survival** avec **`stset`**), le tableau des estimateurs est obtenu la
+commande **`sts list`** et le graphique avec **`sts graph`**.
+
+### SAS
+
+L'estimation de Kaplan-Meier est affichée par défaut par la
+`proc lifetest`.\
+***Warning*** : le tableau affiché par SAS est particulièrement pénible
+à lire voire illisible, en particulier lorsque le nombre de censures est
+élevé, une ligne étant ajoutée pour chaque observation censurée. Je
+conseille de ne pas afficher cette partie de l'output (se reporter à la
+section SAS du chapitre programmation). On récupère pour le reste de
+l'output les valeurs de la durée pour S(t) =(.75,.5,.25) ainsi que le
+graphique, ce qui est suffisant.
+
+### Python
+
+Les resultats sont donnés dans la librairie `lifeline` par des fonctions
+dont le nom est interminable. Je conseille plutôt l'utilisation de la
+librairie **`statmodels`** (se reporter à la section dédiée à Python).
 :::
 
 ## Application
@@ -327,27 +417,33 @@ Time    Total   Fail   Lost           Function     Error     [95% Conf. Int.]
 -------------------------------------------------------------------------------
 ```
 
-Durée médiane: $t=100$ (correspond à $S(t)=0.4940$).  
+Durée médiane: $t=100$ (correspond à $S(t)=0.4940$).
 
-![](images/Image8.png){width=80%}
-
+![](images/Image8.png){width="80%"}
 
 # Quantités associées
 
-A partir de l'estimateur Kaplan-Meier..   
+A partir de l'estimateur Kaplan-Meier..\
 <br>
 
-**Le risque cumulé**: estimateur de Nelson AAlen  
-Il est simplément égal à: 
-$$H(t)=\sum_{t_i\leq k}q(t_i)$$
+**Le risque cumulé**: estimateur de Nelson AAlen\
+Il est simplément égal à: $$H(t)=\sum_{t_i\leq k}q(t_i)$$
 
-![](images/Image19.png){width=70%}
+![](images/Image19.png){width="70%"}
 
-**Le risque instantané**   
-Nécessite l'estimateur de Nelson-Aalen. Le risque est obtenu en lissant les différences - toujours positive - entre $H(t)$ par la méthode dite du **kernel**. Elle permet d’obtenir une fonction continue avec la durée (paramétrables sur les largeurs des fenêtres de lissage).  D’autres méthodes de lissage sont maintenant possibles, et de plus en plus utilisées, en particulier celles utilisant des splines restreintes (paramétrable sur un nombre de degré de liberté – nœuds-).
+**Le risque instantané**\
+Nécessite l'estimateur de Nelson-Aalen. Le risque est obtenu en lissant
+les différences - toujours positive - entre $H(t)$ par la méthode dite
+du **kernel**. Elle permet d'obtenir une fonction continue avec la durée
+(paramétrables sur les largeurs des fenêtres de lissage). D'autres
+méthodes de lissage sont maintenant possibles, et de plus en plus
+utilisées, en particulier celles utilisant des splines restreintes
+(paramétrable sur un nombre de degré de liberté -- nœuds-).
 
-![](images/Image20.png){width=70%}
+![](images/Image20.png){width="70%"}
 
 <br>
+
+
 
 

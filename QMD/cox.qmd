@@ -2,21 +2,6 @@
 title: "Modèle de Cox"
 ---
 
----
-title: "Modèle de Cox"
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-library(knitr)
-library (shiny)
-library (rsconnect)
-library(haven)
-library(pander)
-library(memisc)
-```
-
-
 
 # Le modèle semi-paramétrique de Cox
 
@@ -184,15 +169,24 @@ De la même manière, plus on entre à un âge élevé dans la liste d'attente p
 
 ## R-Stata-Sas-Python   
   
-::: {.callout-important appearance="simple"  icon=false} 
+::: panel-tabset
 
-* **R**: le modèle peut-être  estimé avec la fonction **`coxph`** de la librairie **`survival`**.
+### R
 
-* **SAS** : le modèle est estimé avec la **`proc phreg`**.
+Le modèle est  estimé avec la fonction **`coxph`** de la librairie **`survival`**.
 
-* **Stata**: Le modèle est estimé avec la commande **`stcox`**.
+### Stata
 
-* **Python** : Avec la librairie `lifelines`, le modèle est estimé avec la fonction **`CoxPHFitter`**. Avec la librairie `statmodels`, il est estimé avec la fonction `smf.phreg`.
+Le modèle est estimé avec la commande **`stcox`**.
+
+### SAS
+
+Le modèle est estimé avec la **`proc phreg`**.
+
+
+### Python
+
+Avec la librairie `lifelines`, le modèle est estimé avec la fonction **`CoxPHFitter`**. Avec la librairie `statmodels`, il est estimé avec la fonction `smf.phreg`.
 :::
 
 
@@ -230,7 +224,7 @@ $$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{ik}\frac{e^{X_{i}^{'}b}}{\sum_{j\in R_i}e^{X
 
 
 
-**Résultat cohérent entre SAS - STATA - Survival v2 (R) - Lifelines (PYTHON)**
+**Résultat cohérent entre SAS - STATA - SURVIVAL V2 (R) - Lifelines (Python)**
 
 ::: {.callout-warning} 
 ```{r eval=FALSE}
@@ -266,28 +260,39 @@ Ici l'hypothèse de proportionalité des risques est questionnable pour la varia
 * Le résultat de ce test est considéré par certain.e.s comme un indicateur de l’ampleur du biais qui affecte la baseline du risque.
 
 
-* **Transformations de la durée**: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: $f(t)=t$ (« identity »), $f(t)=log(t)$, $f(t)=KM(t)$ ou $f(t)=1- KMa(t$) où $KMa(t$) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank », est  utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple $t=(0.1,0.5,1,2.6,3)$ donne une transformation $t=(1,2,3,4)$. A savoir : la fonction « identity » rend le test relativement sensible aux évènements très tardifs et rares (outliers).
+* **Transformations de la durée**: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: $f(t)=t$ (« identity »), $f(t)=log(t)$, $f(t)=KM(t)$ ou $f(t)=1- KM(t$) où $KM(t$) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank », est  utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple $t=(0.1,0.5,1,2.6,3)$ donne une transformation $t=(1,2,3,4)$. A savoir : la fonction « identity » rend le test relativement sensible aux évènements très tardifs et rares (outliers).
 
 
 ## R-Stata-Sas-Python  
 
-::: {.callout-warning}
+::: {.callout-important}
 
-* **Utilisatrices et utilisateurs de R**: lire attentivement car les résultats du tests sont modifiés depuis la version 3 de la librairie Survival. Je ne suis pas encore en mesure de dire clairement pourquoi, un piste donnée par une courte note dans le fichier d'aide, et d'évaluer la sensibilité de ce changement à des échantillons de grande taille, et surtout à des estimations avec des durées discrètes/groupées. Bref évaluer cette nouvelle estimation a des données typiques des sciences sociales (T.Therneau est un biostatisticien en poste dans un des établissements de la fameuse *mayo clinic*).   
-
-* **Maj juin 2022**: le programme de la précédente fonction `cox.zph` a été récupéré. La marche à suivre pour l'utiliser est donné dans le chapitre dédié à R.
+* **Pour les utilisatrices et utilisateurs de R**: lire attentivement car depuis la  v3 de la librairie Survival, il s'agit non pas pas d'une nouvelle version du test, mais de la version d'origine qui est exécuté. Tous les autres logiciels utilisent une version *simplifiée* du test. Il y a peu de conséquences en l'absence d'évènements simultanés, situation plutôt rare en sciences sociale. Avec le test *exact* on observe des violations quasi systématiques de l'hypothèse en présence d'un nombre importants d'évènements observés simulatnéments  Je conseille donc, même si une investigation plus complète doit être faite, d'utiliser le test de la version précédente. Je donne une procédure plutôt simple d'exécuté ce test dans le chapitre *programmation*, en le récupérant directement. Seul le nom de la fonction a été modifié.
 :::
 
-::: {.callout-important appearance="simple"  icon=false}
 
-* **R**: [17-05-2022: attention test modifié depuis le v3 de survival] après avoir créer un objet lié à l’estimation du modèle de Cox, on utilise la fonction **`cox.zph`**. La fonction utilise par défaut $f(t)=1-KM(t)$ où $KM(t)$ sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.
-  * **Juin 2022**: j’ai récupéré le programme du test antérieur, renommé **`cox.zphold`**. On peut le télécharger, et il est facilement exécutable. 
+::: panel-tabset
 
-* **SAS**: le test est disponible depuis quelques années avec l’argument **`zph`** sur la ligne `proc lifetest`. Par défaut SAS utilise $f(t)=t$. On peut modifier cette fonction.
+### R
 
-* **Stata**: le test est donné par la commande **`estat phtest, d`**. Par défaut Stata utilise $f(t)=t$. On peut modifier cette fonction.
+Attention test modifié depuis le v3 de survival.
 
-* **Python**: après avoir créer l’objet lié à l’estimation du modèle de Cox, on utilise la fonction **`proportional_hazard_test`**. La fonction utilise par défaut $f(t)=t$, mais on peut afficher les résultats pour toutes les transformations de $t$ disponibles avec l’option `time_transform=’all’`. 
+*  Après avoir créer un objet  à l’estimation du modèle de Cox, on utilise la fonction **`cox.zph`**. Cette fonction utilise par défaut $f(t)=1-KM(t)$ où $KM(t)$ sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.
+*  Test antérieur: j’ai récupéré le programme du test antérieur, renommé **`cox.zphold`**. On peut le télécharger, et il est facilement exécutable.
+
+### Stata
+
+Le test est obtenu avec la commande **`estat phtest, d`**. Par défaut Stata utilise $f(t)=t$. On peut modifier cette fonction.
+
+### SAS
+
+Le test est disponible depuis quelques années avec l’argument **`zph`** sur la ligne `proc lifetest`. Par défaut SAS utilise $f(t)=t$. On peut modifier cette fonction.
+
+
+### Python
+
+On utilise la fonction **`proportional_hazard_test`** de la librairie `lifelines`. La fonction utilise par défaut $f(t)=t$, mais on peut afficher les résultats pour toutes les transformations de $t$ disponibles avec l’option `time_transform=’all’`. 
+
 :::
 
 
@@ -406,7 +411,8 @@ L'intéraction $surgery\times t$ est ici significative ($p<0;05$). On retrouve l
 ##  Solutions
 <br>
 
-***Ne rien faire***
+***Ne rien faire***   
+
 On interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison). Difficilement soutenable pour l’analyse des effets cliniques, elle peut être envisagée dans d’autres domaines. Attention au nombre de variables qui ne respecte pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme « moyenne » sur la période d’observation.  
 On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps les écarts déjà significatifs en début d’observation s’accentuent, à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais si l’effet est modéré : $RR>1$ qui baisse ou $RR<1$ qui augmente au cours du temps, je suis bien moins convaincu de la pertinence de cette option.  
 Egalement il faut tenir compte de l’intérêt portée par les variables qui présentent un problème par rapport à l’hypothèse. Il n’est peut-être pas nécessaire de complexifier le modèle pour des variables introduites comme contrôle.  
@@ -414,17 +420,20 @@ Mais plus problématique… On sait qu’une des causes du non respect de l’hy
 
 <br>
 
-***Modèle de Cox stratifié***
+***Modèle de Cox stratifié***   
+
 Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie ajustées, et si une seule covariable (binaire) présente un problème. Les RR ne seront pas estimés pour la variable.  
 
-***Intéraction***  
+***Intéraction***    
+
 Introduire une interaction avec la durée, ce qui a été fait plus haut. Cela peut permettre d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des RR, dans l'idéal une seule variable. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être linéaire, ce qui est une hypothèse plutôt forte.   
 
-***Modèles alternatifs***     
+***Modèles alternatifs***  
+
 Utiliser un modèle alternatif: modèles paramétriques à risques proportionnels si la distribution du risque s’ajuste bien, le modèle paramétrique « flexible » de Parmar-Royston (non traité) ou un modèle à temps discret.  
 Utiliser un modèle non paramétrique additif dit d’Aalen ou une de ses variantes (non traité). Mais ces modèles, dont les résultats sont des visuels graphiques, se commentent difficilement.  
 
-**Forêt alétaoire**  
+**Forêt aléatoire**    
 Autre méthode : les forêts aléatoires [à présenter un jour tout de même]. Leo Breiman a dès le départ proposé une estimation des modèles de survie par cette méthode. Par définition, pas sensible à l’hypothèse PH. Mais cela reste des méthodes à finalité prédictive, moins riche en interprétation si ce n’est sur les facteurs d’importance. 
 <br><br>
 

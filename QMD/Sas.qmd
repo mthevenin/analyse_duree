@@ -73,9 +73,9 @@ proc lifetest data=trans method=lifetable width=30;
 time stime*died(0);run;
 ```
 
-![](sas/1a.png)
+![](sas/1a.PNG)
 
-![](sas/1b.png)
+![](sas/1b.PNG)
 
 ![](sas/1c.png)
 
@@ -91,11 +91,11 @@ proc lifetest data=trans;
 time stime*died(0); run;
 ```
 
-![](sas/2a.png)
+![](sas/2a.PNG)
 
 ![](sas/2b.png)
 
-![](sas/2c.png)
+![](sas/2c.PNG)
 
 **Warning sur la durée moyenne reportée**
 Sauf exception ne pas interpréter le tableau donnant la durée moyenne. Se reporter à l'estimation des RMST plus bas.
@@ -114,11 +114,11 @@ run;
 
 ![](sas/3a.png)
 
-![](sas/3b.png)
+![](sas/3b.PNG)
 
-![](sas/3c.png)
+![](sas/3c.PNG)
 
-![](sas/3d.png)
+![](sas/3d.PNG)
 
 
 *Comparaison des RMST*
@@ -132,7 +132,7 @@ time stime*died(0);
 strata surgery; run;
 ```
 
-![](sas/4.png)
+![](sas/4.PNG)
 <br>
 **SAS STUDIO: en attente de la mise à jour du module SAS-STAT (on a 5 ans de retard)**  
 
@@ -148,7 +148,7 @@ model stime*died(0) = year age surgery ;
 run;
 ```
 
-![](sas/5a.png)
+![](sas/5a.PNG)
 
 
 
@@ -168,7 +168,7 @@ model stime*died(0) = year age surgery ;
 run;
 ```
 
-![](sas/5b.png)
+![](sas/5b.PNG)
 
 Par défaut SAS utilise la transformation $f(t)=t$ (idem Stata). Pour obtenir l'option par défaut de R $f(t) = 1 - KM(t)$:
 
@@ -179,7 +179,7 @@ model stime*died(0) = year age surgery ;
 run;
 ```
 
-![](sas/5c.png)
+![](sas/5c.PNG)
 
 ### Interaction avec la durée
 
@@ -217,7 +217,7 @@ surgeryt = surgery*stime;
 run;
 ```
 
-![](sas/5d.png)
+![](sas/5d.PNG)
 
 ## Variable dynamique
 
@@ -235,7 +235,7 @@ tvc = transplant=1 and stime>=wait;
 run;
 ```
 
-![](sas/6.png)
+![](sas/6.PNG)
 
 # Modèle à temps discret
 
@@ -266,7 +266,7 @@ proc logistic data=td;
 model died(ref="0") = t t2 t3 year age surgery  ; run;
 ```
 
-![](sas/7a.png)
+![](sas/7a.PNG)
 
 ## Durée discrète
 
@@ -299,9 +299,9 @@ class tq4 / param=ref;
 model died(ref="0") = tq4 year age surgery; run;
 ```
 
-![](sas/7c.png)
+![](sas/7c.PNG)
 
-![](sas/7d.png)
+![](sas/7d.PNG)
 
 # Modèles paramétrique
 
@@ -313,9 +313,9 @@ model stime*died(0) = year age surgery /D=WEIBULL;
 run;
 ```
 
-![](sas/8a.png)
+![](sas/8a.PNG)
 
-![](sas/8b.png)
+![](sas/8b.PNG)
 
 ```{r eval=FALSE}
 proc lifereg data=trans;
@@ -323,9 +323,9 @@ model stime*died(0) = year age surgery /D=LLOGISTIC;
 run;
 ```
 
-![](sas/8c.png)
+![](sas/8c.PNG)
 
-![](sas/8d.png)
+![](sas/8d.PNG)
 
 # Risques concurrents
 
@@ -339,9 +339,9 @@ time stime*compet(0) / eventcode=1; run;
 ```
 
 
-![](sas/9a.png)
+![](sas/9a.PNG)
 
-![](sas/9b.png)
+![](sas/9b.PNG)
 
 ![](sas/9c.png)
 
@@ -353,9 +353,9 @@ time stime*compet(0) / eventcode=1
 strata surgery; run;
 ```
 
-![](sas/9f.png)
+![](sas/9f.PNG)
 
-![](sas/9g.png)
+![](sas/9g.PNG)
 
 ## Modèles
 
@@ -367,7 +367,7 @@ model stime*compet(0) = year age surgery / eventcode=1  ;
 run;
 ```
 
-![](sas/9h.png)
+![](sas/9h.PNG)
 
 **Modèle logistique multinomial à temps discret**
 
@@ -389,8 +389,8 @@ model compet(ref="0") = t t2 year age surgery / link=glogit;
 run;
 ```
 
-![](sas/9i.png)
+![](sas/9i.PNG)
 
-![](sas/9j.png)
+![](sas/9j.PNG)
 
 
