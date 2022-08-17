@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Variables dynamiques</title>
+<title>Analyse des durées - Variables dynamiques</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,6 +131,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Analyse des durées</span>
+  </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -328,7 +331,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#estimation-avec-une-variable-dynamique" id="toc-estimation-avec-une-variable-dynamique" class="nav-link" data-scroll-target="#estimation-avec-une-variable-dynamique">Estimation avec une variable dynamique</a>
   <ul class="collapse">
   <li><a href="#modèle-de-cox" id="toc-modèle-de-cox" class="nav-link" data-scroll-target="#modèle-de-cox">Modèle de Cox</a></li>
+  <li><a href="#cox-solutions-logiciels" id="toc-cox-solutions-logiciels" class="nav-link" data-scroll-target="#cox-solutions-logiciels">Cox: solutions logiciels</a>
+  <ul class="collapse">
   <li><a href="#modèle-à-temps-discret" id="toc-modèle-à-temps-discret" class="nav-link" data-scroll-target="#modèle-à-temps-discret">Modèle à temps discret</a></li>
+  </ul></li>
   </ul></li>
   <li><a href="#précautions" id="toc-précautions" class="nav-link" data-scroll-target="#précautions">Précautions</a></li>
   </ul>
@@ -490,14 +496,20 @@ On a dans la base 2 variables: une variable binaire pour savoir si l’individu 
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>La greffe n’a plus d’impact sur la survie des individus, tout du moins elle ne l’augmente pas. Cela ne signifie pas non plus que des personnes ont pu être “sauvée” grâce à cette opération (ou plutôt leur durée de vie augmentée), mais des complications lors de l’opération ou post-opératoires ou des problèmes de rejet du greffon, surtout à une époque où ces techniques étaient à leurs balbutiements, ont été également la source d’une mortalité peut-être un peu plus précoce que si la personne n’avait pas été greffée.</p>
-<p><strong>Solutions avec les logiciels</strong> :</p>
-<div class="alert alert-info">
-<ul>
-<li><strong>Sas</strong>: la base n’est pas modifiée et la création de la TVC est faite “en aveugle” dans la procédure <code>phreg</code>, après l’instruction <code>model</code>.</li>
-<li><strong>R</strong>, Stata, Python: la base doit être transformée en format long aux temps d’évènement (<code>survsplit</code> avec R, <code>stsplit</code> avec Stata) avant la création de la variable dynamique.</li>
-</ul>
-</div>
 </section>
+<section id="cox-solutions-logiciels" class="level2">
+<h2 class="anchored" data-anchor-id="cox-solutions-logiciels">Cox: solutions logiciels</h2>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">Sas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">R - Stata, Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>La base n’est pas modifiée et la création de la TVC est faite “en aveugle” dans la procédure <code>phreg</code>, après l’instruction <code>model</code>. Ce n’est pas super.</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>La base doit être transformée en format long aux temps d’évènement (<code>survsplit</code> avec R, <code>stsplit</code> avec Stata) avant la création de la variable dynamique.</p>
+</div>
+</div>
+</div>
 <section id="modèle-à-temps-discret" class="level3">
 <h3 class="anchored" data-anchor-id="modèle-à-temps-discret">Modèle à temps discret</h3>
 <p>Même principe pour la construction de la variable dynamique. Pour rappel l’échelle temporelle est le mois, et on a créé en amont une variable qui transforme les jour d’attente en mois (<em>mwait</em>).</p>
@@ -532,16 +544,18 @@ On a dans la base 2 variables: une variable binaire pour savoir si l’individu 
 </div>
 </section>
 </section>
+</section>
 <section id="précautions" class="level1">
 <h1>Précautions</h1>
 <ul>
-<li>Rappel: la cause doit précède l’effet.</li>
-<li>Lorsque l’évènement étudié n’est pas intrinsèquement de type absorbant comme le décès, la « cause » peut se manifester ou plutôt être observée après la survenue de l’évènement étudié.Les modèles de durée standards ne peuvent pas gérer ces situations car l’observation sort du risque après la survenue de l’évènement. Même si la cause est bien mesurée avant l’évènement d’intérêt, un « choc » n’est peut-être qu’un point final d’un processus causal antérieur: une séparation est rarement un évènement ponctuel, une phase plus ou moins longue de mésentente dans le couple lui a vraisemblablement préexister. La datation du début d’un processus causal n’est donc pas toujours facile à mesurer.<br>
-</li>
+<li><p>Rappel: la cause doit précède l’effet.</p></li>
+<li><p>Lorsque l’évènement étudié n’est pas intrinsèquement de type absorbant comme le décès, la « cause » peut se manifester ou plutôt être observée après la survenue de l’évènement étudié.Les modèles de durée standards ne peuvent pas gérer ces situations car l’observation sort du risque après la survenue de l’évènement.</p></li>
+<li><p>Même si la cause est bien mesurée avant l’évènement d’intérêt, un « choc » n’est peut-être qu’un point final d’un processus causal antérieur: une séparation est rarement un évènement ponctuel, une phase plus ou moins longue de mésentente dans le couple lui a vraisemblablement préexister. La datation du début d’un processus causal n’est donc pas toujours facile à mesurer.</p>
+<ul>
 <li><strong>Logique d’adaptation</strong>: la « cause » identifiée est mesurée avant l’évènement étudié.</li>
-<li><strong>Logique d’anticipation</strong>: la « cause » identifiée est mesurée après l’occurrence de l’évènement étudié. L’origine causale est bien antérieure à l’évènement, mais elle n’est pas directement observable.<br>
-</li>
-<li>Lorsque les variables dynamiques sont de type quantitatives/continues, le problème on doit aussi considérer avec des phénomènes d’anticipation sur les valeurs attendues de ces variables, observées postérieurement à l’évènement étudié. On peut introduire des « lags » dans le modèle pour saisir ce phénomène : par exemple <span class="math inline">\(x_t= x_{t+1}\)</span>. Ce décalage des durées d’occurrence peut être aussi introduite pour les variables discrètes (naissance d’un enfant par exemple).</li>
+<li><strong>Logique d’anticipation</strong>: la « cause » identifiée est mesurée après l’occurrence de l’évènement étudié. L’origine causale est bien antérieure à l’évènement, mais elle n’est pas directement observable.</li>
+</ul></li>
+<li><p>Lorsque les variables dynamiques sont de type quantitatives/continues, le problème on doit aussi considérer avec des phénomènes d’anticipation sur les valeurs attendues de ces variables, observées postérieurement à l’évènement étudié. On peut introduire des « lags » dans le modèle pour saisir ce phénomène : par exemple <span class="math inline">\(x_t= x_{t+1}\)</span>. Ce décalage des durées d’occurrence peut être aussi introduite pour les variables discrètes (naissance d’un enfant par exemple).</p></li>
 </ul>
 
 

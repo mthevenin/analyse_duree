@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Modèle de Cox</title>
+<title>Analyse des durées - Modèle de Cox</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -131,6 +131,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Analyse des durées</span>
+  </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -478,18 +481,20 @@ De la même manière, plus on entre à un âge élevé dans la liste d’attente
 </section>
 <section id="r-stata-sas-python" class="level2">
 <h2 class="anchored" data-anchor-id="r-stata-sas-python">R-Stata-Sas-Python</h2>
-<div class="callout-important callout callout-style-simple no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">SAS</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Le modèle est estimé avec la fonction <strong><code>coxph</code></strong> de la librairie <strong><code>survival</code></strong>.</p>
 </div>
-<div class="callout-body-container">
-<ul>
-<li><p><strong>R</strong>: le modèle peut-être estimé avec la fonction <strong><code>coxph</code></strong> de la librairie <strong><code>survival</code></strong>.</p></li>
-<li><p><strong>SAS</strong> : le modèle est estimé avec la <strong><code>proc phreg</code></strong>.</p></li>
-<li><p><strong>Stata</strong>: Le modèle est estimé avec la commande <strong><code>stcox</code></strong>.</p></li>
-<li><p><strong>Python</strong> : Avec la librairie <code>lifelines</code>, le modèle est estimé avec la fonction <strong><code>CoxPHFitter</code></strong>. Avec la librairie <code>statmodels</code>, il est estimé avec la fonction <code>smf.phreg</code>.</p></li>
-</ul>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Le modèle est estimé avec la commande <strong><code>stcox</code></strong>.</p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p>Le modèle est estimé avec la <strong><code>proc phreg</code></strong>.</p>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<p>Avec la librairie <code>lifelines</code>, le modèle est estimé avec la fonction <strong><code>CoxPHFitter</code></strong>. Avec la librairie <code>statmodels</code>, il est estimé avec la fonction <code>smf.phreg</code>.</p>
 </div>
 </div>
 </div>
@@ -522,7 +527,7 @@ De la même manière, plus on entre à un âge élevé dans la liste d’attente
 <li><p>Intuitivement sans censure à droite et en ne considérant que les résidus bruts: on a un RR strictement égal à 1 en début d’exposition <span class="math inline">\(R_i=100\)</span> avec 50 hommes et 50 femmes. Si l’hypothèse PH (strictement) respectée, lorsqu’il reste 90 personnes soumises au risque, on devrait avoir 45 hommes et 45 femmes. Avec <span class="math inline">\(R_i=50\)</span>, 25 hommes et 25 femmes,…….avec <span class="math inline">\(R_i=10\)</span>, 5 hommes et 5 femmes. Au final <span class="math inline">\(X_k\)</span> est toujours égal à 0.5 et les résidus bruts prendront toujours la valeur -.5 si <span class="math inline">\(X=0\)</span> et .5 si <span class="math inline">\(X=1\)</span>. En faisant une simple régression linéaire entre les résidus, qui alternent ces deux valeurs, et <span class="math inline">\(t\)</span>, le coefficient estimé sera non significativement différent de 0.</p></li>
 <li><p>On peut tester l’hypothèse sur les résidus par une régression entre ces résidus pour chaque covariable et la durée (ou fonction dérivée de la durée, par exemple <span class="math inline">\(log(t)\)</span>)). La solution la plus utilisée est le test paramétrique dit de <strong>Grambsch-Therneau</strong>. <br><br></p></li>
 </ul>
-<p><strong>Résultat cohérent entre SAS - STATA - Survival v2 (R) - Lifelines (PYTHON)</strong></p>
+<p><strong>Résultat cohérent entre SAS - STATA - SURVIVAL V2 (R) - Lifelines (Python)</strong></p>
 <div class="callout-warning callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -558,42 +563,44 @@ Warning
 <ul>
 <li><p><strong>Test multiple</strong>: de nouveau il convient de se méfier du résultat du test multiple lorsque le nombre de degrés de liberté est élevé (ou tout simplement supérieur à 1). Le risque de premier espèce peut-être assez faible alors que les tests pour chaque covariables prises une à une présentent élevées (&gt;.1 par exemple). Dans l’exemple sur les trois variables, seulement une est questionnable et le test sur un seuil courant de 5% pourrait être jugé significatif.</p></li>
 <li><p>Le résultat de ce test est considéré par certain.e.s comme un indicateur de l’ampleur du biais qui affecte la baseline du risque.</p></li>
-<li><p><strong>Transformations de la durée</strong>: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: <span class="math inline">\(f(t)=t\)</span> (« identity »), <span class="math inline">\(f(t)=log(t)\)</span>, <span class="math inline">\(f(t)=KM(t)\)</span> ou <span class="math inline">\(f(t)=1- KMa(t\)</span>) où <span class="math inline">\(KMa(t\)</span>) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank », est utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple <span class="math inline">\(t=(0.1,0.5,1,2.6,3)\)</span> donne une transformation <span class="math inline">\(t=(1,2,3,4)\)</span>. A savoir : la fonction « identity » rend le test relativement sensible aux évènements très tardifs et rares (outliers).</p></li>
+<li><p><strong>Transformations de la durée</strong>: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: <span class="math inline">\(f(t)=t\)</span> (« identity »), <span class="math inline">\(f(t)=log(t)\)</span>, <span class="math inline">\(f(t)=KM(t)\)</span> ou <span class="math inline">\(f(t)=1- KM(t\)</span>) où <span class="math inline">\(KM(t\)</span>) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank », est utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple <span class="math inline">\(t=(0.1,0.5,1,2.6,3)\)</span> donne une transformation <span class="math inline">\(t=(1,2,3,4)\)</span>. A savoir : la fonction « identity » rend le test relativement sensible aux évènements très tardifs et rares (outliers).</p></li>
 </ul>
 </section>
 <section id="r-stata-sas-python-1" class="level2">
 <h2 class="anchored" data-anchor-id="r-stata-sas-python-1">R-Stata-Sas-Python</h2>
-<div class="callout-warning callout callout-style-default callout-captioned">
+<div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-caption-container flex-fill">
-Warning
+Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li><p><strong>Utilisatrices et utilisateurs de R</strong>: lire attentivement car les résultats du tests sont modifiés depuis la version 3 de la librairie Survival. Je ne suis pas encore en mesure de dire clairement pourquoi, un piste donnée par une courte note dans le fichier d’aide, et d’évaluer la sensibilité de ce changement à des échantillons de grande taille, et surtout à des estimations avec des durées discrètes/groupées. Bref évaluer cette nouvelle estimation a des données typiques des sciences sociales (T.Therneau est un biostatisticien en poste dans un des établissements de la fameuse <em>mayo clinic</em>).</p></li>
-<li><p><strong>Maj juin 2022</strong>: le programme de la précédente fonction <code>cox.zph</code> a été récupéré. La marche à suivre pour l’utiliser est donné dans le chapitre dédié à R.</p></li>
+<li><strong>Pour les utilisatrices et utilisateurs de R</strong>: lire attentivement car depuis la v3 de la librairie Survival, il s’agit non pas pas d’une nouvelle version du test, mais de la version d’origine qui est exécuté. Tous les autres logiciels utilisent une version <em>simplifiée</em> du test. Il y a peu de conséquences en l’absence d’évènements simultanés, situation plutôt rare en sciences sociale. Avec le test <em>exact</em> on observe des violations quasi systématiques de l’hypothèse en présence d’un nombre importants d’évènements observés simulatnéments Je conseille donc, même si une investigation plus complète doit être faite, d’utiliser le test de la version précédente. Je donne une procédure plutôt simple d’exécuté ce test dans le chapitre <em>programmation</em>, en le récupérant directement. Seul le nom de la fonction a été modifié.</li>
 </ul>
 </div>
 </div>
-<div class="callout-important callout callout-style-simple no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">SAS</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Attention test modifié depuis le v3 de survival.</p>
 <ul>
-<li><p><strong>R</strong>: [17-05-2022: attention test modifié depuis le v3 de survival] après avoir créer un objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>cox.zph</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=1-KM(t)\)</span> où <span class="math inline">\(KM(t)\)</span> sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.</p>
-<ul>
-<li><strong>Juin 2022</strong>: j’ai récupéré le programme du test antérieur, renommé <strong><code>cox.zphold</code></strong>. On peut le télécharger, et il est facilement exécutable.</li>
-</ul></li>
-<li><p><strong>SAS</strong>: le test est disponible depuis quelques années avec l’argument <strong><code>zph</code></strong> sur la ligne <code>proc lifetest</code>. Par défaut SAS utilise <span class="math inline">\(f(t)=t\)</span>. On peut modifier cette fonction.</p></li>
-<li><p><strong>Stata</strong>: le test est donné par la commande <strong><code>estat phtest, d</code></strong>. Par défaut Stata utilise <span class="math inline">\(f(t)=t\)</span>. On peut modifier cette fonction.</p></li>
-<li><p><strong>Python</strong>: après avoir créer l’objet lié à l’estimation du modèle de Cox, on utilise la fonction <strong><code>proportional_hazard_test</code></strong>. La fonction utilise par défaut <span class="math inline">\(f(t)=t\)</span>, mais on peut afficher les résultats pour toutes les transformations de <span class="math inline">\(t\)</span> disponibles avec l’option <code>time_transform=’all’</code>.</p></li>
+<li>Après avoir créer un objet à l’estimation du modèle de Cox, on utilise la fonction <strong><code>cox.zph</code></strong>. Cette fonction utilise par défaut <span class="math inline">\(f(t)=1-KM(t)\)</span> où <span class="math inline">\(KM(t)\)</span> sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.</li>
+<li>Test antérieur: j’ai récupéré le programme du test antérieur, renommé <strong><code>cox.zphold</code></strong>. On peut le télécharger, et il est facilement exécutable.</li>
 </ul>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>Le test est obtenu avec la commande <strong><code>estat phtest, d</code></strong>. Par défaut Stata utilise <span class="math inline">\(f(t)=t\)</span>. On peut modifier cette fonction.</p>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>Le test est disponible depuis quelques années avec l’argument <strong><code>zph</code></strong> sur la ligne <code>proc lifetest</code>. Par défaut SAS utilise <span class="math inline">\(f(t)=t\)</span>. On peut modifier cette fonction.</p>
+</div>
+<div id="tabset-2-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-4-tab">
+<p>On utilise la fonction <strong><code>proportional_hazard_test</code></strong> de la librairie <code>lifelines</code>. La fonction utilise par défaut <span class="math inline">\(f(t)=t\)</span>, mais on peut afficher les résultats pour toutes les transformations de <span class="math inline">\(t\)</span> disponibles avec l’option <code>time_transform=’all’</code>.</p>
 </div>
 </div>
 </div>
@@ -736,18 +743,20 @@ Warning
 <li><strong>Attention</strong>: les calculs ont été donnés à titre d’exemple. Le calculs des intervalles de confiance des rapports de risque s’avère nécessaires si l’on souhaite voir s’ils s’inversent vraiment.</li>
 </ul>
 <p><br> ## Solutions <br></p>
-<p><strong><em>Ne rien faire</em></strong> On interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison). Difficilement soutenable pour l’analyse des effets cliniques, elle peut être envisagée dans d’autres domaines. Attention au nombre de variables qui ne respecte pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme « moyenne » sur la période d’observation.<br>
+<p><strong><em>Ne rien faire</em></strong></p>
+<p>On interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison). Difficilement soutenable pour l’analyse des effets cliniques, elle peut être envisagée dans d’autres domaines. Attention au nombre de variables qui ne respecte pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme « moyenne » sur la période d’observation.<br>
 On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps les écarts déjà significatifs en début d’observation s’accentuent, à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais si l’effet est modéré : <span class="math inline">\(RR&gt;1\)</span> qui baisse ou <span class="math inline">\(RR&lt;1\)</span> qui augmente au cours du temps, je suis bien moins convaincu de la pertinence de cette option.<br>
 Egalement il faut tenir compte de l’intérêt portée par les variables qui présentent un problème par rapport à l’hypothèse. Il n’est peut-être pas nécessaire de complexifier le modèle pour des variables introduites comme contrôle.<br>
 Mais plus problématique… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de <strong><em>frailty</em></strong> (fragilité) lorsque cette non homogénéité n’est pas observables. Des estimations, plutôt complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Si l’hypothèse est sensible aux problèmes d’omission, il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.</p>
 <p><br></p>
-<p><strong><em>Modèle de Cox stratifié</em></strong> Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie ajustées, et si une seule covariable (binaire) présente un problème. Les RR ne seront pas estimés pour la variable.</p>
-<p><strong><em>Intéraction</em></strong><br>
-Introduire une interaction avec la durée, ce qui a été fait plus haut. Cela peut permettre d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des RR, dans l’idéal une seule variable. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être linéaire, ce qui est une hypothèse plutôt forte.</p>
-<p><strong><em>Modèles alternatifs</em></strong><br>
-Utiliser un modèle alternatif: modèles paramétriques à risques proportionnels si la distribution du risque s’ajuste bien, le modèle paramétrique « flexible » de Parmar-Royston (non traité) ou un modèle à temps discret.<br>
+<p><strong><em>Modèle de Cox stratifié</em></strong></p>
+<p>Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie ajustées, et si une seule covariable (binaire) présente un problème. Les RR ne seront pas estimés pour la variable.</p>
+<p><strong><em>Intéraction</em></strong></p>
+<p>Introduire une interaction avec la durée, ce qui a été fait plus haut. Cela peut permettre d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des RR, dans l’idéal une seule variable. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être linéaire, ce qui est une hypothèse plutôt forte.</p>
+<p><strong><em>Modèles alternatifs</em></strong></p>
+<p>Utiliser un modèle alternatif: modèles paramétriques à risques proportionnels si la distribution du risque s’ajuste bien, le modèle paramétrique « flexible » de Parmar-Royston (non traité) ou un modèle à temps discret.<br>
 Utiliser un modèle non paramétrique additif dit d’Aalen ou une de ses variantes (non traité). Mais ces modèles, dont les résultats sont des visuels graphiques, se commentent difficilement.</p>
-<p><strong>Forêt alétaoire</strong><br>
+<p><strong>Forêt aléatoire</strong><br>
 Autre méthode : les forêts aléatoires [à présenter un jour tout de même]. Leo Breiman a dès le départ proposé une estimation des modèles de survie par cette méthode. Par définition, pas sensible à l’hypothèse PH. Mais cela reste des méthodes à finalité prédictive, moins riche en interprétation si ce n’est sur les facteurs d’importance. <br><br></p>
 </section>
 </section>

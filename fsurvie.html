@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Les fonctions de survie</title>
+<title>Analyse des durées - Les fonctions de survie</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -130,6 +130,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
+      <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Analyse des durées</span>
+  </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -429,7 +432,7 @@ Note
 <li>A <span class="math inline">\(t_{min}=0\)</span>, <span class="math inline">\(n_0=n\)</span> individus soumis au risque: <span class="math inline">\(r_0=n_0\)</span>.</li>
 <li>Le nombre d’exposé.e.s au risque sur un intervalle est calculé en soustrayant la moitié des cas censurés sur la longueur de l’intervalle: <span class="math inline">\(r_i=n_i- 0.5\times{c_i}\)</span>, avec <span class="math inline">\(n_i\)</span> le nombre de personnes soumises au risque au début de l’intervalle et <span class="math inline">\(c_i\)</span> le nombre d’observations censurées sur la longueur de l’intervalle. On suppose donc que les observations censurées <span class="math inline">\(c_i\)</span> sont sorties de l’observation uniformément sur l’intervalle. Les cas censurés le sont en moyenne au millieu de l’intervalle. <br></li>
 </ul>
-<p><strong>Calcul de <span class="math inline">\(S(t_i)\)</span></strong><br>
+<p><strong>Calcul de</strong> <span class="math inline">\(S(t_i)\)</span><br>
 On applique la méthode de la section précédente avec:</p>
 <p><span class="math display">\[q(t_i)=\frac{d_i}{n_i - 0.5\times c_i}\]</span></p>
 <p><strong>Calcul de la durée médiane (ou autre quantiles)</strong><br>
@@ -438,22 +441,29 @@ On applique la méthode de la section précédente avec:</p>
 </section>
 <section id="r-stata-sas-python" class="level2">
 <h2 class="anchored" data-anchor-id="r-stata-sas-python">R-Stata-Sas-Python</h2>
-<div class="callout-important callout callout-style-simple no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Sas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Une fonction programmée par un utilisateur (package <code>discSurv</code> =&gt; fonction <code>lifeTable</code>), mais pas convaincante car pas d’estimation des valeurs de la fonction de séjour sur les quartiles de la durée, et estimation avec des intervalles toujours fixés à <span class="math inline">\(dt=1\)</span>. D’un intérêt très limité, voire nul.</p>
 </div>
-<div class="callout-body-container">
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Commande <code>ltable</code>, avec en option la paramétrisation des intervalles de durées. Voir la commande externe <code>qlt</code> (MT) qui calcule les durées médianes (+ autres quartiles) et qui recalcule la fonction de séjour avec une définition des intervalles de durées identique à celle de SAS.</p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p>Sous une <code>proc lifetest</code> avec en option <code>method=lifetable</code>. On peut paramétrer les intervalles d’estimation avec l’option <code>width</code>.</p>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<p>A l’heure actuelle, aucune fonction à ma connaissance</p>
+</div>
+</div>
+</div>
 <ul>
-<li><strong>SAS</strong>: incluse dans <code>proc lifetest</code>.</li>
-<li><strong>Stata</strong>: commande <code>ltable</code>. Voir la commande externe <code>qlt</code> (MT) qui calcule les durées médianes (+ autres quartiles) et qui cale la définition des intervalles avec celle de SAS.</li>
-<li><strong>R</strong>: une fonction programmée par un utilisateur (package <code>discSurv</code> =&gt; fonction <code>lifeTable</code>), mais pas convaincante car pas d’estimation sur les quantiles, et estimation avec des intervalles toujours fixés à <span class="math inline">\(dt=1\)</span>. D’un intérêt très limité, voire nul.<br>
-</li>
-<li><strong>Python</strong>: à l’heure actuelle, aucune fonction à ma connaissance.</li>
+<li><p><strong>Stata</strong>: commande <code>ltable</code>. Voir la commande externe <code>qlt</code> (MT) qui calcule les durées médianes (+ autres quartiles) et qui cale la définition des intervalles avec celle de SAS.</p></li>
+<li><p><strong>R</strong>: une fonction programmée par un utilisateur (package <code>discSurv</code> =&gt; fonction <code>lifeTable</code>), mais pas convaincante car pas d’estimation sur les quantiles, et estimation avec des intervalles toujours fixés à <span class="math inline">\(dt=1\)</span>. D’un intérêt très limité, voire nul.<br>
+</p></li>
+<li><p><strong>Python</strong>: à l’heure actuelle, aucune fonction à ma connaissance.</p></li>
 </ul>
-</div>
-</div>
-</div>
 </section>
 <section id="application" class="level2">
 <h2 class="anchored" data-anchor-id="application">Application</h2>
@@ -537,11 +547,11 @@ On applique la méthode de la section précédente avec:</p>
 </ul>
 <section id="estimation-1" class="level2">
 <h2 class="anchored" data-anchor-id="estimation-1">Estimation</h2>
-<p><strong>Définition du Risk Set (<span class="math inline">\(r_i\)</span>)</strong></p>
+<p><strong>Définition du Risk Set (</strong><span class="math inline">\(r_i\)</span>)</p>
 <p>S’il y a à la fois des évènements et des censures à une durée <span class="math inline">\(t_i\)</span>, les observations censurées sont considérées comme exposées au risque à ce moment, comme si elles étaient censurées très rapidement après. C’est la principale caractéristique de cette méthode, nommée également l’estimateur « product-limit »</p>
-<p><span class="math display">\[r_i=r_{i-1}-d_{i-1}-c_{i-1}\]</span></p>
-<p><br></p>
-<p><strong>Calcul de <span class="math inline">\(q_i\)</span></strong><br>
+<p><span class="math display">\[r_i=r_{i-1}-d_{i-1}-c_{i-1}\]</span><br>
+<br></p>
+<p><strong>Calcul de</strong> <span class="math inline">\(q_i\)</span><br>
 <br> On applique la méthode de la section précédente avec:</p>
 <p><span class="math display">\[q_i=\frac{d_i}{r_{i-1}-d_{i-1}-c_{i-1}}\]</span></p>
 <p><strong>Récupération de la médiane</strong><br>
@@ -550,18 +560,21 @@ On va prendre la valeur de la durée qui se situe juste “en dessous” de 50% 
 </section>
 <section id="r-stata-sas-python-1" class="level2">
 <h2 class="anchored" data-anchor-id="r-stata-sas-python-1">R-Stata-Sas-Python</h2>
-<div class="callout-important callout callout-style-simple no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
+<div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">SAS</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Les estimateurs sont obtenus avec fonction <strong><code>survfit</code></strong> de la librairie <code>survival</code>. On peut obtenir des rendus graphiques supérieurs avec la librairie <code>survminer</code> (fonction <code>ggsurvplot</code>)</p>
 </div>
-<div class="callout-body-container">
-<ul>
-<li><strong>R</strong> : les estimateurs sont donnés par la fonction <strong><code>survfit</code></strong> de la librairie <code>survival</code>.</li>
-<li><strong>SAS</strong> : l’estimation de Kaplan-Meier est affichée par défaut par la <code>proc lifetest</code>. <strong>Attention : le tableau donné par SAS est particulièrement pénible à lire voire illisible, en particulier lorsque le nombre de censures est élevé, une ligne est ajoutée pour chaque observation censurée. Je conseille de ne pas afficher cette partie de l’output (voir section SAS)</strong>. On récupère pour le reste de l’output les valeurs de la durée pour S(t) =(.75,.5,.25) ainsi que le graphique, ce qui est suffisant.</li>
-<li><strong>Stata</strong> : en mode survie (<strong><code>stset</code></strong>), le tableau des estimateurs est donné par la commande <strong><code>sts list</code></strong> et le graphique par <strong><code>sts graph</code></strong>.</li>
-<li><strong>Python</strong>: les resultats sont donnés dans la librairie <code>lifeline</code> par des fonctions dont le nom est tout bonnement interminable. Je conseille plutôt l’utilisation de la librairie <strong><code>statmodels</code></strong> (se reporter à la section dédiée à Python).</li>
-</ul>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>Après avoir appelé les variables de durée et de censure en mode <strong>survival</strong> avec <strong><code>stset</code></strong>), le tableau des estimateurs est obtenu la commande <strong><code>sts list</code></strong> et le graphique avec <strong><code>sts graph</code></strong>.</p>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>L’estimation de Kaplan-Meier est affichée par défaut par la <code>proc lifetest</code>.<br>
+<strong><em>Warning</em></strong> : le tableau affiché par SAS est particulièrement pénible à lire voire illisible, en particulier lorsque le nombre de censures est élevé, une ligne étant ajoutée pour chaque observation censurée. Je conseille de ne pas afficher cette partie de l’output (se reporter à la section SAS du chapitre programmation). On récupère pour le reste de l’output les valeurs de la durée pour S(t) =(.75,.5,.25) ainsi que le graphique, ce qui est suffisant.</p>
+</div>
+<div id="tabset-2-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-4-tab">
+<p>Les resultats sont donnés dans la librairie <code>lifeline</code> par des fonctions dont le nom est interminable. Je conseille plutôt l’utilisation de la librairie <strong><code>statmodels</code></strong> (se reporter à la section dédiée à Python).</p>
 </div>
 </div>
 </div>
@@ -671,8 +684,7 @@ On va prendre la valeur de la durée qui se situe juste “en dessous” de 50% 
 <p>A partir de l’estimateur Kaplan-Meier..<br>
 <br></p>
 <p><strong>Le risque cumulé</strong>: estimateur de Nelson AAlen<br>
-Il est simplément égal à:</p>
-<p><span class="math display">\[H(t)=\sum_{t_i\leq k}q(t_i)\]</span></p>
+Il est simplément égal à: <span class="math display">\[H(t)=\sum_{t_i\leq k}q(t_i)\]</span></p>
 <p><img src="images/Image19.png" class="img-fluid" style="width:70.0%"></p>
 <p><strong>Le risque instantané</strong><br>
 Nécessite l’estimateur de Nelson-Aalen. Le risque est obtenu en lissant les différences - toujours positive - entre <span class="math inline">\(H(t)\)</span> par la méthode dite du <strong>kernel</strong>. Elle permet d’obtenir une fonction continue avec la durée (paramétrables sur les largeurs des fenêtres de lissage). D’autres méthodes de lissage sont maintenant possibles, et de plus en plus utilisées, en particulier celles utilisant des splines restreintes (paramétrable sur un nombre de degré de liberté – nœuds-).</p>
