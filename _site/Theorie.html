@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.96">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Analyse des durées - La théorie</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Analyse des durées</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"><strong>ANALYSE DES DUREES 2022</strong></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mthevenin/analyse_duree"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:marc.thevenin@ined.fr"><i class="bi bi-envelope" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">La théorie</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false"><strong>Données et théorie</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Donnees.html" class="sidebar-item-text sidebar-link">Les Données</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false"><strong>Méthodes non paramétriques</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fsurvie.html" class="sidebar-item-text sidebar-link">Les fonctions de survie</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./comp_fsurvie.html" class="sidebar-item-text sidebar-link">Tests de comparaison</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false"><strong>Modèles à risques proportionnels</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_mod.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cox.html" class="sidebar-item-text sidebar-link">Modèle de Cox</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./discret.html" class="sidebar-item-text sidebar-link">Modèle temps discret</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dynamiques.html" class="sidebar-item-text sidebar-link">Variables dynamiques</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false"><strong>Compléments</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parametrique.html" class="sidebar-item-text sidebar-link">Modèles paramétriques</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./concurrent.html" class="sidebar-item-text sidebar-link">Risques concurrents</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./frailty.html" class="sidebar-item-text sidebar-link">Fragilité et immunité</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false"><strong>Programmation</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R.html" class="sidebar-item-text sidebar-link">R</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Stata.html" class="sidebar-item-text sidebar-link">Stata</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Sas.html" class="sidebar-item-text sidebar-link">SAS</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Python.html" class="sidebar-item-text sidebar-link">PYTHON</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sections</h2>
+   
+  <ul>
+  <li><a href="#temps-et-durée" id="toc-temps-et-durée" class="nav-link active" data-scroll-target="#temps-et-durée"><strong>Temps et durée</strong></a></li>
+  <li><a href="#le-risk-set" id="toc-le-risk-set" class="nav-link" data-scroll-target="#le-risk-set"><strong>Le Risk Set</strong></a></li>
+  <li><a href="#la-censure" id="toc-la-censure" class="nav-link" data-scroll-target="#la-censure"><strong>La Censure</strong></a>
+  <ul class="collapse">
+  <li><a href="#censure-à-droite" id="toc-censure-à-droite" class="nav-link" data-scroll-target="#censure-à-droite"><strong>Censure à droite</strong></a></li>
+  <li><a href="#censure-à-gauche-troncature-et-censure-par-intervalle" id="toc-censure-à-gauche-troncature-et-censure-par-intervalle" class="nav-link" data-scroll-target="#censure-à-gauche-troncature-et-censure-par-intervalle"><strong>Censure à gauche, troncature et censure par intervalle</strong></a></li>
+  </ul></li>
+  <li><a href="#les-grandeurs" id="toc-les-grandeurs" class="nav-link" data-scroll-target="#les-grandeurs"><strong>Les grandeurs</strong></a>
+  <ul class="collapse">
+  <li><a href="#les-grandeurs-utilisées" id="toc-les-grandeurs-utilisées" class="nav-link" data-scroll-target="#les-grandeurs-utilisées"><strong>Les grandeurs utilisées</strong></a></li>
+  <li><a href="#la-fonction-de-survie-st" id="toc-la-fonction-de-survie-st" class="nav-link" data-scroll-target="#la-fonction-de-survie-st"><strong>La fonction de Survie <span class="math inline">\(S(t)\)</span></strong></a></li>
+  <li><a href="#la-fonction-de-répartition-ft" id="toc-la-fonction-de-répartition-ft" class="nav-link" data-scroll-target="#la-fonction-de-répartition-ft"><strong>La fonction de répartition <span class="math inline">\(F(t)\)</span></strong></a></li>
+  <li><a href="#la-fonction-de-densité-ft" id="toc-la-fonction-de-densité-ft" class="nav-link" data-scroll-target="#la-fonction-de-densité-ft"><strong>La fonction de densité <span class="math inline">\(f(t)\)</span></strong></a></li>
+  <li><a href="#le-risque-instantané-ht" id="toc-le-risque-instantané-ht" class="nav-link" data-scroll-target="#le-risque-instantané-ht"><strong>Le risque instantané <span class="math inline">\(h(t)\)</span></strong></a></li>
+  <li><a href="#le-risque-cumulé-ht" id="toc-le-risque-cumulé-ht" class="nav-link" data-scroll-target="#le-risque-cumulé-ht"><strong>Le risque cumulé <span class="math inline">\(H(t)\)</span></strong></a></li>
+  </ul></li>
+  <li><a href="#compléments" id="toc-compléments" class="nav-link" data-scroll-target="#compléments"><strong>Compléments</strong></a>
+  <ul class="collapse">
+  <li><a href="#forme-des-fonctions-de-survie" id="toc-forme-des-fonctions-de-survie" class="nav-link" data-scroll-target="#forme-des-fonctions-de-survie"><strong>Forme des fonctions de survie</strong></a></li>
+  <li><a href="#absence-de-censures-à-droites" id="toc-absence-de-censures-à-droites" class="nav-link" data-scroll-target="#absence-de-censures-à-droites"><strong>Absence de censures à droites</strong></a></li>
+  <li><a href="#utilisation-des-pondérations" id="toc-utilisation-des-pondérations" class="nav-link" data-scroll-target="#utilisation-des-pondérations"><strong>Utilisation des pondérations</strong></a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">La théorie</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>L’analyse des durées peut être vue comme l’étude d’une variable aléatoire <span class="math inline">\(T\)</span> qui décrit la durée d’attente jusqu’à l’occurence d’un évènement.</p>
+<ul>
+<li>La durée <span class="math inline">\(T=0\)</span> est le début de l’exposition au risque (entrée dans le <strong>Risk set</strong>).</li>
+<li><span class="math inline">\(T\)</span> est une mesure non négative de la durée.</li>
+</ul>
+<p>La principale caractéristique de l’analyse des durées est le traitement des informations dites <strong>censurées</strong>, lorsque la <strong>durée d’observation est plus courte que la durée d’exposition au risque</strong>.</p>
+<p><br></p>
+<section id="temps-et-durée" class="level1">
+<h1><strong>Temps et durée</strong></h1>
+<p>Le temps est une dimension (la quatrième), la durée est sa mesure. La durée est tout simplement calculer par la différence, pour une échelle temporelle donnée, entre la fin et le début d’une période d’exposition ou d’observation.<br>
+<br> On distingue généralement deux types de durée : la <strong><em>durée continue</em></strong> et la <strong><em>durée discrète/groupée</em></strong>. Ces deux notions ne possèdent pas réellement de définition, la différence s’explique plutôt par la présence ou non de simultanéité dans l’occurrence des évènements. Le temps étant intrasèquement continu car deux évènements ne peuvent pas avoir lieu en « même temps ». C’est donc l’échelle temporelle choisie ou imposée par l’analyse et les données qui pourra rendre cette mesure continue ou discrète/groupée.<br>
+Pour un physicien travaillant sur la théorie de la relativité avec des horloges atomiques, une minute (voire une seconde) est une mesure très groupée pour ne pas dire grossière du temps, alors que pour un géologue c’est une mesure continue. Pour ces deux disciplines, cette échelle de mesure n’est pas adaptée à leur domaine. Le choix de l’échelle temporelle doit être pertinent par rapport aux objectifs de l’analyse… même si on dispose des informations (dates de naissance exactes), analyser la fécondité avec une métrique journalière n’aurait pas de sens.</p>
+<p>Il existe des situations où les durées sont par nature discrète, lorsqu’un évènement ne peut avoir lieu qu’à un moment précis (date d’anniversaire des contrats pour l’analyse des résiliation). Généralement dans les sciences sociales avec un recueil de données de type rétrospectif, les mesures dites discrètes sont plutôt de nature groupées. Pour une même année, on considèrera indifféremment des évènements qui se produiront un premier janvier et un 31 décembre d’une même année.<br>
+<br></p>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><strong>Durée continue : absence (ou très peu) d’évènements simultanés</strong><br>
+</li>
+<li><strong>Durée discrète/groupée : présence d’évènements simultanés (en grand nombre)</strong><br>
+</li>
+</ul>
+</div>
+</div>
+<p><br></p>
+</section>
+<section id="le-risk-set" class="level1">
+<h1><strong>Le Risk Set</strong></h1>
+<ol type="1">
+<li>Il s’agit de la population “soumise” ou “exposée” au risque lorsque <span class="math inline">\(T=t_i\)</span>. <br></li>
+<li>Cette population varie dans le temps car:
+<ul>
+<li>Certaines personnes ont connu l’évènement, donc peuvent ne plus être soumises au risque (ex: décès si on analyse la mortalité).</li>
+<li>Certaines personnes sortent de l’observation sans avoir (encore) observé l’évènement: décès si on analyse un autre type d’évènement, perdu.e.s de vue, fin de l’observation à une durée peu avancée dans un recueil rétrospectif.</li>
+</ul></li>
+</ol>
+</section>
+<section id="la-censure" class="level1">
+<h1><strong>La Censure</strong></h1>
+<div class="callout-important callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Une observation est dite censurée lorsque la durée d’observation est inférieure à la durée d’exposition au risque</strong></p>
+</div>
+</div>
+<section id="censure-à-droite" class="level2">
+<h2 class="anchored" data-anchor-id="censure-à-droite"><strong>Censure à droite</strong></h2>
+<p><strong>Définition</strong><br>
+<br> Certains individus n’auront pas (encore) connu l’évènement à la date de l’enquête après une certaine durée d’exposition. On a donc besoin d’un marqueur permettant de déterminer que les individus n’ont pas observé l’évènement sur la période d’étude.</p>
+<p><strong>Pourquoi une information est-elle censurée (à droite)?</strong></p>
+<ul>
+<li>Fin de l’étude, date de l’enquête.</li>
+<li>Perdu de vue, décès si autre évènement étudié.</li>
+</ul>
+<p>En pratique (important)</p>
+<ul>
+<li><strong>Ne pas exclure ces observations</strong>, sinon on surestime la survenue de l’évènement.</li>
+<li><strong>Ne pas les considérer a-priori comme sorties de l’exposition sans avoir connu l’évènement</strong>. Elles peuvent connaître l’évènement après la date de l’enquête ou en étant perdues de vue. Sinon on sous-estime la durée moyenne de survenue de l’évènement.</li>
+</ul>
+<p><strong>Exemple</strong><br>
+On effectue une enquête auprès de femmes : On souhaite mesurer l’âge à la première naissance. Au moment de l’enquête, une femme est âgée de 29 ans n’a pas (encore) d’enfant.<br>
+Cette information sera dite «censurée».<br>
+Elle est clairement encore soumise au risque après la date de l’enquête. Au niveau de l’analyse, elle sera soumise au risque à partir de ses premières règles jusqu’au moment de l’enquête.</p>
+<p><br></p>
+<p><strong>Hypothèse fondamentale</strong><br>
+Les observations censurées ont vis à vis du phénomène observé le même comportement que les observations non censurées. On dit que la <strong>censure est non informative</strong>. Elle ne dépend pas de l’évènement analysé. Normalement le problème ne se pose pas dans les recueil retrospectif. <br></p>
+<p><em>Problème posé par la censure informative</em><br>
+Par exemple en analysant des décès avec un recueil prospectif, si un individu est perdu de vue en raison d’une dégradation de son état de santé, l’indépendance entre la cause de la censure et le décès ne peut plus être assurée.<br>
+A l’Ined l’exploitation du registre des personnes atteintes de mucoviscidose (G.Bellis) donne une autre illustration de ce phénomène. Chaque année un nombre significatif de personnes sortent du registre (pas de résultats aux examens annuels). Si certain.e.s perdu.e.s de vue s’expliquent par des déménagements, émigration ou par un simple problème d’enregistrement des informations, on note qu’ils/elles sont nombreu.se.s à présenter une forme « légère » de la maladie. L’information pouvant être donnée ici par la mutation du gène. Comme il n’est pas recommandé de supprimer ou de traiter ces observations comme des censures à droite non informative, on peut les appréhender comme un risque concurrent au décès ou à tout autre évènement analysé à partir de ce registre (voir section dédiée).</p>
+<p><br></p>
+<p>Les graphiques suivant représentent, en temps calendaire et après sa transformation en durée, la logique des censures à droite. Le recueil des informations est ici de nature prospectives.</p>
+<ul>
+<li>Trait plein : durée observée</li>
+<li>Pointillés : durée censurés</li>
+<li>Bulle : moment de l’évènement</li>
+</ul>
+<p><img src="images/cens1.png" class="img-fluid" style="width:90.0%"></p>
+<p><img src="images/cens2.png" class="img-fluid" style="width:90.0%"> <br></p>
+</section>
+<section id="censure-à-gauche-troncature-et-censure-par-intervalle" class="level2">
+<h2 class="anchored" data-anchor-id="censure-à-gauche-troncature-et-censure-par-intervalle"><strong>Censure à gauche, troncature et censure par intervalle</strong></h2>
+<p><strong>Censure à gauche</strong><br>
+L’évènement s’est produit avant le début période d’observation. Typique des données prospectives, de type registre, avec des âges d’inclusion différenciés. <br></p>
+<p><strong>Censure par intervalle</strong> Un évènement peut avoir lieux entre 2 temps d’observations sans qu’on puisse les observer (ex: en criminologie récidive d’un delit entre deux arrestations). Un phénomène de censure à droite avec perdu.e de vue peut se transformer en censure par intervalle lorsque la personne réapparait et est de nouveau incluse dans les données. <br> <strong>Troncature</strong><br>
+Par l’exemple, on analyse la survie d’une population. Seule la survie des individus vivants à l’inclusion peut être analysée (<em>troncature à gauche</em>). On peut également trouver un phénomène de troncature lorsqu’on mesure la durée à partir ou jusqu’à un certain seuil niveau.<br>
+<br></p>
+<p>Ces situations sont généralement plutôt bien contrôlées dans les recueils rétrospectifs. Elles sont assez courantes lorsque le recueil est de type prospectif.</p>
+<p><br></p>
+<p><strong>Durée d’observation supérieure à la durée d’exposition</strong><br>
+A l’inverse des individus peuvent sortir de l’exposition avant la fin de la période d’observation, et il convient donc de corriger la durée de cette sortie.<br>
+Un exemple simple : si au moment de l’enquête une femme sans enfant a 70 ans, cela n’a pas de sens de continuer de l’exposer au risque au-delà d’un certain âge. Si on ne dispose pas d’information sur l’âge à la ménopause on peut tronquer la durée un peu au-delà de l’âge le plus élevé à la première naissance observée dans les données.</p>
+</section>
+</section>
+<section id="les-grandeurs" class="level1">
+<h1><strong>Les grandeurs</strong></h1>
+<p><br></p>
+<section id="les-grandeurs-utilisées" class="level2">
+<h2 class="anchored" data-anchor-id="les-grandeurs-utilisées"><strong>Les grandeurs utilisées</strong></h2>
+<p>La fonction de survie <strong><span class="math inline">\(S(t)\)</span></strong></p>
+<p>La fonction de répartition <strong><span class="math inline">\(F(t)\)</span></strong></p>
+<p>La fonction de densité <strong><span class="math inline">\(f(t)\)</span></strong></p>
+<p>Le risque “instantané” <strong><span class="math inline">\(h(t)\)</span></strong></p>
+<p>Le risque “instantané” cumulé <strong><span class="math inline">\(H(t)\)</span></strong></p>
+<p><br></p>
+<p><strong>Remarques</strong>:</p>
+<ul>
+<li>Toutes ces grandeurs sont mathématiquement liées les unes par rapport aux autres. En connaître une permet d’obtenir les autres.<br>
+</li>
+<li>Au niveau formel on se placera ici du point de vue où la durée mesurée est strictement continue. Cela se traduit, entre autre, par l’absence d’évènements dits “simultanés”.</li>
+<li>Les expressions qui vont suivre ne sont pas des techniques de calcul, mais des grandeurs dont on précisera seulement les propriétés.</li>
+</ul>
+<p><br></p>
+</section>
+<section id="la-fonction-de-survie-st" class="level2">
+<h2 class="anchored" data-anchor-id="la-fonction-de-survie-st"><strong>La fonction de Survie <span class="math inline">\(S(t)\)</span></strong></h2>
+<p>Dans ce type d’analyse, il est courant d’analyser la courbe de survie (ou de séjour).</p>
+<p><strong>La fonction de survie donne la proportion de la population qui n’a pas encore connue l’évènement après une certaine durée <span class="math inline">\(t\)</span></strong>. Elle y a “survécu”.</p>
+<p>Formellement, la fonction de survie est la probabilité de survivre au-delà de <span class="math inline">\(t\)</span>, soit:<br>
+<br></p>
+<p><span class="math display">\[S(t) = P(T&gt;t)\]</span></p>
+<p><br> Propriétés: <span class="math inline">\(S(0)=1\)</span> et <span class="math inline">\(\lim\limits_{t\to{\propto}}S(t)=0\)</span><br>
+<br> La fonction de survie est strictement non croissante.</p>
+</section>
+<section id="la-fonction-de-répartition-ft" class="level2">
+<h2 class="anchored" data-anchor-id="la-fonction-de-répartition-ft"><strong>La fonction de répartition <span class="math inline">\(F(t)\)</span></strong></h2>
+<p>C’est la probabilité de connaitre l’évènement jusqu’en <span class="math inline">\(t\)</span>, soit:<br>
+<br></p>
+<p><span class="math display">\[F(t)=P(T\leq{t})\]</span></p>
+<p><span class="math inline">\(t\geq{0}\)</span> Soit <span class="math inline">\(F(t) = 1 - S(t)\)</span></p>
+<p><br> La fonction de survie et la fonction de répartition sont deux grandeurs strictement complémentaires.<br>
+<br> Propriétés: <span class="math inline">\(F(0)=0\)</span> et <span class="math inline">\(\lim\limits_{t\to{\propto}}F(t)=1\)</span></p>
+</section>
+<section id="la-fonction-de-densité-ft" class="level2">
+<h2 class="anchored" data-anchor-id="la-fonction-de-densité-ft"><strong>La fonction de densité <span class="math inline">\(f(t)\)</span></strong></h2>
+<ul>
+<li>Pour une valeur de <span class="math inline">\(t\)</span> donnée, la fonction de densité de l’évènement donne la distribution des moments où les évènement ont eu lieu. Elle est donnée dans un premier temps par la probabilité de connaitre l’évènement dans un petit intervalle de temps <span class="math inline">\(dt\)</span>. Si <span class="math inline">\(dt\)</span> est proche de 0 (temps continu) alors cette probabilité tend également vers 0. On norme donc cette probabilité par <span class="math inline">\(dt\)</span>. Rappel: on est toujours ici dans la théorie.<br>
+</li>
+<li>En temps continu, la fonction de densité est donnée par la dérivée de la fonction de répartition: <span class="math inline">\(f(t)=F'(t)=-S'(t)\)</span>. <br> Formellement la fonction de densité <span class="math inline">\(f(t)\)</span> s’écrit:</li>
+</ul>
+<p><span class="math display">\[f(t)=\frac{P(t\leq{T}&lt; t + dt)}{dt}\]</span></p>
+<p><br></p>
+</section>
+<section id="le-risque-instantané-ht" class="level2">
+<h2 class="anchored" data-anchor-id="le-risque-instantané-ht"><strong>Le risque instantané <span class="math inline">\(h(t)\)</span></strong></h2>
+<p>Concept fondamental de l’analyse des durées:</p>
+<p><span class="math display">\[h(t)=\frac{P(t\leq{T}&lt; t + dt | T\geq{t})}{dt}\]</span> <br></p>
+<ul>
+<li><span class="math inline">\(P(t\leq{T}&lt; t + dt | T\geq{t})\)</span> donne la probabilité de survenue de l’évènement sur l’intervalle <span class="math inline">\([t,t+dt[\)</span> <em>conditionnellement à la survie au temps <span class="math inline">\(t\)</span></em>.<br>
+</li>
+<li>La quantité obtenue donne alors un nombre moyen d’évènements que connaîtrait un individu durant une unité de temps choisie.</li>
+<li>A priori cette quantité n’est pas une probabilité. C’est la nature de l’évènement, en particulier sa non récurrence, et la métrique temporelle choisie ou disponible qui peut la rendre assimilable à une probabilité. Tout comme la densité, on est plutôt dans la définition d’un <em>taux</em> (d’où l’expression <strong><em>hazard rate</em></strong> en anglais).</li>
+</ul>
+<p><br> On peut également écrire: <span class="math inline">\(h(t)=\frac{f(t)}{S(t)}=\frac{F'(t)}{S(t)}=-\frac{S'(t)}{S(t)}\)</span></p>
+<p><br></p>
+<p>On voit ici clairement que la fonction de risque n’est pas une probabilité : <span class="math inline">\(\frac{f(t)}{S(t)}\)</span> ne peut pas contraindre la valeur à ne pas être supérieure à 1.</p>
+</section>
+<section id="le-risque-cumulé-ht" class="level2">
+<h2 class="anchored" data-anchor-id="le-risque-cumulé-ht"><strong>Le risque cumulé <span class="math inline">\(H(t)\)</span></strong></h2>
+<p>Le risque cumulé est égal à : <span class="math inline">\(H(t)=\int_{0}^{t} h(u)du = -log(S(t))\)</span><br>
+<br> On peut alors le réécrire toutes les autres quantités:<br>
+<br></p>
+<ul>
+<li><span class="math inline">\(S(t)=e^{-H(t)}\)</span><br>
+</li>
+<li><span class="math inline">\(F(t)=1-e^{-H(t)}\)</span><br>
+</li>
+<li><span class="math inline">\(f(t)=h(t)\times{e^{-H(t)}}\)</span></li>
+</ul>
+<p><br> <em>Exemple avec la loi exponentiel (risque constant)</em><br>
+Si on pose que le risque est strictement constant au cours du temps: <span class="math inline">\(h(t)=a\)</span> (on parle de <strong>loi exponentielle</strong> - cf partie sur les modèles AFT - typique des processus sans mémoire comme la durée de vie des ampoules):</p>
+<ul>
+<li><span class="math inline">\(h(t)=a\)</span><br>
+</li>
+<li><span class="math inline">\(H(t)=a\times{t}\)</span><br>
+</li>
+<li><span class="math inline">\(S(t)=e^{-a\times{t}}\)</span><br>
+</li>
+<li><span class="math inline">\(F(t)=1-e^{-a\times{t}}\)</span><br>
+</li>
+<li><span class="math inline">\(f(t)=a\times{e^{-a\times{t}}}\)</span></li>
+</ul>
+<p><img src="images/Image5.png" class="img-fluid" style="width:90.0%"></p>
+<p><strong>Application: risque et échelles temporelles</strong>:<br>
+<br> Fortement inspiré, pour ne pas dire copié, de l’excellent cours de Gilbert Colletaz: https://www.univ-orleans.fr/deg/masters/ESA/GC/sources/Econometrie%20des%20Donnees%20de%20Survie.pdf<br>
+Attention on sort ici très clairement du temps continu, il s’agit seulement de manipuler les concepts et de voir la dépendance de la mesure du risque à l’échelle temporelle choisie/disponible.<br>
+<br></p>
+<ol type="1">
+<li><p>Durant les mois d’hiver, entre le 1er janvier et le 1er avril (3 mois), la probabilité d’attraper un rhume chaque mois est de 48% (il s’agit bien d’un risque). Quelle est le risque d’attraper le rhume durant la saison froide?<br>
+<span class="math inline">\(\frac{0.48}{1/3}=1.44\)</span>. On peut donc s’attendre a attraper 1.44 rhume durant la période d’hiver.</p></li>
+<li><p>On passe une année en vacances dans une région où la probabilité de décéder chaque mois est évaluée à 33%. Quelle est le risque de décéder pendant cette année sabbatique? <span class="math inline">\(\frac{0.33}{1/12}=3.96\)</span><br>
+<br></p></li>
+</ol>
+<p>Le risque peut donc être supérieur à 1 (c’est donc plutôt un taux tel qu’on le défini généralement). En soit cela ne pose pas de problème comme il s’agit d’un nombre moyen d’évènements espérés (exemple: “taux” de fécondité), mais pour des évènements qui ne peuvent pas se répéter, évènements dits “absorbants”, l’interprétation n’est pas très intuitive.<br>
+<br> On peut donc prendre l’inverse du risque qui mesure la durée moyenne (espérée) jusqu’à l’occurence de l’évènement.<br>
+On retrouve donc un concept classique en analyse démographique comme l’espérance de vie (survie): la question n’est pas de savoir si “on” va mourir ou non, le risque indépendement du temps étant par définition égal à 1, mais jusqu’à quand on peut espérer survivre.<br>
+<br> - Pour le rhume, la durée moyenne est de <span class="math inline">\(1/1.44=0.69\)</span> du trimestre hivernal, soit approximativement le début du mois de mars. - Pour l’année sabbatique, la durée moyenne de survie (l’espérance de vie) est de <span class="math inline">\(1/3.96=0.25\)</span> d’une année soit 3 mois après l’arrivée dans la région.</p>
+<p><br></p>
+<p><strong>Exercice</strong> <br></p>
+<ul>
+<li>On a une population de 100 cochons d’Inde.</li>
+<li>On analyse leur mortalité (naturelle).<br>
+</li>
+<li>Ici l’analyse est en temps discret.</li>
+<li>La durée représente le nombre d’année de vie.</li>
+<li>Il n’y a pas de censure à droite.</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Durée</th>
+<th>Nombre de décès</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>30</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>40</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>N=100</strong></p>
+<p>A quel âge le risque de mourir des cochons d’Inde est-il le plus élevé? Quelle est la valeur de ce risque?</p>
+<p><br></p>
+</section>
+</section>
+<section id="compléments" class="level1">
+<h1><strong>Compléments</strong></h1>
+<p><br></p>
+<section id="forme-des-fonctions-de-survie" class="level2">
+<h2 class="anchored" data-anchor-id="forme-des-fonctions-de-survie"><strong>Forme des fonctions de survie</strong></h2>
+<p>Une des propriétés de la fonction de survie ou de séjour est qu’elles tendent vers 0. A la lecture du graphique suivant, cela peut correspondre à la forme de la courbe S2, bien que le % de survivant tend à baisser de moins en moins à mesure que la durée augmente. Deux cas limites doivent être considéré.</p>
+<p><img src="images/Image5b.png" class="img-fluid" style="width:90.0%"> <br></p>
+<ul>
+<li><p><strong>S1</strong>: très peu d’évènements et la fonction de séjour suit une asymptote nettement supérieur à 0 ( <span class="math inline">\(\lim\limits_{t\to{\propto}}S(t)=a\)</span> avec <span class="math inline">\(a&gt;0\)</span>). La question est plus délicate car on interroge l’exposition au risque d’une partie de l’échantillon ou, dit autrement on peut penser qu’une fraction est immunisé au risque. Cette problématique est rapidement posée en fin de formation.</p></li>
+<li><p><strong>S2</strong>: la situation attendue</p></li>
+<li><p><strong>S3</strong>: La survie tombe à 0 très/trop rapidement: il n’y a donc pas ou presque pas de durée (par exemple presque tout l’échantillon observe l’évènement la première année de l’exposition). Les méthodes en temps continue ne sont a priori pas adaptées à ce genre de situation. Si on dispose d’une information plus fine pour dater les évènements, la fonction de séjour pourra reprendre une forme plus “standard”. Dans le graphique, <span class="math inline">\(S(t=1)=0.4\)</span> , <span class="math inline">\(S(t=2)=0.025\)</span>, mais si on dispose par exemple de 10 points d’observations supplémentaires dans chaque durée groupée:</p></li>
+</ul>
+<p><img src="images/Image5c.png" class="img-fluid" style="width:90.0%"></p>
+</section>
+<section id="absence-de-censures-à-droites" class="level2">
+<h2 class="anchored" data-anchor-id="absence-de-censures-à-droites"><strong>Absence de censures à droites</strong></h2>
+<p>Les méthodes qui vont être présentées <strong><em>gèrent</em></strong> la présence de censures à droite. En leur absence, elle restent néanmoins parfaitement valables. L’absence de censure facilite certaines analyses, par exemple celles des fonctions de séjour où le calcul direct des durées moyennes est rendu possible.</p>
+<p><br></p>
+</section>
+<section id="utilisation-des-pondérations" class="level2">
+<h2 class="anchored" data-anchor-id="utilisation-des-pondérations"><strong>Utilisation des pondérations</strong></h2>
+<p>Une question assez récurrente concerne l’utilisation des poids de sondage dans les analyses de durées avec longueurs biographiques souvent assez longues. Appartenant à l’<em>école du bon sens</em> (Eva Levièvre), leur utilisation ne me semble pas recommandée voire à exclure sauf exceptions. En effet les pondérations sont générées au moment de l’enquête, alors que les évènements étudiés peuvent remonter dans un passé plus ou moins lointain pour une partie de la population analysée. Si on regarde de plus près, la création de poids longitudinaux ne résoudrait pas grand chose ,les pondérations devant être recalculées à chaque moment d’observation ou à chaque moment où des évènements se produisent. Par ailleurs on mélangerait à un instant donné des personnes issues de générations différentes ce qui rend impossible tout calage sur des caractéristiques d’un population. Supposons une personne âgée de 25 ans et un personne âgée de 70 ans au moment de l’enquête en 2022, avec un début d’observation à l’âge de 18 ans . A 20 ans (<span class="math inline">\(t=2\)</span>), pour la première personne les caractéristiques de la population sont celles de 2017, pour celle de 70 ans celles de 1972. On fait comment??????</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Marc Thévenin - Ined-Sms - Août 2022</div>
+  </div>
+</footer>
+
+
+
+</body></html>

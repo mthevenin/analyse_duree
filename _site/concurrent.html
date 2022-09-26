@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.96">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Analyse des durées - Risques concurrents</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./frailty.html" rel="next">
+<link href="./parametrique.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">Analyse des durées</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"><strong>ANALYSE DES DUREES 2022</strong></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mthevenin/analyse_duree"><i class="bi bi-github" role="img">
+</i> 
+ </a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="mailto:marc.thevenin@ined.fr"><i class="bi bi-envelope" role="img">
+</i> 
+ </a>
+  </li>  
+</ul>
+              <div class="quarto-toggle-container">
+                  <a href="" class="quarto-color-scheme-toggle nav-link" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+              </div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Risques concurrents</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation docked overflow-auto">
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false"><strong>Données et théorie</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./introduction.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Donnees.html" class="sidebar-item-text sidebar-link">Les Données</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false"><strong>Méthodes non paramétriques</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./fsurvie.html" class="sidebar-item-text sidebar-link">Les fonctions de survie</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./comp_fsurvie.html" class="sidebar-item-text sidebar-link">Tests de comparaison</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false"><strong>Modèles à risques proportionnels</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro_mod.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cox.html" class="sidebar-item-text sidebar-link">Modèle de Cox</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./discret.html" class="sidebar-item-text sidebar-link">Modèle temps discret</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./dynamiques.html" class="sidebar-item-text sidebar-link">Variables dynamiques</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true"><strong>Compléments</strong></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./parametrique.html" class="sidebar-item-text sidebar-link">Modèles paramétriques</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./concurrent.html" class="sidebar-item-text sidebar-link active">Risques concurrents</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./frailty.html" class="sidebar-item-text sidebar-link">Fragilité et immunité</a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false"><strong>Programmation</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./R.html" class="sidebar-item-text sidebar-link">R</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Stata.html" class="sidebar-item-text sidebar-link">Stata</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Sas.html" class="sidebar-item-text sidebar-link">SAS</a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./Python.html" class="sidebar-item-text sidebar-link">PYTHON</a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sections</h2>
+   
+  <ul>
+  <li><a href="#risques-cause-specific-et-biais-sur-les-estimateurs-km" id="toc-risques-cause-specific-et-biais-sur-les-estimateurs-km" class="nav-link active" data-scroll-target="#risques-cause-specific-et-biais-sur-les-estimateurs-km"><strong>Risques “cause-specific” et biais sur les estimateurs KM</strong></a></li>
+  <li><a href="#estimations-en-présence-de-risques-concurrents-cif" id="toc-estimations-en-présence-de-risques-concurrents-cif" class="nav-link" data-scroll-target="#estimations-en-présence-de-risques-concurrents-cif"><strong>Estimations en présence de risques concurrents (CIF)</strong></a>
+  <ul class="collapse">
+  <li><a href="#estimation-non-paramétrique" id="toc-estimation-non-paramétrique" class="nav-link" data-scroll-target="#estimation-non-paramétrique">Estimation non paramétrique</a></li>
+  <li><a href="#r-stata-sas-python" id="toc-r-stata-sas-python" class="nav-link" data-scroll-target="#r-stata-sas-python">R-Stata-Sas-Python</a></li>
+  <li><a href="#compararaison-des-cif" id="toc-compararaison-des-cif" class="nav-link" data-scroll-target="#compararaison-des-cif">Compararaison des CIF</a></li>
+  <li><a href="#r-stata-sas-python-1" id="toc-r-stata-sas-python-1" class="nav-link" data-scroll-target="#r-stata-sas-python-1">R-Stata-Sas-Python</a></li>
+  </ul></li>
+  <li><a href="#modèles" id="toc-modèles" class="nav-link" data-scroll-target="#modèles"><strong>Modèles</strong></a>
+  <ul class="collapse">
+  <li><a href="#modèles-semi-paramétriques" id="toc-modèles-semi-paramétriques" class="nav-link" data-scroll-target="#modèles-semi-paramétriques">Modèles Semi paramétriques</a></li>
+  <li><a href="#r-stata-sas-python-2" id="toc-r-stata-sas-python-2" class="nav-link" data-scroll-target="#r-stata-sas-python-2">R-Stata-Sas-Python</a></li>
+  <li><a href="#modèle-à-temps-discret" id="toc-modèle-à-temps-discret" class="nav-link" data-scroll-target="#modèle-à-temps-discret">Modèle à temps discret</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Risques concurrents</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>Le problème des événements multiples dans les analyses de survie a été posée dans les années 1970 avec la notion de “<strong>risques concurrents</strong>” (competing risks) : il s’agit d’événements survenant au cours de la période d’observations et qui “empêchent” l’occurence de l’événement d’intérêt.</p>
+<ul>
+<li><p>On étudie un processus dont l’occurence a plusieurs modalités, “types” ou “causes”: la mortalité par cause de décès, les types de sortie du chômage (formation, emploi, radiation), les types de sortie de l’emploi (chômage, longue maladie, sortie du marché du travail hors retraite), les lieux de migration ou les espaces de mobilité résidentielle, type de rupture d’union (séparation-divorce, veuvage). Déjà abordé dans la partie théorie, avec un recueil de données de type prospectif les “perdu.e.s de vue” peuvent difficilement être assimilés à des sorties d’observation non informatives (censures).</p></li>
+<li><p>L’analyse des risques concurrents est un cas particulier des modèles “multi-états” avec différents risques considérés comme absorbants.</p></li>
+<li><p>En présence de risques concurrents, l’estimation de Kaplan-Meier ne peut se faire que sous <strong>l’hypothèse d’indépendance entre chacun des risques</strong>. Sinon l’estimateur de Kaplan-Meier n’est plus une probabilité.</p></li>
+<li><p>Une estimation de type KM d’un évènement en concurrence avec d’autres impose que ces derniers soient traités comme des censures à droites non informatives. Mais il n’est pas possible de tester cette hypothèse.</p></li>
+</ul>
+<section id="risques-cause-specific-et-biais-sur-les-estimateurs-km" class="level1">
+<h1><strong>Risques “cause-specific” et biais sur les estimateurs KM</strong></h1>
+<ul>
+<li>Si les risques ne sont pas indépendants les uns par rapport aux autres, la somme des estimateurs de (1-KM) pour chaque risque n’est pas égale - elle est <strong>supérieure</strong> - à l’estimateur de (1-KM) où les risques concurrents sont regroupés en un évènement unique (par exemple le décès).</li>
+<li>Le risque calculé en considérant les risques concurrents comme des censures à droite est appelé “<strong>cause-specific risk</strong>.</li>
+</ul>
+<p><strong>Cause specific risk</strong><br>
+Pour le risque de type <span class="math inline">\(k\)</span>, le risque <em>cause-spécifique</em> (traduction?) en <span class="math inline">\(t_i\)</span> est égal à:<br>
+<span class="math display">\[h_k(t_i)=\frac{d_{i,k}}{R_i}\]</span> Où <span class="math inline">\(d_{i,k}\)</span> est le nombre d’évènement de type <span class="math inline">\(k\)</span> survenu en <span class="math inline">\(t_i\)</span> et <span class="math inline">\(R_i\)</span> la population soumise en <span class="math inline">\(t_i\)</span>.</p>
+<p><br> Conséquence: si les risques ne sont pas indépendants, la fonction de survie estimée avec la méthode Kaplan Meier n’exprime plus une probabilité.</p>
+<p><strong>Exemple sur les décès causés par une malformation cardiaque aigüe</strong></p>
+<p>Dans la base d’origine, il n’y a pas directement cette dimension de risque concurrent, même si on trouve dans la littérature médicale des études prenant le décès rapide post greffe comme un risque de ce type. Les données étant assez anciennes, avec beaucoup de décès post-opératoire, je ne me suis pas « risquer » à générer directement un risque concurrent. Une sortie concurrente a donc été simulée sans plus de précision (cause2), que l’on considèrera non strictement indépendante à la cause d’intérêt. Ce risque entre donc en concurrence avec la cause du décès directement liée à la malformation cardiaque, que la personne ait été transplanté ou non.</p>
+<pre><code>           |    Survival Status
+           |       (1=dead)
+    compet |         0          1 |     Total
+-----------+----------------------+----------
+         0 |        28          0 |        28 
+         1 |         0         56 |        56 
+         2 |         0         19 |        19 
+-----------+----------------------+----------
+     Total |        28         75 |       103 
+</code></pre>
+<p>Variable compet: cause 1 =&gt; décès directement provoquer par la malformation, 2 =&gt; autre cause.</p>
+<p>Lorsqu’on a analysé le décès par la méthode KM, la proportion de survivant.e.s était de 15%.</p>
+<p>Si on applique la méthode de Kaplan Meier à la cause 1 en traitant la cause 2 comme une censure à droite, et à la cause 2 en traitant la cause 1 comme une censure à droite, puis en sommant les deux estimateurs, la fonction de répartition excède 100% au bout de 1000 jours environs. La proportion de survivant.e.s est donc négative.</p>
+<p><img src="images/Image16.png" class="img-fluid"></p>
+</section>
+<section id="estimations-en-présence-de-risques-concurrents-cif" class="level1">
+<h1><strong>Estimations en présence de risques concurrents (CIF)</strong></h1>
+<section id="estimation-non-paramétrique" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-non-paramétrique">Estimation non paramétrique</h2>
+<ul>
+<li>Utiliser l’estimateur de Nelson Aalen: il s’agit du risque instantané cumulé. Comme il ne s’agit pas d’une probabilité, il a été longtemps utilisé comme mesure de l’incidence en présence de risques concurrents dans une logique dite “cause spécifique”:</li>
+</ul>
+<p><span class="math display">\[H_k (t_i)=\sum_{t_i\leq t}\left(\frac{e_{i,k}}{n_i}\right) \]</span></p>
+<ul>
+<li><p>De nos jours, l’estimateur le plus utilisé est la fonction dite <strong>d’incidence cumulée - CIF-</strong> (Kalbfleisch-Prentice, Marubini-Valscchi):</p>
+<ul>
+<li>Il repose sur une probabilité tout en supportant la non indépendance des risques.</li>
+<li>Son interprétation est identique à la fonction de répartition <span class="math inline">\(F(t)=1-S(t)\)</span>. Cette fonction est donc croissante.</li>
+<li>Il est possible de tester les différences entres CIF: <em>test de Gray</em> (R, SAS) ou <em>test de Pepe-Mori</em> (Stata).</li>
+</ul></li>
+</ul>
+<p><strong>La fonction d’incidence cumulée (CIF)</strong><br>
+<br></p>
+<ul>
+<li>Si <span class="math inline">\(h_k(t_i)\)</span> est le risque “cause-spécific en <span class="math inline">\(t_i\)</span> et <span class="math inline">\(S(t_i-1)\)</span> l’estimateur de Kaplan-Meier en <span class="math inline">\(t_i-1\)</span> lorsque tous les risques sont regroupés en un évènement unique, l’incidence cumulée pour le risque <span class="math inline">\(k\)</span> en <span class="math inline">\(t_i\)</span> est égale à:</li>
+</ul>
+<p><span class="math display">\[IC_k(t_i)= \sum_{t_i\leq t}S(t_i-1)h_k(t_i)\]</span></p>
+<ul>
+<li>Les valeurs prises par cette fonction pour la cause <span class="math inline">\(k\)</span> ne dépendent donc pas seulement des individus ayant observé l’évènement à partir de cette seule cause, mais aussi du nombre de personnes qui n’ont pas encore observés l’évènement à partir des autres causes identifiées. Cette dernière information est donnée par <span class="math inline">\(S(t_i-1)\)</span>.</li>
+<li>L’incidence cumulée peut ainsi s’interpréter comme la proportion d’individus qui sont sortis du risque jusqu’en <span class="math inline">\(t_i\)</span> en raison de la cause <span class="math inline">\(k\)</span>.</li>
+</ul>
+<p><img src="images/Image17.png" class="img-fluid"></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> failure<span class="sc">:</span>  compet <span class="sc">==</span> <span class="dv">1</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> competing failures<span class="sc">:</span>  compet <span class="sc">==</span> <span class="dv">2</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    Time       CIF         SE     [<span class="dv">95</span>% Conf. Int.]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="sc">--------------------------------------------------</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>       <span class="dv">1</span>    <span class="fl">0.0097</span>     <span class="fl">0.0097</span>     <span class="fl">0.0009</span>    <span class="fl">0.0477</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>       <span class="dv">2</span>    <span class="fl">0.0194</span>     <span class="fl">0.0136</span>     <span class="fl">0.0038</span>    <span class="fl">0.0619</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>       <span class="dv">3</span>    <span class="fl">0.0485</span>     <span class="fl">0.0212</span>     <span class="fl">0.0181</span>    <span class="fl">0.1022</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>       <span class="dv">5</span>    <span class="fl">0.0680</span>     <span class="fl">0.0248</span>     <span class="fl">0.0300</span>    <span class="fl">0.1273</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>       <span class="dv">6</span>    <span class="fl">0.0874</span>     <span class="fl">0.0278</span>     <span class="fl">0.0429</span>    <span class="fl">0.1515</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>       <span class="dv">8</span>    <span class="fl">0.0971</span>     <span class="fl">0.0292</span>     <span class="fl">0.0497</span>    <span class="fl">0.1634</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>       <span class="dv">9</span>    <span class="fl">0.1068</span>     <span class="fl">0.0304</span>     <span class="fl">0.0566</span>    <span class="fl">0.1751</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      <span class="dv">12</span>    <span class="fl">0.1166</span>     <span class="fl">0.0316</span>     <span class="fl">0.0638</span>    <span class="fl">0.1868</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>      <span class="dv">16</span>    <span class="fl">0.1264</span>     <span class="fl">0.0328</span>     <span class="fl">0.0711</span>    <span class="fl">0.1984</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>      <span class="dv">18</span>    <span class="fl">0.1362</span>     <span class="fl">0.0338</span>     <span class="fl">0.0785</span>    <span class="fl">0.2099</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>      <span class="dv">21</span>    <span class="fl">0.1559</span>     <span class="fl">0.0358</span>     <span class="fl">0.0937</span>    <span class="fl">0.2325</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>      <span class="dv">30</span>    <span class="fl">0.1657</span>     <span class="fl">0.0367</span>     <span class="fl">0.1014</span>    <span class="fl">0.2437</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>      <span class="dv">32</span>    <span class="fl">0.1756</span>     <span class="fl">0.0376</span>     <span class="fl">0.1093</span>    <span class="fl">0.2550</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>      <span class="dv">35</span>    <span class="fl">0.1856</span>     <span class="fl">0.0384</span>     <span class="fl">0.1173</span>    <span class="fl">0.2662</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>      <span class="dv">37</span>    <span class="fl">0.1955</span>     <span class="fl">0.0392</span>     <span class="fl">0.1253</span>    <span class="fl">0.2773</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>      <span class="dv">39</span>    <span class="fl">0.2055</span>     <span class="fl">0.0400</span>     <span class="fl">0.1335</span>    <span class="fl">0.2884</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>      <span class="dv">40</span>    <span class="fl">0.2156</span>     <span class="fl">0.0407</span>     <span class="fl">0.1418</span>    <span class="fl">0.2996</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>      <span class="dv">45</span>    <span class="fl">0.2256</span>     <span class="fl">0.0414</span>     <span class="fl">0.1502</span>    <span class="fl">0.3107</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>      <span class="dv">50</span>    <span class="fl">0.2357</span>     <span class="fl">0.0421</span>     <span class="fl">0.1586</span>    <span class="fl">0.3217</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>      <span class="dv">53</span>    <span class="fl">0.2458</span>     <span class="fl">0.0427</span>     <span class="fl">0.1671</span>    <span class="fl">0.3327</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>      <span class="dv">58</span>    <span class="fl">0.2559</span>     <span class="fl">0.0433</span>     <span class="fl">0.1757</span>    <span class="fl">0.3436</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>      <span class="dv">61</span>    <span class="fl">0.2660</span>     <span class="fl">0.0439</span>     <span class="fl">0.1843</span>    <span class="fl">0.3544</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>      <span class="dv">66</span>    <span class="fl">0.2761</span>     <span class="fl">0.0445</span>     <span class="fl">0.1930</span>    <span class="fl">0.3652</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>      <span class="dv">68</span>    <span class="fl">0.2861</span>     <span class="fl">0.0450</span>     <span class="fl">0.2018</span>    <span class="fl">0.3759</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>      <span class="dv">69</span>    <span class="fl">0.2962</span>     <span class="fl">0.0454</span>     <span class="fl">0.2106</span>    <span class="fl">0.3866</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>      <span class="dv">72</span>    <span class="fl">0.3063</span>     <span class="fl">0.0459</span>     <span class="fl">0.2195</span>    <span class="fl">0.3973</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>      <span class="dv">77</span>    <span class="fl">0.3164</span>     <span class="fl">0.0463</span>     <span class="fl">0.2284</span>    <span class="fl">0.4079</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>      <span class="dv">78</span>    <span class="fl">0.3265</span>     <span class="fl">0.0467</span>     <span class="fl">0.2374</span>    <span class="fl">0.4184</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>      <span class="dv">81</span>    <span class="fl">0.3365</span>     <span class="fl">0.0471</span>     <span class="fl">0.2464</span>    <span class="fl">0.4289</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>      <span class="dv">85</span>    <span class="fl">0.3466</span>     <span class="fl">0.0474</span>     <span class="fl">0.2554</span>    <span class="fl">0.4393</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>      <span class="dv">90</span>    <span class="fl">0.3567</span>     <span class="fl">0.0478</span>     <span class="fl">0.2645</span>    <span class="fl">0.4497</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>      <span class="dv">96</span>    <span class="fl">0.3668</span>     <span class="fl">0.0481</span>     <span class="fl">0.2737</span>    <span class="fl">0.4601</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>     <span class="dv">100</span>    <span class="fl">0.3769</span>     <span class="fl">0.0484</span>     <span class="fl">0.2829</span>    <span class="fl">0.4704</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>     <span class="dv">102</span>    <span class="fl">0.3870</span>     <span class="fl">0.0486</span>     <span class="fl">0.2921</span>    <span class="fl">0.4807</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>     <span class="dv">110</span>    <span class="fl">0.3972</span>     <span class="fl">0.0489</span>     <span class="fl">0.3016</span>    <span class="fl">0.4911</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>     <span class="dv">149</span>    <span class="fl">0.4078</span>     <span class="fl">0.0491</span>     <span class="fl">0.3112</span>    <span class="fl">0.5019</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>     <span class="dv">153</span>    <span class="fl">0.4183</span>     <span class="fl">0.0494</span>     <span class="fl">0.3209</span>    <span class="fl">0.5125</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>     <span class="dv">186</span>    <span class="fl">0.4291</span>     <span class="fl">0.0496</span>     <span class="fl">0.3309</span>    <span class="fl">0.5235</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>     <span class="dv">188</span>    <span class="fl">0.4399</span>     <span class="fl">0.0498</span>     <span class="fl">0.3409</span>    <span class="fl">0.5343</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>     <span class="dv">207</span>    <span class="fl">0.4506</span>     <span class="fl">0.0500</span>     <span class="fl">0.3509</span>    <span class="fl">0.5451</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>     <span class="dv">263</span>    <span class="fl">0.4614</span>     <span class="fl">0.0502</span>     <span class="fl">0.3610</span>    <span class="fl">0.5559</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>     <span class="dv">285</span>    <span class="fl">0.4836</span>     <span class="fl">0.0505</span>     <span class="fl">0.3818</span>    <span class="fl">0.5780</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>     <span class="dv">308</span>    <span class="fl">0.4947</span>     <span class="fl">0.0506</span>     <span class="fl">0.3923</span>    <span class="fl">0.5890</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>     <span class="dv">340</span>    <span class="fl">0.5058</span>     <span class="fl">0.0507</span>     <span class="fl">0.4028</span>    <span class="fl">0.5999</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>     <span class="dv">583</span>    <span class="fl">0.5211</span>     <span class="fl">0.0513</span>     <span class="fl">0.4162</span>    <span class="fl">0.6158</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>     <span class="dv">733</span>    <span class="fl">0.5391</span>     <span class="fl">0.0524</span>     <span class="fl">0.4313</span>    <span class="fl">0.6351</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>     <span class="dv">852</span>    <span class="fl">0.5584</span>     <span class="fl">0.0535</span>     <span class="fl">0.4475</span>    <span class="fl">0.6555</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>     <span class="dv">995</span>    <span class="fl">0.5811</span>     <span class="fl">0.0550</span>     <span class="fl">0.4657</span>    <span class="fl">0.6801</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1032</span>    <span class="fl">0.6039</span>     <span class="fl">0.0561</span>     <span class="fl">0.4850</span>    <span class="fl">0.7036</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    <span class="dv">1386</span>    <span class="fl">0.6343</span>     <span class="fl">0.0584</span>     <span class="fl">0.5084</span>    <span class="fl">0.7362</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>            failure<span class="sc">:</span>  compet <span class="sc">==</span> <span class="dv">2</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a> competing failures<span class="sc">:</span>  compet <span class="sc">==</span> <span class="dv">1</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>    Time       CIF         SE     [<span class="dv">95</span>% Conf. Int.]</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a><span class="sc">--------------------------------------------------</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>       <span class="dv">2</span>    <span class="fl">0.0194</span>     <span class="fl">0.0136</span>     <span class="fl">0.0038</span>    <span class="fl">0.0619</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>      <span class="dv">16</span>    <span class="fl">0.0391</span>     <span class="fl">0.0191</span>     <span class="fl">0.0128</span>    <span class="fl">0.0897</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>      <span class="dv">17</span>    <span class="fl">0.0489</span>     <span class="fl">0.0213</span>     <span class="fl">0.0182</span>    <span class="fl">0.1029</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>      <span class="dv">28</span>    <span class="fl">0.0587</span>     <span class="fl">0.0232</span>     <span class="fl">0.0240</span>    <span class="fl">0.1157</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>      <span class="dv">36</span>    <span class="fl">0.0686</span>     <span class="fl">0.0250</span>     <span class="fl">0.0302</span>    <span class="fl">0.1286</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>      <span class="dv">40</span>    <span class="fl">0.0787</span>     <span class="fl">0.0267</span>     <span class="fl">0.0368</span>    <span class="fl">0.1413</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>      <span class="dv">43</span>    <span class="fl">0.0888</span>     <span class="fl">0.0283</span>     <span class="fl">0.0436</span>    <span class="fl">0.1539</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>      <span class="dv">51</span>    <span class="fl">0.0989</span>     <span class="fl">0.0297</span>     <span class="fl">0.0506</span>    <span class="fl">0.1663</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>      <span class="dv">68</span>    <span class="fl">0.1090</span>     <span class="fl">0.0310</span>     <span class="fl">0.0578</span>    <span class="fl">0.1785</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>      <span class="dv">72</span>    <span class="fl">0.1190</span>     <span class="fl">0.0323</span>     <span class="fl">0.0651</span>    <span class="fl">0.1905</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>      <span class="dv">80</span>    <span class="fl">0.1291</span>     <span class="fl">0.0334</span>     <span class="fl">0.0726</span>    <span class="fl">0.2024</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>     <span class="dv">165</span>    <span class="fl">0.1396</span>     <span class="fl">0.0346</span>     <span class="fl">0.0804</span>    <span class="fl">0.2149</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>     <span class="dv">219</span>    <span class="fl">0.1504</span>     <span class="fl">0.0358</span>     <span class="fl">0.0886</span>    <span class="fl">0.2276</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>     <span class="dv">334</span>    <span class="fl">0.1615</span>     <span class="fl">0.0370</span>     <span class="fl">0.0970</span>    <span class="fl">0.2406</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>     <span class="dv">342</span>    <span class="fl">0.1730</span>     <span class="fl">0.0383</span>     <span class="fl">0.1058</span>    <span class="fl">0.2540</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>     <span class="dv">675</span>    <span class="fl">0.1910</span>     <span class="fl">0.0414</span>     <span class="fl">0.1177</span>    <span class="fl">0.2777</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>     <span class="dv">979</span>    <span class="fl">0.2138</span>     <span class="fl">0.0457</span>     <span class="fl">0.1321</span>    <span class="fl">0.3086</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>En présence du risque concurrent, et traité comme tel, 50% des personnes sont décédées directement de la malformation cardiaque au bout de 308 jours (200 jours avec une estimation de type « cause specific »).</p>
+<p><br></p>
+<p>On peut vérifier que la somme des estimateurs permet d’obtenir la survie toutes causes confondues. Il n’y a pas de surprise à cela, dans l’estimateur Marubini-Valscchi la survie d’ensemble intervient comme un facteur de pondération de la mesure d’intensité dite « cause-specific ».</p>
+</section>
+<section id="r-stata-sas-python" class="level2">
+<h2 class="anchored" data-anchor-id="r-stata-sas-python">R-Stata-Sas-Python</h2>
+<div class="callout-important callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>L’estimation avec des risques de type « cause-specific » demande juste de recoder la variable évènement/censure, en glissant les risques concurrents en censure à droite.</p>
+<p>Pour l’estimation des CIF (risque de sous répartition):</p>
+<ul>
+<li><p><strong>R</strong>: la librairie <strong><code>cmprsk</code></strong> permet d’estimer simplement les incidences cumulées avec la fonction <strong><code>cuminc</code></strong>.</p></li>
+<li><p><strong>Sas</strong>: maintenant directement estimable avec <code>proc lifetest</code>. Il suffit d’indiquer le ou les risques d’intérêt dans l’instruction indiquant la variable de durée et de censure avec l’option <strong><code>failcode=valeur</code></strong>.</p></li>
+<li><p><strong>Stata</strong>: Estimation avec la commande externe <strong><code>stcompet</code></strong>. La commande génère des variables qui demande des manipulations supplémentaires pour afficher les résultats sous forme de tableau par exemple. On peut utiliser et préférer la commande externe <strong><code>stcomlist</code></strong>.</p></li>
+<li><p><strong>Python</strong>: le wrapper de R (<code>cmprsk</code>) ne fonctionne plus à ce jour à défaut de mise à jour.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="compararaison-des-cif" class="level2">
+<h2 class="anchored" data-anchor-id="compararaison-des-cif">Compararaison des CIF</h2>
+<ul>
+<li><p><strong>Test d’homogénéité de Gray</strong>: est basé sur une autre mesure du risque en évènement concurrent. Il s’agit du « subdistribution risks (« risque de sous-répartition », A.Latouche). Son interprétation n’est pas aisée car les personnes ayant observé un risque concurrent sont remises dans le Risk Set. Mais il est directement lié à l’estimation des CIF. Disponible avec SAS et R. Il est également sensible l’hypothèse de proportionnalité et à la distribution des censures à droites entre les groupes comparés. A ma connaissance il n’y a pas de variantes pondérées.</p></li>
+<li><p><strong>Test de Pepe &amp; Mori</strong>: teste directement deux courbes d’incidences et seulement 2. Il y a une version du test qui repose sur une autre fonction directement tirée des incidences, la CPF (Conditional Probability Function), qui n’est pas traite pas afin de ne pas rajouter un concept de supplémentaire.</p></li>
+</ul>
+<p><br></p>
+<p><strong>Test de Gray pour la variable surgery</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>Tests<span class="sc">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>         stat      pv    df</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>cause1 <span class="fl">5.7834605</span> <span class="fl">0.0161</span>  <span class="dv">1</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>cause2 <span class="fl">0.1293076</span> <span class="fl">0.7191</span>  <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="images/Image21.png" class="img-fluid"></p>
+<p><strong>Test de Pepe-Mori pour la variable surgery</strong></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Main event failure<span class="sc">:</span>  compet <span class="sc">==</span> <span class="dv">1</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">Chi2</span>(<span class="dv">1</span>) <span class="ot">=</span> <span class="fl">6.2028</span>  <span class="sc">-</span>  p <span class="ot">=</span>  <span class="fl">0.01275</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>Competing event failure<span class="sc">:</span>  compet <span class="sc">==</span> <span class="dv">2</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">Chi2</span>(<span class="dv">1</span>) <span class="ot">=</span> <span class="fl">1.8796</span>  <span class="sc">-</span>  p <span class="ot">=</span>  <span class="fl">0.17038</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="r-stata-sas-python-1" class="level2">
+<h2 class="anchored" data-anchor-id="r-stata-sas-python-1">R-Stata-Sas-Python</h2>
+<div class="callout-important callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<ul>
+<li><p><strong>Sas</strong>: le test de Gray est estimé si on ajoute l’option strata=nom_variable à la proc lifetest sous risque concurrent (voir encadré précédent). Le test de Pepe-Mori est disponible via une macro externe (<code>%compcif</code>: non testée) :</p></li>
+<li><p><strong>Stata</strong>: Le test de Gray n’est pas disponible, il faut passer par une exécution de la fonction cuminc de la librairie R cmprsk directement dans stata (voir la commande rsource). Pour faire plus simple, on peut estimer le modèle de Fine-Gray avec une seule variable (discrète). Le résultat est comparable à celui du test (voir plus bas). Le test de Pepe-Mori est disponible via la commande externe stpepemori.</p></li>
+<li><p><strong>R</strong>: On ajoute une variable à la fonction <code>cuminc</code> de la librairie <strong><code>cmprsk</code></strong>. Pas de test de <em>Pepe-Mori</em> sur les fonctions d’incidence à ma connaissance.</p></li>
+<li><p><strong>Python</strong>: ne pas essayer d’utiliser la librairie cmprsk qui n’est pas mis à jour et ne fonctionne plus.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="modèles" class="level1">
+<h1><strong>Modèles</strong></h1>
+<section id="modèles-semi-paramétriques" class="level2">
+<h2 class="anchored" data-anchor-id="modèles-semi-paramétriques">Modèles Semi paramétriques</h2>
+<p>Cette présentation sera plutôt brève. Dans le domaine des sciences sociales, je préconise plutôt l’utilisation d’un modèle multinomial à temps discret de type logistique. Le modèle de Cox en présence de risques concurrent n’est valable que dans une logique de risques « cause-specific », le modèle de Fine et Gray bien que directement relié à l’estimation des incidences cumulées, repose sur une définition du risque (de sous répartition) dont l’interprétation n’est pas naturelle. Il est également soumis à l’hypothèse de proportionnalité des risques. <br></p>
+<p><strong>Modélisation des risques « cause-specific » : Cox</strong><br>
+Modèle de Cox «standard» pour chaque évènement, les évènements concurrents sont traités comme des censures à droite. Aucune interprétation sur les fonctions d’incidence ne peut-être faite.</p>
+<p><br></p>
+<p><strong>Modèle de Fine-Gray: subdistribution hazard regression</strong><br>
+Modèle de type semi-paramétrique avec une redéfinition du risque lié à l’estimation des fonctions d’incidence (voir test de Gray). La différence avec le Cox classique réside dans le calcul du risk-set : les évènements concurrents ne sont pas considérés comme des censures, on laisse les individus leur « survivre » jusqu’à la durée maximale observée dans l’échantillon. L’interprétation n’est donc pas très intuitive (Fine et Gray le soulignent). Ce modèle est relativement contreversé. Il ne sera donc pas exécuté pour l’application</p>
+<p><br></p>
+<p>Pour les questions liées à l’interprétation de ces deux types de modèles, se reporter à: https://onlinelibrary.wiley.com/doi/epdf/10.1002/sim.7501</p>
+</section>
+<section id="r-stata-sas-python-2" class="level2">
+<h2 class="anchored" data-anchor-id="r-stata-sas-python-2">R-Stata-Sas-Python</h2>
+<div class="callout-important callout callout-style-simple no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<ul>
+<li><p><strong>R</strong>: on utilise la fonction <strong><code>crr</code></strong> du package cmprsk.</p></li>
+<li><p><strong>Sas</strong>: même principe que pour l’estimation non paramétrique, on ajoute l’option <code>eventcode=valeur</code> à l’instruction <code>model</code> de la <code>proc phreg</code>.</p></li>
+<li><p><strong>Stata</strong>: on utilise la commande interne <strong><code>stcrreg</code></strong>.</p></li>
+<li><p><strong>Python</strong> : ne pas essayer d’utiliser la librairie cmprsk qui n’est pas mis à jour et ne fonctionne donc plus.</p></li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="modèle-à-temps-discret" class="level2">
+<h2 class="anchored" data-anchor-id="modèle-à-temps-discret">Modèle à temps discret</h2>
+<ul>
+<li><p>Il s’agit d’une extension du modèle à temps discret à évènement unique (toutes causes regroupées) avec ici le modèle logistique multinomial.</p></li>
+<li><p>S’il ne permet pas une interprétation sur les fonctions d’incidences, les risques concurrents ne sont pas traitées comme des censures à droite et sont estimés simultanément à la cause d’intérêt.</p></li>
+<li><p>Le modèle multinomial repose sur une hypothèse dite « d’indépendance » des alternatives non pertinentes » (IIA). Cela peut donc paraitre contradictoire d’utiliser ce modèle pour des évènements qui sont supposés non indépendants. Néanmoins la dépendance entre risques concurrents n’est pas non plus stricte. L’hypothèse d’IIA est souvent illustrée par l’exemple des couleurs des bus dans le choix du mode de transport (G.Debreu). On est loin ici d’un tel niveau de dépendance.</p></li>
+<li><p>En terme de lecture, le modèle logistique multinomial les estimateurs peuvent directement s’interpréter comme des rapports de risque (ou relative risk ratio).</p></li>
+<li><p>En sciences sociales, il me semble que ce type de modèle soit à privilégier.</p></li>
+<li><p>On peut également envisager un modèle de type probit multinomial, mais on peut rencontrer des problèmes d’estimations (repose sur la loi normale multivariée). Prévoir un regroupement des causes concurrentes, et dans tous les cas de figure ne pas dépasser trois causes. Niveau lecture, il conviendra d’utiliser une méthode de standardisation, de type « effets marginaux ».</p></li>
+</ul>
+<p>Pour l’exemple, j’ai utilisé comme plus haut pour les modèles à temps discret à évènement unique, le mois comme métrique temporelle.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Multinomial logistic regression                 Number of obs     <span class="ot">=</span>      <span class="dv">1</span>,<span class="dv">127</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>                                                LR <span class="fu">chi2</span>(<span class="dv">10</span>)       <span class="ot">=</span>      <span class="fl">86.25</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>                                                Prob <span class="sc">&gt;</span> chi2       <span class="ot">=</span>     <span class="fl">0.0000</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>Log likelihood <span class="ot">=</span> <span class="sc">-</span><span class="fl">275.00542</span>                     Pseudo R2         <span class="ot">=</span>     <span class="fl">0.1356</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>           e <span class="sc">|</span>        RRR   Std. Err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% Conf. Interval]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>            <span class="sc">|</span>  (base outcome)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>            <span class="sc">|</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>           t <span class="sc">|</span>     <span class="fl">0.8159</span>     <span class="fl">0.0338</span>    <span class="sc">-</span><span class="fl">4.91</span>   <span class="fl">0.000</span>       <span class="fl">0.7522</span>      <span class="fl">0.8850</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>          t2 <span class="sc">|</span>     <span class="fl">1.0032</span>     <span class="fl">0.0009</span>     <span class="fl">3.53</span>   <span class="fl">0.000</span>       <span class="fl">1.0014</span>      <span class="fl">1.0049</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>     <span class="fl">1.0449</span>     <span class="fl">0.0183</span>     <span class="fl">2.51</span>   <span class="fl">0.012</span>       <span class="fl">1.0097</span>      <span class="fl">1.0813</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>     <span class="fl">0.8795</span>     <span class="fl">0.0718</span>    <span class="sc">-</span><span class="fl">1.57</span>   <span class="fl">0.116</span>       <span class="fl">0.7494</span>      <span class="fl">1.0321</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>     surgery <span class="sc">|</span>     <span class="fl">0.3175</span>     <span class="fl">0.1711</span>    <span class="sc">-</span><span class="fl">2.13</span>   <span class="fl">0.033</span>       <span class="fl">0.1104</span>      <span class="fl">0.9129</span></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>            <span class="sc">|</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>           t <span class="sc">|</span>     <span class="fl">0.8168</span>     <span class="fl">0.0565</span>    <span class="sc">-</span><span class="fl">2.93</span>   <span class="fl">0.003</span>       <span class="fl">0.7134</span>      <span class="fl">0.9353</span></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>          t2 <span class="sc">|</span>     <span class="fl">1.0030</span>     <span class="fl">0.0015</span>     <span class="fl">1.94</span>   <span class="fl">0.052</span>       <span class="fl">1.0000</span>      <span class="fl">1.0060</span></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>     <span class="fl">1.0111</span>     <span class="fl">0.0248</span>     <span class="fl">0.45</span>   <span class="fl">0.654</span>       <span class="fl">0.9635</span>      <span class="fl">1.0610</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>     <span class="fl">0.8158</span>     <span class="fl">0.1127</span>    <span class="sc">-</span><span class="fl">1.47</span>   <span class="fl">0.141</span>       <span class="fl">0.6223</span>      <span class="fl">1.0695</span></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>     surgery <span class="sc">|</span>     <span class="fl">0.5412</span>     <span class="fl">0.4221</span>    <span class="sc">-</span><span class="fl">0.79</span>   <span class="fl">0.431</span>       <span class="fl">0.1173</span>      <span class="fl">2.4959</span></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>Remarque <span class="sc">:</span> les constantes ne sont pas reportées, </span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>les valeurs de la référence n’ayant pas grand  <span class="fu">sens</span> (année et âge à <span class="dv">0</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><strong>[ajouter présentation sous forme d’AME / seulement possible avec Stata]</strong></p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./parametrique.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Modèles paramétriques</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./frailty.html" class="pagination-link">
+        <span class="nav-page-text">Fragilité et immunité</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+      <div class="nav-footer-center">Marc Thévenin - Ined-Sms - Août 2022</div>
+  </div>
+</footer>
+
+
+
+</body></html>

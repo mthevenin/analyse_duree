@@ -1,0 +1,81 @@
+---
+title: "Introduction"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library (shiny)
+library (rsconnect)
+library(haven)
+library(pander)
+library(memisc)
+```
+
+# **Questions**
+
+On dispose de données dites "longitudinales", et on cherche à appréhender l'occurence d'un évènement au sein d'une population.
+Les problématiques se basent sur les questions suivantes:  
+<br>
+
+* Observe-t-on la survenue de l'évènement pour l'ensemble des individus?
+* Quelle est la durée jusqu'à la survenue de l'évènement?
+* Quels sont les facteurs qui favorisent la survenue de cet évènement? Facteurs fixes ou  facteurs pouvant apparaitre/changer au cours de la période d'observation: variables dynamiques (**TVC**: *Time Vaying Covariate*)
+
+# **Terminologies**
+
+| Français                     | Anglais                                                 | 
+| ---------------------------- | ------------------------------------------------------- | 
+| Modèles de durée             | Duration analysis (Econométrie)                         |
+| Analyse de survie            | Survival analysis (Epidémiologie, médecine, démographie)|
+| Analyse de fiabilité         | Failure time data analysis (Statistiques industrielles) |
+| Analyse des transitions      | Event-history analysis (Démographie, Sociologie)        |
+| Données de séjour            | Transition analysis (Sociologie)                        |
+| Histoires de vie             |                                                         |
+
+
+<br>
+
+# **Exemples d'analyse**
+
+**Nuptialité, Mise en couple**: cohabiter, décohabiter, se marier, Rompre une union ...  
+<br>
+**Logement**: Changement de statut (locataire <=> propriétaire), mobilité résidentielle ...  
+<br>
+**Emploi**: Trouver un 1er emploi,  changer d'emploi, entrée ou sortie du chômage ...  
+<br>
+**Fécondité**: Avoir un premier enfant, avoir un nouvel enfant ...  
+<br>
+**Mortalité**: Décéder après diagnostic, survivre après l'administration un traitement...  
+
+<br>
+
+# **Elements nécessaire à l'analyse**
+
+1. **Un processus temporel**
+   - Une échelle de mesure (minutes, heures, jours, mois, années....)
+   - Une origine définissant un évènement de départ.  
+   - Une définition précise de l'évènement d'étude.  
+   - Une durée entre le début et la fin de la période d'observation, si nécessaire la fin de la période d'exposition au risque.  
+
+2. **Une population soumise au risque** de connaître l'évènement (**Risk Set**)
+
+3. ***Des variables explicatives*** ou ***covariables***
+   - Fixes: genre, génération, niveau de diplôme, csp,......
+   - Dynamiques (TVC: *Time varying covariates*): Mesurées à tout moment entre le début et la sortie de l'observation: statut matrimonial, taille du ménage, statut d'activité...
+
+<br>
+
+# **Bibliographie**
+
+Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales ou de l’économie. Quelle que soit la langue, le nombre de cours ou documents sont très nombreux dans le domaine de la médecine.  
+
+<br>
+**Cours Gilbert Colletaz** (Université d’Orléans). 
+Le cours est mis à jour tous les ans. Il n’est plus possible d’accéder directement à la dernière version du document, mais il est néanmoins possible de télécharger la version 2016 ( https://docplayer.fr/69359088-Modeles-de-survie-notes-de-cours-master-2-esa-voies-professionnelle-et-recherche-gilbert-colletaz.html ). Applications avec Sas.  
+
+<br>
+**Document de travail de Simon Quantin** (Insee).
+Egalement un excellent document, qui couvre l’ensemble des techniques de base d’analyse des durées en temps dit continu (https://www.insee.fr/fr/statistiques/3695681 ). Il propose surement la meilleure introduction en langue française à la problématique de la fragilité. Applications avec R. On peut juste regretter que les risques concurrents ne soient pas abordés. 
+
+

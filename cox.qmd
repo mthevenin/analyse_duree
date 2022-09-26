@@ -1,0 +1,560 @@
+---
+title: "Modèle de Cox"
+---
+
+
+# Le modèle semi-paramétrique de Cox
+
+On peut ignorer la partie sur l’estimation du modèle. On retiendra tout de même qu'il est déconseillé de tester la méthode dite exacte pour la correction de la vraisemblance, qui ne peut matériellement fonctionner qu’avec un nombre très limité d’évènements observés simultanément, ce qui est plutôt rare avec des données à durées discrètes ou groupées, classiques dans les sciences sociales.
+
+
+## La vraisemblance partielle et estimation des paramètres 
+
+On se situe dans une situation où la durée est mesurée sur une échelle strictement continue. Il ne peut donc y avoir qu'un seul évènement observé en $t_i$ (idem pour les censures).    
+Pour une observation quelconque en $t_i$ qui, pour uniquement un seul individu correspond à un évènement ou une censure, la vraisemblance peut s'écrire: 
+
+$$L_i=f(t_i)^{\delta_i}S(t_i)^{1-\delta_i}$$  
+
+<br>
+
+**Vraisemblance partielle de Cox**  
+
+* $f(t_i)$ est la valeur de la fonction de densité en $t_i$ 
+* $S(t_i)$ est la valeur de la fonction de survie en $t_i$ 
+* $\delta_i=1$ si l'évènement est observé: $L_i=f(t_i)$ 
+* $\delta_i=0$ si l'observation est censurée: $L_i=S(t_i)$                                                                            
+
+<br>
+Comme $f(t_i)=h(t_i)\times S(t_i)$, on obtient:  $L_i=[h(t_i)S(t_i)]^{\delta_i}S(t_i)^{1-\delta_i} = h(t_i)^{\delta_i}S(t_i)$.  
+Pour $i=1,2,.....,n$, la vraisemblance totale s'ecrit donc:  $L_i=\prod_{i=1}^{n}h(t_i)^{\delta_i}S(t_i)$.  
+
+<br>
+On peut réécrire cette vraisemblance en la multipliant et en la divisant par: $\sum_{j\in R_i}h(t_i)$, où $j\in R_i$ est l'ensemble des observation soumises au risque en $t_i$.  
+<br>
+
+$$L=\prod_{i=1}^{n}\left[h(t_i)\frac{\sum_{j\in R}h(t_i)}{\sum_{j\in R}h(t_i)}\right]^{\delta_i}S(t_i)= \prod_{i=1}^{n}\left[\frac{h(t_i)}{\sum_{j\in R_i}h(t_i)}\right]^{\delta_i}\sum_{j\in R_i}h(t_i)^{\delta_i}S(t_i)$$  
+<br>
+La vraisemblance partielle retient le premier terme de la vraisemblance, soit:   
+
+$PL=\prod_{i=1}^{n}\left[\frac{h(t_i)}{\sum_{j\in R}h(t_i)}\right]^{\delta_i}$  
+
+<br>
+Une fois remplacée la valeur de $h(t_i)$ par son expression en tant que modèle à risques proportionnels, la vraisemblance partielle ne dépendra plus de la durée. **Mais elle va dépendre de l'ordre d'arrivée des évènements, c'est à dire leur rang**. 
+<br>
+*Remarque*: pour les observations censurées($\delta_i=0$), $PL=1$. Toutefois, ces censures à droite entrent dans l'expression $\sum_{j\in R}h(t_i)$ tant qu'elles sont soumises au risque.  
+<br>
+En remplaçant donc $h(t_i)$ par l'expression $h_0(t)e^{X_i^{'}b}$:  
+
+$$PL=\prod_{i=1}^{n}\left[\frac{h_0(t)e^{X_{i}^{'}b}}{\sum_{j\in R_i}h_0(t)e^{X_{j}^{'}b}}\right]^{\delta_i} =\prod_{i=1}^{n}\left[\frac{e^{X_i^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}\right]^{\delta_i}$$
+
+L'expression $\frac{e^{Xb}}{\sum_{j\in R}e^{Xb}}$ est une probabilité, la vraisemblance partielle est donc bien un produit de probabilités. **Il s'agit de la probabilité qu'un individu observe l'évènement en $t_i$ sachant qu'un évènement (et un seul) s'est produit**.  
+<br>
+  
+
+*Condition nécessaire: pas d'évènement simultané*:  
+On rappelle que le temps est mesuré de manière strictement continue, il ne doit pas y avoir d'évènement simultané. Sinon, l’estimation de la vraisemblance doit  être corrigée. 
+<br>
+
+*Correction de la vraisemblance avec des évènements simultanés*:    
+
+* La ***méthode dite exacte***: Comme en réalité il n’y a pas d’évènement simultané, on va intégrer à la vraisemblance toutes les permutations possibles des évènements observés simultanément: si en $t_i$ on observe au « même moment » l’évènement pour A et B, une échelle temporelle plus précise nous permettrait de savoir si A s'est produit avant B ou B s'est produit avant A. Comme le nombre de permutations est calculé par une factorielle, avec 3 évènements  mesurés simultanément, il y a 6 permutations possibles ($3\times2\times1$).  
+Problème: le nombre de permutations pour chaque $t_i$ peut devenir très vite particulièrement élevé. Par exemple pour 10 évènements simultanés, le nombre de permutations est égal à 3.628.800. Le temps de calcul devient particulièrement long, et ce type de correction totalement inopérant. 
+* La ***méthode dite de Breslow***: il s'agit d'une approximation de la méthode exacte permettant de ne pas avoir à intégrer chaque permutation. Cette approximation est utilisée par défaut par les logiciels Sas et Stata. 
+* La ***méthode dite  d'Efron***: elle corrige l'approximation de Breslow, et est jugée plus proche de la méthode exacte. C'est la méthode utilisée par défaut avec le logiciel R, et elle est disponible avec les autres applications.  
+
+## Estimation des paramètres
+
+On utilise la méthode habituelle, à savoir la maximisation de la log-vraisemblance (ici partielle).  
+
+* Conditions de premier ordre: calcul des équations de score à partir des dérivées partielles. Solution: $\frac{\partial log(PL)}{\partial{b_k}}=0$. On ne peut pas obtenir de solution numérique directe.  
+Remarque: les équations de score sont utilisées pour tester la validité de l'hypothèse de constance des rapports de risque pour calculer les **résidus de Schoenfeld** (voir plus bas). 
+* Conditions de second ordre: calcul des dérivées secondes qui permettent d'obtenir la matrice d'information de Fisher et la matrice des variances-covariances des paramètres. 
+* Comme il n'y a pas de solution numérique directe, on utilise un algorithme d'optimisation (ex: Newton-Raphson) à partir des équations de score et de la matrice d'information de Fisher.  
+
+**Eléments de calcul**  
+<br>
+En logarithme, la vraisemblance partielle s'ecrit:  
+$$pl(b)=log(pl(b))=log\left(\prod_{i=1}^{n}\left[\frac{e^{X_{i}^{'}b}}{\sum_{j\in R_i}e^{X_jb}}\right]^{\delta_i}\right)$$  
+$$pl(b)=\sum_{i=1}^n\delta_ilog\left(\frac{e^{X_{i}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}} \right)$$
+
+$$pl(b)=\sum_{i=1}^n\delta_i\left(log(e^{X_{i}^{'}b})-log\sum_{j\in R_i}e^{X_{i}^{'}b}\right)$$
+
+$$pl(b)=\sum_{i=1}^n\delta_i\left(X_{i}^{'}b-log\sum_{j\in R_i}e^{X_{i}^{'}b}\right)$$
+
+Calcul de l'équation de score pour une covariable $X_k$:  
+
+$$\frac{\partial pl(b)}{\partial{b_k}}=\sum_{i=1}^n\delta_i\left(X_{ik}-\sum_{j\in R_i}X_{ik}\frac{e^{X_{i}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}\right)$$
+
+
+Comme $\frac{e^{X_{ik}b}}{\sum_{j\in R}e^{X_{jk}b}}$ est une probabilité,  $\sum_{j\in R}X_{ik}\times p_i$ est l'espérance (la moyenne) $E(X_k)$ d'avoir la caractéristique $X_k$ lorsqu'un évènement a été observé. Au final:  
+
+$$\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - E(X_{k}) \right)$$
+
+
+Cette expression va permettre de tester le respect ou non de l’hypothèse de risques proportionnels.
+
+
+
+## Lecture des résultats
+
+Comme il s'agit d'un modèle à risque proportionnel, **les rapports de risques sont constants pendant toute la période d'observation**. Il s'agit d'une propriété de l'estimation.  
+<br>
+
+
+***Covariable binaire (indicatrice)*** 
+<p class="comment">
+$X=(0,1)$: $RR=\frac{h(t\ |\ X=1)}{h(t\ |\ X=0)}=e^b$.  
+A chaque moment de la durée $t$, le risque d'observer l'évènement est $e^b$ fois plus important/plus faible pour $X=1$ que pour $X=0$.  
+</p>
+
+<br>
+
+***Covariable quantitative*** (mais fixe dans le temps) 
+<p class="comment">
+$RR=\frac{h(t\ |\ X=a+c)}{h(t\ |\ X=a)}=e^{c \times{b}}$. 
+On prendra pour illustrer une variable type âge au début de l’exposition au risque (a)*  et un delta de comparaison avec un âge inférieur (c).  
+Si $c=1$ (résultat de l'estimation): A un âge donnée en début d'exposition, le risque de connaitre l'évènement est $e^b$ fois inférieur/supérieur à celui d'une personne qui a un an de moins . 
+</p>
+
+<br>
+
+**Exemple pour les insuffisances cardiaques**  
+
+<br>
+Estimateurs: $b$
+
+```{r eval=FALSE}
+Cox regression -- Efron method for ties
+
+No. of subjects =          103                  Number of obs    =         103
+No. of failures =           75
+Time at risk    =        31938
+                                                LR chi2(3)       =       17.63
+Log likelihood  =   -289.30639                  Prob > chi2      =      0.0005
+
+------------------------------------------------------------------------------
+          _t |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        year |    -0.1196     0.0673    -1.78   0.076      -0.2516      0.0124
+         age |     0.0296     0.0135     2.19   0.029       0.0031      0.0561
+     surgery |    -0.9873     0.4363    -2.26   0.024      -1.8424     -0.1323
+------------------------------------------------------------------------------
+```
+
+Rapports des risques: $e^b$ 
+
+```{r eval=FALSE}
+Cox regression -- Efron method for ties
+
+No. of subjects =          103                  Number of obs    =         103
+No. of failures =           75
+Time at risk    =        31938
+                                                LR chi2(3)       =       17.63
+Log likelihood  =   -289.30639                  Prob > chi2      =      0.0005
+
+------------------------------------------------------------------------------
+          _t | Haz. Ratio   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        year |     0.8872     0.0597    -1.78   0.076       0.7775      1.0124
+         age |     1.0300     0.0139     2.19   0.029       1.0031      1.0577
+     surgery |     0.3726     0.1625    -2.26   0.024       0.1584      0.8761
+------------------------------------------------------------------------------
+```
+
+
+On retrouve les résultats des tests non paramétriques pour l'opération, à savoir qu’un pontage réduit les risques journaliers de décès pendant la période d’observation (augmente la durée de survie).     
+De la même manière, plus on entre à un âge élevé dans la liste d'attente plus le risque de décès augmente. La variable *year*, qui traduit des progrès en médecine, exprime une réduction relativement modérée du risque journalier de décès durant l'attente de la greffe du coeur.   
+
+
+
+
+
+## R-Stata-Sas-Python   
+  
+::: panel-tabset
+
+### R
+
+Le modèle est  estimé avec la fonction **`coxph`** de la librairie **`survival`**.  Hors options, la syntaxe est identiques aux fonctions `survfit` et `survdif`.
+
+### Stata
+
+Le modèle est estimé avec la commande **`stcox`**.
+
+### SAS
+
+Le modèle est estimé avec la **`proc phreg`**.
+
+
+### Python
+
+Avec la librairie `lifelines`, le modèle est estimé avec la fonction **`CoxPHFitter`**. Avec la librairie `statmodels`, il est estimé avec la fonction `smf.phreg`.
+:::
+
+
+# L'hypothèse de constance des rapports de risque
+
+
+*	Les rapports de risque (RR) estimés par le modèle sont contraints à être constant pendant toute la période d’observation. C’est une hypothèse forte.
+*	Le respect de cette hypothèse doit être testé, en particulier pour un modèle de Cox où la baseline du risque est habituellement estimée à l’aide de ces rapports (méthode dite de Breslow, non traitée). En post-estimation, les valeurs estimées du risque pourront présenter des valeurs aberrantes, en particulier négatives.
+*	Tester cette hypothèse revient à tester une interaction entre les rapports et la durée (ou plutôt une fonction de la durée).
+*	Plusieurs méthodes disponibles, celle sur les résidus de martingales, réservée aux covariables continues, et le « test » graphique réservé aux variables catégorielles ne seront pas traités. On traitera  celle basée sur les** résidus de Schoenfeld** puis l'introduction d'une intéraction avec la durée dans le modèle. Cette dernière peut faire également office de méthode de correction lorsque l'hypothèse n'est pas respectée.  
+* Si on regarde les courbes de Kaplan-Meier, leurs croisement non tardif impliquera nécessairement un problème sur cette hypothèse. 
+
+  
+<br>  
+
+## Tests sur les résidus de Schoenfeld
+
+*	Les résidus « bruts » sont directement calculés à partir des équations de scores (voir section estimation).
+*	Ce résidu n’est calculé que pour les observations qui ont connues l’évènement.
+*	Il est calculé au moment où l’évènement s’est produit.
+*	La somme des résidus pour chaque covariable est égale à 0 (propriété de l’équation de score à l’équilibre).
+*	On utilise généralement les résidus de Schoenfeld « standardisés » - par leur variance - pour tenir compte du fait que le risk set diminue au cours du temps.
+*	Pour une observation dont l’évènement s’est produit en t_i, le *résidu brut de Schoenfeld* pour la covariable $X_k$, après estimation du modèle, est égal à:
+  
+$$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{ik}\frac{e^{X_{i}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}= X_{ik} - E(X_k)$$
+
+* Ce résidu est formellement la contribution d'un individu au score. Il se lit comme la différence entre la valeur observée d'une covariable  et sa valeur espérée au moment où un évènement se produit. 
+
+* Si l'hypothèse de constance des risk ratios est respectée, les résidus ne doivent pas suivre une tendance précise, , en particulier à la hausse ou à la baisse.  
+
+* Intuitivement sans censure à droite et en ne considérant que les résidus bruts: on a un RR strictement égal à 1 en début d'exposition $R_i=100$ avec 50 hommes et 50 femmes. Si l'hypothèse PH (strictement) respectée, lorsqu'il reste 90 personnes soumises au risque, on devrait avoir 45 hommes et 45 femmes. Avec $R_i=50$, 25 hommes et 25 femmes,.......avec $R_i=10$, 5 hommes et 5 femmes. 	Au final $X_k$ est toujours égal à 0.5 et les résidus bruts prendront toujours la valeur -.5 si $X=0$ et .5 si $X=1$. En faisant une simple régression linéaire entre les résidus, qui alternent ces deux valeurs, et $t$, le coefficient estimé sera non significativement différent de 0. 
+
+* On peut tester l'hypothèse sur les résidus  par une régression entre ces résidus pour chaque covariable et la durée (ou fonction dérivée de la durée, par exemple $log(t)$)). La solution la plus utilisée est le test de **Grambsch-Therneau**.
+<br><br>
+
+
+
+**Résultat cohérent entre SAS - STATA - SURVIVAL V2 (R) - Lifelines (Python)**
+
+::: {.callout-warning} 
+```{r eval=FALSE}
+      Test of proportional-hazards assumption
+
+      Time:  Time
+      ----------------------------------------------------------------
+                  |       rho            chi2       df       Prob>chi2
+      ------------+---------------------------------------------------
+      year        |      0.10162         0.80        1         0.3720
+      age         |      0.12937         1.61        1         0.2043
+      surgery     |      0.29664         5.54        1         0.0186
+      ------------+---------------------------------------------------
+      global test |                      8.76        3         0.0327
+      ----------------------------------------------------------------
+      
+**Se reporter à la section sur R pour les questions de compatibilité du test entre les v2 et v3 de ** `survival`**.  
+Point essentiel lorsqu'on travaille sur des durées groupées ou discrètes**       
+      
+```
+:::
+
+
+
+Ici l'hypothèse de proportionalité des risques est questionnable pour la variable *surgery*. Le risque ratio  n'est vraisemblablement  pas constant dans le temps.  Ce n'est pas étonnant, le premier décès pour les personnes opérées d'un pontage n'est observé qu'au bout de 165 jours.
+
+
+
+**Remarques / à savoir**  
+
+* **Test multiple**: de nouveau il convient de se méfier du résultat du test multiple lorsque le nombre de degrés de liberté est élevé (ou tout simplement supérieur à 1). Le risque de premier espèce peut-être assez faible alors que les tests pour chaque covariables prises une à une présentent  élevées (>.1 par exemple). Dans l'exemple sur les trois variables, seulement une est questionnable et le test sur un seuil courant de 5% pourrait être jugé significatif.
+
+
+* Le résultat de ce test est considéré par certain.e.s comme un indicateur de l’ampleur du biais qui affecte la baseline du risque.
+
+
+* **Transformations de la durée**: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: $g(t)=t$ (« identity »), $g(t)=log(t)$, $g(t)=KM(t)$ ou $g(t)=1- KM(t$) où $KM(t$) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank », est  utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple $t=(0.1,0.5,1,2.6,3)$ donne une transformation $t=(1,2,3,4)$. A savoir : la fonction « identity » rend le test relativement sensible aux évènements très tardifs et rares (outliers).
+
+
+
+::: callout-important
+
+Le test est exécuté avec la fonction **`coxzph`**.....mais.
+
+Depuis la  v3 de la librairie Survival, il s'agit non pas pas d'une nouvelle version du test, mais de la version d'origine qui est exécutée. Tous les autres logiciels utilisent une version *simplifiée* de ce test. Il y a peu de conséquences en l'absence d'évènements simultanés, situation plutôt fréquente en sciences sociales. Avec le test *exact* on observe des violations quasi systématiques de l'hypothèse en présence d'un nombre importants d'évènements observés simulatnéments.  Je conseille donc, même si une investigation méthodologique plus complète doit être faite, d'utiliser le test de la version précédente. Je donne une procédure plutôt simple d'exécuter ce test dans le chapitre *programmation*, en récupérant directement la fonction. Seul le nom de la fonction a été modifié (**`coxzphold`**).
+:::
+
+
+::: panel-tabset
+
+### R
+
+Attention test modifié depuis le v3 de survival.
+
+*  Après avoir créer un objet  à l’estimation du modèle de Cox, on utilise la fonction **`cox.zph`**. Cette fonction utilise par défaut $f(t)=1-KM(t)$ où $KM(t)$ sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.
+*  Test antérieur: j’ai récupéré le programme du test antérieur, renommé **`cox.zphold`**. On peut le télécharger, et il est facilement exécutable.
+
+### Stata
+
+Le test est obtenu avec la commande **`estat phtest, d`**. Par défaut Stata utilise $f(t)=t$. On peut modifier cette fonction.
+
+### SAS
+
+Le test est disponible depuis quelques années avec l’argument **`zph`** sur la ligne `proc lifetest`. Par défaut SAS utilise $f(t)=t$. On peut modifier cette fonction.
+
+
+### Python
+
+On utilise la fonction **`proportional_hazard_test`** de la librairie `lifelines`. La fonction utilise par défaut $f(t)=t$, mais on peut afficher les résultats pour toutes les transformations de $t$ disponibles avec l’option `time_transform=’all’`. 
+
+:::
+
+
+## Intéraction avec la durée
+<br>
+
+Petit retour sur l'estimation du modèle.  
+
+Pour estimer le modèle de Cox, les données sont dans un premier temps splitées aux temps d'évènement. A l’exception de *Sas*,  les autres logiciels disposent d'une fonction qui effectue cette opération (*R*: `survsplit` - *Stata*: `stsplit`).
+
+```{r eval=FALSE}
+      +------------------------------+
+      | id   surgery    d    t    t0 |
+      |------------------------------|
+  24. |  2         0    0    1     0 |
+  25. |  2         0    0    2     1 |
+  26. |  2         0    0    3     2 |
+  27. |  2         0    0    5     3 |
+  28. |  2         0    1    6     5 |
+      |------------------------------|
+  29. |  3         0    0    1     0 |
+  30. |  3         0    0    2     1 |
+  31. |  3         0    0    3     2 |
+  32. |  3         0    0    5     3 |
+  33. |  3         0    0    6     5 |
+      |------------------------------|
+  34. |  3         0    0    8     6 |
+  35. |  3         0    0    9     8 |
+  36. |  3         0    0   12     9 |
+  37. |  3         0    1   16    12 |
+      +------------------------------+
+```
+
+Les bornes des intervalles $[t_0 ;t]$ ont des valeurs seulement lorsqu'un évènement s'est produit (principe de la vraisemblance partielle). Il n'y a donc pas de valeurs pour $t$ et $t_0$ en $t=4$ ($id=2,3$), $t=7,10,11,13,14,15$ ($id=3$).
+* Les deux individus observent l'évènement en $t=6$ pour $id=2$, et en $t=16$ pour $id=3$. Avant ce moment la valeur de la variable évènement/censure (ici $d$) prend toujours la valeur 0, et prend la valeur 1 le jour du décès.  
+
+On vérifie que les paramètres estimés sont identiques
+
+```{r eval=FALSE}
+Cox regression -- Breslow method for ties
+
+No. of subjects =          103                  Number of obs    =       3,573
+No. of failures =           75
+Time at risk    =        31938
+                                                LR chi2(3)       =       17.56
+Log likelihood  =   -289.54474                  Prob > chi2      =      0.0005
+
+------------------------------------------------------------------------------
+          _t |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        year |  -.1195075   .0673691    -1.77   0.076    -.2515486    .0125336
+         age |   .0295539   .0135341     2.18   0.029     .0030275    .0560803
+   1.surgery |   -.984869   .4362881    -2.26   0.024    -1.839978   -.1297601
+```
+
+
+*Introduction d'une intéraction avec une fonction de la durée*  
+
+On a une variable de durée (on prendra $f(t)=t$) qui sera croisée avec la variable surgery. Le modèle va s'écrire:      
+
+$$h(t | X,t) = h_0(t)e^{b_1age + b_2year + b_3 surgery + b_4 (surgery\times t)}$$
+
+**Exemple**   
+
+```{r eval=FALSE}
+Cox regression -- Breslow method for ties
+
+No. of subjects =          103                  Number of obs    =         103
+No. of failures =           75
+Time at risk    =        31938
+                                                LR chi2(4)       =       21.50
+Log likelihood  =   -287.57352                  Prob > chi2      =      0.0003
+
+------------------------------------------------------------------------------
+          _t |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+main         |
+        year |  -.1229512   .0668619    -1.84   0.066    -.2539981    .0080958
+         age |   .0288597   .0134588     2.14   0.032      .002481    .0552384
+   1.surgery |  -1.751567   .6744632    -2.60   0.009    -3.073491   -.4296435
+-------------+----------------------------------------------------------------
+tvc [interaction]          |
+   t*surgery |   .0022277   .0011025     2.02   0.043     .0000669    .0043886
+------------------------------------------------------------------------------
+Note: Variables in tvc equation interacted with _t.
+```
+
+L'intéraction $surgery\times t$ est ici significative ($p<0.05$). On retrouve donc le résultat du test sur les résidus de Schoenfeld.  
+
+**Intreprétation**:  
+
+* Le paramètre (logHR) pour surgery donne le risque ratio au début de l'exposition au risque ($t=0+\epsilon$): le risque de décéder en début d'observation, le premier jour après l'inscription dans le registre, est $(e^{-1.75}-1)\times 100 = -82\%$ plus faible pour les personnes qui ont eu un pontage.
+* Le terme d'intéraction étant positif, le gain en survie pour les personnes qui ont eu un pontage va diminuer avec le temps. Le RR augmente donc avec le temps, il est multiplié par 1.002 par jour.
+
+
+| $t$         | Calcul                        | Risk ratio   | 
+| ----------- | ----------------------------- | ------------ |
+| $0+\epsilon$| $e^{-1.75 + 0.002\times 0}$   |  $0.28$      | 
+| 1           | $e^{-1.75 + 0.002\times 1}$   |  $0.281$     | 
+| 2           | $e^{-1.75 + 0.002\times 2}$   |  $0.282$     |  
+| .           | .                             |              |
+| .           | .                             |              | 
+| 10          | $e^{-1.75 + 0.002\times 10}$  |  $0.286$     | 
+| 100         | $e^{-1.75 + 0.002\times 100}$ |  $0.34$      | 
+| 365         | $e^{-1.75 + 0.002\times 365}$ |  $0.58$      | 
+
+
+Attention, les calculs du tableau précédent ont été donnés à titre d'exemple. Les intervalles de confiance des rapports de risque s'avère nécessaires compte tenu de la diminution de la population restante exposée au risque.
+
+
+**Important**:  
+
+- Le modèle n'est plus un modèle à risque proportionnel. La variable *surgery* n'est plus une variable **fixe** mais une variable tronquée dynamique qui prend la valeur de t pour les personnes qui ont été opérées d'un pontage avant leur entrée dans le registre de greffe.
+- L'altération des rapports de risque dépend de la forme fonctionnelle de l'intéraction choisie. Ici la modification dans le temps du rapport des risque est constante, ce qui est une hypothèse assez forte. On a, en quelques sorte, réintroduit une hypothèse de proportionnalité, ici sur le degré d'altération des écarts de risques dans le temps.
+- **Attention**: les calculs ont été donnés à titre d'exemple. Le calculs des intervalles de confiance des rapports de risque s'avère nécessaires si l'on souhaite voir s'ils s'inversent vraiment.
+
+
+<br>
+##  Que faire 
+<br>
+
+***Ne rien faire***   
+
+On interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison). Difficilement soutenable pour l’analyse des effets cliniques, elle peut être envisagée dans d’autres domaines. Attention au nombre de variables qui ne respecte pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme « moyenne » sur la période d’observation.  
+On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps les écarts déjà significatifs en début d’observation s’accentuent, à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais si l’effet est modéré : $RR>1$ qui baisse ou $RR<1$ qui augmente au cours du temps, je suis moins convaincu de la pertinence de cette option.  
+Il faut tenir compte de l’intérêt portée par les variables qui présentent un problème par rapport à l’hypothèse. Il n’est peut-être pas nécessaire de complexifier le modèle pour des variables introduites comme simples contrôles.    
+Mais plus problématique… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de ***frailty*** (fragilité) lorsque cette non homogénéité n’est pas observables. Des estimations, plus complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Si l’hypothèse est sensible aux problèmes d’omission, il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.    
+
+<br>
+
+***Modèle de Cox stratifié***   
+
+Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie ajustées, et si une seule covariable (binaire) présente un problème. Les RR ne seront pas estimés pour la variable qui ne respecte pas l'hypothèse.  
+
+***Intéraction***    
+
+Introduire une interaction avec la durée, ce qui a été fait juste haut dessus. Cela peut permettre d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des RR, dans l'idéal une seule variable. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être strictement linéaire, ce qui est une hypothèse plutôt forte.... et on remets en quelque sort une contrainte de proportionalité.  
+
+***Modèles alternatifs***  
+
+Utiliser un modèle alternatif: modèles paramétriques à risques proportionnels si la distribution du risque s’ajuste bien, le modèle paramétrique « flexible » de Parmar-Royston (non traité) ou un modèle à temps discret. Dans ce dernier cas, on peut également corriger la non proportionalité avec une intéraction. Si on ne le fait pas, les risques prédits sous forme de probabilités conditionnelles resteront toujours dans les bornes contrairement au modèle de Cox.      
+Utiliser un modèle non paramétrique additif dit d’Aalen ou une de ses variantes. Mais ces modèles, dont les résultats sont des visuels graphiques, et se commentent difficilement.  
+
+**Forêt aléatoire**    
+Autre méthode : les forêts aléatoires [à présenter un jour tout de même]. L.Breiman a dès le départ proposé une estimation des modèles de survie par cette méthode. Par définition, pas sensible à l’hypothèse PH. Mais cela reste des méthodes à finalité prédictive, moins riche en interprétation si ce n’est sur les facteurs d’importance. 
+
+<br><br>
+
+
+# Cox et modèle de poisson  
+
+Juste une courte remarque.  
+
+Le modèle a été estimé par la méthode de la vraisemblance partielle. On peut montrer que le modèle de Cox est estimable à partir d’un simple modèle de Poisson. Cette estimation est appelée «***Constant Piecewise Exponential PH model***». 
+
+```{r eval=FALSE}
+Poisson regression                              Number of obs     =      3,573
+                                                LR chi2(90)       =     122.42
+                                                Prob > chi2       =     0.0131
+Log likelihood = -344.95318                     Pseudo R2         =     0.1507
+
+------------------------------------------------------------------------------
+          _d |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+-------------+----------------------------------------------------------------
+        year |  -.1195204    .067374    -1.77   0.076     -.251571    .0125302
+         age |   .0295531    .013535     2.18   0.029      .003025    .0560811
+     surgery |    -.98486   .4363162    -2.26   0.024    -1.840024   -.1296961
+             |
+       stime |
+          2  |   .4223592   1.154708     0.37   0.715    -1.840826    2.685544
+          3  |   .0495983   1.154704     0.04   0.966     -2.21358    2.312776
+          5  |   -.828855   1.224781    -0.68   0.499    -3.229383    1.571673
+          6  |  -.9922643   1.224779    -0.81   0.418    -3.392786    1.408258
+          8  |  -1.940546   1.414215    -1.37   0.170    -4.712356    .8312648
+          9  |   -2.03868   1.414233    -1.44   0.149    -4.810526    .7331649
+         11  |  -12.59255   2179.957    -0.01   0.995     -4285.23    4260.045
+         12  |   -2.30438   1.414226    -1.63   0.103    -5.076213    .4674526
+         16  |  -1.481512   1.154713    -1.28   0.199    -3.744708    .7816839
+         17  |  -2.591968    1.41426    -1.83   0.067    -5.363868    .1799312
+         18  |  -2.642535   1.414254    -1.87   0.062    -5.414421    .1293516
+         21  |  -2.095489   1.224819    -1.71   0.087    -4.496091    .3051133
+         28  |  -3.055745   1.414246    -2.16   0.031    -5.827616   -.2838729
+         30  |  -3.103495    1.41426    -2.19   0.028    -5.875395   -.3315961
+         31  |  -13.89462   2179.957    -0.01   0.995    -4286.532    4258.743
+         32  |  -3.144133   1.414253    -2.22   0.026    -5.916018   -.3722474
+         35  |  -3.219157   1.414258    -2.28   0.023    -5.991053    -.447262
+         36  |  -3.227893   1.414267    -2.28   0.022    -5.999806   -.4559796
+         37  |  -3.246139   1.414263    -2.30   0.022    -6.018042   -.4742351
+         39  |   -3.26923   1.414303    -2.31   0.021    -6.041213   -.4972472
+         40  |  -2.581465   1.224839    -2.11   0.035    -4.982106   -.1808239
+         43  |  -3.311454   1.414341    -2.34   0.019    -6.083512   -.5393966
+         45  |  -3.327473   1.414407    -2.35   0.019    -6.099661   -.5552857
+         50  |  -3.421206   1.414399    -2.42   0.016    -6.193377   -.6490357
+         51  |  -3.425081   1.414444    -2.42   0.015    -6.197341   -.6528208
+         53  |   -3.44536   1.414475    -2.44   0.015     -6.21768    -.673039
+         58  |  -3.514664   1.414489    -2.48   0.013    -6.287011   -.7423175
+         61  |  -3.543748   1.414557    -2.51   0.012    -6.316229   -.7712681
+         66  |  -3.602062   1.414546    -2.55   0.011    -6.374522   -.8296028
+         68  |   -2.90779   1.225106    -2.37   0.018    -5.308954   -.5066257
+         69  |  -3.580111   1.414549    -2.53   0.011    -6.352577   -.8076461
+         72  |  -2.914206    1.22505    -2.38   0.017     -5.31526   -.5131524
+         77  |  -3.624716   1.414601    -2.56   0.010    -6.397284   -.8521489
+         78  |  -3.593983   1.414779    -2.54   0.011    -6.366898   -.8210686
+         80  |  -3.597845   1.414765    -2.54   0.011    -6.370734   -.8249558
+         81  |  -3.589639   1.414745    -2.54   0.011    -6.362489   -.8167895
+         85  |  -3.598044   1.414948    -2.54   0.011    -6.371291    -.824798
+         90  |   -3.62163   1.415099    -2.56   0.010    -6.395173   -.8480873
+         96  |  -3.658159   1.415134    -2.59   0.010     -6.43177    -.884548
+        100  |  -3.672641   1.415162    -2.60   0.009    -6.446308   -.8989739
+        102  |  -3.662767   1.415232    -2.59   0.010    -6.436571   -.8889631
+        109  |  -14.65089   2179.957    -0.01   0.995    -4287.288    4257.986
+        110  |  -3.704316   1.415125    -2.62   0.009     -6.47791   -.9307209
+        131  |  -14.68697   2179.957    -0.01   0.995    -4287.324     4257.95
+        149  |  -3.976368   1.415012    -2.81   0.005    -6.749742   -1.202995
+        153  |   -3.97938   1.414995    -2.81   0.005    -6.752718   -1.206041
+        165  |  -4.013449   1.415156    -2.84   0.005    -6.787104   -1.239793
+        180  |  -15.09339   2179.957    -0.01   0.994    -4287.731    4257.544
+        186  |  -4.112806   1.414994    -2.91   0.004    -6.886144   -1.339468
+        188  |   -4.11316   1.414915    -2.91   0.004    -6.886342   -1.339978
+        207  |  -4.178467   1.414929    -2.95   0.003    -6.951678   -1.405256
+        219  |  -4.206547    1.41493    -2.97   0.003     -6.97976   -1.433334
+        263  |  -4.342286   1.415099    -3.07   0.002     -7.11583   -1.568742
+        265  |  -16.10078   2179.957    -0.01   0.994    -4288.738    4256.536
+        285  |  -3.688074   1.225534    -3.01   0.003    -6.090076   -1.286072
+        308  |  -4.409256   1.414925    -3.12   0.002    -7.182459   -1.636054
+        334  |  -4.432237   1.415143    -3.13   0.002    -7.205866   -1.658607
+        340  |  -4.422918   1.415095    -3.13   0.002    -7.196453   -1.649383
+        342  |  -4.365805    1.41511    -3.09   0.002     -7.13937   -1.592239
+        370  |  -16.64142   2179.957    -0.01   0.994    -4289.279    4255.996
+        397  |  -16.53454   2179.957    -0.01   0.994    -4289.172    4256.103
+        427  |  -16.28492   2179.957    -0.01   0.994    -4288.922    4256.352
+        445  |  -16.76689   2179.957    -0.01   0.994    -4289.404     4255.87
+        482  |   -15.8041   2179.957    -0.01   0.994    -4288.441    4256.833
+        515  |  -16.91429   2179.957    -0.01   0.994    -4289.552    4255.723
+        545  |  -16.10426   2179.957    -0.01   0.994    -4288.742    4256.533
+        583  |  -4.641434   1.415524    -3.28   0.001     -7.41581   -1.867057
+        596  |  -16.41019   2179.957    -0.01   0.994    -4289.047    4256.227
+        620  |  -17.07029   2179.957    -0.01   0.994    -4289.708    4255.567
+        670  |  -17.14785   2179.957    -0.01   0.994    -4289.785    4255.489
+        675  |  -4.631958   1.416377    -3.27   0.001    -7.408006   -1.855911
+        733  |   -4.60698   1.416405    -3.25   0.001    -7.383082   -1.830878
+        841  |  -17.05138   2179.957    -0.01   0.994    -4289.689    4255.586
+        852  |  -4.566243   1.417712    -3.22   0.001    -7.344907   -1.787579
+        915  |  -17.40169   2179.957    -0.01   0.994    -4290.039    4255.236
+        941  |  -17.34105   2179.957    -0.01   0.994    -4289.978    4255.296
+        979  |  -4.426862   1.419414    -3.12   0.002    -7.208862   -1.644862
+        995  |  -4.401387   1.418922    -3.10   0.002    -7.182422   -1.620352
+       1032  |  -4.390393   1.418666    -3.09   0.002    -7.170928   -1.609859
+       1141  |   -16.4898   2179.957    -0.01   0.994    -4289.127    4256.148
+       1321  |  -17.02179   2179.957    -0.01   0.994    -4289.659    4255.616
+       1386  |  -4.427898    1.41857    -3.12   0.002    -7.208243   -1.647553
+       1400  |  -17.74095   2179.957    -0.01   0.994    -4290.378    4254.896
+       1407  |  -17.17352   2179.957    -0.01   0.994    -4289.811    4255.464
+       1571  |  -18.15173   2179.957    -0.01   0.993    -4290.789    4254.486
+       1586  |  -18.39765   2179.957    -0.01   0.993    -4291.035     4254.24
+       1799  |  -18.08037   2179.957    -0.01   0.993    -4290.718    4254.557
+             |
+       _cons |   2.482922   4.946271     0.50   0.616    -7.211591    12.17744
+   ln(stime) |          1  (exposure)
+```
+
