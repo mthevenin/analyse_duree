@@ -8,14 +8,14 @@ website:
     location: sidebar
   page-navigation: true
   page-footer: 
-    center: "Marc Thévenin - Ined-Sms - Août 2022" 
-    background: light
+    center: "Marc Thévenin - Ined-Sms - Octobre 2022" 
+    background: dark
 
   navbar:
     collapse-below: lg
     left:
-      - text: "**ANALYSE DES DUREES 2022**"
-        href: index.qmd
+#      - text: "**ANALYSE DES DUREES 2022**"
+#       href: index.qmd
       - icon: github
         href: https://github.com/mthevenin/analyse_duree
       - icon: envelope
@@ -61,13 +61,17 @@ website:
 format:
   html:
     theme: 
-      light: [yeti]
-      dark:  [yeti, theme-dark.scss]    
+      light: yeti
+#      dark:  [yeti, theme-dark.scss]    
+    css: style.css
+    highlight-style: zenburn
+#    code-block-bg: true
+#    code-block-border-left: "#31BAE9"
     code-background: true
     code-copy: true
     toc: true
     toc-depth: 3
     toc-title: Sections
-    highlight-style: monochrome
+#    highlight-style: monochrome
 
 

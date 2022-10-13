@@ -10,7 +10,7 @@ Deux paquets d'analyse: principalement```lifelines``` (km, cox, aft...) et ```st
 <br>
 Le package ```statsmodels``` est également ne mesure d'estimer des courbes de séjour de type Kaplan-Meier et des modèles à risque proportionnel de Cox. Le package ```lifelines``` couvre la quasi totalité des méthodes standards, à l'exception des les risques concurrents.  
  
- 
+
 ```{r, echo=FALSE, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(knitr)
@@ -19,8 +19,6 @@ library(haven)
 library(memisc)
 library(reticulate)
 ```
-
-
 
 ```{r eval=FALSE}
 import numpy  as np
