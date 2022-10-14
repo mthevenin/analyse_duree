@@ -264,15 +264,6 @@ Ici l'hypothèse de proportionalité des risques est questionnable pour la varia
 * **Transformations de la durée**: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: $g(t)=t$ (« identity »), $g(t)=log(t)$, $g(t)=KM(t)$ ou $g(t)=1- KM(t$) où $KM(t$) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank », est  utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple $t=(0.1,0.5,1,2.6,3)$ donne une transformation $t=(1,2,3,4)$. A savoir : la fonction « identity » rend le test relativement sensible aux évènements très tardifs et rares (outliers).
 
 
-
-::: callout-important
-
-Le test est exécuté avec la fonction **`coxzph`**.....mais.
-
-Depuis la  v3 de la librairie Survival, il s'agit non pas pas d'une nouvelle version du test, mais de la version d'origine qui est exécutée. Tous les autres logiciels utilisent une version *simplifiée* de ce test. Il y a peu de conséquences en l'absence d'évènements simultanés, situation plutôt fréquente en sciences sociales. Avec le test *exact* on observe des violations quasi systématiques de l'hypothèse en présence d'un nombre importants d'évènements observés simulatnéments.  Je conseille donc, même si une investigation méthodologique plus complète doit être faite, d'utiliser le test de la version précédente. Je donne une procédure plutôt simple d'exécuter ce test dans le chapitre *programmation*, en récupérant directement la fonction. Seul le nom de la fonction a été modifié (**`coxzphold`**).
-:::
-
-
 ::: panel-tabset
 
 ### R
@@ -397,9 +388,9 @@ que chaque jour le HR entre personnes opérées et personnes non opérées augme
 - **Attention**: les calculs ont été donnés à titre d'exemple. Le calculs des intervalles de confiance des rapports de risque s'avère nécessaires si l'on souhaite voir s'ils s'inversent vraiment.
 
 
-<br>
+
+
 ##  Que faire 
-<br>
 
 ***Ne rien faire***   
 
