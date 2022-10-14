@@ -108,25 +108,28 @@ $tvc = transplant$ , si $transplant=1$ et $_t<wait$ alors $tvc=0$.
 Maintenant, si on estime le modèle avec cette variable dynamique qui indique clairement le moment de la transition (jour de la greffe):
 
 ```{r eval=FALSE}
-Cox regression -- Efron method for ties
 
-No. of subjects =          103                  Number of obs    =       3,668
-No. of failures =           75
-Time at risk    =      31938.1
-                                                LR chi2(4)       =       17.70
-Log likelihood  =   -289.27058                  Prob > chi2      =      0.0014
+Cox regression with Efron method for ties
+
+No. of subjects =    103                                Number of obs =  3,573
+No. of failures =     75
+Time at risk    = 31,938
+                                                        LR chi2(4)    =  17.70
+Log likelihood = -289.27014                             Prob > chi2   = 0.0014
 
 ------------------------------------------------------------------------------
-          _t |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+          _t | Haz. ratio   Std. err.      z    P>|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
-        year |  -.1202612   .0673414    -1.79   0.074     -.252248    .0117256
-         age |   .0304498   .0138998     2.19   0.028     .0032068    .0576929
-   1.surgery |  -.9829386   .4365524    -2.25   0.024    -1.838566   -.1273116
-       1.tvc |  -.0826682   .3047751    -0.27   0.786    -.6800165      .51468
+        year |      0.887      0.060    -1.79   0.074        0.777       1.012
+         age |      1.031      0.014     2.19   0.029        1.003       1.059
+     surgery |      0.374      0.163    -2.25   0.024        0.159       0.880
+         tvc |      0.921      0.281    -0.27   0.787        0.507       1.674
 ------------------------------------------------------------------------------
+
 ```
 
-La greffe n'a plus d'impact sur la survie des individus, tout du moins elle ne l'augmente pas. Cela ne signifie pas non plus que des personnes ont pu être "sauvée" grâce à cette opération (ou plutôt leur durée de vie augmentée), mais des complications lors de l'opération ou post-opératoires ou des problèmes de rejet du greffon, surtout à une époque où ces techniques étaient à leurs balbutiements, ont été également la source d'une mortalité peut-être un peu plus précoce que si la personne n'avait pas été greffée.
+L'impact de la greffe apparaît maintenant bien plus contestable sur la survie des individus, tout du moins elle ne l'augmente pas. Cela ne signifie pas non plus que des personnes ont pu être "sauvée" grâce à cette opération (ou plutôt leur durée de vie augmentée), mais des complications lors de l'opération ou post-opératoire, surtout à une époque où ces techniques étaient à leurs balbutiements, ont pu également accélérer la mortalité  par rapport à une personne non (encore) greffée.
+
 
 ## Cox: solutions logiciels
 

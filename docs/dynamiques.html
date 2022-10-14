@@ -335,7 +335,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Variables dynamiques</h1>
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Variables dynamiques</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -446,24 +446,24 @@ On va dans un premier temps estimer le modèle (de Cox) avec la variable fixe <e
 </div>
 <p>Maintenant, si on estime le modèle avec cette variable dynamique qui indique clairement le moment de la transition (jour de la greffe):</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Cox regression <span class="sc">--</span> Efron method <span class="cf">for</span> ties</span>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Cox regression with Efron method <span class="cf">for</span> ties</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>No. of subjects <span class="ot">=</span>          <span class="dv">103</span>                  Number of obs    <span class="ot">=</span>       <span class="dv">3</span>,<span class="dv">668</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>No. of failures <span class="ot">=</span>           <span class="dv">75</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Time at risk    <span class="ot">=</span>      <span class="fl">31938.1</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                                                LR <span class="fu">chi2</span>(<span class="dv">4</span>)       <span class="ot">=</span>       <span class="fl">17.70</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>Log likelihood  <span class="ot">=</span>   <span class="sc">-</span><span class="fl">289.27058</span>                  Prob <span class="sc">&gt;</span> chi2      <span class="ot">=</span>      <span class="fl">0.0014</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>No. of subjects <span class="ot">=</span>    <span class="dv">103</span>                                Number of obs <span class="ot">=</span>  <span class="dv">3</span>,<span class="dv">573</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>No. of failures <span class="ot">=</span>     <span class="dv">75</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>Time at risk    <span class="ot">=</span> <span class="dv">31</span>,<span class="dv">938</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                                                        LR <span class="fu">chi2</span>(<span class="dv">4</span>)    <span class="ot">=</span>  <span class="fl">17.70</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>Log likelihood <span class="ot">=</span> <span class="sc">-</span><span class="fl">289.27014</span>                             Prob <span class="sc">&gt;</span> chi2   <span class="ot">=</span> <span class="fl">0.0014</span></span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>          _t <span class="sc">|</span>      Coef.   Std. Err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% Conf. Interval]</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>          _t <span class="sc">|</span> Haz. ratio   Std. err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% conf. interval]</span>
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>  <span class="sc">-</span>.<span class="dv">1202612</span>   .<span class="dv">0673414</span>    <span class="sc">-</span><span class="fl">1.79</span>   <span class="fl">0.074</span>     <span class="sc">-</span>.<span class="dv">252248</span>    .<span class="dv">0117256</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>   .<span class="dv">0304498</span>   .<span class="dv">0138998</span>     <span class="fl">2.19</span>   <span class="fl">0.028</span>     .<span class="dv">0032068</span>    .<span class="dv">0576929</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>   <span class="fl">1.</span>surgery <span class="sc">|</span>  <span class="sc">-</span>.<span class="dv">9829386</span>   .<span class="dv">4365524</span>    <span class="sc">-</span><span class="fl">2.25</span>   <span class="fl">0.024</span>    <span class="sc">-</span><span class="fl">1.838566</span>   <span class="sc">-</span>.<span class="dv">1273116</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>       <span class="fl">1.</span>tvc <span class="sc">|</span>  <span class="sc">-</span>.<span class="dv">0826682</span>   .<span class="dv">3047751</span>    <span class="sc">-</span><span class="fl">0.27</span>   <span class="fl">0.786</span>    <span class="sc">-</span>.<span class="dv">6800165</span>      .<span class="dv">51468</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>      <span class="fl">0.887</span>      <span class="fl">0.060</span>    <span class="sc">-</span><span class="fl">1.79</span>   <span class="fl">0.074</span>        <span class="fl">0.777</span>       <span class="fl">1.012</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>      <span class="fl">1.031</span>      <span class="fl">0.014</span>     <span class="fl">2.19</span>   <span class="fl">0.029</span>        <span class="fl">1.003</span>       <span class="fl">1.059</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>     surgery <span class="sc">|</span>      <span class="fl">0.374</span>      <span class="fl">0.163</span>    <span class="sc">-</span><span class="fl">2.25</span>   <span class="fl">0.024</span>        <span class="fl">0.159</span>       <span class="fl">0.880</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>         tvc <span class="sc">|</span>      <span class="fl">0.921</span>      <span class="fl">0.281</span>    <span class="sc">-</span><span class="fl">0.27</span>   <span class="fl">0.787</span>        <span class="fl">0.507</span>       <span class="fl">1.674</span></span>
 <span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>La greffe n’a plus d’impact sur la survie des individus, tout du moins elle ne l’augmente pas. Cela ne signifie pas non plus que des personnes ont pu être “sauvée” grâce à cette opération (ou plutôt leur durée de vie augmentée), mais des complications lors de l’opération ou post-opératoires ou des problèmes de rejet du greffon, surtout à une époque où ces techniques étaient à leurs balbutiements, ont été également la source d’une mortalité peut-être un peu plus précoce que si la personne n’avait pas été greffée.</p>
+<p>L’impact de la greffe apparaît maintenant bien plus contestable sur la survie des individus, tout du moins elle ne l’augmente pas. Cela ne signifie pas non plus que des personnes ont pu être “sauvée” grâce à cette opération (ou plutôt leur durée de vie augmentée), mais des complications lors de l’opération ou post-opératoire, surtout à une époque où ces techniques étaient à leurs balbutiements, ont pu également accélérer la mortalité par rapport à une personne non (encore) greffée.</p>
 </section>
 <section id="cox-solutions-logiciels" class="level2">
 <h2 class="anchored" data-anchor-id="cox-solutions-logiciels">Cox: solutions logiciels</h2>
@@ -526,6 +526,8 @@ On va dans un premier temps estimer le modèle (de Cox) avec la variable fixe <e
 <li><p>Lorsque les variables dynamiques sont de type quantitatives/continues, le problème on doit aussi considérer avec des phénomènes d’anticipation sur les valeurs attendues de ces variables, observées postérieurement à l’évènement étudié. On peut introduire des « lags » dans le modèle pour saisir ce phénomène : par exemple <span class="math inline">\(x_t= x_{t+1}\)</span>. Ce décalage des durées d’occurrence peut être aussi introduite pour les variables discrètes (naissance d’un enfant par exemple).</p></li>
 </ul>
 
+
+<!-- -->
 
 </section>
 
@@ -595,6 +597,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
@@ -674,7 +727,198 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         <span class="nav-page-text">Modèles paramétriques</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb6" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Variables dynamiques"</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Cette section sera principalement traitée par l'exemple, et on ne s'intéressera qu'aux variables de type discrète, avec un seul changement d'état.</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Dans un modèle de durée, une variable dynamique peut-être appréhendée comme une intéraction entre la durée et une variable quantitative.</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Pour un modèle de Cox, l'hypothèse de risque proportionnel ne peut donc pas être testée sur la variable d'origine.</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Ne pas tenir compte du caractère dynamique d'une dimension peut conduire à des interprétations erronées.</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Warning: La façon de modéliser les dimensions dynamiques en analyse des durées peut conduire à des biais de causalité, en particulier dans les sciences sociales, en omettant les effets d'anticipation. C'est une situation classique avec des covariables dynamiques de type discrètes. Les techniques standards ne peuvent modéliser que des effets d'adaptation : la cause - observée - précède l'effet.</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu"># Facteur dynamique traitée de manière fixe</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>On reprend l'exemple sur malformation cardiaque, en ajoutant la variable relative à la greffe. La question est donc: une transplantation du coeur réduit-elle le risque journalier de décéder (ou augmente la durée de survie).  </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>On a dans la base 2 variables: une variable binaire pour savoir si l'individu à été greffé ou non, **tranplant**, et la variable *wait* de type continue tronquée  donnant la durée en jour jusqu'à l'opération depuis l'inscription dans le registre (0 si $transplant=0$).   </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>On va dans un premier temps estimer le modèle (de Cox) avec la variable fixe *transplant*.   </span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>          _t <span class="sc">|</span> Haz. ratio   Std. err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% conf. interval]</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>      <span class="fl">0.926</span>      <span class="fl">0.061</span>    <span class="sc">-</span><span class="fl">1.16</span>   <span class="fl">0.246</span>        <span class="fl">0.813</span>       <span class="fl">1.055</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>      <span class="fl">1.058</span>      <span class="fl">0.015</span>     <span class="fl">3.91</span>   <span class="fl">0.000</span>        <span class="fl">1.029</span>       <span class="fl">1.089</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>     surgery <span class="sc">|</span>      <span class="fl">0.537</span>      <span class="fl">0.241</span>    <span class="sc">-</span><span class="fl">1.38</span>   <span class="fl">0.167</span>        <span class="fl">0.223</span>       <span class="fl">1.296</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  transplant <span class="sc">|</span>      <span class="fl">0.251</span>      <span class="fl">0.079</span>    <span class="sc">-</span><span class="fl">4.38</span>   <span class="fl">0.000</span>        <span class="fl">0.135</span>       <span class="fl">0.466</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>        wait <span class="sc">|</span>      <span class="fl">0.993</span>      <span class="fl">0.005</span>    <span class="sc">-</span><span class="fl">1.48</span>   <span class="fl">0.139</span>        <span class="fl">0.983</span>       <span class="fl">1.002</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>Interprétation: traité de manière fixe, la greffe réduit donc sensiblement le risque journalier de décéder </span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>Au niveau des données le modèle à été estimé, pour une personne greffée (ici id=70), à partir de ce mapping:</span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+-------------------------------------------------------------+</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a>      <span class="er">|</span> id   year   age   surgery   transp<span class="sc">~</span>t   wait   _d   _t   _t0 <span class="sc">|</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a>      <span class="er">|</span><span class="sc">-------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a><span class="fl">1896.</span> <span class="sc">|</span> <span class="dv">70</span>     <span class="dv">72</span>    <span class="dv">52</span>         <span class="dv">0</span>          <span class="dv">1</span>      <span class="dv">5</span>    <span class="dv">0</span>    <span class="dv">1</span>     <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a><span class="fl">1897.</span> <span class="sc">|</span> <span class="dv">70</span>     <span class="dv">72</span>    <span class="dv">52</span>         <span class="dv">0</span>          <span class="dv">1</span>      <span class="dv">5</span>    <span class="dv">0</span>    <span class="dv">2</span>     <span class="dv">1</span> <span class="sc">|</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a><span class="fl">1898.</span> <span class="sc">|</span> <span class="dv">70</span>     <span class="dv">72</span>    <span class="dv">52</span>         <span class="dv">0</span>          <span class="dv">1</span>      <span class="dv">5</span>    <span class="dv">0</span>    <span class="dv">3</span>     <span class="dv">2</span> <span class="sc">|</span></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a><span class="fl">1899.</span> <span class="sc">|</span> <span class="dv">70</span>     <span class="dv">72</span>    <span class="dv">52</span>         <span class="dv">0</span>          <span class="dv">1</span>      <span class="dv">5</span>    <span class="dv">0</span>    <span class="dv">5</span>     <span class="dv">3</span> <span class="sc">|</span></span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="fl">1900.</span> <span class="sc">|</span> <span class="dv">70</span>     <span class="dv">72</span>    <span class="dv">52</span>         <span class="dv">0</span>          <span class="dv">1</span>      <span class="dv">5</span>    <span class="dv">0</span>    <span class="dv">6</span>     <span class="dv">5</span> <span class="sc">|</span></span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>      <span class="er">|</span><span class="sc">-------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a><span class="fl">1901.</span> <span class="sc">|</span> <span class="dv">70</span>     <span class="dv">72</span>    <span class="dv">52</span>         <span class="dv">0</span>          <span class="dv">1</span>      <span class="dv">5</span>    <span class="dv">0</span>    <span class="dv">8</span>     <span class="dv">6</span> <span class="sc">|</span></span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="fl">1902.</span> <span class="sc">|</span> <span class="dv">70</span>     <span class="dv">72</span>    <span class="dv">52</span>         <span class="dv">0</span>          <span class="dv">1</span>      <span class="dv">5</span>    <span class="dv">0</span>    <span class="dv">9</span>     <span class="dv">8</span> <span class="sc">|</span></span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a><span class="fl">1903.</span> <span class="sc">|</span> <span class="dv">70</span>     <span class="dv">72</span>    <span class="dv">52</span>         <span class="dv">0</span>          <span class="dv">1</span>      <span class="dv">5</span>    <span class="dv">0</span>   <span class="dv">12</span>     <span class="dv">9</span> <span class="sc">|</span></span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a><span class="fl">1904.</span> <span class="sc">|</span> <span class="dv">70</span>     <span class="dv">72</span>    <span class="dv">52</span>         <span class="dv">0</span>          <span class="dv">1</span>      <span class="dv">5</span>    <span class="dv">0</span>   <span class="dv">16</span>    <span class="dv">12</span> <span class="sc">|</span></span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a><span class="fl">1905.</span> <span class="sc">|</span> <span class="dv">70</span>     <span class="dv">72</span>    <span class="dv">52</span>         <span class="dv">0</span>          <span class="dv">1</span>      <span class="dv">5</span>    <span class="dv">0</span>   <span class="dv">17</span>    <span class="dv">16</span> <span class="sc">|</span></span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a>      <span class="er">|</span><span class="sc">-------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="fl">1906.</span> <span class="sc">|</span> <span class="dv">70</span>     <span class="dv">72</span>    <span class="dv">52</span>         <span class="dv">0</span>          <span class="dv">1</span>      <span class="dv">5</span>    <span class="dv">0</span>   <span class="dv">18</span>    <span class="dv">17</span> <span class="sc">|</span></span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a><span class="fl">1907.</span> <span class="sc">|</span> <span class="dv">70</span>     <span class="dv">72</span>    <span class="dv">52</span>         <span class="dv">0</span>          <span class="dv">1</span>      <span class="dv">5</span>    <span class="dv">0</span>   <span class="dv">21</span>    <span class="dv">18</span> <span class="sc">|</span></span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="fl">1908.</span> <span class="sc">|</span> <span class="dv">70</span>     <span class="dv">72</span>    <span class="dv">52</span>         <span class="dv">0</span>          <span class="dv">1</span>      <span class="dv">5</span>    <span class="dv">0</span>   <span class="dv">28</span>    <span class="dv">21</span> <span class="sc">|</span></span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a><span class="fl">1909.</span> <span class="sc">|</span> <span class="dv">70</span>     <span class="dv">72</span>    <span class="dv">52</span>         <span class="dv">0</span>          <span class="dv">1</span>      <span class="dv">5</span>    <span class="dv">1</span>   <span class="dv">30</span>    <span class="dv">28</span> <span class="sc">|</span></span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>      <span class="sc">+-------------------------------------------------------------+</span></span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>**Problème**: une personne est codée greffée avant le jour de la transplantation. L'effet *causal* est donc mal mesuré si sa dimension temporelle a été ignorée, ici le jour exact de l'opération. C'est le même principe pour l'évènement, la personne est codée décédée (1) le jour du décès, et vivante avant (0).  </span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a><span class="fu"># Estimation avec une variable dynamique</span></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-64"><a href="#cb6-64" aria-hidden="true" tabindex="-1"></a>Il convient donc de modifier l'information avec le délai d'attente jusqu'à la greffe. Quel que soit le logiciel, le principe de construction de la variable suit la logique suivante:\</span>
+<span id="cb6-65"><a href="#cb6-65" aria-hidden="true" tabindex="-1"></a>$tvc = transplant$ , si $transplant=1$ et $_t&lt;wait$ alors $tvc=0$.</span>
+<span id="cb6-66"><a href="#cb6-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-67"><a href="#cb6-67" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modèle de Cox</span></span>
+<span id="cb6-68"><a href="#cb6-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-69"><a href="#cb6-69" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb6-70"><a href="#cb6-70" aria-hidden="true" tabindex="-1"></a>  <span class="sc">+---------------------------------------------------------------------+</span></span>
+<span id="cb6-71"><a href="#cb6-71" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> id   year   age   surgery   tvc   wait   _d          _t         _t0 <span class="sc">|</span></span>
+<span id="cb6-72"><a href="#cb6-72" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">---------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb6-73"><a href="#cb6-73" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">0</span>     <span class="dv">12</span>    <span class="dv">0</span>           <span class="dv">1</span>           <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb6-74"><a href="#cb6-74" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">0</span>     <span class="dv">12</span>    <span class="dv">0</span>           <span class="dv">2</span>           <span class="dv">1</span> <span class="sc">|</span></span>
+<span id="cb6-75"><a href="#cb6-75" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">0</span>     <span class="dv">12</span>    <span class="dv">0</span>           <span class="dv">3</span>           <span class="dv">2</span> <span class="sc">|</span></span>
+<span id="cb6-76"><a href="#cb6-76" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">0</span>     <span class="dv">12</span>    <span class="dv">0</span>           <span class="dv">5</span>           <span class="dv">3</span> <span class="sc">|</span></span>
+<span id="cb6-77"><a href="#cb6-77" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">0</span>     <span class="dv">12</span>    <span class="dv">0</span>   <span class="fl">5.0999999</span>           <span class="dv">5</span> <span class="sc">|</span></span>
+<span id="cb6-78"><a href="#cb6-78" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">---------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb6-79"><a href="#cb6-79" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">0</span>     <span class="dv">12</span>    <span class="dv">0</span>           <span class="dv">6</span>   <span class="fl">5.0999999</span> <span class="sc">|</span></span>
+<span id="cb6-80"><a href="#cb6-80" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">0</span>     <span class="dv">12</span>    <span class="dv">0</span>           <span class="dv">8</span>           <span class="dv">6</span> <span class="sc">|</span></span>
+<span id="cb6-81"><a href="#cb6-81" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">0</span>     <span class="dv">12</span>    <span class="dv">0</span>           <span class="dv">9</span>           <span class="dv">8</span> <span class="sc">|</span></span>
+<span id="cb6-82"><a href="#cb6-82" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">12</span>           <span class="dv">9</span> <span class="sc">|</span></span>
+<span id="cb6-83"><a href="#cb6-83" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">16</span>          <span class="dv">12</span> <span class="sc">|</span></span>
+<span id="cb6-84"><a href="#cb6-84" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">---------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb6-85"><a href="#cb6-85" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">17</span>          <span class="dv">16</span> <span class="sc">|</span></span>
+<span id="cb6-86"><a href="#cb6-86" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">18</span>          <span class="dv">17</span> <span class="sc">|</span></span>
+<span id="cb6-87"><a href="#cb6-87" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">21</span>          <span class="dv">18</span> <span class="sc">|</span></span>
+<span id="cb6-88"><a href="#cb6-88" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">28</span>          <span class="dv">21</span> <span class="sc">|</span></span>
+<span id="cb6-89"><a href="#cb6-89" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">30</span>          <span class="dv">28</span> <span class="sc">|</span></span>
+<span id="cb6-90"><a href="#cb6-90" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">---------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb6-91"><a href="#cb6-91" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">32</span>          <span class="dv">30</span> <span class="sc">|</span></span>
+<span id="cb6-92"><a href="#cb6-92" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">35</span>          <span class="dv">32</span> <span class="sc">|</span></span>
+<span id="cb6-93"><a href="#cb6-93" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">36</span>          <span class="dv">35</span> <span class="sc">|</span></span>
+<span id="cb6-94"><a href="#cb6-94" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">37</span>          <span class="dv">36</span> <span class="sc">|</span></span>
+<span id="cb6-95"><a href="#cb6-95" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">39</span>          <span class="dv">37</span> <span class="sc">|</span></span>
+<span id="cb6-96"><a href="#cb6-96" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">---------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb6-97"><a href="#cb6-97" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">40</span>          <span class="dv">39</span> <span class="sc">|</span></span>
+<span id="cb6-98"><a href="#cb6-98" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">43</span>          <span class="dv">40</span> <span class="sc">|</span></span>
+<span id="cb6-99"><a href="#cb6-99" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">45</span>          <span class="dv">43</span> <span class="sc">|</span></span>
+<span id="cb6-100"><a href="#cb6-100" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">50</span>          <span class="dv">45</span> <span class="sc">|</span></span>
+<span id="cb6-101"><a href="#cb6-101" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">51</span>          <span class="dv">50</span> <span class="sc">|</span></span>
+<span id="cb6-102"><a href="#cb6-102" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">---------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb6-103"><a href="#cb6-103" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">0</span>          <span class="dv">53</span>          <span class="dv">51</span> <span class="sc">|</span></span>
+<span id="cb6-104"><a href="#cb6-104" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">10</span>     <span class="dv">68</span>    <span class="dv">42</span>         <span class="dv">0</span>     <span class="dv">1</span>     <span class="dv">12</span>    <span class="dv">1</span>          <span class="dv">58</span>          <span class="dv">53</span> <span class="sc">|</span></span>
+<span id="cb6-105"><a href="#cb6-105" aria-hidden="true" tabindex="-1"></a>  <span class="sc">+---------------------------------------------------------------------+</span></span>
+<span id="cb6-106"><a href="#cb6-106" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-107"><a href="#cb6-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-108"><a href="#cb6-108" aria-hidden="true" tabindex="-1"></a>Maintenant, si on estime le modèle avec cette variable dynamique qui indique clairement le moment de la transition (jour de la greffe):</span>
+<span id="cb6-109"><a href="#cb6-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-110"><a href="#cb6-110" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb6-111"><a href="#cb6-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-112"><a href="#cb6-112" aria-hidden="true" tabindex="-1"></a>Cox regression with Efron method <span class="cf">for</span> ties</span>
+<span id="cb6-113"><a href="#cb6-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-114"><a href="#cb6-114" aria-hidden="true" tabindex="-1"></a>No. of subjects <span class="ot">=</span>    <span class="dv">103</span>                                Number of obs <span class="ot">=</span>  <span class="dv">3</span>,<span class="dv">573</span></span>
+<span id="cb6-115"><a href="#cb6-115" aria-hidden="true" tabindex="-1"></a>No. of failures <span class="ot">=</span>     <span class="dv">75</span></span>
+<span id="cb6-116"><a href="#cb6-116" aria-hidden="true" tabindex="-1"></a>Time at risk    <span class="ot">=</span> <span class="dv">31</span>,<span class="dv">938</span></span>
+<span id="cb6-117"><a href="#cb6-117" aria-hidden="true" tabindex="-1"></a>                                                        LR <span class="fu">chi2</span>(<span class="dv">4</span>)    <span class="ot">=</span>  <span class="fl">17.70</span></span>
+<span id="cb6-118"><a href="#cb6-118" aria-hidden="true" tabindex="-1"></a>Log likelihood <span class="ot">=</span> <span class="sc">-</span><span class="fl">289.27014</span>                             Prob <span class="sc">&gt;</span> chi2   <span class="ot">=</span> <span class="fl">0.0014</span></span>
+<span id="cb6-119"><a href="#cb6-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-120"><a href="#cb6-120" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb6-121"><a href="#cb6-121" aria-hidden="true" tabindex="-1"></a>          _t <span class="sc">|</span> Haz. ratio   Std. err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% conf. interval]</span>
+<span id="cb6-122"><a href="#cb6-122" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb6-123"><a href="#cb6-123" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>      <span class="fl">0.887</span>      <span class="fl">0.060</span>    <span class="sc">-</span><span class="fl">1.79</span>   <span class="fl">0.074</span>        <span class="fl">0.777</span>       <span class="fl">1.012</span></span>
+<span id="cb6-124"><a href="#cb6-124" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>      <span class="fl">1.031</span>      <span class="fl">0.014</span>     <span class="fl">2.19</span>   <span class="fl">0.029</span>        <span class="fl">1.003</span>       <span class="fl">1.059</span></span>
+<span id="cb6-125"><a href="#cb6-125" aria-hidden="true" tabindex="-1"></a>     surgery <span class="sc">|</span>      <span class="fl">0.374</span>      <span class="fl">0.163</span>    <span class="sc">-</span><span class="fl">2.25</span>   <span class="fl">0.024</span>        <span class="fl">0.159</span>       <span class="fl">0.880</span></span>
+<span id="cb6-126"><a href="#cb6-126" aria-hidden="true" tabindex="-1"></a>         tvc <span class="sc">|</span>      <span class="fl">0.921</span>      <span class="fl">0.281</span>    <span class="sc">-</span><span class="fl">0.27</span>   <span class="fl">0.787</span>        <span class="fl">0.507</span>       <span class="fl">1.674</span></span>
+<span id="cb6-127"><a href="#cb6-127" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb6-128"><a href="#cb6-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-129"><a href="#cb6-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-130"><a href="#cb6-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-131"><a href="#cb6-131" aria-hidden="true" tabindex="-1"></a>L'impact de la greffe apparaît maintenant bien plus contestable sur la survie des individus, tout du moins elle ne l'augmente pas. Cela ne signifie pas non plus que des personnes ont pu être "sauvée" grâce à cette opération (ou plutôt leur durée de vie augmentée), mais des complications lors de l'opération ou post-opératoire, surtout à une époque où ces techniques étaient à leurs balbutiements, ont pu également accélérer la mortalité  par rapport à une personne non (encore) greffée.</span>
+<span id="cb6-132"><a href="#cb6-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-133"><a href="#cb6-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-134"><a href="#cb6-134" aria-hidden="true" tabindex="-1"></a><span class="fu">## Cox: solutions logiciels</span></span>
+<span id="cb6-135"><a href="#cb6-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-136"><a href="#cb6-136" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
+<span id="cb6-137"><a href="#cb6-137" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sas</span></span>
+<span id="cb6-138"><a href="#cb6-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-139"><a href="#cb6-139" aria-hidden="true" tabindex="-1"></a>La base n'est pas modifiée et la création de la TVC est faite "en aveugle" dans la procédure <span class="in">`phreg`</span>, après l'instruction <span class="in">`model`</span>. Ce n'est pas super.</span>
+<span id="cb6-140"><a href="#cb6-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-141"><a href="#cb6-141" aria-hidden="true" tabindex="-1"></a><span class="fu">### R - Stata, Python</span></span>
+<span id="cb6-142"><a href="#cb6-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-143"><a href="#cb6-143" aria-hidden="true" tabindex="-1"></a>La base doit être transformée en format long aux temps d'évènement (<span class="in">`survsplit`</span> avec R, <span class="in">`stsplit`</span> avec Stata) avant la création de la variable dynamique.</span>
+<span id="cb6-144"><a href="#cb6-144" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb6-145"><a href="#cb6-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-146"><a href="#cb6-146" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modèle à temps discret</span></span>
+<span id="cb6-147"><a href="#cb6-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-148"><a href="#cb6-148" aria-hidden="true" tabindex="-1"></a>Même principe pour la construction de la variable dynamique. Pour rappel l'échelle temporelle est le mois, et on a créé en amont une variable qui transforme les jour d'attente en mois (*mwait*).</span>
+<span id="cb6-149"><a href="#cb6-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-150"><a href="#cb6-150" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb6-151"><a href="#cb6-151" aria-hidden="true" tabindex="-1"></a><span class="sc">+---------------------------------------------+</span></span>
+<span id="cb6-152"><a href="#cb6-152" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> id   year   age   surgery   tvc   mwait   t <span class="sc">|</span></span>
+<span id="cb6-153"><a href="#cb6-153" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">---------------------------------------------</span><span class="er">|</span></span>
+<span id="cb6-154"><a href="#cb6-154" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">13</span>     <span class="dv">68</span>    <span class="dv">54</span>         <span class="dv">0</span>     <span class="dv">0</span>       <span class="dv">2</span>   <span class="dv">1</span> <span class="sc">|</span></span>
+<span id="cb6-155"><a href="#cb6-155" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">13</span>     <span class="dv">68</span>    <span class="dv">54</span>         <span class="dv">0</span>     <span class="dv">1</span>       <span class="dv">2</span>   <span class="dv">2</span> <span class="sc">|</span></span>
+<span id="cb6-156"><a href="#cb6-156" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> <span class="dv">13</span>     <span class="dv">68</span>    <span class="dv">54</span>         <span class="dv">0</span>     <span class="dv">1</span>       <span class="dv">2</span>   <span class="dv">3</span> <span class="sc">|</span></span>
+<span id="cb6-157"><a href="#cb6-157" aria-hidden="true" tabindex="-1"></a>  <span class="sc">+---------------------------------------------+</span></span>
+<span id="cb6-158"><a href="#cb6-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-159"><a href="#cb6-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-160"><a href="#cb6-160" aria-hidden="true" tabindex="-1"></a>Logistic regression                             Number of obs     <span class="ot">=</span>      <span class="dv">1</span>,<span class="dv">127</span></span>
+<span id="cb6-161"><a href="#cb6-161" aria-hidden="true" tabindex="-1"></a>                                                LR <span class="fu">chi2</span>(<span class="dv">7</span>)        <span class="ot">=</span>      <span class="fl">90.73</span></span>
+<span id="cb6-162"><a href="#cb6-162" aria-hidden="true" tabindex="-1"></a>                                                Prob <span class="sc">&gt;</span> chi2       <span class="ot">=</span>     <span class="fl">0.0000</span></span>
+<span id="cb6-163"><a href="#cb6-163" aria-hidden="true" tabindex="-1"></a>Log likelihood <span class="ot">=</span> <span class="sc">-</span><span class="fl">230.32152</span>                     Pseudo R2         <span class="ot">=</span>     <span class="fl">0.1645</span></span>
+<span id="cb6-164"><a href="#cb6-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-165"><a href="#cb6-165" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb6-166"><a href="#cb6-166" aria-hidden="true" tabindex="-1"></a>           e <span class="sc">|</span>      Coef.   Std. Err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% Conf. Interval]</span>
+<span id="cb6-167"><a href="#cb6-167" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb6-168"><a href="#cb6-168" aria-hidden="true" tabindex="-1"></a>           t <span class="sc">|</span>   <span class="sc">-</span>.<span class="dv">365048</span>   .<span class="dv">0915105</span>    <span class="sc">-</span><span class="fl">3.99</span>   <span class="fl">0.000</span>    <span class="sc">-</span>.<span class="dv">5444052</span>   <span class="sc">-</span>.<span class="dv">1856907</span></span>
+<span id="cb6-169"><a href="#cb6-169" aria-hidden="true" tabindex="-1"></a>          t2 <span class="sc">|</span>   .<span class="dv">0139226</span>   .<span class="dv">0053256</span>     <span class="fl">2.61</span>   <span class="fl">0.009</span>     .<span class="dv">0034846</span>    .<span class="dv">0243606</span></span>
+<span id="cb6-170"><a href="#cb6-170" aria-hidden="true" tabindex="-1"></a>          t3 <span class="sc">|</span>   <span class="sc">-</span>.<span class="dv">000162</span>   .<span class="dv">0000815</span>    <span class="sc">-</span><span class="fl">1.99</span>   <span class="fl">0.047</span>    <span class="sc">-</span>.<span class="dv">0003217</span>   <span class="sc">-</span><span class="fl">2.27e-06</span></span>
+<span id="cb6-171"><a href="#cb6-171" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>  <span class="sc">-</span>.<span class="dv">1324928</span>   .<span class="dv">0737516</span>    <span class="sc">-</span><span class="fl">1.80</span>   <span class="fl">0.072</span>    <span class="sc">-</span>.<span class="dv">2770433</span>    .<span class="dv">0120577</span></span>
+<span id="cb6-172"><a href="#cb6-172" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>    .<span class="dv">033829</span>   .<span class="dv">0149503</span>     <span class="fl">2.26</span>   <span class="fl">0.024</span>      .<span class="dv">004527</span>    .<span class="dv">0631311</span></span>
+<span id="cb6-173"><a href="#cb6-173" aria-hidden="true" tabindex="-1"></a>     surgery <span class="sc">|</span>  <span class="sc">-</span><span class="fl">1.007795</span>   .<span class="dv">4490177</span>    <span class="sc">-</span><span class="fl">2.24</span>   <span class="fl">0.025</span>    <span class="sc">-</span><span class="fl">1.887854</span>   <span class="sc">-</span>.<span class="dv">1277365</span></span>
+<span id="cb6-174"><a href="#cb6-174" aria-hidden="true" tabindex="-1"></a>         tvc <span class="sc">|</span>  <span class="sc">-</span>.<span class="dv">0543011</span>   .<span class="dv">3114096</span>    <span class="sc">-</span><span class="fl">0.17</span>   <span class="fl">0.862</span>    <span class="sc">-</span>.<span class="dv">6646528</span>    .<span class="dv">5560505</span></span>
+<span id="cb6-175"><a href="#cb6-175" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb6-176"><a href="#cb6-176" aria-hidden="true" tabindex="-1"></a>Remarque <span class="sc">:</span> la constante n’est pas reportée, les valeurs de la référence</span>
+<span id="cb6-177"><a href="#cb6-177" aria-hidden="true" tabindex="-1"></a>n’ayant pas grand  <span class="fu">sens</span> (année et âge à <span class="dv">0</span>)</span>
+<span id="cb6-178"><a href="#cb6-178" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb6-179"><a href="#cb6-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-180"><a href="#cb6-180" aria-hidden="true" tabindex="-1"></a><span class="fu"># Précautions</span></span>
+<span id="cb6-181"><a href="#cb6-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-182"><a href="#cb6-182" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Rappel: la cause doit précède l'effet.</span>
+<span id="cb6-183"><a href="#cb6-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-184"><a href="#cb6-184" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Lorsque l'évènement étudié n'est pas intrinsèquement de type absorbant comme le décès, la « cause » peut se manifester ou plutôt être observée après la survenue de l'évènement étudié.Les modèles de durée standards ne peuvent pas gérer ces situations car l'observation sort du risque après la survenue de l'évènement.</span>
+<span id="cb6-185"><a href="#cb6-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-186"><a href="#cb6-186" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Même si la cause est bien mesurée avant l'évènement d'intérêt, un « choc » n'est peut-être qu'un point final d'un processus causal antérieur: une séparation est rarement un évènement ponctuel, une phase plus ou moins longue de mésentente dans le couple lui a vraisemblablement préexister. La datation du début d'un processus causal n'est donc pas toujours facile à mesurer.</span>
+<span id="cb6-187"><a href="#cb6-187" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>**Logique d'adaptation**: la « cause » identifiée est mesurée avant l'évènement étudié.</span>
+<span id="cb6-188"><a href="#cb6-188" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>**Logique d'anticipation**: la « cause » identifiée est mesurée après l'occurrence de l'évènement étudié. L'origine causale est bien antérieure à l'évènement, mais elle n'est pas directement observable.</span>
+<span id="cb6-189"><a href="#cb6-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-190"><a href="#cb6-190" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Lorsque les variables dynamiques sont de type quantitatives/continues, le problème on doit aussi considérer avec des phénomènes d'anticipation sur les valeurs attendues de ces variables, observées postérieurement à l'évènement étudié. On peut introduire des « lags » dans le modèle pour saisir ce phénomène : par exemple $x_t= x_{t+1}$. Ce décalage des durées d'occurrence peut être aussi introduite pour les variables discrètes (naissance d'un enfant par exemple).</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

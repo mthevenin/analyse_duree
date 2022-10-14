@@ -73,6 +73,8 @@ Programme de cette section: [Lien](programme_R.R)
 |                                         |                                                       |
 |                                         | -   `stargazer` - `gtsummary`                         |
 +-----------------------------------------+-------------------------------------------------------+
+
+
 ## **Installation**
 
 Les dernières versions de certains packages peuvent être installées via Github (ex: `survminer`). Pour les récupérer, passer par le package ```devtools```.  

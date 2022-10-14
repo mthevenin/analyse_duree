@@ -338,7 +338,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Modèle de Cox</h1>
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Modèle de Cox</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -620,105 +620,49 @@ Important
 <p>Les bornes des intervalles <span class="math inline">\([t_0 ;t]\)</span> ont des valeurs seulement lorsqu’un évènement s’est produit (principe de la vraisemblance partielle). Il n’y a donc pas de valeurs pour <span class="math inline">\(t\)</span> et <span class="math inline">\(t_0\)</span> en <span class="math inline">\(t=4\)</span> (<span class="math inline">\(id=2,3\)</span>), <span class="math inline">\(t=7,10,11,13,14,15\)</span> (<span class="math inline">\(id=3\)</span>). * Les deux individus observent l’évènement en <span class="math inline">\(t=6\)</span> pour <span class="math inline">\(id=2\)</span>, et en <span class="math inline">\(t=16\)</span> pour <span class="math inline">\(id=3\)</span>. Avant ce moment la valeur de la variable évènement/censure (ici <span class="math inline">\(d\)</span>) prend toujours la valeur 0, et prend la valeur 1 le jour du décès.</p>
 <p>On vérifie que les paramètres estimés sont identiques</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Cox regression <span class="sc">--</span> Breslow method <span class="cf">for</span> ties</span>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Cox regression with Efron method <span class="cf">for</span> ties</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>No. of subjects <span class="ot">=</span>          <span class="dv">103</span>                  Number of obs    <span class="ot">=</span>       <span class="dv">3</span>,<span class="dv">573</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>No. of failures <span class="ot">=</span>           <span class="dv">75</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>Time at risk    <span class="ot">=</span>        <span class="dv">31938</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                                                LR <span class="fu">chi2</span>(<span class="dv">3</span>)       <span class="ot">=</span>       <span class="fl">17.56</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>Log likelihood  <span class="ot">=</span>   <span class="sc">-</span><span class="fl">289.54474</span>                  Prob <span class="sc">&gt;</span> chi2      <span class="ot">=</span>      <span class="fl">0.0005</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>No. of subjects <span class="ot">=</span>    <span class="dv">103</span>                                Number of obs <span class="ot">=</span>  <span class="dv">3</span>,<span class="dv">573</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>No. of failures <span class="ot">=</span>     <span class="dv">75</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>Time at risk    <span class="ot">=</span> <span class="dv">31</span>,<span class="dv">938</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>                                                        LR <span class="fu">chi2</span>(<span class="dv">3</span>)    <span class="ot">=</span>  <span class="fl">17.63</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>Log likelihood <span class="ot">=</span> <span class="sc">-</span><span class="fl">289.30639</span>                             Prob <span class="sc">&gt;</span> chi2   <span class="ot">=</span> <span class="fl">0.0005</span></span>
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>          _t <span class="sc">|</span>      Coef.   Std. Err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% Conf. Interval]</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>          _t <span class="sc">|</span> Haz. ratio   Std. err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% conf. interval]</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>  <span class="sc">-</span>.<span class="dv">1195075</span>   .<span class="dv">0673691</span>    <span class="sc">-</span><span class="fl">1.77</span>   <span class="fl">0.076</span>    <span class="sc">-</span>.<span class="dv">2515486</span>    .<span class="dv">0125336</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>   .<span class="dv">0295539</span>   .<span class="dv">0135341</span>     <span class="fl">2.18</span>   <span class="fl">0.029</span>     .<span class="dv">0030275</span>    .<span class="dv">0560803</span></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>   <span class="fl">1.</span>surgery <span class="sc">|</span>   <span class="sc">-</span>.<span class="dv">984869</span>   .<span class="dv">4362881</span>    <span class="sc">-</span><span class="fl">2.26</span>   <span class="fl">0.024</span>    <span class="sc">-</span><span class="fl">1.839978</span>   <span class="sc">-</span>.<span class="dv">1297601</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>      <span class="fl">0.887</span>      <span class="fl">0.060</span>    <span class="sc">-</span><span class="fl">1.78</span>   <span class="fl">0.076</span>        <span class="fl">0.778</span>       <span class="fl">1.012</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>      <span class="fl">1.030</span>      <span class="fl">0.014</span>     <span class="fl">2.19</span>   <span class="fl">0.029</span>        <span class="fl">1.003</span>       <span class="fl">1.058</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>     surgery <span class="sc">|</span>      <span class="fl">0.373</span>      <span class="fl">0.163</span>    <span class="sc">-</span><span class="fl">2.26</span>   <span class="fl">0.024</span>        <span class="fl">0.158</span>       <span class="fl">0.876</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><em>Introduction d’une intéraction avec une fonction de la durée</em></p>
 <p>On a une variable de durée (on prendra <span class="math inline">\(f(t)=t\)</span>) qui sera croisée avec la variable surgery. Le modèle va s’écrire:</p>
 <p><span class="math display">\[h(t | X,t) = h_0(t)e^{b_1age + b_2year + b_3 surgery + b_4 (surgery\times t)}\]</span></p>
 <p><strong>Exemple</strong></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Cox regression <span class="sc">--</span> Breslow method <span class="cf">for</span> ties</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Cox regression with Efron method <span class="cf">for</span> ties</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>No. of subjects <span class="ot">=</span>          <span class="dv">103</span>                  Number of obs    <span class="ot">=</span>         <span class="dv">103</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>No. of failures <span class="ot">=</span>           <span class="dv">75</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Time at risk    <span class="ot">=</span>        <span class="dv">31938</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                                                LR <span class="fu">chi2</span>(<span class="dv">4</span>)       <span class="ot">=</span>       <span class="fl">21.50</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>Log likelihood  <span class="ot">=</span>   <span class="sc">-</span><span class="fl">287.57352</span>                  Prob <span class="sc">&gt;</span> chi2      <span class="ot">=</span>      <span class="fl">0.0003</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>No. of subjects <span class="ot">=</span>    <span class="dv">103</span>                                Number of obs <span class="ot">=</span>    <span class="dv">103</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>No. of failures <span class="ot">=</span>     <span class="dv">75</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Time at risk    <span class="ot">=</span> <span class="dv">31</span>,<span class="dv">938</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                                                        LR <span class="fu">chi2</span>(<span class="dv">4</span>)    <span class="ot">=</span>  <span class="fl">21.58</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>Log likelihood <span class="ot">=</span> <span class="sc">-</span><span class="fl">287.32903</span>                             Prob <span class="sc">&gt;</span> chi2   <span class="ot">=</span> <span class="fl">0.0002</span></span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>          _t <span class="sc">|</span>      Coef.   Std. Err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% Conf. Interval]</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>          _t <span class="sc">|</span> Haz. ratio   Std. err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% conf. interval]</span>
 <span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>main         <span class="sc">|</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>  <span class="sc">-</span>.<span class="dv">1229512</span>   .<span class="dv">0668619</span>    <span class="sc">-</span><span class="fl">1.84</span>   <span class="fl">0.066</span>    <span class="sc">-</span>.<span class="dv">2539981</span>    .<span class="dv">0080958</span></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>   .<span class="dv">0288597</span>   .<span class="dv">0134588</span>     <span class="fl">2.14</span>   <span class="fl">0.032</span>      .<span class="dv">002481</span>    .<span class="dv">0552384</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>   <span class="fl">1.</span>surgery <span class="sc">|</span>  <span class="sc">-</span><span class="fl">1.751567</span>   .<span class="dv">6744632</span>    <span class="sc">-</span><span class="fl">2.60</span>   <span class="fl">0.009</span>    <span class="sc">-</span><span class="fl">3.073491</span>   <span class="sc">-</span>.<span class="dv">4296435</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>      <span class="fl">0.884</span>      <span class="fl">0.059</span>    <span class="sc">-</span><span class="fl">1.84</span>   <span class="fl">0.066</span>        <span class="fl">0.776</span>       <span class="fl">1.008</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>      <span class="fl">1.029</span>      <span class="fl">0.014</span>     <span class="fl">2.15</span>   <span class="fl">0.032</span>        <span class="fl">1.003</span>       <span class="fl">1.057</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="fu">surgery</span>(t0<span class="sc">+</span>) <span class="sc">|</span>      <span class="fl">0.173</span>      <span class="fl">0.117</span>    <span class="sc">-</span><span class="fl">2.60</span>   <span class="fl">0.009</span>        <span class="fl">0.046</span>       <span class="fl">0.649</span></span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>tvc [interaction]          <span class="sc">|</span></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>   t<span class="sc">*</span>surgery <span class="sc">|</span>   .<span class="dv">0022277</span>   .<span class="dv">0011025</span>     <span class="fl">2.02</span>   <span class="fl">0.043</span>     .<span class="dv">0000669</span>    .<span class="dv">0043886</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>Note<span class="sc">:</span> Variables <span class="cf">in</span> tvc equation interacted with _t.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>Rapport de HR<span class="sc">|</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>   surgery<span class="sc">*</span>t <span class="sc">|</span>      <span class="fl">1.002</span>      <span class="fl">0.001</span>     <span class="fl">2.02</span>   <span class="fl">0.043</span>        <span class="fl">1.000</span>       <span class="fl">1.004</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>L’intéraction <span class="math inline">\(surgery\times t\)</span> est ici significative (<span class="math inline">\(p&lt;0.05\)</span>). On retrouve donc le résultat du test sur les résidus de Schoenfeld.</p>
-<p><strong>Intreprétation</strong>:</p>
-<ul>
-<li>Le paramètre (logHR) pour surgery donne le risque ratio au début de l’exposition au risque (<span class="math inline">\(t=0+\epsilon\)</span>): le risque de décéder en début d’observation, le premier jour après l’inscription dans le registre, est <span class="math inline">\((e^{-1.75}-1)\times 100 = -82\%\)</span> plus faible pour les personnes qui ont eu un pontage.</li>
-<li>Le terme d’intéraction étant positif, le gain en survie pour les personnes qui ont eu un pontage va diminuer avec le temps. Le RR augmente donc avec le temps, il est multiplié par 1.002 par jour.</li>
-</ul>
-<table class="table">
-<thead>
-<tr class="header">
-<th><span class="math inline">\(t\)</span></th>
-<th>Calcul</th>
-<th>Risk ratio</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(0+\epsilon\)</span></td>
-<td><span class="math inline">\(e^{-1.75 + 0.002\times 0}\)</span></td>
-<td><span class="math inline">\(0.28\)</span></td>
-</tr>
-<tr class="even">
-<td>1</td>
-<td><span class="math inline">\(e^{-1.75 + 0.002\times 1}\)</span></td>
-<td><span class="math inline">\(0.281\)</span></td>
-</tr>
-<tr class="odd">
-<td>2</td>
-<td><span class="math inline">\(e^{-1.75 + 0.002\times 2}\)</span></td>
-<td><span class="math inline">\(0.282\)</span></td>
-</tr>
-<tr class="even">
-<td>.</td>
-<td>.</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>.</td>
-<td>.</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>10</td>
-<td><span class="math inline">\(e^{-1.75 + 0.002\times 10}\)</span></td>
-<td><span class="math inline">\(0.286\)</span></td>
-</tr>
-<tr class="odd">
-<td>100</td>
-<td><span class="math inline">\(e^{-1.75 + 0.002\times 100}\)</span></td>
-<td><span class="math inline">\(0.34\)</span></td>
-</tr>
-<tr class="even">
-<td>365</td>
-<td><span class="math inline">\(e^{-1.75 + 0.002\times 365}\)</span></td>
-<td><span class="math inline">\(0.58\)</span></td>
-</tr>
-</tbody>
-</table>
-<p>Attention, les calculs du tableau précédent ont été donnés à titre d’exemple. Les intervalles de confiance des rapports de risque s’avère nécessaires compte tenu de la diminution de la population restante exposée au risque.</p>
+<p>On retrouve donc un résultat proche de celui obtenu à partir du test sur les résidus de Schoenfeld pour la variable <em>surgery</em>. Il a le mérité de pouvoir être interprété.<br>
+Malgré une hypothèse plutôt forte sur la forme fonctionnelle de l’intéraction, et dans les fait surement pas pertinente, on peut dire que chaque jour le HR entre personnes opérées et personnes non opérées augmente de 0.2%. L’effet de l’opération sur la survie des individus s’estompe avec le temps.</p>
 <p><strong>Important</strong>:</p>
 <ul>
 <li>Le modèle n’est plus un modèle à risque proportionnel. La variable <em>surgery</em> n’est plus une variable <strong>fixe</strong> mais une variable tronquée dynamique qui prend la valeur de t pour les personnes qui ont été opérées d’un pontage avant leur entrée dans le registre de greffe.</li>
@@ -855,6 +799,8 @@ Autre méthode : les forêts aléatoires [à présenter un jour tout de même]. 
 </div>
 
 
+<!-- -->
+
 </section>
 
 </main> <!-- /main -->
@@ -923,6 +869,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
@@ -1002,7 +999,550 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         <span class="nav-page-text">Modèle temps discret</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb8" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Modèle de Cox"</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># Le modèle semi-paramétrique de Cox</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>On peut ignorer la partie sur l’estimation du modèle. On retiendra tout de même qu'il est déconseillé de tester la méthode dite exacte pour la correction de la vraisemblance, qui ne peut matériellement fonctionner qu’avec un nombre très limité d’évènements observés simultanément, ce qui est plutôt rare avec des données à durées discrètes ou groupées, classiques dans les sciences sociales.</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## La vraisemblance partielle et estimation des paramètres </span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>On se situe dans une situation où la durée est mesurée sur une échelle strictement continue. Il ne peut donc y avoir qu'un seul évènement observé en $t_i$ (idem pour les censures).    </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>Pour une observation quelconque en $t_i$ qui, pour uniquement un seul individu correspond à un évènement ou une censure, la vraisemblance peut s'écrire: </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>$$L_i=f(t_i)^{\delta_i}S(t_i)^{1-\delta_i}$$  </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>**Vraisemblance partielle de Cox**  </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$f(t_i)$ est la valeur de la fonction de densité en $t_i$ </span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$S(t_i)$ est la valeur de la fonction de survie en $t_i$ </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\delta_i=1$ si l'évènement est observé: $L_i=f(t_i)$ </span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\delta_i=0$ si l'observation est censurée: $L_i=S(t_i)$                                                                            </span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>Comme $f(t_i)=h(t_i)\times S(t_i)$, on obtient:  $L_i=<span class="co">[</span><span class="ot">h(t_i)S(t_i)</span><span class="co">]</span>^{\delta_i}S(t_i)^{1-\delta_i} = h(t_i)^{\delta_i}S(t_i)$.  </span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>Pour $i=1,2,.....,n$, la vraisemblance totale s'ecrit donc:  $L_i=\prod_{i=1}^{n}h(t_i)^{\delta_i}S(t_i)$.  </span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>On peut réécrire cette vraisemblance en la multipliant et en la divisant par: $\sum_{j\in R_i}h(t_i)$, où $j\in R_i$ est l'ensemble des observation soumises au risque en $t_i$.  </span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>$$L=\prod_{i=1}^{n}\left<span class="co">[</span><span class="ot">h(t_i)\frac{\sum_{j\in R}h(t_i)}{\sum_{j\in R}h(t_i)}\right</span><span class="co">]</span>^{\delta_i}S(t_i)= \prod_{i=1}^{n}\left<span class="co">[</span><span class="ot">\frac{h(t_i)}{\sum_{j\in R_i}h(t_i)}\right</span><span class="co">]</span>^{\delta_i}\sum_{j\in R_i}h(t_i)^{\delta_i}S(t_i)$$  </span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>La vraisemblance partielle retient le premier terme de la vraisemblance, soit:   </span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>$PL=\prod_{i=1}^{n}\left<span class="co">[</span><span class="ot">\frac{h(t_i)}{\sum_{j\in R}h(t_i)}\right</span><span class="co">]</span>^{\delta_i}$  </span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>Une fois remplacée la valeur de $h(t_i)$ par son expression en tant que modèle à risques proportionnels, la vraisemblance partielle ne dépendra plus de la durée. **Mais elle va dépendre de l'ordre d'arrivée des évènements, c'est à dire leur rang**. </span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>*Remarque*: pour les observations censurées($\delta_i=0$), $PL=1$. Toutefois, ces censures à droite entrent dans l'expression $\sum_{j\in R}h(t_i)$ tant qu'elles sont soumises au risque.  </span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>En remplaçant donc $h(t_i)$ par l'expression $h_0(t)e^{X_i^{'}b}$:  </span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>$$PL=\prod_{i=1}^{n}\left<span class="co">[</span><span class="ot">\frac{h_0(t)e^{X_{i}^{'}b}}{\sum_{j\in R_i}h_0(t)e^{X_{j}^{'}b}}\right</span><span class="co">]</span>^{\delta_i} =\prod_{i=1}^{n}\left<span class="co">[</span><span class="ot">\frac{e^{X_i^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}\right</span><span class="co">]</span>^{\delta_i}$$</span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>L'expression $\frac{e^{Xb}}{\sum_{j\in R}e^{Xb}}$ est une probabilité, la vraisemblance partielle est donc bien un produit de probabilités. **Il s'agit de la probabilité qu'un individu observe l'évènement en $t_i$ sachant qu'un évènement (et un seul) s'est produit**.  </span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-53"><a href="#cb8-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-54"><a href="#cb8-54" aria-hidden="true" tabindex="-1"></a>*Condition nécessaire: pas d'évènement simultané*:  </span>
+<span id="cb8-55"><a href="#cb8-55" aria-hidden="true" tabindex="-1"></a>On rappelle que le temps est mesuré de manière strictement continue, il ne doit pas y avoir d'évènement simultané. Sinon, l’estimation de la vraisemblance doit  être corrigée. </span>
+<span id="cb8-56"><a href="#cb8-56" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-57"><a href="#cb8-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-58"><a href="#cb8-58" aria-hidden="true" tabindex="-1"></a>*Correction de la vraisemblance avec des évènements simultanés*:    </span>
+<span id="cb8-59"><a href="#cb8-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-60"><a href="#cb8-60" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>La ***méthode dite exacte***: Comme en réalité il n’y a pas d’évènement simultané, on va intégrer à la vraisemblance toutes les permutations possibles des évènements observés simultanément: si en $t_i$ on observe au « même moment » l’évènement pour A et B, une échelle temporelle plus précise nous permettrait de savoir si A s'est produit avant B ou B s'est produit avant A. Comme le nombre de permutations est calculé par une factorielle, avec 3 évènements  mesurés simultanément, il y a 6 permutations possibles ($3\times2\times1$).  </span>
+<span id="cb8-61"><a href="#cb8-61" aria-hidden="true" tabindex="-1"></a>Problème: le nombre de permutations pour chaque $t_i$ peut devenir très vite particulièrement élevé. Par exemple pour 10 évènements simultanés, le nombre de permutations est égal à 3.628.800. Le temps de calcul devient particulièrement long, et ce type de correction totalement inopérant. </span>
+<span id="cb8-62"><a href="#cb8-62" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>La ***méthode dite de Breslow***: il s'agit d'une approximation de la méthode exacte permettant de ne pas avoir à intégrer chaque permutation. Cette approximation est utilisée par défaut par les logiciels Sas et Stata. </span>
+<span id="cb8-63"><a href="#cb8-63" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>La ***méthode dite  d'Efron***: elle corrige l'approximation de Breslow, et est jugée plus proche de la méthode exacte. C'est la méthode utilisée par défaut avec le logiciel R, et elle est disponible avec les autres applications.  </span>
+<span id="cb8-64"><a href="#cb8-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-65"><a href="#cb8-65" aria-hidden="true" tabindex="-1"></a><span class="fu">## Estimation des paramètres</span></span>
+<span id="cb8-66"><a href="#cb8-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-67"><a href="#cb8-67" aria-hidden="true" tabindex="-1"></a>On utilise la méthode habituelle, à savoir la maximisation de la log-vraisemblance (ici partielle).  </span>
+<span id="cb8-68"><a href="#cb8-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-69"><a href="#cb8-69" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Conditions de premier ordre: calcul des équations de score à partir des dérivées partielles. Solution: $\frac{\partial log(PL)}{\partial{b_k}}=0$. On ne peut pas obtenir de solution numérique directe.  </span>
+<span id="cb8-70"><a href="#cb8-70" aria-hidden="true" tabindex="-1"></a>Remarque: les équations de score sont utilisées pour tester la validité de l'hypothèse de constance des rapports de risque pour calculer les **résidus de Schoenfeld** (voir plus bas). </span>
+<span id="cb8-71"><a href="#cb8-71" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Conditions de second ordre: calcul des dérivées secondes qui permettent d'obtenir la matrice d'information de Fisher et la matrice des variances-covariances des paramètres. </span>
+<span id="cb8-72"><a href="#cb8-72" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Comme il n'y a pas de solution numérique directe, on utilise un algorithme d'optimisation (ex: Newton-Raphson) à partir des équations de score et de la matrice d'information de Fisher.  </span>
+<span id="cb8-73"><a href="#cb8-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-74"><a href="#cb8-74" aria-hidden="true" tabindex="-1"></a>**Eléments de calcul**  </span>
+<span id="cb8-75"><a href="#cb8-75" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-76"><a href="#cb8-76" aria-hidden="true" tabindex="-1"></a>En logarithme, la vraisemblance partielle s'ecrit:  </span>
+<span id="cb8-77"><a href="#cb8-77" aria-hidden="true" tabindex="-1"></a>$$pl(b)=log(pl(b))=log\left(\prod_{i=1}^{n}\left<span class="co">[</span><span class="ot">\frac{e^{X_{i}^{'}b}}{\sum_{j\in R_i}e^{X_jb}}\right</span><span class="co">]</span>^{\delta_i}\right)$$  </span>
+<span id="cb8-78"><a href="#cb8-78" aria-hidden="true" tabindex="-1"></a>$$pl(b)=\sum_{i=1}^n\delta_ilog\left(\frac{e^{X_{i}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}} \right)$$</span>
+<span id="cb8-79"><a href="#cb8-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-80"><a href="#cb8-80" aria-hidden="true" tabindex="-1"></a>$$pl(b)=\sum_{i=1}^n\delta_i\left(log(e^{X_{i}^{'}b})-log\sum_{j\in R_i}e^{X_{i}^{'}b}\right)$$</span>
+<span id="cb8-81"><a href="#cb8-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-82"><a href="#cb8-82" aria-hidden="true" tabindex="-1"></a>$$pl(b)=\sum_{i=1}^n\delta_i\left(X_{i}^{'}b-log\sum_{j\in R_i}e^{X_{i}^{'}b}\right)$$</span>
+<span id="cb8-83"><a href="#cb8-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-84"><a href="#cb8-84" aria-hidden="true" tabindex="-1"></a>Calcul de l'équation de score pour une covariable $X_k$:  </span>
+<span id="cb8-85"><a href="#cb8-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-86"><a href="#cb8-86" aria-hidden="true" tabindex="-1"></a>$$\frac{\partial pl(b)}{\partial{b_k}}=\sum_{i=1}^n\delta_i\left(X_{ik}-\sum_{j\in R_i}X_{ik}\frac{e^{X_{i}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}\right)$$</span>
+<span id="cb8-87"><a href="#cb8-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-88"><a href="#cb8-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-89"><a href="#cb8-89" aria-hidden="true" tabindex="-1"></a>Comme $\frac{e^{X_{ik}b}}{\sum_{j\in R}e^{X_{jk}b}}$ est une probabilité,  $\sum_{j\in R}X_{ik}\times p_i$ est l'espérance (la moyenne) $E(X_k)$ d'avoir la caractéristique $X_k$ lorsqu'un évènement a été observé. Au final:  </span>
+<span id="cb8-90"><a href="#cb8-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-91"><a href="#cb8-91" aria-hidden="true" tabindex="-1"></a>$$\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - E(X_{k}) \right)$$</span>
+<span id="cb8-92"><a href="#cb8-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-93"><a href="#cb8-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-94"><a href="#cb8-94" aria-hidden="true" tabindex="-1"></a>Cette expression va permettre de tester le respect ou non de l’hypothèse de risques proportionnels.</span>
+<span id="cb8-95"><a href="#cb8-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-96"><a href="#cb8-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-97"><a href="#cb8-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-98"><a href="#cb8-98" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lecture des résultats</span></span>
+<span id="cb8-99"><a href="#cb8-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-100"><a href="#cb8-100" aria-hidden="true" tabindex="-1"></a>Comme il s'agit d'un modèle à risque proportionnel, **les rapports de risques sont constants pendant toute la période d'observation**. Il s'agit d'une propriété de l'estimation.  </span>
+<span id="cb8-101"><a href="#cb8-101" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-102"><a href="#cb8-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-103"><a href="#cb8-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-104"><a href="#cb8-104" aria-hidden="true" tabindex="-1"></a>***Covariable binaire (indicatrice)*** </span>
+<span id="cb8-105"><a href="#cb8-105" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p</span> <span class="er">class</span><span class="ot">=</span><span class="st">"comment"</span><span class="kw">&gt;</span></span>
+<span id="cb8-106"><a href="#cb8-106" aria-hidden="true" tabindex="-1"></a>$X=(0,1)$: $RR=\frac{h(t\ |\ X=1)}{h(t\ |\ X=0)}=e^b$.  </span>
+<span id="cb8-107"><a href="#cb8-107" aria-hidden="true" tabindex="-1"></a>A chaque moment de la durée $t$, le risque d'observer l'évènement est $e^b$ fois plus important/plus faible pour $X=1$ que pour $X=0$.  </span>
+<span id="cb8-108"><a href="#cb8-108" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/p&gt;</span></span>
+<span id="cb8-109"><a href="#cb8-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-110"><a href="#cb8-110" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-111"><a href="#cb8-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-112"><a href="#cb8-112" aria-hidden="true" tabindex="-1"></a>***Covariable quantitative*** (mais fixe dans le temps) </span>
+<span id="cb8-113"><a href="#cb8-113" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;p</span> <span class="er">class</span><span class="ot">=</span><span class="st">"comment"</span><span class="kw">&gt;</span></span>
+<span id="cb8-114"><a href="#cb8-114" aria-hidden="true" tabindex="-1"></a>$RR=\frac{h(t\ |\ X=a+c)}{h(t\ |\ X=a)}=e^{c \times{b}}$. </span>
+<span id="cb8-115"><a href="#cb8-115" aria-hidden="true" tabindex="-1"></a>On prendra pour illustrer une variable type âge au début de l’exposition au risque (a)*  et un delta de comparaison avec un âge inférieur (c).  </span>
+<span id="cb8-116"><a href="#cb8-116" aria-hidden="true" tabindex="-1"></a>Si $c=1$ (résultat de l'estimation): A un âge donnée en début d'exposition, le risque de connaitre l'évènement est $e^b$ fois inférieur/supérieur à celui d'une personne qui a un an de moins . </span>
+<span id="cb8-117"><a href="#cb8-117" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;/p&gt;</span></span>
+<span id="cb8-118"><a href="#cb8-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-119"><a href="#cb8-119" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-120"><a href="#cb8-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-121"><a href="#cb8-121" aria-hidden="true" tabindex="-1"></a>**Exemple pour les insuffisances cardiaques**  </span>
+<span id="cb8-122"><a href="#cb8-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-123"><a href="#cb8-123" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb8-124"><a href="#cb8-124" aria-hidden="true" tabindex="-1"></a>Estimateurs: $b$</span>
+<span id="cb8-125"><a href="#cb8-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-126"><a href="#cb8-126" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb8-127"><a href="#cb8-127" aria-hidden="true" tabindex="-1"></a>Cox regression <span class="sc">--</span> Efron method <span class="cf">for</span> ties</span>
+<span id="cb8-128"><a href="#cb8-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-129"><a href="#cb8-129" aria-hidden="true" tabindex="-1"></a>No. of subjects <span class="ot">=</span>          <span class="dv">103</span>                  Number of obs    <span class="ot">=</span>         <span class="dv">103</span></span>
+<span id="cb8-130"><a href="#cb8-130" aria-hidden="true" tabindex="-1"></a>No. of failures <span class="ot">=</span>           <span class="dv">75</span></span>
+<span id="cb8-131"><a href="#cb8-131" aria-hidden="true" tabindex="-1"></a>Time at risk    <span class="ot">=</span>        <span class="dv">31938</span></span>
+<span id="cb8-132"><a href="#cb8-132" aria-hidden="true" tabindex="-1"></a>                                                LR <span class="fu">chi2</span>(<span class="dv">3</span>)       <span class="ot">=</span>       <span class="fl">17.63</span></span>
+<span id="cb8-133"><a href="#cb8-133" aria-hidden="true" tabindex="-1"></a>Log likelihood  <span class="ot">=</span>   <span class="sc">-</span><span class="fl">289.30639</span>                  Prob <span class="sc">&gt;</span> chi2      <span class="ot">=</span>      <span class="fl">0.0005</span></span>
+<span id="cb8-134"><a href="#cb8-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-135"><a href="#cb8-135" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb8-136"><a href="#cb8-136" aria-hidden="true" tabindex="-1"></a>          _t <span class="sc">|</span>      Coef.   Std. Err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% Conf. Interval]</span>
+<span id="cb8-137"><a href="#cb8-137" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb8-138"><a href="#cb8-138" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>    <span class="sc">-</span><span class="fl">0.1196</span>     <span class="fl">0.0673</span>    <span class="sc">-</span><span class="fl">1.78</span>   <span class="fl">0.076</span>      <span class="sc">-</span><span class="fl">0.2516</span>      <span class="fl">0.0124</span></span>
+<span id="cb8-139"><a href="#cb8-139" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>     <span class="fl">0.0296</span>     <span class="fl">0.0135</span>     <span class="fl">2.19</span>   <span class="fl">0.029</span>       <span class="fl">0.0031</span>      <span class="fl">0.0561</span></span>
+<span id="cb8-140"><a href="#cb8-140" aria-hidden="true" tabindex="-1"></a>     surgery <span class="sc">|</span>    <span class="sc">-</span><span class="fl">0.9873</span>     <span class="fl">0.4363</span>    <span class="sc">-</span><span class="fl">2.26</span>   <span class="fl">0.024</span>      <span class="sc">-</span><span class="fl">1.8424</span>     <span class="sc">-</span><span class="fl">0.1323</span></span>
+<span id="cb8-141"><a href="#cb8-141" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb8-142"><a href="#cb8-142" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-143"><a href="#cb8-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-144"><a href="#cb8-144" aria-hidden="true" tabindex="-1"></a>Rapports des risques: $e^b$ </span>
+<span id="cb8-145"><a href="#cb8-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-146"><a href="#cb8-146" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb8-147"><a href="#cb8-147" aria-hidden="true" tabindex="-1"></a>Cox regression <span class="sc">--</span> Efron method <span class="cf">for</span> ties</span>
+<span id="cb8-148"><a href="#cb8-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-149"><a href="#cb8-149" aria-hidden="true" tabindex="-1"></a>No. of subjects <span class="ot">=</span>          <span class="dv">103</span>                  Number of obs    <span class="ot">=</span>         <span class="dv">103</span></span>
+<span id="cb8-150"><a href="#cb8-150" aria-hidden="true" tabindex="-1"></a>No. of failures <span class="ot">=</span>           <span class="dv">75</span></span>
+<span id="cb8-151"><a href="#cb8-151" aria-hidden="true" tabindex="-1"></a>Time at risk    <span class="ot">=</span>        <span class="dv">31938</span></span>
+<span id="cb8-152"><a href="#cb8-152" aria-hidden="true" tabindex="-1"></a>                                                LR <span class="fu">chi2</span>(<span class="dv">3</span>)       <span class="ot">=</span>       <span class="fl">17.63</span></span>
+<span id="cb8-153"><a href="#cb8-153" aria-hidden="true" tabindex="-1"></a>Log likelihood  <span class="ot">=</span>   <span class="sc">-</span><span class="fl">289.30639</span>                  Prob <span class="sc">&gt;</span> chi2      <span class="ot">=</span>      <span class="fl">0.0005</span></span>
+<span id="cb8-154"><a href="#cb8-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-155"><a href="#cb8-155" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb8-156"><a href="#cb8-156" aria-hidden="true" tabindex="-1"></a>          _t <span class="sc">|</span> Haz. Ratio   Std. Err.      z    P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span>     [<span class="dv">95</span>% Conf. Interval]</span>
+<span id="cb8-157"><a href="#cb8-157" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------+----------------------------------------------------------------</span></span>
+<span id="cb8-158"><a href="#cb8-158" aria-hidden="true" tabindex="-1"></a>        year <span class="sc">|</span>     <span class="fl">0.8872</span>     <span class="fl">0.0597</span>    <span class="sc">-</span><span class="fl">1.78</span>   <span class="fl">0.076</span>       <span class="fl">0.7775</span>      <span class="fl">1.0124</span></span>
+<span id="cb8-159"><a href="#cb8-159" aria-hidden="true" tabindex="-1"></a>         age <span class="sc">|</span>     <span class="fl">1.0300</span>     <span class="fl">0.0139</span>     <span class="fl">2.19</span>   <span class="fl">0.029</span>       <span class="fl">1.0031</span>      <span class="fl">1.0577</span></span>
+<span id="cb8-160"><a href="#cb8-160" aria-hidden="true" tabindex="-1"></a>     surgery <span class="sc">|</span>     <span class="fl">0.3726</span>     <span class="fl">0.1625</span>    <span class="sc">-</span><span class="fl">2.26</span>   <span class="fl">0.024</span>       <span class="fl">0.1584</span>      <span class="fl">0.8761</span></span>
+<span id="cb8-161"><a href="#cb8-161" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
+<span id="cb8-162"><a href="#cb8-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb8-163"><a href="#cb8-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-164"><a href="#cb8-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-165"><a href="#cb8-165" aria-hidden="true" tabindex="-1"></a>On retrouve les résultats des tests non paramétriques pour l'opération, à savoir qu’un pontage réduit les risques journaliers de décès pendant la période d’observation (augmente la durée de survie).     </span>
+<span id="cb8-166"><a href="#cb8-166" aria-hidden="true" tabindex="-1"></a>De la même manière, plus on entre à un âge élevé dans la liste d'attente plus le risque de décès augmente. La variable *year*, qui traduit des progrès en médecine, exprime une réduction relativement modérée du risque journalier de décès durant l'attente de la greffe du coeur.   </span>
+<span id="cb8-167"><a href="#cb8-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-168"><a href="#cb8-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-169"><a href="#cb8-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-170"><a href="#cb8-170" aria-hidden="true" tabindex="-1"></a><span class="fu">## R-Stata-Sas-Python   </span></span>
+<span id="cb8-171"><a href="#cb8-171" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-172"><a href="#cb8-172" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
+<span id="cb8-173"><a href="#cb8-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-174"><a href="#cb8-174" aria-hidden="true" tabindex="-1"></a><span class="fu">### R</span></span>
+<span id="cb8-175"><a href="#cb8-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-176"><a href="#cb8-176" aria-hidden="true" tabindex="-1"></a>Le modèle est  estimé avec la fonction **`coxph`** de la librairie **`survival`**.  Hors options, la syntaxe est identiques aux fonctions <span class="in">`survfit`</span> et <span class="in">`survdif`</span>.</span>
+<span id="cb8-177"><a href="#cb8-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-178"><a href="#cb8-178" aria-hidden="true" tabindex="-1"></a><span class="fu">### Stata</span></span>
+<span id="cb8-179"><a href="#cb8-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-180"><a href="#cb8-180" aria-hidden="true" tabindex="-1"></a>Le modèle est estimé avec la commande **`stcox`**.</span>
+<span id="cb8-181"><a href="#cb8-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-182"><a href="#cb8-182" aria-hidden="true" tabindex="-1"></a><span class="fu">### SAS</span></span>
+<span id="cb8-183"><a href="#cb8-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-184"><a href="#cb8-184" aria-hidden="true" tabindex="-1"></a>Le modèle est estimé avec la **`proc phreg`**.</span>
+<span id="cb8-185"><a href="#cb8-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-186"><a href="#cb8-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-187"><a href="#cb8-187" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python</span></span>
+<span id="cb8-188"><a href="#cb8-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-189"><a href="#cb8-189" aria-hidden="true" tabindex="-1"></a>Avec la librairie <span class="in">`lifelines`</span>, le modèle est estimé avec la fonction **`CoxPHFitter`**. Avec la librairie <span class="in">`statmodels`</span>, il est estimé avec la fonction <span class="in">`smf.phreg`</span>.</span>
+<span id="cb8-190"><a href="#cb8-190" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb8-191"><a href="#cb8-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-192"><a href="#cb8-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-193"><a href="#cb8-193" aria-hidden="true" tabindex="-1"></a><span class="fu"># L'hypothèse de constance des rapports de risque</span></span>
+<span id="cb8-194"><a href="#cb8-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-195"><a href="#cb8-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-196"><a href="#cb8-196" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Les rapports de risque (RR) estimés par le modèle sont contraints à être constant pendant toute la période d’observation. C’est une hypothèse forte.</span>
+<span id="cb8-197"><a href="#cb8-197" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Le respect de cette hypothèse doit être testé, en particulier pour un modèle de Cox où la baseline du risque est habituellement estimée à l’aide de ces rapports (méthode dite de Breslow, non traitée). En post-estimation, les valeurs estimées du risque pourront présenter des valeurs aberrantes, en particulier négatives.</span>
+<span id="cb8-198"><a href="#cb8-198" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Tester cette hypothèse revient à tester une interaction entre les rapports et la durée (ou plutôt une fonction de la durée).</span>
+<span id="cb8-199"><a href="#cb8-199" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Plusieurs méthodes disponibles, celle sur les résidus de martingales, réservée aux covariables continues, et le « test » graphique réservé aux variables catégorielles ne seront pas traités. On traitera  celle basée sur les** résidus de Schoenfeld** puis l'introduction d'une intéraction avec la durée dans le modèle. Cette dernière peut faire également office de méthode de correction lorsque l'hypothèse n'est pas respectée.  </span>
+<span id="cb8-200"><a href="#cb8-200" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si on regarde les courbes de Kaplan-Meier, leurs croisement non tardif impliquera nécessairement un problème sur cette hypothèse. </span>
+<span id="cb8-201"><a href="#cb8-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-202"><a href="#cb8-202" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-203"><a href="#cb8-203" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span>  </span>
+<span id="cb8-204"><a href="#cb8-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tests sur les résidus de Schoenfeld</span></span>
+<span id="cb8-206"><a href="#cb8-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Les résidus « bruts » sont directement calculés à partir des équations de scores (voir section estimation).</span>
+<span id="cb8-208"><a href="#cb8-208" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Ce résidu n’est calculé que pour les observations qui ont connues l’évènement.</span>
+<span id="cb8-209"><a href="#cb8-209" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Il est calculé au moment où l’évènement s’est produit.</span>
+<span id="cb8-210"><a href="#cb8-210" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>La somme des résidus pour chaque covariable est égale à 0 (propriété de l’équation de score à l’équilibre).</span>
+<span id="cb8-211"><a href="#cb8-211" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>On utilise généralement les résidus de Schoenfeld « standardisés » - par leur variance - pour tenir compte du fait que le risk set diminue au cours du temps.</span>
+<span id="cb8-212"><a href="#cb8-212" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Pour une observation dont l’évènement s’est produit en t_i, le *résidu brut de Schoenfeld* pour la covariable $X_k$, après estimation du modèle, est égal à:</span>
+<span id="cb8-213"><a href="#cb8-213" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-214"><a href="#cb8-214" aria-hidden="true" tabindex="-1"></a>$$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{ik}\frac{e^{X_{i}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}= X_{ik} - E(X_k)$$</span>
+<span id="cb8-215"><a href="#cb8-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-216"><a href="#cb8-216" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Ce résidu est formellement la contribution d'un individu au score. Il se lit comme la différence entre la valeur observée d'une covariable  et sa valeur espérée au moment où un évènement se produit. </span>
+<span id="cb8-217"><a href="#cb8-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-218"><a href="#cb8-218" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si l'hypothèse de constance des risk ratios est respectée, les résidus ne doivent pas suivre une tendance précise, , en particulier à la hausse ou à la baisse.  </span>
+<span id="cb8-219"><a href="#cb8-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-220"><a href="#cb8-220" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Intuitivement sans censure à droite et en ne considérant que les résidus bruts: on a un RR strictement égal à 1 en début d'exposition $R_i=100$ avec 50 hommes et 50 femmes. Si l'hypothèse PH (strictement) respectée, lorsqu'il reste 90 personnes soumises au risque, on devrait avoir 45 hommes et 45 femmes. Avec $R_i=50$, 25 hommes et 25 femmes,.......avec $R_i=10$, 5 hommes et 5 femmes.   Au final $X_k$ est toujours égal à 0.5 et les résidus bruts prendront toujours la valeur -.5 si $X=0$ et .5 si $X=1$. En faisant une simple régression linéaire entre les résidus, qui alternent ces deux valeurs, et $t$, le coefficient estimé sera non significativement différent de 0. </span>
+<span id="cb8-221"><a href="#cb8-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-222"><a href="#cb8-222" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>On peut tester l'hypothèse sur les résidus  par une régression entre ces résidus pour chaque covariable et la durée (ou fonction dérivée de la durée, par exemple $log(t)$)). La solution la plus utilisée est le test de **Grambsch-Therneau**.</span>
+<span id="cb8-223"><a href="#cb8-223" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;&lt;br&gt;</span></span>
+<span id="cb8-224"><a href="#cb8-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-225"><a href="#cb8-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-226"><a href="#cb8-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-227"><a href="#cb8-227" aria-hidden="true" tabindex="-1"></a>**Résultat cohérent entre SAS - STATA - SURVIVAL V2 (R) - Lifelines (Python)**</span>
+<span id="cb8-228"><a href="#cb8-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-229"><a href="#cb8-229" aria-hidden="true" tabindex="-1"></a>::: {.callout-warning} </span>
+<span id="cb8-230"><a href="#cb8-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb8-231"><a href="#cb8-231" aria-hidden="true" tabindex="-1"></a>      Test of proportional<span class="sc">-</span>hazards assumption</span>
+<span id="cb8-232"><a href="#cb8-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-233"><a href="#cb8-233" aria-hidden="true" tabindex="-1"></a>      Time<span class="sc">:</span>  Time</span>
+<span id="cb8-234"><a href="#cb8-234" aria-hidden="true" tabindex="-1"></a>      <span class="sc">----------------------------------------------------------------</span></span>
+<span id="cb8-235"><a href="#cb8-235" aria-hidden="true" tabindex="-1"></a>                  <span class="er">|</span>       rho            chi2       df       Prob<span class="sc">&gt;</span>chi2</span>
+<span id="cb8-236"><a href="#cb8-236" aria-hidden="true" tabindex="-1"></a>      <span class="sc">------------+---------------------------------------------------</span></span>
+<span id="cb8-237"><a href="#cb8-237" aria-hidden="true" tabindex="-1"></a>      year        <span class="sc">|</span>      <span class="fl">0.10162</span>         <span class="fl">0.80</span>        <span class="dv">1</span>         <span class="fl">0.3720</span></span>
+<span id="cb8-238"><a href="#cb8-238" aria-hidden="true" tabindex="-1"></a>      age         <span class="sc">|</span>      <span class="fl">0.12937</span>         <span class="fl">1.61</span>        <span class="dv">1</span>         <span class="fl">0.2043</span></span>
+<span id="cb8-239"><a href="#cb8-239" aria-hidden="true" tabindex="-1"></a>      surgery     <span class="sc">|</span>      <span class="fl">0.29664</span>         <span class="fl">5.54</span>        <span class="dv">1</span>         <span class="fl">0.0186</span></span>
+<span id="cb8-240"><a href="#cb8-240" aria-hidden="true" tabindex="-1"></a>      <span class="sc">------------+---------------------------------------------------</span></span>
+<span id="cb8-241"><a href="#cb8-241" aria-hidden="true" tabindex="-1"></a>      global test <span class="sc">|</span>                      <span class="fl">8.76</span>        <span class="dv">3</span>         <span class="fl">0.0327</span></span>
+<span id="cb8-242"><a href="#cb8-242" aria-hidden="true" tabindex="-1"></a>      <span class="sc">----------------------------------------------------------------</span></span>
+<span id="cb8-243"><a href="#cb8-243" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb8-244"><a href="#cb8-244" aria-hidden="true" tabindex="-1"></a><span class="er">**</span>Se reporter à la section sur R pour les questions de compatibilité du test entre les v2 et v3 de <span class="sc">**</span> <span class="st">`</span><span class="at">survival</span><span class="st">`</span><span class="sc">**</span>.  </span>
+<span id="cb8-245"><a href="#cb8-245" aria-hidden="true" tabindex="-1"></a>Point essentiel lorsqu<span class="st">'on travaille sur des durées groupées ou discrètes**       </span></span>
+<span id="cb8-246"><a href="#cb8-246" aria-hidden="true" tabindex="-1"></a><span class="st">      </span></span>
+<span id="cb8-247"><a href="#cb8-247" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb8-248"><a href="#cb8-248" aria-hidden="true" tabindex="-1"></a><span class="st">:::</span></span>
+<span id="cb8-249"><a href="#cb8-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-250"><a href="#cb8-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-251"><a href="#cb8-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-252"><a href="#cb8-252" aria-hidden="true" tabindex="-1"></a><span class="st">Ici l'</span>hypothèse de proportionalité des risques est questionnable pour la variable <span class="sc">*</span>surgery<span class="sc">*</span>. Le risque ratio  n<span class="st">'est vraisemblablement  pas constant dans le temps.  Ce n'</span>est pas étonnant, le premier décès pour les personnes opérées d<span class="st">'un pontage n'</span>est observé qu<span class="st">'au bout de 165 jours.</span></span>
+<span id="cb8-253"><a href="#cb8-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-254"><a href="#cb8-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-255"><a href="#cb8-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-256"><a href="#cb8-256" aria-hidden="true" tabindex="-1"></a><span class="st">**Remarques / à savoir**  </span></span>
+<span id="cb8-257"><a href="#cb8-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-258"><a href="#cb8-258" aria-hidden="true" tabindex="-1"></a><span class="st">* **Test multiple**: de nouveau il convient de se méfier du résultat du test multiple lorsque le nombre de degrés de liberté est élevé (ou tout simplement supérieur à 1). Le risque de premier espèce peut-être assez faible alors que les tests pour chaque covariables prises une à une présentent  élevées (&gt;.1 par exemple). Dans l'</span>exemple sur les trois variables, seulement une est questionnable et le test sur un seuil courant de <span class="dv">5</span>% pourrait être jugé significatif.</span>
+<span id="cb8-259"><a href="#cb8-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-260"><a href="#cb8-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-261"><a href="#cb8-261" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Le résultat de ce test est considéré par certain.e.s comme un indicateur de l’ampleur du biais qui affecte la baseline du risque.</span>
+<span id="cb8-262"><a href="#cb8-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-263"><a href="#cb8-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-264"><a href="#cb8-264" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> <span class="er">**</span>Transformations de la durée<span class="sc">**</span><span class="er">:</span> n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes<span class="sc">:</span> <span class="er">$</span><span class="fu">g</span>(t)<span class="ot">=</span>t<span class="sc">$</span> (« identity »), <span class="sc">$</span><span class="fu">g</span>(t)<span class="ot">=</span><span class="fu">log</span>(t)<span class="sc">$</span>, <span class="sc">$</span><span class="fu">g</span>(t)<span class="ot">=</span><span class="fu">KM</span>(t)<span class="sc">$</span> ou <span class="sc">$</span><span class="fu">g</span>(t)<span class="ot">=</span><span class="dv">1</span><span class="sc">-</span> <span class="fu">KM</span>(t<span class="sc">$</span>) où <span class="sc">$</span><span class="fu">KM</span>(t<span class="sc">$</span>) est l’estimateur de Kaplan<span class="sc">-</span>Meier. Enfin une transformation appelée « rank », est  utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple <span class="sc">$</span>t<span class="ot">=</span>(<span class="fl">0.1</span>,<span class="fl">0.5</span>,<span class="dv">1</span>,<span class="fl">2.6</span>,<span class="dv">3</span>)<span class="sc">$</span> donne une transformation <span class="sc">$</span>t<span class="ot">=</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>)<span class="sc">$</span>. A savoir <span class="sc">:</span> la fonction « identity » rend le test relativement sensible aux évènements très tardifs et <span class="fu">rares</span> (outliers).</span>
+<span id="cb8-265"><a href="#cb8-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-266"><a href="#cb8-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-267"><a href="#cb8-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-268"><a href="#cb8-268" aria-hidden="true" tabindex="-1"></a><span class="sc">:::</span> callout<span class="sc">-</span>important</span>
+<span id="cb8-269"><a href="#cb8-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-270"><a href="#cb8-270" aria-hidden="true" tabindex="-1"></a>Le test est exécuté avec la fonction <span class="sc">**</span><span class="st">`</span><span class="at">coxzph</span><span class="st">`</span><span class="sc">**</span>.....mais.</span>
+<span id="cb8-271"><a href="#cb8-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-272"><a href="#cb8-272" aria-hidden="true" tabindex="-1"></a>Depuis la  v3 de la librairie Survival, il s<span class="st">'agit non pas pas d'</span>une nouvelle version du test, mais de la version d<span class="st">'origine qui est exécutée. Tous les autres logiciels utilisent une version *simplifiée* de ce test. Il y a peu de conséquences en l'</span>absence d<span class="st">'évènements simultanés, situation plutôt fréquente en sciences sociales. Avec le test *exact* on observe des violations quasi systématiques de l'</span>hypothèse en présence d<span class="st">'un nombre importants d'</span>évènements observés simulatnéments.  Je conseille donc, même si une investigation méthodologique plus complète doit être faite, d<span class="st">'utiliser le test de la version précédente. Je donne une procédure plutôt simple d'</span>exécuter ce test dans le chapitre <span class="sc">*</span>programmation<span class="sc">*</span>, en récupérant directement la fonction. Seul le nom de la fonction a été modifié (<span class="sc">**</span><span class="st">`</span><span class="at">coxzphold</span><span class="st">`</span><span class="sc">**</span>).</span>
+<span id="cb8-273"><a href="#cb8-273" aria-hidden="true" tabindex="-1"></a><span class="sc">:::</span></span>
+<span id="cb8-274"><a href="#cb8-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-275"><a href="#cb8-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-276"><a href="#cb8-276" aria-hidden="true" tabindex="-1"></a><span class="er">:::</span> panel<span class="sc">-</span>tabset</span>
+<span id="cb8-277"><a href="#cb8-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-278"><a href="#cb8-278" aria-hidden="true" tabindex="-1"></a><span class="do">### R</span></span>
+<span id="cb8-279"><a href="#cb8-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-280"><a href="#cb8-280" aria-hidden="true" tabindex="-1"></a>Attention test modifié depuis le v3 de survival.</span>
+<span id="cb8-281"><a href="#cb8-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-282"><a href="#cb8-282" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>  Après avoir créer un objet  à l’estimation du modèle de Cox, on utilise la fonction <span class="sc">**</span><span class="st">`</span><span class="at">cox.zph</span><span class="st">`</span><span class="sc">**</span>. Cette fonction utilise par défaut <span class="sc">$</span><span class="fu">f</span>(t)<span class="ot">=</span><span class="dv">1</span><span class="sc">-</span><span class="fu">KM</span>(t)<span class="sc">$</span> où <span class="sc">$</span><span class="fu">KM</span>(t)<span class="sc">$</span> sont les estimateurs de la courbe de Kaplan<span class="sc">-</span>Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.</span>
+<span id="cb8-283"><a href="#cb8-283" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>  Test antérieur<span class="sc">:</span> j’ai récupéré le programme du test antérieur, renommé <span class="sc">**</span><span class="st">`</span><span class="at">cox.zphold</span><span class="st">`</span><span class="sc">**</span>. On peut le télécharger, et il est facilement exécutable.</span>
+<span id="cb8-284"><a href="#cb8-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-285"><a href="#cb8-285" aria-hidden="true" tabindex="-1"></a><span class="do">### Stata</span></span>
+<span id="cb8-286"><a href="#cb8-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-287"><a href="#cb8-287" aria-hidden="true" tabindex="-1"></a>Le test est obtenu avec la commande <span class="sc">**</span><span class="st">`</span><span class="at">estat phtest, d</span><span class="st">`</span><span class="sc">**</span>. Par défaut Stata utilise <span class="sc">$</span><span class="fu">f</span>(t)<span class="ot">=</span>t<span class="sc">$</span>. On peut modifier cette fonction.</span>
+<span id="cb8-288"><a href="#cb8-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-289"><a href="#cb8-289" aria-hidden="true" tabindex="-1"></a><span class="do">### SAS</span></span>
+<span id="cb8-290"><a href="#cb8-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-291"><a href="#cb8-291" aria-hidden="true" tabindex="-1"></a>Le test est disponible depuis quelques années avec l’argument <span class="sc">**</span><span class="st">`</span><span class="at">zph</span><span class="st">`</span><span class="sc">**</span> sur la ligne <span class="st">`</span><span class="at">proc lifetest</span><span class="st">`</span>. Par défaut SAS utilise <span class="sc">$</span><span class="fu">f</span>(t)<span class="ot">=</span>t<span class="sc">$</span>. On peut modifier cette fonction.</span>
+<span id="cb8-292"><a href="#cb8-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-293"><a href="#cb8-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-294"><a href="#cb8-294" aria-hidden="true" tabindex="-1"></a><span class="do">### Python</span></span>
+<span id="cb8-295"><a href="#cb8-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-296"><a href="#cb8-296" aria-hidden="true" tabindex="-1"></a>On utilise la fonction <span class="sc">**</span><span class="st">`</span><span class="at">proportional_hazard_test</span><span class="st">`</span><span class="sc">**</span> de la librairie <span class="st">`</span><span class="at">lifelines</span><span class="st">`</span>. La fonction utilise par défaut <span class="sc">$</span><span class="fu">f</span>(t)<span class="ot">=</span>t<span class="sc">$</span>, mais on peut afficher les résultats pour toutes les transformations de <span class="sc">$</span>t<span class="sc">$</span> disponibles avec l’option <span class="st">`</span><span class="at">time_transform=’all’</span><span class="st">`</span>. </span>
+<span id="cb8-297"><a href="#cb8-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-298"><a href="#cb8-298" aria-hidden="true" tabindex="-1"></a><span class="sc">:::</span></span>
+<span id="cb8-299"><a href="#cb8-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-300"><a href="#cb8-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-301"><a href="#cb8-301" aria-hidden="true" tabindex="-1"></a><span class="do">## Intéraction avec la durée</span></span>
+<span id="cb8-302"><a href="#cb8-302" aria-hidden="true" tabindex="-1"></a><span class="er">&lt;</span>br<span class="sc">&gt;</span></span>
+<span id="cb8-303"><a href="#cb8-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-304"><a href="#cb8-304" aria-hidden="true" tabindex="-1"></a>Petit retour sur l<span class="st">'estimation du modèle.  </span></span>
+<span id="cb8-305"><a href="#cb8-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-306"><a href="#cb8-306" aria-hidden="true" tabindex="-1"></a><span class="st">Pour estimer le modèle de Cox, les données sont dans un premier temps splitées aux temps d'</span>évènement. A l’exception de <span class="sc">*</span>Sas<span class="sc">*</span>,  les autres logiciels disposent d<span class="st">'une fonction qui effectue cette opération (*R*: `survsplit` - *Stata*: `stsplit`).</span></span>
+<span id="cb8-307"><a href="#cb8-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-308"><a href="#cb8-308" aria-hidden="true" tabindex="-1"></a><span class="st">```{r eval=FALSE}</span></span>
+<span id="cb8-309"><a href="#cb8-309" aria-hidden="true" tabindex="-1"></a><span class="st">      +------------------------------+</span></span>
+<span id="cb8-310"><a href="#cb8-310" aria-hidden="true" tabindex="-1"></a><span class="st">      | id   surgery    d    t    t0 |</span></span>
+<span id="cb8-311"><a href="#cb8-311" aria-hidden="true" tabindex="-1"></a><span class="st">      |------------------------------|</span></span>
+<span id="cb8-312"><a href="#cb8-312" aria-hidden="true" tabindex="-1"></a><span class="st">  24. |  2         0    0    1     0 |</span></span>
+<span id="cb8-313"><a href="#cb8-313" aria-hidden="true" tabindex="-1"></a><span class="st">  25. |  2         0    0    2     1 |</span></span>
+<span id="cb8-314"><a href="#cb8-314" aria-hidden="true" tabindex="-1"></a><span class="st">  26. |  2         0    0    3     2 |</span></span>
+<span id="cb8-315"><a href="#cb8-315" aria-hidden="true" tabindex="-1"></a><span class="st">  27. |  2         0    0    5     3 |</span></span>
+<span id="cb8-316"><a href="#cb8-316" aria-hidden="true" tabindex="-1"></a><span class="st">  28. |  2         0    1    6     5 |</span></span>
+<span id="cb8-317"><a href="#cb8-317" aria-hidden="true" tabindex="-1"></a><span class="st">      |------------------------------|</span></span>
+<span id="cb8-318"><a href="#cb8-318" aria-hidden="true" tabindex="-1"></a><span class="st">  29. |  3         0    0    1     0 |</span></span>
+<span id="cb8-319"><a href="#cb8-319" aria-hidden="true" tabindex="-1"></a><span class="st">  30. |  3         0    0    2     1 |</span></span>
+<span id="cb8-320"><a href="#cb8-320" aria-hidden="true" tabindex="-1"></a><span class="st">  31. |  3         0    0    3     2 |</span></span>
+<span id="cb8-321"><a href="#cb8-321" aria-hidden="true" tabindex="-1"></a><span class="st">  32. |  3         0    0    5     3 |</span></span>
+<span id="cb8-322"><a href="#cb8-322" aria-hidden="true" tabindex="-1"></a><span class="st">  33. |  3         0    0    6     5 |</span></span>
+<span id="cb8-323"><a href="#cb8-323" aria-hidden="true" tabindex="-1"></a><span class="st">      |------------------------------|</span></span>
+<span id="cb8-324"><a href="#cb8-324" aria-hidden="true" tabindex="-1"></a><span class="st">  34. |  3         0    0    8     6 |</span></span>
+<span id="cb8-325"><a href="#cb8-325" aria-hidden="true" tabindex="-1"></a><span class="st">  35. |  3         0    0    9     8 |</span></span>
+<span id="cb8-326"><a href="#cb8-326" aria-hidden="true" tabindex="-1"></a><span class="st">  36. |  3         0    0   12     9 |</span></span>
+<span id="cb8-327"><a href="#cb8-327" aria-hidden="true" tabindex="-1"></a><span class="st">  37. |  3         0    1   16    12 |</span></span>
+<span id="cb8-328"><a href="#cb8-328" aria-hidden="true" tabindex="-1"></a><span class="st">      +------------------------------+</span></span>
+<span id="cb8-329"><a href="#cb8-329" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb8-330"><a href="#cb8-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-331"><a href="#cb8-331" aria-hidden="true" tabindex="-1"></a><span class="st">Les bornes des intervalles $[t_0 ;t]$ ont des valeurs seulement lorsqu'</span>un évènement s<span class="st">'est produit (principe de la vraisemblance partielle). Il n'</span>y a donc pas de valeurs pour <span class="sc">$</span>t<span class="sc">$</span> et <span class="sc">$</span>t_0<span class="sc">$</span> en <span class="sc">$</span>t<span class="ot">=</span><span class="dv">4</span><span class="sc">$</span> (<span class="sc">$</span><span class="at">id=</span><span class="dv">2</span>,<span class="dv">3</span><span class="sc">$</span>), <span class="sc">$</span>t<span class="ot">=</span><span class="dv">7</span>,<span class="dv">10</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">14</span>,<span class="dv">15</span><span class="sc">$</span> (<span class="sc">$</span><span class="at">id=</span><span class="dv">3</span><span class="sc">$</span>).</span>
+<span id="cb8-332"><a href="#cb8-332" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span> Les deux individus observent l<span class="st">'évènement en $t=6$ pour $id=2$, et en $t=16$ pour $id=3$. Avant ce moment la valeur de la variable évènement/censure (ici $d$) prend toujours la valeur 0, et prend la valeur 1 le jour du décès.  </span></span>
+<span id="cb8-333"><a href="#cb8-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-334"><a href="#cb8-334" aria-hidden="true" tabindex="-1"></a><span class="st">On vérifie que les paramètres estimés sont identiques</span></span>
+<span id="cb8-335"><a href="#cb8-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-336"><a href="#cb8-336" aria-hidden="true" tabindex="-1"></a><span class="st">```{r eval=FALSE}</span></span>
+<span id="cb8-337"><a href="#cb8-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-338"><a href="#cb8-338" aria-hidden="true" tabindex="-1"></a><span class="st">Cox regression with Efron method for ties</span></span>
+<span id="cb8-339"><a href="#cb8-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-340"><a href="#cb8-340" aria-hidden="true" tabindex="-1"></a><span class="st">No. of subjects =    103                                Number of obs =  3,573</span></span>
+<span id="cb8-341"><a href="#cb8-341" aria-hidden="true" tabindex="-1"></a><span class="st">No. of failures =     75</span></span>
+<span id="cb8-342"><a href="#cb8-342" aria-hidden="true" tabindex="-1"></a><span class="st">Time at risk    = 31,938</span></span>
+<span id="cb8-343"><a href="#cb8-343" aria-hidden="true" tabindex="-1"></a><span class="st">                                                        LR chi2(3)    =  17.63</span></span>
+<span id="cb8-344"><a href="#cb8-344" aria-hidden="true" tabindex="-1"></a><span class="st">Log likelihood = -289.30639                             Prob &gt; chi2   = 0.0005</span></span>
+<span id="cb8-345"><a href="#cb8-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-346"><a href="#cb8-346" aria-hidden="true" tabindex="-1"></a><span class="st">------------------------------------------------------------------------------</span></span>
+<span id="cb8-347"><a href="#cb8-347" aria-hidden="true" tabindex="-1"></a><span class="st">          _t | Haz. ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]</span></span>
+<span id="cb8-348"><a href="#cb8-348" aria-hidden="true" tabindex="-1"></a><span class="st">-------------+----------------------------------------------------------------</span></span>
+<span id="cb8-349"><a href="#cb8-349" aria-hidden="true" tabindex="-1"></a><span class="st">        year |      0.887      0.060    -1.78   0.076        0.778       1.012</span></span>
+<span id="cb8-350"><a href="#cb8-350" aria-hidden="true" tabindex="-1"></a><span class="st">         age |      1.030      0.014     2.19   0.029        1.003       1.058</span></span>
+<span id="cb8-351"><a href="#cb8-351" aria-hidden="true" tabindex="-1"></a><span class="st">     surgery |      0.373      0.163    -2.26   0.024        0.158       0.876</span></span>
+<span id="cb8-352"><a href="#cb8-352" aria-hidden="true" tabindex="-1"></a><span class="st">------------------------------------------------------------------------------</span></span>
+<span id="cb8-353"><a href="#cb8-353" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb8-354"><a href="#cb8-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-355"><a href="#cb8-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-356"><a href="#cb8-356" aria-hidden="true" tabindex="-1"></a><span class="st">*Introduction d'</span>une intéraction avec une fonction de la durée<span class="sc">*</span>  </span>
+<span id="cb8-357"><a href="#cb8-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-358"><a href="#cb8-358" aria-hidden="true" tabindex="-1"></a>On a une variable de durée (on prendra <span class="sc">$</span><span class="fu">f</span>(t)<span class="ot">=</span>t<span class="sc">$</span>) qui sera croisée avec la variable surgery. Le modèle va s<span class="st">'écrire:      </span></span>
+<span id="cb8-359"><a href="#cb8-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-360"><a href="#cb8-360" aria-hidden="true" tabindex="-1"></a><span class="st">$$h(t | X,t) = h_0(t)e^{b_1age + b_2year + b_3 surgery + b_4 (surgery</span><span class="sc">\t</span><span class="st">imes t)}$$</span></span>
+<span id="cb8-361"><a href="#cb8-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-362"><a href="#cb8-362" aria-hidden="true" tabindex="-1"></a><span class="st">**Exemple**   </span></span>
+<span id="cb8-363"><a href="#cb8-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-364"><a href="#cb8-364" aria-hidden="true" tabindex="-1"></a><span class="st">```{r eval=FALSE}</span></span>
+<span id="cb8-365"><a href="#cb8-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-366"><a href="#cb8-366" aria-hidden="true" tabindex="-1"></a><span class="st">Cox regression with Efron method for ties</span></span>
+<span id="cb8-367"><a href="#cb8-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-368"><a href="#cb8-368" aria-hidden="true" tabindex="-1"></a><span class="st">No. of subjects =    103                                Number of obs =    103</span></span>
+<span id="cb8-369"><a href="#cb8-369" aria-hidden="true" tabindex="-1"></a><span class="st">No. of failures =     75</span></span>
+<span id="cb8-370"><a href="#cb8-370" aria-hidden="true" tabindex="-1"></a><span class="st">Time at risk    = 31,938</span></span>
+<span id="cb8-371"><a href="#cb8-371" aria-hidden="true" tabindex="-1"></a><span class="st">                                                        LR chi2(4)    =  21.58</span></span>
+<span id="cb8-372"><a href="#cb8-372" aria-hidden="true" tabindex="-1"></a><span class="st">Log likelihood = -287.32903                             Prob &gt; chi2   = 0.0002</span></span>
+<span id="cb8-373"><a href="#cb8-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-374"><a href="#cb8-374" aria-hidden="true" tabindex="-1"></a><span class="st">------------------------------------------------------------------------------</span></span>
+<span id="cb8-375"><a href="#cb8-375" aria-hidden="true" tabindex="-1"></a><span class="st">          _t | Haz. ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]</span></span>
+<span id="cb8-376"><a href="#cb8-376" aria-hidden="true" tabindex="-1"></a><span class="st">-------------+----------------------------------------------------------------</span></span>
+<span id="cb8-377"><a href="#cb8-377" aria-hidden="true" tabindex="-1"></a><span class="st">main         |</span></span>
+<span id="cb8-378"><a href="#cb8-378" aria-hidden="true" tabindex="-1"></a><span class="st">        year |      0.884      0.059    -1.84   0.066        0.776       1.008</span></span>
+<span id="cb8-379"><a href="#cb8-379" aria-hidden="true" tabindex="-1"></a><span class="st">         age |      1.029      0.014     2.15   0.032        1.003       1.057</span></span>
+<span id="cb8-380"><a href="#cb8-380" aria-hidden="true" tabindex="-1"></a><span class="st">surgery(t0+) |      0.173      0.117    -2.60   0.009        0.046       0.649</span></span>
+<span id="cb8-381"><a href="#cb8-381" aria-hidden="true" tabindex="-1"></a><span class="st">-------------+----------------------------------------------------------------</span></span>
+<span id="cb8-382"><a href="#cb8-382" aria-hidden="true" tabindex="-1"></a><span class="st">Rapport de HR|</span></span>
+<span id="cb8-383"><a href="#cb8-383" aria-hidden="true" tabindex="-1"></a><span class="st">   surgery*t |      1.002      0.001     2.02   0.043        1.000       1.004</span></span>
+<span id="cb8-384"><a href="#cb8-384" aria-hidden="true" tabindex="-1"></a><span class="st">------------------------------------------------------------------------------</span></span>
+<span id="cb8-385"><a href="#cb8-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-386"><a href="#cb8-386" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb8-387"><a href="#cb8-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-388"><a href="#cb8-388" aria-hidden="true" tabindex="-1"></a><span class="st">On retrouve donc un résultat proche de celui obtenu à partir du test sur les résidus de Schoenfeld pour la variable *surgery*. Il a le mérité de pouvoir être interprété.  </span></span>
+<span id="cb8-389"><a href="#cb8-389" aria-hidden="true" tabindex="-1"></a><span class="st">Malgré  une hypothèse plutôt forte sur la forme fonctionnelle de l'</span>intéraction, et dans les fait surement pas pertinente, on peut dire </span>
+<span id="cb8-390"><a href="#cb8-390" aria-hidden="true" tabindex="-1"></a>que chaque jour le HR entre personnes opérées et personnes non opérées augmente de <span class="fl">0.2</span>%. L<span class="st">'effet de l'</span>opération sur la survie des individus s<span class="st">'estompe avec le temps.</span></span>
+<span id="cb8-391"><a href="#cb8-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-392"><a href="#cb8-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-393"><a href="#cb8-393" aria-hidden="true" tabindex="-1"></a><span class="st">**Important**:  </span></span>
+<span id="cb8-394"><a href="#cb8-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-395"><a href="#cb8-395" aria-hidden="true" tabindex="-1"></a><span class="st">- Le modèle n'</span>est plus un modèle à risque proportionnel. La variable <span class="sc">*</span>surgery<span class="sc">*</span> n<span class="st">'est plus une variable **fixe** mais une variable tronquée dynamique qui prend la valeur de t pour les personnes qui ont été opérées d'</span>un pontage avant leur entrée dans le registre de greffe.</span>
+<span id="cb8-396"><a href="#cb8-396" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span> L<span class="st">'altération des rapports de risque dépend de la forme fonctionnelle de l'</span>intéraction choisie. Ici la modification dans le temps du rapport des risque est constante, ce qui est une hypothèse assez forte. On a, en quelques sorte, réintroduit une hypothèse de proportionnalité, ici sur le degré d<span class="st">'altération des écarts de risques dans le temps.</span></span>
+<span id="cb8-397"><a href="#cb8-397" aria-hidden="true" tabindex="-1"></a><span class="st">- **Attention**: les calculs ont été donnés à titre d'</span>exemple. Le calculs des intervalles de confiance des rapports de risque s<span class="st">'avère nécessaires si l'</span>on souhaite voir s<span class="st">'ils s'</span>inversent vraiment.</span>
+<span id="cb8-398"><a href="#cb8-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-399"><a href="#cb8-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-400"><a href="#cb8-400" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span>br<span class="sc">&gt;</span></span>
+<span id="cb8-401"><a href="#cb8-401" aria-hidden="true" tabindex="-1"></a><span class="do">##  Que faire </span></span>
+<span id="cb8-402"><a href="#cb8-402" aria-hidden="true" tabindex="-1"></a><span class="er">&lt;</span>br<span class="sc">&gt;</span></span>
+<span id="cb8-403"><a href="#cb8-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-404"><a href="#cb8-404" aria-hidden="true" tabindex="-1"></a><span class="er">***</span>Ne rien faire<span class="sc">**</span><span class="er">*</span>   </span>
+<span id="cb8-405"><a href="#cb8-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-406"><a href="#cb8-406" aria-hidden="true" tabindex="-1"></a>On interprète le risque ratio comme un ratio moyen pendant la durée d’<span class="fu">observation</span> (P.Allison). Difficilement soutenable pour l’analyse des effets cliniques, elle peut être envisagée dans d’autres domaines. Attention au nombre de variables qui ne respecte pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme « moyenne » sur la période d’observation.  </span>
+<span id="cb8-407"><a href="#cb8-407" aria-hidden="true" tabindex="-1"></a>On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps les écarts déjà significatifs en début d’observation s’accentuent, à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais si l’effet est modéré <span class="sc">:</span> <span class="er">$</span>RR<span class="sc">&gt;</span><span class="dv">1</span><span class="sc">$</span> qui baisse ou <span class="sc">$</span>RR<span class="sc">&lt;</span><span class="dv">1</span><span class="sc">$</span> qui augmente au cours du temps, je suis moins convaincu de la pertinence de cette option.  </span>
+<span id="cb8-408"><a href="#cb8-408" aria-hidden="true" tabindex="-1"></a>Il faut tenir compte de l’intérêt portée par les variables qui présentent un problème par rapport à l’hypothèse. Il n’est peut<span class="sc">-</span>être pas nécessaire de complexifier le modèle pour des variables introduites comme simples contrôles.    </span>
+<span id="cb8-409"><a href="#cb8-409" aria-hidden="true" tabindex="-1"></a>Mais plus problématique… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de <span class="sc">**</span><span class="er">*</span>frailty<span class="sc">**</span><span class="er">*</span> (fragilité) lorsque cette non homogénéité n’est pas observables. Des estimations, plus complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Si l’hypothèse est sensible aux problèmes d’omission, il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.    </span>
+<span id="cb8-410"><a href="#cb8-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-411"><a href="#cb8-411" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span>br<span class="sc">&gt;</span></span>
+<span id="cb8-412"><a href="#cb8-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-413"><a href="#cb8-413" aria-hidden="true" tabindex="-1"></a><span class="er">***</span>Modèle de Cox stratifié<span class="sc">**</span><span class="er">*</span>   </span>
+<span id="cb8-414"><a href="#cb8-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-415"><a href="#cb8-415" aria-hidden="true" tabindex="-1"></a>Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie ajustées, et si une seule <span class="fu">covariable</span> (binaire) présente un problème. Les RR ne seront pas estimés pour la variable qui ne respecte pas l<span class="st">'hypothèse.  </span></span>
+<span id="cb8-416"><a href="#cb8-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-417"><a href="#cb8-417" aria-hidden="true" tabindex="-1"></a><span class="st">***Intéraction***    </span></span>
+<span id="cb8-418"><a href="#cb8-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-419"><a href="#cb8-419" aria-hidden="true" tabindex="-1"></a><span class="st">Introduire une interaction avec la durée, ce qui a été fait juste haut dessus. Cela peut permettre d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des RR, dans l'</span>idéal une seule variable. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être strictement linéaire, ce qui est une hypothèse plutôt forte.... et on remets en quelque sort une contrainte de proportionalité.  </span>
+<span id="cb8-420"><a href="#cb8-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-421"><a href="#cb8-421" aria-hidden="true" tabindex="-1"></a><span class="sc">**</span><span class="er">*</span>Modèles alternatifs<span class="sc">**</span><span class="er">*</span>  </span>
+<span id="cb8-422"><a href="#cb8-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-423"><a href="#cb8-423" aria-hidden="true" tabindex="-1"></a>Utiliser un modèle alternatif<span class="sc">:</span> modèles paramétriques à risques proportionnels si la distribution du risque s’ajuste bien, le modèle paramétrique « flexible » de Parmar<span class="sc">-</span><span class="fu">Royston</span> (non traité) ou un modèle à temps discret. Dans ce dernier cas, on peut également corriger la non proportionalité avec une intéraction. Si on ne le fait pas, les risques prédits sous forme de probabilités conditionnelles resteront toujours dans les bornes contrairement au modèle de Cox.      </span>
+<span id="cb8-424"><a href="#cb8-424" aria-hidden="true" tabindex="-1"></a>Utiliser un modèle non paramétrique additif dit d’Aalen ou une de ses variantes. Mais ces modèles, dont les résultats sont des visuels graphiques, et se commentent difficilement.  </span>
+<span id="cb8-425"><a href="#cb8-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-426"><a href="#cb8-426" aria-hidden="true" tabindex="-1"></a><span class="sc">**</span>Forêt aléatoire<span class="sc">**</span>    </span>
+<span id="cb8-427"><a href="#cb8-427" aria-hidden="true" tabindex="-1"></a>Autre méthode <span class="sc">:</span> les forêts aléatoires [à présenter un jour tout de même]. L.Breiman a dès le départ proposé une estimation des modèles de survie par cette méthode. Par définition, pas sensible à l’hypothèse PH. Mais cela reste des méthodes à finalité prédictive, moins riche en interprétation si ce n’est sur les facteurs d’importance. </span>
+<span id="cb8-428"><a href="#cb8-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-429"><a href="#cb8-429" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span>br<span class="sc">&gt;</span><span class="er">&lt;</span>br<span class="sc">&gt;</span></span>
+<span id="cb8-430"><a href="#cb8-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-431"><a href="#cb8-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-432"><a href="#cb8-432" aria-hidden="true" tabindex="-1"></a><span class="co"># Cox et modèle de poisson  </span></span>
+<span id="cb8-433"><a href="#cb8-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-434"><a href="#cb8-434" aria-hidden="true" tabindex="-1"></a>Juste une courte remarque.  </span>
+<span id="cb8-435"><a href="#cb8-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-436"><a href="#cb8-436" aria-hidden="true" tabindex="-1"></a>Le modèle a été estimé par la méthode de la vraisemblance partielle. On peut montrer que le modèle de Cox est estimable à partir d’un simple modèle de Poisson. Cette estimation est appelée «<span class="sc">**</span><span class="er">*</span>Constant Piecewise Exponential PH model<span class="sc">**</span><span class="er">*</span>». </span>
+<span id="cb8-437"><a href="#cb8-437" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-438"><a href="#cb8-438" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb8-439"><a href="#cb8-439" aria-hidden="true" tabindex="-1"></a><span class="at">Poisson regression                              Number of obs     =      3,573</span></span>
+<span id="cb8-440"><a href="#cb8-440" aria-hidden="true" tabindex="-1"></a><span class="at">                                                LR chi2(90)       =     122.42</span></span>
+<span id="cb8-441"><a href="#cb8-441" aria-hidden="true" tabindex="-1"></a><span class="at">                                                Prob &gt; chi2       =     0.0131</span></span>
+<span id="cb8-442"><a href="#cb8-442" aria-hidden="true" tabindex="-1"></a><span class="at">Log likelihood = -344.95318                     Pseudo R2         =     0.1507</span></span>
+<span id="cb8-443"><a href="#cb8-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-444"><a href="#cb8-444" aria-hidden="true" tabindex="-1"></a><span class="at">------------------------------------------------------------------------------</span></span>
+<span id="cb8-445"><a href="#cb8-445" aria-hidden="true" tabindex="-1"></a><span class="at">          _d |      Coef.   Std. Err.      z    P&gt;|z|     [95% Conf. Interval]</span></span>
+<span id="cb8-446"><a href="#cb8-446" aria-hidden="true" tabindex="-1"></a><span class="at">-------------+----------------------------------------------------------------</span></span>
+<span id="cb8-447"><a href="#cb8-447" aria-hidden="true" tabindex="-1"></a><span class="at">        year |  -.1195204    .067374    -1.77   0.076     -.251571    .0125302</span></span>
+<span id="cb8-448"><a href="#cb8-448" aria-hidden="true" tabindex="-1"></a><span class="at">         age |   .0295531    .013535     2.18   0.029      .003025    .0560811</span></span>
+<span id="cb8-449"><a href="#cb8-449" aria-hidden="true" tabindex="-1"></a><span class="at">     surgery |    -.98486   .4363162    -2.26   0.024    -1.840024   -.1296961</span></span>
+<span id="cb8-450"><a href="#cb8-450" aria-hidden="true" tabindex="-1"></a><span class="at">             |</span></span>
+<span id="cb8-451"><a href="#cb8-451" aria-hidden="true" tabindex="-1"></a><span class="at">       stime |</span></span>
+<span id="cb8-452"><a href="#cb8-452" aria-hidden="true" tabindex="-1"></a><span class="at">          2  |   .4223592   1.154708     0.37   0.715    -1.840826    2.685544</span></span>
+<span id="cb8-453"><a href="#cb8-453" aria-hidden="true" tabindex="-1"></a><span class="at">          3  |   .0495983   1.154704     0.04   0.966     -2.21358    2.312776</span></span>
+<span id="cb8-454"><a href="#cb8-454" aria-hidden="true" tabindex="-1"></a><span class="at">          5  |   -.828855   1.224781    -0.68   0.499    -3.229383    1.571673</span></span>
+<span id="cb8-455"><a href="#cb8-455" aria-hidden="true" tabindex="-1"></a><span class="at">          6  |  -.9922643   1.224779    -0.81   0.418    -3.392786    1.408258</span></span>
+<span id="cb8-456"><a href="#cb8-456" aria-hidden="true" tabindex="-1"></a><span class="at">          8  |  -1.940546   1.414215    -1.37   0.170    -4.712356    .8312648</span></span>
+<span id="cb8-457"><a href="#cb8-457" aria-hidden="true" tabindex="-1"></a><span class="at">          9  |   -2.03868   1.414233    -1.44   0.149    -4.810526    .7331649</span></span>
+<span id="cb8-458"><a href="#cb8-458" aria-hidden="true" tabindex="-1"></a><span class="at">         11  |  -12.59255   2179.957    -0.01   0.995     -4285.23    4260.045</span></span>
+<span id="cb8-459"><a href="#cb8-459" aria-hidden="true" tabindex="-1"></a><span class="at">         12  |   -2.30438   1.414226    -1.63   0.103    -5.076213    .4674526</span></span>
+<span id="cb8-460"><a href="#cb8-460" aria-hidden="true" tabindex="-1"></a><span class="at">         16  |  -1.481512   1.154713    -1.28   0.199    -3.744708    .7816839</span></span>
+<span id="cb8-461"><a href="#cb8-461" aria-hidden="true" tabindex="-1"></a><span class="at">         17  |  -2.591968    1.41426    -1.83   0.067    -5.363868    .1799312</span></span>
+<span id="cb8-462"><a href="#cb8-462" aria-hidden="true" tabindex="-1"></a><span class="at">         18  |  -2.642535   1.414254    -1.87   0.062    -5.414421    .1293516</span></span>
+<span id="cb8-463"><a href="#cb8-463" aria-hidden="true" tabindex="-1"></a><span class="at">         21  |  -2.095489   1.224819    -1.71   0.087    -4.496091    .3051133</span></span>
+<span id="cb8-464"><a href="#cb8-464" aria-hidden="true" tabindex="-1"></a><span class="at">         28  |  -3.055745   1.414246    -2.16   0.031    -5.827616   -.2838729</span></span>
+<span id="cb8-465"><a href="#cb8-465" aria-hidden="true" tabindex="-1"></a><span class="at">         30  |  -3.103495    1.41426    -2.19   0.028    -5.875395   -.3315961</span></span>
+<span id="cb8-466"><a href="#cb8-466" aria-hidden="true" tabindex="-1"></a><span class="at">         31  |  -13.89462   2179.957    -0.01   0.995    -4286.532    4258.743</span></span>
+<span id="cb8-467"><a href="#cb8-467" aria-hidden="true" tabindex="-1"></a><span class="at">         32  |  -3.144133   1.414253    -2.22   0.026    -5.916018   -.3722474</span></span>
+<span id="cb8-468"><a href="#cb8-468" aria-hidden="true" tabindex="-1"></a><span class="at">         35  |  -3.219157   1.414258    -2.28   0.023    -5.991053    -.447262</span></span>
+<span id="cb8-469"><a href="#cb8-469" aria-hidden="true" tabindex="-1"></a><span class="at">         36  |  -3.227893   1.414267    -2.28   0.022    -5.999806   -.4559796</span></span>
+<span id="cb8-470"><a href="#cb8-470" aria-hidden="true" tabindex="-1"></a><span class="at">         37  |  -3.246139   1.414263    -2.30   0.022    -6.018042   -.4742351</span></span>
+<span id="cb8-471"><a href="#cb8-471" aria-hidden="true" tabindex="-1"></a><span class="at">         39  |   -3.26923   1.414303    -2.31   0.021    -6.041213   -.4972472</span></span>
+<span id="cb8-472"><a href="#cb8-472" aria-hidden="true" tabindex="-1"></a><span class="at">         40  |  -2.581465   1.224839    -2.11   0.035    -4.982106   -.1808239</span></span>
+<span id="cb8-473"><a href="#cb8-473" aria-hidden="true" tabindex="-1"></a><span class="at">         43  |  -3.311454   1.414341    -2.34   0.019    -6.083512   -.5393966</span></span>
+<span id="cb8-474"><a href="#cb8-474" aria-hidden="true" tabindex="-1"></a><span class="at">         45  |  -3.327473   1.414407    -2.35   0.019    -6.099661   -.5552857</span></span>
+<span id="cb8-475"><a href="#cb8-475" aria-hidden="true" tabindex="-1"></a><span class="at">         50  |  -3.421206   1.414399    -2.42   0.016    -6.193377   -.6490357</span></span>
+<span id="cb8-476"><a href="#cb8-476" aria-hidden="true" tabindex="-1"></a><span class="at">         51  |  -3.425081   1.414444    -2.42   0.015    -6.197341   -.6528208</span></span>
+<span id="cb8-477"><a href="#cb8-477" aria-hidden="true" tabindex="-1"></a><span class="at">         53  |   -3.44536   1.414475    -2.44   0.015     -6.21768    -.673039</span></span>
+<span id="cb8-478"><a href="#cb8-478" aria-hidden="true" tabindex="-1"></a><span class="at">         58  |  -3.514664   1.414489    -2.48   0.013    -6.287011   -.7423175</span></span>
+<span id="cb8-479"><a href="#cb8-479" aria-hidden="true" tabindex="-1"></a><span class="at">         61  |  -3.543748   1.414557    -2.51   0.012    -6.316229   -.7712681</span></span>
+<span id="cb8-480"><a href="#cb8-480" aria-hidden="true" tabindex="-1"></a><span class="at">         66  |  -3.602062   1.414546    -2.55   0.011    -6.374522   -.8296028</span></span>
+<span id="cb8-481"><a href="#cb8-481" aria-hidden="true" tabindex="-1"></a><span class="at">         68  |   -2.90779   1.225106    -2.37   0.018    -5.308954   -.5066257</span></span>
+<span id="cb8-482"><a href="#cb8-482" aria-hidden="true" tabindex="-1"></a><span class="at">         69  |  -3.580111   1.414549    -2.53   0.011    -6.352577   -.8076461</span></span>
+<span id="cb8-483"><a href="#cb8-483" aria-hidden="true" tabindex="-1"></a><span class="at">         72  |  -2.914206    1.22505    -2.38   0.017     -5.31526   -.5131524</span></span>
+<span id="cb8-484"><a href="#cb8-484" aria-hidden="true" tabindex="-1"></a><span class="at">         77  |  -3.624716   1.414601    -2.56   0.010    -6.397284   -.8521489</span></span>
+<span id="cb8-485"><a href="#cb8-485" aria-hidden="true" tabindex="-1"></a><span class="at">         78  |  -3.593983   1.414779    -2.54   0.011    -6.366898   -.8210686</span></span>
+<span id="cb8-486"><a href="#cb8-486" aria-hidden="true" tabindex="-1"></a><span class="at">         80  |  -3.597845   1.414765    -2.54   0.011    -6.370734   -.8249558</span></span>
+<span id="cb8-487"><a href="#cb8-487" aria-hidden="true" tabindex="-1"></a><span class="at">         81  |  -3.589639   1.414745    -2.54   0.011    -6.362489   -.8167895</span></span>
+<span id="cb8-488"><a href="#cb8-488" aria-hidden="true" tabindex="-1"></a><span class="at">         85  |  -3.598044   1.414948    -2.54   0.011    -6.371291    -.824798</span></span>
+<span id="cb8-489"><a href="#cb8-489" aria-hidden="true" tabindex="-1"></a><span class="at">         90  |   -3.62163   1.415099    -2.56   0.010    -6.395173   -.8480873</span></span>
+<span id="cb8-490"><a href="#cb8-490" aria-hidden="true" tabindex="-1"></a><span class="at">         96  |  -3.658159   1.415134    -2.59   0.010     -6.43177    -.884548</span></span>
+<span id="cb8-491"><a href="#cb8-491" aria-hidden="true" tabindex="-1"></a><span class="at">        100  |  -3.672641   1.415162    -2.60   0.009    -6.446308   -.8989739</span></span>
+<span id="cb8-492"><a href="#cb8-492" aria-hidden="true" tabindex="-1"></a><span class="at">        102  |  -3.662767   1.415232    -2.59   0.010    -6.436571   -.8889631</span></span>
+<span id="cb8-493"><a href="#cb8-493" aria-hidden="true" tabindex="-1"></a><span class="at">        109  |  -14.65089   2179.957    -0.01   0.995    -4287.288    4257.986</span></span>
+<span id="cb8-494"><a href="#cb8-494" aria-hidden="true" tabindex="-1"></a><span class="at">        110  |  -3.704316   1.415125    -2.62   0.009     -6.47791   -.9307209</span></span>
+<span id="cb8-495"><a href="#cb8-495" aria-hidden="true" tabindex="-1"></a><span class="at">        131  |  -14.68697   2179.957    -0.01   0.995    -4287.324     4257.95</span></span>
+<span id="cb8-496"><a href="#cb8-496" aria-hidden="true" tabindex="-1"></a><span class="at">        149  |  -3.976368   1.415012    -2.81   0.005    -6.749742   -1.202995</span></span>
+<span id="cb8-497"><a href="#cb8-497" aria-hidden="true" tabindex="-1"></a><span class="at">        153  |   -3.97938   1.414995    -2.81   0.005    -6.752718   -1.206041</span></span>
+<span id="cb8-498"><a href="#cb8-498" aria-hidden="true" tabindex="-1"></a><span class="at">        165  |  -4.013449   1.415156    -2.84   0.005    -6.787104   -1.239793</span></span>
+<span id="cb8-499"><a href="#cb8-499" aria-hidden="true" tabindex="-1"></a><span class="at">        180  |  -15.09339   2179.957    -0.01   0.994    -4287.731    4257.544</span></span>
+<span id="cb8-500"><a href="#cb8-500" aria-hidden="true" tabindex="-1"></a><span class="at">        186  |  -4.112806   1.414994    -2.91   0.004    -6.886144   -1.339468</span></span>
+<span id="cb8-501"><a href="#cb8-501" aria-hidden="true" tabindex="-1"></a><span class="at">        188  |   -4.11316   1.414915    -2.91   0.004    -6.886342   -1.339978</span></span>
+<span id="cb8-502"><a href="#cb8-502" aria-hidden="true" tabindex="-1"></a><span class="at">        207  |  -4.178467   1.414929    -2.95   0.003    -6.951678   -1.405256</span></span>
+<span id="cb8-503"><a href="#cb8-503" aria-hidden="true" tabindex="-1"></a><span class="at">        219  |  -4.206547    1.41493    -2.97   0.003     -6.97976   -1.433334</span></span>
+<span id="cb8-504"><a href="#cb8-504" aria-hidden="true" tabindex="-1"></a><span class="at">        263  |  -4.342286   1.415099    -3.07   0.002     -7.11583   -1.568742</span></span>
+<span id="cb8-505"><a href="#cb8-505" aria-hidden="true" tabindex="-1"></a><span class="at">        265  |  -16.10078   2179.957    -0.01   0.994    -4288.738    4256.536</span></span>
+<span id="cb8-506"><a href="#cb8-506" aria-hidden="true" tabindex="-1"></a><span class="at">        285  |  -3.688074   1.225534    -3.01   0.003    -6.090076   -1.286072</span></span>
+<span id="cb8-507"><a href="#cb8-507" aria-hidden="true" tabindex="-1"></a><span class="at">        308  |  -4.409256   1.414925    -3.12   0.002    -7.182459   -1.636054</span></span>
+<span id="cb8-508"><a href="#cb8-508" aria-hidden="true" tabindex="-1"></a><span class="at">        334  |  -4.432237   1.415143    -3.13   0.002    -7.205866   -1.658607</span></span>
+<span id="cb8-509"><a href="#cb8-509" aria-hidden="true" tabindex="-1"></a><span class="at">        340  |  -4.422918   1.415095    -3.13   0.002    -7.196453   -1.649383</span></span>
+<span id="cb8-510"><a href="#cb8-510" aria-hidden="true" tabindex="-1"></a><span class="at">        342  |  -4.365805    1.41511    -3.09   0.002     -7.13937   -1.592239</span></span>
+<span id="cb8-511"><a href="#cb8-511" aria-hidden="true" tabindex="-1"></a><span class="at">        370  |  -16.64142   2179.957    -0.01   0.994    -4289.279    4255.996</span></span>
+<span id="cb8-512"><a href="#cb8-512" aria-hidden="true" tabindex="-1"></a><span class="at">        397  |  -16.53454   2179.957    -0.01   0.994    -4289.172    4256.103</span></span>
+<span id="cb8-513"><a href="#cb8-513" aria-hidden="true" tabindex="-1"></a><span class="at">        427  |  -16.28492   2179.957    -0.01   0.994    -4288.922    4256.352</span></span>
+<span id="cb8-514"><a href="#cb8-514" aria-hidden="true" tabindex="-1"></a><span class="at">        445  |  -16.76689   2179.957    -0.01   0.994    -4289.404     4255.87</span></span>
+<span id="cb8-515"><a href="#cb8-515" aria-hidden="true" tabindex="-1"></a><span class="at">        482  |   -15.8041   2179.957    -0.01   0.994    -4288.441    4256.833</span></span>
+<span id="cb8-516"><a href="#cb8-516" aria-hidden="true" tabindex="-1"></a><span class="at">        515  |  -16.91429   2179.957    -0.01   0.994    -4289.552    4255.723</span></span>
+<span id="cb8-517"><a href="#cb8-517" aria-hidden="true" tabindex="-1"></a><span class="at">        545  |  -16.10426   2179.957    -0.01   0.994    -4288.742    4256.533</span></span>
+<span id="cb8-518"><a href="#cb8-518" aria-hidden="true" tabindex="-1"></a><span class="at">        583  |  -4.641434   1.415524    -3.28   0.001     -7.41581   -1.867057</span></span>
+<span id="cb8-519"><a href="#cb8-519" aria-hidden="true" tabindex="-1"></a><span class="at">        596  |  -16.41019   2179.957    -0.01   0.994    -4289.047    4256.227</span></span>
+<span id="cb8-520"><a href="#cb8-520" aria-hidden="true" tabindex="-1"></a><span class="at">        620  |  -17.07029   2179.957    -0.01   0.994    -4289.708    4255.567</span></span>
+<span id="cb8-521"><a href="#cb8-521" aria-hidden="true" tabindex="-1"></a><span class="at">        670  |  -17.14785   2179.957    -0.01   0.994    -4289.785    4255.489</span></span>
+<span id="cb8-522"><a href="#cb8-522" aria-hidden="true" tabindex="-1"></a><span class="at">        675  |  -4.631958   1.416377    -3.27   0.001    -7.408006   -1.855911</span></span>
+<span id="cb8-523"><a href="#cb8-523" aria-hidden="true" tabindex="-1"></a><span class="at">        733  |   -4.60698   1.416405    -3.25   0.001    -7.383082   -1.830878</span></span>
+<span id="cb8-524"><a href="#cb8-524" aria-hidden="true" tabindex="-1"></a><span class="at">        841  |  -17.05138   2179.957    -0.01   0.994    -4289.689    4255.586</span></span>
+<span id="cb8-525"><a href="#cb8-525" aria-hidden="true" tabindex="-1"></a><span class="at">        852  |  -4.566243   1.417712    -3.22   0.001    -7.344907   -1.787579</span></span>
+<span id="cb8-526"><a href="#cb8-526" aria-hidden="true" tabindex="-1"></a><span class="at">        915  |  -17.40169   2179.957    -0.01   0.994    -4290.039    4255.236</span></span>
+<span id="cb8-527"><a href="#cb8-527" aria-hidden="true" tabindex="-1"></a><span class="at">        941  |  -17.34105   2179.957    -0.01   0.994    -4289.978    4255.296</span></span>
+<span id="cb8-528"><a href="#cb8-528" aria-hidden="true" tabindex="-1"></a><span class="at">        979  |  -4.426862   1.419414    -3.12   0.002    -7.208862   -1.644862</span></span>
+<span id="cb8-529"><a href="#cb8-529" aria-hidden="true" tabindex="-1"></a><span class="at">        995  |  -4.401387   1.418922    -3.10   0.002    -7.182422   -1.620352</span></span>
+<span id="cb8-530"><a href="#cb8-530" aria-hidden="true" tabindex="-1"></a><span class="at">       1032  |  -4.390393   1.418666    -3.09   0.002    -7.170928   -1.609859</span></span>
+<span id="cb8-531"><a href="#cb8-531" aria-hidden="true" tabindex="-1"></a><span class="at">       1141  |   -16.4898   2179.957    -0.01   0.994    -4289.127    4256.148</span></span>
+<span id="cb8-532"><a href="#cb8-532" aria-hidden="true" tabindex="-1"></a><span class="at">       1321  |  -17.02179   2179.957    -0.01   0.994    -4289.659    4255.616</span></span>
+<span id="cb8-533"><a href="#cb8-533" aria-hidden="true" tabindex="-1"></a><span class="at">       1386  |  -4.427898    1.41857    -3.12   0.002    -7.208243   -1.647553</span></span>
+<span id="cb8-534"><a href="#cb8-534" aria-hidden="true" tabindex="-1"></a><span class="at">       1400  |  -17.74095   2179.957    -0.01   0.994    -4290.378    4254.896</span></span>
+<span id="cb8-535"><a href="#cb8-535" aria-hidden="true" tabindex="-1"></a><span class="at">       1407  |  -17.17352   2179.957    -0.01   0.994    -4289.811    4255.464</span></span>
+<span id="cb8-536"><a href="#cb8-536" aria-hidden="true" tabindex="-1"></a><span class="at">       1571  |  -18.15173   2179.957    -0.01   0.993    -4290.789    4254.486</span></span>
+<span id="cb8-537"><a href="#cb8-537" aria-hidden="true" tabindex="-1"></a><span class="at">       1586  |  -18.39765   2179.957    -0.01   0.993    -4291.035     4254.24</span></span>
+<span id="cb8-538"><a href="#cb8-538" aria-hidden="true" tabindex="-1"></a><span class="at">       1799  |  -18.08037   2179.957    -0.01   0.993    -4290.718    4254.557</span></span>
+<span id="cb8-539"><a href="#cb8-539" aria-hidden="true" tabindex="-1"></a><span class="at">             |</span></span>
+<span id="cb8-540"><a href="#cb8-540" aria-hidden="true" tabindex="-1"></a><span class="at">       _cons |   2.482922   4.946271     0.50   0.616    -7.211591    12.17744</span></span>
+<span id="cb8-541"><a href="#cb8-541" aria-hidden="true" tabindex="-1"></a><span class="at">   ln(stime) |          1  (exposure)</span></span>
+<span id="cb8-542"><a href="#cb8-542" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

@@ -1846,628 +1846,630 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb97-73"><a href="#cb97-73" aria-hidden="true" tabindex="-1"></a>|                                         |                                                       |</span>
 <span id="cb97-74"><a href="#cb97-74" aria-hidden="true" tabindex="-1"></a>|                                         | -   <span class="in">`stargazer`</span> - <span class="in">`gtsummary`</span>                         |</span>
 <span id="cb97-75"><a href="#cb97-75" aria-hidden="true" tabindex="-1"></a>+-----------------------------------------+-------------------------------------------------------+</span>
-<span id="cb97-76"><a href="#cb97-76" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Installation**</span></span>
+<span id="cb97-76"><a href="#cb97-76" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-77"><a href="#cb97-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-78"><a href="#cb97-78" aria-hidden="true" tabindex="-1"></a>Les dernières versions de certains packages peuvent être installées via Github (ex: <span class="in">`survminer`</span>). Pour les récupérer, passer par le package ```devtools```.  </span>
+<span id="cb97-78"><a href="#cb97-78" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Installation**</span></span>
 <span id="cb97-79"><a href="#cb97-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-80"><a href="#cb97-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-81"><a href="#cb97-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE, warning=FALSE}</span></span>
-<span id="cb97-82"><a href="#cb97-82" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("survival")</span></span>
-<span id="cb97-83"><a href="#cb97-83" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("survminer")</span></span>
-<span id="cb97-84"><a href="#cb97-84" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("flexsurv")</span></span>
-<span id="cb97-85"><a href="#cb97-85" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("survRM2")</span></span>
-<span id="cb97-86"><a href="#cb97-86" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidyr")</span></span>
-<span id="cb97-87"><a href="#cb97-87" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("gtools")</span></span>
-<span id="cb97-88"><a href="#cb97-88" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("jtools")</span></span>
-<span id="cb97-89"><a href="#cb97-89" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("RecordLinkage")</span></span>
-<span id="cb97-90"><a href="#cb97-90" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("gtsummary")</span></span>
-<span id="cb97-91"><a href="#cb97-91" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("cmprsk")</span></span>
+<span id="cb97-80"><a href="#cb97-80" aria-hidden="true" tabindex="-1"></a>Les dernières versions de certains packages peuvent être installées via Github (ex: <span class="in">`survminer`</span>). Pour les récupérer, passer par le package ```devtools```.  </span>
+<span id="cb97-81"><a href="#cb97-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-82"><a href="#cb97-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-83"><a href="#cb97-83" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE, warning=FALSE}</span></span>
+<span id="cb97-84"><a href="#cb97-84" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("survival")</span></span>
+<span id="cb97-85"><a href="#cb97-85" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("survminer")</span></span>
+<span id="cb97-86"><a href="#cb97-86" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("flexsurv")</span></span>
+<span id="cb97-87"><a href="#cb97-87" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("survRM2")</span></span>
+<span id="cb97-88"><a href="#cb97-88" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("tidyr")</span></span>
+<span id="cb97-89"><a href="#cb97-89" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("gtools")</span></span>
+<span id="cb97-90"><a href="#cb97-90" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("jtools")</span></span>
+<span id="cb97-91"><a href="#cb97-91" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("RecordLinkage")</span></span>
 <span id="cb97-92"><a href="#cb97-92" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("gtsummary")</span></span>
-<span id="cb97-93"><a href="#cb97-93" aria-hidden="true" tabindex="-1"></a><span class="co">#install.package(stargazer)</span></span>
-<span id="cb97-94"><a href="#cb97-94" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("muhaz")</span></span>
-<span id="cb97-95"><a href="#cb97-95" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
-<span id="cb97-96"><a href="#cb97-96" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
-<span id="cb97-97"><a href="#cb97-97" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flexsurv)</span>
-<span id="cb97-98"><a href="#cb97-98" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survRM2)</span>
-<span id="cb97-99"><a href="#cb97-99" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtools)</span>
-<span id="cb97-100"><a href="#cb97-100" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb97-101"><a href="#cb97-101" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jtools)</span>
-<span id="cb97-102"><a href="#cb97-102" aria-hidden="true" tabindex="-1"></a><span class="co">#library(RecordLinkage)</span></span>
-<span id="cb97-103"><a href="#cb97-103" aria-hidden="true" tabindex="-1"></a><span class="co">#library(gtsummary)</span></span>
-<span id="cb97-104"><a href="#cb97-104" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cmprsk)</span>
-<span id="cb97-105"><a href="#cb97-105" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(discSurv)</span>
-<span id="cb97-106"><a href="#cb97-106" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(muhaz)</span>
-<span id="cb97-107"><a href="#cb97-107" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
-<span id="cb97-108"><a href="#cb97-108" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-109"><a href="#cb97-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-110"><a href="#cb97-110" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-93"><a href="#cb97-93" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("cmprsk")</span></span>
+<span id="cb97-94"><a href="#cb97-94" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("gtsummary")</span></span>
+<span id="cb97-95"><a href="#cb97-95" aria-hidden="true" tabindex="-1"></a><span class="co">#install.package(stargazer)</span></span>
+<span id="cb97-96"><a href="#cb97-96" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("muhaz")</span></span>
+<span id="cb97-97"><a href="#cb97-97" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb97-98"><a href="#cb97-98" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survminer)</span>
+<span id="cb97-99"><a href="#cb97-99" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flexsurv)</span>
+<span id="cb97-100"><a href="#cb97-100" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survRM2)</span>
+<span id="cb97-101"><a href="#cb97-101" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gtools)</span>
+<span id="cb97-102"><a href="#cb97-102" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb97-103"><a href="#cb97-103" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(jtools)</span>
+<span id="cb97-104"><a href="#cb97-104" aria-hidden="true" tabindex="-1"></a><span class="co">#library(RecordLinkage)</span></span>
+<span id="cb97-105"><a href="#cb97-105" aria-hidden="true" tabindex="-1"></a><span class="co">#library(gtsummary)</span></span>
+<span id="cb97-106"><a href="#cb97-106" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(cmprsk)</span>
+<span id="cb97-107"><a href="#cb97-107" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(discSurv)</span>
+<span id="cb97-108"><a href="#cb97-108" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(muhaz)</span>
+<span id="cb97-109"><a href="#cb97-109" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(stargazer)</span>
+<span id="cb97-110"><a href="#cb97-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-111"><a href="#cb97-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-112"><a href="#cb97-112" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Survival v2 versus v3**</span></span>
+<span id="cb97-112"><a href="#cb97-112" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
 <span id="cb97-113"><a href="#cb97-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-114"><a href="#cb97-114" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-115"><a href="#cb97-115" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb97-116"><a href="#cb97-116" aria-hidden="true" tabindex="-1"></a>Se reporterà la partie sur les risques proportionnels.   </span>
-<span id="cb97-117"><a href="#cb97-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-118"><a href="#cb97-118" aria-hidden="true" tabindex="-1"></a>Pour avoir des résultats cohérents avec les autres applications, j'ai conservé la version 2 de la librairie <span class="in">`survival`</span>. J'ai donné une alternative au test avec une ancienne méthode, consistant à faire une régression linéaire entre les residus standardisés de Schoenfeld et une fonction de la durée, à ce jour limité à $f(t)=t$. Le code n'est pas trop compliqué, manque juste la récupération des noms des variables. Ici ce n'est pas trop grave car il y a seulement 3 variables pour autant de degrés de liberté, mais cela risque de devenir un peu plus lourd pour un modèle plus riche.  </span>
+<span id="cb97-114"><a href="#cb97-114" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Survival v2 versus v3**</span></span>
+<span id="cb97-115"><a href="#cb97-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-116"><a href="#cb97-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-117"><a href="#cb97-117" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-118"><a href="#cb97-118" aria-hidden="true" tabindex="-1"></a>Se reporterà la partie sur les risques proportionnels.   </span>
 <span id="cb97-119"><a href="#cb97-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-120"><a href="#cb97-120" aria-hidden="true" tabindex="-1"></a>Au cas où je donne les instructions pour installer la dernière mise à jour de la version 2 de survival (penser à désinstaller la v3 si nécessaire). La dernière version de **`Rtools`** doit être installée.</span>
+<span id="cb97-120"><a href="#cb97-120" aria-hidden="true" tabindex="-1"></a>Pour avoir des résultats cohérents avec les autres applications, j'ai conservé la version 2 de la librairie <span class="in">`survival`</span>. J'ai donné une alternative au test avec une ancienne méthode, consistant à faire une régression linéaire entre les residus standardisés de Schoenfeld et une fonction de la durée, à ce jour limité à $f(t)=t$. Le code n'est pas trop compliqué, manque juste la récupération des noms des variables. Ici ce n'est pas trop grave car il y a seulement 3 variables pour autant de degrés de liberté, mais cela risque de devenir un peu plus lourd pour un modèle plus riche.  </span>
 <span id="cb97-121"><a href="#cb97-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-122"><a href="#cb97-122" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
-<span id="cb97-123"><a href="#cb97-123" aria-hidden="true" tabindex="-1"></a><span class="co"># installation survival 2.44-1 (30 mars 2019)</span></span>
-<span id="cb97-124"><a href="#cb97-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-125"><a href="#cb97-125" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(remotes)</span>
-<span id="cb97-126"><a href="#cb97-126" aria-hidden="true" tabindex="-1"></a><span class="fu">install_version</span>(<span class="st">"survival"</span>, <span class="at">version =</span> <span class="st">"2.44-1"</span>, <span class="at">repos =</span> <span class="st">"http://cran.us.r-project.org"</span>)</span>
-<span id="cb97-127"><a href="#cb97-127" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-128"><a href="#cb97-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-129"><a href="#cb97-129" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
-<span id="cb97-130"><a href="#cb97-130" aria-hidden="true" tabindex="-1"></a>**Maj juin 2022**: pour le problème du test de Grambsch-Therneau, j’ai récupéré le programme de la version 2 de **`survival`**, renommé la fonction <span class="in">`cox.zphold`</span>. Une fois chargé avec la fonction <span class="in">`source(…path/cox.zphold.R)`</span>, on peut l’exécuter directement. </span>
-<span id="cb97-131"><a href="#cb97-131" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb97-132"><a href="#cb97-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-133"><a href="#cb97-133" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-122"><a href="#cb97-122" aria-hidden="true" tabindex="-1"></a>Au cas où je donne les instructions pour installer la dernière mise à jour de la version 2 de survival (penser à désinstaller la v3 si nécessaire). La dernière version de **`Rtools`** doit être installée.</span>
+<span id="cb97-123"><a href="#cb97-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-124"><a href="#cb97-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=FALSE}</span></span>
+<span id="cb97-125"><a href="#cb97-125" aria-hidden="true" tabindex="-1"></a><span class="co"># installation survival 2.44-1 (30 mars 2019)</span></span>
+<span id="cb97-126"><a href="#cb97-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-127"><a href="#cb97-127" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(remotes)</span>
+<span id="cb97-128"><a href="#cb97-128" aria-hidden="true" tabindex="-1"></a><span class="fu">install_version</span>(<span class="st">"survival"</span>, <span class="at">version =</span> <span class="st">"2.44-1"</span>, <span class="at">repos =</span> <span class="st">"http://cran.us.r-project.org"</span>)</span>
+<span id="cb97-129"><a href="#cb97-129" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-130"><a href="#cb97-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-131"><a href="#cb97-131" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb97-132"><a href="#cb97-132" aria-hidden="true" tabindex="-1"></a>**Maj juin 2022**: pour le problème du test de Grambsch-Therneau, j’ai récupéré le programme de la version 2 de **`survival`**, renommé la fonction <span class="in">`cox.zphold`</span>. Une fois chargé avec la fonction <span class="in">`source(…path/cox.zphold.R)`</span>, on peut l’exécuter directement. </span>
+<span id="cb97-133"><a href="#cb97-133" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb97-134"><a href="#cb97-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-135"><a href="#cb97-135" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Analyse Non paramétrique**</span></span>
+<span id="cb97-135"><a href="#cb97-135" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
 <span id="cb97-136"><a href="#cb97-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-137"><a href="#cb97-137" aria-hidden="true" tabindex="-1"></a>Chargement de la base transplantation</span>
+<span id="cb97-137"><a href="#cb97-137" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Analyse Non paramétrique**</span></span>
 <span id="cb97-138"><a href="#cb97-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-141"><a href="#cb97-141" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb97-142"><a href="#cb97-142" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb97-143"><a href="#cb97-143" aria-hidden="true" tabindex="-1"></a>trans <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv"</span>)</span>
-<span id="cb97-144"><a href="#cb97-144" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-145"><a href="#cb97-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-146"><a href="#cb97-146" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-139"><a href="#cb97-139" aria-hidden="true" tabindex="-1"></a>Chargement de la base transplantation</span>
+<span id="cb97-140"><a href="#cb97-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-143"><a href="#cb97-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb97-144"><a href="#cb97-144" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb97-145"><a href="#cb97-145" aria-hidden="true" tabindex="-1"></a>trans <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv"</span>)</span>
+<span id="cb97-146"><a href="#cb97-146" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-147"><a href="#cb97-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-148"><a href="#cb97-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Méthode actuarielle**</span></span>
+<span id="cb97-148"><a href="#cb97-148" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
 <span id="cb97-149"><a href="#cb97-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-150"><a href="#cb97-150" aria-hidden="true" tabindex="-1"></a>La fonction disponible du paquet <span class="in">`discsurv`</span>, *`lifetable`*, a des fonctionalités plutôt limitées. Si on peut depuis une MAJ récente définir des intervalles de durée, il n'y a toujours pas d'estimateurs les différents quantiles de la courbe de survie.   </span>
+<span id="cb97-150"><a href="#cb97-150" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Méthode actuarielle**</span></span>
 <span id="cb97-151"><a href="#cb97-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-152"><a href="#cb97-152" aria-hidden="true" tabindex="-1"></a>Pire, la programmation est rendue un peu compliquée pour pas grand chose. On doit s'assurer que la base est bien en format <span class="in">`data.frame`</span>.   </span>
-<span id="cb97-153"><a href="#cb97-153" aria-hidden="true" tabindex="-1"></a>Je donne les codes pour info, sans plus de commentaires.</span>
-<span id="cb97-154"><a href="#cb97-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-157"><a href="#cb97-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb97-158"><a href="#cb97-158" aria-hidden="true" tabindex="-1"></a>trans <span class="ot">=</span> <span class="fu">as.data.frame</span>(trans)</span>
-<span id="cb97-159"><a href="#cb97-159" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-160"><a href="#cb97-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-161"><a href="#cb97-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-162"><a href="#cb97-162" aria-hidden="true" tabindex="-1"></a>**Fonction `lifeTable`**  </span>
+<span id="cb97-152"><a href="#cb97-152" aria-hidden="true" tabindex="-1"></a>La fonction disponible du paquet <span class="in">`discsurv`</span>, *`lifetable`*, a des fonctionalités plutôt limitées. Si on peut depuis une MAJ récente définir des intervalles de durée, il n'y a toujours pas d'estimateurs les différents quantiles de la courbe de survie.   </span>
+<span id="cb97-153"><a href="#cb97-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-154"><a href="#cb97-154" aria-hidden="true" tabindex="-1"></a>Pire, la programmation est rendue un peu compliquée pour pas grand chose. On doit s'assurer que la base est bien en format <span class="in">`data.frame`</span>.   </span>
+<span id="cb97-155"><a href="#cb97-155" aria-hidden="true" tabindex="-1"></a>Je donne les codes pour info, sans plus de commentaires.</span>
+<span id="cb97-156"><a href="#cb97-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-159"><a href="#cb97-159" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb97-160"><a href="#cb97-160" aria-hidden="true" tabindex="-1"></a>trans <span class="ot">=</span> <span class="fu">as.data.frame</span>(trans)</span>
+<span id="cb97-161"><a href="#cb97-161" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-162"><a href="#cb97-162" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-163"><a href="#cb97-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-164"><a href="#cb97-164" aria-hidden="true" tabindex="-1"></a>***Intervalle par defaut $dt=1$***  </span>
+<span id="cb97-164"><a href="#cb97-164" aria-hidden="true" tabindex="-1"></a>**Fonction `lifeTable`**  </span>
 <span id="cb97-165"><a href="#cb97-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-166"><a href="#cb97-166" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, warning=FALSE, class.output="result"}</span></span>
-<span id="cb97-167"><a href="#cb97-167" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "S(t) méthode actuarielle avec `discSurv` (1)"</span></span>
-<span id="cb97-168"><a href="#cb97-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-169"><a href="#cb97-169" aria-hidden="true" tabindex="-1"></a>lt <span class="ot">=</span> <span class="fu">lifeTable</span>(<span class="at">dataShort=</span>trans, <span class="at">timeColumn=</span><span class="st">"stime"</span>, <span class="at">eventColumn =</span> <span class="st">"died"</span>)</span>
+<span id="cb97-166"><a href="#cb97-166" aria-hidden="true" tabindex="-1"></a>***Intervalle par defaut $dt=1$***  </span>
+<span id="cb97-167"><a href="#cb97-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-168"><a href="#cb97-168" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, warning=FALSE, class.output="result"}</span></span>
+<span id="cb97-169"><a href="#cb97-169" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap: "S(t) méthode actuarielle avec `discSurv` (1)"</span></span>
 <span id="cb97-170"><a href="#cb97-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-171"><a href="#cb97-171" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lt, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(lt<span class="sc">$</span>Output)[<span class="dv">1</span>], <span class="at">y =</span> lt<span class="sc">$</span>Output<span class="sc">$</span>S, <span class="at">xlab =</span> <span class="st">"Intervalles t = journalier"</span>, <span class="at">ylab=</span><span class="st">"S(t)"</span>)</span>
-<span id="cb97-172"><a href="#cb97-172" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-173"><a href="#cb97-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-174"><a href="#cb97-174" aria-hidden="true" tabindex="-1"></a>***Intervalle $dt=30$***</span>
-<span id="cb97-175"><a href="#cb97-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, warning=FALSE, class.output="result"}</span></span>
-<span id="cb97-176"><a href="#cb97-176" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap:  "S(t) méthode actuarielle avec `discSurv` (2)"</span></span>
-<span id="cb97-177"><a href="#cb97-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-178"><a href="#cb97-178" aria-hidden="true" tabindex="-1"></a><span class="co"># On définit le vecteur des intervalles (il n'y avait pas plus simple????)</span></span>
-<span id="cb97-179"><a href="#cb97-179" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ceiling</span>(<span class="fu">max</span>(trans<span class="sc">$</span>stime)<span class="sc">/</span><span class="dv">30</span>)<span class="sc">*</span><span class="dv">30</span></span>
-<span id="cb97-180"><a href="#cb97-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-181"><a href="#cb97-181" aria-hidden="true" tabindex="-1"></a><span class="co"># Base dis avec une nouvelle variable de durée =&gt; timeDisc </span></span>
-<span id="cb97-182"><a href="#cb97-182" aria-hidden="true" tabindex="-1"></a>dis <span class="ot">&lt;-</span> <span class="fu">contToDisc</span>(<span class="at">dataShort=</span>trans, <span class="at">timeColumn=</span><span class="st">"stime"</span>, <span class="at">intervalLimits =</span> dt )</span>
-<span id="cb97-183"><a href="#cb97-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-184"><a href="#cb97-184" aria-hidden="true" tabindex="-1"></a>lt <span class="ot">&lt;-</span> <span class="fu">lifeTable</span>(<span class="at">dataShort=</span>dis, <span class="at">timeColumn=</span><span class="st">"timeDisc"</span>, <span class="at">eventColumn =</span> <span class="st">"died"</span>)</span>
+<span id="cb97-171"><a href="#cb97-171" aria-hidden="true" tabindex="-1"></a>lt <span class="ot">=</span> <span class="fu">lifeTable</span>(<span class="at">dataShort=</span>trans, <span class="at">timeColumn=</span><span class="st">"stime"</span>, <span class="at">eventColumn =</span> <span class="st">"died"</span>)</span>
+<span id="cb97-172"><a href="#cb97-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-173"><a href="#cb97-173" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lt, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(lt<span class="sc">$</span>Output)[<span class="dv">1</span>], <span class="at">y =</span> lt<span class="sc">$</span>Output<span class="sc">$</span>S, <span class="at">xlab =</span> <span class="st">"Intervalles t = journalier"</span>, <span class="at">ylab=</span><span class="st">"S(t)"</span>)</span>
+<span id="cb97-174"><a href="#cb97-174" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-175"><a href="#cb97-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-176"><a href="#cb97-176" aria-hidden="true" tabindex="-1"></a>***Intervalle $dt=30$***</span>
+<span id="cb97-177"><a href="#cb97-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, warning=FALSE, class.output="result"}</span></span>
+<span id="cb97-178"><a href="#cb97-178" aria-hidden="true" tabindex="-1"></a><span class="co">#| fig-cap:  "S(t) méthode actuarielle avec `discSurv` (2)"</span></span>
+<span id="cb97-179"><a href="#cb97-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-180"><a href="#cb97-180" aria-hidden="true" tabindex="-1"></a><span class="co"># On définit le vecteur des intervalles (il n'y avait pas plus simple????)</span></span>
+<span id="cb97-181"><a href="#cb97-181" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ceiling</span>(<span class="fu">max</span>(trans<span class="sc">$</span>stime)<span class="sc">/</span><span class="dv">30</span>)<span class="sc">*</span><span class="dv">30</span></span>
+<span id="cb97-182"><a href="#cb97-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-183"><a href="#cb97-183" aria-hidden="true" tabindex="-1"></a><span class="co"># Base dis avec une nouvelle variable de durée =&gt; timeDisc </span></span>
+<span id="cb97-184"><a href="#cb97-184" aria-hidden="true" tabindex="-1"></a>dis <span class="ot">&lt;-</span> <span class="fu">contToDisc</span>(<span class="at">dataShort=</span>trans, <span class="at">timeColumn=</span><span class="st">"stime"</span>, <span class="at">intervalLimits =</span> dt )</span>
 <span id="cb97-185"><a href="#cb97-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-186"><a href="#cb97-186" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lt, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(lt<span class="sc">$</span>Output)[<span class="dv">1</span>], <span class="at">y =</span> lt<span class="sc">$</span>Output<span class="sc">$</span>S, <span class="at">xlab =</span> <span class="st">"Intervalles dt = 30 jours"</span>, <span class="at">ylab=</span><span class="st">"S(t)"</span>)</span>
-<span id="cb97-187"><a href="#cb97-187" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-188"><a href="#cb97-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-189"><a href="#cb97-189" aria-hidden="true" tabindex="-1"></a>Sur les abcisses, ce sont les valeurs des intervalles qui sont reportés: 10=300 jours. Ce n'est vraiment pas terrible. Pour ce type d'estimateurs, il est préférable d'utiliser Sas ou Stata.</span>
+<span id="cb97-186"><a href="#cb97-186" aria-hidden="true" tabindex="-1"></a>lt <span class="ot">&lt;-</span> <span class="fu">lifeTable</span>(<span class="at">dataShort=</span>dis, <span class="at">timeColumn=</span><span class="st">"timeDisc"</span>, <span class="at">eventColumn =</span> <span class="st">"died"</span>)</span>
+<span id="cb97-187"><a href="#cb97-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-188"><a href="#cb97-188" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(lt, <span class="at">x =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">dim</span>(lt<span class="sc">$</span>Output)[<span class="dv">1</span>], <span class="at">y =</span> lt<span class="sc">$</span>Output<span class="sc">$</span>S, <span class="at">xlab =</span> <span class="st">"Intervalles dt = 30 jours"</span>, <span class="at">ylab=</span><span class="st">"S(t)"</span>)</span>
+<span id="cb97-189"><a href="#cb97-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-190"><a href="#cb97-190" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-191"><a href="#cb97-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-192"><a href="#cb97-192" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Méthode Kaplan-Meier**</span></span>
+<span id="cb97-191"><a href="#cb97-191" aria-hidden="true" tabindex="-1"></a>Sur les abcisses, ce sont les valeurs des intervalles qui sont reportés: 10=300 jours. Ce n'est vraiment pas terrible. Pour ce type d'estimateurs, il est préférable d'utiliser Sas ou Stata.</span>
+<span id="cb97-192"><a href="#cb97-192" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-193"><a href="#cb97-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-194"><a href="#cb97-194" aria-hidden="true" tabindex="-1"></a>Le package survival est le principal outil d'analyse des durée. Le package survminer permet d'améliorer la présentation des graphiques. </span>
-<span id="cb97-195"><a href="#cb97-195" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb97-196"><a href="#cb97-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-197"><a href="#cb97-197" aria-hidden="true" tabindex="-1"></a>**Estimation des fonctions de survie**  </span>
-<span id="cb97-198"><a href="#cb97-198" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb97-199"><a href="#cb97-199" aria-hidden="true" tabindex="-1"></a>Fonction ```survfit```  </span>
-<span id="cb97-200"><a href="#cb97-200" aria-hidden="true" tabindex="-1"></a>Syntaxe</span>
-<span id="cb97-201"><a href="#cb97-201" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=F}</span></span>
-<span id="cb97-202"><a href="#cb97-202" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> x, <span class="at">data =</span> base)</span>
-<span id="cb97-203"><a href="#cb97-203" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-204"><a href="#cb97-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-205"><a href="#cb97-205" aria-hidden="true" tabindex="-1"></a>On peut renseigner directement les variables permettant de calculer la durée et non la variable de durée elle-même. Cette méthode est utilisée lorsqu'on introduit une variable dynamique dans un modèle semi-paramétrique (<span class="in">`coxph`</span>).</span>
+<span id="cb97-194"><a href="#cb97-194" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Méthode Kaplan-Meier**</span></span>
+<span id="cb97-195"><a href="#cb97-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-196"><a href="#cb97-196" aria-hidden="true" tabindex="-1"></a>Le package survival est le principal outil d'analyse des durée. Le package survminer permet d'améliorer la présentation des graphiques. </span>
+<span id="cb97-197"><a href="#cb97-197" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-198"><a href="#cb97-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-199"><a href="#cb97-199" aria-hidden="true" tabindex="-1"></a>**Estimation des fonctions de survie**  </span>
+<span id="cb97-200"><a href="#cb97-200" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-201"><a href="#cb97-201" aria-hidden="true" tabindex="-1"></a>Fonction ```survfit```  </span>
+<span id="cb97-202"><a href="#cb97-202" aria-hidden="true" tabindex="-1"></a>Syntaxe</span>
+<span id="cb97-203"><a href="#cb97-203" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=F}</span></span>
+<span id="cb97-204"><a href="#cb97-204" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> x, <span class="at">data =</span> base)</span>
+<span id="cb97-205"><a href="#cb97-205" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-206"><a href="#cb97-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-207"><a href="#cb97-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=F}</span></span>
-<span id="cb97-208"><a href="#cb97-208" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(variable_start, variable_end, status) <span class="sc">~</span> x, <span class="at">data =</span> nom_base)</span>
-<span id="cb97-209"><a href="#cb97-209" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-210"><a href="#cb97-210" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-211"><a href="#cb97-211" aria-hidden="true" tabindex="-1"></a>Sans comparaison de groupes:  </span>
+<span id="cb97-207"><a href="#cb97-207" aria-hidden="true" tabindex="-1"></a>On peut renseigner directement les variables permettant de calculer la durée et non la variable de durée elle-même. Cette méthode est utilisée lorsqu'on introduit une variable dynamique dans un modèle semi-paramétrique (<span class="in">`coxph`</span>).</span>
+<span id="cb97-208"><a href="#cb97-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-209"><a href="#cb97-209" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, eval=F}</span></span>
+<span id="cb97-210"><a href="#cb97-210" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(variable_start, variable_end, status) <span class="sc">~</span> x, <span class="at">data =</span> nom_base)</span>
+<span id="cb97-211"><a href="#cb97-211" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-212"><a href="#cb97-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-213"><a href="#cb97-213" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-214"><a href="#cb97-214" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(stime, died) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> trans)</span>
-<span id="cb97-215"><a href="#cb97-215" aria-hidden="true" tabindex="-1"></a>fit</span>
-<span id="cb97-216"><a href="#cb97-216" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
-<span id="cb97-217"><a href="#cb97-217" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit)</span>
-<span id="cb97-218"><a href="#cb97-218" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-219"><a href="#cb97-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-220"><a href="#cb97-220" aria-hidden="true" tabindex="-1"></a>Le premier output <span class="in">`fit`</span> permet d'obtenir la durée médiane, ici égale à 100 ($S(100)=0.494$). Le second  avec la fonction **`summary`** permet d'obtenir une table des estimateurs. La fonction de survie peut être tracée avec la fonction **`plot`** (en pointillés les intervalles de confiance).  </span>
+<span id="cb97-213"><a href="#cb97-213" aria-hidden="true" tabindex="-1"></a>Sans comparaison de groupes:  </span>
+<span id="cb97-214"><a href="#cb97-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-215"><a href="#cb97-215" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-216"><a href="#cb97-216" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(stime, died) <span class="sc">~</span> <span class="dv">1</span>, <span class="at">data =</span> trans)</span>
+<span id="cb97-217"><a href="#cb97-217" aria-hidden="true" tabindex="-1"></a>fit</span>
+<span id="cb97-218"><a href="#cb97-218" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit)</span>
+<span id="cb97-219"><a href="#cb97-219" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(fit)</span>
+<span id="cb97-220"><a href="#cb97-220" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-221"><a href="#cb97-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-222"><a href="#cb97-222" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb97-223"><a href="#cb97-223" aria-hidden="true" tabindex="-1"></a>On peut obtenir des graphes de  meilleur qualité avec la librairie **`survminer`**.  </span>
-<span id="cb97-224"><a href="#cb97-224" aria-hidden="true" tabindex="-1"></a>Avec la fonction **`ggsurvplot`**</span>
-<span id="cb97-225"><a href="#cb97-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-226"><a href="#cb97-226" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-227"><a href="#cb97-227" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb97-228"><a href="#cb97-228" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-229"><a href="#cb97-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-230"><a href="#cb97-230" aria-hidden="true" tabindex="-1"></a>On peut ajouter la population encore soumise au risque à plusieurs points d'observation</span>
+<span id="cb97-222"><a href="#cb97-222" aria-hidden="true" tabindex="-1"></a>Le premier output <span class="in">`fit`</span> permet d'obtenir la durée médiane, ici égale à 100 ($S(100)=0.494$). Le second  avec la fonction **`summary`** permet d'obtenir une table des estimateurs. La fonction de survie peut être tracée avec la fonction **`plot`** (en pointillés les intervalles de confiance).  </span>
+<span id="cb97-223"><a href="#cb97-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-224"><a href="#cb97-224" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-225"><a href="#cb97-225" aria-hidden="true" tabindex="-1"></a>On peut obtenir des graphes de  meilleur qualité avec la librairie **`survminer`**.  </span>
+<span id="cb97-226"><a href="#cb97-226" aria-hidden="true" tabindex="-1"></a>Avec la fonction **`ggsurvplot`**</span>
+<span id="cb97-227"><a href="#cb97-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-228"><a href="#cb97-228" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-229"><a href="#cb97-229" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb97-230"><a href="#cb97-230" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-231"><a href="#cb97-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-232"><a href="#cb97-232" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-233"><a href="#cb97-233" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">risk.table =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb97-234"><a href="#cb97-234" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-235"><a href="#cb97-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-236"><a href="#cb97-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-237"><a href="#cb97-237" aria-hidden="true" tabindex="-1"></a>**Comparaison des fonctions de survie** </span>
+<span id="cb97-232"><a href="#cb97-232" aria-hidden="true" tabindex="-1"></a>On peut ajouter la population encore soumise au risque à plusieurs points d'observation</span>
+<span id="cb97-233"><a href="#cb97-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-234"><a href="#cb97-234" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-235"><a href="#cb97-235" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">risk.table =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb97-236"><a href="#cb97-236" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-237"><a href="#cb97-237" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-238"><a href="#cb97-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-239"><a href="#cb97-239" aria-hidden="true" tabindex="-1"></a>On va comparer les deuxfonctions de survie pour la variable *surgery*, celle pour les personnes non opérées et celle pour les personnes opérées.  </span>
+<span id="cb97-239"><a href="#cb97-239" aria-hidden="true" tabindex="-1"></a>**Comparaison des fonctions de survie** </span>
 <span id="cb97-240"><a href="#cb97-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-241"><a href="#cb97-241" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-242"><a href="#cb97-242" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(stime, died) <span class="sc">~</span> surgery, <span class="at">data =</span> trans)</span>
-<span id="cb97-243"><a href="#cb97-243" aria-hidden="true" tabindex="-1"></a>fit</span>
-<span id="cb97-244"><a href="#cb97-244" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">risk.table =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb97-245"><a href="#cb97-245" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-246"><a href="#cb97-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-247"><a href="#cb97-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-248"><a href="#cb97-248" aria-hidden="true" tabindex="-1"></a>**Tests du log-rank**</span>
+<span id="cb97-241"><a href="#cb97-241" aria-hidden="true" tabindex="-1"></a>On va comparer les deuxfonctions de survie pour la variable *surgery*, celle pour les personnes non opérées et celle pour les personnes opérées.  </span>
+<span id="cb97-242"><a href="#cb97-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-243"><a href="#cb97-243" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-244"><a href="#cb97-244" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">&lt;-</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(stime, died) <span class="sc">~</span> surgery, <span class="at">data =</span> trans)</span>
+<span id="cb97-245"><a href="#cb97-245" aria-hidden="true" tabindex="-1"></a>fit</span>
+<span id="cb97-246"><a href="#cb97-246" aria-hidden="true" tabindex="-1"></a><span class="fu">ggsurvplot</span>(fit, <span class="at">conf.int =</span> <span class="cn">TRUE</span>, <span class="at">risk.table =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb97-247"><a href="#cb97-247" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-248"><a href="#cb97-248" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-249"><a href="#cb97-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-250"><a href="#cb97-250" aria-hidden="true" tabindex="-1"></a>On utilise la fonction **`survdiff`**, avec comme variante le test de Peto-Peto (<span class="in">`rho=1`</span>).  </span>
-<span id="cb97-251"><a href="#cb97-251" aria-hidden="true" tabindex="-1"></a>La syntaxe est quasiment identique à la fonction <span class="in">`survdiff`</span>.  </span>
-<span id="cb97-252"><a href="#cb97-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-253"><a href="#cb97-253" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-254"><a href="#cb97-254" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(stime, died) <span class="sc">~</span> surgery, <span class="at">rho=</span><span class="dv">1</span>, <span class="at">data =</span> trans)</span>
-<span id="cb97-255"><a href="#cb97-255" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-256"><a href="#cb97-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-257"><a href="#cb97-257" aria-hidden="true" tabindex="-1"></a>Ici la variable est binaire. Si on veux tester deux à deux les niveaux d'une variable catégorielle à plus de deux modalités, on utilise la fonction **`pairwise_survdiff`** de <span class="in">`survminer`</span> (syntaxe identique que ```survdiff```).  </span>
+<span id="cb97-250"><a href="#cb97-250" aria-hidden="true" tabindex="-1"></a>**Tests du log-rank**</span>
+<span id="cb97-251"><a href="#cb97-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-252"><a href="#cb97-252" aria-hidden="true" tabindex="-1"></a>On utilise la fonction **`survdiff`**, avec comme variante le test de Peto-Peto (<span class="in">`rho=1`</span>).  </span>
+<span id="cb97-253"><a href="#cb97-253" aria-hidden="true" tabindex="-1"></a>La syntaxe est quasiment identique à la fonction <span class="in">`survdiff`</span>.  </span>
+<span id="cb97-254"><a href="#cb97-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-255"><a href="#cb97-255" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-256"><a href="#cb97-256" aria-hidden="true" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(stime, died) <span class="sc">~</span> surgery, <span class="at">rho=</span><span class="dv">1</span>, <span class="at">data =</span> trans)</span>
+<span id="cb97-257"><a href="#cb97-257" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-258"><a href="#cb97-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-259"><a href="#cb97-259" aria-hidden="true" tabindex="-1"></a>**Comparaison des RMST**</span>
+<span id="cb97-259"><a href="#cb97-259" aria-hidden="true" tabindex="-1"></a>Ici la variable est binaire. Si on veux tester deux à deux les niveaux d'une variable catégorielle à plus de deux modalités, on utilise la fonction **`pairwise_survdiff`** de <span class="in">`survminer`</span> (syntaxe identique que ```survdiff```).  </span>
 <span id="cb97-260"><a href="#cb97-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-261"><a href="#cb97-261" aria-hidden="true" tabindex="-1"></a>La fonction **`rmst2`** du package **`survRM2`** permet de comparer les RMST entre 2 groupes (et pas plus). La strate</span>
-<span id="cb97-262"><a href="#cb97-262" aria-hidden="true" tabindex="-1"></a>pour les comparaisons doit être renommée *arm*. La fonction, issue d'une commande de Stata, n'est pas très souple.</span>
-<span id="cb97-263"><a href="#cb97-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-264"><a href="#cb97-264" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-265"><a href="#cb97-265" aria-hidden="true" tabindex="-1"></a>trans<span class="sc">$</span>arm<span class="ot">=</span>trans<span class="sc">$</span>surgery</span>
-<span id="cb97-266"><a href="#cb97-266" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="fu">rmst2</span>(trans<span class="sc">$</span>stime, trans<span class="sc">$</span>died, trans<span class="sc">$</span>arm, <span class="at">tau=</span><span class="cn">NULL</span>)</span>
-<span id="cb97-267"><a href="#cb97-267" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a)</span>
-<span id="cb97-268"><a href="#cb97-268" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(a)</span>
-<span id="cb97-269"><a href="#cb97-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-270"><a href="#cb97-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-271"><a href="#cb97-271" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-261"><a href="#cb97-261" aria-hidden="true" tabindex="-1"></a>**Comparaison des RMST**</span>
+<span id="cb97-262"><a href="#cb97-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-263"><a href="#cb97-263" aria-hidden="true" tabindex="-1"></a>La fonction **`rmst2`** du package **`survRM2`** permet de comparer les RMST entre 2 groupes (et pas plus). La strate</span>
+<span id="cb97-264"><a href="#cb97-264" aria-hidden="true" tabindex="-1"></a>pour les comparaisons doit être renommée *arm*. La fonction, issue d'une commande de Stata, n'est pas très souple.</span>
+<span id="cb97-265"><a href="#cb97-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-266"><a href="#cb97-266" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-267"><a href="#cb97-267" aria-hidden="true" tabindex="-1"></a>trans<span class="sc">$</span>arm<span class="ot">=</span>trans<span class="sc">$</span>surgery</span>
+<span id="cb97-268"><a href="#cb97-268" aria-hidden="true" tabindex="-1"></a>a<span class="ot">=</span><span class="fu">rmst2</span>(trans<span class="sc">$</span>stime, trans<span class="sc">$</span>died, trans<span class="sc">$</span>arm, <span class="at">tau=</span><span class="cn">NULL</span>)</span>
+<span id="cb97-269"><a href="#cb97-269" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a)</span>
+<span id="cb97-270"><a href="#cb97-270" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(a)</span>
+<span id="cb97-271"><a href="#cb97-271" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-272"><a href="#cb97-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-273"><a href="#cb97-273" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Modèle de Cox**</span></span>
+<span id="cb97-273"><a href="#cb97-273" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
 <span id="cb97-274"><a href="#cb97-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-275"><a href="#cb97-275" aria-hidden="true" tabindex="-1"></a>Ici tout est estimé avec des fonctions du package ```survival```:  </span>
+<span id="cb97-275"><a href="#cb97-275" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Modèle de Cox**</span></span>
 <span id="cb97-276"><a href="#cb97-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-277"><a href="#cb97-277" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Estimation du modèle: ```coxph```.</span>
-<span id="cb97-278"><a href="#cb97-278" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Test de Grambsch-Therneau: ```cox.zph```.</span>
-<span id="cb97-279"><a href="#cb97-279" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Introduction d'une variable dynamique: ```survsplit```.</span>
-<span id="cb97-280"><a href="#cb97-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-281"><a href="#cb97-281" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Estimation du modèle**</span></span>
+<span id="cb97-277"><a href="#cb97-277" aria-hidden="true" tabindex="-1"></a>Ici tout est estimé avec des fonctions du package ```survival```:  </span>
+<span id="cb97-278"><a href="#cb97-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-279"><a href="#cb97-279" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Estimation du modèle: ```coxph```.</span>
+<span id="cb97-280"><a href="#cb97-280" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Test de Grambsch-Therneau: ```cox.zph```.</span>
+<span id="cb97-281"><a href="#cb97-281" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Introduction d'une variable dynamique: ```survsplit```.</span>
 <span id="cb97-282"><a href="#cb97-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-283"><a href="#cb97-283" aria-hidden="true" tabindex="-1"></a>Par défaut, R utilise la correction d'Efron pour les évènements simultanés. Il est préférable de ne pas la modifier.</span>
+<span id="cb97-283"><a href="#cb97-283" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Estimation du modèle**</span></span>
 <span id="cb97-284"><a href="#cb97-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-285"><a href="#cb97-285" aria-hidden="true" tabindex="-1"></a>Syntaxe:</span>
+<span id="cb97-285"><a href="#cb97-285" aria-hidden="true" tabindex="-1"></a>Par défaut, R utilise la correction d'Efron pour les évènements simultanés. Il est préférable de ne pas la modifier.</span>
 <span id="cb97-286"><a href="#cb97-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-287"><a href="#cb97-287" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-288"><a href="#cb97-288" aria-hidden="true" tabindex="-1"></a><span class="in">coxph(Surv(time, status) ~ x1 + x2 + ....., data=base, ties="nom_correction"))</span></span>
+<span id="cb97-287"><a href="#cb97-287" aria-hidden="true" tabindex="-1"></a>Syntaxe:</span>
+<span id="cb97-288"><a href="#cb97-288" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-289"><a href="#cb97-289" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-290"><a href="#cb97-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-291"><a href="#cb97-291" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-292"><a href="#cb97-292" aria-hidden="true" tabindex="-1"></a>coxfit <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> trans)</span>
-<span id="cb97-293"><a href="#cb97-293" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(coxfit)</span>
-<span id="cb97-294"><a href="#cb97-294" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-295"><a href="#cb97-295" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-296"><a href="#cb97-296" aria-hidden="true" tabindex="-1"></a>La table des résultats reporte le logarithme des Risques Ratios (coef) ainsi que les RR (exp(coef)). Il est intéressant de regarder la valeur de concordance (Harrel's) qui donne des indications sur la qualité de l'ajustement (proche de l'AUC/ROC).  </span>
+<span id="cb97-290"><a href="#cb97-290" aria-hidden="true" tabindex="-1"></a><span class="in">coxph(Surv(time, status) ~ x1 + x2 + ....., data=base, ties="nom_correction"))</span></span>
+<span id="cb97-291"><a href="#cb97-291" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-292"><a href="#cb97-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-293"><a href="#cb97-293" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-294"><a href="#cb97-294" aria-hidden="true" tabindex="-1"></a>coxfit <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> trans)</span>
+<span id="cb97-295"><a href="#cb97-295" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(coxfit)</span>
+<span id="cb97-296"><a href="#cb97-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-297"><a href="#cb97-297" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-298"><a href="#cb97-298" aria-hidden="true" tabindex="-1"></a>On peut représenter sous forme graphique les résultats avec la fonction **`ggforest`** de <span class="in">`survminer`</span></span>
+<span id="cb97-298"><a href="#cb97-298" aria-hidden="true" tabindex="-1"></a>La table des résultats reporte le logarithme des Risques Ratios (coef) ainsi que les RR (exp(coef)). Il est intéressant de regarder la valeur de concordance (Harrel's) qui donne des indications sur la qualité de l'ajustement (proche de l'AUC/ROC).  </span>
 <span id="cb97-299"><a href="#cb97-299" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-300"><a href="#cb97-300" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-301"><a href="#cb97-301" aria-hidden="true" tabindex="-1"></a><span class="fu">ggforest</span>(coxfit)</span>
-<span id="cb97-302"><a href="#cb97-302" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-303"><a href="#cb97-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-304"><a href="#cb97-304" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Hypothèse PH**</span></span>
+<span id="cb97-300"><a href="#cb97-300" aria-hidden="true" tabindex="-1"></a>On peut représenter sous forme graphique les résultats avec la fonction **`ggforest`** de <span class="in">`survminer`</span></span>
+<span id="cb97-301"><a href="#cb97-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-302"><a href="#cb97-302" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-303"><a href="#cb97-303" aria-hidden="true" tabindex="-1"></a><span class="fu">ggforest</span>(coxfit)</span>
+<span id="cb97-304"><a href="#cb97-304" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-305"><a href="#cb97-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-306"><a href="#cb97-306" aria-hidden="true" tabindex="-1"></a>::: callout-warning   </span>
-<span id="cb97-307"><a href="#cb97-307" aria-hidden="true" tabindex="-1"></a>Attention aux résultats entre la v2 et la v3 de survival. Les deux sont présentés, avec un test reposant sur une régression linéaire (OLS même si GLS préférable) entre les résidus de Schoenfeld et une fonction de la durée (ici f(t)=t), et fait rapidement le 17 mai. Pour illustrer la question les résultats du test de Grambsch-Therneau sont donnés pour les deux versions.</span>
-<span id="cb97-308"><a href="#cb97-308" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb97-309"><a href="#cb97-309" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-310"><a href="#cb97-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-311"><a href="#cb97-311" aria-hidden="true" tabindex="-1"></a>**Résidus de Schoenfeld**  </span>
-<span id="cb97-312"><a href="#cb97-312" aria-hidden="true" tabindex="-1"></a>On utilise la fonction **`cox.zph`** pour le test de *Grambsch-Therneau*.  </span>
-<span id="cb97-313"><a href="#cb97-313" aria-hidden="true" tabindex="-1"></a>Le test peut utiliser plusieurs fonctions de la durée. Par défaut la fonction utilise $1-KM$, soit le complémentaire de l'estimateur de Kaplan-Meier (option <span class="in">`transform="km"`</span>).</span>
-<span id="cb97-314"><a href="#cb97-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-315"><a href="#cb97-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-316"><a href="#cb97-316" aria-hidden="true" tabindex="-1"></a>***Test Grambsch-Therneau***</span>
+<span id="cb97-306"><a href="#cb97-306" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Hypothèse PH**</span></span>
+<span id="cb97-307"><a href="#cb97-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-308"><a href="#cb97-308" aria-hidden="true" tabindex="-1"></a>::: callout-warning   </span>
+<span id="cb97-309"><a href="#cb97-309" aria-hidden="true" tabindex="-1"></a>Attention aux résultats entre la v2 et la v3 de survival. Les deux sont présentés, avec un test reposant sur une régression linéaire (OLS même si GLS préférable) entre les résidus de Schoenfeld et une fonction de la durée (ici f(t)=t), et fait rapidement le 17 mai. Pour illustrer la question les résultats du test de Grambsch-Therneau sont donnés pour les deux versions.</span>
+<span id="cb97-310"><a href="#cb97-310" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb97-311"><a href="#cb97-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-312"><a href="#cb97-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-313"><a href="#cb97-313" aria-hidden="true" tabindex="-1"></a>**Résidus de Schoenfeld**  </span>
+<span id="cb97-314"><a href="#cb97-314" aria-hidden="true" tabindex="-1"></a>On utilise la fonction **`cox.zph`** pour le test de *Grambsch-Therneau*.  </span>
+<span id="cb97-315"><a href="#cb97-315" aria-hidden="true" tabindex="-1"></a>Le test peut utiliser plusieurs fonctions de la durée. Par défaut la fonction utilise $1-KM$, soit le complémentaire de l'estimateur de Kaplan-Meier (option <span class="in">`transform="km"`</span>).</span>
+<span id="cb97-316"><a href="#cb97-316" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-317"><a href="#cb97-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-318"><a href="#cb97-318" aria-hidden="true" tabindex="-1"></a>**&lt;span style="color: #CC0066"&gt;Résultat du test avec la v2 de survival&lt;/span&gt;**</span>
+<span id="cb97-318"><a href="#cb97-318" aria-hidden="true" tabindex="-1"></a>***Test Grambsch-Therneau***</span>
 <span id="cb97-319"><a href="#cb97-319" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-320"><a href="#cb97-320" aria-hidden="true" tabindex="-1"></a>Avec <span class="in">`transform="km"`</span></span>
-<span id="cb97-321"><a href="#cb97-321" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-322"><a href="#cb97-322" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(coxfit)</span>
-<span id="cb97-323"><a href="#cb97-323" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-324"><a href="#cb97-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-325"><a href="#cb97-325" aria-hidden="true" tabindex="-1"></a>Avec <span class="in">`transform="identity"`</span> ($f(t)=t$) <span class="co">[</span><span class="ot">remarque: solution de Stata par défaut</span><span class="co">]</span>.</span>
-<span id="cb97-326"><a href="#cb97-326" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-327"><a href="#cb97-327" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(coxfit, <span class="at">transform=</span><span class="st">"identity"</span>)</span>
-<span id="cb97-328"><a href="#cb97-328" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-329"><a href="#cb97-329" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-330"><a href="#cb97-330" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-331"><a href="#cb97-331" aria-hidden="true" tabindex="-1"></a>**&lt;span style="color:#CC0066"&gt;Résultat du test avec la v3 de survival&lt;/span&gt;**</span>
+<span id="cb97-320"><a href="#cb97-320" aria-hidden="true" tabindex="-1"></a>**&lt;span style="color: #CC0066"&gt;Résultat du test avec la v2 de survival&lt;/span&gt;**</span>
+<span id="cb97-321"><a href="#cb97-321" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-322"><a href="#cb97-322" aria-hidden="true" tabindex="-1"></a>Avec <span class="in">`transform="km"`</span></span>
+<span id="cb97-323"><a href="#cb97-323" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-324"><a href="#cb97-324" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(coxfit)</span>
+<span id="cb97-325"><a href="#cb97-325" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-326"><a href="#cb97-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-327"><a href="#cb97-327" aria-hidden="true" tabindex="-1"></a>Avec <span class="in">`transform="identity"`</span> ($f(t)=t$) <span class="co">[</span><span class="ot">remarque: solution de Stata par défaut</span><span class="co">]</span>.</span>
+<span id="cb97-328"><a href="#cb97-328" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-329"><a href="#cb97-329" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zph</span>(coxfit, <span class="at">transform=</span><span class="st">"identity"</span>)</span>
+<span id="cb97-330"><a href="#cb97-330" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-331"><a href="#cb97-331" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-332"><a href="#cb97-332" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-333"><a href="#cb97-333" aria-hidden="true" tabindex="-1"></a><span class="in">```{}</span></span>
-<span id="cb97-334"><a href="#cb97-334" aria-hidden="true" tabindex="-1"></a><span class="in"> cox.zph(coxfit)</span></span>
-<span id="cb97-335"><a href="#cb97-335" aria-hidden="true" tabindex="-1"></a><span class="in">        chisq df     p</span></span>
-<span id="cb97-336"><a href="#cb97-336" aria-hidden="true" tabindex="-1"></a><span class="in">year    3.309  1 0.069</span></span>
-<span id="cb97-337"><a href="#cb97-337" aria-hidden="true" tabindex="-1"></a><span class="in">age     0.922  1 0.337</span></span>
-<span id="cb97-338"><a href="#cb97-338" aria-hidden="true" tabindex="-1"></a><span class="in">surgery 5.494  1 0.019</span></span>
-<span id="cb97-339"><a href="#cb97-339" aria-hidden="true" tabindex="-1"></a><span class="in">GLOBAL  8.581  3 0.035</span></span>
-<span id="cb97-340"><a href="#cb97-340" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-341"><a href="#cb97-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-342"><a href="#cb97-342" aria-hidden="true" tabindex="-1"></a><span class="in">cox.zph(coxfit, transform="identity")</span></span>
-<span id="cb97-343"><a href="#cb97-343" aria-hidden="true" tabindex="-1"></a><span class="in">        chisq df     p</span></span>
-<span id="cb97-344"><a href="#cb97-344" aria-hidden="true" tabindex="-1"></a><span class="in">year     4.54  1 0.033</span></span>
-<span id="cb97-345"><a href="#cb97-345" aria-hidden="true" tabindex="-1"></a><span class="in">age      1.71  1 0.191</span></span>
-<span id="cb97-346"><a href="#cb97-346" aria-hidden="true" tabindex="-1"></a><span class="in">surgery  4.92  1 0.027</span></span>
-<span id="cb97-347"><a href="#cb97-347" aria-hidden="true" tabindex="-1"></a><span class="in">GLOBAL   9.47  3 0.02</span></span>
-<span id="cb97-348"><a href="#cb97-348" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-349"><a href="#cb97-349" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-333"><a href="#cb97-333" aria-hidden="true" tabindex="-1"></a>**&lt;span style="color:#CC0066"&gt;Résultat du test avec la v3 de survival&lt;/span&gt;**</span>
+<span id="cb97-334"><a href="#cb97-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-335"><a href="#cb97-335" aria-hidden="true" tabindex="-1"></a><span class="in">```{}</span></span>
+<span id="cb97-336"><a href="#cb97-336" aria-hidden="true" tabindex="-1"></a><span class="in"> cox.zph(coxfit)</span></span>
+<span id="cb97-337"><a href="#cb97-337" aria-hidden="true" tabindex="-1"></a><span class="in">        chisq df     p</span></span>
+<span id="cb97-338"><a href="#cb97-338" aria-hidden="true" tabindex="-1"></a><span class="in">year    3.309  1 0.069</span></span>
+<span id="cb97-339"><a href="#cb97-339" aria-hidden="true" tabindex="-1"></a><span class="in">age     0.922  1 0.337</span></span>
+<span id="cb97-340"><a href="#cb97-340" aria-hidden="true" tabindex="-1"></a><span class="in">surgery 5.494  1 0.019</span></span>
+<span id="cb97-341"><a href="#cb97-341" aria-hidden="true" tabindex="-1"></a><span class="in">GLOBAL  8.581  3 0.035</span></span>
+<span id="cb97-342"><a href="#cb97-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-343"><a href="#cb97-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-344"><a href="#cb97-344" aria-hidden="true" tabindex="-1"></a><span class="in">cox.zph(coxfit, transform="identity")</span></span>
+<span id="cb97-345"><a href="#cb97-345" aria-hidden="true" tabindex="-1"></a><span class="in">        chisq df     p</span></span>
+<span id="cb97-346"><a href="#cb97-346" aria-hidden="true" tabindex="-1"></a><span class="in">year     4.54  1 0.033</span></span>
+<span id="cb97-347"><a href="#cb97-347" aria-hidden="true" tabindex="-1"></a><span class="in">age      1.71  1 0.191</span></span>
+<span id="cb97-348"><a href="#cb97-348" aria-hidden="true" tabindex="-1"></a><span class="in">surgery  4.92  1 0.027</span></span>
+<span id="cb97-349"><a href="#cb97-349" aria-hidden="true" tabindex="-1"></a><span class="in">GLOBAL   9.47  3 0.02</span></span>
 <span id="cb97-350"><a href="#cb97-350" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-351"><a href="#cb97-351" aria-hidden="true" tabindex="-1"></a>La différence n'est pas minime, en particulier pour la variable *year*.  </span>
-<span id="cb97-352"><a href="#cb97-352" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb97-353"><a href="#cb97-353" aria-hidden="true" tabindex="-1"></a>Remarque: avec la v3, quelques options ont été ajoutées tel que *`terms`* qui permet pour une variable catégorielle à plus de deux modalités de choisir entre un sous test multiple sur la variable (k modalités =&gt; k-1 degré de liberté) et une série de tests à 1 degré de liberté sur chaque modalité (k-1 tests). De mon point de vue préférer la seconde solution avec **`terms=FALSE`**.</span>
-<span id="cb97-354"><a href="#cb97-354" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-355"><a href="#cb97-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-351"><a href="#cb97-351" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-352"><a href="#cb97-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-353"><a href="#cb97-353" aria-hidden="true" tabindex="-1"></a>La différence n'est pas minime, en particulier pour la variable *year*.  </span>
+<span id="cb97-354"><a href="#cb97-354" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-355"><a href="#cb97-355" aria-hidden="true" tabindex="-1"></a>Remarque: avec la v3, quelques options ont été ajoutées tel que *`terms`* qui permet pour une variable catégorielle à plus de deux modalités de choisir entre un sous test multiple sur la variable (k modalités =&gt; k-1 degré de liberté) et une série de tests à 1 degré de liberté sur chaque modalité (k-1 tests). De mon point de vue préférer la seconde solution avec **`terms=FALSE`**.</span>
 <span id="cb97-356"><a href="#cb97-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-357"><a href="#cb97-357" aria-hidden="true" tabindex="-1"></a>**MAJ JUIN 2022 : cox.zphold**</span>
+<span id="cb97-357"><a href="#cb97-357" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-358"><a href="#cb97-358" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-359"><a href="#cb97-359" aria-hidden="true" tabindex="-1"></a>::: callout-warning   </span>
-<span id="cb97-360"><a href="#cb97-360" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;span</span> <span class="er">style</span><span class="ot">=</span><span class="st">"color:#CC0066"</span><span class="kw">&gt;</span></span>
-<span id="cb97-361"><a href="#cb97-361" aria-hidden="true" tabindex="-1"></a>J’ai récupéré la fonction de la version précédente de survival (identique Sas, Stata, Python), renommée <span class="in">`cox.zphold`</span>. Elle est récupérable à cette adresse. :<span class="co">[</span><span class="ot">&lt;https://github.com/mthevenin/analyse_duree/tree/main/cox.zphold&gt;</span><span class="co">]</span>.  </span>
-<span id="cb97-362"><a href="#cb97-362" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-363"><a href="#cb97-363" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-364"><a href="#cb97-364" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Une fois enregistré, charger dans le programme d’analyse la fonction</span>
-<span id="cb97-365"><a href="#cb97-365" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Après avoir estimé le modèle de Cox, exécuter la fonction **`cox.zphold()`**</span>
-<span id="cb97-366"><a href="#cb97-366" aria-hidden="true" tabindex="-1"></a>:::  </span>
-<span id="cb97-367"><a href="#cb97-367" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb97-368"><a href="#cb97-368" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-369"><a href="#cb97-369" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"D:/D/Marc/SMS/FORMATIONS/2022/Durée2/a distribuer/cox.zphold.R"</span>)</span>
-<span id="cb97-370"><a href="#cb97-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-371"><a href="#cb97-371" aria-hidden="true" tabindex="-1"></a>coxfit <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery,   <span class="at">data =</span> trans)</span>
-<span id="cb97-372"><a href="#cb97-372" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-373"><a href="#cb97-373" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-374"><a href="#cb97-374" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-375"><a href="#cb97-375" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zphold</span>(coxfit)</span>
-<span id="cb97-376"><a href="#cb97-376" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zphold</span>(coxfit, <span class="at">transform=</span><span class="st">"identity"</span>)</span>
-<span id="cb97-377"><a href="#cb97-377" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-378"><a href="#cb97-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-379"><a href="#cb97-379" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-380"><a href="#cb97-380" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb97-359"><a href="#cb97-359" aria-hidden="true" tabindex="-1"></a>**MAJ JUIN 2022 : cox.zphold**</span>
+<span id="cb97-360"><a href="#cb97-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-361"><a href="#cb97-361" aria-hidden="true" tabindex="-1"></a>::: callout-warning   </span>
+<span id="cb97-362"><a href="#cb97-362" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;span</span> <span class="er">style</span><span class="ot">=</span><span class="st">"color:#CC0066"</span><span class="kw">&gt;</span></span>
+<span id="cb97-363"><a href="#cb97-363" aria-hidden="true" tabindex="-1"></a>J’ai récupéré la fonction de la version précédente de survival (identique Sas, Stata, Python), renommée <span class="in">`cox.zphold`</span>. Elle est récupérable à cette adresse. :<span class="co">[</span><span class="ot">&lt;https://github.com/mthevenin/analyse_duree/tree/main/cox.zphold&gt;</span><span class="co">]</span>.  </span>
+<span id="cb97-364"><a href="#cb97-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-365"><a href="#cb97-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-366"><a href="#cb97-366" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Une fois enregistré, charger dans le programme d’analyse la fonction</span>
+<span id="cb97-367"><a href="#cb97-367" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Après avoir estimé le modèle de Cox, exécuter la fonction **`cox.zphold()`**</span>
+<span id="cb97-368"><a href="#cb97-368" aria-hidden="true" tabindex="-1"></a>:::  </span>
+<span id="cb97-369"><a href="#cb97-369" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb97-370"><a href="#cb97-370" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-371"><a href="#cb97-371" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"D:/D/Marc/SMS/FORMATIONS/2022/Durée2/a distribuer/cox.zphold.R"</span>)</span>
+<span id="cb97-372"><a href="#cb97-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-373"><a href="#cb97-373" aria-hidden="true" tabindex="-1"></a>coxfit <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery,   <span class="at">data =</span> trans)</span>
+<span id="cb97-374"><a href="#cb97-374" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-375"><a href="#cb97-375" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-376"><a href="#cb97-376" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-377"><a href="#cb97-377" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zphold</span>(coxfit)</span>
+<span id="cb97-378"><a href="#cb97-378" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zphold</span>(coxfit, <span class="at">transform=</span><span class="st">"identity"</span>)</span>
+<span id="cb97-379"><a href="#cb97-379" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-380"><a href="#cb97-380" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-381"><a href="#cb97-381" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-382"><a href="#cb97-382" aria-hidden="true" tabindex="-1"></a><span class="fu">## Régression linéaire sur les résidus de Schoenfeld</span></span>
+<span id="cb97-382"><a href="#cb97-382" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
 <span id="cb97-383"><a href="#cb97-383" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-384"><a href="#cb97-384" aria-hidden="true" tabindex="-1"></a>Pour information: </span>
+<span id="cb97-384"><a href="#cb97-384" aria-hidden="true" tabindex="-1"></a><span class="fu">## Régression linéaire sur les résidus de Schoenfeld</span></span>
 <span id="cb97-385"><a href="#cb97-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-386"><a href="#cb97-386" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-387"><a href="#cb97-387" aria-hidden="true" tabindex="-1"></a>resid<span class="ot">=</span> <span class="fu">resid</span>(coxfit, <span class="at">type=</span><span class="st">"scaledsch"</span>)</span>
-<span id="cb97-388"><a href="#cb97-388" aria-hidden="true" tabindex="-1"></a>varnames <span class="ot">&lt;-</span> <span class="fu">names</span>(coxfit<span class="sc">$</span>coefficients)</span>
-<span id="cb97-389"><a href="#cb97-389" aria-hidden="true" tabindex="-1"></a>coln <span class="ot">=</span> <span class="fu">c</span>(varnames)</span>
-<span id="cb97-390"><a href="#cb97-390" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(resid) <span class="ot">=</span> <span class="fu">c</span>(coln)</span>
-<span id="cb97-391"><a href="#cb97-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-392"><a href="#cb97-392" aria-hidden="true" tabindex="-1"></a>times    <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">dimnames</span>(resid)[[<span class="dv">1</span>]])</span>
+<span id="cb97-386"><a href="#cb97-386" aria-hidden="true" tabindex="-1"></a>Pour information: </span>
+<span id="cb97-387"><a href="#cb97-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-388"><a href="#cb97-388" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-389"><a href="#cb97-389" aria-hidden="true" tabindex="-1"></a>resid<span class="ot">=</span> <span class="fu">resid</span>(coxfit, <span class="at">type=</span><span class="st">"scaledsch"</span>)</span>
+<span id="cb97-390"><a href="#cb97-390" aria-hidden="true" tabindex="-1"></a>varnames <span class="ot">&lt;-</span> <span class="fu">names</span>(coxfit<span class="sc">$</span>coefficients)</span>
+<span id="cb97-391"><a href="#cb97-391" aria-hidden="true" tabindex="-1"></a>coln <span class="ot">=</span> <span class="fu">c</span>(varnames)</span>
+<span id="cb97-392"><a href="#cb97-392" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(resid) <span class="ot">=</span> <span class="fu">c</span>(coln)</span>
 <span id="cb97-393"><a href="#cb97-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-394"><a href="#cb97-394" aria-hidden="true" tabindex="-1"></a>resid <span class="ot">=</span> <span class="fu">data.frame</span>(resid)</span>
-<span id="cb97-395"><a href="#cb97-395" aria-hidden="true" tabindex="-1"></a>resid <span class="ot">=</span> <span class="fu">cbind</span>(resid, <span class="at">t=</span>times)</span>
-<span id="cb97-396"><a href="#cb97-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-397"><a href="#cb97-397" aria-hidden="true" tabindex="-1"></a>year    <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">lm</span>(year<span class="sc">~</span>t, <span class="at">data=</span>resid))</span>
-<span id="cb97-398"><a href="#cb97-398" aria-hidden="true" tabindex="-1"></a>age     <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">lm</span>(age<span class="sc">~</span>t, <span class="at">data=</span>resid))</span>
-<span id="cb97-399"><a href="#cb97-399" aria-hidden="true" tabindex="-1"></a>surgery <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">lm</span>(surgery<span class="sc">~</span>t, <span class="at">data=</span>resid))</span>
-<span id="cb97-400"><a href="#cb97-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-401"><a href="#cb97-401" aria-hidden="true" tabindex="-1"></a><span class="do">#####################</span></span>
-<span id="cb97-402"><a href="#cb97-402" aria-hidden="true" tabindex="-1"></a><span class="co"># p-values de l'OLS #</span></span>
+<span id="cb97-394"><a href="#cb97-394" aria-hidden="true" tabindex="-1"></a>times    <span class="ot">=</span> <span class="fu">as.numeric</span>(<span class="fu">dimnames</span>(resid)[[<span class="dv">1</span>]])</span>
+<span id="cb97-395"><a href="#cb97-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-396"><a href="#cb97-396" aria-hidden="true" tabindex="-1"></a>resid <span class="ot">=</span> <span class="fu">data.frame</span>(resid)</span>
+<span id="cb97-397"><a href="#cb97-397" aria-hidden="true" tabindex="-1"></a>resid <span class="ot">=</span> <span class="fu">cbind</span>(resid, <span class="at">t=</span>times)</span>
+<span id="cb97-398"><a href="#cb97-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-399"><a href="#cb97-399" aria-hidden="true" tabindex="-1"></a>year    <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">lm</span>(year<span class="sc">~</span>t, <span class="at">data=</span>resid))</span>
+<span id="cb97-400"><a href="#cb97-400" aria-hidden="true" tabindex="-1"></a>age     <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">lm</span>(age<span class="sc">~</span>t, <span class="at">data=</span>resid))</span>
+<span id="cb97-401"><a href="#cb97-401" aria-hidden="true" tabindex="-1"></a>surgery <span class="ot">=</span> <span class="fu">summary</span>(<span class="fu">lm</span>(surgery<span class="sc">~</span>t, <span class="at">data=</span>resid))</span>
+<span id="cb97-402"><a href="#cb97-402" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-403"><a href="#cb97-403" aria-hidden="true" tabindex="-1"></a><span class="do">#####################</span></span>
-<span id="cb97-404"><a href="#cb97-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-405"><a href="#cb97-405" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"p-value pour year:"</span>,    year<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>])</span>
-<span id="cb97-406"><a href="#cb97-406" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"p-value pour age:"</span>,     age<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>])</span>
-<span id="cb97-407"><a href="#cb97-407" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"p-value pour surgery:"</span>, surgery<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>])</span>
-<span id="cb97-408"><a href="#cb97-408" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-409"><a href="#cb97-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-410"><a href="#cb97-410" aria-hidden="true" tabindex="-1"></a>On retrouve bien les résultats de la version *simplifiée* du test </span>
-<span id="cb97-411"><a href="#cb97-411" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb97-412"><a href="#cb97-412" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-413"><a href="#cb97-413" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-414"><a href="#cb97-414" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb97-415"><a href="#cb97-415" aria-hidden="true" tabindex="-1"></a>**Introduction d'une intéraction**</span>
-<span id="cb97-416"><a href="#cb97-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-417"><a href="#cb97-417" aria-hidden="true" tabindex="-1"></a>Lorsque la covariable n'est pas continue, elle doit être transformée en indicatrice. Vérifier que les résultats du modèle sont bien identiques avec le modèle estimé précédemment (ne pas oublier d'omettre le niveau en référence).  </span>
-<span id="cb97-418"><a href="#cb97-418" aria-hidden="true" tabindex="-1"></a>Ici la variable surgery est déjà sous forme d'indicatrice (0,1).  </span>
-<span id="cb97-419"><a href="#cb97-419" aria-hidden="true" tabindex="-1"></a>La variable d'intéraction est **`tt(nom-variable)`**, la fonction de la durée (ici forme linéaire simple) est indiquée en option de la fonction: **`tt = function(x, t, ...) x*t`**.</span>
-<span id="cb97-420"><a href="#cb97-420" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-421"><a href="#cb97-421" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-422"><a href="#cb97-422" aria-hidden="true" tabindex="-1"></a>coxfit2 <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery <span class="sc">+</span> <span class="fu">tt</span>(surgery), <span class="at">data =</span> trans, <span class="at">tt =</span> <span class="cf">function</span>(x, t, ...) x<span class="sc">*</span>t)</span>
-<span id="cb97-423"><a href="#cb97-423" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(coxfit2)</span>
-<span id="cb97-424"><a href="#cb97-424" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-425"><a href="#cb97-425" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-426"><a href="#cb97-426" aria-hidden="true" tabindex="-1"></a>**Rappel**: le paramètre estimé pour **`tt(surgery)`** ne reporte pas un rapport de risques, mais un rapport de de deux rapports de risques (c'est bien une double différence sur l'échelle d'estimation - log -).  </span>
+<span id="cb97-404"><a href="#cb97-404" aria-hidden="true" tabindex="-1"></a><span class="co"># p-values de l'OLS #</span></span>
+<span id="cb97-405"><a href="#cb97-405" aria-hidden="true" tabindex="-1"></a><span class="do">#####################</span></span>
+<span id="cb97-406"><a href="#cb97-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-407"><a href="#cb97-407" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"p-value pour year:"</span>,    year<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>])</span>
+<span id="cb97-408"><a href="#cb97-408" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"p-value pour age:"</span>,     age<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>])</span>
+<span id="cb97-409"><a href="#cb97-409" aria-hidden="true" tabindex="-1"></a><span class="fu">paste</span>(<span class="st">"p-value pour surgery:"</span>, surgery<span class="sc">$</span>coefficients[<span class="dv">2</span>,<span class="dv">4</span>])</span>
+<span id="cb97-410"><a href="#cb97-410" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-411"><a href="#cb97-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-412"><a href="#cb97-412" aria-hidden="true" tabindex="-1"></a>On retrouve bien les résultats de la version *simplifiée* du test </span>
+<span id="cb97-413"><a href="#cb97-413" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb97-414"><a href="#cb97-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-415"><a href="#cb97-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-416"><a href="#cb97-416" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb97-417"><a href="#cb97-417" aria-hidden="true" tabindex="-1"></a>**Introduction d'une intéraction**</span>
+<span id="cb97-418"><a href="#cb97-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-419"><a href="#cb97-419" aria-hidden="true" tabindex="-1"></a>Lorsque la covariable n'est pas continue, elle doit être transformée en indicatrice. Vérifier que les résultats du modèle sont bien identiques avec le modèle estimé précédemment (ne pas oublier d'omettre le niveau en référence).  </span>
+<span id="cb97-420"><a href="#cb97-420" aria-hidden="true" tabindex="-1"></a>Ici la variable surgery est déjà sous forme d'indicatrice (0,1).  </span>
+<span id="cb97-421"><a href="#cb97-421" aria-hidden="true" tabindex="-1"></a>La variable d'intéraction est **`tt(nom-variable)`**, la fonction de la durée (ici forme linéaire simple) est indiquée en option de la fonction: **`tt = function(x, t, ...) x*t`**.</span>
+<span id="cb97-422"><a href="#cb97-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-423"><a href="#cb97-423" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-424"><a href="#cb97-424" aria-hidden="true" tabindex="-1"></a>coxfit2 <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery <span class="sc">+</span> <span class="fu">tt</span>(surgery), <span class="at">data =</span> trans, <span class="at">tt =</span> <span class="cf">function</span>(x, t, ...) x<span class="sc">*</span>t)</span>
+<span id="cb97-425"><a href="#cb97-425" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(coxfit2)</span>
+<span id="cb97-426"><a href="#cb97-426" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-427"><a href="#cb97-427" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-428"><a href="#cb97-428" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-428"><a href="#cb97-428" aria-hidden="true" tabindex="-1"></a>**Rappel**: le paramètre estimé pour **`tt(surgery)`** ne reporte pas un rapport de risques, mais un rapport de de deux rapports de risques (c'est bien une double différence sur l'échelle d'estimation - log -).  </span>
 <span id="cb97-429"><a href="#cb97-429" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-430"><a href="#cb97-430" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Variable dynamique (binaire)**</span></span>
+<span id="cb97-430"><a href="#cb97-430" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
 <span id="cb97-431"><a href="#cb97-431" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-432"><a href="#cb97-432" aria-hidden="true" tabindex="-1"></a>La dimension dynamique est le fait d'avoir été opéré pour une greffe du coeur.  </span>
-<span id="cb97-433"><a href="#cb97-433" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb97-434"><a href="#cb97-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-435"><a href="#cb97-435" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Etape 1**: créer un vecteur donnant les durées aux temps d'évènement.</span>
-<span id="cb97-436"><a href="#cb97-436" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Etape 2**: appliquer ce vecteurs de points de coupure à la fonction ```survsplit```.</span>
-<span id="cb97-437"><a href="#cb97-437" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Etape 3**: modifier la variable transplant (ou créer une nouvelle) à l'aide de la variable **wait** qui prend la valeur 1 à partir du jour de la greffe, 0 avant.</span>
-<span id="cb97-438"><a href="#cb97-438" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-439"><a href="#cb97-439" aria-hidden="true" tabindex="-1"></a>*Etape 1*</span>
-<span id="cb97-440"><a href="#cb97-440" aria-hidden="true" tabindex="-1"></a>Création de l'objet cut (vecteur)</span>
-<span id="cb97-443"><a href="#cb97-443" aria-hidden="true" tabindex="-1"></a><span class="in">```{R}</span></span>
-<span id="cb97-444"><a href="#cb97-444" aria-hidden="true" tabindex="-1"></a>cut<span class="ot">=</span> <span class="fu">unique</span>(trans<span class="sc">$</span>stime[trans<span class="sc">$</span>died <span class="sc">==</span> <span class="dv">1</span>])</span>
-<span id="cb97-445"><a href="#cb97-445" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-446"><a href="#cb97-446" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-447"><a href="#cb97-447" aria-hidden="true" tabindex="-1"></a>*Etape 2*</span>
-<span id="cb97-448"><a href="#cb97-448" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-449"><a href="#cb97-449" aria-hidden="true" tabindex="-1"></a>tvc <span class="ot">=</span> <span class="fu">survSplit</span>(<span class="at">data =</span> trans, <span class="at">cut =</span> cut, <span class="at">end =</span> <span class="st">"stime"</span>, <span class="at">start =</span> <span class="st">"stime0"</span>, <span class="at">event =</span> <span class="st">"died"</span>)</span>
-<span id="cb97-450"><a href="#cb97-450" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-451"><a href="#cb97-451" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-452"><a href="#cb97-452" aria-hidden="true" tabindex="-1"></a>Remarque: pour estimer le modèle de Cox de départ avec cette base longue.</span>
-<span id="cb97-453"><a href="#cb97-453" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-454"><a href="#cb97-454" aria-hidden="true" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime0, stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> tvc)</span>
-<span id="cb97-455"><a href="#cb97-455" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-456"><a href="#cb97-456" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-457"><a href="#cb97-457" aria-hidden="true" tabindex="-1"></a>*Etape 3*</span>
-<span id="cb97-458"><a href="#cb97-458" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-459"><a href="#cb97-459" aria-hidden="true" tabindex="-1"></a>tvc<span class="sc">$</span>tvc<span class="ot">=</span><span class="fu">ifelse</span>(tvc<span class="sc">$</span>transplant<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> tvc<span class="sc">$</span>wait<span class="sc">&lt;=</span>tvc<span class="sc">$</span>stime,<span class="dv">1</span>,<span class="dv">0</span>)</span>
-<span id="cb97-460"><a href="#cb97-460" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-461"><a href="#cb97-461" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-462"><a href="#cb97-462" aria-hidden="true" tabindex="-1"></a>**Estimation du modèle**  </span>
-<span id="cb97-463"><a href="#cb97-463" aria-hidden="true" tabindex="-1"></a>En format long, on doit préciser dans la formule l'intervalle de durée avec les variables stime0 (début) et stime(fin) </span>
-<span id="cb97-464"><a href="#cb97-464" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-465"><a href="#cb97-465" aria-hidden="true" tabindex="-1"></a>tvcfit <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime0, stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery <span class="sc">+</span> tvc, <span class="at">data =</span> tvc)</span>
-<span id="cb97-466"><a href="#cb97-466" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tvcfit)</span>
-<span id="cb97-467"><a href="#cb97-467" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-468"><a href="#cb97-468" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-469"><a href="#cb97-469" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-470"><a href="#cb97-470" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-471"><a href="#cb97-471" aria-hidden="true" tabindex="-1"></a><span class="fu">ggforest</span>(tvcfit)</span>
-<span id="cb97-472"><a href="#cb97-472" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-473"><a href="#cb97-473" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-474"><a href="#cb97-474" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-432"><a href="#cb97-432" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Variable dynamique (binaire)**</span></span>
+<span id="cb97-433"><a href="#cb97-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-434"><a href="#cb97-434" aria-hidden="true" tabindex="-1"></a>La dimension dynamique est le fait d'avoir été opéré pour une greffe du coeur.  </span>
+<span id="cb97-435"><a href="#cb97-435" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-436"><a href="#cb97-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-437"><a href="#cb97-437" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Etape 1**: créer un vecteur donnant les durées aux temps d'évènement.</span>
+<span id="cb97-438"><a href="#cb97-438" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Etape 2**: appliquer ce vecteurs de points de coupure à la fonction ```survsplit```.</span>
+<span id="cb97-439"><a href="#cb97-439" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Etape 3**: modifier la variable transplant (ou créer une nouvelle) à l'aide de la variable **wait** qui prend la valeur 1 à partir du jour de la greffe, 0 avant.</span>
+<span id="cb97-440"><a href="#cb97-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-441"><a href="#cb97-441" aria-hidden="true" tabindex="-1"></a>*Etape 1*</span>
+<span id="cb97-442"><a href="#cb97-442" aria-hidden="true" tabindex="-1"></a>Création de l'objet cut (vecteur)</span>
+<span id="cb97-445"><a href="#cb97-445" aria-hidden="true" tabindex="-1"></a><span class="in">```{R}</span></span>
+<span id="cb97-446"><a href="#cb97-446" aria-hidden="true" tabindex="-1"></a>cut<span class="ot">=</span> <span class="fu">unique</span>(trans<span class="sc">$</span>stime[trans<span class="sc">$</span>died <span class="sc">==</span> <span class="dv">1</span>])</span>
+<span id="cb97-447"><a href="#cb97-447" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-448"><a href="#cb97-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-449"><a href="#cb97-449" aria-hidden="true" tabindex="-1"></a>*Etape 2*</span>
+<span id="cb97-450"><a href="#cb97-450" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-451"><a href="#cb97-451" aria-hidden="true" tabindex="-1"></a>tvc <span class="ot">=</span> <span class="fu">survSplit</span>(<span class="at">data =</span> trans, <span class="at">cut =</span> cut, <span class="at">end =</span> <span class="st">"stime"</span>, <span class="at">start =</span> <span class="st">"stime0"</span>, <span class="at">event =</span> <span class="st">"died"</span>)</span>
+<span id="cb97-452"><a href="#cb97-452" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-453"><a href="#cb97-453" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-454"><a href="#cb97-454" aria-hidden="true" tabindex="-1"></a>Remarque: pour estimer le modèle de Cox de départ avec cette base longue.</span>
+<span id="cb97-455"><a href="#cb97-455" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-456"><a href="#cb97-456" aria-hidden="true" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime0, stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> tvc)</span>
+<span id="cb97-457"><a href="#cb97-457" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-458"><a href="#cb97-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-459"><a href="#cb97-459" aria-hidden="true" tabindex="-1"></a>*Etape 3*</span>
+<span id="cb97-460"><a href="#cb97-460" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-461"><a href="#cb97-461" aria-hidden="true" tabindex="-1"></a>tvc<span class="sc">$</span>tvc<span class="ot">=</span><span class="fu">ifelse</span>(tvc<span class="sc">$</span>transplant<span class="sc">==</span><span class="dv">1</span> <span class="sc">&amp;</span> tvc<span class="sc">$</span>wait<span class="sc">&lt;=</span>tvc<span class="sc">$</span>stime,<span class="dv">1</span>,<span class="dv">0</span>)</span>
+<span id="cb97-462"><a href="#cb97-462" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-463"><a href="#cb97-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-464"><a href="#cb97-464" aria-hidden="true" tabindex="-1"></a>**Estimation du modèle**  </span>
+<span id="cb97-465"><a href="#cb97-465" aria-hidden="true" tabindex="-1"></a>En format long, on doit préciser dans la formule l'intervalle de durée avec les variables stime0 (début) et stime(fin) </span>
+<span id="cb97-466"><a href="#cb97-466" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-467"><a href="#cb97-467" aria-hidden="true" tabindex="-1"></a>tvcfit <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime0, stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery <span class="sc">+</span> tvc, <span class="at">data =</span> tvc)</span>
+<span id="cb97-468"><a href="#cb97-468" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(tvcfit)</span>
+<span id="cb97-469"><a href="#cb97-469" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-470"><a href="#cb97-470" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-471"><a href="#cb97-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-472"><a href="#cb97-472" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-473"><a href="#cb97-473" aria-hidden="true" tabindex="-1"></a><span class="fu">ggforest</span>(tvcfit)</span>
+<span id="cb97-474"><a href="#cb97-474" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-475"><a href="#cb97-475" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-476"><a href="#cb97-476" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Analyse en temps discret**</span></span>
+<span id="cb97-476"><a href="#cb97-476" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
 <span id="cb97-477"><a href="#cb97-477" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-478"><a href="#cb97-478" aria-hidden="true" tabindex="-1"></a>Pour la durée, on va utiliser la variable mois (en fait regroupement sur 30 jours).  </span>
-<span id="cb97-479"><a href="#cb97-479" aria-hidden="true" tabindex="-1"></a>La fonction ```uncount``` du package ```tidy``` permettra de splitter la base au temps d'observation.  </span>
-<span id="cb97-480"><a href="#cb97-480" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-481"><a href="#cb97-481" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE}</span></span>
-<span id="cb97-482"><a href="#cb97-482" aria-hidden="true" tabindex="-1"></a>trans <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv"</span>)</span>
-<span id="cb97-483"><a href="#cb97-483" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyr"</span>)</span>
-<span id="cb97-484"><a href="#cb97-484" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-485"><a href="#cb97-485" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-486"><a href="#cb97-486" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-487"><a href="#cb97-487" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">=</span> <span class="fu">uncount</span>(trans,mois)</span>
-<span id="cb97-488"><a href="#cb97-488" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">=</span> dt[<span class="fu">order</span>(dt<span class="sc">$</span>id),]</span>
-<span id="cb97-489"><a href="#cb97-489" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-490"><a href="#cb97-490" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-491"><a href="#cb97-491" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, class.output="result"}</span></span>
-<span id="cb97-492"><a href="#cb97-492" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dt,<span class="dv">11</span>) <span class="sc">|&gt;</span></span>
-<span id="cb97-493"><a href="#cb97-493" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span> <span class="fu">kable</span>()</span>
-<span id="cb97-494"><a href="#cb97-494" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-495"><a href="#cb97-495" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-496"><a href="#cb97-496" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-497"><a href="#cb97-497" aria-hidden="true" tabindex="-1"></a>La variable mois a été supprimée, on va générer une variable type compteur pour mesurer la durée à chaque point d'observation. On va également recréer la variable (renommée T).    </span>
+<span id="cb97-478"><a href="#cb97-478" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Analyse en temps discret**</span></span>
+<span id="cb97-479"><a href="#cb97-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-480"><a href="#cb97-480" aria-hidden="true" tabindex="-1"></a>Pour la durée, on va utiliser la variable mois (en fait regroupement sur 30 jours).  </span>
+<span id="cb97-481"><a href="#cb97-481" aria-hidden="true" tabindex="-1"></a>La fonction ```uncount``` du package ```tidy``` permettra de splitter la base au temps d'observation.  </span>
+<span id="cb97-482"><a href="#cb97-482" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-483"><a href="#cb97-483" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE}</span></span>
+<span id="cb97-484"><a href="#cb97-484" aria-hidden="true" tabindex="-1"></a>trans <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv"</span>)</span>
+<span id="cb97-485"><a href="#cb97-485" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(<span class="st">"tidyr"</span>)</span>
+<span id="cb97-486"><a href="#cb97-486" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-487"><a href="#cb97-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-488"><a href="#cb97-488" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-489"><a href="#cb97-489" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">=</span> <span class="fu">uncount</span>(trans,mois)</span>
+<span id="cb97-490"><a href="#cb97-490" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">=</span> dt[<span class="fu">order</span>(dt<span class="sc">$</span>id),]</span>
+<span id="cb97-491"><a href="#cb97-491" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-492"><a href="#cb97-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-493"><a href="#cb97-493" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=F, class.output="result"}</span></span>
+<span id="cb97-494"><a href="#cb97-494" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(dt,<span class="dv">11</span>) <span class="sc">|&gt;</span></span>
+<span id="cb97-495"><a href="#cb97-495" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span> <span class="fu">kable</span>()</span>
+<span id="cb97-496"><a href="#cb97-496" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-497"><a href="#cb97-497" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-498"><a href="#cb97-498" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-499"><a href="#cb97-499" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-500"><a href="#cb97-500" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>x<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb97-501"><a href="#cb97-501" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>t <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, <span class="at">FUN=</span>cumsum)</span>
-<span id="cb97-502"><a href="#cb97-502" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>T <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, <span class="at">FUN=</span>sum)</span>
-<span id="cb97-503"><a href="#cb97-503" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>, ],)</span>
-<span id="cb97-504"><a href="#cb97-504" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-505"><a href="#cb97-505" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-506"><a href="#cb97-506" aria-hidden="true" tabindex="-1"></a>*Remarque : j’utilise ici le code standard de R, on peut faire la même chose avec dplyr de manière plus rapide (mise à jour à prévoir)*.   </span>
-<span id="cb97-507"><a href="#cb97-507" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb97-508"><a href="#cb97-508" aria-hidden="true" tabindex="-1"></a>Si un individu est décédé, died=1 est reporté sur toute les lignes (idem qu'avec la variable dynamique). On va modifier la variable tel que *died=0 si t&lt;T$*.</span>
-<span id="cb97-509"><a href="#cb97-509" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-510"><a href="#cb97-510" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-511"><a href="#cb97-511" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>died[dt<span class="sc">$</span>t<span class="sc">&lt;</span>dt<span class="sc">$</span>T]<span class="ot">=</span><span class="dv">0</span></span>
-<span id="cb97-512"><a href="#cb97-512" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>, ],)</span>
-<span id="cb97-513"><a href="#cb97-513" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-514"><a href="#cb97-514" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-515"><a href="#cb97-515" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-499"><a href="#cb97-499" aria-hidden="true" tabindex="-1"></a>La variable mois a été supprimée, on va générer une variable type compteur pour mesurer la durée à chaque point d'observation. On va également recréer la variable (renommée T).    </span>
+<span id="cb97-500"><a href="#cb97-500" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-501"><a href="#cb97-501" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-502"><a href="#cb97-502" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>x<span class="ot">=</span><span class="dv">1</span></span>
+<span id="cb97-503"><a href="#cb97-503" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>t <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, <span class="at">FUN=</span>cumsum)</span>
+<span id="cb97-504"><a href="#cb97-504" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>T <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, <span class="at">FUN=</span>sum)</span>
+<span id="cb97-505"><a href="#cb97-505" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>, ],)</span>
+<span id="cb97-506"><a href="#cb97-506" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-507"><a href="#cb97-507" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-508"><a href="#cb97-508" aria-hidden="true" tabindex="-1"></a>*Remarque : j’utilise ici le code standard de R, on peut faire la même chose avec dplyr de manière plus rapide (mise à jour à prévoir)*.   </span>
+<span id="cb97-509"><a href="#cb97-509" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-510"><a href="#cb97-510" aria-hidden="true" tabindex="-1"></a>Si un individu est décédé, died=1 est reporté sur toute les lignes (idem qu'avec la variable dynamique). On va modifier la variable tel que *died=0 si t&lt;T$*.</span>
+<span id="cb97-511"><a href="#cb97-511" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-512"><a href="#cb97-512" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-513"><a href="#cb97-513" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>died[dt<span class="sc">$</span>t<span class="sc">&lt;</span>dt<span class="sc">$</span>T]<span class="ot">=</span><span class="dv">0</span></span>
+<span id="cb97-514"><a href="#cb97-514" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(dt[<span class="dv">1</span><span class="sc">:</span><span class="dv">11</span>, ],)</span>
+<span id="cb97-515"><a href="#cb97-515" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-516"><a href="#cb97-516" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-517"><a href="#cb97-517" aria-hidden="true" tabindex="-1"></a><span class="fu">## **$f(t)$ quantitative**</span></span>
+<span id="cb97-517"><a href="#cb97-517" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
 <span id="cb97-518"><a href="#cb97-518" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-519"><a href="#cb97-519" aria-hidden="true" tabindex="-1"></a>Avec un effet quadratique d'ordre 2.  </span>
+<span id="cb97-519"><a href="#cb97-519" aria-hidden="true" tabindex="-1"></a><span class="fu">## **$f(t)$ quantitative**</span></span>
 <span id="cb97-520"><a href="#cb97-520" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-521"><a href="#cb97-521" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-522"><a href="#cb97-522" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>t2<span class="ot">=</span>dt<span class="sc">$</span>t<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb97-523"><a href="#cb97-523" aria-hidden="true" tabindex="-1"></a>dtfit <span class="ot">=</span> <span class="fu">glm</span>(died <span class="sc">~</span> t <span class="sc">+</span> t2 <span class="sc">+</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data=</span>dt, <span class="at">family=</span><span class="st">"binomial"</span>)</span>
-<span id="cb97-524"><a href="#cb97-524" aria-hidden="true" tabindex="-1"></a><span class="fu">summ</span>(dtfit)</span>
-<span id="cb97-525"><a href="#cb97-525" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-526"><a href="#cb97-526" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-527"><a href="#cb97-527" aria-hidden="true" tabindex="-1"></a>***Remarque sur la présentation de l'output**: la fonction <span class="in">`summ`</span> est intégrée au package <span class="in">`jtools`</span>. Elle ne fonctionne qu'avec le package ```Recordlinkage``` qui doit être installé et chargé.  </span>
+<span id="cb97-521"><a href="#cb97-521" aria-hidden="true" tabindex="-1"></a>Avec un effet quadratique d'ordre 2.  </span>
+<span id="cb97-522"><a href="#cb97-522" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-523"><a href="#cb97-523" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-524"><a href="#cb97-524" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>t2<span class="ot">=</span>dt<span class="sc">$</span>t<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb97-525"><a href="#cb97-525" aria-hidden="true" tabindex="-1"></a>dtfit <span class="ot">=</span> <span class="fu">glm</span>(died <span class="sc">~</span> t <span class="sc">+</span> t2 <span class="sc">+</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data=</span>dt, <span class="at">family=</span><span class="st">"binomial"</span>)</span>
+<span id="cb97-526"><a href="#cb97-526" aria-hidden="true" tabindex="-1"></a><span class="fu">summ</span>(dtfit)</span>
+<span id="cb97-527"><a href="#cb97-527" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-528"><a href="#cb97-528" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-529"><a href="#cb97-529" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-529"><a href="#cb97-529" aria-hidden="true" tabindex="-1"></a>***Remarque sur la présentation de l'output**: la fonction <span class="in">`summ`</span> est intégrée au package <span class="in">`jtools`</span>. Elle ne fonctionne qu'avec le package ```Recordlinkage``` qui doit être installé et chargé.  </span>
 <span id="cb97-530"><a href="#cb97-530" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-531"><a href="#cb97-531" aria-hidden="true" tabindex="-1"></a><span class="fu">## **$f(t)$ discrète **</span></span>
+<span id="cb97-531"><a href="#cb97-531" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-532"><a href="#cb97-532" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-533"><a href="#cb97-533" aria-hidden="true" tabindex="-1"></a>On va créer une variable de type dicrète regroupant la variable *t* sur ses quartiles (pour l'exemple seulement, tous types de regroupement est envisageable).  </span>
-<span id="cb97-534"><a href="#cb97-534" aria-hidden="true" tabindex="-1"></a>On va utiliser la fonction <span class="in">`quantcut`</span> du package <span class="in">`gtools`</span>.</span>
-<span id="cb97-535"><a href="#cb97-535" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-536"><a href="#cb97-536" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-537"><a href="#cb97-537" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE, class.output="result"}</span></span>
-<span id="cb97-538"><a href="#cb97-538" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>ct4 <span class="ot">&lt;-</span> <span class="fu">quantcut</span>(dt<span class="sc">$</span>t)</span>
-<span id="cb97-539"><a href="#cb97-539" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dt<span class="sc">$</span>ct4) </span>
-<span id="cb97-540"><a href="#cb97-540" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-541"><a href="#cb97-541" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-542"><a href="#cb97-542" aria-hidden="true" tabindex="-1"></a>On va générer un compteur et un total d'observations sur la strate regroupant *id* et *ct4*.</span>
+<span id="cb97-533"><a href="#cb97-533" aria-hidden="true" tabindex="-1"></a><span class="fu">## **$f(t)$ discrète **</span></span>
+<span id="cb97-534"><a href="#cb97-534" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-535"><a href="#cb97-535" aria-hidden="true" tabindex="-1"></a>On va créer une variable de type dicrète regroupant la variable *t* sur ses quartiles (pour l'exemple seulement, tous types de regroupement est envisageable).  </span>
+<span id="cb97-536"><a href="#cb97-536" aria-hidden="true" tabindex="-1"></a>On va utiliser la fonction <span class="in">`quantcut`</span> du package <span class="in">`gtools`</span>.</span>
+<span id="cb97-537"><a href="#cb97-537" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-538"><a href="#cb97-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-539"><a href="#cb97-539" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE, class.output="result"}</span></span>
+<span id="cb97-540"><a href="#cb97-540" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>ct4 <span class="ot">&lt;-</span> <span class="fu">quantcut</span>(dt<span class="sc">$</span>t)</span>
+<span id="cb97-541"><a href="#cb97-541" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(dt<span class="sc">$</span>ct4) </span>
+<span id="cb97-542"><a href="#cb97-542" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-543"><a href="#cb97-543" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-544"><a href="#cb97-544" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-545"><a href="#cb97-545" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>n <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, dt<span class="sc">$</span>ct4, <span class="at">FUN=</span>cumsum)</span>
-<span id="cb97-546"><a href="#cb97-546" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>N <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, dt<span class="sc">$</span>ct4, <span class="at">FUN=</span>sum)</span>
-<span id="cb97-547"><a href="#cb97-547" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-548"><a href="#cb97-548" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-549"><a href="#cb97-549" aria-hidden="true" tabindex="-1"></a>On conserve la dernière observation dans la strate.  </span>
+<span id="cb97-544"><a href="#cb97-544" aria-hidden="true" tabindex="-1"></a>On va générer un compteur et un total d'observations sur la strate regroupant *id* et *ct4*.</span>
+<span id="cb97-545"><a href="#cb97-545" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-546"><a href="#cb97-546" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-547"><a href="#cb97-547" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>n <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, dt<span class="sc">$</span>ct4, <span class="at">FUN=</span>cumsum)</span>
+<span id="cb97-548"><a href="#cb97-548" aria-hidden="true" tabindex="-1"></a>dt<span class="sc">$</span>N <span class="ot">=</span> <span class="fu">ave</span>(dt<span class="sc">$</span>x,dt<span class="sc">$</span>id, dt<span class="sc">$</span>ct4, <span class="at">FUN=</span>sum)</span>
+<span id="cb97-549"><a href="#cb97-549" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-550"><a href="#cb97-550" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-551"><a href="#cb97-551" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-552"><a href="#cb97-552" aria-hidden="true" tabindex="-1"></a>dt2 <span class="ot">=</span> <span class="fu">subset</span>(dt, n<span class="sc">==</span>N)</span>
-<span id="cb97-553"><a href="#cb97-553" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-554"><a href="#cb97-554" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-555"><a href="#cb97-555" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-556"><a href="#cb97-556" aria-hidden="true" tabindex="-1"></a>**Estimation du modèle**</span>
+<span id="cb97-551"><a href="#cb97-551" aria-hidden="true" tabindex="-1"></a>On conserve la dernière observation dans la strate.  </span>
+<span id="cb97-552"><a href="#cb97-552" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-553"><a href="#cb97-553" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-554"><a href="#cb97-554" aria-hidden="true" tabindex="-1"></a>dt2 <span class="ot">=</span> <span class="fu">subset</span>(dt, n<span class="sc">==</span>N)</span>
+<span id="cb97-555"><a href="#cb97-555" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-556"><a href="#cb97-556" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-557"><a href="#cb97-557" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-558"><a href="#cb97-558" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
-<span id="cb97-559"><a href="#cb97-559" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">glm</span>(died <span class="sc">~</span> ct4 <span class="sc">+</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data=</span>dt2, <span class="at">family=</span>binomial)</span>
-<span id="cb97-560"><a href="#cb97-560" aria-hidden="true" tabindex="-1"></a><span class="fu">summ</span>(fit)</span>
-<span id="cb97-561"><a href="#cb97-561" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-562"><a href="#cb97-562" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-563"><a href="#cb97-563" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-558"><a href="#cb97-558" aria-hidden="true" tabindex="-1"></a>**Estimation du modèle**</span>
+<span id="cb97-559"><a href="#cb97-559" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-560"><a href="#cb97-560" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, class.output="result"}</span></span>
+<span id="cb97-561"><a href="#cb97-561" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">glm</span>(died <span class="sc">~</span> ct4 <span class="sc">+</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data=</span>dt2, <span class="at">family=</span>binomial)</span>
+<span id="cb97-562"><a href="#cb97-562" aria-hidden="true" tabindex="-1"></a><span class="fu">summ</span>(fit)</span>
+<span id="cb97-563"><a href="#cb97-563" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-564"><a href="#cb97-564" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-565"><a href="#cb97-565" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Modèles usuels**</span></span>
+<span id="cb97-565"><a href="#cb97-565" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
 <span id="cb97-566"><a href="#cb97-566" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-567"><a href="#cb97-567" aria-hidden="true" tabindex="-1"></a>On utilise la fonction ```survreg``` du package ```survival```</span>
+<span id="cb97-567"><a href="#cb97-567" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Modèles usuels**</span></span>
 <span id="cb97-568"><a href="#cb97-568" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-569"><a href="#cb97-569" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Modèle de Weibull**</span></span>
+<span id="cb97-569"><a href="#cb97-569" aria-hidden="true" tabindex="-1"></a>On utilise la fonction ```survreg``` du package ```survival```</span>
 <span id="cb97-570"><a href="#cb97-570" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-571"><a href="#cb97-571" aria-hidden="true" tabindex="-1"></a>**De type AFT**  </span>
-<span id="cb97-572"><a href="#cb97-572" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE, class.output="result"}</span></span>
-<span id="cb97-573"><a href="#cb97-573" aria-hidden="true" tabindex="-1"></a>weibull <span class="ot">=</span> <span class="fu">survreg</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> trans, <span class="at">dist=</span><span class="st">"weibull"</span>)</span>
-<span id="cb97-574"><a href="#cb97-574" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(weibull)</span>
-<span id="cb97-575"><a href="#cb97-575" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-576"><a href="#cb97-576" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-577"><a href="#cb97-577" aria-hidden="true" tabindex="-1"></a>**De type PH**  </span>
-<span id="cb97-578"><a href="#cb97-578" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb97-579"><a href="#cb97-579" aria-hidden="true" tabindex="-1"></a>La paramétrisation PH n'est pas possible avec la fonction ```survreg```.  </span>
-<span id="cb97-580"><a href="#cb97-580" aria-hidden="true" tabindex="-1"></a>Il faut utiliser le package ```flexsurv```, qui permet également d'estimer les modèles paramétriques disponibles avec ```survival```.  </span>
-<span id="cb97-581"><a href="#cb97-581" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-582"><a href="#cb97-582" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
-<span id="cb97-583"><a href="#cb97-583" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flexsurv)</span>
-<span id="cb97-584"><a href="#cb97-584" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-585"><a href="#cb97-585" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-586"><a href="#cb97-586" aria-hidden="true" tabindex="-1"></a>Pour estimer le modèle de Weibull de type PH, on utilise en option ```dist="weibullPH"```.  </span>
+<span id="cb97-571"><a href="#cb97-571" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Modèle de Weibull**</span></span>
+<span id="cb97-572"><a href="#cb97-572" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-573"><a href="#cb97-573" aria-hidden="true" tabindex="-1"></a>**De type AFT**  </span>
+<span id="cb97-574"><a href="#cb97-574" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, message=FALSE, class.output="result"}</span></span>
+<span id="cb97-575"><a href="#cb97-575" aria-hidden="true" tabindex="-1"></a>weibull <span class="ot">=</span> <span class="fu">survreg</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> trans, <span class="at">dist=</span><span class="st">"weibull"</span>)</span>
+<span id="cb97-576"><a href="#cb97-576" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(weibull)</span>
+<span id="cb97-577"><a href="#cb97-577" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-578"><a href="#cb97-578" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-579"><a href="#cb97-579" aria-hidden="true" tabindex="-1"></a>**De type PH**  </span>
+<span id="cb97-580"><a href="#cb97-580" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-581"><a href="#cb97-581" aria-hidden="true" tabindex="-1"></a>La paramétrisation PH n'est pas possible avec la fonction ```survreg```.  </span>
+<span id="cb97-582"><a href="#cb97-582" aria-hidden="true" tabindex="-1"></a>Il faut utiliser le package ```flexsurv```, qui permet également d'estimer les modèles paramétriques disponibles avec ```survival```.  </span>
+<span id="cb97-583"><a href="#cb97-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-584"><a href="#cb97-584" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
+<span id="cb97-585"><a href="#cb97-585" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(flexsurv)</span>
+<span id="cb97-586"><a href="#cb97-586" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-587"><a href="#cb97-587" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-588"><a href="#cb97-588" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
-<span id="cb97-589"><a href="#cb97-589" aria-hidden="true" tabindex="-1"></a><span class="fu">flexsurvreg</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> trans, <span class="at">dist=</span><span class="st">"weibullPH"</span>)</span>
-<span id="cb97-590"><a href="#cb97-590" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-591"><a href="#cb97-591" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-592"><a href="#cb97-592" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-588"><a href="#cb97-588" aria-hidden="true" tabindex="-1"></a>Pour estimer le modèle de Weibull de type PH, on utilise en option ```dist="weibullPH"```.  </span>
+<span id="cb97-589"><a href="#cb97-589" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-590"><a href="#cb97-590" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
+<span id="cb97-591"><a href="#cb97-591" aria-hidden="true" tabindex="-1"></a><span class="fu">flexsurvreg</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(stime, died) <span class="sc">~</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> trans, <span class="at">dist=</span><span class="st">"weibullPH"</span>)</span>
+<span id="cb97-592"><a href="#cb97-592" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-593"><a href="#cb97-593" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-594"><a href="#cb97-594" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Risques concurrents**</span></span>
+<span id="cb97-594"><a href="#cb97-594" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
 <span id="cb97-595"><a href="#cb97-595" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-596"><a href="#cb97-596" aria-hidden="true" tabindex="-1"></a>Package ```cmprsk``` pour l'analyse paramétrique et le modèle de Fine-Gray.  </span>
+<span id="cb97-596"><a href="#cb97-596" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Risques concurrents**</span></span>
 <span id="cb97-597"><a href="#cb97-597" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-598"><a href="#cb97-598" aria-hidden="true" tabindex="-1"></a>Package cmprsk pour l’analyse non paramétrique et le modèle de Fine-Gray.</span>
-<span id="cb97-599"><a href="#cb97-599" aria-hidden="true" tabindex="-1"></a>La variable de censure/évènement, *compet*, correspond à la variable died avec une modalité supplémentaire simulée. On suppose l’existence d’une cause supplémentaire au décès autre qu’une malformation cardiaque et non strictement indépendante de cell-ci.</span>
-<span id="cb97-600"><a href="#cb97-600" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-601"><a href="#cb97-601" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-602"><a href="#cb97-602" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=F, class.output="result"}</span></span>
-<span id="cb97-603"><a href="#cb97-603" aria-hidden="true" tabindex="-1"></a>compet <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv"</span>)</span>
-<span id="cb97-604"><a href="#cb97-604" aria-hidden="true" tabindex="-1"></a><span class="co"># variable compet</span></span>
-<span id="cb97-605"><a href="#cb97-605" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(compet<span class="sc">$</span>compet) </span>
-<span id="cb97-606"><a href="#cb97-606" aria-hidden="true" tabindex="-1"></a><span class="co"># variable died</span></span>
-<span id="cb97-607"><a href="#cb97-607" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(compet<span class="sc">$</span>died) </span>
-<span id="cb97-608"><a href="#cb97-608" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-609"><a href="#cb97-609" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-610"><a href="#cb97-610" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-611"><a href="#cb97-611" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Incidences cumulées**</span></span>
+<span id="cb97-598"><a href="#cb97-598" aria-hidden="true" tabindex="-1"></a>Package ```cmprsk``` pour l'analyse paramétrique et le modèle de Fine-Gray.  </span>
+<span id="cb97-599"><a href="#cb97-599" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-600"><a href="#cb97-600" aria-hidden="true" tabindex="-1"></a>Package cmprsk pour l’analyse non paramétrique et le modèle de Fine-Gray.</span>
+<span id="cb97-601"><a href="#cb97-601" aria-hidden="true" tabindex="-1"></a>La variable de censure/évènement, *compet*, correspond à la variable died avec une modalité supplémentaire simulée. On suppose l’existence d’une cause supplémentaire au décès autre qu’une malformation cardiaque et non strictement indépendante de cell-ci.</span>
+<span id="cb97-602"><a href="#cb97-602" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-603"><a href="#cb97-603" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-604"><a href="#cb97-604" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=F, class.output="result"}</span></span>
+<span id="cb97-605"><a href="#cb97-605" aria-hidden="true" tabindex="-1"></a>compet <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">"https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv"</span>)</span>
+<span id="cb97-606"><a href="#cb97-606" aria-hidden="true" tabindex="-1"></a><span class="co"># variable compet</span></span>
+<span id="cb97-607"><a href="#cb97-607" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(compet<span class="sc">$</span>compet) </span>
+<span id="cb97-608"><a href="#cb97-608" aria-hidden="true" tabindex="-1"></a><span class="co"># variable died</span></span>
+<span id="cb97-609"><a href="#cb97-609" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(compet<span class="sc">$</span>died) </span>
+<span id="cb97-610"><a href="#cb97-610" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-611"><a href="#cb97-611" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-612"><a href="#cb97-612" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-613"><a href="#cb97-613" aria-hidden="true" tabindex="-1"></a>On utilise la fonction ```cuminc``` du package ```cmprsk```.  </span>
+<span id="cb97-613"><a href="#cb97-613" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Incidences cumulées**</span></span>
 <span id="cb97-614"><a href="#cb97-614" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-615"><a href="#cb97-615" aria-hidden="true" tabindex="-1"></a>*Pas de comparaison*</span>
+<span id="cb97-615"><a href="#cb97-615" aria-hidden="true" tabindex="-1"></a>On utilise la fonction ```cuminc``` du package ```cmprsk```.  </span>
 <span id="cb97-616"><a href="#cb97-616" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-617"><a href="#cb97-617" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
-<span id="cb97-618"><a href="#cb97-618" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">=</span> <span class="fu">cuminc</span>(compet<span class="sc">$</span>stime, compet<span class="sc">$</span>compet)</span>
-<span id="cb97-619"><a href="#cb97-619" aria-hidden="true" tabindex="-1"></a>ic </span>
-<span id="cb97-620"><a href="#cb97-620" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ic)</span>
-<span id="cb97-621"><a href="#cb97-621" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-622"><a href="#cb97-622" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-623"><a href="#cb97-623" aria-hidden="true" tabindex="-1"></a>Avec survminer</span>
+<span id="cb97-617"><a href="#cb97-617" aria-hidden="true" tabindex="-1"></a>*Pas de comparaison*</span>
+<span id="cb97-618"><a href="#cb97-618" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-619"><a href="#cb97-619" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
+<span id="cb97-620"><a href="#cb97-620" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">=</span> <span class="fu">cuminc</span>(compet<span class="sc">$</span>stime, compet<span class="sc">$</span>compet)</span>
+<span id="cb97-621"><a href="#cb97-621" aria-hidden="true" tabindex="-1"></a>ic </span>
+<span id="cb97-622"><a href="#cb97-622" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ic)</span>
+<span id="cb97-623"><a href="#cb97-623" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-624"><a href="#cb97-624" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-625"><a href="#cb97-625" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
-<span id="cb97-626"><a href="#cb97-626" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcompetingrisks</span>(<span class="at">fit =</span> ic)</span>
-<span id="cb97-627"><a href="#cb97-627" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-628"><a href="#cb97-628" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-629"><a href="#cb97-629" aria-hidden="true" tabindex="-1"></a>*Comparaison*</span>
+<span id="cb97-625"><a href="#cb97-625" aria-hidden="true" tabindex="-1"></a>Avec survminer</span>
+<span id="cb97-626"><a href="#cb97-626" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-627"><a href="#cb97-627" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
+<span id="cb97-628"><a href="#cb97-628" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcompetingrisks</span>(<span class="at">fit =</span> ic)</span>
+<span id="cb97-629"><a href="#cb97-629" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-630"><a href="#cb97-630" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-631"><a href="#cb97-631" aria-hidden="true" tabindex="-1"></a>Le test de Gray est automatiquement exécuté.</span>
+<span id="cb97-631"><a href="#cb97-631" aria-hidden="true" tabindex="-1"></a>*Comparaison*</span>
 <span id="cb97-632"><a href="#cb97-632" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-633"><a href="#cb97-633" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
-<span id="cb97-634"><a href="#cb97-634" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">=</span> <span class="fu">cuminc</span>(compet<span class="sc">$</span>stime, compet<span class="sc">$</span>compet, <span class="at">group=</span>compet<span class="sc">$</span>surgery, <span class="at">rho=</span><span class="dv">1</span>)</span>
-<span id="cb97-635"><a href="#cb97-635" aria-hidden="true" tabindex="-1"></a>ic </span>
-<span id="cb97-636"><a href="#cb97-636" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ic)</span>
-<span id="cb97-637"><a href="#cb97-637" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-638"><a href="#cb97-638" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-639"><a href="#cb97-639" aria-hidden="true" tabindex="-1"></a>Avec survminer. Pour avoir un seul graphique pour toutes les courbes ajouter l'option **`multiple_panels = F`**</span>
+<span id="cb97-633"><a href="#cb97-633" aria-hidden="true" tabindex="-1"></a>Le test de Gray est automatiquement exécuté.</span>
+<span id="cb97-634"><a href="#cb97-634" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-635"><a href="#cb97-635" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
+<span id="cb97-636"><a href="#cb97-636" aria-hidden="true" tabindex="-1"></a>ic <span class="ot">=</span> <span class="fu">cuminc</span>(compet<span class="sc">$</span>stime, compet<span class="sc">$</span>compet, <span class="at">group=</span>compet<span class="sc">$</span>surgery, <span class="at">rho=</span><span class="dv">1</span>)</span>
+<span id="cb97-637"><a href="#cb97-637" aria-hidden="true" tabindex="-1"></a>ic </span>
+<span id="cb97-638"><a href="#cb97-638" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(ic)</span>
+<span id="cb97-639"><a href="#cb97-639" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-640"><a href="#cb97-640" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-641"><a href="#cb97-641" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
-<span id="cb97-642"><a href="#cb97-642" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcompetingrisks</span>(<span class="at">fit =</span> ic)</span>
-<span id="cb97-643"><a href="#cb97-643" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-644"><a href="#cb97-644" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcompetingrisks</span>(<span class="at">fit =</span> ic, <span class="at">multiple_panels =</span> F)</span>
-<span id="cb97-645"><a href="#cb97-645" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-646"><a href="#cb97-646" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-647"><a href="#cb97-647" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-648"><a href="#cb97-648" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb97-641"><a href="#cb97-641" aria-hidden="true" tabindex="-1"></a>Avec survminer. Pour avoir un seul graphique pour toutes les courbes ajouter l'option **`multiple_panels = F`**</span>
+<span id="cb97-642"><a href="#cb97-642" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-643"><a href="#cb97-643" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
+<span id="cb97-644"><a href="#cb97-644" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcompetingrisks</span>(<span class="at">fit =</span> ic)</span>
+<span id="cb97-645"><a href="#cb97-645" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-646"><a href="#cb97-646" aria-hidden="true" tabindex="-1"></a><span class="fu">ggcompetingrisks</span>(<span class="at">fit =</span> ic, <span class="at">multiple_panels =</span> F)</span>
+<span id="cb97-647"><a href="#cb97-647" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-648"><a href="#cb97-648" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-649"><a href="#cb97-649" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-650"><a href="#cb97-650" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Modèles**</span></span>
+<span id="cb97-650"><a href="#cb97-650" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
 <span id="cb97-651"><a href="#cb97-651" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-652"><a href="#cb97-652" aria-hidden="true" tabindex="-1"></a><span class="fu">### **Fine-Gray**</span></span>
+<span id="cb97-652"><a href="#cb97-652" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Modèles**</span></span>
 <span id="cb97-653"><a href="#cb97-653" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-654"><a href="#cb97-654" aria-hidden="true" tabindex="-1"></a>Attention à l'interprétation des "Risks/Hazards ratio".  Modèle dont l'utilisation est assez critiquée, il n'est pas impossible que le retire à un moment ou un autre. Comme on travaille</span>
+<span id="cb97-654"><a href="#cb97-654" aria-hidden="true" tabindex="-1"></a><span class="fu">### **Fine-Gray**</span></span>
 <span id="cb97-655"><a href="#cb97-655" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-656"><a href="#cb97-656" aria-hidden="true" tabindex="-1"></a>Fonction ```crr``` du plackage ```cmprsk```.  </span>
-<span id="cb97-657"><a href="#cb97-657" aria-hidden="true" tabindex="-1"></a>Peu pratique les covariables doivent être introduites sous forme de matrice (n observation * k variables). Pour les covariables discrètes, prévoir la forme binaire et l'omission de la catégorie de référence.</span>
-<span id="cb97-658"><a href="#cb97-658" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-659"><a href="#cb97-659" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
-<span id="cb97-660"><a href="#cb97-660" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> compet[<span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"age"</span>, <span class="st">"surgery"</span>)]</span>
-<span id="cb97-661"><a href="#cb97-661" aria-hidden="true" tabindex="-1"></a>c <span class="ot">=</span> <span class="fu">as.matrix</span>(c)</span>
-<span id="cb97-662"><a href="#cb97-662" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">crr</span>(compet<span class="sc">$</span>stime, compet<span class="sc">$</span>compet, c))</span>
-<span id="cb97-663"><a href="#cb97-663" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-664"><a href="#cb97-664" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-665"><a href="#cb97-665" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-666"><a href="#cb97-666" aria-hidden="true" tabindex="-1"></a><span class="fu">### **Modèle multinomial**</span></span>
+<span id="cb97-656"><a href="#cb97-656" aria-hidden="true" tabindex="-1"></a>Attention à l'interprétation des "Risks/Hazards ratio".  Modèle dont l'utilisation est assez critiquée, il n'est pas impossible que le retire à un moment ou un autre. Comme on travaille</span>
+<span id="cb97-657"><a href="#cb97-657" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-658"><a href="#cb97-658" aria-hidden="true" tabindex="-1"></a>Fonction ```crr``` du plackage ```cmprsk```.  </span>
+<span id="cb97-659"><a href="#cb97-659" aria-hidden="true" tabindex="-1"></a>Peu pratique les covariables doivent être introduites sous forme de matrice (n observation * k variables). Pour les covariables discrètes, prévoir la forme binaire et l'omission de la catégorie de référence.</span>
+<span id="cb97-660"><a href="#cb97-660" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-661"><a href="#cb97-661" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
+<span id="cb97-662"><a href="#cb97-662" aria-hidden="true" tabindex="-1"></a>c <span class="ot">&lt;-</span> compet[<span class="fu">c</span>(<span class="st">"year"</span>, <span class="st">"age"</span>, <span class="st">"surgery"</span>)]</span>
+<span id="cb97-663"><a href="#cb97-663" aria-hidden="true" tabindex="-1"></a>c <span class="ot">=</span> <span class="fu">as.matrix</span>(c)</span>
+<span id="cb97-664"><a href="#cb97-664" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">crr</span>(compet<span class="sc">$</span>stime, compet<span class="sc">$</span>compet, c))</span>
+<span id="cb97-665"><a href="#cb97-665" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb97-666"><a href="#cb97-666" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb97-667"><a href="#cb97-667" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-668"><a href="#cb97-668" aria-hidden="true" tabindex="-1"></a>On va de nouveau utiliser la variable mois (temps discret).  </span>
-<span id="cb97-669"><a href="#cb97-669" aria-hidden="true" tabindex="-1"></a>Le modèle sera estimé à l'aide la fonction ```multinom``` du package ```nnet```, les p-values doivent-être programmées, l'output ne donnant que les erreurs-types.  </span>
-<span id="cb97-670"><a href="#cb97-670" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-671"><a href="#cb97-671" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
-<span id="cb97-672"><a href="#cb97-672" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("nnet")</span></span>
-<span id="cb97-673"><a href="#cb97-673" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nnet)</span>
-<span id="cb97-674"><a href="#cb97-674" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-675"><a href="#cb97-675" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-676"><a href="#cb97-676" aria-hidden="true" tabindex="-1"></a>*Transformation de la base*  </span>
+<span id="cb97-668"><a href="#cb97-668" aria-hidden="true" tabindex="-1"></a><span class="fu">### **Modèle multinomial**</span></span>
+<span id="cb97-669"><a href="#cb97-669" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-670"><a href="#cb97-670" aria-hidden="true" tabindex="-1"></a>On va de nouveau utiliser la variable mois (temps discret).  </span>
+<span id="cb97-671"><a href="#cb97-671" aria-hidden="true" tabindex="-1"></a>Le modèle sera estimé à l'aide la fonction ```multinom``` du package ```nnet```, les p-values doivent-être programmées, l'output ne donnant que les erreurs-types.  </span>
+<span id="cb97-672"><a href="#cb97-672" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-673"><a href="#cb97-673" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
+<span id="cb97-674"><a href="#cb97-674" aria-hidden="true" tabindex="-1"></a><span class="co">#install.packages("nnet")</span></span>
+<span id="cb97-675"><a href="#cb97-675" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nnet)</span>
+<span id="cb97-676"><a href="#cb97-676" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-677"><a href="#cb97-677" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-678"><a href="#cb97-678" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
-<span id="cb97-679"><a href="#cb97-679" aria-hidden="true" tabindex="-1"></a>compet<span class="sc">$</span>T <span class="ot">=</span> compet<span class="sc">$</span>mois</span>
-<span id="cb97-680"><a href="#cb97-680" aria-hidden="true" tabindex="-1"></a>td <span class="ot">=</span> <span class="fu">uncount</span>(compet, mois)</span>
-<span id="cb97-681"><a href="#cb97-681" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>x<span class="ot">=</span><span class="dv">1</span></span>
-<span id="cb97-682"><a href="#cb97-682" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>t <span class="ot">=</span> <span class="fu">ave</span>(td<span class="sc">$</span>x, td<span class="sc">$</span>id, <span class="at">FUN=</span>cumsum)</span>
-<span id="cb97-683"><a href="#cb97-683" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>t2 <span class="ot">=</span> td<span class="sc">$</span>t<span class="sc">*</span>td<span class="sc">$</span>t</span>
-<span id="cb97-684"><a href="#cb97-684" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>e <span class="ot">=</span> <span class="fu">ifelse</span>(td<span class="sc">$</span>t<span class="sc">&lt;</span>td<span class="sc">$</span>T,<span class="dv">0</span>, td<span class="sc">$</span>compet)</span>
-<span id="cb97-685"><a href="#cb97-685" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-686"><a href="#cb97-686" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-687"><a href="#cb97-687" aria-hidden="true" tabindex="-1"></a>*Estimation*</span>
+<span id="cb97-678"><a href="#cb97-678" aria-hidden="true" tabindex="-1"></a>*Transformation de la base*  </span>
+<span id="cb97-679"><a href="#cb97-679" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-680"><a href="#cb97-680" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
+<span id="cb97-681"><a href="#cb97-681" aria-hidden="true" tabindex="-1"></a>compet<span class="sc">$</span>T <span class="ot">=</span> compet<span class="sc">$</span>mois</span>
+<span id="cb97-682"><a href="#cb97-682" aria-hidden="true" tabindex="-1"></a>td <span class="ot">=</span> <span class="fu">uncount</span>(compet, mois)</span>
+<span id="cb97-683"><a href="#cb97-683" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>x<span class="ot">=</span><span class="dv">1</span></span>
+<span id="cb97-684"><a href="#cb97-684" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>t <span class="ot">=</span> <span class="fu">ave</span>(td<span class="sc">$</span>x, td<span class="sc">$</span>id, <span class="at">FUN=</span>cumsum)</span>
+<span id="cb97-685"><a href="#cb97-685" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>t2 <span class="ot">=</span> td<span class="sc">$</span>t<span class="sc">*</span>td<span class="sc">$</span>t</span>
+<span id="cb97-686"><a href="#cb97-686" aria-hidden="true" tabindex="-1"></a>td<span class="sc">$</span>e <span class="ot">=</span> <span class="fu">ifelse</span>(td<span class="sc">$</span>t<span class="sc">&lt;</span>td<span class="sc">$</span>T,<span class="dv">0</span>, td<span class="sc">$</span>compet)</span>
+<span id="cb97-687"><a href="#cb97-687" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-688"><a href="#cb97-688" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-689"><a href="#cb97-689" aria-hidden="true" tabindex="-1"></a>Pour estimer le modèle, on utilise la fonction ```mlogit``` du package ```nnet```. Les p-values seront calculées à partir d'un test bilatéral (statistique z). </span>
-<span id="cb97-690"><a href="#cb97-690" aria-hidden="true" tabindex="-1"></a>Pour avoir un output correct, on peut conseiler le package gtsummary (fonction <span class="in">`tlb_regression`</span>).</span>
-<span id="cb97-691"><a href="#cb97-691" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-692"><a href="#cb97-692" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
+<span id="cb97-689"><a href="#cb97-689" aria-hidden="true" tabindex="-1"></a>*Estimation*</span>
+<span id="cb97-690"><a href="#cb97-690" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-691"><a href="#cb97-691" aria-hidden="true" tabindex="-1"></a>Pour estimer le modèle, on utilise la fonction ```mlogit``` du package ```nnet```. Les p-values seront calculées à partir d'un test bilatéral (statistique z). </span>
+<span id="cb97-692"><a href="#cb97-692" aria-hidden="true" tabindex="-1"></a>Pour avoir un output correct, on peut conseiler le package gtsummary (fonction <span class="in">`tlb_regression`</span>).</span>
 <span id="cb97-693"><a href="#cb97-693" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-694"><a href="#cb97-694" aria-hidden="true" tabindex="-1"></a>competfit <span class="ot">=</span> <span class="fu">multinom</span>(<span class="at">formula =</span> e <span class="sc">~</span> t <span class="sc">+</span> t2 <span class="sc">+</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> td)</span>
-<span id="cb97-695"><a href="#cb97-695" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(competfit)</span></span>
-<span id="cb97-696"><a href="#cb97-696" aria-hidden="true" tabindex="-1"></a><span class="co">#z = summary(competfit)$coefficients/summary(competfit)$standard.errors</span></span>
-<span id="cb97-697"><a href="#cb97-697" aria-hidden="true" tabindex="-1"></a><span class="co">#p &lt;- (1 - pnorm(abs(z), 0, 1)) * 2</span></span>
-<span id="cb97-698"><a href="#cb97-698" aria-hidden="true" tabindex="-1"></a><span class="co">#p</span></span>
-<span id="cb97-699"><a href="#cb97-699" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(competfit, <span class="at">type =</span> <span class="st">"text"</span>, <span class="at">ci =</span> <span class="cn">TRUE</span>, <span class="at">star.cutoffs =</span> <span class="cn">NA</span>, <span class="at">omit.table.layout =</span> <span class="st">"n"</span>)</span>
-<span id="cb97-700"><a href="#cb97-700" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb97-701"><a href="#cb97-701" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb97-702"><a href="#cb97-702" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-694"><a href="#cb97-694" aria-hidden="true" tabindex="-1"></a><span class="in">```{R, message=FALSE, class.output="result"}</span></span>
+<span id="cb97-695"><a href="#cb97-695" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-696"><a href="#cb97-696" aria-hidden="true" tabindex="-1"></a>competfit <span class="ot">=</span> <span class="fu">multinom</span>(<span class="at">formula =</span> e <span class="sc">~</span> t <span class="sc">+</span> t2 <span class="sc">+</span> year <span class="sc">+</span> age <span class="sc">+</span> surgery, <span class="at">data =</span> td)</span>
+<span id="cb97-697"><a href="#cb97-697" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(competfit)</span></span>
+<span id="cb97-698"><a href="#cb97-698" aria-hidden="true" tabindex="-1"></a><span class="co">#z = summary(competfit)$coefficients/summary(competfit)$standard.errors</span></span>
+<span id="cb97-699"><a href="#cb97-699" aria-hidden="true" tabindex="-1"></a><span class="co">#p &lt;- (1 - pnorm(abs(z), 0, 1)) * 2</span></span>
+<span id="cb97-700"><a href="#cb97-700" aria-hidden="true" tabindex="-1"></a><span class="co">#p</span></span>
+<span id="cb97-701"><a href="#cb97-701" aria-hidden="true" tabindex="-1"></a><span class="fu">stargazer</span>(competfit, <span class="at">type =</span> <span class="st">"text"</span>, <span class="at">ci =</span> <span class="cn">TRUE</span>, <span class="at">star.cutoffs =</span> <span class="cn">NA</span>, <span class="at">omit.table.layout =</span> <span class="st">"n"</span>)</span>
+<span id="cb97-702"><a href="#cb97-702" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb97-703"><a href="#cb97-703" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-704"><a href="#cb97-704" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb97-705"><a href="#cb97-705" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
@@ -2476,7 +2478,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       <div class="nav-footer-center">Marc Thévenin - Ined-Sms - Octobre 2022</div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","loop":true,"closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});</script>
 
 
 

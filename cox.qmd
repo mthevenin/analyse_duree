@@ -167,8 +167,6 @@ De la même manière, plus on entre à un âge élevé dans la liste d'attente p
 
 
 
-
-
 ## R-Stata-Sas-Python   
   
 ::: panel-tabset
@@ -336,20 +334,22 @@ Les bornes des intervalles $[t_0 ;t]$ ont des valeurs seulement lorsqu'un évèn
 On vérifie que les paramètres estimés sont identiques
 
 ```{r eval=FALSE}
-Cox regression -- Breslow method for ties
 
-No. of subjects =          103                  Number of obs    =       3,573
-No. of failures =           75
-Time at risk    =        31938
-                                                LR chi2(3)       =       17.56
-Log likelihood  =   -289.54474                  Prob > chi2      =      0.0005
+Cox regression with Efron method for ties
+
+No. of subjects =    103                                Number of obs =  3,573
+No. of failures =     75
+Time at risk    = 31,938
+                                                        LR chi2(3)    =  17.63
+Log likelihood = -289.30639                             Prob > chi2   = 0.0005
 
 ------------------------------------------------------------------------------
-          _t |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+          _t | Haz. ratio   Std. err.      z    P>|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
-        year |  -.1195075   .0673691    -1.77   0.076    -.2515486    .0125336
-         age |   .0295539   .0135341     2.18   0.029     .0030275    .0560803
-   1.surgery |   -.984869   .4362881    -2.26   0.024    -1.839978   -.1297601
+        year |      0.887      0.060    -1.78   0.076        0.778       1.012
+         age |      1.030      0.014     2.19   0.029        1.003       1.058
+     surgery |      0.373      0.163    -2.26   0.024        0.158       0.876
+------------------------------------------------------------------------------
 ```
 
 
@@ -362,49 +362,32 @@ $$h(t | X,t) = h_0(t)e^{b_1age + b_2year + b_3 surgery + b_4 (surgery\times t)}$
 **Exemple**   
 
 ```{r eval=FALSE}
-Cox regression -- Breslow method for ties
 
-No. of subjects =          103                  Number of obs    =         103
-No. of failures =           75
-Time at risk    =        31938
-                                                LR chi2(4)       =       21.50
-Log likelihood  =   -287.57352                  Prob > chi2      =      0.0003
+Cox regression with Efron method for ties
+
+No. of subjects =    103                                Number of obs =    103
+No. of failures =     75
+Time at risk    = 31,938
+                                                        LR chi2(4)    =  21.58
+Log likelihood = -287.32903                             Prob > chi2   = 0.0002
 
 ------------------------------------------------------------------------------
-          _t |      Coef.   Std. Err.      z    P>|z|     [95% Conf. Interval]
+          _t | Haz. ratio   Std. err.      z    P>|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
 main         |
-        year |  -.1229512   .0668619    -1.84   0.066    -.2539981    .0080958
-         age |   .0288597   .0134588     2.14   0.032      .002481    .0552384
-   1.surgery |  -1.751567   .6744632    -2.60   0.009    -3.073491   -.4296435
+        year |      0.884      0.059    -1.84   0.066        0.776       1.008
+         age |      1.029      0.014     2.15   0.032        1.003       1.057
+surgery(t0+) |      0.173      0.117    -2.60   0.009        0.046       0.649
 -------------+----------------------------------------------------------------
-tvc [interaction]          |
-   t*surgery |   .0022277   .0011025     2.02   0.043     .0000669    .0043886
+Rapport de HR|
+   surgery*t |      1.002      0.001     2.02   0.043        1.000       1.004
 ------------------------------------------------------------------------------
-Note: Variables in tvc equation interacted with _t.
+
 ```
 
-L'intéraction $surgery\times t$ est ici significative ($p<0.05$). On retrouve donc le résultat du test sur les résidus de Schoenfeld.  
-
-**Intreprétation**:  
-
-* Le paramètre (logHR) pour surgery donne le risque ratio au début de l'exposition au risque ($t=0+\epsilon$): le risque de décéder en début d'observation, le premier jour après l'inscription dans le registre, est $(e^{-1.75}-1)\times 100 = -82\%$ plus faible pour les personnes qui ont eu un pontage.
-* Le terme d'intéraction étant positif, le gain en survie pour les personnes qui ont eu un pontage va diminuer avec le temps. Le RR augmente donc avec le temps, il est multiplié par 1.002 par jour.
-
-
-| $t$         | Calcul                        | Risk ratio   | 
-| ----------- | ----------------------------- | ------------ |
-| $0+\epsilon$| $e^{-1.75 + 0.002\times 0}$   |  $0.28$      | 
-| 1           | $e^{-1.75 + 0.002\times 1}$   |  $0.281$     | 
-| 2           | $e^{-1.75 + 0.002\times 2}$   |  $0.282$     |  
-| .           | .                             |              |
-| .           | .                             |              | 
-| 10          | $e^{-1.75 + 0.002\times 10}$  |  $0.286$     | 
-| 100         | $e^{-1.75 + 0.002\times 100}$ |  $0.34$      | 
-| 365         | $e^{-1.75 + 0.002\times 365}$ |  $0.58$      | 
-
-
-Attention, les calculs du tableau précédent ont été donnés à titre d'exemple. Les intervalles de confiance des rapports de risque s'avère nécessaires compte tenu de la diminution de la population restante exposée au risque.
+On retrouve donc un résultat proche de celui obtenu à partir du test sur les résidus de Schoenfeld pour la variable *surgery*. Il a le mérité de pouvoir être interprété.  
+Malgré  une hypothèse plutôt forte sur la forme fonctionnelle de l'intéraction, et dans les fait surement pas pertinente, on peut dire 
+que chaque jour le HR entre personnes opérées et personnes non opérées augmente de 0.2%. L'effet de l'opération sur la survie des individus s'estompe avec le temps.
 
 
 **Important**:  
