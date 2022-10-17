@@ -301,8 +301,16 @@ ggforest(coxfit)
 
 ## **Hypothèse PH**
 
+
+### Test Grambsch-Therneau
+
+**Résidus de Schoenfeld**  
+On utilise la fonction **`cox.zph`** pour effectuer ce test.  
+Le test peut utiliser plusieurs fonctions de la durée. Par défaut la fonction utilise $1-KM$, soit le complémentaire de l'estimateur de Kaplan-Meier (option `transform="km"`).
+
+
 ::: callout-warning   
-Attention aux résultats entre la v2 et la v3 de survival. Les deux sont présentés, avec un test reposant sur une régression linéaire (OLS même si GLS préférable) entre les résidus de Schoenfeld et une fonction de la durée (ici f(t)=t). Pour illustrer le problème les résultats du test de Grambsch-Therneau sont donnés pour les deux versions.  
+Attention aux résultats entre le test de la v2 et de la v3 de `survival`. Les deux sont présentés, avec un test reposant sur une régression linéaire (OLS même si GLS préférable) entre les résidus de Schoenfeld et une fonction de la durée (ici f(t)=t). Pour illustrer le problème les résultats du test de Grambsch-Therneau sont donnés pour les deux versions.  
 
 Au delà des programmes, voici la seule explication qui accompagne le test de la version de 3 de survival
 
@@ -312,20 +320,11 @@ C'est un peu léger.
 
 Pour l'instant je préconise de rester à la version antérieure du test, en raison de son lien très fort avec une régression linéaire entre les résidus standardisés et une fonction de la durée, mais également en termes de reproductibilité, les autres applications utilisant cette version originale. Je donne la marche à suivre pour exécuter ce test.  
 
-Il convient également de préciser dans une analyse la version du test qui a été exécutée.
+Il serait également bienvenu de préciser dans une analyse la version du test qui a été exécutée.
 :::
 
 
-**Résidus de Schoenfeld**  
-On utilise la fonction **`cox.zph`** pour le test de *Grambsch-Therneau*.  
-Le test peut utiliser plusieurs fonctions de la durée. Par défaut la fonction utilise $1-KM$, soit le complémentaire de l'estimateur de Kaplan-Meier (option `transform="km"`).
-
-
-## Test Grambsch-Therneau
-
 **<span style="color: #CC0066">Résultat du test avec la v3 de survival</span>**
-
-***Test exact***
 
 Avec `transform="km"`
 ```{r, class.output="result"}
@@ -340,10 +339,7 @@ cox.zph(coxfit, transform="identity")
 Remarque: avec la v3, quelques options ont été ajoutées tel que *`terms`* qui permet pour une variable catégorielle à plus de deux modalités de choisir entre un sous test multiple sur la variable (k modalités => k-1 degré de liberté) et une série de tests à 1 degré de liberté sur chaque modalité (k-1 tests). De mon point de vue préférer la seconde solution avec **`terms=FALSE`**.
 
 
-
 **<span style="color: #CC0066">Résultat du test avec la v2 de survival</span>**  
-
-***Test simplifié (celui que j'utilise)***
 
 ::: callout-warning   
 <span style="color:#CC0066">
@@ -365,13 +361,11 @@ cox.zphold(coxfit)
 cox.zphold(coxfit, transform="identity")
 ```
 
-
 ::: callout-note
 
 ## Régression linéaire sur les résidus de Schoenfeld
 
-
-Estimé simplement à partir d'une OLS
+Estimé simplement à partir d'une OLS (normalement préféré une GLS pour tenir compte de l'autocorrélation des erreurs)
 
 
 ```{r, class.output="result"}
@@ -398,12 +392,11 @@ paste("p-value pour age:",     age$coefficients[2,4])
 paste("p-value pour surgery:", surgery$coefficients[2,4])
 ```
 
-On retrouve bien les résultats de la version *simplifiée* du test 
+On est trés proche du test effectué avec la v2 de `survival`. 
 :::
 
 
-  
-## Introduction d'une intéraction
+### Introduction d'une intéraction
 
 Lorsque la covariable n'est pas continue, elle doit être transformée en indicatrice. Vérifier que les résultats du modèle sont bien identiques avec le modèle estimé précédemment (ne pas oublier d'omettre le niveau en référence).  
 Ici la variable surgery est déjà sous forme d'indicatrice (0,1).  
