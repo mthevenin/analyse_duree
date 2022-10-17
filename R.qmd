@@ -115,24 +115,14 @@ library(stargazer)
 
 
 <br>
-Se reporterà la partie sur les risques proportionnels.   
+Se reporter à la partie sur les risques proportionnels.   
 
-Pour avoir des résultats cohérents avec les autres applications, j'ai conservé la version 2 de la librairie `survival`. J'ai donné une alternative au test avec une ancienne méthode, consistant à faire une régression linéaire entre les residus standardisés de Schoenfeld et une fonction de la durée, à ce jour limité à $f(t)=t$. Le code n'est pas trop compliqué, manque juste la récupération des noms des variables. Ici ce n'est pas trop grave car il y a seulement 3 variables pour autant de degrés de liberté, mais cela risque de devenir un peu plus lourd pour un modèle plus riche.  
-
-Au cas où je donne les instructions pour installer la dernière mise à jour de la version 2 de survival (penser à désinstaller la v3 si nécessaire). La dernière version de **`Rtools`** doit être installée.
-
-```{r, eval=FALSE}
-# installation survival 2.44-1 (30 mars 2019)
+```{r filename=" installation survival 2.44-1 (30 mars 2019)", eval=FALSE}
 
 require(remotes)
 install_version("survival", version = "2.44-1", repos = "http://cran.us.r-project.org")
 ```
 
-::: callout-note
-**Maj juin 2022**: pour le problème du test de Grambsch-Therneau, j’ai récupéré le programme de la version 2 de **`survival`**, renommé la fonction `cox.zphold`. Une fois chargé avec la fonction `source(…path/cox.zphold.R)`, on peut l’exécuter directement. 
-:::
-
-<br>
 
 # **Analyse Non paramétrique**
 

@@ -802,7 +802,7 @@
     "href": "R.html#survival-v2-versus-v3",
     "title": "R",
     "section": "Survival v2 versus v3",
-    "text": "Survival v2 versus v3\n Se reporterà la partie sur les risques proportionnels.\nPour avoir des résultats cohérents avec les autres applications, j’ai conservé la version 2 de la librairie survival. J’ai donné une alternative au test avec une ancienne méthode, consistant à faire une régression linéaire entre les residus standardisés de Schoenfeld et une fonction de la durée, à ce jour limité à \\(f(t)=t\\). Le code n’est pas trop compliqué, manque juste la récupération des noms des variables. Ici ce n’est pas trop grave car il y a seulement 3 variables pour autant de degrés de liberté, mais cela risque de devenir un peu plus lourd pour un modèle plus riche.\nAu cas où je donne les instructions pour installer la dernière mise à jour de la version 2 de survival (penser à désinstaller la v3 si nécessaire). La dernière version de Rtools doit être installée.\n\n# installation survival 2.44-1 (30 mars 2019)\n\nrequire(remotes)\ninstall_version(\"survival\", version = \"2.44-1\", repos = \"http://cran.us.r-project.org\")\n\n\n\n\n\n\n\nNote\n\n\n\nMaj juin 2022: pour le problème du test de Grambsch-Therneau, j’ai récupéré le programme de la version 2 de survival, renommé la fonction cox.zphold. Une fois chargé avec la fonction source(…path/cox.zphold.R), on peut l’exécuter directement."
+    "text": "Survival v2 versus v3\n Se reporter à la partie sur les risques proportionnels.\n::: {.cell filename=’ installation survival 2.44-1 (30 mars 2019)’}\nrequire(remotes)\ninstall_version(\"survival\", version = \"2.44-1\", repos = \"http://cran.us.r-project.org\")\n:::"
   },
   {
     "objectID": "cox.html#que-faire",
