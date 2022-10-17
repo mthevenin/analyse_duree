@@ -302,7 +302,17 @@ ggforest(coxfit)
 ## **Hypothèse PH**
 
 ::: callout-warning   
-Attention aux résultats entre la v2 et la v3 de survival. Les deux sont présentés, avec un test reposant sur une régression linéaire (OLS même si GLS préférable) entre les résidus de Schoenfeld et une fonction de la durée (ici f(t)=t), et fait rapidement le 17 mai. Pour illustrer la question les résultats du test de Grambsch-Therneau sont donnés pour les deux versions.
+Attention aux résultats entre la v2 et la v3 de survival. Les deux sont présentés, avec un test reposant sur une régression linéaire (OLS même si GLS préférable) entre les résidus de Schoenfeld et une fonction de la durée (ici f(t)=t). Pour illustrer le problème les résultats du test de Grambsch-Therneau sont donnés pour les deux versions.  
+
+Au delà des programmes, voici la seule explication qui accompagne le test de la version de 3 de survival
+
+> In versions of the package before survival3.0 the function computed a fast approximation to the score test. Later versions compute the actual score test.
+
+C'est un peu léger. 
+
+Pour l'instant je préconise de rester à la version antérieure du test, en raison de son lien très fort avec une régression linéaire entre les résidus standardisés et une fonction de la durée, mais également en termes de reproductibilité, les autres applications utilisant cette version originale. Je donne la marche à suivre pour exécuter ce test.  
+
+Il convient également de préciser dans une analyse la version du test qui a été exécutée.
 :::
 
 
