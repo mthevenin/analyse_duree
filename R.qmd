@@ -311,9 +311,11 @@ On utilise la fonction **`cox.zph`** pour le test de *Grambsch-Therneau*.
 Le test peut utiliser plusieurs fonctions de la durée. Par défaut la fonction utilise $1-KM$, soit le complémentaire de l'estimateur de Kaplan-Meier (option `transform="km"`).
 
 
-***Test Grambsch-Therneau***
+## Test Grambsch-Therneau
 
-**<span style="color: #CC0066">Résultat du test avec la v2 de survival</span>**
+**<span style="color: #CC0066">Résultat du test avec la v3 de survival</span>**
+
+***Test exact***
 
 Avec `transform="km"`
 ```{r, class.output="result"}
@@ -325,41 +327,20 @@ Avec `transform="identity"` ($f(t)=t$) [remarque: solution de Stata par défaut]
 cox.zph(coxfit, transform="identity")
 ```
 
-
-**<span style="color:#CC0066">Résultat du test avec la v3 de survival</span>**
-
-```{}
- cox.zph(coxfit)
-        chisq df     p
-year    3.309  1 0.069
-age     0.922  1 0.337
-surgery 5.494  1 0.019
-GLOBAL  8.581  3 0.035
-
-
-cox.zph(coxfit, transform="identity")
-        chisq df     p
-year     4.54  1 0.033
-age      1.71  1 0.191
-surgery  4.92  1 0.027
-GLOBAL   9.47  3 0.02
-
-```
-
-La différence n'est pas minime, en particulier pour la variable *year*.  
-<br>
 Remarque: avec la v3, quelques options ont été ajoutées tel que *`terms`* qui permet pour une variable catégorielle à plus de deux modalités de choisir entre un sous test multiple sur la variable (k modalités => k-1 degré de liberté) et une série de tests à 1 degré de liberté sur chaque modalité (k-1 tests). De mon point de vue préférer la seconde solution avec **`terms=FALSE`**.
 
 
 
-**MAJ JUIN 2022 : cox.zphold**
+**<span style="color: #CC0066">Résultat du test avec la v2 de survival</span>**  
+
+***Test simplifié (celui que j'utilise)***
 
 ::: callout-warning   
 <span style="color:#CC0066">
-J’ai récupéré la fonction de la version précédente de survival (identique Sas, Stata, Python), renommée `cox.zphold`. Elle est récupérable à cette adresse. :[<https://github.com/mthevenin/analyse_duree/tree/main/cox.zphold>].  
+J’ai récupéré la fonction de la version précédente de survival (identique Sas, Stata, Python), renommée `cox.zphold`. Elle se trouve à cette adresse. :[<https://github.com/mthevenin/analyse_duree/tree/main/cox.zphold>].  
 
 
-- Une fois enregistré, charger dans le programme d’analyse la fonction
+- Une fois enregistrée avec comme nom de fichier `cox.zphold.R`, la charger dans le programme d’analyse avec la fonction `source()` 
 - Après avoir estimé le modèle de Cox, exécuter la fonction **`cox.zphold()`**
 :::  
   
@@ -379,7 +360,9 @@ cox.zphold(coxfit, transform="identity")
 
 ## Régression linéaire sur les résidus de Schoenfeld
 
-Pour information: 
+
+Estimé simplement à partir d'une OLS
+
 
 ```{r, class.output="result"}
 resid= resid(coxfit, type="scaledsch")
@@ -410,7 +393,7 @@ On retrouve bien les résultats de la version *simplifiée* du test
 
 
   
-**Introduction d'une intéraction**
+## Introduction d'une intéraction
 
 Lorsque la covariable n'est pas continue, elle doit être transformée en indicatrice. Vérifier que les résultats du modèle sont bien identiques avec le modèle estimé précédemment (ne pas oublier d'omettre le niveau en référence).  
 Ici la variable surgery est déjà sous forme d'indicatrice (0,1).  
