@@ -73,20 +73,18 @@ Remarque: les équations de score sont utilisées pour tester la validité de l'
 
 **Eléments de calcul**  
 <br>
-En logarithme, la vraisemblance partielle s'ecrit:  
-$$pl(b)=log(pl(b))=log\left(\prod_{i=1}^{n}\left[\frac{e^{X_{i}^{'}b}}{\sum_{j\in R_i}e^{X_jb}}\right]^{\delta_i}\right)$$  
-$$pl(b)=\sum_{i=1}^n\delta_ilog\left(\frac{e^{X_{i}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}} \right)$$
+En logarithme (sans évènement simultané), la vraisemblance partielle s'ecrit:  
 
-$$pl(b)=\sum_{i=1}^n\delta_i\left(log(e^{X_{i}^{'}b})-log\sum_{j\in R_i}e^{X_{i}^{'}b}\right)$$
+$$pl(b)=\sum_{i=1}^n\delta_i\left(log(e^{X_{i}^{'}b})-log\sum_{j\in R_i}e^{X_{j}^{'}b}\right)$$
 
-$$pl(b)=\sum_{i=1}^n\delta_i\left(X_{i}^{'}b-log\sum_{j\in R_i}e^{X_{i}^{'}b}\right)$$
+$$pl(b)=\sum_{i=1}^n\delta_i\left(X_{i}^{'}b-log\sum_{j\in R_i}e^{X_{j}^{'}b}\right)$$
 
 Calcul de l'équation de score pour une covariable $X_k$:  
 
-$$\frac{\partial pl(b)}{\partial{b_k}}=\sum_{i=1}^n\delta_i\left(X_{ik}-\sum_{j\in R_i}X_{ik}\frac{e^{X_{i}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}\right)$$
+$$\frac{\partial pl(b)}{\partial{b_k}}=\sum_{i=1}^n\delta_i\left(X_{ik}-\sum_{j\in R_i}X_{ik}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}\right)$$
 
 
-Comme $\frac{e^{X_{ik}b}}{\sum_{j\in R}e^{X_{jk}b}}$ est une probabilité,  $\sum_{j\in R}X_{ik}\times p_i$ est l'espérance (la moyenne) $E(X_k)$ d'avoir la caractéristique $X_k$ lorsqu'un évènement a été observé. Au final:  
+Comme $\frac{e^{X_{j}b}}{\sum_{j\in R}e^{X_{j}b}}$ est une probabilité, et  $\sum_{j\in R}X_{ik}\times p_i$ est l'espérance (la moyenne) $E(X_k)$ d'avoir la caractéristique $X_k$ lorsqu'un évènement a été observé. Au final:  
 
 $$\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - E(X_{k}) \right)$$
 
@@ -196,7 +194,7 @@ Avec la librairie `lifelines`, le modèle est estimé avec la fonction **`CoxPHF
 *	Les rapports de risque (RR) estimés par le modèle sont contraints à être constant pendant toute la période d’observation. C’est une hypothèse forte.
 *	Le respect de cette hypothèse doit être testé, en particulier pour un modèle de Cox où la baseline du risque est habituellement estimée à l’aide de ces rapports (méthode dite de Breslow, non traitée). En post-estimation, les valeurs estimées du risque pourront présenter des valeurs aberrantes, en particulier négatives.
 *	Tester cette hypothèse revient à tester une interaction entre les rapports et la durée (ou plutôt une fonction de la durée).
-*	Plusieurs méthodes disponibles, celle sur les résidus de martingales, réservée aux covariables continues, et le « test » graphique réservé aux variables catégorielles ne seront pas traités. On traitera  celle basée sur les** résidus de Schoenfeld** puis l'introduction d'une intéraction avec la durée dans le modèle. Cette dernière peut faire également office de méthode de correction lorsque l'hypothèse n'est pas respectée.  
+*	Plusieurs méthodes disponibles, celle sur les résidus de martingales, réservée aux covariables continues, et le « test » graphique réservé aux variables catégorielles ne seront pas traités. On traitera  celle basée sur les **résidus de Schoenfeld** puis l'introduction d'une intéraction avec la durée dans le modèle. Cette dernière peut faire également office de méthode de correction lorsque l'hypothèse n'est pas respectée.  
 * Si on regarde les courbes de Kaplan-Meier, leurs croisement non tardif impliquera nécessairement un problème sur cette hypothèse. 
 
   
@@ -211,7 +209,7 @@ Avec la librairie `lifelines`, le modèle est estimé avec la fonction **`CoxPHF
 *	On utilise généralement les résidus de Schoenfeld « standardisés » - par leur variance - pour tenir compte du fait que le risk set diminue au cours du temps.
 *	Pour une observation dont l’évènement s’est produit en t_i, le *résidu brut de Schoenfeld* pour la covariable $X_k$, après estimation du modèle, est égal à:
   
-$$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{ik}\frac{e^{X_{i}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}= X_{ik} - E(X_k)$$
+$$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{ik}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}= X_{ik} - E(X_k)$$
 
 * Ce résidu est formellement la contribution d'un individu au score. Il se lit comme la différence entre la valeur observée d'une covariable  et sa valeur espérée au moment où un évènement se produit. 
 
