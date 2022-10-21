@@ -19,6 +19,31 @@ library(fontawesome)
 ```
 
 
+::: {.callout-important}  
+
+## Maj à venir sur les résidus de Schoenfeld [21 Octobre 2022]
+
+**Test simplifié versus test exact**    
+
+Depuis la version 3 du pkg `survival` le test permettant d'étudier la validé de l'hypothèse de constance des risques suite à l'estimation d'un modèle de Cox, est celui  proposé dans l'article de P.Grambsch et T.Therneau.  
+Jusqu'à cette version du pkg, une version simplifiée du test était implémenté. C'est également le cas actuellement dans les autres applications statistiques tels que Stata (`estat phtest`), Sas (`proc phreg`), Python (`lifelines`,`statmodels`). 
+
+Dans son principe le test (du score) n'est pas compliqué puisqu'il consiste à introduire une intéraction entre une fonction de la durée et un rapport de risque.  
+
+Différence entre le test simplifié et le test exact:   
+
+- ***Test simplifié***: La variance des résidus est celle de l'estimateur du rapport de risque de la covariable. Le test se réduit à une régression linéaire (ordinaire), la standardisation des résidus se fait en appliquant dans l'équation de score une variance moyenne. 
+- ***Test exact***: pour chaque résidu on calcule leur variance à partir de l'information de Fisher (dérivée de l'équation de score, ici juste sur les termes de la diagonale) . Le test consiste alors à estimer pour chaque covariable une régression linéaire généralisée. On peut retrouver les détails (très) techniques de la méthode dans l'[Article de Grambsch-Therneau](https://www.jstor.org/stable/2337123#metadata_info_tab_contents).   
+ 
+Pour les personnes qui utilisent R, le test "simplifié" a été supprimé du package, ce qui ne me semble pas du tout une bonne idée. Je donne néanmoins un moyen simple de le récupérer et de l'exécuter.  
+Sur quelques tests (données réelles et simulations réalisées avec le pkg `coxed`), le choix du test, simplifié ou exact, ne semble pas neutre **en particulier lorsqu'on travaille sur des durées discrètes ou groupées**... soit classiquement les données utilisées en sciences sociales. Se pose également un problème assez critique de reproductibilité, les résultats variants à ce jour d'une solution logicielle à une autre.  
+
+Commme si le choix de la fonction de la durée, elle même débattue dans la littérature, ne suffisait pas.  
+
+***D'ici la fin novembre, une note va être incluse au support pour donner des éléments plus précis sur la computation du test. Cela me permetrra d'ajoutés une section sera ajoutée sous formes d'annexes techniques, que j'ai souhaité réduire au maximum dans le corps du support. La sections dédiées au test et à la programmation feront également l'objet d'une modification***. J'indiquerai ici l'avancée de la maj, et laisserai cet avertissement plusieurs mois.  
+
+:::
+
 
 
 ::: {.callout-note icon=false}  

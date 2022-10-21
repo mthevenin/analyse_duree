@@ -299,18 +299,16 @@ On utilise la fonction **`cox.zph`** pour effectuer ce test.
 Le test peut utiliser plusieurs fonctions de la durée. Par défaut la fonction utilise $1-KM$, soit le complémentaire de l'estimateur de Kaplan-Meier (option `transform="km"`).
 
 
-::: callout-warning   
-Attention aux résultats entre le test de la v2 et de la v3 de `survival`. Les deux sont présentés, avec un test reposant sur une régression linéaire (OLS même si GLS préférable) entre les résidus de Schoenfeld et une fonction de la durée (ici f(t)=t). Pour illustrer le problème les résultats du test de Grambsch-Therneau sont donnés pour les deux versions.  
+::: callout-warning 
 
-Au delà des programmes, voici la seule explication qui accompagne le test de la version de 3 de survival
+## Mise à jour à venir: test simplifié et test exact
 
-> In versions of the package before survival3.0 the function computed a fast approximation to the score test. Later versions compute the actual score test.
+Attention aux résultats entre le test de la v2 et de la v3 de `survival`. Les deux sont présentés, avec un test reposant sur une régression linéaire entre les résidus de Schoenfeld et une fonction de la durée (ici f(t)=t): OLS dans le cas du test simplifié et GLS dans le cas du test exact. Le passage d'un test à l'autre ne me semble pas neutre du point de vue des données utilisées, en particulier celles qui mesurent la durée. Pour illustrer le problème les résultats du test de Grambsch-Therneau sont donnés pour les deux versions.  
 
-C'est un peu léger. 
 
 Pour l'instant je préconise de rester à la version antérieure du test, en raison de son lien très fort avec une régression linéaire entre les résidus standardisés et une fonction de la durée, mais également en termes de reproductibilité, les autres applications utilisant cette version originale. Je donne la marche à suivre pour exécuter ce test.  
 
-Il serait également bienvenu de préciser dans une analyse la version du test qui a été exécutée.
+Dans une analyse, je conseille de préciser dans une analyse la version du test qui a été exécutée. Le test simplifié est actuellement la seule solution dans Stata, Sas ou Python.
 :::
 
 
@@ -353,10 +351,9 @@ cox.zphold(coxfit, transform="identity")
 
 ::: callout-note
 
-## Régression linéaire sur les résidus de Schoenfeld
+## Régression linéaire ordinaire sur les résidus de Schoenfeld
 
-Estimé simplement à partir d'une OLS (normalement préféré une GLS pour tenir compte de l'autocorrélation des erreurs)
-
+Pour information, avec une OLS 
 
 ```{r, class.output="result"}
 resid= resid(coxfit, type="scaledsch")
@@ -382,7 +379,8 @@ paste("p-value pour age:",     age$coefficients[2,4])
 paste("p-value pour surgery:", surgery$coefficients[2,4])
 ```
 
-On est trés proche du test effectué avec la v2 de `survival`. 
+On est trés proche des résulats du test simplifié effectué avec la v2 de `survival`. Et c'est tout à fait normal.
+
 :::
 
 
