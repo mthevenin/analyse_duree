@@ -511,10 +511,10 @@ Important
 </div>
 <div class="callout-body-container callout-body">
 <p>Une maj va être réalisée en novembre, pour expliquer le plus clairement possible la différences entre le test simplifié (Stata, Sas, R jusqu’à la v3) et le test exact (R à partir de la V3).</p>
-<p>Résumé rapide: le test consiste à regarder la corrélation entre des résidus obtenus directement avec la fonction de score de la vraisemblanced partielle de Cox.</p>
+<p>Résumé rapide: le test consiste à regarder la corrélation entre des résidus obtenus directement avec la fonction de score de la vraisemblanc partielle de Cox.</p>
 <ul>
-<li>Test simplifié: simple corrélation obtenu par une régression linéaire par les mondres carrés ordinaires. Pour chaque covariable, on utilise la variance de son estimateur obtenu par le modèle.</li>
-<li>Test exact: corrélation obtenu par une régression linéaire par les mondres carrés généralisés. Pour chaque covariable, on calcule la variance du résidu après avoir calculé la matrice d’information de fisher (seulement les termes sur la diagonale). Le modèle linéaire généralisés vont prendre en compte l’autocorrélation des résidus inhérente à une analyse sur données temporelles.</li>
+<li>Test simplifié: simple corrélation obtenu par une régression linéaire par les moindres carrés ordinaires. Pour chaque covariable, on utilise la variance de son estimateur obtenu par le modèle.</li>
+<li>Test exact: corrélation obtenu par une régression linéaire par les mondres carrés généralisés. Pour chaque covariable, on calcule la variance du résidu après avoir calculé la matrice d’information de fisher (seulement les termes sur la diagonale). Les moindres carrés généralisés corrigeront la présence d’autocorrélations des résidus, possibles lorsqu’on utilise des données temporelles.</li>
 </ul>
 </div>
 </div>
@@ -1211,10 +1211,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb8-204"><a href="#cb8-204" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-205"><a href="#cb8-205" aria-hidden="true" tabindex="-1"></a>Une maj va être réalisée en novembre, pour expliquer le plus clairement possible la différences entre le test simplifié (Stata, Sas, R jusqu'à la v3) et le test exact (R à partir de la V3).  </span>
 <span id="cb8-206"><a href="#cb8-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a>Résumé rapide: le test consiste à regarder la corrélation entre des résidus obtenus directement avec la fonction de score de la vraisemblanced partielle de Cox.  </span>
+<span id="cb8-207"><a href="#cb8-207" aria-hidden="true" tabindex="-1"></a>Résumé rapide: le test consiste à regarder la corrélation entre des résidus obtenus directement avec la fonction de score de la vraisemblanc partielle de Cox.  </span>
 <span id="cb8-208"><a href="#cb8-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-209"><a href="#cb8-209" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test simplifié: simple corrélation obtenu par une régression linéaire par les mondres carrés ordinaires. Pour chaque covariable, on utilise la variance de son estimateur obtenu par le modèle.</span>
-<span id="cb8-210"><a href="#cb8-210" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test exact:  corrélation obtenu par une régression linéaire par les mondres carrés généralisés. Pour chaque covariable, on calcule la variance du résidu après avoir calculé la matrice d'information de fisher (seulement les termes sur la diagonale). Le modèle linéaire généralisés vont prendre en compte l'autocorrélation des résidus inhérente à une analyse sur données temporelles.</span>
+<span id="cb8-209"><a href="#cb8-209" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test simplifié: simple corrélation obtenu par une régression linéaire par les moindres carrés ordinaires. Pour chaque covariable, on utilise la variance de son estimateur obtenu par le modèle.</span>
+<span id="cb8-210"><a href="#cb8-210" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Test exact:  corrélation obtenu par une régression linéaire par les mondres carrés généralisés. Pour chaque covariable, on calcule la variance du résidu après avoir calculé la matrice d'information de fisher (seulement les termes sur la diagonale). Les moindres carrés généralisés corrigeront la présence d'autocorrélations des résidus, possibles lorsqu'on utilise des données temporelles.</span>
 <span id="cb8-211"><a href="#cb8-211" aria-hidden="true" tabindex="-1"></a>::: </span>
 <span id="cb8-212"><a href="#cb8-212" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-213"><a href="#cb8-213" aria-hidden="true" tabindex="-1"></a></span>

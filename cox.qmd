@@ -204,10 +204,10 @@ Avec la librairie `lifelines`, le modèle est estimé avec la fonction **`CoxPHF
 
 Une maj va être réalisée en novembre, pour expliquer le plus clairement possible la différences entre le test simplifié (Stata, Sas, R jusqu'à la v3) et le test exact (R à partir de la V3).  
 
-Résumé rapide: le test consiste à regarder la corrélation entre des résidus obtenus directement avec la fonction de score de la vraisemblanced partielle de Cox.  
+Résumé rapide: le test consiste à regarder la corrélation entre des résidus obtenus directement avec la fonction de score de la vraisemblanc partielle de Cox.  
 
-- Test simplifié: simple corrélation obtenu par une régression linéaire par les mondres carrés ordinaires. Pour chaque covariable, on utilise la variance de son estimateur obtenu par le modèle.
-- Test exact:  corrélation obtenu par une régression linéaire par les mondres carrés généralisés. Pour chaque covariable, on calcule la variance du résidu après avoir calculé la matrice d'information de fisher (seulement les termes sur la diagonale). Le modèle linéaire généralisés vont prendre en compte l'autocorrélation des résidus inhérente à une analyse sur données temporelles.
+- Test simplifié: simple corrélation obtenu par une régression linéaire par les moindres carrés ordinaires. Pour chaque covariable, on utilise la variance de son estimateur obtenu par le modèle.
+- Test exact:  corrélation obtenu par une régression linéaire par les mondres carrés généralisés. Pour chaque covariable, on calcule la variance du résidu après avoir calculé la matrice d'information de fisher (seulement les termes sur la diagonale). Les moindres carrés généralisés corrigeront la présence d'autocorrélations des résidus, possibles lorsqu'on utilise des données temporelles.
 ::: 
 
 
