@@ -202,7 +202,12 @@ Avec la librairie `lifelines`, le modèle est estimé avec la fonction **`CoxPHF
 
 ::: callout-important
 
-Une maj va être réalisé en novembre, pour préciser le plus clairement possible la différences entre le test simplifié (Stata, Sas, R jusqu'à la v3) et le test exact (R à partir de la V3).
+Une maj va être réalisée en novembre, pour expliquer le plus clairement possible la différences entre le test simplifié (Stata, Sas, R jusqu'à la v3) et le test exact (R à partir de la V3).  
+
+Résumé rapide: le test consiste à regarder la corrélation entre des résidus obtenus directement avec la fonction de score de la vraisemblanced partielle de Cox.  
+
+- Test simplifié: simple corrélation obtenu par une régression linéaire par les mondres carrés ordinaires. Pour chaque covariable, on utilise la variance de son estimateur obtenu par le modèle.
+- Test exact:  corrélation obtenu par une régression linéaire par les mondres carrés généralisés. Pour chaque covariable, on calcule la variance du résidu après avoir calculé la matrice d'information de fisher (seulement les termes sur la diagonale). Le modèle linéaire généralisés vont prendre en compte l'autocorrélation des résidus inhérente à une analyse sur données temporelles.
 ::: 
 
 
@@ -212,7 +217,7 @@ Une maj va être réalisé en novembre, pour préciser le plus clairement possib
 *	Il est calculé au moment où l’évènement s’est produit.
 *	La somme des résidus pour chaque covariable est égale à 0 (propriété de l’équation de score à l’équilibre).
 *	On utilise généralement les résidus de Schoenfeld « standardisés » - par leur variance - pour tenir compte du fait que le risk set diminue au cours du temps.
-*	Pour une observation dont l’évènement s’est produit en t_i, le *résidu brut de Schoenfeld* pour la covariable $X_k$, après estimation du modèle, est égal à:
+*	Pour une observation dont l’évènement s’est produit en $t_i$, le *résidu brut de Schoenfeld* pour la covariable $X_k$, après estimation du modèle, est égal à:
   
 $$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{jk}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}= X_{ik} - E(X_k)$$
 
