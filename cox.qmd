@@ -249,9 +249,6 @@ $$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{jk}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X
       global test |                      8.76        3         0.0327
       ----------------------------------------------------------------
       
-**Se reporter à la section sur R pour les questions de compatibilité du test entre les v2 et v3 de ** `survival`**.  
-Point essentiel lorsqu'on travaille sur des durées groupées ou discrètes**       
-      
 ```
 :::
 
