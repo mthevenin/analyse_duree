@@ -308,6 +308,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
       </ul>
   </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false"><strong>Annexes</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./annexes.html" class="sidebar-item-text sidebar-link">Annexes</a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -335,7 +351,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Tests de comparaison</h1>
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Tests de comparaison</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -641,6 +657,8 @@ Sur un horizon de 995 jours, ces individus peuvent espérer vivre 735 jours en m
 <p><img src="images/image9rmst.png" class="img-fluid" style="width:90.0%"></p>
 
 
+<!-- -->
+
 </section>
 </section>
 
@@ -710,6 +728,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
@@ -789,7 +858,342 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         <span class="nav-page-text">Introduction</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Tests de comparaison"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>Les tests d'égalités des fonctions de survie entre différentes valeurs d'une covariable sont calculés à partir de la méthode de Kaplan Meier.  </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;BR&gt;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>L'utilisation du test correspond à la nécessité de déterminer si une même distribution gouverne les évènements observés dans les différentes  strates.  </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>Attention: pas de test possible sur des variables continues. Il faut donc prévoir des regroupements pour les transformer en variable ordinale.    </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>Deux méthodes sont utilisées:  </span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>La plus ancienne et la plus diffusée: test  dits du **log-rank**). </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Plus récente et (hélas) moins difusée: comparaison des **RMST** (*Restricted Mean of Survival Time*).</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a><span class="fu"># Tests du log-rank</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>Il s'agit d'une série de tests qui répondent à la même logique, la seule différence réside dans le poids accordé au début ou à la fin de la période d'observation. Par ailleurs ces différents tests sont plus ou moins sensibles à la distribution des censures à droites entre les sous échantillons.  </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>Ces tests entrent dans le cadre des tests du Khi2, même si formellement ils relèvent des techniques dites de rang.     </span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>Il s'agira donc de comparer des effectifs observés à des effectifs espérés à chaque temps d'évènement. La principale différence réside dans le calcul de la variance de la statistique du test qui, ici, suit une loi hypergéométrique.  </span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>**Principe de calcul des effectifs - évènements - observés et espérés pour deux groupes**</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Effectifs observés en $t_i$**: $o_{i1}$ et $o_{i2}$ sont égaux à $d_{i1}$ et $d_{i2}$, et leur somme pour tous les temps d'évènement à $O_1$ et $O_2$.</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Effectifs expérés** (hypothèse nulle $H_0$): comme pour une statistique du $\chi^2$ on se base sur les marges, avec le risque set ($R_i$) en $t_i$ pour dénombrer les effectifs, soit $e_{i1}=R_{i1}\times\frac{d_i}{R_i}$ et $e_{i2}=R_{i2}\times\frac{d_2}{R_i}$. Leur somme pour tous les temps d'évènement est égale à $E_1$ et $E_2$. Le principe de calcul des effectifs observés reposent donc  sur l'hypothèse d'un rapport des risques toujours égal à 1 au cours du temps (*hypothèse fondamentale de risques proportionnels*).</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Statistique du log-rank**: $(O_1 - E_1) = -(O_2 - E_2)$. </span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Statistique de test**: sous $H_0$, $\frac{(O_1 - E_1)^2}{\sum{v_i}}$, avec $v_i$ la variance de $(o_{i1} - e_{i2})$, suis un $\chi^2(1)$.</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>Si on teste la différence de $g$ fonctions de survie, la statistique de test suis un $\chi^2(g-1)$.  </span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>**Les principaux tests de type log-rank**  </span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>Le principe de construction des effectifs observés et espérés reste le même dans chaque test, les différences résident dans les pondérations ($w_i$) qui prennent en compte, de manière différente, la taille de la population soumise au risque à chaque durée où au moins un évènement est observé.    </span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Test du log-rank**: $w_i=1$  </span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>  Il accorde le même poids à toutes les durées d'évènement. C'est le test standard, le plus utilisé. </span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Test de Wilconxon-Breslow-Grehan**: $w_i=R_i$    </span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  Les écarts entre effectifs observés et espérés sont pondérés par la population soumise à risque en $t_i$. Le test accorde plus de poids au début de la période analysée, et il est sensible aux différences de distributions entre les strates des observations censurées.</span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Test de Tarone-Ware**: $w_i=\sqrt{R_i}$   </span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  Variante du test précédent, il atténue le poids accordé aux évènements au début de la période d'observation. Il est par ailleurs moins sensible au problème de la distribution des censures entre les strates. </span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Test de Peto-Peto** : $w_i=S_i$  </span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  La pondération est une variante de la fonction de survie KM (avec $R_i=R_i+1$). Le test n'est pas sensible au problème de distribution des censures. </span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Test de Fleming-Harington**: $w_i=(S_i)^p\times(1-S_i)^{q}$ avec $0\leq{p}\leq{1}$ </span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  Il permet de paramétrer le poids accordé au début où à la fin de temps d'observation. Si $p=q=0$ on retrouve le test du log-rank.    </span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>**En pratique/remarques**:  </span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Les tests du log-rank sont sensibles à l’hypothèse de risques proportionnels (voir **modèle semi-paramétrique de Cox**). En pratique si des courbes de séjours se croisent, il est déconseillé de les utiliser. Cela ne signifie pas que si les courbes ne se croisent pas, l’hypothèse de proportionnalité des risques est respectée : des rapports de risque peuvent au cours du temps s’accentuer, se réduire ou le cas échant s’inverser (typique d’un croisement).</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Effectuer un test global (multiple/omnibus) sur un nombre important de groupes (ou &gt;2) peut rendre le test très facilement significatif. Il peut être intéressant de tester des courbes deux à deux (idem qu’une régression avec covariable discrète), en conservant un seul degré de liberté. Des méthodes de correction du test multiple sont possibles. </span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## R-Stata-Sas-Python   </span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a><span class="fu">### R </span></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>On utilise la fonction **`survdiff`** de la librairie `survival`. Le résultat du test de Peto-Peto est affiché par défaut (`rho=1`). Si on souhaite utiliser le test non pondéré, on ajoute l’option `rho=0`. Pour obtenir le résultat d'un test multiple corrigé (plus d’un degré de liberté), on peut utiliser la fonction **`pairwise_survdiff`** de la librairie **`survminer`**. Cette fonction permet d'obtenir des tests 2 à 2 si une variable a plus de deux groupes.  </span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>Je conseille de rester sur l'option ***Peto-Peto*** et dans le cas d'une variable à plus de deux modalités, d'utiliser la fonction de <span class="in">`survminer`</span> </span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Stata </span></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>On utilise la commande **`sts test`** avec le nom de la version du test: <span class="in">`peto`</span>, <span class="in">`wilcoxon`</span> . Sans préciser le nom de la variante, le test non pondéré est exécuté.</span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sas</span></span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>Le test non pondéré et la version Wilcoxon sont données avec l’option **`strata`** de la `proc lifetest`. Attention : ne jamais utiliser la version *LR Test* qui est biaisée. Pour obtenir d’autres versions du test du log-rank, on ajoute **`/test=all`** à l’option <span class="in">`strata`</span>.</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python</span></span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>Avec la librairie <span class="in">`lifelines`</span>, on utilise la fonction **`logrank_test`**. Quatre variantes sont disponibles (Wilcoxon, Tarone-Ware, Peto-Peto et Fleming-Harrigton). On peut également utiliser la fonction **`duration.survdiff`** de <span class="in">`statmodels`</span> (non pondéré, Wilcoxon - appelé ici Breslow- et Tarone-Ware).  </span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## Application </span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>On compare ici l'effet du pontage sur le risque de décéder depuis l'inscription dans le registre de greffe. </span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/Image9.png)</span></span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>Log<span class="sc">-</span>rank test <span class="cf">for</span> equality of survivor functions</span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>        <span class="sc">|</span>   Events         Events</span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>surgery <span class="sc">|</span>  observed       expected</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="sc">--------+-------------------------</span></span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>       <span class="sc">|</span>        <span class="dv">69</span>          <span class="fl">60.34</span></span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="sc">|</span>         <span class="dv">6</span>          <span class="fl">14.66</span></span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a><span class="sc">--------+-------------------------</span></span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>Total   <span class="sc">|</span>        <span class="dv">75</span>          <span class="fl">75.00</span></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>              <span class="fu">chi2</span>(<span class="dv">1</span>) <span class="ot">=</span>       <span class="fl">6.59</span></span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>              Pr<span class="sc">&gt;</span>chi2 <span class="ot">=</span>     <span class="fl">0.0103</span></span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="fu">Wilcoxon</span> (Breslow) test <span class="cf">for</span> equality of survivor functions</span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>        <span class="sc">|</span>   Events         Events        Sum of</span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>surgery <span class="sc">|</span>  observed       expected        ranks</span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a><span class="sc">--------+--------------------------------------</span></span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>       <span class="sc">|</span>        <span class="dv">69</span>          <span class="fl">60.34</span>          <span class="dv">623</span></span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="sc">|</span>         <span class="dv">6</span>          <span class="fl">14.66</span>         <span class="sc">-</span><span class="dv">623</span></span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a><span class="sc">--------+--------------------------------------</span></span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>Total   <span class="sc">|</span>        <span class="dv">75</span>          <span class="fl">75.00</span>            <span class="dv">0</span></span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>              <span class="fu">chi2</span>(<span class="dv">1</span>) <span class="ot">=</span>       <span class="fl">8.99</span></span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a>              Pr<span class="sc">&gt;</span>chi2 <span class="ot">=</span>     <span class="fl">0.0027</span></span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a>Tarone<span class="sc">-</span>Ware test <span class="cf">for</span> equality of survivor functions</span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a>        <span class="sc">|</span>   Events         Events        Sum of</span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a>surgery <span class="sc">|</span>  observed       expected        ranks</span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a><span class="sc">--------+--------------------------------------</span></span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>       <span class="sc">|</span>        <span class="dv">69</span>          <span class="fl">60.34</span>    <span class="fl">73.111827</span></span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="sc">|</span>         <span class="dv">6</span>          <span class="fl">14.66</span>   <span class="sc">-</span><span class="fl">73.111827</span></span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a><span class="sc">--------+--------------------------------------</span></span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a>Total   <span class="sc">|</span>        <span class="dv">75</span>          <span class="fl">75.00</span>            <span class="dv">0</span></span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>              <span class="fu">chi2</span>(<span class="dv">1</span>) <span class="ot">=</span>       <span class="fl">8.46</span></span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>              Pr<span class="sc">&gt;</span>chi2 <span class="ot">=</span>     <span class="fl">0.0036</span></span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a>Peto<span class="sc">-</span>Peto test <span class="cf">for</span> equality of survivor functions</span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a>        <span class="sc">|</span>   Events         Events        Sum of</span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a>surgery <span class="sc">|</span>  observed       expected        ranks</span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a><span class="sc">--------+--------------------------------------</span></span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a><span class="dv">0</span>       <span class="sc">|</span>        <span class="dv">69</span>          <span class="fl">60.34</span>    <span class="fl">6.0529913</span></span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>       <span class="sc">|</span>         <span class="dv">6</span>          <span class="fl">14.66</span>   <span class="sc">-</span><span class="fl">6.0529913</span></span>
+<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a><span class="sc">--------+--------------------------------------</span></span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a>Total   <span class="sc">|</span>        <span class="dv">75</span>          <span class="fl">75.00</span>            <span class="dv">0</span></span>
+<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a>              <span class="fu">chi2</span>(<span class="dv">1</span>) <span class="ot">=</span>       <span class="fl">8.66</span></span>
+<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a>              Pr<span class="sc">&gt;</span>chi2 <span class="ot">=</span>     <span class="fl">0.0033</span></span>
+<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a>Les résultats font apparaître que l’opération permet d’allonger la durée de survie des personnes.  </span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a><span class="fu"># Comparaison des RMST </span></span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>**RMST**: *Restricted Mean of Survival Time*  </span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a>La comparaison des RMST est une alternative pertinente aux tests du log-rank car elle ne repose pas sur des hypothèses contraignantes (proportionnalité des risques, distribution des censures), et permet une lecture vivante basée sur des espérances de séjour et non sur la lecture d’une simple p-value traduisant l’homogénéité ou non des fonctions de séjour. Par ailleurs les comparaisons sont souples, on peut choisir un ou plusieurs points d’horizon pour alimenter l’analyse.  </span>
+<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a>**Principe**  </span>
+<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>L’aire sous la fonction de survie représente la durée moyenne d’attente jusqu'à l’évènement, soit une espérance de survie.</span>
+<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>En présence de censure à droite, il faut borner la durée maximale $t^*&lt;\infty$. L'espérance de survie s'interprète donc sur un horizon fini.  On est très proche d’une mesure en analyse démographique type « espérance de vie partielle ».</span>
+<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$RMST =\int_0^{t^*}S(t)dt$. </span>
+<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>On peut facilement comparer les RMST de deux groupes, en termes de différence ou de ratio. </span>
+<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Par défaut on définit généralement $t^*$ à partir le temps du dernier évènement observé.  Il est néanmoins possible de calculer le RMST sur des intervalles plus court, ce qui lui permet une véritable souplesse au niveau de l’analyse. </span>
+<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a><span class="fu">## R-Stata-Sas-Python   </span></span>
+<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a>Attention, selon les logiciels la durée max par défaut n'est pas la même. Pour R et Sas, il s'agit du moment où le dernier évènement à été observé sur l'ensemble de l'échantillon, alors que pour Stata si on compare le moment du dernier évènement observé entre les deux groupes, c'est le plus court qui fait office de durée maximale. Cela affectera légèrement la valeur des Rmst estimées par défaut.  </span>
+<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a>Pour l'exemple, la durée maximale utilisée par R/Sas est de 1407 jours alors que pour Stata elle est de 995 jours.</span>
+<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
+<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a><span class="fu">### R  </span></span>
+<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a>Librairie **`SurvRm2`**. Programmée par les mêmes personnes que la commande Stata, la fonction proposée n'est pas très souple.</span>
+<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a><span class="fu">### Stata</span></span>
+<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a>Commande externe **`strmst2`**. La plus ancienne fonction proposée par les logiciels. Au final plus limitée que la solution Sas. J’ai programmé une commande, <span class="in">`diffrmst`</span>, qui représente graphiquement les estimations des Rmst pour chaque temps d’évènement, leurs différences et les p-value issues des comparaisons. </span>
+<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a><span class="fu">### SAS </span></span>
+<span id="cb4-190"><a href="#cb4-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-191"><a href="#cb4-191" aria-hidden="true" tabindex="-1"></a>Disponible depuis la version 15.1 de SAS/Stat (fin 2018). Les estimations et le résultat du test de comparaison sont récupérables très simplement dans une <span class="in">`proc lifetest`</span>, avec en option **`plots=(rmst)**` . Bien que sortie tardivement par rapport Stata et R, les résultats sont particulièrement complets.</span>
+<span id="cb4-192"><a href="#cb4-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-193"><a href="#cb4-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-194"><a href="#cb4-194" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python</span></span>
+<span id="cb4-195"><a href="#cb4-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-196"><a href="#cb4-196" aria-hidden="true" tabindex="-1"></a>Estimation un peu pénible. A partir de l'estimateur KM obtenu avec la fonction <span class="in">`KaplanMeierFitter`</span> de <span class="in">`lifelines`</span>, on peut obtenir les RMST avec la fonction  <span class="in">`restricted_mean_survival_time`</span>. </span>
+<span id="cb4-197"><a href="#cb4-197" aria-hidden="true" tabindex="-1"></a>On peut tracer les fonctions, en revanche le test de comparaison n'est pas implémenté.</span>
+<span id="cb4-198"><a href="#cb4-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-199"><a href="#cb4-199" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-200"><a href="#cb4-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-201"><a href="#cb4-201" aria-hidden="true" tabindex="-1"></a><span class="fu">## Application</span></span>
+<span id="cb4-202"><a href="#cb4-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-203"><a href="#cb4-203" aria-hidden="true" tabindex="-1"></a>::: caption-warning</span>
+<span id="cb4-204"><a href="#cb4-204" aria-hidden="true" tabindex="-1"></a>Les résultats qui suivent ont été obtenu avec **Stata**. La valeur par défaut de $t_max$ est légèrement différente, mais les conclusions sont identiques. </span>
+<span id="cb4-205"><a href="#cb4-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-206"><a href="#cb4-206" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb4-207"><a href="#cb4-207" aria-hidden="true" tabindex="-1"></a>Restricted Mean Survival <span class="fu">Time</span> (RMST) by arm</span>
+<span id="cb4-208"><a href="#cb4-208" aria-hidden="true" tabindex="-1"></a><span class="sc">-----------------------------------------------------------</span></span>
+<span id="cb4-209"><a href="#cb4-209" aria-hidden="true" tabindex="-1"></a>   Group <span class="sc">|</span>  Estimate    Std. Err.      [<span class="dv">95</span>% Conf. Interval]</span>
+<span id="cb4-210"><a href="#cb4-210" aria-hidden="true" tabindex="-1"></a><span class="sc">---------+-------------------------------------------------</span></span>
+<span id="cb4-211"><a href="#cb4-211" aria-hidden="true" tabindex="-1"></a>   arm <span class="dv">1</span> <span class="sc">|</span>   <span class="fl">734.758</span>     <span class="fl">133.478</span>      <span class="fl">473.145</span>      <span class="fl">996.370</span></span>
+<span id="cb4-212"><a href="#cb4-212" aria-hidden="true" tabindex="-1"></a>   arm <span class="dv">0</span> <span class="sc">|</span>   <span class="fl">310.169</span>      <span class="fl">43.158</span>      <span class="fl">225.581</span>      <span class="fl">394.757</span></span>
+<span id="cb4-213"><a href="#cb4-213" aria-hidden="true" tabindex="-1"></a><span class="sc">-----------------------------------------------------------</span></span>
+<span id="cb4-214"><a href="#cb4-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-215"><a href="#cb4-215" aria-hidden="true" tabindex="-1"></a>Between<span class="sc">-</span>group <span class="fu">contrast</span> (arm <span class="dv">1</span> versus arm <span class="dv">0</span>) </span>
+<span id="cb4-216"><a href="#cb4-216" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------</span></span>
+<span id="cb4-217"><a href="#cb4-217" aria-hidden="true" tabindex="-1"></a>           Contrast  <span class="sc">|</span>  Estimate       [<span class="dv">95</span>% Conf. Interval]     P<span class="sc">&gt;</span><span class="er">|</span>z<span class="sc">|</span></span>
+<span id="cb4-218"><a href="#cb4-218" aria-hidden="true" tabindex="-1"></a><span class="sc">---------------------+--------------------------------------------------</span></span>
+<span id="cb4-219"><a href="#cb4-219" aria-hidden="true" tabindex="-1"></a><span class="fu">RMST</span> (arm <span class="dv">1</span> <span class="sc">-</span> arm <span class="dv">0</span>) <span class="sc">|</span>   <span class="fl">424.589</span>      <span class="fl">149.641</span>      <span class="fl">699.537</span>      <span class="fl">0.002</span></span>
+<span id="cb4-220"><a href="#cb4-220" aria-hidden="true" tabindex="-1"></a><span class="fu">RMST</span> (arm <span class="dv">1</span> <span class="sc">/</span> arm <span class="dv">0</span>) <span class="sc">|</span>     <span class="fl">2.369</span>        <span class="fl">1.513</span>        <span class="fl">3.710</span>      <span class="fl">0.000</span></span>
+<span id="cb4-221"><a href="#cb4-221" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------</span></span>
+<span id="cb4-222"><a href="#cb4-222" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-223"><a href="#cb4-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-224"><a href="#cb4-224" aria-hidden="true" tabindex="-1"></a>Ici $t^*$ est égal à 995 jours, soit la durée qui correspond au dernier décès observé lorsqu'une personne a été opérée pour un pontage (surgery=1).  </span>
+<span id="cb4-225"><a href="#cb4-225" aria-hidden="true" tabindex="-1"></a>Sur un horizon de 995 jours, ces individus peuvent espérer vivre 735 jours en moyenne, contre 310 jours pour les autres.  La durée moyenne de survie est donc deux fois plus importante pour les personnes opérées d'un pontage (rapport des Rmst = 2.3 ), soit une différence de 424 jours.</span>
+<span id="cb4-226"><a href="#cb4-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-227"><a href="#cb4-227" aria-hidden="true" tabindex="-1"></a>*Rmst et différences de Rmst à tous les points d'évènement jusqu'à $t_max$*</span>
+<span id="cb4-228"><a href="#cb4-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-229"><a href="#cb4-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb4-230"><a href="#cb4-230" aria-hidden="true" tabindex="-1"></a>  <span class="sc">+--------------------------------------------------------------------------+</span></span>
+<span id="cb4-231"><a href="#cb4-231" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span> _time     _rmst1     _rmst0      _diff          _l         _u         _p <span class="sc">|</span></span>
+<span id="cb4-232"><a href="#cb4-232" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-233"><a href="#cb4-233" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>     <span class="dv">1</span>          <span class="dv">1</span>          <span class="dv">1</span>          <span class="dv">0</span>           <span class="dv">0</span>          <span class="dv">0</span>          . <span class="sc">|</span></span>
+<span id="cb4-234"><a href="#cb4-234" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>     <span class="dv">2</span>          <span class="dv">2</span>   <span class="fl">1.989011</span>    .<span class="dv">010989</span>     .<span class="dv">010989</span>    .<span class="dv">010989</span>          . <span class="sc">|</span>   </span>
+<span id="cb4-235"><a href="#cb4-235" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>     <span class="dv">3</span>          <span class="dv">3</span>   <span class="fl">2.945055</span>   .<span class="dv">0549451</span>   <span class="sc">-</span>.<span class="dv">0196757</span>   .<span class="dv">1295658</span>   .<span class="dv">1489731</span> <span class="sc">|</span></span>
+<span id="cb4-236"><a href="#cb4-236" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>     <span class="dv">5</span>          <span class="dv">5</span>   <span class="fl">4.791209</span>   .<span class="dv">2087912</span>    .<span class="dv">0256584</span>   .<span class="dv">3919241</span>   .<span class="dv">0254456</span> <span class="sc">|</span></span>
+<span id="cb4-237"><a href="#cb4-237" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="fl">5.1</span>        <span class="fl">5.1</span>   <span class="fl">4.882418</span>   .<span class="dv">2175824</span>    .<span class="dv">0240373</span>   .<span class="dv">4111275</span>   .<span class="dv">0275679</span> <span class="sc">|</span></span>
+<span id="cb4-238"><a href="#cb4-238" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-239"><a href="#cb4-239" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>     <span class="dv">6</span>          <span class="dv">6</span>   <span class="fl">5.693407</span>   .<span class="dv">3065934</span>    .<span class="dv">0643487</span>   .<span class="dv">5488381</span>   .<span class="dv">0131162</span> <span class="sc">|</span></span>
+<span id="cb4-240"><a href="#cb4-240" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>     <span class="dv">8</span>          <span class="dv">8</span>   <span class="fl">7.451648</span>   .<span class="dv">5483516</span>    .<span class="dv">1860869</span>   .<span class="dv">9106163</span>   .<span class="dv">0030096</span> <span class="sc">|</span></span>
+<span id="cb4-241"><a href="#cb4-241" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>     <span class="dv">9</span>          <span class="dv">9</span>    <span class="fl">8.31978</span>   .<span class="dv">6802198</span>    .<span class="dv">2523926</span>   <span class="fl">1.108047</span>   .<span class="dv">0018318</span> <span class="sc">|</span></span>
+<span id="cb4-242"><a href="#cb4-242" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">11</span>         <span class="dv">11</span>   <span class="fl">10.03407</span>    .<span class="dv">965934</span>    .<span class="dv">4072903</span>   <span class="fl">1.524578</span>   .<span class="dv">0007017</span> <span class="sc">|</span></span>
+<span id="cb4-243"><a href="#cb4-243" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">12</span>         <span class="dv">12</span>   <span class="fl">10.89121</span>   <span class="fl">1.108791</span>    .<span class="dv">4836155</span>   <span class="fl">1.733967</span>   .<span class="dv">0005087</span> <span class="sc">|</span></span>
+<span id="cb4-244"><a href="#cb4-244" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-245"><a href="#cb4-245" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">16</span>         <span class="dv">16</span>   <span class="fl">14.27525</span>   <span class="fl">1.724747</span>    .<span class="dv">8259398</span>   <span class="fl">2.623554</span>   .<span class="dv">0001692</span> <span class="sc">|</span></span>
+<span id="cb4-246"><a href="#cb4-246" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">17</span>         <span class="dv">17</span>   <span class="fl">15.08787</span>   <span class="fl">1.912131</span>    .<span class="dv">9277063</span>   <span class="fl">2.896555</span>   .<span class="dv">0001407</span> <span class="sc">|</span></span>
+<span id="cb4-247"><a href="#cb4-247" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">18</span>         <span class="dv">18</span>   <span class="fl">15.88935</span>   <span class="fl">2.110646</span>     <span class="fl">1.05301</span>   <span class="fl">3.168283</span>   .<span class="dv">0000918</span> <span class="sc">|</span></span>
+<span id="cb4-248"><a href="#cb4-248" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">21</span>         <span class="dv">21</span>   <span class="fl">18.26041</span>   <span class="fl">2.739589</span>    <span class="fl">1.458002</span>   <span class="fl">4.021176</span>   .<span class="dv">0000279</span> <span class="sc">|</span></span>
+<span id="cb4-249"><a href="#cb4-249" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">28</span>         <span class="dv">28</span>   <span class="fl">23.63703</span>   <span class="fl">4.362966</span>    <span class="fl">2.526501</span>   <span class="fl">6.199431</span>   <span class="fl">3.22e-06</span> <span class="sc">|</span></span>
+<span id="cb4-250"><a href="#cb4-250" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-251"><a href="#cb4-251" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">30</span>         <span class="dv">30</span>   <span class="fl">25.15095</span>   <span class="fl">4.849051</span>    <span class="fl">2.842812</span>    <span class="fl">6.85529</span>   <span class="fl">2.17e-06</span> <span class="sc">|</span></span>
+<span id="cb4-252"><a href="#cb4-252" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">31</span>         <span class="dv">31</span>   <span class="fl">25.89677</span>   <span class="fl">5.103226</span>    <span class="fl">3.014868</span>   <span class="fl">7.191583</span>   <span class="fl">1.67e-06</span> <span class="sc">|</span></span>
+<span id="cb4-253"><a href="#cb4-253" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">32</span>         <span class="dv">32</span>    <span class="fl">26.6426</span>     <span class="fl">5.3574</span>    <span class="fl">3.186886</span>   <span class="fl">7.527915</span>   <span class="fl">1.31e-06</span> <span class="sc">|</span></span>
+<span id="cb4-254"><a href="#cb4-254" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">35</span>         <span class="dv">35</span>   <span class="fl">28.84618</span>   <span class="fl">6.153824</span>    <span class="fl">3.736433</span>   <span class="fl">8.571216</span>   <span class="fl">6.06e-07</span> <span class="sc">|</span></span>
+<span id="cb4-255"><a href="#cb4-255" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">36</span>         <span class="dv">36</span>    <span class="fl">29.5694</span>     <span class="fl">6.4306</span>    <span class="fl">3.929635</span>   <span class="fl">8.931564</span>   <span class="fl">4.67e-07</span> <span class="sc">|</span></span>
+<span id="cb4-256"><a href="#cb4-256" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-257"><a href="#cb4-257" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">37</span>         <span class="dv">37</span>   <span class="fl">30.28132</span>   <span class="fl">6.718675</span>    <span class="fl">4.135427</span>   <span class="fl">9.301923</span>   <span class="fl">3.44e-07</span> <span class="sc">|</span></span>
+<span id="cb4-258"><a href="#cb4-258" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">39</span>         <span class="dv">39</span>   <span class="fl">31.68257</span>   <span class="fl">7.317427</span>    <span class="fl">4.569757</span>    <span class="fl">10.0651</span>   <span class="fl">1.79e-07</span> <span class="sc">|</span></span>
+<span id="cb4-259"><a href="#cb4-259" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">40</span>         <span class="dv">40</span>   <span class="fl">32.37189</span>   <span class="fl">7.628103</span>    <span class="fl">4.797789</span>   <span class="fl">10.45842</span>   <span class="fl">1.28e-07</span> <span class="sc">|</span></span>
+<span id="cb4-260"><a href="#cb4-260" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">43</span>         <span class="dv">43</span>   <span class="fl">34.37207</span>   <span class="fl">8.627934</span>    <span class="fl">5.552385</span>   <span class="fl">11.70349</span>   <span class="fl">3.83e-08</span> <span class="sc">|</span></span>
+<span id="cb4-261"><a href="#cb4-261" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">45</span>         <span class="dv">45</span>   <span class="fl">35.68291</span>    <span class="fl">9.31709</span>     <span class="fl">6.07508</span>    <span class="fl">12.5591</span>   <span class="fl">1.77e-08</span> <span class="sc">|</span></span>
+<span id="cb4-262"><a href="#cb4-262" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-263"><a href="#cb4-263" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">50</span>         <span class="dv">50</span>   <span class="fl">38.90352</span>   <span class="fl">11.09648</span>    <span class="fl">7.431942</span>   <span class="fl">14.76102</span>   <span class="fl">2.94e-09</span> <span class="sc">|</span></span>
+<span id="cb4-264"><a href="#cb4-264" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">51</span>         <span class="dv">51</span>   <span class="fl">39.53634</span>   <span class="fl">11.46366</span>    <span class="fl">7.711818</span>    <span class="fl">15.2155</span>   <span class="fl">2.12e-09</span> <span class="sc">|</span></span>
+<span id="cb4-265"><a href="#cb4-265" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">53</span>         <span class="dv">53</span>   <span class="fl">40.77938</span>   <span class="fl">12.22061</span>    <span class="fl">8.298259</span>   <span class="fl">16.14297</span>   <span class="fl">1.02e-09</span> <span class="sc">|</span></span>
+<span id="cb4-266"><a href="#cb4-266" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">58</span>         <span class="dv">58</span>   <span class="fl">43.83049</span>   <span class="fl">14.16951</span>     <span class="fl">9.81571</span>   <span class="fl">18.52331</span>   <span class="fl">1.79e-10</span> <span class="sc">|</span></span>
+<span id="cb4-267"><a href="#cb4-267" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">61</span>         <span class="dv">61</span>   <span class="fl">45.62725</span>   <span class="fl">15.37275</span>    <span class="fl">10.75502</span>   <span class="fl">19.99047</span>   <span class="fl">6.81e-11</span> <span class="sc">|</span></span>
+<span id="cb4-268"><a href="#cb4-268" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-269"><a href="#cb4-269" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">66</span>         <span class="dv">66</span>   <span class="fl">48.56535</span>   <span class="fl">17.43465</span>    <span class="fl">12.37503</span>   <span class="fl">22.49426</span>   <span class="fl">1.44e-11</span> <span class="sc">|</span></span>
+<span id="cb4-270"><a href="#cb4-270" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">68</span>         <span class="dv">68</span>   <span class="fl">49.71799</span>   <span class="fl">18.28201</span>    <span class="fl">13.04371</span>    <span class="fl">23.5203</span>   <span class="fl">7.90e-12</span> <span class="sc">|</span></span>
+<span id="cb4-271"><a href="#cb4-271" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">69</span>         <span class="dv">69</span>   <span class="fl">50.27171</span>   <span class="fl">18.72829</span>    <span class="fl">13.40325</span>   <span class="fl">24.05333</span>   <span class="fl">5.45e-12</span> <span class="sc">|</span></span>
+<span id="cb4-272"><a href="#cb4-272" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">72</span>         <span class="dv">72</span>   <span class="fl">51.89897</span>   <span class="fl">20.10103</span>    <span class="fl">14.51838</span>   <span class="fl">25.68369</span>   <span class="fl">1.70e-12</span> <span class="sc">|</span></span>
+<span id="cb4-273"><a href="#cb4-273" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">77</span>         <span class="dv">77</span>   <span class="fl">54.49805</span>   <span class="fl">22.50194</span>    <span class="fl">16.49285</span>   <span class="fl">28.51104</span>   <span class="fl">2.14e-13</span> <span class="sc">|</span></span>
+<span id="cb4-274"><a href="#cb4-274" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-275"><a href="#cb4-275" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">78</span>         <span class="dv">78</span>   <span class="fl">55.00657</span>   <span class="fl">22.99343</span>    <span class="fl">16.89797</span>   <span class="fl">29.08889</span>   <span class="fl">1.43e-13</span> <span class="sc">|</span></span>
+<span id="cb4-276"><a href="#cb4-276" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">80</span>         <span class="dv">80</span>   <span class="fl">56.00101</span>   <span class="fl">23.99899</span>    <span class="fl">17.73478</span>   <span class="fl">30.26321</span>   <span class="fl">5.97e-14</span> <span class="sc">|</span></span>
+<span id="cb4-277"><a href="#cb4-277" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">81</span>         <span class="dv">81</span>   <span class="fl">56.48692</span>   <span class="fl">24.51307</span>    <span class="fl">18.16526</span>   <span class="fl">30.86089</span>   <span class="fl">3.77e-14</span> <span class="sc">|</span></span>
+<span id="cb4-278"><a href="#cb4-278" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">85</span>         <span class="dv">85</span>   <span class="fl">58.38539</span>   <span class="fl">26.61461</span>    <span class="fl">19.93458</span>   <span class="fl">33.29464</span>   <span class="fl">5.77e-15</span> <span class="sc">|</span></span>
+<span id="cb4-279"><a href="#cb4-279" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">90</span>         <span class="dv">90</span>   <span class="fl">60.70197</span>   <span class="fl">29.29803</span>     <span class="fl">22.1984</span>   <span class="fl">36.39766</span>   <span class="fl">6.66e-16</span> <span class="sc">|</span></span>
+<span id="cb4-280"><a href="#cb4-280" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-281"><a href="#cb4-281" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>    <span class="dv">96</span>         <span class="dv">96</span>   <span class="fl">63.41406</span>   <span class="fl">32.58594</span>    <span class="fl">24.97681</span>   <span class="fl">40.19506</span>          <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb4-282"><a href="#cb4-282" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">100</span>        <span class="dv">100</span>   <span class="fl">65.17693</span>   <span class="fl">34.82308</span>    <span class="fl">26.87198</span>   <span class="fl">42.77418</span>          <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb4-283"><a href="#cb4-283" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">102</span>        <span class="dv">102</span>   <span class="fl">66.03575</span>   <span class="fl">35.96425</span>    <span class="fl">27.84368</span>   <span class="fl">44.08482</span>          <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb4-284"><a href="#cb4-284" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">109</span>        <span class="dv">109</span>   <span class="fl">68.96255</span>   <span class="fl">40.03745</span>    <span class="fl">31.32724</span>   <span class="fl">48.74766</span>          <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb4-285"><a href="#cb4-285" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">110</span>        <span class="dv">110</span>   <span class="fl">69.38067</span>   <span class="fl">40.61933</span>    <span class="fl">31.82339</span>   <span class="fl">49.41528</span>          <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb4-286"><a href="#cb4-286" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-287"><a href="#cb4-287" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">131</span>        <span class="dv">131</span>   <span class="fl">77.91717</span>   <span class="fl">53.08283</span>    <span class="fl">42.46146</span>    <span class="fl">63.7042</span>          <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb4-288"><a href="#cb4-288" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">149</span>        <span class="dv">149</span>   <span class="fl">85.23417</span>   <span class="fl">63.76583</span>    <span class="fl">51.49939</span>   <span class="fl">76.03227</span>          <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb4-289"><a href="#cb4-289" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">153</span>        <span class="dv">153</span>   <span class="fl">86.81235</span>   <span class="fl">66.18765</span>    <span class="fl">53.54893</span>   <span class="fl">78.82638</span>          <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb4-290"><a href="#cb4-290" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">165</span>        <span class="dv">165</span>    <span class="fl">91.4034</span>    <span class="fl">73.5966</span>    <span class="fl">59.87845</span>   <span class="fl">87.31474</span>          <span class="dv">0</span> <span class="sc">|</span></span>
+<span id="cb4-291"><a href="#cb4-291" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">180</span>   <span class="fl">178.6364</span>   <span class="fl">97.14223</span>   <span class="fl">81.49413</span>    <span class="fl">51.34782</span>   <span class="fl">111.6404</span>   <span class="fl">1.17e-07</span> <span class="sc">|</span></span>
+<span id="cb4-292"><a href="#cb4-292" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-293"><a href="#cb4-293" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">186</span>   <span class="fl">184.0909</span>   <span class="fl">99.43776</span>   <span class="fl">84.65315</span>    <span class="fl">53.34505</span>   <span class="fl">115.9613</span>   <span class="fl">1.16e-07</span> <span class="sc">|</span></span>
+<span id="cb4-294"><a href="#cb4-294" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">188</span>   <span class="fl">185.7273</span>   <span class="fl">100.2029</span>   <span class="fl">85.52434</span>    <span class="fl">53.56977</span>   <span class="fl">117.4789</span>   <span class="fl">1.56e-07</span> <span class="sc">|</span></span>
+<span id="cb4-295"><a href="#cb4-295" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">207</span>   <span class="fl">201.2727</span>   <span class="fl">107.2376</span>    <span class="fl">94.0351</span>    <span class="fl">58.18815</span>   <span class="fl">129.8821</span>   <span class="fl">2.73e-07</span> <span class="sc">|</span></span>
+<span id="cb4-296"><a href="#cb4-296" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">219</span>   <span class="fl">211.0909</span>   <span class="fl">111.5325</span>   <span class="fl">99.55843</span>    <span class="fl">61.16676</span>   <span class="fl">137.9501</span>   <span class="fl">3.72e-07</span> <span class="sc">|</span></span>
+<span id="cb4-297"><a href="#cb4-297" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">263</span>   <span class="fl">247.0909</span>   <span class="fl">126.7373</span>   <span class="fl">120.3536</span>    <span class="fl">72.25138</span>   <span class="fl">168.4559</span>   <span class="fl">9.40e-07</span> <span class="sc">|</span></span>
+<span id="cb4-298"><a href="#cb4-298" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-299"><a href="#cb4-299" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">265</span>   <span class="fl">248.7273</span>   <span class="fl">127.4037</span>   <span class="fl">121.3235</span>    <span class="fl">72.75741</span>   <span class="fl">169.8897</span>   <span class="fl">9.77e-07</span> <span class="sc">|</span></span>
+<span id="cb4-300"><a href="#cb4-300" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">285</span>   <span class="fl">265.0909</span>   <span class="fl">134.0682</span>   <span class="fl">131.0227</span>    <span class="fl">77.89536</span>   <span class="fl">184.1501</span>   <span class="fl">1.34e-06</span> <span class="sc">|</span></span>
+<span id="cb4-301"><a href="#cb4-301" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">308</span>   <span class="fl">283.9091</span>   <span class="fl">141.1427</span>   <span class="fl">142.7664</span>    <span class="fl">84.36629</span>   <span class="fl">201.1664</span>   <span class="fl">1.66e-06</span> <span class="sc">|</span></span>
+<span id="cb4-302"><a href="#cb4-302" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">334</span>   <span class="fl">305.1818</span>   <span class="fl">148.8068</span>    <span class="fl">156.375</span>    <span class="fl">91.96277</span>   <span class="fl">220.7872</span>   <span class="fl">1.95e-06</span> <span class="sc">|</span></span>
+<span id="cb4-303"><a href="#cb4-303" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">340</span>   <span class="fl">310.0909</span>   <span class="fl">150.4986</span>   <span class="fl">159.5923</span>    <span class="fl">93.78695</span>   <span class="fl">225.3977</span>   <span class="fl">2.00e-06</span> <span class="sc">|</span></span>
+<span id="cb4-304"><a href="#cb4-304" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-305"><a href="#cb4-305" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">342</span>   <span class="fl">311.7273</span>   <span class="fl">151.0369</span>   <span class="fl">160.6904</span>    <span class="fl">94.42397</span>   <span class="fl">226.9568</span>   <span class="fl">2.01e-06</span> <span class="sc">|</span></span>
+<span id="cb4-306"><a href="#cb4-306" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">370</span>   <span class="fl">332.0909</span>   <span class="fl">158.5728</span>   <span class="fl">173.5181</span>    <span class="fl">93.67896</span>   <span class="fl">253.3572</span>   .<span class="dv">0000205</span> <span class="sc">|</span></span>
+<span id="cb4-307"><a href="#cb4-307" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">397</span>   <span class="fl">351.7273</span>   <span class="fl">165.8396</span>   <span class="fl">185.8876</span>    <span class="fl">98.91358</span>   <span class="fl">272.8617</span>    .<span class="dv">000028</span> <span class="sc">|</span></span>
+<span id="cb4-308"><a href="#cb4-308" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">427</span>   <span class="fl">373.5454</span>   <span class="fl">173.9138</span>   <span class="fl">199.6316</span>    <span class="fl">104.6545</span>   <span class="fl">294.6087</span>   .<span class="dv">0000379</span> <span class="sc">|</span></span>
+<span id="cb4-309"><a href="#cb4-309" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">445</span>   <span class="fl">386.6364</span>   <span class="fl">178.7584</span>    <span class="fl">207.878</span>    <span class="fl">108.0686</span>   <span class="fl">307.6874</span>   .<span class="dv">0000446</span> <span class="sc">|</span></span>
+<span id="cb4-310"><a href="#cb4-310" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-311"><a href="#cb4-311" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">482</span>   <span class="fl">413.5454</span>   <span class="fl">188.7166</span>   <span class="fl">224.8289</span>    <span class="fl">115.0297</span>   <span class="fl">334.6281</span>   .<span class="dv">0000599</span> <span class="sc">|</span></span>
+<span id="cb4-312"><a href="#cb4-312" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">515</span>   <span class="fl">437.5454</span>   <span class="fl">197.5982</span>   <span class="fl">239.9472</span>    <span class="fl">121.1866</span>   <span class="fl">358.7078</span>    .<span class="dv">000075</span> <span class="sc">|</span></span>
+<span id="cb4-313"><a href="#cb4-313" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">545</span>   <span class="fl">459.3636</span>   <span class="fl">205.6725</span>   <span class="fl">253.6912</span>    <span class="fl">126.7507</span>   <span class="fl">380.6316</span>   .<span class="dv">0000897</span> <span class="sc">|</span></span>
+<span id="cb4-314"><a href="#cb4-314" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">583</span>        <span class="dv">487</span>   <span class="fl">215.8998</span>   <span class="fl">271.1002</span>    <span class="fl">133.7623</span>    <span class="fl">408.438</span>   .<span class="dv">0001093</span> <span class="sc">|</span></span>
+<span id="cb4-315"><a href="#cb4-315" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">596</span>   <span class="fl">494.8788</span>   <span class="fl">219.3987</span>   <span class="fl">275.4801</span>    <span class="fl">134.5264</span>   <span class="fl">416.4339</span>   .<span class="dv">0001279</span> <span class="sc">|</span></span>
+<span id="cb4-316"><a href="#cb4-316" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-317"><a href="#cb4-317" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">620</span>   <span class="fl">509.4243</span>    <span class="fl">225.858</span>   <span class="fl">283.5662</span>    <span class="fl">136.4692</span>   <span class="fl">430.6632</span>   .<span class="dv">0001579</span> <span class="sc">|</span></span>
+<span id="cb4-318"><a href="#cb4-318" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">670</span>   <span class="fl">539.7273</span>   <span class="fl">239.3151</span>   <span class="fl">300.4122</span>    <span class="fl">140.0713</span>   <span class="fl">460.7531</span>   .<span class="dv">0002405</span> <span class="sc">|</span></span>
+<span id="cb4-319"><a href="#cb4-319" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">675</span>   <span class="fl">542.7576</span>   <span class="fl">240.6608</span>   <span class="fl">302.0968</span>    <span class="fl">140.4026</span>   <span class="fl">463.7909</span>   .<span class="dv">0002504</span> <span class="sc">|</span></span>
+<span id="cb4-320"><a href="#cb4-320" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">733</span>   <span class="fl">577.9091</span>   <span class="fl">254.9701</span>    <span class="fl">322.939</span>    <span class="fl">145.3689</span>    <span class="fl">500.509</span>   .<span class="dv">0003645</span> <span class="sc">|</span></span>
+<span id="cb4-321"><a href="#cb4-321" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">841</span>   <span class="fl">643.3636</span>   <span class="fl">279.1928</span>   <span class="fl">364.1708</span>    <span class="fl">155.9437</span>   <span class="fl">572.3979</span>   .<span class="dv">0006085</span> <span class="sc">|</span></span>
+<span id="cb4-322"><a href="#cb4-322" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span><span class="sc">--------------------------------------------------------------------------</span><span class="er">|</span></span>
+<span id="cb4-323"><a href="#cb4-323" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">852</span>   <span class="fl">650.0303</span>   <span class="fl">281.6599</span>   <span class="fl">368.3704</span>    <span class="fl">156.9483</span>   <span class="fl">579.7925</span>    .<span class="dv">000638</span> <span class="sc">|</span></span>
+<span id="cb4-324"><a href="#cb4-324" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">915</span>   <span class="fl">688.2121</span>   <span class="fl">294.2198</span>   <span class="fl">393.9923</span>    <span class="fl">164.2457</span>   <span class="fl">623.7389</span>   .<span class="dv">0007762</span> <span class="sc">|</span></span>
+<span id="cb4-325"><a href="#cb4-325" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">941</span>   <span class="fl">703.9697</span>   <span class="fl">299.4033</span>   <span class="fl">404.5664</span>    <span class="fl">167.1596</span>   <span class="fl">641.9732</span>   .<span class="dv">0008378</span> <span class="sc">|</span></span>
+<span id="cb4-326"><a href="#cb4-326" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">979</span>        <span class="dv">727</span>   <span class="fl">306.9791</span>   <span class="fl">420.0209</span>    <span class="fl">171.3309</span>   <span class="fl">668.7109</span>   .<span class="dv">0009321</span> <span class="sc">|</span></span>
+<span id="cb4-327"><a href="#cb4-327" aria-hidden="true" tabindex="-1"></a>  <span class="er">|</span>   <span class="dv">995</span>   <span class="fl">734.7576</span>   <span class="fl">310.1689</span>   <span class="fl">424.5887</span>    <span class="fl">149.6407</span>   <span class="fl">699.5366</span>   .<span class="dv">0024726</span> <span class="sc">|</span></span>
+<span id="cb4-328"><a href="#cb4-328" aria-hidden="true" tabindex="-1"></a>  <span class="sc">+--------------------------------------------------------------------------+</span></span>
+<span id="cb4-329"><a href="#cb4-329" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-330"><a href="#cb4-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-331"><a href="#cb4-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-332"><a href="#cb4-332" aria-hidden="true" tabindex="-1"></a>Le graphique suivant, donne les valeurs des Rmst et les écarts de la variable *surgery* en faisant varier $t_max$ sur chaque durée où un décès a été observé. Il a été réalisé avec Stata, la durée maximale utilisée est de 995 jours</span>
+<span id="cb4-333"><a href="#cb4-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-334"><a href="#cb4-334" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/image9rmst.png)</span>{width=90%}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

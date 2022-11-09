@@ -70,20 +70,26 @@ V=1/imat
 #imat = c(fit$var,fit$var,fit$var,fit$var)
 
 u2 <- c(0, sum(g*U))  # first derivative
-i2 <- matrix(c(sum(1/V), sum(g*(1/V)), sum(g*(1/V)), sum(g^2*(1/V))),2,2)  # second derivative
-i2
+I2 <- matrix(c(sum(1/V), sum(g*(1/V)), sum(g*(1/V)), sum(g^2*(1/V))),2,2)  # second derivative
+I2
 
 
-M =solve(i2, u2)
+M =solve(I2, u2)
 M %*% u2
-sctest <- solve(i2, u2) %*% u2
+sctest <- solve(I2, u2) %*% u2
 sctest
 
+(sum(g*U))^2
+
+A = sum(g*V*g)
+
+a= sum(g*V)
+a
+b = 1/sum(V)
+c = 
 
 
 
-sum(imat)
-sum(1/V)
 
 
 # Test standard
@@ -123,7 +129,6 @@ num = (sum(residsc*ttimes))^2
 num
 
 num/denom
-
 
 t(sum(U*ttimes))*(1/denom)*(sum(U*ttimes))
 

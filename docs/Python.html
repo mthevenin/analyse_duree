@@ -93,6 +93,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./annexes.html" rel="next">
 <link href="./Sas.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -306,6 +307,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
       </ul>
   </li>
+        <li class="px-0"><hr class="sidebar-divider hi "></li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false"><strong>Annexes</strong></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./annexes.html" class="sidebar-item-text sidebar-link">Annexes</a>
+  </div>
+</li>
+      </ul>
+  </li>
     </ul>
     </div>
 </nav>
@@ -348,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">PYTHON</h1>
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">PYTHON</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -899,6 +916,8 @@ Pour la durée, on utilisera ici la variable <strong>mois</strong> (regroupement
 </div>
 
 
+<!-- -->
+
 </section>
 </section>
 
@@ -968,6 +987,57 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
   function tippyHover(el, contentFn) {
     const config = {
       allowHTML: true,
@@ -1043,8 +1113,654 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./annexes.html" class="pagination-link">
+        <span class="nav-page-text">Annexes</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
-</nav>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb44" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Python"</span></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a>title: "PYTHON"</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-9"><a href="#cb44-9" aria-hidden="true" tabindex="-1"></a>Deux paquets d'analyse: principalement```lifelines``` (km, cox, aft...) et ```statsmodels``` (estimation logit en temps discret, kaplan-Meier, Cox).</span>
+<span id="cb44-10"><a href="#cb44-10" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb44-11"><a href="#cb44-11" aria-hidden="true" tabindex="-1"></a>Le package ```statsmodels``` est également ne mesure d'estimer des courbes de séjour de type Kaplan-Meier et des modèles à risque proportionnel de Cox. Le package ```lifelines``` couvre la quasi totalité des méthodes standards, à l'exception des les risques concurrents.  </span>
+<span id="cb44-12"><a href="#cb44-12" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb44-13"><a href="#cb44-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-14"><a href="#cb44-14" aria-hidden="true" tabindex="-1"></a><span class="in">```{r, echo=FALSE, include=FALSE}</span></span>
+<span id="cb44-15"><a href="#cb44-15" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_chunk<span class="sc">$</span><span class="fu">set</span>(<span class="at">echo =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb44-16"><a href="#cb44-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb44-17"><a href="#cb44-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span> (rsconnect)</span>
+<span id="cb44-18"><a href="#cb44-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb44-19"><a href="#cb44-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(memisc)</span>
+<span id="cb44-20"><a href="#cb44-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(reticulate)</span>
+<span id="cb44-21"><a href="#cb44-21" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-22"><a href="#cb44-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-23"><a href="#cb44-23" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb44-24"><a href="#cb44-24" aria-hidden="true" tabindex="-1"></a>import numpy  as np</span>
+<span id="cb44-25"><a href="#cb44-25" aria-hidden="true" tabindex="-1"></a>import pandas as pd</span>
+<span id="cb44-26"><a href="#cb44-26" aria-hidden="true" tabindex="-1"></a>import patsy  as pt</span>
+<span id="cb44-27"><a href="#cb44-27" aria-hidden="true" tabindex="-1"></a>import lifelines as lf</span>
+<span id="cb44-28"><a href="#cb44-28" aria-hidden="true" tabindex="-1"></a>import matplotlib.pyplot as plt</span>
+<span id="cb44-29"><a href="#cb44-29" aria-hidden="true" tabindex="-1"></a>import statsmodels as sm</span>
+<span id="cb44-30"><a href="#cb44-30" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-31"><a href="#cb44-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-32"><a href="#cb44-32" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb44-33"><a href="#cb44-33" aria-hidden="true" tabindex="-1"></a>import os</span>
+<span id="cb44-34"><a href="#cb44-34" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">'QT_QPA_PLATFORM_PLUGIN_PATH'</span>] <span class="ot">=</span><span class="st">'C:/Users/thevenin_m/AppData\Local/Continuum/anaconda3/Lib/site-packages/PyQt5/Qt5/plugins/platforms'</span></span>
+<span id="cb44-35"><a href="#cb44-35" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-36"><a href="#cb44-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-37"><a href="#cb44-37" aria-hidden="true" tabindex="-1"></a>Chargement de la base</span>
+<span id="cb44-38"><a href="#cb44-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-39"><a href="#cb44-39" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb44-40"><a href="#cb44-40" aria-hidden="true" tabindex="-1"></a>trans <span class="ot">=</span> <span class="fu">pd.read_csv</span>(<span class="st">"https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv"</span>)</span>
+<span id="cb44-41"><a href="#cb44-41" aria-hidden="true" tabindex="-1"></a><span class="fu">trans.head</span>(<span class="dv">10</span>)</span>
+<span id="cb44-42"><a href="#cb44-42" aria-hidden="true" tabindex="-1"></a><span class="fu">trans.info</span>()</span>
+<span id="cb44-43"><a href="#cb44-43" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-44"><a href="#cb44-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-45"><a href="#cb44-45" aria-hidden="true" tabindex="-1"></a><span class="fu"># Package lifelines</span></span>
+<span id="cb44-46"><a href="#cb44-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-47"><a href="#cb44-47" aria-hidden="true" tabindex="-1"></a>https://lifelines.readthedocs.io/en/latest/</span>
+<span id="cb44-48"><a href="#cb44-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-49"><a href="#cb44-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-50"><a href="#cb44-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## Non Paramétrique: Kaplan Meier</span></span>
+<span id="cb44-51"><a href="#cb44-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-52"><a href="#cb44-52" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimateur KM et durée médiane</span></span>
+<span id="cb44-53"><a href="#cb44-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb44-54"><a href="#cb44-54" aria-hidden="true" tabindex="-1"></a>T <span class="ot">=</span> trans[<span class="st">'stime'</span>]</span>
+<span id="cb44-55"><a href="#cb44-55" aria-hidden="true" tabindex="-1"></a>E <span class="ot">=</span> trans[<span class="st">'died'</span>]</span>
+<span id="cb44-56"><a href="#cb44-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-57"><a href="#cb44-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-58"><a href="#cb44-58" aria-hidden="true" tabindex="-1"></a>from lifelines import KaplanMeierFitter</span>
+<span id="cb44-59"><a href="#cb44-59" aria-hidden="true" tabindex="-1"></a>kmf <span class="ot">=</span> <span class="fu">KaplanMeierFitter</span>()</span>
+<span id="cb44-60"><a href="#cb44-60" aria-hidden="true" tabindex="-1"></a><span class="fu">kmf.fit</span>(T,E)</span>
+<span id="cb44-61"><a href="#cb44-61" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(kmf.survival_function_)</span>
+<span id="cb44-62"><a href="#cb44-62" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="st">"DUREE MEDIANE:"</span></span>
+<span id="cb44-63"><a href="#cb44-63" aria-hidden="true" tabindex="-1"></a>b <span class="ot">=</span> kmf.median_survival_time_</span>
+<span id="cb44-64"><a href="#cb44-64" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(a,b)</span>
+<span id="cb44-65"><a href="#cb44-65" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-66"><a href="#cb44-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-67"><a href="#cb44-67" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb44-68"><a href="#cb44-68" aria-hidden="true" tabindex="-1"></a>          KM_estimate</span>
+<span id="cb44-69"><a href="#cb44-69" aria-hidden="true" tabindex="-1"></a>timeline             </span>
+<span id="cb44-70"><a href="#cb44-70" aria-hidden="true" tabindex="-1"></a><span class="fl">0.0</span>          <span class="fl">1.000000</span></span>
+<span id="cb44-71"><a href="#cb44-71" aria-hidden="true" tabindex="-1"></a><span class="fl">1.0</span>          <span class="fl">0.990291</span></span>
+<span id="cb44-72"><a href="#cb44-72" aria-hidden="true" tabindex="-1"></a><span class="fl">2.0</span>          <span class="fl">0.961165</span></span>
+<span id="cb44-73"><a href="#cb44-73" aria-hidden="true" tabindex="-1"></a><span class="fl">3.0</span>          <span class="fl">0.932039</span></span>
+<span id="cb44-74"><a href="#cb44-74" aria-hidden="true" tabindex="-1"></a><span class="fl">5.0</span>          <span class="fl">0.912621</span></span>
+<span id="cb44-75"><a href="#cb44-75" aria-hidden="true" tabindex="-1"></a>...               ...</span>
+<span id="cb44-76"><a href="#cb44-76" aria-hidden="true" tabindex="-1"></a><span class="fl">1400.0</span>       <span class="fl">0.151912</span></span>
+<span id="cb44-77"><a href="#cb44-77" aria-hidden="true" tabindex="-1"></a><span class="fl">1407.0</span>       <span class="fl">0.151912</span></span>
+<span id="cb44-78"><a href="#cb44-78" aria-hidden="true" tabindex="-1"></a><span class="fl">1571.0</span>       <span class="fl">0.151912</span></span>
+<span id="cb44-79"><a href="#cb44-79" aria-hidden="true" tabindex="-1"></a><span class="fl">1586.0</span>       <span class="fl">0.151912</span></span>
+<span id="cb44-80"><a href="#cb44-80" aria-hidden="true" tabindex="-1"></a><span class="fl">1799.0</span>       <span class="fl">0.151912</span></span>
+<span id="cb44-81"><a href="#cb44-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-82"><a href="#cb44-82" aria-hidden="true" tabindex="-1"></a>[<span class="dv">89</span> rows x <span class="dv">1</span> columns]</span>
+<span id="cb44-83"><a href="#cb44-83" aria-hidden="true" tabindex="-1"></a>DUREE MEDIANE<span class="sc">:</span> <span class="fl">100.0</span></span>
+<span id="cb44-84"><a href="#cb44-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-85"><a href="#cb44-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-86"><a href="#cb44-86" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-87"><a href="#cb44-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-88"><a href="#cb44-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-89"><a href="#cb44-89" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb44-90"><a href="#cb44-90" aria-hidden="true" tabindex="-1"></a><span class="fu">kmf.plot</span>()</span>
+<span id="cb44-91"><a href="#cb44-91" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-92"><a href="#cb44-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-93"><a href="#cb44-93" aria-hidden="true" tabindex="-1"></a><span class="al">![](python/1.png)</span></span>
+<span id="cb44-94"><a href="#cb44-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-95"><a href="#cb44-95" aria-hidden="true" tabindex="-1"></a><span class="fu">### Comparaison des fonctions de survie</span></span>
+<span id="cb44-96"><a href="#cb44-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb44-97"><a href="#cb44-97" aria-hidden="true" tabindex="-1"></a>ax <span class="ot">=</span> <span class="fu">plt.subplot</span>(<span class="dv">111</span>)</span>
+<span id="cb44-98"><a href="#cb44-98" aria-hidden="true" tabindex="-1"></a>kmf <span class="ot">=</span> <span class="fu">KaplanMeierFitter</span>()</span>
+<span id="cb44-99"><a href="#cb44-99" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, grouped_df <span class="cf">in</span> <span class="fu">trans.groupby</span>(<span class="st">'surgery'</span>)<span class="sc">:</span></span>
+<span id="cb44-100"><a href="#cb44-100" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kmf.fit</span>(grouped_df[<span class="st">'stime'</span>], grouped_df[<span class="st">'died'</span>], <span class="at">label=</span>name)</span>
+<span id="cb44-101"><a href="#cb44-101" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kmf.plot</span>(<span class="at">ax=</span>ax)</span>
+<span id="cb44-102"><a href="#cb44-102" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-103"><a href="#cb44-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-104"><a href="#cb44-104" aria-hidden="true" tabindex="-1"></a><span class="al">![](python/2.png)</span></span>
+<span id="cb44-105"><a href="#cb44-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-106"><a href="#cb44-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-107"><a href="#cb44-107" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb44-108"><a href="#cb44-108" aria-hidden="true" tabindex="-1"></a>from lifelines.statistics import multivariate_logrank_test</span>
+<span id="cb44-109"><a href="#cb44-109" aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">multivariate_logrank_test</span>(trans[<span class="st">'stime'</span>], trans[<span class="st">'surgery'</span>], trans[<span class="st">'died'</span>])</span>
+<span id="cb44-110"><a href="#cb44-110" aria-hidden="true" tabindex="-1"></a><span class="fu">results.print_summary</span>()</span>
+<span id="cb44-111"><a href="#cb44-111" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-112"><a href="#cb44-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-113"><a href="#cb44-113" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb44-114"><a href="#cb44-114" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span>lifelines.StatisticalResult<span class="sc">:</span> multivariate_logrank_test<span class="sc">&gt;</span></span>
+<span id="cb44-115"><a href="#cb44-115" aria-hidden="true" tabindex="-1"></a>               t_0 <span class="ot">=</span> <span class="sc">-</span><span class="dv">1</span></span>
+<span id="cb44-116"><a href="#cb44-116" aria-hidden="true" tabindex="-1"></a> null_distribution <span class="ot">=</span> chi squared</span>
+<span id="cb44-117"><a href="#cb44-117" aria-hidden="true" tabindex="-1"></a>degrees_of_freedom <span class="ot">=</span> <span class="dv">1</span></span>
+<span id="cb44-118"><a href="#cb44-118" aria-hidden="true" tabindex="-1"></a>         test_name <span class="ot">=</span> multivariate_logrank_test</span>
+<span id="cb44-119"><a href="#cb44-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-120"><a href="#cb44-120" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span>
+<span id="cb44-121"><a href="#cb44-121" aria-hidden="true" tabindex="-1"></a> test_statistic    p  <span class="sc">-</span><span class="fu">log2</span>(p)</span>
+<span id="cb44-122"><a href="#cb44-122" aria-hidden="true" tabindex="-1"></a>           <span class="fl">6.59</span> <span class="fl">0.01</span>      <span class="fl">6.61</span></span>
+<span id="cb44-123"><a href="#cb44-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-124"><a href="#cb44-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-125"><a href="#cb44-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-126"><a href="#cb44-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-127"><a href="#cb44-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-128"><a href="#cb44-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-129"><a href="#cb44-129" aria-hidden="true" tabindex="-1"></a><span class="fu">## Semi paramétrique: Cox</span></span>
+<span id="cb44-130"><a href="#cb44-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-131"><a href="#cb44-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimation</span></span>
+<span id="cb44-132"><a href="#cb44-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-133"><a href="#cb44-133" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb44-134"><a href="#cb44-134" aria-hidden="true" tabindex="-1"></a>model <span class="ot">=</span> <span class="st">'year + age + C(surgery) -1'</span></span>
+<span id="cb44-135"><a href="#cb44-135" aria-hidden="true" tabindex="-1"></a>X <span class="ot">=</span> <span class="fu">pt.dmatrix</span>(model, trans, <span class="at">return_type=</span><span class="st">'dataframe'</span>)</span>
+<span id="cb44-136"><a href="#cb44-136" aria-hidden="true" tabindex="-1"></a>design_info <span class="ot">=</span> X.design_info</span>
+<span id="cb44-137"><a href="#cb44-137" aria-hidden="true" tabindex="-1"></a>YX <span class="ot">=</span> <span class="fu">X.join</span>(trans[[<span class="st">'stime'</span>,<span class="st">'died'</span>]])</span>
+<span id="cb44-138"><a href="#cb44-138" aria-hidden="true" tabindex="-1"></a><span class="fu">YX.drop</span>([<span class="st">'C(surgery)[0]'</span>], <span class="at">axis=</span><span class="dv">1</span>, <span class="at">inplace=</span>True)</span>
+<span id="cb44-139"><a href="#cb44-139" aria-hidden="true" tabindex="-1"></a><span class="fu">YX.head</span>()</span>
+<span id="cb44-140"><a href="#cb44-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-141"><a href="#cb44-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-142"><a href="#cb44-142" aria-hidden="true" tabindex="-1"></a>from lifelines import CoxPHFitter</span>
+<span id="cb44-143"><a href="#cb44-143" aria-hidden="true" tabindex="-1"></a>cph <span class="ot">=</span> <span class="fu">CoxPHFitter</span>()</span>
+<span id="cb44-144"><a href="#cb44-144" aria-hidden="true" tabindex="-1"></a><span class="fu">cph.fit</span>(YX, <span class="at">duration_col=</span><span class="st">'stime'</span>, <span class="at">event_col=</span><span class="st">'died'</span>)</span>
+<span id="cb44-145"><a href="#cb44-145" aria-hidden="true" tabindex="-1"></a><span class="fu">cph.print_summary</span>()</span>
+<span id="cb44-146"><a href="#cb44-146" aria-hidden="true" tabindex="-1"></a><span class="fu">cph.plot</span>()</span>
+<span id="cb44-147"><a href="#cb44-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-148"><a href="#cb44-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-149"><a href="#cb44-149" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb44-150"><a href="#cb44-150" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span>lifelines.CoxPHFitter<span class="sc">:</span> fitted with <span class="dv">103</span> total observations, <span class="dv">28</span> right<span class="sc">-</span>censored observations<span class="sc">&gt;</span></span>
+<span id="cb44-151"><a href="#cb44-151" aria-hidden="true" tabindex="-1"></a>             duration col <span class="ot">=</span> <span class="st">'stime'</span></span>
+<span id="cb44-152"><a href="#cb44-152" aria-hidden="true" tabindex="-1"></a>                event col <span class="ot">=</span> <span class="st">'died'</span></span>
+<span id="cb44-153"><a href="#cb44-153" aria-hidden="true" tabindex="-1"></a>      baseline estimation <span class="ot">=</span> breslow</span>
+<span id="cb44-154"><a href="#cb44-154" aria-hidden="true" tabindex="-1"></a>   number of observations <span class="ot">=</span> <span class="dv">103</span></span>
+<span id="cb44-155"><a href="#cb44-155" aria-hidden="true" tabindex="-1"></a>number of events observed <span class="ot">=</span> <span class="dv">75</span></span>
+<span id="cb44-156"><a href="#cb44-156" aria-hidden="true" tabindex="-1"></a>   partial log<span class="sc">-</span>likelihood <span class="ot">=</span> <span class="sc">-</span><span class="fl">289.31</span></span>
+<span id="cb44-157"><a href="#cb44-157" aria-hidden="true" tabindex="-1"></a>         time fit was run <span class="ot">=</span> <span class="dv">2021-04-21</span> <span class="dv">13</span><span class="sc">:</span><span class="dv">24</span><span class="sc">:</span><span class="dv">52</span> UTC</span>
+<span id="cb44-158"><a href="#cb44-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-159"><a href="#cb44-159" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span>
+<span id="cb44-160"><a href="#cb44-160" aria-hidden="true" tabindex="-1"></a>                coef  <span class="fu">exp</span>(coef)   <span class="fu">se</span>(coef)   coef lower <span class="dv">95</span><span class="sc">%   coef upper 95%</span>  <span class="fu">exp</span>(coef) lower <span class="dv">95</span>%  <span class="fu">exp</span>(coef) upper</span>
+<span id="cb44-161"><a href="#cb44-161" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span>  <span class="dv">95</span>%</span>
+<span id="cb44-162"><a href="#cb44-162" aria-hidden="true" tabindex="-1"></a><span class="fu">C</span>(surgery)[<span class="dv">1</span>]  <span class="sc">-</span><span class="fl">0.99</span>       <span class="fl">0.37</span>       <span class="fl">0.44</span>            <span class="sc">-</span><span class="fl">1.84</span>            <span class="sc">-</span><span class="fl">0.13</span>                 <span class="fl">0.16</span>                 </span>
+<span id="cb44-163"><a href="#cb44-163" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fl">0.88</span></span>
+<span id="cb44-164"><a href="#cb44-164" aria-hidden="true" tabindex="-1"></a>year           <span class="sc">-</span><span class="fl">0.12</span>       <span class="fl">0.89</span>       <span class="fl">0.07</span>            <span class="sc">-</span><span class="fl">0.25</span>             <span class="fl">0.01</span>                 <span class="fl">0.78</span>                 </span>
+<span id="cb44-165"><a href="#cb44-165" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fl">1.01</span></span>
+<span id="cb44-166"><a href="#cb44-166" aria-hidden="true" tabindex="-1"></a>age             <span class="fl">0.03</span>       <span class="fl">1.03</span>       <span class="fl">0.01</span>             <span class="fl">0.00</span>             <span class="fl">0.06</span>                 <span class="fl">1.00</span>                 </span>
+<span id="cb44-167"><a href="#cb44-167" aria-hidden="true" tabindex="-1"></a><span class="sc">&gt;</span> <span class="fl">1.06</span></span>
+<span id="cb44-168"><a href="#cb44-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-169"><a href="#cb44-169" aria-hidden="true" tabindex="-1"></a>                  z    p   <span class="sc">-</span><span class="fu">log2</span>(p)</span>
+<span id="cb44-170"><a href="#cb44-170" aria-hidden="true" tabindex="-1"></a><span class="fu">C</span>(surgery)[<span class="dv">1</span>] <span class="sc">-</span><span class="fl">2.26</span> <span class="fl">0.02</span>       <span class="fl">5.40</span></span>
+<span id="cb44-171"><a href="#cb44-171" aria-hidden="true" tabindex="-1"></a>year          <span class="sc">-</span><span class="fl">1.78</span> <span class="fl">0.08</span>       <span class="fl">3.72</span></span>
+<span id="cb44-172"><a href="#cb44-172" aria-hidden="true" tabindex="-1"></a>age            <span class="fl">2.19</span> <span class="fl">0.03</span>       <span class="fl">5.12</span></span>
+<span id="cb44-173"><a href="#cb44-173" aria-hidden="true" tabindex="-1"></a><span class="sc">---</span></span>
+<span id="cb44-174"><a href="#cb44-174" aria-hidden="true" tabindex="-1"></a>Concordance <span class="ot">=</span> <span class="fl">0.65</span></span>
+<span id="cb44-175"><a href="#cb44-175" aria-hidden="true" tabindex="-1"></a>Partial AIC <span class="ot">=</span> <span class="fl">584.61</span></span>
+<span id="cb44-176"><a href="#cb44-176" aria-hidden="true" tabindex="-1"></a>log<span class="sc">-</span>likelihood ratio test <span class="ot">=</span> <span class="fl">17.63</span> on <span class="dv">3</span> df</span>
+<span id="cb44-177"><a href="#cb44-177" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fu">log2</span>(p) of ll<span class="sc">-</span>ratio test <span class="ot">=</span> <span class="fl">10.90</span></span>
+<span id="cb44-178"><a href="#cb44-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-179"><a href="#cb44-179" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-180"><a href="#cb44-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-181"><a href="#cb44-181" aria-hidden="true" tabindex="-1"></a><span class="al">![](python/3.png)</span></span>
+<span id="cb44-182"><a href="#cb44-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-183"><a href="#cb44-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-184"><a href="#cb44-184" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tests hypothèse PH</span></span>
+<span id="cb44-185"><a href="#cb44-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-186"><a href="#cb44-186" aria-hidden="true" tabindex="-1"></a>**Test PH: Schoenfeld Méthode 1**</span>
+<span id="cb44-187"><a href="#cb44-187" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb44-188"><a href="#cb44-188" aria-hidden="true" tabindex="-1"></a><span class="fu">cph.check_assumptions</span>(YX,<span class="at">p_value_threshold=</span><span class="fl">0.05</span>)</span>
+<span id="cb44-189"><a href="#cb44-189" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb44-190"><a href="#cb44-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-191"><a href="#cb44-191" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb44-192"><a href="#cb44-192" aria-hidden="true" tabindex="-1"></a>The <span class="st">``</span>p_value_threshold<span class="st">``</span> is set at <span class="dv">0</span>.<span class="fl">05.</span> Even under the null hypothesis of no violations, some</span>
+<span id="cb44-193"><a href="#cb44-193" aria-hidden="true" tabindex="-1"></a>covariates will be below the threshold by chance. This is compounded when there are many covariates.</span>
+<span id="cb44-194"><a href="#cb44-194" aria-hidden="true" tabindex="-1"></a>Similarly, when there are lots of observations, even minor deviances from the proportional hazard</span>
+<span id="cb44-195"><a href="#cb44-195" aria-hidden="true" tabindex="-1"></a>assumption will be flagged.</span>
+<span id="cb44-196"><a href="#cb44-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-197"><a href="#cb44-197" aria-hidden="true" tabindex="-1"></a>With that <span class="cf">in</span> mind, it<span class="st">'s best to use a combination of statistical tests and visual tests to determine</span></span>
+<span id="cb44-198"><a href="#cb44-198" aria-hidden="true" tabindex="-1"></a><span class="st">the most serious violations. Produce visual plots using ``check_assumptions(..., show_plots=True)``</span></span>
+<span id="cb44-199"><a href="#cb44-199" aria-hidden="true" tabindex="-1"></a><span class="st">and looking for non-constant lines. See link [A] below for a full example.</span></span>
+<span id="cb44-200"><a href="#cb44-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-201"><a href="#cb44-201" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;lifelines.StatisticalResult: proportional_hazard_test&gt;</span></span>
+<span id="cb44-202"><a href="#cb44-202" aria-hidden="true" tabindex="-1"></a><span class="st"> null_distribution = chi squared</span></span>
+<span id="cb44-203"><a href="#cb44-203" aria-hidden="true" tabindex="-1"></a><span class="st">degrees_of_freedom = 1</span></span>
+<span id="cb44-204"><a href="#cb44-204" aria-hidden="true" tabindex="-1"></a><span class="st">         test_name = proportional_hazard_test</span></span>
+<span id="cb44-205"><a href="#cb44-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-206"><a href="#cb44-206" aria-hidden="true" tabindex="-1"></a><span class="st">---</span></span>
+<span id="cb44-207"><a href="#cb44-207" aria-hidden="true" tabindex="-1"></a><span class="st">                    test_statistic    p  -log2(p)</span></span>
+<span id="cb44-208"><a href="#cb44-208" aria-hidden="true" tabindex="-1"></a><span class="st">C(surgery)[1] km              4.01 0.05      4.47</span></span>
+<span id="cb44-209"><a href="#cb44-209" aria-hidden="true" tabindex="-1"></a><span class="st">              rank            3.74 0.05      4.23</span></span>
+<span id="cb44-210"><a href="#cb44-210" aria-hidden="true" tabindex="-1"></a><span class="st">age           km              1.18 0.28      1.86</span></span>
+<span id="cb44-211"><a href="#cb44-211" aria-hidden="true" tabindex="-1"></a><span class="st">              rank            1.06 0.30      1.72</span></span>
+<span id="cb44-212"><a href="#cb44-212" aria-hidden="true" tabindex="-1"></a><span class="st">year          km              2.07 0.15      2.73</span></span>
+<span id="cb44-213"><a href="#cb44-213" aria-hidden="true" tabindex="-1"></a><span class="st">              rank            2.08 0.15      2.75</span></span>
+<span id="cb44-214"><a href="#cb44-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-215"><a href="#cb44-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-216"><a href="#cb44-216" aria-hidden="true" tabindex="-1"></a><span class="st">1. Variable '</span><span class="fu">C</span>(surgery)[<span class="dv">1</span>]<span class="st">' failed the non-proportional test: p-value is 0.0452.</span></span>
+<span id="cb44-217"><a href="#cb44-217" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-218"><a href="#cb44-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-219"><a href="#cb44-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-220"><a href="#cb44-220" aria-hidden="true" tabindex="-1"></a><span class="st">**Test PH: Schoenfeld Méthode 2**</span></span>
+<span id="cb44-221"><a href="#cb44-221" aria-hidden="true" tabindex="-1"></a><span class="st">```{r eval=FALSE}</span></span>
+<span id="cb44-222"><a href="#cb44-222" aria-hidden="true" tabindex="-1"></a><span class="st">from lifelines.statistics import  proportional_hazard_test </span></span>
+<span id="cb44-223"><a href="#cb44-223" aria-hidden="true" tabindex="-1"></a><span class="st">zph = proportional_hazard_test(cph, YX, time_transform='</span>all<span class="st">')</span></span>
+<span id="cb44-224"><a href="#cb44-224" aria-hidden="true" tabindex="-1"></a><span class="st">zph.print_summary()</span></span>
+<span id="cb44-225"><a href="#cb44-225" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-226"><a href="#cb44-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-227"><a href="#cb44-227" aria-hidden="true" tabindex="-1"></a><span class="st">```{r eval=FALSE}</span></span>
+<span id="cb44-228"><a href="#cb44-228" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;lifelines.StatisticalResult: proportional_hazard_test&gt;</span></span>
+<span id="cb44-229"><a href="#cb44-229" aria-hidden="true" tabindex="-1"></a><span class="st"> null_distribution = chi squared</span></span>
+<span id="cb44-230"><a href="#cb44-230" aria-hidden="true" tabindex="-1"></a><span class="st">degrees_of_freedom = 1</span></span>
+<span id="cb44-231"><a href="#cb44-231" aria-hidden="true" tabindex="-1"></a><span class="st">         test_name = proportional_hazard_test</span></span>
+<span id="cb44-232"><a href="#cb44-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-233"><a href="#cb44-233" aria-hidden="true" tabindex="-1"></a><span class="st">---</span></span>
+<span id="cb44-234"><a href="#cb44-234" aria-hidden="true" tabindex="-1"></a><span class="st">                        test_statistic    p  -log2(p)</span></span>
+<span id="cb44-235"><a href="#cb44-235" aria-hidden="true" tabindex="-1"></a><span class="st">C(surgery)[1] identity            5.54 0.02      5.75</span></span>
+<span id="cb44-236"><a href="#cb44-236" aria-hidden="true" tabindex="-1"></a><span class="st">              km                  4.01 0.05      4.47</span></span>
+<span id="cb44-237"><a href="#cb44-237" aria-hidden="true" tabindex="-1"></a><span class="st">              log                 3.69 0.05      4.19</span></span>
+<span id="cb44-238"><a href="#cb44-238" aria-hidden="true" tabindex="-1"></a><span class="st">              rank                3.74 0.05      4.23</span></span>
+<span id="cb44-239"><a href="#cb44-239" aria-hidden="true" tabindex="-1"></a><span class="st">age           identity            1.61 0.20      2.29</span></span>
+<span id="cb44-240"><a href="#cb44-240" aria-hidden="true" tabindex="-1"></a><span class="st">              km                  1.18 0.28      1.86</span></span>
+<span id="cb44-241"><a href="#cb44-241" aria-hidden="true" tabindex="-1"></a><span class="st">              log                 0.61 0.44      1.20</span></span>
+<span id="cb44-242"><a href="#cb44-242" aria-hidden="true" tabindex="-1"></a><span class="st">              rank                1.06 0.30      1.72</span></span>
+<span id="cb44-243"><a href="#cb44-243" aria-hidden="true" tabindex="-1"></a><span class="st">year          identity            0.80 0.37      1.43</span></span>
+<span id="cb44-244"><a href="#cb44-244" aria-hidden="true" tabindex="-1"></a><span class="st">              km                  2.07 0.15      2.73</span></span>
+<span id="cb44-245"><a href="#cb44-245" aria-hidden="true" tabindex="-1"></a><span class="st">              log                 1.34 0.25      2.02</span></span>
+<span id="cb44-246"><a href="#cb44-246" aria-hidden="true" tabindex="-1"></a><span class="st">              rank                2.08 0.15      2.75</span></span>
+<span id="cb44-247"><a href="#cb44-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-248"><a href="#cb44-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-249"><a href="#cb44-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-250"><a href="#cb44-250" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-251"><a href="#cb44-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-252"><a href="#cb44-252" aria-hidden="true" tabindex="-1"></a><span class="st">**Test PH: intéraction**</span></span>
+<span id="cb44-253"><a href="#cb44-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-254"><a href="#cb44-254" aria-hidden="true" tabindex="-1"></a><span class="st">```{r eval=FALSE}</span></span>
+<span id="cb44-255"><a href="#cb44-255" aria-hidden="true" tabindex="-1"></a><span class="st">from lifelines.utils import to_episodic_format</span></span>
+<span id="cb44-256"><a href="#cb44-256" aria-hidden="true" tabindex="-1"></a><span class="st">from lifelines import CoxTimeVaryingFitter</span></span>
+<span id="cb44-257"><a href="#cb44-257" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-258"><a href="#cb44-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-259"><a href="#cb44-259" aria-hidden="true" tabindex="-1"></a><span class="st">*Transformation de la base YX*</span></span>
+<span id="cb44-260"><a href="#cb44-260" aria-hidden="true" tabindex="-1"></a><span class="st">```{r eval=FALSE}</span></span>
+<span id="cb44-261"><a href="#cb44-261" aria-hidden="true" tabindex="-1"></a><span class="st">long = to_episodic_format(YX, duration_col='</span>stime<span class="st">', event_col='</span>died<span class="st">')</span></span>
+<span id="cb44-262"><a href="#cb44-262" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-263"><a href="#cb44-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-264"><a href="#cb44-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-265"><a href="#cb44-265" aria-hidden="true" tabindex="-1"></a><span class="st">*Création de la variable d'</span>intéraction<span class="sc">*</span></span>
+<span id="cb44-266"><a href="#cb44-266" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-267"><a href="#cb44-267" aria-hidden="true" tabindex="-1"></a><span class="at">long['surgery_t'] = long['C(surgery)[1]'] * long['stop']</span></span>
+<span id="cb44-268"><a href="#cb44-268" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-269"><a href="#cb44-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-270"><a href="#cb44-270" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>Estimation<span class="sc">*</span></span>
+<span id="cb44-271"><a href="#cb44-271" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-272"><a href="#cb44-272" aria-hidden="true" tabindex="-1"></a><span class="at">ctv = CoxTimeVaryingFitter()</span></span>
+<span id="cb44-273"><a href="#cb44-273" aria-hidden="true" tabindex="-1"></a><span class="at">ctv.fit(long,</span></span>
+<span id="cb44-274"><a href="#cb44-274" aria-hidden="true" tabindex="-1"></a><span class="at">        id_col='id',</span></span>
+<span id="cb44-275"><a href="#cb44-275" aria-hidden="true" tabindex="-1"></a><span class="at">        event_col='died',</span></span>
+<span id="cb44-276"><a href="#cb44-276" aria-hidden="true" tabindex="-1"></a><span class="at">        start_col='start',</span></span>
+<span id="cb44-277"><a href="#cb44-277" aria-hidden="true" tabindex="-1"></a><span class="at">        stop_col='stop',)</span></span>
+<span id="cb44-278"><a href="#cb44-278" aria-hidden="true" tabindex="-1"></a><span class="at">ctv.print_summary(4)</span></span>
+<span id="cb44-279"><a href="#cb44-279" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-280"><a href="#cb44-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-281"><a href="#cb44-281" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-282"><a href="#cb44-282" aria-hidden="true" tabindex="-1"></a><span class="at">&lt;lifelines.CoxTimeVaryingFitter: fitted with 31938 periods, 103 subjects, 75 events&gt;</span></span>
+<span id="cb44-283"><a href="#cb44-283" aria-hidden="true" tabindex="-1"></a><span class="at">         event col = 'died'</span></span>
+<span id="cb44-284"><a href="#cb44-284" aria-hidden="true" tabindex="-1"></a><span class="at">number of subjects = 103</span></span>
+<span id="cb44-285"><a href="#cb44-285" aria-hidden="true" tabindex="-1"></a><span class="at"> number of periods = 31938</span></span>
+<span id="cb44-286"><a href="#cb44-286" aria-hidden="true" tabindex="-1"></a><span class="at">  number of events = 75</span></span>
+<span id="cb44-287"><a href="#cb44-287" aria-hidden="true" tabindex="-1"></a><span class="at">partial log-likelihood = -287.3290</span></span>
+<span id="cb44-288"><a href="#cb44-288" aria-hidden="true" tabindex="-1"></a><span class="at">  time fit was run = 2021-04-21 13:32:40 UTC</span></span>
+<span id="cb44-289"><a href="#cb44-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-290"><a href="#cb44-290" aria-hidden="true" tabindex="-1"></a><span class="at">---</span></span>
+<span id="cb44-291"><a href="#cb44-291" aria-hidden="true" tabindex="-1"></a><span class="at">                 coef  exp(coef)   se(coef)   coef lower 95%   coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%</span></span>
+<span id="cb44-292"><a href="#cb44-292" aria-hidden="true" tabindex="-1"></a><span class="at">C(surgery)[1] -1.7547     0.1730     0.6743          -3.0764          -0.4331               0.0461               0.6485</span></span>
+<span id="cb44-293"><a href="#cb44-293" aria-hidden="true" tabindex="-1"></a><span class="at">age            0.0289     1.0293     0.0134           0.0025           0.0552               1.0025               1.0568</span></span>
+<span id="cb44-294"><a href="#cb44-294" aria-hidden="true" tabindex="-1"></a><span class="at">year          -0.1231     0.8842     0.0668          -0.2541           0.0079               0.7756               1.0080</span></span>
+<span id="cb44-295"><a href="#cb44-295" aria-hidden="true" tabindex="-1"></a><span class="at">surgery_t      0.0022     1.0022     0.0011           0.0001           0.0044               1.0001               1.0044</span></span>
+<span id="cb44-296"><a href="#cb44-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-297"><a href="#cb44-297" aria-hidden="true" tabindex="-1"></a><span class="at">                    z      p   -log2(p)</span></span>
+<span id="cb44-298"><a href="#cb44-298" aria-hidden="true" tabindex="-1"></a><span class="at">C(surgery)[1] -2.6022 0.0093     6.7542</span></span>
+<span id="cb44-299"><a href="#cb44-299" aria-hidden="true" tabindex="-1"></a><span class="at">age            2.1479 0.0317     4.9785</span></span>
+<span id="cb44-300"><a href="#cb44-300" aria-hidden="true" tabindex="-1"></a><span class="at">year          -1.8415 0.0656     3.9312</span></span>
+<span id="cb44-301"><a href="#cb44-301" aria-hidden="true" tabindex="-1"></a><span class="at">surgery_t      2.0239 0.0430     4.5402</span></span>
+<span id="cb44-302"><a href="#cb44-302" aria-hidden="true" tabindex="-1"></a><span class="at">---</span></span>
+<span id="cb44-303"><a href="#cb44-303" aria-hidden="true" tabindex="-1"></a><span class="at">Partial AIC = 582.6581</span></span>
+<span id="cb44-304"><a href="#cb44-304" aria-hidden="true" tabindex="-1"></a><span class="at">log-likelihood ratio test = 21.5846 on 4 df</span></span>
+<span id="cb44-305"><a href="#cb44-305" aria-hidden="true" tabindex="-1"></a><span class="at">-log2(p) of ll-ratio test = 12.0103</span></span>
+<span id="cb44-306"><a href="#cb44-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-307"><a href="#cb44-307" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-308"><a href="#cb44-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-309"><a href="#cb44-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-310"><a href="#cb44-310" aria-hidden="true" tabindex="-1"></a><span class="do">### Variable dynamique binaire</span></span>
+<span id="cb44-311"><a href="#cb44-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-312"><a href="#cb44-312" aria-hidden="true" tabindex="-1"></a><span class="do">## Modèle à temps discret</span></span>
+<span id="cb44-313"><a href="#cb44-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-314"><a href="#cb44-314" aria-hidden="true" tabindex="-1"></a><span class="do">### Ajustement continu</span></span>
+<span id="cb44-315"><a href="#cb44-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-316"><a href="#cb44-316" aria-hidden="true" tabindex="-1"></a>Modèle logistique estimé avec le paquet <span class="st">```</span><span class="at">statsmodel</span><span class="st">```</span>. La fonction <span class="st">```</span><span class="at">to_episodic_format</span><span class="st">```</span> de <span class="st">```</span><span class="at">lifelines</span><span class="st">```</span> permet de mettre en forme la base.  </span>
+<span id="cb44-317"><a href="#cb44-317" aria-hidden="true" tabindex="-1"></a>Pour la  durée, on utilisera ici la variable <span class="sc">**</span>mois<span class="sc">**</span> (regroupement de stime par intervalle de <span class="dv">30</span> jours).</span>
+<span id="cb44-318"><a href="#cb44-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-319"><a href="#cb44-319" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-320"><a href="#cb44-320" aria-hidden="true" tabindex="-1"></a><span class="at">import statsmodels.formula.api as smf #type R formule =&gt; ce qu'on utilisera#</span></span>
+<span id="cb44-321"><a href="#cb44-321" aria-hidden="true" tabindex="-1"></a><span class="at">import statsmodels.api as sm #type python#</span></span>
+<span id="cb44-322"><a href="#cb44-322" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-323"><a href="#cb44-323" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-324"><a href="#cb44-324" aria-hidden="true" tabindex="-1"></a><span class="sc">**</span>Transformation de la base en format long<span class="sc">**</span></span>
+<span id="cb44-325"><a href="#cb44-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-326"><a href="#cb44-326" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-327"><a href="#cb44-327" aria-hidden="true" tabindex="-1"></a><span class="at">td = pd.read_csv("D:/Marc/SMS/FORMATIONS/2019/analyse durees/a distribuer/transplantation.csv")</span></span>
+<span id="cb44-328"><a href="#cb44-328" aria-hidden="true" tabindex="-1"></a><span class="at">td.drop(['id'], axis=1, inplace=True)</span></span>
+<span id="cb44-329"><a href="#cb44-329" aria-hidden="true" tabindex="-1"></a><span class="at">td['dur'] = td['mois']</span></span>
+<span id="cb44-330"><a href="#cb44-330" aria-hidden="true" tabindex="-1"></a><span class="at">td = to_episodic_format(td, duration_col='mois', event_col='died')</span></span>
+<span id="cb44-331"><a href="#cb44-331" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-332"><a href="#cb44-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-333"><a href="#cb44-333" aria-hidden="true" tabindex="-1"></a><span class="sc">**</span>Recherche de l<span class="st">'ajustement**  </span></span>
+<span id="cb44-334"><a href="#cb44-334" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;br&gt;</span></span>
+<span id="cb44-335"><a href="#cb44-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-336"><a href="#cb44-336" aria-hidden="true" tabindex="-1"></a><span class="st">```{r eval=FALSE}</span></span>
+<span id="cb44-337"><a href="#cb44-337" aria-hidden="true" tabindex="-1"></a><span class="st">td['</span>t2<span class="st">'] = td['</span>stop<span class="st">']**2</span></span>
+<span id="cb44-338"><a href="#cb44-338" aria-hidden="true" tabindex="-1"></a><span class="st">td['</span>t3<span class="st">'] = td['</span>stop<span class="st">']**3</span></span>
+<span id="cb44-339"><a href="#cb44-339" aria-hidden="true" tabindex="-1"></a><span class="st">fit1 = smf.glm(formula=  "died ~ stop", data=td, family=sm.families.Binomial()).fit()</span></span>
+<span id="cb44-340"><a href="#cb44-340" aria-hidden="true" tabindex="-1"></a><span class="st">fit2 = smf.glm(formula=  "died ~ stop + t2", data=td, family=sm.families.Binomial()).fit()</span></span>
+<span id="cb44-341"><a href="#cb44-341" aria-hidden="true" tabindex="-1"></a><span class="st">fit3 = smf.glm(formula=  "died ~ stop + t2 + t3", data=td, family=sm.families.Binomial()).fit()</span></span>
+<span id="cb44-342"><a href="#cb44-342" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-343"><a href="#cb44-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-344"><a href="#cb44-344" aria-hidden="true" tabindex="-1"></a><span class="st">**Comparaison des AIC**</span></span>
+<span id="cb44-345"><a href="#cb44-345" aria-hidden="true" tabindex="-1"></a><span class="st">```{r eval=FALSE}</span></span>
+<span id="cb44-346"><a href="#cb44-346" aria-hidden="true" tabindex="-1"></a><span class="st">print("AIC pour ajustement t1")</span></span>
+<span id="cb44-347"><a href="#cb44-347" aria-hidden="true" tabindex="-1"></a><span class="st">print(fit1.aic)</span></span>
+<span id="cb44-348"><a href="#cb44-348" aria-hidden="true" tabindex="-1"></a><span class="st">print("AIC pour ajustement durée t1 + t2")</span></span>
+<span id="cb44-349"><a href="#cb44-349" aria-hidden="true" tabindex="-1"></a><span class="st">print(fit2.aic)</span></span>
+<span id="cb44-350"><a href="#cb44-350" aria-hidden="true" tabindex="-1"></a><span class="st">print("AIC pour ajustement durée t1 + t2 + t3")</span></span>
+<span id="cb44-351"><a href="#cb44-351" aria-hidden="true" tabindex="-1"></a><span class="st">print(fit3.aic)</span></span>
+<span id="cb44-352"><a href="#cb44-352" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-353"><a href="#cb44-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-354"><a href="#cb44-354" aria-hidden="true" tabindex="-1"></a><span class="st">```{r eval=FALSE}</span></span>
+<span id="cb44-355"><a href="#cb44-355" aria-hidden="true" tabindex="-1"></a><span class="st">AIC pour ajustement t1</span></span>
+<span id="cb44-356"><a href="#cb44-356" aria-hidden="true" tabindex="-1"></a><span class="st">512.1039235968562</span></span>
+<span id="cb44-357"><a href="#cb44-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-358"><a href="#cb44-358" aria-hidden="true" tabindex="-1"></a><span class="st">AIC pour ajustement durée t1 + t2</span></span>
+<span id="cb44-359"><a href="#cb44-359" aria-hidden="true" tabindex="-1"></a><span class="st">508.1014573009212</span></span>
+<span id="cb44-360"><a href="#cb44-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-361"><a href="#cb44-361" aria-hidden="true" tabindex="-1"></a><span class="st">AIC pour ajustement durée t1 + t2 + t3</span></span>
+<span id="cb44-362"><a href="#cb44-362" aria-hidden="true" tabindex="-1"></a><span class="st">506.1882809518765</span></span>
+<span id="cb44-363"><a href="#cb44-363" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-364"><a href="#cb44-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-365"><a href="#cb44-365" aria-hidden="true" tabindex="-1"></a><span class="st">**Estimation du modèle**</span></span>
+<span id="cb44-366"><a href="#cb44-366" aria-hidden="true" tabindex="-1"></a><span class="st">```{r eval=FALSE}</span></span>
+<span id="cb44-367"><a href="#cb44-367" aria-hidden="true" tabindex="-1"></a><span class="st">tdfit = smf.glm(formula=  "died ~ stop + t2 + t3 + year + age + surgery", data=td, family=sm.families.Binomial()).fit()</span></span>
+<span id="cb44-368"><a href="#cb44-368" aria-hidden="true" tabindex="-1"></a><span class="st">tdfit.summary()</span></span>
+<span id="cb44-369"><a href="#cb44-369" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-370"><a href="#cb44-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-371"><a href="#cb44-371" aria-hidden="true" tabindex="-1"></a><span class="st">```{r eval=FALSE}</span></span>
+<span id="cb44-372"><a href="#cb44-372" aria-hidden="true" tabindex="-1"></a><span class="st">&lt;class '</span>statsmodels.iolib.summary.Summary<span class="st">'&gt;</span></span>
+<span id="cb44-373"><a href="#cb44-373" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb44-374"><a href="#cb44-374" aria-hidden="true" tabindex="-1"></a><span class="st">                 Generalized Linear Model Regression Results                  </span></span>
+<span id="cb44-375"><a href="#cb44-375" aria-hidden="true" tabindex="-1"></a><span class="st">==============================================================================</span></span>
+<span id="cb44-376"><a href="#cb44-376" aria-hidden="true" tabindex="-1"></a><span class="st">Dep. Variable:                   died   No. Observations:                 1164</span></span>
+<span id="cb44-377"><a href="#cb44-377" aria-hidden="true" tabindex="-1"></a><span class="st">Model:                            GLM   Df Residuals:                     1157</span></span>
+<span id="cb44-378"><a href="#cb44-378" aria-hidden="true" tabindex="-1"></a><span class="st">Model Family:                Binomial   Df Model:                            6</span></span>
+<span id="cb44-379"><a href="#cb44-379" aria-hidden="true" tabindex="-1"></a><span class="st">Link Function:                  logit   Scale:                          1.0000</span></span>
+<span id="cb44-380"><a href="#cb44-380" aria-hidden="true" tabindex="-1"></a><span class="st">Method:                          IRLS   Log-Likelihood:                -240.20</span></span>
+<span id="cb44-381"><a href="#cb44-381" aria-hidden="true" tabindex="-1"></a><span class="st">Date:                Wed, 21 Apr 2021   Deviance:                       480.39</span></span>
+<span id="cb44-382"><a href="#cb44-382" aria-hidden="true" tabindex="-1"></a><span class="st">Time:                        15:44:21   Pearson chi2:                 1.30e+03</span></span>
+<span id="cb44-383"><a href="#cb44-383" aria-hidden="true" tabindex="-1"></a><span class="st">No. Iterations:                     7                                         </span></span>
+<span id="cb44-384"><a href="#cb44-384" aria-hidden="true" tabindex="-1"></a><span class="st">Covariance Type:            nonrobust                                         </span></span>
+<span id="cb44-385"><a href="#cb44-385" aria-hidden="true" tabindex="-1"></a><span class="st">==============================================================================</span></span>
+<span id="cb44-386"><a href="#cb44-386" aria-hidden="true" tabindex="-1"></a><span class="st">                 coef    std err          z      P&gt;|z|      [0.025      0.975]</span></span>
+<span id="cb44-387"><a href="#cb44-387" aria-hidden="true" tabindex="-1"></a><span class="st">------------------------------------------------------------------------------</span></span>
+<span id="cb44-388"><a href="#cb44-388" aria-hidden="true" tabindex="-1"></a><span class="st">Intercept      6.3097      5.201      1.213      0.225      -3.884      16.503</span></span>
+<span id="cb44-389"><a href="#cb44-389" aria-hidden="true" tabindex="-1"></a><span class="st">stop          -0.2807      0.077     -3.635      0.000      -0.432      -0.129</span></span>
+<span id="cb44-390"><a href="#cb44-390" aria-hidden="true" tabindex="-1"></a><span class="st">t2             0.0096      0.005      2.083      0.037       0.001       0.019</span></span>
+<span id="cb44-391"><a href="#cb44-391" aria-hidden="true" tabindex="-1"></a><span class="st">t3            -0.0001   6.97e-05     -1.493      0.135      -0.000    3.26e-05</span></span>
+<span id="cb44-392"><a href="#cb44-392" aria-hidden="true" tabindex="-1"></a><span class="st">year          -0.1263      0.072     -1.747      0.081      -0.268       0.015</span></span>
+<span id="cb44-393"><a href="#cb44-393" aria-hidden="true" tabindex="-1"></a><span class="st">age            0.0337      0.014      2.330      0.020       0.005       0.062</span></span>
+<span id="cb44-394"><a href="#cb44-394" aria-hidden="true" tabindex="-1"></a><span class="st">surgery       -1.0050      0.447     -2.250      0.024      -1.880      -0.130</span></span>
+<span id="cb44-395"><a href="#cb44-395" aria-hidden="true" tabindex="-1"></a><span class="st">==============================================================================</span></span>
+<span id="cb44-396"><a href="#cb44-396" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span></span>
+<span id="cb44-397"><a href="#cb44-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-398"><a href="#cb44-398" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-399"><a href="#cb44-399" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-400"><a href="#cb44-400" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-401"><a href="#cb44-401" aria-hidden="true" tabindex="-1"></a><span class="st">### Ajustement discret</span></span>
+<span id="cb44-402"><a href="#cb44-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-403"><a href="#cb44-403" aria-hidden="true" tabindex="-1"></a><span class="st">*Création des intervalles pour l'</span><span class="fu">exemple</span> (quantile de la durée en mois)<span class="sc">*</span></span>
+<span id="cb44-404"><a href="#cb44-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-405"><a href="#cb44-405" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-406"><a href="#cb44-406" aria-hidden="true" tabindex="-1"></a><span class="at">td['ct4'] = pd.qcut(td['stop'],[0, .25, .5, .75, 1.]) </span></span>
+<span id="cb44-407"><a href="#cb44-407" aria-hidden="true" tabindex="-1"></a><span class="at">td['ct4'].value_counts(normalize=True)*100</span></span>
+<span id="cb44-408"><a href="#cb44-408" aria-hidden="true" tabindex="-1"></a><span class="at">td.ct4 = pd.Categorical(td.ct4)</span></span>
+<span id="cb44-409"><a href="#cb44-409" aria-hidden="true" tabindex="-1"></a><span class="at">td['ct4'] = td.ct4.cat.codes</span></span>
+<span id="cb44-410"><a href="#cb44-410" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-411"><a href="#cb44-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-412"><a href="#cb44-412" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-413"><a href="#cb44-413" aria-hidden="true" tabindex="-1"></a><span class="at">(0.999, 4.0]    27.233677</span></span>
+<span id="cb44-414"><a href="#cb44-414" aria-hidden="true" tabindex="-1"></a><span class="at">(11.0, 23.0]    24.484536</span></span>
+<span id="cb44-415"><a href="#cb44-415" aria-hidden="true" tabindex="-1"></a><span class="at">(4.0, 11.0]     24.398625</span></span>
+<span id="cb44-416"><a href="#cb44-416" aria-hidden="true" tabindex="-1"></a><span class="at">(23.0, 61.0]    23.883162</span></span>
+<span id="cb44-417"><a href="#cb44-417" aria-hidden="true" tabindex="-1"></a><span class="at">Name: ct4, dtype: float64</span></span>
+<span id="cb44-418"><a href="#cb44-418" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-419"><a href="#cb44-419" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-420"><a href="#cb44-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-421"><a href="#cb44-421" aria-hidden="true" tabindex="-1"></a>Pour chaque individu, on conserve une seule observation par intervalle.</span>
+<span id="cb44-422"><a href="#cb44-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-423"><a href="#cb44-423" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-424"><a href="#cb44-424" aria-hidden="true" tabindex="-1"></a><span class="at">td2 = td </span></span>
+<span id="cb44-425"><a href="#cb44-425" aria-hidden="true" tabindex="-1"></a><span class="at">td2['t'] = td2['ct4']</span></span>
+<span id="cb44-426"><a href="#cb44-426" aria-hidden="true" tabindex="-1"></a><span class="at">td2 = td2.sort_values(['id', 'stop'])</span></span>
+<span id="cb44-427"><a href="#cb44-427" aria-hidden="true" tabindex="-1"></a><span class="at">td2 =  td2.groupby(['id','ct4']).last()</span></span>
+<span id="cb44-428"><a href="#cb44-428" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-429"><a href="#cb44-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-430"><a href="#cb44-430" aria-hidden="true" tabindex="-1"></a><span class="sc">**</span>Estimation<span class="sc">**</span></span>
+<span id="cb44-431"><a href="#cb44-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-432"><a href="#cb44-432" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-433"><a href="#cb44-433" aria-hidden="true" tabindex="-1"></a><span class="at">td2fit = smf.glm(formula=  "died ~ C(t) +  year + age + surgery", data=td2, family=sm.families.Binomial()).fit()</span></span>
+<span id="cb44-434"><a href="#cb44-434" aria-hidden="true" tabindex="-1"></a><span class="at">td2fit.summary()</span></span>
+<span id="cb44-435"><a href="#cb44-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-436"><a href="#cb44-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-437"><a href="#cb44-437" aria-hidden="true" tabindex="-1"></a><span class="at">&lt;class 'statsmodels.iolib.summary.Summary'&gt;</span></span>
+<span id="cb44-438"><a href="#cb44-438" aria-hidden="true" tabindex="-1"></a><span class="at">"""</span></span>
+<span id="cb44-439"><a href="#cb44-439" aria-hidden="true" tabindex="-1"></a><span class="at">                 Generalized Linear Model Regression Results                  </span></span>
+<span id="cb44-440"><a href="#cb44-440" aria-hidden="true" tabindex="-1"></a><span class="at">==============================================================================</span></span>
+<span id="cb44-441"><a href="#cb44-441" aria-hidden="true" tabindex="-1"></a><span class="at">Dep. Variable:                   died   No. Observations:                  200</span></span>
+<span id="cb44-442"><a href="#cb44-442" aria-hidden="true" tabindex="-1"></a><span class="at">Model:                            GLM   Df Residuals:                      200</span></span>
+<span id="cb44-443"><a href="#cb44-443" aria-hidden="true" tabindex="-1"></a><span class="at">Model Family:                Binomial   Df Model:                           -1</span></span>
+<span id="cb44-444"><a href="#cb44-444" aria-hidden="true" tabindex="-1"></a><span class="at">Link Function:                  logit   Scale:                          1.0000</span></span>
+<span id="cb44-445"><a href="#cb44-445" aria-hidden="true" tabindex="-1"></a><span class="at">Method:                          IRLS   Log-Likelihood:                -112.26</span></span>
+<span id="cb44-446"><a href="#cb44-446" aria-hidden="true" tabindex="-1"></a><span class="at">Date:                Wed, 21 Apr 2021   Deviance:                       224.52</span></span>
+<span id="cb44-447"><a href="#cb44-447" aria-hidden="true" tabindex="-1"></a><span class="at">Time:                        15:54:03   Pearson chi2:                     229.</span></span>
+<span id="cb44-448"><a href="#cb44-448" aria-hidden="true" tabindex="-1"></a><span class="at">No. Iterations:                     5                                         </span></span>
+<span id="cb44-449"><a href="#cb44-449" aria-hidden="true" tabindex="-1"></a><span class="at">Covariance Type:            nonrobust                                         </span></span>
+<span id="cb44-450"><a href="#cb44-450" aria-hidden="true" tabindex="-1"></a><span class="at">==============================================================================</span></span>
+<span id="cb44-451"><a href="#cb44-451" aria-hidden="true" tabindex="-1"></a><span class="at">                 coef    std err          z      P&gt;|z|      [0.025      0.975]</span></span>
+<span id="cb44-452"><a href="#cb44-452" aria-hidden="true" tabindex="-1"></a><span class="at">------------------------------------------------------------------------------</span></span>
+<span id="cb44-453"><a href="#cb44-453" aria-hidden="true" tabindex="-1"></a><span class="at">Intercept     11.8018      6.617      1.784      0.074      -1.167      24.770</span></span>
+<span id="cb44-454"><a href="#cb44-454" aria-hidden="true" tabindex="-1"></a><span class="at">C(t)[T.1]     -0.9078      0.408     -2.227      0.026      -1.707      -0.109</span></span>
+<span id="cb44-455"><a href="#cb44-455" aria-hidden="true" tabindex="-1"></a><span class="at">C(t)[T.2]     -1.8451      0.587     -3.141      0.002      -2.996      -0.694</span></span>
+<span id="cb44-456"><a href="#cb44-456" aria-hidden="true" tabindex="-1"></a><span class="at">C(t)[T.3]     -0.3224      0.578     -0.557      0.577      -1.456       0.811</span></span>
+<span id="cb44-457"><a href="#cb44-457" aria-hidden="true" tabindex="-1"></a><span class="at">year          -0.1947      0.093     -2.104      0.035      -0.376      -0.013</span></span>
+<span id="cb44-458"><a href="#cb44-458" aria-hidden="true" tabindex="-1"></a><span class="at">age            0.0468      0.018      2.543      0.011       0.011       0.083</span></span>
+<span id="cb44-459"><a href="#cb44-459" aria-hidden="true" tabindex="-1"></a><span class="at">surgery       -1.1025      0.503     -2.192      0.028      -2.088      -0.117</span></span>
+<span id="cb44-460"><a href="#cb44-460" aria-hidden="true" tabindex="-1"></a><span class="at">==============================================================================</span></span>
+<span id="cb44-461"><a href="#cb44-461" aria-hidden="true" tabindex="-1"></a><span class="at">"""</span></span>
+<span id="cb44-462"><a href="#cb44-462" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-463"><a href="#cb44-463" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-464"><a href="#cb44-464" aria-hidden="true" tabindex="-1"></a><span class="do">## Modèle paramétrique de type AFT</span></span>
+<span id="cb44-465"><a href="#cb44-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-466"><a href="#cb44-466" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{}</span></span>
+<span id="cb44-467"><a href="#cb44-467" aria-hidden="true" tabindex="-1"></a><span class="at">from lifelines import WeibullAFTFitter, LogLogisticAFTFitter</span></span>
+<span id="cb44-468"><a href="#cb44-468" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-469"><a href="#cb44-469" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-470"><a href="#cb44-470" aria-hidden="true" tabindex="-1"></a><span class="sc">**</span>Weibull<span class="sc">**</span></span>
+<span id="cb44-471"><a href="#cb44-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-472"><a href="#cb44-472" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-473"><a href="#cb44-473" aria-hidden="true" tabindex="-1"></a><span class="at">aftw = WeibullAFTFitter()</span></span>
+<span id="cb44-474"><a href="#cb44-474" aria-hidden="true" tabindex="-1"></a><span class="at">aftw.fit(YX, duration_col='stime', event_col='died')</span></span>
+<span id="cb44-475"><a href="#cb44-475" aria-hidden="true" tabindex="-1"></a><span class="at">aftw.print_summary()</span></span>
+<span id="cb44-476"><a href="#cb44-476" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-477"><a href="#cb44-477" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-478"><a href="#cb44-478" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-479"><a href="#cb44-479" aria-hidden="true" tabindex="-1"></a><span class="at">&lt;lifelines.WeibullAFTFitter: fitted with 103 total observations, 28 right-censored observations&gt;</span></span>
+<span id="cb44-480"><a href="#cb44-480" aria-hidden="true" tabindex="-1"></a><span class="at">             duration col = 'stime'</span></span>
+<span id="cb44-481"><a href="#cb44-481" aria-hidden="true" tabindex="-1"></a><span class="at">                event col = 'died'</span></span>
+<span id="cb44-482"><a href="#cb44-482" aria-hidden="true" tabindex="-1"></a><span class="at">   number of observations = 103</span></span>
+<span id="cb44-483"><a href="#cb44-483" aria-hidden="true" tabindex="-1"></a><span class="at">number of events observed = 75</span></span>
+<span id="cb44-484"><a href="#cb44-484" aria-hidden="true" tabindex="-1"></a><span class="at">           log-likelihood = -488.17</span></span>
+<span id="cb44-485"><a href="#cb44-485" aria-hidden="true" tabindex="-1"></a><span class="at">         time fit was run = 2021-04-21 13:55:14 UTC</span></span>
+<span id="cb44-486"><a href="#cb44-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-487"><a href="#cb44-487" aria-hidden="true" tabindex="-1"></a><span class="at">---</span></span>
+<span id="cb44-488"><a href="#cb44-488" aria-hidden="true" tabindex="-1"></a><span class="at">                        coef  exp(coef)   se(coef)   coef lower 95%   coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%</span></span>
+<span id="cb44-489"><a href="#cb44-489" aria-hidden="true" tabindex="-1"></a><span class="at">lambda_ C(surgery)[1]   1.97       7.17       0.78             0.44             3.50                 1.56                33.05</span></span>
+<span id="cb44-490"><a href="#cb44-490" aria-hidden="true" tabindex="-1"></a><span class="at">        year            0.16       1.18       0.12            -0.08             0.40                 0.93                 1.49</span></span>
+<span id="cb44-491"><a href="#cb44-491" aria-hidden="true" tabindex="-1"></a><span class="at">        age            -0.06       0.94       0.02            -0.11            -0.01                 0.90                 0.99</span></span>
+<span id="cb44-492"><a href="#cb44-492" aria-hidden="true" tabindex="-1"></a><span class="at">        _intercept     -3.02       0.05       8.73           -20.13            14.09                 0.00             1.31e+06</span></span>
+<span id="cb44-493"><a href="#cb44-493" aria-hidden="true" tabindex="-1"></a><span class="at">rho_    _intercept     -0.59       0.56       0.09            -0.77            -0.41                 0.46                 0.67</span></span>
+<span id="cb44-494"><a href="#cb44-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-495"><a href="#cb44-495" aria-hidden="true" tabindex="-1"></a><span class="at">                          z      p   -log2(p)</span></span>
+<span id="cb44-496"><a href="#cb44-496" aria-hidden="true" tabindex="-1"></a><span class="at">lambda_ C(surgery)[1]  2.53   0.01       6.45</span></span>
+<span id="cb44-497"><a href="#cb44-497" aria-hidden="true" tabindex="-1"></a><span class="at">        year           1.33   0.18       2.44</span></span>
+<span id="cb44-498"><a href="#cb44-498" aria-hidden="true" tabindex="-1"></a><span class="at">        age           -2.49   0.01       6.28</span></span>
+<span id="cb44-499"><a href="#cb44-499" aria-hidden="true" tabindex="-1"></a><span class="at">        _intercept    -0.35   0.73       0.46</span></span>
+<span id="cb44-500"><a href="#cb44-500" aria-hidden="true" tabindex="-1"></a><span class="at">rho_    _intercept    -6.33 &lt;0.005      31.93</span></span>
+<span id="cb44-501"><a href="#cb44-501" aria-hidden="true" tabindex="-1"></a><span class="at">---</span></span>
+<span id="cb44-502"><a href="#cb44-502" aria-hidden="true" tabindex="-1"></a><span class="at">Concordance = 0.65</span></span>
+<span id="cb44-503"><a href="#cb44-503" aria-hidden="true" tabindex="-1"></a><span class="at">AIC = 986.34</span></span>
+<span id="cb44-504"><a href="#cb44-504" aria-hidden="true" tabindex="-1"></a><span class="at">log-likelihood ratio test = 18.87 on 3 df</span></span>
+<span id="cb44-505"><a href="#cb44-505" aria-hidden="true" tabindex="-1"></a><span class="at">-log2(p) of ll-ratio test = 11.75</span></span>
+<span id="cb44-506"><a href="#cb44-506" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-507"><a href="#cb44-507" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-508"><a href="#cb44-508" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-509"><a href="#cb44-509" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-510"><a href="#cb44-510" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-511"><a href="#cb44-511" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-512"><a href="#cb44-512" aria-hidden="true" tabindex="-1"></a><span class="sc">**</span>Loglogistique<span class="sc">**</span></span>
+<span id="cb44-513"><a href="#cb44-513" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-514"><a href="#cb44-514" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-515"><a href="#cb44-515" aria-hidden="true" tabindex="-1"></a><span class="at">aftl = LogLogisticAFTFitter()</span></span>
+<span id="cb44-516"><a href="#cb44-516" aria-hidden="true" tabindex="-1"></a><span class="at">aftl.fit(YX, duration_col='stime', event_col='died')</span></span>
+<span id="cb44-517"><a href="#cb44-517" aria-hidden="true" tabindex="-1"></a><span class="at">aftl.print_summary()</span></span>
+<span id="cb44-518"><a href="#cb44-518" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-519"><a href="#cb44-519" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-520"><a href="#cb44-520" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-521"><a href="#cb44-521" aria-hidden="true" tabindex="-1"></a><span class="at">&lt;lifelines.LogLogisticAFTFitter: fitted with 103 total observations, 28 right-censored observations&gt;</span></span>
+<span id="cb44-522"><a href="#cb44-522" aria-hidden="true" tabindex="-1"></a><span class="at">             duration col = 'stime'</span></span>
+<span id="cb44-523"><a href="#cb44-523" aria-hidden="true" tabindex="-1"></a><span class="at">                event col = 'died'</span></span>
+<span id="cb44-524"><a href="#cb44-524" aria-hidden="true" tabindex="-1"></a><span class="at">   number of observations = 103</span></span>
+<span id="cb44-525"><a href="#cb44-525" aria-hidden="true" tabindex="-1"></a><span class="at">number of events observed = 75</span></span>
+<span id="cb44-526"><a href="#cb44-526" aria-hidden="true" tabindex="-1"></a><span class="at">           log-likelihood = -482.58</span></span>
+<span id="cb44-527"><a href="#cb44-527" aria-hidden="true" tabindex="-1"></a><span class="at">         time fit was run = 2021-04-21 13:55:58 UTC</span></span>
+<span id="cb44-528"><a href="#cb44-528" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-529"><a href="#cb44-529" aria-hidden="true" tabindex="-1"></a><span class="at">---</span></span>
+<span id="cb44-530"><a href="#cb44-530" aria-hidden="true" tabindex="-1"></a><span class="at">                       coef  exp(coef)   se(coef)   coef lower 95%   coef upper 95%  exp(coef) lower 95%  exp(coef) upper 95%</span></span>
+<span id="cb44-531"><a href="#cb44-531" aria-hidden="true" tabindex="-1"></a><span class="at">alpha_ C(surgery)[1]   2.27       9.72       0.69             0.92             3.63                 2.51                37.68</span></span>
+<span id="cb44-532"><a href="#cb44-532" aria-hidden="true" tabindex="-1"></a><span class="at">       year            0.24       1.27       0.12             0.01             0.47                 1.01                 1.60</span></span>
+<span id="cb44-533"><a href="#cb44-533" aria-hidden="true" tabindex="-1"></a><span class="at">       age            -0.04       0.96       0.02            -0.08            -0.00                 0.92                 1.00</span></span>
+<span id="cb44-534"><a href="#cb44-534" aria-hidden="true" tabindex="-1"></a><span class="at">       _intercept    -10.41       0.00       8.34           -26.76             5.94                 0.00               381.76</span></span>
+<span id="cb44-535"><a href="#cb44-535" aria-hidden="true" tabindex="-1"></a><span class="at">beta_  _intercept     -0.18       0.83       0.10            -0.37             0.01                 0.69                 1.01</span></span>
+<span id="cb44-536"><a href="#cb44-536" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-537"><a href="#cb44-537" aria-hidden="true" tabindex="-1"></a><span class="at">                         z      p   -log2(p)</span></span>
+<span id="cb44-538"><a href="#cb44-538" aria-hidden="true" tabindex="-1"></a><span class="at">alpha_ C(surgery)[1]  3.29 &lt;0.005       9.96</span></span>
+<span id="cb44-539"><a href="#cb44-539" aria-hidden="true" tabindex="-1"></a><span class="at">       year           2.05   0.04       4.65</span></span>
+<span id="cb44-540"><a href="#cb44-540" aria-hidden="true" tabindex="-1"></a><span class="at">       age           -2.01   0.04       4.49</span></span>
+<span id="cb44-541"><a href="#cb44-541" aria-hidden="true" tabindex="-1"></a><span class="at">       _intercept    -1.25   0.21       2.24</span></span>
+<span id="cb44-542"><a href="#cb44-542" aria-hidden="true" tabindex="-1"></a><span class="at">beta_  _intercept    -1.86   0.06       4.00</span></span>
+<span id="cb44-543"><a href="#cb44-543" aria-hidden="true" tabindex="-1"></a><span class="at">---</span></span>
+<span id="cb44-544"><a href="#cb44-544" aria-hidden="true" tabindex="-1"></a><span class="at">Concordance = 0.66</span></span>
+<span id="cb44-545"><a href="#cb44-545" aria-hidden="true" tabindex="-1"></a><span class="at">AIC = 975.16</span></span>
+<span id="cb44-546"><a href="#cb44-546" aria-hidden="true" tabindex="-1"></a><span class="at">log-likelihood ratio test = 21.69 on 3 df</span></span>
+<span id="cb44-547"><a href="#cb44-547" aria-hidden="true" tabindex="-1"></a><span class="at">-log2(p) of ll-ratio test = 13.69</span></span>
+<span id="cb44-548"><a href="#cb44-548" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-549"><a href="#cb44-549" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-550"><a href="#cb44-550" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-551"><a href="#cb44-551" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-552"><a href="#cb44-552" aria-hidden="true" tabindex="-1"></a><span class="co"># Package statsmodels</span></span>
+<span id="cb44-553"><a href="#cb44-553" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-554"><a href="#cb44-554" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-555"><a href="#cb44-555" aria-hidden="true" tabindex="-1"></a>https<span class="sc">:</span><span class="er">//</span>www.statsmodels.org<span class="sc">/</span>dev<span class="sc">/</span>duration.html</span>
+<span id="cb44-556"><a href="#cb44-556" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-557"><a href="#cb44-557" aria-hidden="true" tabindex="-1"></a>Le package permet d<span class="st">'estimer des fonction de séjour de type Kaplan-Meier et des modèles de Cox.</span></span>
+<span id="cb44-558"><a href="#cb44-558" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-559"><a href="#cb44-559" aria-hidden="true" tabindex="-1"></a><span class="st">## Kaplan-Meier</span></span>
+<span id="cb44-560"><a href="#cb44-560" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-561"><a href="#cb44-561" aria-hidden="true" tabindex="-1"></a><span class="st">```{r eval=FALSE}</span></span>
+<span id="cb44-562"><a href="#cb44-562" aria-hidden="true" tabindex="-1"></a><span class="st">km = sm.SurvfuncRight(trans["stime"], trans["died"])</span></span>
+<span id="cb44-563"><a href="#cb44-563" aria-hidden="true" tabindex="-1"></a><span class="st">km.summary()</span></span>
+<span id="cb44-564"><a href="#cb44-564" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-565"><a href="#cb44-565" aria-hidden="true" tabindex="-1"></a><span class="st"> </span></span>
+<span id="cb44-566"><a href="#cb44-566" aria-hidden="true" tabindex="-1"></a><span class="st">```{r eval=FALSE} </span></span>
+<span id="cb44-567"><a href="#cb44-567" aria-hidden="true" tabindex="-1"></a><span class="st">      Surv prob  Surv prob SE  num at risk  num events</span></span>
+<span id="cb44-568"><a href="#cb44-568" aria-hidden="true" tabindex="-1"></a><span class="st">Time                                                  </span></span>
+<span id="cb44-569"><a href="#cb44-569" aria-hidden="true" tabindex="-1"></a><span class="st">1      0.990291      0.009661          103         1.0</span></span>
+<span id="cb44-570"><a href="#cb44-570" aria-hidden="true" tabindex="-1"></a><span class="st">2      0.961165      0.019037          102         3.0</span></span>
+<span id="cb44-571"><a href="#cb44-571" aria-hidden="true" tabindex="-1"></a><span class="st">3      0.932039      0.024799           99         3.0</span></span>
+<span id="cb44-572"><a href="#cb44-572" aria-hidden="true" tabindex="-1"></a><span class="st">5      0.912621      0.027825           96         2.0</span></span>
+<span id="cb44-573"><a href="#cb44-573" aria-hidden="true" tabindex="-1"></a><span class="st">6      0.893204      0.030432           94         2.0</span></span>
+<span id="cb44-574"><a href="#cb44-574" aria-hidden="true" tabindex="-1"></a><span class="st">...         ...           ...          ...         ...</span></span>
+<span id="cb44-575"><a href="#cb44-575" aria-hidden="true" tabindex="-1"></a><span class="st">852    0.250655      0.048731           14         1.0</span></span>
+<span id="cb44-576"><a href="#cb44-576" aria-hidden="true" tabindex="-1"></a><span class="st">979    0.227868      0.049341           11         1.0</span></span>
+<span id="cb44-577"><a href="#cb44-577" aria-hidden="true" tabindex="-1"></a><span class="st">995    0.205081      0.049390           10         1.0</span></span>
+<span id="cb44-578"><a href="#cb44-578" aria-hidden="true" tabindex="-1"></a><span class="st">1032   0.182295      0.048877            9         1.0</span></span>
+<span id="cb44-579"><a href="#cb44-579" aria-hidden="true" tabindex="-1"></a><span class="st">1386   0.151912      0.049277            6         1.0</span></span>
+<span id="cb44-580"><a href="#cb44-580" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-581"><a href="#cb44-581" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-582"><a href="#cb44-582" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-583"><a href="#cb44-583" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-584"><a href="#cb44-584" aria-hidden="true" tabindex="-1"></a><span class="st">Les test du log-rank sont disponibles avec la fonction ```survdiff``` (nom idem R). Au niveau graphique, la programmation semble un peu</span></span>
+<span id="cb44-585"><a href="#cb44-585" aria-hidden="true" tabindex="-1"></a><span class="st">lourde et mériterait d'</span>être simplifiée (donc non traitée).  </span>
+<span id="cb44-586"><a href="#cb44-586" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-587"><a href="#cb44-587" aria-hidden="true" tabindex="-1"></a><span class="sc">**</span>Comparaison de <span class="fu">S</span>(t) à partir des tests du log<span class="sc">-</span>rank<span class="sc">**</span>  </span>
+<span id="cb44-588"><a href="#cb44-588" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-589"><a href="#cb44-589" aria-hidden="true" tabindex="-1"></a><span class="er">&lt;</span>br<span class="sc">&gt;</span></span>
+<span id="cb44-590"><a href="#cb44-590" aria-hidden="true" tabindex="-1"></a>Résultat<span class="sc">:</span> (statistique de test, p<span class="sc">-</span>value)</span>
+<span id="cb44-591"><a href="#cb44-591" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-592"><a href="#cb44-592" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>Test non pondéré<span class="sc">*</span></span>
+<span id="cb44-593"><a href="#cb44-593" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-594"><a href="#cb44-594" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-595"><a href="#cb44-595" aria-hidden="true" tabindex="-1"></a><span class="at">sm.duration.survdiff(trans.stime, trans.died, trans.surgery)</span></span>
+<span id="cb44-596"><a href="#cb44-596" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-597"><a href="#cb44-597" aria-hidden="true" tabindex="-1"></a><span class="at"># (6.590012323234387, 0.010255246157888975)</span></span>
+<span id="cb44-598"><a href="#cb44-598" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-599"><a href="#cb44-599" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-600"><a href="#cb44-600" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>Breslow<span class="sc">*</span></span>
+<span id="cb44-601"><a href="#cb44-601" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-602"><a href="#cb44-602" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-603"><a href="#cb44-603" aria-hidden="true" tabindex="-1"></a><span class="at">sm.duration.survdiff(trans.stime, trans.died, trans.surgery, weight_type='gb')</span></span>
+<span id="cb44-604"><a href="#cb44-604" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-605"><a href="#cb44-605" aria-hidden="true" tabindex="-1"></a><span class="at"># (8.989753779902495, 0.0027149757927903417)</span></span>
+<span id="cb44-606"><a href="#cb44-606" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-607"><a href="#cb44-607" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-608"><a href="#cb44-608" aria-hidden="true" tabindex="-1"></a><span class="sc">*</span>Tarone<span class="sc">-</span>Ware<span class="sc">*</span></span>
+<span id="cb44-609"><a href="#cb44-609" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-610"><a href="#cb44-610" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-611"><a href="#cb44-611" aria-hidden="true" tabindex="-1"></a><span class="at">sm.duration.survdiff(trans.stime, trans.died, trans.surgery, weight_type='tw')</span></span>
+<span id="cb44-612"><a href="#cb44-612" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-613"><a href="#cb44-613" aria-hidden="true" tabindex="-1"></a><span class="at"># (8.462352726451392, 0.0036257256194570653)</span></span>
+<span id="cb44-614"><a href="#cb44-614" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-615"><a href="#cb44-615" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-616"><a href="#cb44-616" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-617"><a href="#cb44-617" aria-hidden="true" tabindex="-1"></a><span class="do">## Modèle de Cox</span></span>
+<span id="cb44-618"><a href="#cb44-618" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-619"><a href="#cb44-619" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-620"><a href="#cb44-620" aria-hidden="true" tabindex="-1"></a><span class="at">mod = smf.phreg("stime ~  year + age + surgery ",trans, status='died', ties="efron")</span></span>
+<span id="cb44-621"><a href="#cb44-621" aria-hidden="true" tabindex="-1"></a><span class="at">rslt = mod.fit()</span></span>
+<span id="cb44-622"><a href="#cb44-622" aria-hidden="true" tabindex="-1"></a><span class="at">print(rslt.summary())</span></span>
+<span id="cb44-623"><a href="#cb44-623" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-624"><a href="#cb44-624" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-625"><a href="#cb44-625" aria-hidden="true" tabindex="-1"></a><span class="st">```</span><span class="at">{r eval=FALSE}</span></span>
+<span id="cb44-626"><a href="#cb44-626" aria-hidden="true" tabindex="-1"></a><span class="at">                       Results: PHReg</span></span>
+<span id="cb44-627"><a href="#cb44-627" aria-hidden="true" tabindex="-1"></a><span class="at">=============================================================</span></span>
+<span id="cb44-628"><a href="#cb44-628" aria-hidden="true" tabindex="-1"></a><span class="at">Model:                    PH Reg       Sample size:       103</span></span>
+<span id="cb44-629"><a href="#cb44-629" aria-hidden="true" tabindex="-1"></a><span class="at">Dependent variable:       stime        Num. events:       75 </span></span>
+<span id="cb44-630"><a href="#cb44-630" aria-hidden="true" tabindex="-1"></a><span class="at">Ties:                     Efron                              </span></span>
+<span id="cb44-631"><a href="#cb44-631" aria-hidden="true" tabindex="-1"></a><span class="at">-------------------------------------------------------------</span></span>
+<span id="cb44-632"><a href="#cb44-632" aria-hidden="true" tabindex="-1"></a><span class="at">         log HR log HR SE   HR      t    P&gt;|t|  [0.025 0.975]</span></span>
+<span id="cb44-633"><a href="#cb44-633" aria-hidden="true" tabindex="-1"></a><span class="at">-------------------------------------------------------------</span></span>
+<span id="cb44-634"><a href="#cb44-634" aria-hidden="true" tabindex="-1"></a><span class="at">year    -0.1196    0.0673 0.8872 -1.7765 0.0757 0.7775 1.0124</span></span>
+<span id="cb44-635"><a href="#cb44-635" aria-hidden="true" tabindex="-1"></a><span class="at">age      0.0296    0.0135 1.0300  2.1872 0.0287 1.0031 1.0577</span></span>
+<span id="cb44-636"><a href="#cb44-636" aria-hidden="true" tabindex="-1"></a><span class="at">surgery -0.9873    0.4363 0.3726 -2.2632 0.0236 0.1584 0.8761</span></span>
+<span id="cb44-637"><a href="#cb44-637" aria-hidden="true" tabindex="-1"></a><span class="at">=============================================================</span></span>
+<span id="cb44-638"><a href="#cb44-638" aria-hidden="true" tabindex="-1"></a><span class="at">Confidence intervals are for the hazard ratios</span></span>
+<span id="cb44-639"><a href="#cb44-639" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-640"><a href="#cb44-640" aria-hidden="true" tabindex="-1"></a><span class="st">```</span></span>
+<span id="cb44-641"><a href="#cb44-641" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-642"><a href="#cb44-642" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">

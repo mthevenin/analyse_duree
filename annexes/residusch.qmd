@@ -1,0 +1,118 @@
+---
+title: "Tests GT simplifié sur les résidus de Schoenfeld"
+author: "Marc Thevenin"
+date: "11-09-2022"
+---
+
+
+::: callout-important
+Attention il ne s'agit pas du test actuellement implémenté dans la nouvelle version de `survival` (v3) qui, malheureusement, lui a substitué la version dite "exacte". Le programme de la fonction 
+du test simplifié est néanmoins facilement récupérable et exécutable. [lien](https://github.com/mthevenin/analyse_duree/blob/main/cox.zphold/cox.zphold.R).  
+
+Je continue de préconiser l'utilisation de cette version non "exact" du test, reproductible avec les autres applications statistiques (Stata,Sas,Python).
+:::
+
+* Le test dit "simplifié", qui n'apparait pas dans le texte original de P.Gramsch et T.Thernau [lien](https://www.jstor.org/stable/2337123#metadata_info_tab_contents), répond à un soucis d'instabilité des variances des résidus de Schoenfeld en fin de durée d'observation lorsque peu d'observation restent soumises au risque. Cet argument est soulevé dans leur ouvrage de 2022  [lien](https://link.springer.com/book/10.1007/978-1-4757-3294-8) avant d'en présenter sa version.
+* Il est simplifié car on applique à tous les résidus bruts la variance du paramètre ($b$) estimés par le modèle de Cox. 
+* Le test devient alors un simple test de corrélation entre les résidus et une fonction de la durée (centrée). Dans l'esprit, il peut être également approché par une regression linéaire par les moindre carrés ordinaires entre les résidus et une fonction de la durée (voir page 134 de l'ouvrage de Grambsch et Therneau).
+
+
+Soit les données suivantes, avec *t* la variable de durées, *Y* la variable de censure et *X* la seule et unique covariable.
+
+* Pas d'évènement simultané (donc pas de correction de la vraisemblance)
+* Covariable de type indicatrice
+
+| $t_i$ | $Y_i$ | $X_i$ |
+|-----|-----|-----|
+| 1   | 1   | 1   |
+| 2   | 0   | 0   |
+| 3   | 0   | 0   |
+| 4   | 1   | 1   |
+| 5   | 1   | 1   |
+| 6   | 1   | 0   |
+| 7   | 0   | 1   |
+
+```{r}
+test = data.frame(time=  c(1,2,3,4,5,6,7),
+                    Y=c(1,0,0,1,1,1,0),
+                    X=     c(1,0,0,1,1,0,1))
+```
+
+Estimation du modèle de Cox:
+
+```{r}
+library(survival)
+fit = coxph(formula = Surv(time, Y) ~ X, data=test)
+fit
+```
+
+Calcul des résidus brut (si et seulement si $Y=1$) dans le cas d'une seule covariable avec $b$ égal à **0.62**:  
+
+$$rs_{i}=X_{i}- \sum_{j\in R_i}X_{i}\frac{e^{0.62\times X}}{\sum_{j\in R_i}e^{0.62\times X}}= X_{i} - E(X_{j\in R_i})$$
+Il y a ici 4 résidus à calculer, pour $t=(1,4,5,6)$   
+
+**Résidus pour $t=1$**    
+
+* $a_1= \sum_{j\in R_i}e^{0.62\times X} = e^{0.62} + 1 + 1 + e^{0.62} + 1 + e^{0.62}= 10.43$
+* $b_1= \sum_{j\in R_i}X_{i}\frac{e^{0.62\times X}}{\sum_{j\in R_i}e^{0.62\times X}} = 4\times\frac{e^{0.62}}{10.43} = 0.71$ 
+* $r_1 = 1 - 0.71 = 0.29$
+
+**Résidus pour $t=4$**  
+
+* $a_4 = e^{0.62} + e^{0.62} + 1 + e^{0.62} = 6.58$
+* $b_4 =  4\times\frac{e^{0.62}}{6.58} = 0.84$ 
+* $r_4 = 1 - 0.84 = 0.15$
+
+**Résidus pour $t=5$**  
+
+* $a_5 = e^{0.62} + e^{0.62} + 1 = 4.71$
+* $b_5 = 2\times\frac{e^{0.62}}{4.71} = 0.78$
+* $r_5 = 1 - 0.78 = 0.21$
+
+**Résidus pour $t=6$**  
+
+* $a_6 = e^{0.62} + 1 = 2.86$
+* $b_6 = \frac{e^{0.62}}{2.86} = 0.65$
+* $r_6 = 0 - 0.65 = -0.65$
+
+Les résidus "standardisés", dans le texte *scaled residuals* (je cale sur une traduction correcte en français) sont égaux à: 
+
+$$sr_i = b + nd \times Var(b) \times r_i$$
+ Avec $nd= \sum Y_i$
+ 
+  
+* $\sum Y_i = 4$
+* $Var(b) = (1.1723)^2=1.37$
+
+* $sr_1 = 0.62 + 4\times 1.37 \times 0.29 = 2.20$
+* $sr_4 = 0.62 + 4\times 1.37 \times 0.15 = 1.47$
+* $sr_5 = 0.62 + 4\times 1.37 \times 0.21 = 1.78$
+* $sr_6 = 0.62 + 4\times 1.37 \times (-0.65) = -2.95$
+
+
+Avec $g(t_i)$ une fonction de la durée ($g(t_i)=t_i$, $g(t_i)=1-KM(t_i)$...) et $\overline{g(t)}$ sa valeur moyenne, la statistique  du test score simplifié pour une covariable est égale à :   
+
+$$\frac{[\sum_i(g(t_i) - \overline{g(t_i)}\times sr_i)]^2}{(nd \times Var(b) \times \sum_i(g(t_i) - \overline{g(t_i)})^2}$$
+Et suis un $\chi^2$ à 1 degré de liberté.  
+
+Avec $\overline{g(t_i)}=t_i$, le calcul de la statistique de test est:  
+
+*  $\overline{g(t_i)}= \frac{28}{7}=4$
+
+* $\frac{[(1-4)\times 2.20] + [(4-4)\times 1.47 + (5-4)\times 1.78 + (6-4)\times (-2.95)]^2 }{4\times 1.37 \times [(1-4)^2 + (4-4)^2 + (5-4)^2 + (6-4)^2] } = \frac{114.9}{76.72} = 1.49$
+
+
+```{r}
+#source("D:/D/Marc/SMS/FORMATIONS/analyse_duree/cox.zphold/cox.zphold.R")
+
+source("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/cox.zphold/cox.zphold.R")
+
+````
+
+
+```{r}
+cox.zphold(fit, transform="identity")
+````
+
+
+

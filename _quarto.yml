@@ -57,6 +57,10 @@ website:
           - Stata.qmd
           - Sas.qmd
           - Python.qmd
+        - text: "---"  
+        - section: "**Annexes**"
+          contents:
+          - annexes.qmd
 
 format:
   html:
