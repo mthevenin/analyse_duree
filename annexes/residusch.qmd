@@ -75,7 +75,7 @@ Il y a ici 4 résidus à calculer, pour $t=(1,4,5,6)$
 * $b_6 = \frac{e^{0.62}}{2.86} = 0.65$
 * $r_6 = 0 - 0.65 = -0.65$
 
-Les résidus "standardisés", dans le texte *scaled residuals* (je cale sur une traduction correcte en français) sont égaux à: 
+Les résidus "standardisés", ou plutôt *scaled residuals* (je cale sur une traduction correcte en français) sont égaux à: 
 
 $$sr_i = b + nd \times Var(b) \times r_i$$
  Avec $nd= \sum Y_i$
@@ -109,10 +109,7 @@ source("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/cox.zph
 
 ````
 
-
 ```{r}
 cox.zphold(fit, transform="identity")
 ````
-
-
 

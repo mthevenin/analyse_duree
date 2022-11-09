@@ -480,7 +480,7 @@ n= 7, number of events= 4 </code></pre>
 <li><span class="math inline">\(b_6 = \frac{e^{0.62}}{2.86} = 0.65\)</span></li>
 <li><span class="math inline">\(r_6 = 0 - 0.65 = -0.65\)</span></li>
 </ul>
-<p>Les résidus “standardisés”, dans le texte <em>scaled residuals</em> (je cale sur une traduction correcte en français) sont égaux à:</p>
+<p>Les résidus “standardisés”, ou plutôt <em>scaled residuals</em> (je cale sur une traduction correcte en français) sont égaux à:</p>
 <p><span class="math display">\[sr_i = b + nd \times Var(b) \times r_i\]</span> Avec <span class="math inline">\(nd= \sum Y_i\)</span></p>
 <ul>
 <li><p><span class="math inline">\(\sum Y_i = 4\)</span></p></li>
@@ -776,7 +776,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$b_6 = \frac{e^{0.62}}{2.86} = 0.65$</span>
 <span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$r_6 = 0 - 0.65 = -0.65$</span>
 <span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>Les résidus "standardisés", dans le texte *scaled residuals* (je cale sur une traduction correcte en français) sont égaux à: </span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a>Les résidus "standardisés", ou plutôt *scaled residuals* (je cale sur une traduction correcte en français) sont égaux à: </span>
 <span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a>$$sr_i = b + nd \times Var(b) \times r_i$$</span>
 <span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a> Avec $nd= \sum Y_i$</span>
@@ -810,12 +810,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
 <span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zphold</span>(fit, <span class="at">transform=</span><span class="st">"identity"</span>)</span>
-<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
-<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zphold</span>(fit, <span class="at">transform=</span><span class="st">"identity"</span>)</span>
+<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a><span class="in">````</span></span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
