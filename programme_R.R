@@ -10,6 +10,8 @@
 #install.packages("jtools")
 #install.packages("RecordLinkage")
 #install.packages("cmprsk")
+#install.packages("tibble")
+#install.packages("stringr")
 #install.packages("gtsummary")
 #install.packages("nnet")
 #install.packages("muhaz")
@@ -22,6 +24,8 @@ library(tidyr)
 library(jtools)
 library(RecordLinkage)
 library(cmprsk)
+library(tibble)
+library(stringr)
 library(gtsummary)
 library(nnet)
 library(muhaz)
@@ -32,7 +36,7 @@ library(muhaz)
 
 # Chargement base
 library(readr)
-trans <- read.csv("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv")
+trans <- read_csv("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv")
 
 # Non parametrique
 
@@ -77,25 +81,29 @@ summary(coxfit)
 ggforest(coxfit)
 tbl_regression(coxfit,exponentiate=TRUE)
 
+### Test ph attention diff v2 versus v3
 
-## test ph attention diff v2 versus v3
-### test GB (resultat different cours si v3)
+# Test GB (Résultat different si v3 car test exact => gls avec variances calculées à chaque t sur les résidus)
+
+cox.zph(coxfit)
+cox.zph(coxfit, transform="identity")
 
 ### avec Récupération de l'ancienne version du test: fonction cox.zphold
 ## lien fichier: https://github.com/mthevenin/analyse_duree/tree/main/cox.zphold
+## je conseille de rester sur cette solution car reproductible avec autres applis Stats + pas de test miracle (voir 
+## le bouquin de Grambsch-Therneau)
 source("D:/D/Marc/SMS/FORMATIONS/2022/Durée2/a distribuer/cox.zphold.R")
 cox.zphold(coxfit)
 cox.zphold(coxfit, transform="identity")
 
-### methode ols: correlation residus/t
-### plutôt conseillé d'estimer avec une gls (generalized least square => correlation des erreurs de la regression dans le temps)
+### methode ols: correlation residus/t =>  cox.zphold avec transform="identity"
 
 resid= resid(coxfit, type="scaledsch")
 varnames <- names(coxfit$coefficients)
 coln = c(varnames)
 colnames(resid) = c(coln)
 
-times    = as.numeric(dimnames(resid)[[1]])
+times = as.numeric(dimnames(resid)[[1]])
 
 resid = data.frame(resid)
 resid = cbind(resid, t=times)
@@ -104,14 +112,13 @@ year    = summary(lm(year~t, data=resid))
 age     = summary(lm(age~t, data=resid))
 surgery = summary(lm(surgery~t, data=resid))
 
-###################
-#p-values de l'OLS#
-###################
+##########
+#p-values#
+##########
 
-paste("p-value pour year:", year$coefficients[2,4])
-paste("p-value pour age:",  age$coefficients[2,4])
-paste("p-value pour surgery:", surgery$coefficients[2,4])
-
+year$coefficients[,4] 
+age$coefficients[,4] 
+surgery$coefficients[,4] 
 
 ## interaction
 
