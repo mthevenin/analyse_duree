@@ -9,7 +9,7 @@ Ici je n'ai rien fait  de plus que renommer la fonction de la version antérieur
 * Télécharger le programme **cox.zphold.R**
 * Charger la fonction **`cox.zphold()`** avec: **`source("//...path.../cox.zphold.R")`**
 * Exécuter un modèle de Cox avec la fonction **`fit=coxph(...)`**
-* Exécuté le test avec **`cox.zphold(fit)`**
+* Exécuter le test avec **`cox.zphold(fit)`**
 
 
 * Package **`survival`**: https://github.com/therneau/survival
