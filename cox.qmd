@@ -86,7 +86,7 @@ $$\frac{\partial pl(b)}{\partial{b_k}}=\sum_{i=1}^n\delta_i\left(X_{ik}-\sum_{j\
 
 Comme $\frac{e^{X_{j}b}}{\sum_{j\in R}e^{X_{j}b}}$ est une probabilité, et  $\sum_{j\in R}X_{ik}\times p_i$ est l'espérance (la moyenne) $E(X_k)$ d'avoir la caractéristique $X_k$ lorsqu'un évènement a été observé. Au final:  
 
-$$\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - E(X_{k}) \right)$$
+$$\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - E(X_{j\in R_i,k}) \right)$$
 
 
 Cette expression va permettre de tester le respect ou non de l’hypothèse de risques proportionnels.
@@ -234,10 +234,9 @@ $$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{jk}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X
 **Des éléments de calculs du test "simplifié" sont donnés dans la section "annexes"**
 
 
-
-**Résultat cohérent entre SAS - STATA - SURVIVAL V2 (R) - Lifelines (Python)**
-
 ::: {.callout-warning} 
+
+## **Résultats identiques entre SAS - STATA - SURVIVAL V2 (R) - Lifelines/statmodels (Python)**  
 
 Avec $g(t)=t$:  
 
@@ -259,17 +258,14 @@ Avec $g(t)=t$:
 :::
 
 
-
 Ici l'hypothèse de proportionalité des risques est questionnable pour la variable *surgery*. Le risque ratio  pourrait ne pas constant dans le temps.  Ce n'est pas étonnant, sur les données le premier décès pour les personnes opérées d'un pontage n'est observé qu'au bout de 165 jours.
 
 
 **Remarques / à savoir**  
 
-* **Test multiple**: de nouveau il convient de se méfier du résultat du test multiple lorsque le nombre de degrés de liberté est élevé (ou tout simplement supérieur à 1). Le risque de premier espèce peut-être assez faible alors que les tests pour chaque covariables prises une à une présentent  élevées (>.1 par exemple). Dans l'exemple sur les trois variables, seulement une est questionnable et le test sur un seuil courant de 5% pourrait être jugé significatif.
-
-
-* Le résultat de ce test est considéré par certain.e.s comme un indicateur de l’ampleur du biais qui affecte la baseline du risque.
-
+* **Test multiple**: de nouveau il convient de se méfier du résultat du test multiple. Le risque de premier espèce peut-être assez faible alors que les tests pour chaque covariables prises une à une présentent des valeurs élevées (>.1 par exemple).     
+Le résultat de ce test est considéré par certain.e.s comme un indicateur de l’ampleur du biais qui affecte la baseline du risque.  
+Le résultat de ce test multiple est considéré par certain.e.s comme un indicateur de l’ampleur du biais qui affecte la baseline du risque.
 
 * **Transformations de la durée**: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: $g(t)=t$ (« identity »), $g(t)=log(t)$, $g(t)=KM(t)$ ou $g(t)=1- KM(t$) où $KM(t$) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank », est  utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple $t=(0.1,0.5,1,2.6,3)$ donne une transformation $t=(1,2,3,4)$. A savoir : la fonction « identity » rend le test relativement sensible aux évènements très tardifs et rares (outliers).
 
@@ -278,7 +274,7 @@ Ici l'hypothèse de proportionalité des risques est questionnable pour la varia
 
 ### R
 
-***Attention test modifié depuis le v3 de survival***.
+***Attention version exacte du test depuis le v3 de survival***.
 
 *  Après avoir créer un objet  à l’estimation du modèle de Cox, on utilise la fonction **`cox.zph`**. Cette fonction utilise par défaut $g(t)=1-KM(t)$ où $KM(t)$ sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.
 *  Test antérieur: j’ai récupéré le programme du test antérieur, renommé **`cox.zphold`**. On peut le télécharger, et il est facilement exécutable.
@@ -329,8 +325,8 @@ Pour estimer le modèle de Cox, les données sont dans un premier temps splitée
       +------------------------------+
 ```
 
-Les bornes des intervalles $[t_0 ;t]$ ont des valeurs seulement lorsqu'un évènement s'est produit (principe de la vraisemblance partielle). Il n'y a donc pas de valeurs pour $t$ et $t_0$ en $t=4$ ($id=2,3$), $t=7,10,11,13,14,15$ ($id=3$).
-* Les deux individus observent l'évènement en $t=6$ pour $id=2$, et en $t=16$ pour $id=3$. Avant ce moment la valeur de la variable évènement/censure (ici $d$) prend toujours la valeur 0, et prend la valeur 1 le jour du décès.  
+Les bornes des intervalles $[t_0 ;t]$ ont des valeurs seulement lorsqu'un évènement s'est produit (principe de la vraisemblance partielle). Il n'y a donc pas de valeurs pour $t$ et $t_0$ en $t=4$ ($id=2,3$), $t=7,10,11,13,14,15$ ($id=3$).  
+Les deux individus observent l'évènement en $t=6$ pour $id=2$, et en $t=16$ pour $id=3$. Avant ce moment la valeur de la variable évènement/censure (ici $d$) prend toujours la valeur 0, et prend la valeur 1 le jour du décès.  
 
 On vérifie que les paramètres estimés sont identiques
 
@@ -356,7 +352,7 @@ Log likelihood = -289.30639                             Prob > chi2   = 0.0005
 
 *Introduction d'une intéraction avec une fonction de la durée*  
 
-On a une variable de durée (on prendra $f(t)=t$) qui sera croisée avec la variable surgery. Le modèle va s'écrire:      
+On a une variable de durée (on prendra $g(t)=t$) qui sera croisée avec la variable *surgery*. Le modèle va s'écrire:      
 
 $$h(t | X,t) = h_0(t)e^{b_1age + b_2year + b_3 surgery + b_4 (surgery\times t)}$$
 
@@ -386,7 +382,7 @@ Rapport de HR|
 
 ```
 
-On retrouve donc un résultat proche de celui obtenu à partir du test simplifié sur les résidus de Schoenfeld pour la variable *surgery*. Avec $f(t)=t$, il a le mérite de pouvoir être interprété directement. Ce qui ne veut pas dire qu'il s'agit de la meilleure solution.    
+On retrouve donc un résultat proche de celui obtenu à partir du test simplifié sur les résidus de Schoenfeld pour la variable *surgery*. Avec $g(t)=t$, il a le mérite de pouvoir être interprété directement. Ce qui ne veut pas dire qu'il s'agit de la meilleure solution.    
 Donc, malgré  une hypothèse plutôt forte sur la forme fonctionnelle de l'intéraction, et dans les fait surement pas pertinente, on peut dire  que chaque jour le HR entre personnes opérées et personnes non opérées augmente de 0.2%. L'effet de l'opération sur la survie des individus s'estompe avec le temps.
 
 
