@@ -92,7 +92,7 @@ $$sr_i = b + nd \times Var(b) \times r_i$$
 
 Avec $g(t_i)$ une fonction de la durée ($g(t_i)=t_i$, $g(t_i)=1-KM(t_i)$...) et $\overline{g(t)}$ sa valeur moyenne, la statistique  du test score simplifié pour une covariable est égale à :   
 
-$$\frac{[\sum_i(g(t_i) - \overline{g(t_i)}\times sr_i)]^2}{(nd \times Var(b) \times \sum_i(g(t_i) - \overline{g(t_i)})^2}$$
+$$\frac{[\sum_i(g(t_i) - \overline{g(t_i)}\times sr_i)]^2}{nd \times Var(b) \times (\sum_i(g(t_i) - \overline{g(t_i)})^2}$$
 Et suis un $\chi^2$ à 1 degré de liberté.  
 
 Avec $\overline{g(t_i)}=t_i$, le calcul de la statistique de test est:  
