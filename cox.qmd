@@ -164,7 +164,6 @@ On retrouve les résultats des tests non paramétriques pour l'opération, à sa
 De la même manière, plus on entre à un âge élevé dans la liste d'attente plus le risque de décès augmente. La variable *year*, qui traduit des progrès en médecine, exprime une réduction relativement modérée du risque journalier de décès durant l'attente de la greffe du coeur.   
 
 
-
 ## R-Stata-Sas-Python   
   
 ::: panel-tabset
