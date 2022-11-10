@@ -34,11 +34,11 @@ On peut réécrire cette vraisemblance en la multipliant et en la divisant par: 
 
 $$L=\prod_{i=1}^{n}\left[h(t_i)\frac{\sum_{j\in R}h(t_i)}{\sum_{j\in R}h(t_i)}\right]^{\delta_i}S(t_i)= \prod_{i=1}^{n}\left[\frac{h(t_i)}{\sum_{j\in R_i}h(t_i)}\right]^{\delta_i}\sum_{j\in R_i}h(t_i)^{\delta_i}S(t_i)$$  
 <br>
-La vraisemblance partielle retient le premier terme de la vraisemblance, soit:   
+La vraisemblance partielle retient seulement le premier terme de la vraisemblance, soit:   
 
-$PL=\prod_{i=1}^{n}\left[\frac{h(t_i)}{\sum_{j\in R}h(t_i)}\right]^{\delta_i}$  
+$$PL=\prod_{i=1}^{n}\left[\frac{h(t_i)}{\sum_{j\in R}h(t_i)}\right]^{\delta_i}$$  
 
-<br>
+
 Une fois remplacée la valeur de $h(t_i)$ par son expression en tant que modèle à risques proportionnels, la vraisemblance partielle ne dépendra plus de la durée. **Mais elle va dépendre de l'ordre d'arrivée des évènements, c'est à dire leur rang**. 
 <br>
 *Remarque*: pour les observations censurées($\delta_i=0$), $PL=1$. Toutefois, ces censures à droite entrent dans l'expression $\sum_{j\in R}h(t_i)$ tant qu'elles sont soumises au risque.  
@@ -202,7 +202,6 @@ Avec la librairie `lifelines`, le modèle est estimé avec la fonction **`CoxPHF
 
 ::: callout-important
 
-Une maj va être réalisée en novembre, pour expliquer le plus clairement possible la différences entre le test simplifié (Stata, Sas, R jusqu'à la v3) et le test exact (R à partir de la V3).  
 
 Résumé rapide: le test consiste à regarder la corrélation entre des résidus obtenus directement avec la fonction de score de la vraisemblanc partielle de Cox.  
 
@@ -216,25 +215,33 @@ Résumé rapide: le test consiste à regarder la corrélation entre des résidus
 *	Ce résidu n’est calculé que pour les observations qui ont connues l’évènement.
 *	Il est calculé au moment où l’évènement s’est produit.
 *	La somme des résidus pour chaque covariable est égale à 0 (propriété de l’équation de score à l’équilibre).
-*	On utilise généralement les résidus de Schoenfeld « standardisés » - par leur variance - pour tenir compte du fait que le risk set diminue au cours du temps.
+*	On utilise généralement les résidus de Schoenfeld « standardisés » ou plutôt "remis à l'échelle" - par leur variance - pour tenir compte du fait que la population soumise au risque diminue au cours du temps.
 *	Pour une observation dont l’évènement s’est produit en $t_i$, le *résidu brut de Schoenfeld* pour la covariable $X_k$, après estimation du modèle, est égal à:
   
-$$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{jk}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}= X_{ik} - E(X_k)$$
+$$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{jk}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}= X_{ik} - E(X_{j\in R_i})$$
 
-* Ce résidu est formellement la contribution d'un individu au score. Il se lit comme la différence entre la valeur observée d'une covariable  et sa valeur espérée au moment où un évènement se produit. 
+* Ce résidu est formellement la contribution d'une observation au score. Il se lit comme la différence entre la valeur observée d'une covariable  et sa valeur espérée au moment où un évènement se produit. 
 
 * Si l'hypothèse de constance des risk ratios est respectée, les résidus ne doivent pas suivre une tendance précise, , en particulier à la hausse ou à la baisse.  
 
 * Intuitivement sans censure à droite et en ne considérant que les résidus bruts: on a un RR strictement égal à 1 en début d'exposition $R_i=100$ avec 50 hommes et 50 femmes. Si l'hypothèse PH (strictement) respectée, lorsqu'il reste 90 personnes soumises au risque, on devrait avoir 45 hommes et 45 femmes. Avec $R_i=50$, 25 hommes et 25 femmes,.......avec $R_i=10$, 5 hommes et 5 femmes. 	Au final $X_k$ est toujours égal à 0.5 et les résidus bruts prendront toujours la valeur -.5 si $X=0$ et .5 si $X=1$. En faisant une simple régression linéaire entre les résidus, qui alternent ces deux valeurs, et $t$, le coefficient estimé sera non significativement différent de 0. 
 
-* On peut tester l'hypothèse sur les résidus  par une régression entre ces résidus pour chaque covariable et la durée (ou fonction dérivée de la durée, par exemple $log(t)$)). La solution la plus utilisée est le test de **Grambsch-Therneau**.
-<br><br>
+*   On peut tester l'hypothèse sur les résidus par une régression entre
+    ces résidus pour chaque covariable et la durée (ou fonction dérivée
+    de la durée, par exemple $t$ ou $log(t)$)). La solution la plus utilisée
+    est le test de **Grambsch-Therneau** sous sa forme simplifiée (R jusqu'à v3 de `survival`, Sas, Stata, Python) ou exacte (R depuis la V3).   
+
+
+**Des éléments de calculs du test "simplifié" sont donnés dans la section "annexes"**
 
 
 
 **Résultat cohérent entre SAS - STATA - SURVIVAL V2 (R) - Lifelines (Python)**
 
 ::: {.callout-warning} 
+
+Avec $g(t)=t$:  
+
 ```{r eval=FALSE}
       Test of proportional-hazards assumption
 
@@ -274,21 +281,21 @@ Ici l'hypothèse de proportionalité des risques est questionnable pour la varia
 
 ***Attention test modifié depuis le v3 de survival***.
 
-*  Après avoir créer un objet  à l’estimation du modèle de Cox, on utilise la fonction **`cox.zph`**. Cette fonction utilise par défaut $f(t)=1-KM(t)$ où $KM(t)$ sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.
+*  Après avoir créer un objet  à l’estimation du modèle de Cox, on utilise la fonction **`cox.zph`**. Cette fonction utilise par défaut $g(t)=1-KM(t)$ où $KM(t)$ sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.
 *  Test antérieur: j’ai récupéré le programme du test antérieur, renommé **`cox.zphold`**. On peut le télécharger, et il est facilement exécutable.
 
 ### Stata
 
-Le test est obtenu avec la commande **`estat phtest, d`**. Par défaut Stata utilise $f(t)=t$. On peut modifier cette fonction.
+Le test est obtenu avec la commande **`estat phtest, d`**. Par défaut Stata utilise $g(t)=t$. On peut modifier cette fonction.
 
 ### SAS
 
-Le test est disponible depuis quelques années avec l’argument **`zph`** sur la ligne `proc lifetest`. Par défaut SAS utilise $f(t)=t$. On peut modifier cette fonction.
+Le test est disponible depuis quelques années avec l’argument **`zph`** sur la ligne `proc lifetest`. Par défaut SAS utilise $g(t)=t$. On peut modifier cette fonction.
 
 
 ### Python
 
-On utilise la fonction **`proportional_hazard_test`** de la librairie `lifelines`. La fonction utilise par défaut $f(t)=t$, mais on peut afficher les résultats pour toutes les transformations de $t$ disponibles avec l’option `time_transform=’all’`. 
+On utilise la fonction **`proportional_hazard_test`** de la librairie `lifelines`. La fonction utilise par défaut $g(t)=t$, mais on peut afficher les résultats pour toutes les transformations de $t$ disponibles avec l’option `time_transform=’all’`. 
 
 :::
 
@@ -397,31 +404,31 @@ Donc, malgré  une hypothèse plutôt forte sur la forme fonctionnelle de l'int�
 
 ***Ne rien faire***   
 
-On interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison). Difficilement soutenable pour l’analyse des effets cliniques, elle peut être envisagée dans d’autres domaines. Attention au nombre de variables qui ne respecte pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme « moyenne » sur la période d’observation.  
-On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps les écarts déjà significatifs en début d’observation s’accentuent, à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais si l’effet est modéré : $RR>1$ qui baisse ou $RR<1$ qui augmente au cours du temps, je suis moins convaincu de la pertinence de cette option.  
-Il faut tenir compte de l’intérêt portée par les variables qui présentent un problème par rapport à l’hypothèse. Il n’est peut-être pas nécessaire de complexifier le modèle pour des variables introduites comme simples contrôles.   
+On interprète le "hazard ratio" comme un ratio moyen sur une durée d’observation (P.Allison). Difficilement soutenable pour l’analyse d'effets cliniques, on peut l'envisager dans d’autres domaines. Attention au nombre de variables qui ne respecte pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée. Il convient tout de même lors de l’interprétation, de préciser celles qui seront analysées sous un rapport « moyen».  
+On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps les écarts de risque, déjà important en début d’observation s’accentuent, à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais s'ils suivent un processus de modération: $RR>1$ qui baisse ou $RR<1$ qui augmente au cours du temps, je suis moins convaincu de la pertinence de cette option.  
+Il faut également tenir compte de l’intérêt porté par les variables qui présentent un problème par rapport à l’hypothèse. Il n’est peut-être pas nécessaire de complexifier le modèle pour des variables introduites comme simples contrôles.   
 
-
-Mais plus problématique [**très important**]… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de ***frailty*** (fragilité) lorsque cette non homogénéité n’est pas observables. Des estimations, plus complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Si l’hypothèse est sensible aux problèmes d’omission, il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.  
-Le test de **Grambsch-Therneau** est donc aussi un test qui donne des éléments d'informations sur de possibles effets de sélection, ou plus généralement sur la présence de biais d'omission dans le modèle.
+Mais plus problématique [**très important**]… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de ***frailty*** (fragilité) lorsque cette non homogénéité n’est pas observable. Des estimations, plus complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Si l’hypothèse est sensible aux biais d’omission, il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.  
+Le test de **Grambsch-Therneau** peut-être également appréhendé comme un test qui donne un élément d'information sur de possibles biais d'omission (endogénéité)dans le modèle.
 
 <br>
 
 ***Modèle de Cox stratifié***   
 
-Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie ajustées, et si une seule covariable (binaire) présente un problème. Les RR ne seront pas estimés pour la variable qui ne respecte pas l'hypothèse.  
+Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie prédites ajustées, et si une seule covariable (binaire) présente un problème. Les RR ne seront pas estimés pour la variable qui ne respecte pas l'hypothèse.    
+[*Je pense faire un courté entrée dessuis dans la section annexe en 2023*].
 
 ***Intéraction***    
 
-Introduire une interaction avec la durée, ce qui a été fait juste haut dessus. Cela peut permettre d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des RR, dans l'idéal une seule variable. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être strictement linéaire, ce qui est une hypothèse plutôt forte.... et on remets en quelque sort une contrainte de proportionalité.  
+Introduire une interaction avec la durée, ce qui a été fait juste haut dessus. Cela peut permettre d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des rapports de risque, dans l'idéal une seule variable. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être strictement linéaire, ce qui est une hypothèse plutôt forte....  on introduit de nouveau une contrainte de proportionalité dans le modèle.  
 
 ***Modèles alternatifs***  
 
-Utiliser un modèle alternatif: modèles paramétriques à risques proportionnels si la distribution du risque s’ajuste bien, le modèle paramétrique « flexible » de Parmar-Royston (non traité) ou un modèle à temps discret. Dans ce dernier cas, on peut également corriger la non proportionalité avec une intéraction. Si on ne le fait pas, les risques prédits sous forme de probabilités conditionnelles resteront toujours dans les bornes contrairement au modèle de Cox.      
-Utiliser un modèle non paramétrique additif dit d’Aalen ou une de ses variantes. Mais ces modèles, dont les résultats sont des visuels graphiques, et se commentent difficilement.  
+Utiliser un modèle alternatif: modèles paramétriques à risques proportionnels si la distribution du risque s’ajuste bien, le modèle paramétrique « flexible » de Parmar-Royston (***ajout prévu pour 2023***) ou un modèle à temps discret. Pour la dernière solution, on peut également corriger la non proportionalité avec l'introduction  d'une intéraction. Si on ne le fait pas, les risques prédits, par définition sous forme de probabilités conditionnelles, resteront toujours dans les bornes contrairement au modèle de Cox.      
+Utiliser un modèle non paramétrique additif dit d’Aalen ou une de ses variantes (non traité). Mais ces modèles, dont les résultats sont présentés par des graphiques, se commentent assez difficilement.  
 
 **Forêt aléatoire**    
-Autre méthode : les forêts aléatoires [à présenter un jour tout de même]. L.Breiman a dès le départ proposé une estimation des modèles de survie par cette méthode. Par définition, pas sensible à l’hypothèse PH. Mais cela reste des méthodes à finalité prédictive, moins riche en interprétation si ce n’est sur les facteurs d’importance. 
+Autre méthode : les forêts aléatoires [*à présenter un jour tout de même*]. L.Breiman a dès le départ proposé une estimation des modèles de survie par cette méthode. Par définition, pas sensible à l’hypothèse PH. Mais cela reste des méthodes à finalité prédictive, moins riche en interprétation. 
 
 <br><br>
 
