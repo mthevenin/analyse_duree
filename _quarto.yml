@@ -31,7 +31,7 @@ website:
           contents:
           - introduction.qmd
           - Donnees.qmd
-          - theorie.qmd
+          - Theorie.qmd 
         - text: "---"      
         - section: "**Méthodes non paramétriques**"
           contents:
