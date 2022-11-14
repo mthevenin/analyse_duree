@@ -214,7 +214,7 @@
     "href": "Donnees.html#enquête-mafe-ined",
     "title": "Les Données",
     "section": "Enquête MAFE (Ined)",
-    "text": "Enquête MAFE (Ined)\nhttps://mafeproject.site.ined.fr/\n\n\n\n\n\n\nNote\n\n\n\nLa manipulation des données biographiques est un sujet très important avec ce type d’enquêtes, tout particulièrement avec MAFE . A l’initiative de Cris Beauchemin, des tutoriels de manipulation avec Stata, SAS et R ont été rédigés, en mettant à disposition un jeu de données réduit issu de l’enquête. Celui avec R doit être mis à jour dans quelques mois, il est out of date sur certaines parties (2015). La problématique choisie est la reconstitution des états annuels de transnationalité des unions au Sénégal, donc avec des situations de polygamie….c’est franchement un peu l’enfer.\nMalgré tout, on peut se faire un aperçu des divers problèmes rencontrés lorsqu’on manipule ce genre de données.\nnotes 8-9-10\n\n\nBase sur les caractéristiques individuelles\n\nModule biographique sur les lieux de résidence"
+    "text": "Enquête MAFE (Ined)\nBase sur les caractéristiques individuelles\n\nModule biographique sur les lieux de résidence"
   },
   {
     "objectID": "dynamiques.html",

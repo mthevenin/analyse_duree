@@ -107,9 +107,9 @@ Avec $\overline{g(t_i)}=t_i$, le calcul de la statistique de test est:
 
 source("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/cox.zphold/cox.zphold.R")
 
-````
+```
 
 ```{r}
 cox.zphold(fit, transform="identity")
-````
+```
 

@@ -140,14 +140,6 @@ Deux enquêtes biographiques de type rétrospectives produite par l’Ined, avec
 
 ## **Enquête MAFE (Ined)**
 
-<https://mafeproject.site.ined.fr/>
-
-::: callout-note
-La manipulation des données biographiques est un sujet très important avec ce type d'enquêtes, tout particulièrement avec MAFE . A l'initiative de *Cris Beauchemin*, des tutoriels de manipulation avec Stata, SAS et R ont été rédigés, en mettant à disposition un jeu de données réduit issu de l'enquête. ***Celui avec R doit être mis à jour dans quelques mois***, il est out of date sur certaines parties (2015). La problématique choisie est la reconstitution des états annuels de transnationalité des unions au Sénégal, donc avec des situations de polygamie....c'est franchement un peu l'enfer.  
-Malgré tout, on peut se faire un aperçu des divers problèmes rencontrés lorsqu'on manipule ce genre de données.  
-[notes 8-9-10](https://mafeproject.site.ined.fr/en/methodo/methodological_notes/)
-:::
-
 
 *Base sur les caractéristiques individuelles*    
 
