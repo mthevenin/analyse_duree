@@ -53,7 +53,7 @@ Les problématiques se basent sur les questions suivantes:
 # **Elements nécessaire à l'analyse**
 
 1. **Un processus temporel**
-   - Une échelle de mesure (minutes, heures, jours, mois, années....)
+   - Une échelle de mesure: minutes, heures, jours, mois, années....
    - Une origine définissant un évènement de départ.  
    - Une définition précise de l'évènement d'étude.  
    - Une durée entre le début et la fin de la période d'observation, si nécessaire la fin de la période d'exposition au risque.  
