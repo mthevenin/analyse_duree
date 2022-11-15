@@ -24,14 +24,36 @@ La principale caractéristique de l’analyse des durées est le traitement des 
 
 # **Temps et durée**
 
-Le temps est une dimension (la quatrième), la durée est sa mesure. La durée est tout simplement calculer par la différence, pour une échelle temporelle donnée, entre la fin et le début d’une période d’exposition ou d’observation.  
-<br>
-On distingue généralement deux types de durée : la ***durée continue*** et la ***durée discrète/groupée***. Ces deux notions ne possèdent pas réellement de définition, la différence s’explique plutôt par la présence ou non de simultanéité dans l’occurrence des évènements.
-Le temps étant intrasèquement continu car deux évènements ne peuvent pas avoir lieu en « même temps ». C’est donc l’échelle temporelle choisie ou imposée par l’analyse et les données qui pourra rendre cette mesure continue ou discrète/groupée.  
-Pour un physicien travaillant sur la théorie de la relativité avec des horloges atomiques, une minute (voire une seconde) est une mesure très groupée pour ne pas dire grossière du temps, alors que pour un géologue c’est une mesure continue. Pour ces deux disciplines, cette échelle de mesure n’est pas adaptée à leur domaine. Le choix de l’échelle temporelle doit être pertinent par rapport aux objectifs de l’analyse... même si on dispose des informations (dates de naissance exactes), analyser la fécondité avec une métrique journalière n'aurait pas de sens.   
+Le temps est une dimension (la quatrième), la durée est sa mesure. La
+durée est tout simplement calculée par la différence, pour une échelle
+temporelle donnée, entre la fin et le début d'une période d'exposition
+ou d'observation.  
+<br> On distingue généralement deux types de mesure de la durée :  ***continue*** et ***discrète/groupée***. Ces deux notions ne
+possèdent pas réellement de définition, la différence s'explique plutôt
+par la présence ou non de simultanéité dans l'occurrence des évènements.
+Le temps étant intrasèquement continu car deux évènements ne peuvent pas
+avoir lieu en « même temps ». C'est donc l'échelle temporelle choisie ou
+imposée par l'analyse et les données qui pourra rendre cette mesure
+continue ou discrète/groupée.\
+Pour un physicien travaillant sur la théorie de la relativité avec des
+horloges atomiques, une minute (voire une seconde) est une mesure très
+groupée pour ne pas dire grossière du temps, alors que pour un géologue
+c'est une mesure continue. Pour ces deux disciplines, cette échelle de
+mesure n'est pas adaptée à leur domaine. Le choix de l'échelle
+temporelle doit être pertinent par rapport aux objectifs de l'analyse
+même si on dispose des informations très fines (dates de naissance exactes).
+Etudier la fécondité avec une métrique journalière n'aurait pas de
+sens.
 
-Il existe des situations où les durées sont par nature discrète, lorsqu’un évènement ne peut avoir lieu qu’à un moment précis (date d'anniversaire des contrats pour l'analyse des résiliation). Généralement dans les sciences sociales avec un recueil de données de type rétrospectif, les mesures dites discrètes sont plutôt de nature groupées. Pour une même année, on considèrera indifféremment des évènements qui se produiront un premier janvier et un 31 décembre d’une même année.    
-<br>
+Il existe des situations où les durées sont par nature discrète,
+lorsqu'un évènement ne peut avoir lieu qu'à un moment précis (date
+d'anniversaire des contrats pour l'analyse des résiliation).
+Généralement dans les sciences sociales avec un recueil de données de
+type rétrospectif, les mesures dites discrètes sont plutôt de nature
+groupées. Pour une même année, on considèrera indifféremment des
+évènements qui se produiront un premier janvier et un 31 décembre d'une
+même année.
+
 
 ::: callout-important    
 * **Durée continue : absence (ou très peu) d’évènements simultanés**   
@@ -46,8 +68,8 @@ Il existe des situations où les durées sont par nature discrète, lorsqu’un 
 1. Il s'agit de la population "soumise" ou "exposée" au risque lorsque $T=t_i$. 
 <br>
 2. Cette population varie dans le temps car:
-   * Certaines personnes ont connu l'évènement, donc peuvent ne plus être soumises au risque (ex: décès si on analyse la mortalité). 
-   * Certaines personnes sortent de l'observation sans avoir (encore) observé l'évènement: décès si on analyse un autre type d'évènement, perdu.e.s de vue, fin de l'observation à une durée peu avancée dans un recueil rétrospectif.  
+   * Certaines personnes ont connu l'évènement, donc ne peuvent plus être soumises au risque (ex: décès si on analyse la mortalité). 
+   * Certaines personnes sortent de l'observation sans avoir (encore) observé l'évènement: décès si on analyse un autre type d'évènement, perdu.e.s de vue, fin de l'observation dans un recueil rétrospectif.  
 
 # **La Censure**
 
@@ -55,7 +77,6 @@ Il existe des situations où les durées sont par nature discrète, lorsqu’un 
 ::: callout-important  
 **Une observation est dite censurée lorsque la durée d'observation est inférieure à la durée d'exposition au risque**  
 :::
-
 
 ## **Censure à droite**
 
@@ -86,7 +107,7 @@ Les observations censurées ont vis à vis du phénomène observé le même comp
 
 *Problème posé par la censure informative*  
 Par exemple en analysant des décès avec un recueil prospectif, si un individu est perdu de vue en raison d’une dégradation de son état de santé, l’indépendance entre la cause de la censure et le décès ne peut plus être assurée.  
-A l’Ined l’exploitation du registre des personnes atteintes de mucoviscidose (G.Bellis) donne une autre illustration de ce phénomène. Chaque année un nombre significatif de personnes sortent du registre (pas de résultats aux examens annuels). Si certain.e.s perdu.e.s de vue s’expliquent par des déménagements, émigration ou par un simple problème d’enregistrement des informations, on note qu’ils/elles sont nombreu.se.s à présenter une forme « légère » de la maladie. L’information pouvant être donnée ici par la mutation du gène. Comme il n’est pas recommandé de supprimer ou de traiter ces observations comme des censures à droite non informative, on peut les appréhender comme un risque concurrent au décès ou à tout autre évènement analysé à partir de ce registre (voir section dédiée).  
+A l’Ined l’exploitation du registre des personnes atteintes de mucoviscidose (G.Bellis) donne une autre illustration de ce phénomène. Chaque année un nombre significatif de personnes sortent du registre (pas de résultats aux examens annuels). Si certain.e.s perdu.e.s de vue s’expliquent par des déménagements, émigration ou par un simple problème d’enregistrement des informations, on note qu’ils/elles sont nombreu.se.s à présenter une forme « légère » de la maladie. L’information pouvant être donnée ici par la mutation du gène. Comme il n’est pas recommandé de supprimer ou de traiter ces observations comme des censures à droite non informatives, on peut les appréhender comme un risque concurrent au décès ou à tout autre évènement analysé à partir de ce registre (voir section dédiée).  
 
 <br>
 
@@ -111,7 +132,7 @@ L’évènement s’est produit avant le début période d’observation. Typiqu
 <br>
 
 **Censure par intervalle**
-Un évènement peut avoir lieux entre 2 temps d'observations sans qu'on puisse les observer (ex: en criminologie récidive d'un delit entre deux arrestations). Un phénomène de censure à droite avec perdu.e de vue peut se transformer en censure par intervalle lorsque la personne réapparait et est de nouveau incluse dans les données. 
+Un évènement peut se produire entre 2 temps d'observations sans qu'on puisse les observer (ex: en criminologie récidive d'un delit entre deux arrestations). Un phénomène de censure à droite avec perdu.e de vue peut se transformer en censure par intervalle lorsque la personne réapparait et est de nouveau incluse dans les données. 
 <br>
 **Troncature**   
 Par l’exemple, on analyse la survie d’une population. Seule la survie des individus vivants à l’inclusion peut être analysée (*troncature à gauche*). On peut également  trouver un phénomène de troncature lorsqu’on mesure la durée à partir ou jusqu'à un certain seuil niveau.   
@@ -214,6 +235,11 @@ $h(t)=\frac{f(t)}{S(t)}=\frac{F'(t)}{S(t)}=-\frac{S'(t)}{S(t)}$
 <br>
 
 On voit ici clairement que la fonction de risque n’est pas une probabilité : $\frac{f(t)}{S(t)}$ ne peut pas contraindre la valeur à ne pas être supérieure à 1.
+
+
+::: callout-info
+Formellement pour $f(t)$ et $h(t)$, les expressions sont la limite lorsque *dt* tend vers 0 des deux quantités présentées ci-dessus.  Son omission est volontaire de ma part en raison de l'application qui est donnée un peu plus loin qui, justement, regarde l'effet de l'élargissement des intervalles de durée sur la mesure du taux de risque.      
+:::
 
 
 ## **Le risque cumulé $H(t)$**

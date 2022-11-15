@@ -7,11 +7,11 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 Les méthodes non paramétriques portent généralement sur l'analyse des
-fonctions de survie (séjour) ou sur celle des fonctions de répartitions,
+fonctions de survie ($S(t$)) ou sur celle des fonctions de répartitions ($F(t)$),
 plus rarement sur les mesures d'incidence données par le risque cumulé.
 Deux méthodes d'estimations sont proposées : la méthode dite actuarielle
-et la méthode dite de Kaplan & Meier. Ces deux méthodes sont adaptées à
-des mesures différentes de la durée : plutôt discrète pour la technique
+et la méthode dite de Kaplan & Meier. Ces deux approches sont adaptées à
+des mesures différentes de la durée : plutôt discrèt/groupées pour la technique
 actuarielle et plutôt continue pour Kaplan-Meier (KM). Cela induit un
 traitement différent de la censure dans l'estimation. La seconde est de
 très très loin la plus diffusée, surement en raison des tests de
@@ -75,10 +75,11 @@ $$S(t_i)=\displaystyle \prod_{t_i\leq{k}} (1-q(t_i))$$
     d'avoir été opéré pour un pontage aorto-coronarien avant
     l'inscription (*surgery*). Le début de l'exposition au risque est
     l'entrée dans le registre, la durée est mesurée en jour (*stime*).
-    La variable évènement est le décès (*died*).
+    La variable évènement/censure est le décès (*died*).
 
--   L'introduction d'une dimension dynamique, la greffe, est donnée par les informations présentent dans les
-    les variable *transplant* et *wait*.
+-   L'introduction d'une dimension dynamique, la greffe, est donnée par
+    les informations contenues dans les variables *transplant* et
+    *wait*.
 
 -   \[Mettre liens git avec la base en .csv, .dta, .sas7bdat\]
 
@@ -95,7 +96,6 @@ $$S(t_i)=\displaystyle \prod_{t_i\leq{k}} (1-q(t_i))$$
 :::
 
 
-
 <br>
 
 # **La méthode actuarielle**
@@ -103,7 +103,11 @@ $$S(t_i)=\displaystyle \prod_{t_i\leq{k}} (1-q(t_i))$$
 -   Estimation sur des intervalles définies par l'utilisateur.
 -   Méthode dite «continue», estimation en milieu d'intevalle.
 -   Méthode apropriée lorsque la durée est mesurée de manière discrète/groupée.
--   Méthode, hélas, de plus en plus abandonnée dans les sciences sociales ou les durées sont plus rarement mesurées de manière exacte. L'absence de test de comparaison des fonctions de survie n'y est pas étranger.
+-   Méthode, hélas, quasiment abandonnée dans les sciences
+    sociales même si les durées sont plus rarement mesurées de manière
+    exacte. L'absence de test de comparaison des fonctions de survie n'y
+    est pas étranger.
+
 
 ## Estimation
 
@@ -450,8 +454,7 @@ les différences - toujours positive - entre $H(t)$ par la méthode dite
 du **kernel**. Elle permet d'obtenir une fonction continue avec la durée
 (paramétrables sur les largeurs des fenêtres de lissage). D'autres
 méthodes de lissage sont maintenant possibles, et de plus en plus
-utilisées, en particulier celles utilisant des splines restreintes
-(paramétrable sur un nombre de degré de liberté -- nœuds-).
+utilisées, en particulier celles utilisant des splines.
 
 ![](images/Image20.png){width="70%"}
 
