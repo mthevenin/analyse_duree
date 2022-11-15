@@ -18,7 +18,7 @@
     "href": "comp_fsurvie.html",
     "title": "Tests de comparaison",
     "section": "",
-    "text": "Les tests d’égalités des fonctions de survie entre différentes valeurs d’une covariable sont calculés à partir de la méthode de Kaplan Meier.\n L’utilisation du test correspond à la nécessité de déterminer si une même distribution gouverne les évènements observés dans les différentes strates.\nAttention: pas de test possible sur des variables continues. Il faut donc prévoir des regroupements pour les transformer en variable ordinale.\nDeux méthodes sont utilisées:"
+    "text": "Les tests d’égalités des fonctions de survie entre différentes valeurs d’une covariable sont calculés à partir de la méthode de Kaplan Meier.\nL’utilisation du test correspond à la nécessité de déterminer si une même distribution gouverne les évènements observés dans les différentes strates.\nAttention: pas de test possible sur des variables continues. Il faut donc prévoir des regroupements pour les transformer en variable ordinale.\nDeux méthodes sont utilisées:"
   },
   {
     "objectID": "comp_fsurvie.html#r-stata-sas-python",

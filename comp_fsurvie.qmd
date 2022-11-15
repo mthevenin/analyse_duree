@@ -3,9 +3,8 @@ title: "Tests de comparaison"
 ---
 
 
+Les tests d'égalités des fonctions de survie entre différentes valeurs d'une covariable sont calculés à partir de la méthode de Kaplan Meier.   
 
-Les tests d'égalités des fonctions de survie entre différentes valeurs d'une covariable sont calculés à partir de la méthode de Kaplan Meier.  
-<BR>
 L'utilisation du test correspond à la nécessité de déterminer si une même distribution gouverne les évènements observés dans les différentes  strates.  
 Attention: pas de test possible sur des variables continues. Il faut donc prévoir des regroupements pour les transformer en variable ordinale.    
 
@@ -18,10 +17,10 @@ Deux méthodes sont utilisées:
 
 # Tests du log-rank
 
-Il s'agit d'une série de tests qui répondent à la même logique, la seule différence réside dans le poids accordé au début ou à la fin de la période d'observation. Par ailleurs ces différents tests sont plus ou moins sensibles à la distribution des censures à droites entre les sous échantillons.  
-<br>
-Ces tests entrent dans le cadre des tests du Khi2, même si formellement ils relèvent des techniques dites de rang.     
-Il s'agira donc de comparer des effectifs observés à des effectifs espérés à chaque temps d'évènement. La principale différence réside dans le calcul de la variance de la statistique du test qui, ici, suit une loi hypergéométrique.  
+Il s'agit d'une série de tests qui répondent à la même logique, la seule différence réside dans le poids accordé au début ou à la fin de la période d'observation. Par ailleurs ces différents tests sont plus ou moins sensibles à la distribution des censures à droites entre les sous échantillons.     
+
+Dans leur logique, ces tests entrent dans le cadre des tests d'indépendance du Khi2, même si formellement ils relèvent des techniques dites de rang.     
+Il s'agira donc de comparer des effectifs observés à des effectifs espérés à chaque temps d'évènement. La principale différence réside dans le calcul de la variance de la statistique du test qui, ici, suit une loi hypergéométrique (proche loi binomiale mais avec tirage sans remise).  
 
 **Principe de calcul des effectifs - évènements - observés et espérés pour deux groupes**
 
@@ -52,7 +51,7 @@ Le principe de construction des effectifs observés et espérés reste le même 
 
 **En pratique/remarques**:  
 
-*	Les tests du log-rank sont sensibles à l’hypothèse de risques proportionnels (voir **modèle semi-paramétrique de Cox**). En pratique si des courbes de séjours se croisent, il est déconseillé de les utiliser. Cela ne signifie pas que si les courbes ne se croisent pas, l’hypothèse de proportionnalité des risques est respectée : des rapports de risque peuvent au cours du temps s’accentuer, se réduire ou le cas échant s’inverser (typique d’un croisement).
+*	Les tests du log-rank sont sensibles à l’hypothèse de risques proportionnels (voir **modèle semi-paramétrique de Cox**). En pratique si des courbes de séjours se croisent, il est fortement déconseillé de ne pas les utiliser. Cela ne signifie pas que si les courbes ne se croisent pas, l’hypothèse de proportionnalité des risques est respectée : des rapports de risque peuvent au cours du temps s'intensifier, se réduire ou le cas échant s’inverser (typique d’un croisement).
 *	Effectuer un test global (multiple/omnibus) sur un nombre important de groupes (ou >2) peut rendre le test très facilement significatif. Il peut être intéressant de tester des courbes deux à deux (idem qu’une régression avec covariable discrète), en conservant un seul degré de liberté. Des méthodes de correction du test multiple sont possibles. 
 
 ## R-Stata-Sas-Python   
