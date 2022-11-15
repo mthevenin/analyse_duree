@@ -337,6 +337,6 @@ Sur un horizon de 995 jours, ces individus peuvent espérer vivre 735 jours en m
 ```
 
 
-Le graphique suivant, donne les valeurs des Rmst et les écarts de la variable *surgery* en faisant varier $t_max$ sur chaque durée où un décès a été observé. Il a été réalisé avec Stata, la durée maximale utilisée a été paramétré à 1407 jours (idem R, Sas).
+Le graphique suivant, donne les valeurs des Rmst et les écarts de la variable *surgery* en faisant varier $tmax$ sur chaque durée où un décès a été observé. Il a été réalisé avec Stata, la durée maximale utilisée a été paramétré à 1407 jours (idem R, Sas).
 
 ![](images/image9rmst.png){width=90%}

@@ -393,15 +393,15 @@ Pour <span class="math inline">\(h_{1b}(t)\)</span>, le rapport de risques augme
 <p><strong>Modèle semi-paramétrique de Cox</strong><br>
 Le modèle estime directement les <span class="math inline">\(b\)</span> indépendement de <span class="math inline">\(h_0(t)\)</span>, c’est pour cela qu’il est semi-paramétrique. Les rapports de risque (<span class="math inline">\(e^{b}\)</span>) seront utilisés pour estimer la baseline <span class="math inline">\(h_0(t)\)</span>, qui peut s’avérer nécessaire pour calculer des fonctions de survie ajustées. Le respect de l’hypothèse de proportionalité est donc important et donc être testé. <br></p>
 <p><strong>Modèle à temps discret</strong></p>
-<p>De type paramétrique. Peut être estimé à l’aide d’un modèle logistique, probit ou complémentaire log-log. La première est la plus courante, la dernière a l’avantage d’être directement relié au modèle de Cox (modèle de Cox à temps discret).<br>
-<br> Sa forme diffère de la présentation usuelle d’un modèle à risque proportionnel. Toutefois, il est régi par une hypothèse de proportionalité. Le non respect de l’hypothèse est moins critique car la baseline du « risque » est estimée simultanément. Il est comme son nom l’indique, particulièrement adapté au durées discrètes ou groupées. <br> Avec une spécification logistique, la plus courante, les Odds vont sous certaines conditions, se confondre avec des probabilités/risques.</p>
-<p><br></p>
-<p><strong>Les modèles paramétriques standard</strong><br>
+<ul>
+<li><p><strong><em>Modèle à temps discret</em></strong>: De type paramétrique. Peut être estimé à l’aide d’un modèle logistique, probit ou complémentaire log-log. Le premier est le plus courant, le dernièr a l’avantage d’être directement relié au modèle de Cox (modèle de Cox à temps discret). Sa forme diffère de la présentation usuelle d’un modèle à risque proportionnel. Toutefois, il est régi par une hypothèse de proportionnalité. Le non respect de l’hypothèse est moins critique car la baseline du « risque » est estimée simultanément. Il est comme son nom l’indique, particulièrement adapté au durées discrètes ou groupées. Avec une spécification logistique, les Odds vont sous certaines conditions, se confondre avec des probabilités/risques.</p></li>
+<li><p><strong>Les modèles paramétriques standard</strong><br>
 Les modèles dits de Weibull, exponentiel ou Gompertz ont une spécification sous hypothèse de risque proportionnel. Ils seront traités brièvement dans les compléments. Historiquement, le modèle de Cox est une réponse à une possible difficulté dans l’ajustement du risque par une loi de distribution du risque a priori.<br>
-<br></p>
-<p><strong>Modèle paramétrique de Parmar-Royston</strong> (non traité)<br>
+<br></p></li>
+<li><p><strong>Modèle paramétrique de Parmar-Royston</strong> (non traité)<br>
 <span class="math inline">\(h_0(t)\)</span>, via le risque cumulé <span class="math inline">\(H(t)\)</span>, est estimé simultanément avec les risques ratios en utilisant la populaire méthode des <em>splines cubiques</em>. Il est implémenté dans les logiciels standards (R, Stata, Sas). Les rapports de risque sont très proches de ceux estimés par le modèle classique de Cox.<br>
-Il offre donc une alternative particulièrement intéressante à celui-ci, et il s’est maintenant largement diffusé dans l’analyse des effets cliniques.</p>
+Il offre donc une alternative particulièrement intéressante à celui-ci, et il s’est maintenant largement diffusé dans l’analyse des effets cliniques.</p></li>
+</ul>
 
 
 <!-- -->
@@ -664,25 +664,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>**Modèle à temps discret** </span>
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>De type paramétrique. Peut être estimé à l’aide d’un modèle logistique, probit ou complémentaire log-log. La première est la plus courante, la dernière a l’avantage d’être directement relié au modèle de Cox (modèle de Cox à temps discret).  </span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>Sa forme diffère de la présentation usuelle d’un modèle à risque proportionnel. Toutefois, il est régi par une hypothèse de proportionalité. Le non respect de l’hypothèse est moins critique car la baseline du « risque » est estimée simultanément. Il est comme son nom l’indique, particulièrement adapté au durées discrètes ou groupées. </span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>Avec une spécification logistique, la plus courante, les Odds vont sous certaines conditions, se confondre avec des probabilités/risques. </span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>**Les modèles paramétriques standard**  </span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>Les modèles dits de Weibull, exponentiel ou Gompertz ont une spécification sous hypothèse de risque proportionnel. Ils seront traités brièvement dans les compléments. Historiquement, le modèle de Cox est une réponse à une possible difficulté dans l’ajustement du risque par une loi de distribution du risque a priori.  </span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>**Modèle paramétrique de Parmar-Royston** (non traité)  </span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>$h_0(t)$, via le risque cumulé $H(t)$,  est estimé simultanément avec les risques ratios en utilisant la populaire méthode des *splines cubiques*. Il est implémenté dans les logiciels standards (R, Stata, Sas). Les rapports de risque sont très proches de ceux estimés par le modèle classique de Cox.   </span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>Il offre donc une alternative particulièrement intéressante à celui-ci, et il s'est maintenant largement diffusé dans l’analyse des effets cliniques.</span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">*    </span>***Modèle à temps discret***: De type paramétrique. Peut être estimé à l'aide d'un modèle logistique, probit ou complémentaire log-log. Le premier est le plus courant, le dernièr a l'avantage d'être directement relié au modèle de Cox (modèle de Cox à temps discret). Sa forme diffère de la présentation usuelle d'un modèle à risque proportionnel. Toutefois, il est régi par une hypothèse de proportionnalité. Le non respect de l'hypothèse est moins critique car la baseline du « risque » est estimée simultanément. Il est comme son nom l'indique, particulièrement adapté au durées discrètes ou groupées. Avec une spécification logistique, les Odds vont sous certaines conditions, se confondre avec des probabilités/risques.</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Les modèles paramétriques standard**  </span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>Les modèles dits de Weibull, exponentiel ou Gompertz ont une spécification sous hypothèse de risque proportionnel. Ils seront traités brièvement dans les compléments. Historiquement, le modèle de Cox est une réponse à une possible difficulté dans l’ajustement du risque par une loi de distribution du risque a priori.  </span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Modèle paramétrique de Parmar-Royston** (non traité)  </span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>$h_0(t)$, via le risque cumulé $H(t)$,  est estimé simultanément avec les risques ratios en utilisant la populaire méthode des *splines cubiques*. Il est implémenté dans les logiciels standards (R, Stata, Sas). Les rapports de risque sont très proches de ceux estimés par le modèle classique de Cox.   </span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>Il offre donc une alternative particulièrement intéressante à celui-ci, et il s'est maintenant largement diffusé dans l’analyse des effets cliniques.</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

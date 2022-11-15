@@ -57,20 +57,14 @@ Le modèle estime directement les $b$ indépendement de $h_0(t)$, c'est pour cel
 
 **Modèle à temps discret** 
 
-De type paramétrique. Peut être estimé à l’aide d’un modèle logistique, probit ou complémentaire log-log. La première est la plus courante, la dernière a l’avantage d’être directement relié au modèle de Cox (modèle de Cox à temps discret).  
-<br>
-Sa forme diffère de la présentation usuelle d’un modèle à risque proportionnel. Toutefois, il est régi par une hypothèse de proportionalité. Le non respect de l’hypothèse est moins critique car la baseline du « risque » est estimée simultanément. Il est comme son nom l’indique, particulièrement adapté au durées discrètes ou groupées. 
-<br>
-Avec une spécification logistique, la plus courante, les Odds vont sous certaines conditions, se confondre avec des probabilités/risques. 
+*    ***Modèle à temps discret***: De type paramétrique. Peut être estimé à l'aide d'un modèle logistique, probit ou complémentaire log-log. Le premier est le plus courant, le dernièr a l'avantage d'être directement relié au modèle de Cox (modèle de Cox à temps discret). Sa forme diffère de la présentation usuelle d'un modèle à risque proportionnel. Toutefois, il est régi par une hypothèse de proportionnalité. Le non respect de l'hypothèse est moins critique car la baseline du « risque » est estimée simultanément. Il est comme son nom l'indique, particulièrement adapté au durées discrètes ou groupées. Avec une spécification logistique, les Odds vont sous certaines conditions, se confondre avec des probabilités/risques.
  
-<br>
 
-
-**Les modèles paramétriques standard**  
+* **Les modèles paramétriques standard**  
 Les modèles dits de Weibull, exponentiel ou Gompertz ont une spécification sous hypothèse de risque proportionnel. Ils seront traités brièvement dans les compléments. Historiquement, le modèle de Cox est une réponse à une possible difficulté dans l’ajustement du risque par une loi de distribution du risque a priori.  
 <br>
 
-**Modèle paramétrique de Parmar-Royston** (non traité)  
+* **Modèle paramétrique de Parmar-Royston** (non traité)  
 $h_0(t)$, via le risque cumulé $H(t)$,  est estimé simultanément avec les risques ratios en utilisant la populaire méthode des *splines cubiques*. Il est implémenté dans les logiciels standards (R, Stata, Sas). Les rapports de risque sont très proches de ceux estimés par le modèle classique de Cox.   
 Il offre donc une alternative particulièrement intéressante à celui-ci, et il s'est maintenant largement diffusé dans l’analyse des effets cliniques.
  
