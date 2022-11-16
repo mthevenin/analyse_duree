@@ -10,8 +10,7 @@ On peut ignorer la partie sur l’estimation du modèle. On retiendra tout de m�
 
 ## La vraisemblance partielle et estimation des paramètres 
 
-On se situe dans une situation où la durée est mesurée sur une échelle strictement continue. Il ne peut donc y avoir qu'un seul évènement observé en $t_i$ (idem pour les censures).    
-Pour une observation quelconque en $t_i$ qui, pour uniquement un seul individu correspond à un évènement ou une censure, la vraisemblance peut s'écrire: 
+On se situe dans une situation où la durée est mesurée sur une échelle strictement continue. Il ne peut donc y avoir qu'un seul évènement observé en $t_i$ (idem si censure): 
 
 $$L_i=f(t_i)^{\delta_i}S(t_i)^{1-\delta_i}$$  
 
@@ -47,18 +46,17 @@ En remplaçant donc $h(t_i)$ par l'expression $h_0(t)e^{X_i^{'}b}$:
 
 $$PL=\prod_{i=1}^{n}\left[\frac{h_0(t)e^{X_{i}^{'}b}}{\sum_{j\in R_i}h_0(t)e^{X_{j}^{'}b}}\right]^{\delta_i} =\prod_{i=1}^{n}\left[\frac{e^{X_i^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}\right]^{\delta_i}$$
 
-L'expression $\frac{e^{Xb}}{\sum_{j\in R}e^{Xb}}$ est une probabilité, la vraisemblance partielle est donc bien un produit de probabilités. **Il s'agit de la probabilité qu'un individu observe l'évènement en $t_i$ sachant qu'un évènement (et un seul) s'est produit**.  
-<br>
-  
+L'expression $\frac{e^{Xb}}{\sum_{j\in R}e^{Xb}}$ est une probabilité, la vraisemblance partielle est donc bien un produit de probabilités. **Il s'agit de la probabilité qu'un individu observe l'évènement en $t_i$ sachant qu'un évènement (et un seul) s'est produit**.    
 
+<br>
 *Condition nécessaire: pas d'évènement simultané*:  
-On rappelle que le temps est mesuré de manière strictement continue, il ne doit pas y avoir d'évènement simultané. Sinon, l’estimation de la vraisemblance doit  être corrigée. 
+On rappelle que la durée est mesuré de manière strictement continue, il ne doit pas y avoir d'évènement simultané. Sinon, l’estimation de la vraisemblance doit faire l'objet d'une correction.   
 <br>
 
 *Correction de la vraisemblance avec des évènements simultanés*:    
 
-* La ***méthode dite exacte***: Comme en réalité il n’y a pas d’évènement simultané, on va intégrer à la vraisemblance toutes les permutations possibles des évènements observés simultanément: si en $t_i$ on observe au « même moment » l’évènement pour A et B, une échelle temporelle plus précise nous permettrait de savoir si A s'est produit avant B ou B s'est produit avant A. Comme le nombre de permutations est calculé par une factorielle, avec 3 évènements  mesurés simultanément, il y a 6 permutations possibles ($3\times2\times1$).  
-Problème: le nombre de permutations pour chaque $t_i$ peut devenir très vite particulièrement élevé. Par exemple pour 10 évènements simultanés, le nombre de permutations est égal à 3.628.800. Le temps de calcul devient particulièrement long, et ce type de correction totalement inopérant. 
+* La ***méthode dite exacte***: Comme il ne doit pasy avoir d’évènement simultané, on va intégrer à la vraisemblance toutes les permutations possibles des évènements observés simultanément: si en $t_i$ on observe au « même moment » l’évènement pour A et B, une échelle temporelle plus précise nous permettrait de savoir si A s'est produit avant B ou B s'est produit avant A. Comme le nombre de permutations est calculé à l'aide d'une factorielle, avec 3 évènements  mesurés simultanément, il y a 6 permutations possibles ($3\times2\times1$).  
+Problème: le nombre de permutations pour chaque $t_i$ peut devenir très vite particulièrement élevé. Par exemple pour 10 évènements simultanés, le nombre de permutations est égal à 3.628.800. Le temps de calcul devient extrêmement long, et ce type de correction totalement inopérant. 
 * La ***méthode dite de Breslow***: il s'agit d'une approximation de la méthode exacte permettant de ne pas avoir à intégrer chaque permutation. Cette approximation est utilisée par défaut par les logiciels Sas et Stata. 
 * La ***méthode dite  d'Efron***: elle corrige l'approximation de Breslow, et est jugée plus proche de la méthode exacte. C'est la méthode utilisée par défaut avec le logiciel R, et elle est disponible avec les autres applications.  
 
@@ -89,7 +87,7 @@ Comme $\frac{e^{X_{j}b}}{\sum_{j\in R}e^{X_{j}b}}$ est une probabilité, et  $\s
 $$\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - E(X_{j\in R_i,k}) \right)$$
 
 
-Cette expression va permettre de tester le respect ou non de l’hypothèse de risques proportionnels.
+Cette expression va permettre de tester le respect ou non de l’hypothèse de risques proportionnels via les *résisus de Schoenfeld*. 
 
 
 
@@ -100,19 +98,17 @@ Comme il s'agit d'un modèle à risque proportionnel, **les rapports de risques 
 
 
 ***Covariable binaire (indicatrice)*** 
-<p class="comment">
 $X=(0,1)$: $RR=\frac{h(t\ |\ X=1)}{h(t\ |\ X=0)}=e^b$.  
 A chaque moment de la durée $t$, le risque d'observer l'évènement est $e^b$ fois plus important/plus faible pour $X=1$ que pour $X=0$.  
-</p>
 
 <br>
 
 ***Covariable quantitative*** (mais fixe dans le temps) 
-<p class="comment">
+
 $RR=\frac{h(t\ |\ X=a+c)}{h(t\ |\ X=a)}=e^{c \times{b}}$. 
-On prendra pour illustrer une variable type âge au début de l’exposition au risque (a)*  et un delta de comparaison avec un âge inférieur (c).  
-Si $c=1$ (résultat de l'estimation): A un âge donnée en début d'exposition, le risque de connaitre l'évènement est $e^b$ fois inférieur/supérieur à celui d'une personne qui a un an de moins . 
-</p>
+On prendra pour illustrer une variable type âge au début de l’exposition au risque (a)  et un delta de comparaison avec un âge inférieur c.  
+Si $c=1$ (résultat de l'estimation): A un âge donnée en début d'exposition, le risque de connaitre l'évènement est $e^b$ fois inférieur/supérieur à celui d'une personne qui a un an de moins au début de l'exposition. 
+
 
 <br>
 
@@ -191,9 +187,9 @@ Avec la librairie `lifelines`, le modèle est estimé avec la fonction **`CoxPHF
 
 
 *	Les rapports de risque (RR) estimés par le modèle sont contraints à être constant pendant toute la période d’observation. C’est une hypothèse forte.
-*	Le respect de cette hypothèse doit être testé, en particulier pour un modèle de Cox où la baseline du risque est habituellement estimée à l’aide de ces rapports (méthode dite de Breslow, non traitée). En post-estimation, les valeurs estimées du risque pourront présenter des valeurs aberrantes, en particulier négatives.
+*	Le respect de cette hypothèse doit être testé, en particulier pour un modèle de Cox où la baseline du risque est habituellement estimée à l’aide de ces rapports (méthode dite de Breslow, non traitée...mais bientôt en annexe). En post-estimation, les valeurs estimées du risque pourront présenter des valeurs aberrantes, en particulier négatives.
 *	Tester cette hypothèse revient à tester une interaction entre les rapports et la durée (ou plutôt une fonction de la durée).
-*	Plusieurs méthodes disponibles, celle sur les résidus de martingales, réservée aux covariables continues, et le « test » graphique réservé aux variables catégorielles ne seront pas traités. On traitera  celle basée sur les **résidus de Schoenfeld** puis l'introduction d'une intéraction avec la durée dans le modèle. Cette dernière peut faire également office de méthode de correction lorsque l'hypothèse n'est pas respectée.  
+*	Plusieurs méthodes disponibles, celle sur les résidus de martingales, réservée aux covariables continues, et le « test » graphique réservé aux variables catégorielles ne seront pas traités. On traitera celle basée sur les **résidus de Schoenfeld** puis l'introduction d'une intéraction avec la durée dans le modèle. Cette dernière peut faire également office de méthode de correction lorsque l'hypothèse n'est pas respectée.  
 * Si on regarde les courbes de Kaplan-Meier, leurs croisement non tardif impliquera nécessairement un problème sur cette hypothèse. 
 
 
@@ -204,8 +200,12 @@ Avec la librairie `lifelines`, le modèle est estimé avec la fonction **`CoxPHF
 
 Résumé rapide: le test consiste à regarder la corrélation entre des résidus obtenus directement avec la fonction de score de la vraisemblanc partielle de Cox.  
 
-- Test simplifié: simple corrélation obtenu par une régression linéaire par les moindres carrés ordinaires. Pour chaque covariable, on utilise la variance de son estimateur obtenu par le modèle.
-- Test exact:  corrélation obtenu par une régression linéaire par les mondres carrés généralisés. Pour chaque covariable, on calcule la variance du résidu après avoir calculé la matrice d'information de fisher (seulement les termes sur la diagonale). Les moindres carrés généralisés corrigeront la présence d'autocorrélations des résidus, possibles lorsqu'on utilise des données temporelles.
+- ***Test simplifié***: simple corrélation obtenu par une régression linéaire par les moindres carrés ordinaires. Pour chaque covariable, la standardisation du résidu utilise la variance de l'estimateur obtenu par le modèle. Une rapide présentation est disponible  [ici](https://mthevenin.github.io/analyse_duree/annexes/residusch.html)
+- ***Test exact***:  corrélation obtenu par une régression linéaire par les moindres carrés généralisés. Pour chaque covariable, on calcule la variance et on utilise la variance exacte du résidu à partir de la dérivée de la fonction score (matrice d'information de fisher sur sa diagonale). Les moindres carrés généralisés corrigeront la présence d'autocorrélations des résidus, classique avec des données temporelles.   
+
+A ce jour le test exact est implémenté seulement dans la v3 du package `survival` de R. Un problème de reproductibilité se pose, dans l'espace des applications et dans le temps pour R, le test simplifié n'étant plus disponible à son installation (je donne un moyen de l'exécuter tout de même).  
+Je m'interroge par ailleurs sur la sensibilité de la version exacte en présence de durées discrètes ou groupées.
+
 ::: 
 
 
@@ -214,24 +214,24 @@ Résumé rapide: le test consiste à regarder la corrélation entre des résidus
 *	Ce résidu n’est calculé que pour les observations qui ont connues l’évènement.
 *	Il est calculé au moment où l’évènement s’est produit.
 *	La somme des résidus pour chaque covariable est égale à 0 (propriété de l’équation de score à l’équilibre).
-*	On utilise généralement les résidus de Schoenfeld « standardisés » ou plutôt "remis à l'échelle" - par leur variance - pour tenir compte du fait que la population soumise au risque diminue au cours du temps.
+*	On utilise généralement les résidus de Schoenfeld « standardisés » ou plutôt "remis à l'échelle" - par leur variance -.
 *	Pour une observation dont l’évènement s’est produit en $t_i$, le *résidu brut de Schoenfeld* pour la covariable $X_k$, après estimation du modèle, est égal à:
   
 $$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{jk}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}= X_{ik} - E(X_{j\in R_i})$$
 
-* Ce résidu est formellement la contribution d'une observation au score. Il se lit comme la différence entre la valeur observée d'une covariable  et sa valeur espérée au moment où un évènement se produit. 
+* Ce résidu est formellement la contribution d'une observation ou d'un moment d'évènement au score. Il se lit comme la différence entre la valeur observée d'une covariable  et sa valeur espérée au moment où un évènement se produit. 
 
 * Si l'hypothèse de constance des risk ratios est respectée, les résidus ne doivent pas suivre une tendance précise, , en particulier à la hausse ou à la baisse.  
 
-* Intuitivement sans censure à droite et en ne considérant que les résidus bruts: on a un RR strictement égal à 1 en début d'exposition $R_i=100$ avec 50 hommes et 50 femmes. Si l'hypothèse PH (strictement) respectée, lorsqu'il reste 90 personnes soumises au risque, on devrait avoir 45 hommes et 45 femmes. Avec $R_i=50$, 25 hommes et 25 femmes,.......avec $R_i=10$, 5 hommes et 5 femmes. 	Au final $X_k$ est toujours égal à 0.5 et les résidus bruts prendront toujours la valeur -.5 si $X=0$ et .5 si $X=1$. En faisant une simple régression linéaire entre les résidus, qui alternent ces deux valeurs, et $t$, le coefficient estimé sera non significativement différent de 0. 
+* Intuitivement sans censure à droite et en ne considérant que les résidus bruts: on a un RR strictement égal à 1 en début d'exposition $R_i=100$ avec 50 hommes et 50 femmes. Si l'hypothèse PH (strictement) respectée, lorsqu'il reste 90 personnes soumises au risque, on devrait avoir 45 hommes et 45 femmes. Avec $R_i=50$, 25 hommes et 25 femmes,.......avec $R_i=10$, 5 hommes et 5 femmes. 	Au final l'espérance d'avoir la caractéristique $X$ est toujours égal à 0.5 et les résidus bruts prendront toujours la valeur -.5 si $X=0$ et .5 si $X=1$. En faisant une simple régression linéaire entre les résidus, qui alternent ces deux valeurs, et $t$, le coefficient estimé sera non significativement différent de 0. 
 
 *   On peut tester l'hypothèse sur les résidus par une régression entre
     ces résidus pour chaque covariable et la durée (ou fonction dérivée
-    de la durée, par exemple $t$ ou $log(t)$)). La solution la plus utilisée
-    est le test de **Grambsch-Therneau** sous sa forme simplifiée (R jusqu'à v3 de `survival`, Sas, Stata, Python) ou exacte (R depuis la V3).   
+    de la durée, par exemple $t$ ou $log(t)$)). Cette solution prend forme avec le
+     test de **Grambsch-Therneau** sous sa forme simplifiée -OLS- (R jusqu'à v3 de `survival`, Sas, Stata, Python) ou exacte - GLS- (R depuis la V3).   
 
 
-**Des éléments de calculs du test "simplifié" sont donnés dans la section "annexes"**
+On trouvera des éléments de calcul du test simplifié [ici](https://mthevenin.github.io/analyse_duree/annexes/residusch.html) 
 
 
 ::: {.callout-warning} 
@@ -258,16 +258,16 @@ Avec $g(t)=t$:
 :::
 
 
-Ici l'hypothèse de proportionalité des risques est questionnable pour la variable *surgery*. Le risque ratio  pourrait ne pas constant dans le temps.  Ce n'est pas étonnant, sur les données le premier décès pour les personnes opérées d'un pontage n'est observé qu'au bout de 165 jours.
+Ici l'hypothèse de proportionnalité des risques est questionnable pour la variable *surgery*. Le risque ratio  pourrait ne pas constant dans le temps.  Ce n'est pas peut-être pas étonnant,  le premier décès pour les personnes opérées d'un pontage n'est observé qu'au bout de 165 jours.
 
 
 **Remarques / à savoir**  
 
-* **Test multiple**: de nouveau il convient de se méfier du résultat du test multiple. Le risque de premier espèce peut-être assez faible alors que les tests pour chaque covariables prises une à une présentent des valeurs élevées (>.1 par exemple).     
+* **Test multiple**: de nouveau il convient de se méfier du résultat du test multiple. Le risque de premier espèce peut-être assez faible alors que les tests pour chaque covariables prises une à une présenteraient des valeurs élevées (>.1 par exemple).     
 Le résultat de ce test est considéré par certain.e.s comme un indicateur de l’ampleur du biais qui affecte la baseline du risque.  
 Le résultat de ce test multiple est considéré par certain.e.s comme un indicateur de l’ampleur du biais qui affecte la baseline du risque.
 
-* **Transformations de la durée**: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: $g(t)=t$ (« identity »), $g(t)=log(t)$, $g(t)=KM(t)$ ou $g(t)=1- KM(t$) où $KM(t$) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank », est  utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple $t=(0.1,0.5,1,2.6,3)$ donne une transformation $t=(1,2,3,4)$. A savoir : la fonction « identity » rend le test relativement sensible aux évènements très tardifs et rares (outliers).
+* **Transformations de la durée**: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: $g(t)=t$ (« identity »), $g(t)=log(t)$, $g(t)=KM(t)$ ou $g(t)=1- KM(t$) où $KM(t$) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank », est  utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple $t=(0.1,0.5,1,2.6,3)$ donne une transformation $t=(1,2,3,4)$. A savoir : la fonction « identity », utilisée ici, rend le test relativement sensible aux évènements tardifs lorsque la population restant soumise est peu nombreuse (outliers).
 
 
 ::: panel-tabset
@@ -277,7 +277,7 @@ Le résultat de ce test multiple est considéré par certain.e.s comme un indica
 ***Attention version exacte du test depuis le v3 de survival***.
 
 *  Après avoir créer un objet  à l’estimation du modèle de Cox, on utilise la fonction **`cox.zph`**. Cette fonction utilise par défaut $g(t)=1-KM(t)$ où $KM(t)$ sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.
-*  Test antérieur: j’ai récupéré le programme du test antérieur, renommé **`cox.zphold`**. On peut le télécharger, et il est facilement exécutable.
+*  Test antérieur: j’ai récupéré le programme du test antérieur, renommé **`cox.zphold`**. On peut le charger simplement, et il est facilement exécutable.
 
 ### Stata
 
@@ -382,16 +382,14 @@ Rapport de HR|
 
 ```
 
-On retrouve donc un résultat proche de celui obtenu à partir du test simplifié sur les résidus de Schoenfeld pour la variable *surgery*. Avec $g(t)=t$, il a le mérite de pouvoir être interprété directement. Ce qui ne veut pas dire qu'il s'agit de la meilleure solution.    
-Donc, malgré  une hypothèse plutôt forte sur la forme fonctionnelle de l'intéraction, et dans les fait surement pas pertinente, on peut dire  que chaque jour le HR entre personnes opérées et personnes non opérées augmente de 0.2%. L'effet de l'opération sur la survie des individus s'estompe avec le temps.
+On retrouve donc un résultat proche de celui obtenu à partir du test simplifié sur les résidus de Schoenfeld pour la variable *surgery* (et c'est normal). Avec $g(t)=t$, il a le mérite de pouvoir être interprété directement. Ce qui ne veut pas dire qu'il s'agit de la meilleure solution.    
+Donc, malgré  une hypothèse plutôt forte sur la forme fonctionnelle de l'intéraction, et dans les fait surement pas pertinente, on peut dire  que chaque jour le HR entre personnes opérées et personnes non opérées augmente de 0.2%. L'effet de l'opération sur la survie des individus s'estompe donc avec le temps.
 
 
 **Important**:  
 
 - Le modèle n'est plus un modèle à risque proportionnel. La variable *surgery* n'est plus une variable **fixe** mais une variable tronquée dynamique qui prend la valeur de $t$ pour les personnes qui ont été opérées d'un pontage avant leur entrée dans le registre de greffe.
 - L'altération des rapports de risque dépend de la forme fonctionnelle de l'intéraction choisie. Ici la modification dans le temps du rapport des risque est constante, ce qui est une hypothèse assez forte. On a, en quelques sorte, réintroduit une hypothèse de proportionnalité, ici sur le degré d'altération des écarts de risques dans le temps, qui devient lui même constant.
-- **Attention**: les calculs ont été donnés à titre d'exemple. Le calculs des intervalles de confiance des rapports de risque s'avère nécessaires si l'on souhaite voir s'ils s'inversent vraiment.
-
 
 
 
@@ -399,9 +397,10 @@ Donc, malgré  une hypothèse plutôt forte sur la forme fonctionnelle de l'int�
 
 ***Ne rien faire***   
 
-On interprète le "hazard ratio" comme un ratio moyen sur une durée d’observation (P.Allison). Difficilement soutenable pour l’analyse d'effets cliniques, on peut l'envisager dans d’autres domaines. Attention au nombre de variables qui ne respecte pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée. Il convient tout de même lors de l’interprétation, de préciser celles qui seront analysées sous un rapport « moyen».  
-On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps les écarts de risque, déjà important en début d’observation s’accentuent, à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais s'ils suivent un processus de modération: $RR>1$ qui baisse ou $RR<1$ qui augmente au cours du temps, je suis moins convaincu de la pertinence de cette option.  
-Il faut également tenir compte de l’intérêt porté par les variables qui présentent un problème par rapport à l’hypothèse. Il n’est peut-être pas nécessaire de complexifier le modèle pour des variables introduites comme simples contrôles.   
+On interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison). Difficilement soutenable pour l’analyse des effets cliniques, elle peut être envisagée dans d’autres domaines. Attention au nombre de variables qui ne respecte pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme « moyenne » sur la période d’observation.  
+On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps des différences de risque, déjà assez important en début d’observation s’accentuent, à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais si l’effet est modéré : $RR>1$ qui baisse ou $RR<1$ qui augmente au cours du temps, je suis moins convaincu de la pertinence de cette option.  
+Il faut tenir compte de l’intérêt portée par les variables qui présentent un problème par rapport à l’hypothèse. Il n’est peut-être pas nécessaire de complexifier le modèle pour des variables introduites comme simples contrôles.        
+Mais plus problématique… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de ***frailty*** (fragilité) lorsque cette non homogénéité n’est pas observables. Des estimations, plus complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Si l’hypothèse est sensible aux problèmes d’omission, il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.   
 
 Mais plus problématique [**très important**]… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de ***frailty*** (fragilité) lorsque cette non homogénéité n’est pas observable. Des estimations, plus complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Si l’hypothèse est sensible aux biais d’omission, il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.  
 Le test de **Grambsch-Therneau** peut-être également appréhendé comme un test qui donne un élément d'information sur de possibles biais d'omission (endogénéité)dans le modèle.
