@@ -403,7 +403,7 @@ Il faut tenir compte de l’intérêt portée par les variables qui présentent 
 Mais plus problématique… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de ***frailty*** (fragilité) lorsque cette non homogénéité n’est pas observables. Des estimations, plus complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Si l’hypothèse est sensible aux problèmes d’omission, il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.   
 
 Mais plus problématique [**très important**]… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de ***frailty*** (fragilité) lorsque cette non homogénéité n’est pas observable. Des estimations, plus complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Si l’hypothèse est sensible aux biais d’omission, il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.  
-Le test de **Grambsch-Therneau** peut-être également appréhendé comme un test qui donne un élément d'information sur de possibles biais d'omission (endogénéité)dans le modèle.
+Le test de **Grambsch-Therneau** peut-être également appréhendé comme un test qui donne un élément d'information sur de possibles biais d'omission (endogénéité)dans le modèle.   
 
 <br>
 
