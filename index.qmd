@@ -62,28 +62,6 @@ Sur quelques applications (données réelles et simulations réalisées avec le 
 :::
 
 
-::: {.callout-note icon=false}  
-## Liens INED
-
-* **Site de l'Ined**: <https://www.ined.fr>  
-* **Site du Service Méthodes Statistiques**: <https://sms.site.ined.fr> 
-* **Site des Rencontres de Statistique Appliquée**: <https://statapp.site.ined.fr>
-* **Site du séminaire R à l'Usage des Sciences Sociales (RUSS)**: <https://russ.site.ined.fr> 
-:::
-
-
-::: {.callout-note icon=false}  
-## Autres supports
-
-* <https://github.com/mthevenin>
-* **Visualisation des données avec Stata (2020-2022)**: [`r fa("link", fill = "steelblue")`](https://mthevenin.github.io/stata_fr/index.html)
-* **Introduction à Stata (2018 - un peu ancienne - MAJ en cours)**: [`r fa("link", fill = "steelblue")`](https://mthevenin.github.io/stata_programmation/formation/chapitre0.html)
-* **Introduction à la regression logistique (v1 2022)**: [`r fa("link", fill = "steelblue")`](https://github.com/mthevenin/intro_logit/blob/main/modele_logit_v1_revise.pdf) 
-:::
-
-
-<br>
-`r fa("address-card")` <mailto:marc.thevenin@ined.fr> - Service Méthodes Statistiques - Ined -  
 <br>
 `r fa("r-project")` Support réalisé avec [Rstudio](href:https://www.rstudio.com) - [Quarto](https://quarto.org/)  
 `r fa("code")` Langages utilisés pour la partie programmation: [R](https://www.r-project.org/) - [Stata](https://www.stata.com/) - [Sas](https://www.sas.com/fr_fr/home.html) - [Python](https://www.python.org/) 
