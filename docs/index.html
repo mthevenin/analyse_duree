@@ -153,6 +153,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </i> 
  <span class="menu-text"></span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./about.html" rel="">
+ <span class="menu-text">A propos</span></a>
+  </li>  
 </ul>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
@@ -337,6 +341,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 
+<div class="callout-note callout callout-style-default callout-captioned">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-caption-container flex-fill">
+Objectif 2023: modèles de durée basés sur des pseudo-observations (<em>Andersen et al - 2003-</em>)
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Alternative, à première vue intéressante, aux modèles standards (Cox, paramétrique, méthodes à durée discrète).</li>
+<li>Pseudo observation: résidu de type <em>Jackknife</em>. Pas d’inquiétude le principe est plutôt simple.</li>
+<li>Régression sur ces résidus, à un ou plusieurs points de la durée… Fléxible.
+<ul>
+<li>modèle de type linéaire estimé par le maximum de vraisemblance avec variance robuste.</li>
+<li>choix d’une fonction de lien pour faciliter l’interprétation des paramètres</li>
+</ul></li>
+<li>S’applique à: fonction de Survie et Rmst (Kaplan Meier), CIF (risques concurrents).</li>
+<li>Pas d’hypothèse de proportionnalité requise.</li>
+<li>Warning: très très forte dépendance à l’hypothèse de censure non informative. Les <em>pseudos observation</em> sont calculées pour les censures antérieures à la durée sélectionnée.</li>
+<li>Quelques références (application R et Stata):
+<ul>
+<li><a href="https://www.jstatsoft.org/article/download/v102i09/4297" class="uri">https://www.jstatsoft.org/article/download/v102i09/4297</a></li>
+<li><a href="https://journals.sagepub.com/doi/pdf/10.1177/1536867X1501500313" class="uri">https://journals.sagepub.com/doi/pdf/10.1177/1536867X1501500313</a></li>
+</ul></li>
+<li>Comme les Rmst, bonne diffusion de la méthode en médecine et en épidémiologie</li>
+<li>Mise à jour de ce support pour le premier semestre 2023, beaucoup de tests doivent être fait avec de données type biographiques. La question des évènements simultanés et plus généralement des durées discrètes/groupées n’est pas traitée dans la littérature.</li>
+</ul>
+</div>
+</div>
 <div class="callout-important callout callout-style-default callout-captioned">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -347,7 +382,7 @@ Test Grambsch-Therneau: version simplifiée versus version exacte
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Depuis la version 3 du pkg <code>survival</code> le test permettant d’étudier la validé de l’hypothèse de constance des risques suite à l’estimation d’un modèle de Cox, est celui proposé dans l’article de P.Grambsch et T.Therneau.<br>
+<p>Depuis la version 3 du pkg <code>survival</code> (2020), le test permettant d’étudier la validé de l’hypothèse de constance des risques suite à l’estimation d’un modèle de Cox, est celui proposé dans l’article de P.Grambsch et T.Therneau.<br>
 Jusqu’à cette version du pkg, une version simplifiée du test était implémenté. C’est également le cas actuellement dans les autres applications statistiques tels que Stata (<code>estat phtest</code>), Sas (<code>proc phreg</code>), Python (<code>lifelines</code>,<code>statmodels</code>).</p>
 <p>Dans son principe le test (du score) n’est pas compliqué puisqu’il consiste à introduire une intéraction entre une fonction de la durée et un rapport de risque.</p>
 <p>Différence entre le test simplifié et le test exact:</p>
@@ -627,58 +662,74 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}  </span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>::: {.callout-note}  </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Objectif 2023: modèles de durée basés sur des pseudo-observations (*Andersen et al - 2003-*)</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">## Test Grambsch-Therneau: version simplifiée versus version exacte</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>Depuis la version 3 du pkg <span class="in">`survival`</span> le test permettant d'étudier la validé de l'hypothèse de constance des risques suite à l'estimation d'un modèle de Cox, est celui  proposé dans l'article de P.Grambsch et T.Therneau.  </span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>Jusqu'à cette version du pkg, une version simplifiée du test était implémenté. C'est également le cas actuellement dans les autres applications statistiques tels que Stata (<span class="in">`estat phtest`</span>), Sas (<span class="in">`proc phreg`</span>), Python (<span class="in">`lifelines`</span>,<span class="in">`statmodels`</span>). </span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>Dans son principe le test (du score) n'est pas compliqué puisqu'il consiste à introduire une intéraction entre une fonction de la durée et un rapport de risque.  </span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>Différence entre le test simplifié et le test exact:   </span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>***Test simplifié***: La variance des résidus est celle de l'estimateur du rapport de risque de la covariable. Le test se réduit à une régression linéaire (ordinaire), la standardisation des résidus se fait en leur appliquant la variance du paramètre estimé par le modèle . </span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>***Test exact***: pour chaque résidu on calcule leur variance exacte à partir de la dérivée de l'équation de score. Le test consiste alors à estimer pour chaque covariable une régression linéaire généralisée. On peut retrouver les détails (très) techniques de la méthode dans l'<span class="co">[</span><span class="ot">Article de Grambsch-Therneau</span><span class="co">](https://www.jstor.org/stable/2337123#metadata_info_tab_contents)</span>. </span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>Pour les personnes qui utilisent **R**, le test "simplifié" a été supprimé du package, ce qui ne me semble pas du tout une bonne idée. Je donne néanmoins un moyen simple de le récupérer et de l'exécuter.  </span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>Sur quelques applications (données réelles et simulations réalisées avec le pkg <span class="in">`coxed`</span>), le choix de la version du test ne semble pas neutre à la métrique temporelle utilisée: continue ou discrète/groupée. Se pose également un problème assez critique de reproductibilité, les résultats variants donc maintenant d'une solution logicielle à une autre ( R versus Stata-Sas-Python), et entre les deux versions du package <span class="in">`survival`</span>. Comme si le type de transformation/fonction de la durée appliquée au test, également débattu dans la littérature, ne suffisait pas.  </span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>::: {.callout-note icon=false}  </span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bibliographie (courte mais efficace)</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Cours de Gilbert Colletaz (version 2016)**: <span class="co">[</span><span class="ot">`r fa("link", fill = "steelblue")`</span><span class="co">](https://docplayer.fr/69359088-Modeles-de-survie-notes-de-cours-master-2-esa-voies-professionnelle-et-recherche-gilbert-colletaz.html)</span> </span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Document de travail Insee de Simon Quantin (2019)**: <span class="co">[</span><span class="ot">`r fa("link", fill = "steelblue")`</span><span class="co">](https://www.insee.fr/fr/statistiques/3695681)</span> <span class="co">[</span><span class="ot">avec version 2 de la librarie *`survival`*</span><span class="co">]</span>  </span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Alternative, à première vue intéressante, aux modèles standards (Cox, paramétrique, méthodes à durée discrète).</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pseudo observation: résidu de type *Jackknife*. Pas d'inquiétude le principe est plutôt simple.</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Régression sur ces résidus, à un ou plusieurs points de la durée... Fléxible.</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>modèle de type linéaire estimé par le maximum de vraisemblance avec variance robuste.</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>choix d'une fonction de lien pour faciliter l'interprétation des paramètres</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>S'applique à: fonction de Survie et Rmst (Kaplan Meier), CIF (risques concurrents).</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pas d'hypothèse de proportionnalité requise. </span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Warning: très très forte dépendance à l'hypothèse de censure non informative. Les *pseudos observation* sont calculées pour les censures antérieures à la durée sélectionnée.</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Quelques références (application R et Stata):</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="ot">&lt;https://www.jstatsoft.org/article/download/v102i09/4297&gt;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="ot">&lt;https://journals.sagepub.com/doi/pdf/10.1177/1536867X1501500313&gt;</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Comme les Rmst, bonne diffusion de la méthode en médecine et en épidémiologie</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Mise à jour de ce support pour le premier semestre 2023, beaucoup de tests doivent être fait avec de données type biographiques. La question des évènements simultanés et plus généralement des durées discrètes/groupées n'est pas traitée dans la littérature.</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>::: {.callout-important}  </span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## Test Grambsch-Therneau: version simplifiée versus version exacte</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>Depuis la version 3 du pkg <span class="in">`survival`</span> (2020), le test permettant d'étudier la validé de l'hypothèse de constance des risques suite à l'estimation d'un modèle de Cox, est celui  proposé dans l'article de P.Grambsch et T.Therneau.  </span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>Jusqu'à cette version du pkg, une version simplifiée du test était implémenté. C'est également le cas actuellement dans les autres applications statistiques tels que Stata (<span class="in">`estat phtest`</span>), Sas (<span class="in">`proc phreg`</span>), Python (<span class="in">`lifelines`</span>,<span class="in">`statmodels`</span>). </span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>Dans son principe le test (du score) n'est pas compliqué puisqu'il consiste à introduire une intéraction entre une fonction de la durée et un rapport de risque.  </span>
 <span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>::: {.callout-note icon=false}  </span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## Liens INED</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Site de l'Ined**: <span class="ot">&lt;https://www.ined.fr&gt;</span>  </span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Site du Service Méthodes Statistiques**: <span class="ot">&lt;https://sms.site.ined.fr&gt;</span> </span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Site des Rencontres de Statistique Appliquée**: <span class="ot">&lt;https://statapp.site.ined.fr&gt;</span></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Site du séminaire R à l'Usage des Sciences Sociales (RUSS)**: <span class="ot">&lt;https://russ.site.ined.fr&gt;</span> </span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>::: {.callout-note icon=false}  </span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## Autres supports</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="ot">&lt;https://github.com/mthevenin&gt;</span></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Visualisation des données avec Stata (2020-2022)**: <span class="co">[</span><span class="ot">`r fa("link", fill = "steelblue")`</span><span class="co">](https://mthevenin.github.io/stata_fr/index.html)</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Introduction à Stata (2018 - un peu ancienne - MAJ en cours)**: <span class="co">[</span><span class="ot">`r fa("link", fill = "steelblue")`</span><span class="co">](https://mthevenin.github.io/stata_programmation/formation/chapitre0.html)</span></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Introduction à la regression logistique (v1 2022)**: <span class="co">[</span><span class="ot">`r fa("link", fill = "steelblue")`</span><span class="co">](https://github.com/mthevenin/intro_logit/blob/main/modele_logit_v1_revise.pdf)</span> </span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>Différence entre le test simplifié et le test exact:   </span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>***Test simplifié***: La variance des résidus est celle de l'estimateur du rapport de risque de la covariable. Le test se réduit à une régression linéaire (ordinaire), la standardisation des résidus se fait en leur appliquant la variance du paramètre estimé par le modèle . </span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>***Test exact***: pour chaque résidu on calcule leur variance exacte à partir de la dérivée de l'équation de score. Le test consiste alors à estimer pour chaque covariable une régression linéaire généralisée. On peut retrouver les détails (très) techniques de la méthode dans l'<span class="co">[</span><span class="ot">Article de Grambsch-Therneau</span><span class="co">](https://www.jstor.org/stable/2337123#metadata_info_tab_contents)</span>. </span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>Pour les personnes qui utilisent **R**, le test "simplifié" a été supprimé du package, ce qui ne me semble pas du tout une bonne idée. Je donne néanmoins un moyen simple de le récupérer et de l'exécuter.  </span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>Sur quelques applications (données réelles et simulations réalisées avec le pkg <span class="in">`coxed`</span>), le choix de la version du test ne semble pas neutre à la métrique temporelle utilisée: continue ou discrète/groupée. Se pose également un problème assez critique de reproductibilité, les résultats variants donc maintenant d'une solution logicielle à une autre ( R versus Stata-Sas-Python), et entre les deux versions du package <span class="in">`survival`</span>. Comme si le type de transformation/fonction de la durée appliquée au test, également débattu dans la littérature, ne suffisait pas.  </span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>::: {.callout-note icon=false}  </span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bibliographie (courte mais efficace)</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Cours de Gilbert Colletaz (version 2016)**: <span class="co">[</span><span class="ot">`r fa("link", fill = "steelblue")`</span><span class="co">](https://docplayer.fr/69359088-Modeles-de-survie-notes-de-cours-master-2-esa-voies-professionnelle-et-recherche-gilbert-colletaz.html)</span> </span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Document de travail Insee de Simon Quantin (2019)**: <span class="co">[</span><span class="ot">`r fa("link", fill = "steelblue")`</span><span class="co">](https://www.insee.fr/fr/statistiques/3695681)</span> <span class="co">[</span><span class="ot">avec version 2 de la librarie *`survival`*</span><span class="co">]</span>  </span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>::: {.callout-note icon=false}  </span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## Liens INED</span></span>
 <span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="in">`r fa("address-card")`</span> <span class="ot">&lt;mailto:marc.thevenin@ined.fr&gt;</span> - Service Méthodes Statistiques - Ined -  </span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="in">`r fa("r-project")`</span> Support réalisé avec <span class="co">[</span><span class="ot">Rstudio</span><span class="co">](href:https://www.rstudio.com)</span> - <span class="co">[</span><span class="ot">Quarto</span><span class="co">](https://quarto.org/)</span>  </span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="in">`r fa("code")`</span> Langages utilisés pour la partie programmation: <span class="co">[</span><span class="ot">R</span><span class="co">](https://www.r-project.org/)</span> - <span class="co">[</span><span class="ot">Stata</span><span class="co">](https://www.stata.com/)</span> - <span class="co">[</span><span class="ot">Sas</span><span class="co">](https://www.sas.com/fr_fr/home.html)</span> - <span class="co">[</span><span class="ot">Python</span><span class="co">](https://www.python.org/)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Site de l'Ined**: <span class="ot">&lt;https://www.ined.fr&gt;</span>  </span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Site du Service Méthodes Statistiques**: <span class="ot">&lt;https://sms.site.ined.fr&gt;</span> </span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Site des Rencontres de Statistique Appliquée**: <span class="ot">&lt;https://statapp.site.ined.fr&gt;</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Site du séminaire R à l'Usage des Sciences Sociales (RUSS)**: <span class="ot">&lt;https://russ.site.ined.fr&gt;</span> </span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>::: {.callout-note icon=false}  </span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="fu">## Autres supports</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span><span class="ot">&lt;https://github.com/mthevenin&gt;</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Visualisation des données avec Stata (2020-2022)**: <span class="co">[</span><span class="ot">`r fa("link", fill = "steelblue")`</span><span class="co">](https://mthevenin.github.io/stata_fr/index.html)</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Introduction à Stata (2018 - un peu ancienne - MAJ en cours)**: <span class="co">[</span><span class="ot">`r fa("link", fill = "steelblue")`</span><span class="co">](https://mthevenin.github.io/stata_programmation/formation/chapitre0.html)</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Introduction à la regression logistique (v1 2022)**: <span class="co">[</span><span class="ot">`r fa("link", fill = "steelblue")`</span><span class="co">](https://github.com/mthevenin/intro_logit/blob/main/modele_logit_v1_revise.pdf)</span> </span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="in">`r fa("address-card")`</span> <span class="ot">&lt;mailto:marc.thevenin@ined.fr&gt;</span> - Service Méthodes Statistiques - Ined -  </span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="in">`r fa("r-project")`</span> Support réalisé avec <span class="co">[</span><span class="ot">Rstudio</span><span class="co">](href:https://www.rstudio.com)</span> - <span class="co">[</span><span class="ot">Quarto</span><span class="co">](https://quarto.org/)</span>  </span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="in">`r fa("code")`</span> Langages utilisés pour la partie programmation: <span class="co">[</span><span class="ot">R</span><span class="co">](https://www.r-project.org/)</span> - <span class="co">[</span><span class="ot">Stata</span><span class="co">](https://www.stata.com/)</span> - <span class="co">[</span><span class="ot">Sas</span><span class="co">](https://www.sas.com/fr_fr/home.html)</span> - <span class="co">[</span><span class="ot">Python</span><span class="co">](https://www.python.org/)</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

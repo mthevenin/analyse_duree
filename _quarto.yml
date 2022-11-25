@@ -14,12 +14,12 @@ website:
   navbar:
     collapse-below: lg
     left:
-#      - text: "**ANALYSE DES DUREES 2022**"
-#       href: index.qmd
       - icon: github
         href: https://github.com/mthevenin/analyse_duree
       - icon: envelope
         href: mailto:marc.thevenin@ined.fr          
+      - href: about.qmd 
+        text: "A propos"
 
   sidebar:
       title: "PLAN"
@@ -66,7 +66,6 @@ format:
   html:
     theme: 
       light: yeti
-#      dark:  [yeti, theme-dark.scss]    
     css: style.css
     highlight-style: zenburn
 #    code-block-bg: true

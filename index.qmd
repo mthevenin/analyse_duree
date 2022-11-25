@@ -19,12 +19,28 @@ library(fontawesome)
 ```
 
 
+::: {.callout-note}  
+## Objectif 2023: modèles de durée basés sur des pseudo-observations (*Andersen et al - 2003-*)
+
+- Alternative, à première vue intéressante, aux modèles standards (Cox, paramétrique, méthodes à durée discrète).
+- Pseudo observation: résidu de type *Jackknife*. Pas d'inquiétude le principe est plutôt simple.
+- Régression sur ces résidus, à un ou plusieurs points de la durée... Fléxible.
+  - modèle de type linéaire estimé par le maximum de vraisemblance avec variance robuste.
+  - choix d'une fonction de lien pour faciliter l'interprétation des paramètres
+- S'applique à: fonction de Survie et Rmst (Kaplan Meier), CIF (risques concurrents).
+- Pas d'hypothèse de proportionnalité requise. 
+- Warning: très très forte dépendance à l'hypothèse de censure non informative. Les *pseudos observation* sont calculées pour les censures antérieures à la durée sélectionnée.
+- Quelques références (application R et Stata):
+  - <https://www.jstatsoft.org/article/download/v102i09/4297>
+  - <https://journals.sagepub.com/doi/pdf/10.1177/1536867X1501500313>
+- Comme les Rmst, bonne diffusion de la méthode en médecine et en épidémiologie
+- Mise à jour de ce support pour le premier semestre 2023, beaucoup de tests doivent être fait avec de données type biographiques. La question des évènements simultanés et plus généralement des durées discrètes/groupées n'est pas traitée dans la littérature.
+:::
+
 ::: {.callout-important}  
-
-
 ## Test Grambsch-Therneau: version simplifiée versus version exacte
 
-Depuis la version 3 du pkg `survival` le test permettant d'étudier la validé de l'hypothèse de constance des risques suite à l'estimation d'un modèle de Cox, est celui  proposé dans l'article de P.Grambsch et T.Therneau.  
+Depuis la version 3 du pkg `survival` (2020), le test permettant d'étudier la validé de l'hypothèse de constance des risques suite à l'estimation d'un modèle de Cox, est celui  proposé dans l'article de P.Grambsch et T.Therneau.  
 Jusqu'à cette version du pkg, une version simplifiée du test était implémenté. C'est également le cas actuellement dans les autres applications statistiques tels que Stata (`estat phtest`), Sas (`proc phreg`), Python (`lifelines`,`statmodels`). 
 
 Dans son principe le test (du score) n'est pas compliqué puisqu'il consiste à introduire une intéraction entre une fonction de la durée et un rapport de risque.  
