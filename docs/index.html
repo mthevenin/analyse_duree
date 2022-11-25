@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.207">
+<meta name="generator" content="quarto-1.3.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -144,12 +144,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/mthevenin/analyse_duree"><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/mthevenin/analyse_duree" rel=""><i class="bi bi-github" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="mailto:marc.thevenin@ined.fr"><i class="bi bi-envelope" role="img">
+    <a class="nav-link" href="mailto:marc.thevenin@ined.fr" rel=""><i class="bi bi-envelope" role="img">
 </i> 
  <span class="menu-text"></span></a>
   </li>  
@@ -352,11 +352,11 @@ Jusqu’à cette version du pkg, une version simplifiée du test était impléme
 <p>Dans son principe le test (du score) n’est pas compliqué puisqu’il consiste à introduire une intéraction entre une fonction de la durée et un rapport de risque.</p>
 <p>Différence entre le test simplifié et le test exact:</p>
 <ul>
-<li><strong><em>Test simplifié</em></strong>: La variance des résidus est celle de l’estimateur du rapport de risque de la covariable. Le test se réduit à une régression linéaire (ordinaire), la standardisation des résidus se fait en appliquant dans l’équation de score la variance du paramètre estimé par le modèle .</li>
-<li><strong><em>Test exact</em></strong>: pour chaque résidu on calcule leur variance à partir de l’information de Fisher (dérivée de l’équation de score, ici juste sur les termes de la diagonale). Le test consiste alors à estimer pour chaque covariable une régression linéaire généralisée. On peut retrouver les détails (très) techniques de la méthode dans l’<a href="https://www.jstor.org/stable/2337123#metadata_info_tab_contents">Article de Grambsch-Therneau</a>.</li>
+<li><strong><em>Test simplifié</em></strong>: La variance des résidus est celle de l’estimateur du rapport de risque de la covariable. Le test se réduit à une régression linéaire (ordinaire), la standardisation des résidus se fait en leur appliquant la variance du paramètre estimé par le modèle .</li>
+<li><strong><em>Test exact</em></strong>: pour chaque résidu on calcule leur variance exacte à partir de la dérivée de l’équation de score. Le test consiste alors à estimer pour chaque covariable une régression linéaire généralisée. On peut retrouver les détails (très) techniques de la méthode dans l’<a href="https://www.jstor.org/stable/2337123#metadata_info_tab_contents">Article de Grambsch-Therneau</a>.</li>
 </ul>
-<p>Pour les personnes qui utilisent R, le test “simplifié” a été supprimé du package, ce qui ne me semble pas du tout une bonne idée. Je donne néanmoins un moyen simple de le récupérer et de l’exécuter.<br>
-Sur quelques applications (données réelles et simulations réalisées avec le pkg <code>coxed</code>), le choix de la version du test, ne semble pas neutre à la métrique temporelle utilisée: continue ou discrète/groupée. Se pose également un problème assez critique de reproductibilité, les résultats variants donc maintenant d’une solution logicielle à une autre ( R versus Stata-Sas-Python). Comme si le type de transformation/fonction de la durée appliquée au test, également débattu dans la littérature, ne suffisait pas.</p>
+<p>Pour les personnes qui utilisent <strong>R</strong>, le test “simplifié” a été supprimé du package, ce qui ne me semble pas du tout une bonne idée. Je donne néanmoins un moyen simple de le récupérer et de l’exécuter.<br>
+Sur quelques applications (données réelles et simulations réalisées avec le pkg <code>coxed</code>), le choix de la version du test ne semble pas neutre à la métrique temporelle utilisée: continue ou discrète/groupée. Se pose également un problème assez critique de reproductibilité, les résultats variants donc maintenant d’une solution logicielle à une autre ( R versus Stata-Sas-Python), et entre les deux versions du package <code>survival</code>. Comme si le type de transformation/fonction de la durée appliquée au test, également débattu dans la littérature, ne suffisait pas.</p>
 </div>
 </div>
 <div class="callout-note callout callout-style-default no-icon callout-captioned">
@@ -639,11 +639,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>Différence entre le test simplifié et le test exact:   </span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>***Test simplifié***: La variance des résidus est celle de l'estimateur du rapport de risque de la covariable. Le test se réduit à une régression linéaire (ordinaire), la standardisation des résidus se fait en appliquant dans l'équation de score la variance du paramètre estimé par le modèle . </span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>***Test exact***: pour chaque résidu on calcule leur variance à partir de l'information de Fisher (dérivée de l'équation de score, ici juste sur les termes de la diagonale). Le test consiste alors à estimer pour chaque covariable une régression linéaire généralisée. On peut retrouver les détails (très) techniques de la méthode dans l'<span class="co">[</span><span class="ot">Article de Grambsch-Therneau</span><span class="co">](https://www.jstor.org/stable/2337123#metadata_info_tab_contents)</span>.   </span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>***Test simplifié***: La variance des résidus est celle de l'estimateur du rapport de risque de la covariable. Le test se réduit à une régression linéaire (ordinaire), la standardisation des résidus se fait en leur appliquant la variance du paramètre estimé par le modèle . </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>***Test exact***: pour chaque résidu on calcule leur variance exacte à partir de la dérivée de l'équation de score. Le test consiste alors à estimer pour chaque covariable une régression linéaire généralisée. On peut retrouver les détails (très) techniques de la méthode dans l'<span class="co">[</span><span class="ot">Article de Grambsch-Therneau</span><span class="co">](https://www.jstor.org/stable/2337123#metadata_info_tab_contents)</span>. </span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>Pour les personnes qui utilisent R, le test "simplifié" a été supprimé du package, ce qui ne me semble pas du tout une bonne idée. Je donne néanmoins un moyen simple de le récupérer et de l'exécuter.  </span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>Sur quelques applications (données réelles et simulations réalisées avec le pkg <span class="in">`coxed`</span>), le choix de la version du test, ne semble pas neutre à la métrique temporelle utilisée: continue ou discrète/groupée. Se pose également un problème assez critique de reproductibilité, les résultats variants donc maintenant d'une solution logicielle à une autre ( R versus Stata-Sas-Python). Comme si le type de transformation/fonction de la durée appliquée au test, également débattu dans la littérature, ne suffisait pas.  </span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>Pour les personnes qui utilisent **R**, le test "simplifié" a été supprimé du package, ce qui ne me semble pas du tout une bonne idée. Je donne néanmoins un moyen simple de le récupérer et de l'exécuter.  </span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>Sur quelques applications (données réelles et simulations réalisées avec le pkg <span class="in">`coxed`</span>), le choix de la version du test ne semble pas neutre à la métrique temporelle utilisée: continue ou discrète/groupée. Se pose également un problème assez critique de reproductibilité, les résultats variants donc maintenant d'une solution logicielle à une autre ( R versus Stata-Sas-Python), et entre les deux versions du package <span class="in">`survival`</span>. Comme si le type de transformation/fonction de la durée appliquée au test, également débattu dans la littérature, ne suffisait pas.  </span>
 <span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>::: {.callout-note icon=false}  </span>

@@ -31,11 +31,11 @@ Dans son principe le test (du score) n'est pas compliqué puisqu'il consiste à 
 
 Différence entre le test simplifié et le test exact:   
 
-- ***Test simplifié***: La variance des résidus est celle de l'estimateur du rapport de risque de la covariable. Le test se réduit à une régression linéaire (ordinaire), la standardisation des résidus se fait en appliquant dans l'équation de score la variance du paramètre estimé par le modèle . 
-- ***Test exact***: pour chaque résidu on calcule leur variance à partir de l'information de Fisher (dérivée de l'équation de score, ici juste sur les termes de la diagonale). Le test consiste alors à estimer pour chaque covariable une régression linéaire généralisée. On peut retrouver les détails (très) techniques de la méthode dans l'[Article de Grambsch-Therneau](https://www.jstor.org/stable/2337123#metadata_info_tab_contents).   
+- ***Test simplifié***: La variance des résidus est celle de l'estimateur du rapport de risque de la covariable. Le test se réduit à une régression linéaire (ordinaire), la standardisation des résidus se fait en leur appliquant la variance du paramètre estimé par le modèle . 
+- ***Test exact***: pour chaque résidu on calcule leur variance exacte à partir de la dérivée de l'équation de score. Le test consiste alors à estimer pour chaque covariable une régression linéaire généralisée. On peut retrouver les détails (très) techniques de la méthode dans l'[Article de Grambsch-Therneau](https://www.jstor.org/stable/2337123#metadata_info_tab_contents). 
  
-Pour les personnes qui utilisent R, le test "simplifié" a été supprimé du package, ce qui ne me semble pas du tout une bonne idée. Je donne néanmoins un moyen simple de le récupérer et de l'exécuter.  
-Sur quelques applications (données réelles et simulations réalisées avec le pkg `coxed`), le choix de la version du test, ne semble pas neutre à la métrique temporelle utilisée: continue ou discrète/groupée. Se pose également un problème assez critique de reproductibilité, les résultats variants donc maintenant d'une solution logicielle à une autre ( R versus Stata-Sas-Python). Comme si le type de transformation/fonction de la durée appliquée au test, également débattu dans la littérature, ne suffisait pas.  
+Pour les personnes qui utilisent **R**, le test "simplifié" a été supprimé du package, ce qui ne me semble pas du tout une bonne idée. Je donne néanmoins un moyen simple de le récupérer et de l'exécuter.  
+Sur quelques applications (données réelles et simulations réalisées avec le pkg `coxed`), le choix de la version du test ne semble pas neutre à la métrique temporelle utilisée: continue ou discrète/groupée. Se pose également un problème assez critique de reproductibilité, les résultats variants donc maintenant d'une solution logicielle à une autre ( R versus Stata-Sas-Python), et entre les deux versions du package `survival`. Comme si le type de transformation/fonction de la durée appliquée au test, également débattu dans la littérature, ne suffisait pas.  
 :::
 
 ::: {.callout-note icon=false}  
