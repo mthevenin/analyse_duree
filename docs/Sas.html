@@ -104,6 +104,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -446,9 +449,21 @@ Selon le type d’analyse la totalité des outputs ne seront pas reproduits (<co
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>proc lifetest data<span class="ot">=</span>trans method<span class="ot">=</span>lifetable width<span class="ot">=</span><span class="dv">30</span>;</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>time stime<span class="sc">*</span><span class="fu">died</span>(<span class="dv">0</span>);run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/1a.PNG" class="img-fluid"></p>
-<p><img src="sas/1b.PNG" class="img-fluid"></p>
-<p><img src="sas/1c.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/1a.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="sas/1a.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/1b.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="sas/1b.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/1c.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="sas/1c.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </section>
 <section id="méthode-kaplan-meier" class="level2">
 <h2 class="anchored" data-anchor-id="méthode-kaplan-meier">Méthode Kaplan-Meier</h2>
@@ -459,9 +474,21 @@ Pour récupérer ces estimateurs, on peut les récupérer via l’instruction ou
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>proc lifetest data<span class="ot">=</span>trans;</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>time stime<span class="sc">*</span><span class="fu">died</span>(<span class="dv">0</span>); run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/2a.PNG" class="img-fluid"></p>
-<p><img src="sas/2b.png" class="img-fluid"></p>
-<p><img src="sas/2c.PNG" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/2a.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="sas/2a.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/2b.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5"><img src="sas/2b.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/2c.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-6"><img src="sas/2c.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 <p><strong>Warning sur la durée moyenne reportée</strong> Sauf exception ne pas interpréter le tableau donnant la durée moyenne. Se reporter à l’estimation des RMST plus bas.</p>
 <p><strong>Comparaison des fonctions de survie</strong></p>
 <p><em>Tests du log rank</em></p>
@@ -472,10 +499,26 @@ Pour récupérer ces estimateurs, on peut les récupérer via l’instruction ou
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>strata surgery <span class="sc">/</span> test<span class="ot">=</span>all;</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/3a.png" class="img-fluid"></p>
-<p><img src="sas/3b.PNG" class="img-fluid"></p>
-<p><img src="sas/3c.PNG" class="img-fluid"></p>
-<p><img src="sas/3d.PNG" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/3a.png" class="lightbox" data-gallery="quarto-lightbox-gallery-7"><img src="sas/3a.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/3b.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-8"><img src="sas/3b.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/3c.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-9"><img src="sas/3c.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/3d.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-10"><img src="sas/3d.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 <p><em>Comparaison des RMST</em></p>
 <p>Disponible avec le dernier module stat de Sas base (Sas-Stat 15.1 novembre 2018).</p>
 <div class="cell">
@@ -484,7 +527,7 @@ Pour récupérer ces estimateurs, on peut les récupérer via l’instruction ou
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>time stime<span class="sc">*</span><span class="fu">died</span>(<span class="dv">0</span>);</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>strata surgery; run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/4.PNG" class="img-fluid"> <br> <strong>SAS STUDIO: en attente de la mise à jour du module SAS-STAT (on a 5 ans de retard)</strong></p>
+<p><a href="sas/4.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-11"><img src="sas/4.PNG" class="img-fluid"></a> <br> <strong>SAS STUDIO: en attente de la mise à jour du module SAS-STAT (on a 5 ans de retard)</strong></p>
 <p><br></p>
 </section>
 </section>
@@ -495,7 +538,11 @@ Pour récupérer ces estimateurs, on peut les récupérer via l’instruction ou
 <pre><code>proc phreg data=trans;
 model stime*died(0) = year age surgery ;
 run;</code></pre>
-<p><img src="sas/5a.PNG" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/5a.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-12"><img src="sas/5a.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </section>
 <section id="tests-de-lhypothèse-ph" class="level2">
 <h2 class="anchored" data-anchor-id="tests-de-lhypothèse-ph">Tests de l’hypothèse PH</h2>
@@ -509,7 +556,11 @@ run;</code></pre>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>model stime<span class="sc">*</span><span class="fu">died</span>(<span class="dv">0</span>) <span class="ot">=</span> year age surgery ;</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/5b.PNG" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/5b.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-13"><img src="sas/5b.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 <p>Par défaut SAS utilise la transformation <span class="math inline">\(f(t)=t\)</span> (idem Stata). Pour obtenir l’option par défaut de R <span class="math inline">\(f(t) = 1 - KM(t)\)</span>:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>ods select PHReg.zphTest;</span>
@@ -517,7 +568,11 @@ run;</code></pre>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>model stime<span class="sc">*</span><span class="fu">died</span>(<span class="dv">0</span>) <span class="ot">=</span> year age surgery ;</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/5c.PNG" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/5c.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-14"><img src="sas/5c.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </section>
 <section id="interaction-avec-la-durée" class="level3">
 <h3 class="anchored" data-anchor-id="interaction-avec-la-durée">Interaction avec la durée</h3>
@@ -548,7 +603,11 @@ La covariable doit être sous forme d’indicatrice (binaire: (0,1)). Ce qui est
 <span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>surgeryt <span class="ot">=</span> surgery<span class="sc">*</span>stime;</span>
 <span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/5d.PNG" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/5d.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-15"><img src="sas/5d.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </section>
 </section>
 <section id="variable-dynamique" class="level2">
@@ -563,7 +622,11 @@ La covariable doit être sous forme d’indicatrice (binaire: (0,1)). Ce qui est
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>tvc <span class="ot">=</span> transplant<span class="ot">=</span><span class="dv">1</span> and stime<span class="sc">&gt;=</span>wait;</span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/6.PNG" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/6.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-16"><img src="sas/6.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </section>
 </section>
 <section id="modèle-à-temps-discret" class="level1">
@@ -591,7 +654,11 @@ La covariable doit être sous forme d’indicatrice (binaire: (0,1)). Ce qui est
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>proc logistic data<span class="ot">=</span>td;</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>model <span class="fu">died</span>(<span class="at">ref=</span><span class="st">"0"</span>) <span class="ot">=</span> t t2 t3 year age surgery  ; run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/7a.PNG" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/7a.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-17"><img src="sas/7a.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </section>
 <section id="durée-discrète" class="level2">
 <h2 class="anchored" data-anchor-id="durée-discrète">Durée discrète</h2>
@@ -619,8 +686,16 @@ La covariable doit être sous forme d’indicatrice (binaire: (0,1)). Ce qui est
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>class tq4 <span class="sc">/</span> param<span class="ot">=</span>ref;</span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>model <span class="fu">died</span>(<span class="at">ref=</span><span class="st">"0"</span>) <span class="ot">=</span> tq4 year age surgery; run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/7c.PNG" class="img-fluid"></p>
-<p><img src="sas/7d.PNG" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/7c.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-18"><img src="sas/7c.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/7d.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-19"><img src="sas/7d.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </section>
 </section>
 <section id="modèles-paramétrique" class="level1">
@@ -631,15 +706,31 @@ La covariable doit être sous forme d’indicatrice (binaire: (0,1)). Ce qui est
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>model stime<span class="sc">*</span><span class="fu">died</span>(<span class="dv">0</span>) <span class="ot">=</span> year age surgery <span class="sc">/</span>D<span class="ot">=</span>WEIBULL;</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/8a.PNG" class="img-fluid"></p>
-<p><img src="sas/8b.PNG" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/8a.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-20"><img src="sas/8a.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/8b.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-21"><img src="sas/8b.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>proc lifereg data<span class="ot">=</span>trans;</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>model stime<span class="sc">*</span><span class="fu">died</span>(<span class="dv">0</span>) <span class="ot">=</span> year age surgery <span class="sc">/</span>D<span class="ot">=</span>LLOGISTIC;</span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/8c.PNG" class="img-fluid"></p>
-<p><img src="sas/8d.PNG" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/8c.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-22"><img src="sas/8c.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/8d.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-23"><img src="sas/8d.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </section>
 <section id="risques-concurrents" class="level1">
 <h1>Risques concurrents</h1>
@@ -650,17 +741,37 @@ La covariable doit être sous forme d’indicatrice (binaire: (0,1)). Ce qui est
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>proc lifetest data<span class="ot">=</span>trans plots<span class="ot">=</span>CIF;</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>time stime<span class="sc">*</span><span class="fu">compet</span>(<span class="dv">0</span>) <span class="sc">/</span> eventcode<span class="ot">=</span><span class="dv">1</span>; run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/9a.PNG" class="img-fluid"></p>
-<p><img src="sas/9b.PNG" class="img-fluid"></p>
-<p><img src="sas/9c.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/9a.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-24"><img src="sas/9a.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/9b.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-25"><img src="sas/9b.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/9c.png" class="lightbox" data-gallery="quarto-lightbox-gallery-26"><img src="sas/9c.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 <p>Pour récupérer le test de Gray, on utilise l’instruction <code>strata</code>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>proc lifetest data<span class="ot">=</span>trans plots<span class="ot">=</span>CIF;</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>time stime<span class="sc">*</span><span class="fu">compet</span>(<span class="dv">0</span>) <span class="sc">/</span> eventcode<span class="ot">=</span><span class="dv">1</span></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>strata surgery; run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/9f.PNG" class="img-fluid"></p>
-<p><img src="sas/9g.PNG" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/9f.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-27"><img src="sas/9f.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/9g.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-28"><img src="sas/9g.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </section>
 <section id="modèles" class="level2">
 <h2 class="anchored" data-anchor-id="modèles">Modèles</h2>
@@ -670,7 +781,11 @@ La covariable doit être sous forme d’indicatrice (binaire: (0,1)). Ce qui est
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>model stime<span class="sc">*</span><span class="fu">compet</span>(<span class="dv">0</span>) <span class="ot">=</span> year age surgery <span class="sc">/</span> eventcode<span class="ot">=</span><span class="dv">1</span>  ;</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/9h.PNG" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/9h.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-29"><img src="sas/9h.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 <p><strong>Modèle logistique multinomial à temps discret</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>data td; set trans; </span>
@@ -688,8 +803,16 @@ La covariable doit être sous forme d’indicatrice (binaire: (0,1)). Ce qui est
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>model <span class="fu">compet</span>(<span class="at">ref=</span><span class="st">"0"</span>) <span class="ot">=</span> t t2 year age surgery <span class="sc">/</span> link<span class="ot">=</span>glogit;</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="sas/9i.PNG" class="img-fluid"></p>
-<p><img src="sas/9j.PNG" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/9i.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-30"><img src="sas/9i.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="sas/9j.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-31"><img src="sas/9j.PNG" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 
 
 <!-- -->
@@ -1292,6 +1415,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       <div class="nav-footer-center">Marc Thévenin - Ined-Sms - Octobre 2022</div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","closeEffect":"zoom","openEffect":"zoom","loop":true});</script>
 
 
 

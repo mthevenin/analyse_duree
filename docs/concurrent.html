@@ -104,6 +104,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -411,7 +414,11 @@ Pour le risque de type <span class="math inline">\(k\)</span>, le risque <em>cau
 <p>Variable compet: cause 1 =&gt; décès directement provoquer par la malformation, 2 =&gt; autre cause.</p>
 <p>Lorsqu’on a analysé le décès par la méthode KM, la proportion de survivant.e.s était de 15%.</p>
 <p>Si on applique la méthode de Kaplan Meier à la cause 1 en traitant la cause 2 comme une censure à droite, et à la cause 2 en traitant la cause 1 comme une censure à droite, puis en sommant les deux estimateurs, la fonction de répartition excède 100% au bout de 1000 jours environs. La proportion de survivant.e.s est donc négative.</p>
-<p><img src="images/Image16.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Image16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="images/Image16.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </section>
 <section id="estimations-en-présence-de-risques-concurrents-cif" class="level1">
 <h1><strong>Estimations en présence de risques concurrents (CIF)</strong></h1>
@@ -439,7 +446,11 @@ Pour le risque de type <span class="math inline">\(k\)</span>, le risque <em>cau
 <li>Les valeurs prises par cette fonction pour la cause <span class="math inline">\(k\)</span> ne dépendent donc pas seulement des individus ayant observé l’évènement à partir de cette seule cause, mais aussi du nombre de personnes qui n’ont pas encore observés l’évènement à partir des autres causes identifiées. Cette dernière information est donnée par <span class="math inline">\(S(t_i-1)\)</span>.</li>
 <li>L’incidence cumulée peut ainsi s’interpréter comme la proportion d’individus qui sont sortis du risque jusqu’en <span class="math inline">\(t_i\)</span> en raison de la cause <span class="math inline">\(k\)</span>.</li>
 </ul>
-<p><img src="images/Image17.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Image17.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="images/Image17.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a> failure<span class="sc">:</span>  compet <span class="sc">==</span> <span class="dv">1</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a> competing failures<span class="sc">:</span>  compet <span class="sc">==</span> <span class="dv">2</span></span>
@@ -558,7 +569,11 @@ Pour le risque de type <span class="math inline">\(k\)</span>, le risque <em>cau
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>cause1 <span class="fl">5.7834605</span> <span class="fl">0.0161</span>  <span class="dv">1</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>cause2 <span class="fl">0.1293076</span> <span class="fl">0.7191</span>  <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="images/Image21.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Image21.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="images/Image21.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 <p><strong>Test de Pepe-Mori pour la variable surgery</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>Main event failure<span class="sc">:</span>  compet <span class="sc">==</span> <span class="dv">1</span></span>
@@ -1187,6 +1202,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       <div class="nav-footer-center">Marc Thévenin - Ined-Sms - Octobre 2022</div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","loop":true,"selector":".lightbox","descPosition":"bottom"});</script>
 
 
 

@@ -103,6 +103,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -650,7 +653,11 @@ Dans les résulats qui suivent, ces quantiles ont été estimés avec Stata en r
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="fu">S</span>(t)<span class="ot">=</span><span class="fl">0.25</span><span class="sc">:</span> t<span class="ot">=</span>  <span class="fl">913.968</span></span>
 <span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="fu">S</span>(t)<span class="ot">=</span><span class="fl">0.10</span><span class="sc">:</span> t<span class="ot">=</span>        .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="images/Image7.png" class="img-fluid" style="width:70.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Image7.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="images/Image7.png" class="img-fluid figure-img" style="width:70.0%"></a></p>
+</figure>
+</div>
 <p>102 jours après leur inscription dans le registre d’attente pour une greffe, 50% des malades sont toujours en vie. Au bout de 914 jours, 75% des personnes sont décédées.</p>
 </section>
 </section>
@@ -795,7 +802,11 @@ On va prendre la valeur de la durée qui se situe juste “en dessous” de 50% 
 <span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------------------------------------------------------------------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Durée médiane: <span class="math inline">\(t=100\)</span> (correspond à <span class="math inline">\(S(t)=0.4940\)</span>).</p>
-<p><img src="images/Image8.png" class="img-fluid" style="width:80.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Image8.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="images/Image8.png" class="img-fluid figure-img" style="width:80.0%"></a></p>
+</figure>
+</div>
 </section>
 </section>
 <section id="quantités-associées" class="level1">
@@ -803,10 +814,18 @@ On va prendre la valeur de la durée qui se situe juste “en dessous” de 50% 
 <p>A partir de l’estimateur Kaplan-Meier.. <br></p>
 <p><strong>Le risque cumulé</strong>: estimateur de Nelson AAlen<br>
 Il est simplément égal à: <span class="math display">\[H(t)=\sum_{t_i\leq k}q(t_i)\]</span></p>
-<p><img src="images/Image19.png" class="img-fluid" style="width:70.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Image19.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="images/Image19.png" class="img-fluid figure-img" style="width:70.0%"></a></p>
+</figure>
+</div>
 <p><strong>Le risque instantané</strong><br>
 Nécessite l’estimateur de Nelson-Aalen. Le risque est obtenu en lissant les différences - toujours positive - entre <span class="math inline">\(H(t)\)</span> par la méthode dite du <strong>kernel</strong>. Elle permet d’obtenir une fonction continue avec la durée (paramétrables sur les largeurs des fenêtres de lissage). D’autres méthodes de lissage sont maintenant possibles, et de plus en plus utilisées, en particulier celles utilisant des splines.</p>
-<p><img src="images/Image20.png" class="img-fluid" style="width:70.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Image20.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4"><img src="images/Image20.png" class="img-fluid figure-img" style="width:70.0%"></a></p>
+</figure>
+</div>
 <p><br></p>
 
 
@@ -1479,6 +1498,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       <div class="nav-footer-center">Marc Thévenin - Ined-Sms - Octobre 2022</div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","closeEffect":"zoom"});</script>
 
 
 

@@ -103,6 +103,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -440,7 +443,11 @@ La pondération est une variante de la fonction de survie KM (avec <span class="
 <section id="application" class="level2">
 <h2 class="anchored" data-anchor-id="application">Application</h2>
 <p>On compare ici l’effet du pontage sur le risque de décéder depuis l’inscription dans le registre de greffe.</p>
-<p><img src="images/Image9.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Image9.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="images/Image9.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Log<span class="sc">-</span>rank test <span class="cf">for</span> equality of survivor functions</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -668,7 +675,11 @@ Sur un horizon de 995 jours, ces individus peuvent espérer vivre 735 jours en m
 <span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>  <span class="sc">+--------------------------------------------------------------------------+</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Le graphique suivant, donne les valeurs des Rmst et les écarts de la variable <em>surgery</em> en faisant varier <span class="math inline">\(tmax\)</span> sur chaque durée où un décès a été observé. Il a été réalisé avec Stata, la durée maximale utilisée a été paramétré à 1407 jours (idem R, Sas).</p>
-<p><img src="images/image9rmst.png" class="img-fluid" style="width:90.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/image9rmst.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="images/image9rmst.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
+</figure>
+</div>
 
 
 <!-- -->
@@ -1219,6 +1230,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       <div class="nav-footer-center">Marc Thévenin - Ined-Sms - Octobre 2022</div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":true,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom"});</script>
 
 
 

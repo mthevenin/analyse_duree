@@ -103,6 +103,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -448,7 +451,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">kmf.plot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="python/1.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="python/1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="python/1.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </section>
 <section id="comparaison-des-fonctions-de-survie" class="level3">
 <h3 class="anchored" data-anchor-id="comparaison-des-fonctions-de-survie">Comparaison des fonctions de survie</h3>
@@ -459,7 +466,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kmf.fit</span>(grouped_df[<span class="st">'stime'</span>], grouped_df[<span class="st">'died'</span>], <span class="at">label=</span>name)</span>
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">kmf.plot</span>(<span class="at">ax=</span>ax)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="python/2.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="python/2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="python/2.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>from lifelines.statistics import multivariate_logrank_test</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>results <span class="ot">=</span> <span class="fu">multivariate_logrank_test</span>(trans[<span class="st">'stime'</span>], trans[<span class="st">'surgery'</span>], trans[<span class="st">'died'</span>])</span>
@@ -527,7 +538,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>log<span class="sc">-</span>likelihood ratio test <span class="ot">=</span> <span class="fl">17.63</span> on <span class="dv">3</span> df</span>
 <span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a><span class="sc">-</span><span class="fu">log2</span>(p) of ll<span class="sc">-</span>ratio test <span class="ot">=</span> <span class="fl">10.90</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="python/3.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="python/3.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3"><img src="python/3.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 </section>
 <section id="tests-hypothèse-ph" class="level3">
 <h3 class="anchored" data-anchor-id="tests-hypothèse-ph">Tests hypothèse PH</h3>
@@ -1772,6 +1787,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       <div class="nav-footer-center">Marc Thévenin - Ined-Sms - Octobre 2022</div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":true,"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom"});</script>
 
 
 

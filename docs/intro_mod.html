@@ -103,6 +103,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -386,7 +389,11 @@ Le rapport des risques entre <span class="math inline">\(A\)</span> et <span cla
 <span class="math display">\[\frac{h_A(t)}{h_B(t)}= \frac{e^{bX_A}}{e^{bX_B}}=e^{b(X_A-X_B)}\]</span></p>
 <p>Autrement dit, la proportionalité des risques peut traduire l’absence d’une interaction significative entres les rapports de risques estiméspar un modèle à risque proportionnel et la durée (ou une fonction de celle-ci).</p>
 <p><strong>Illustration graphique</strong></p>
-<p><img src="images/Image18.png" class="img-fluid" style="width:70.0%"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Image18.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="images/Image18.png" class="img-fluid figure-img" style="width:70.0%"></a></p>
+</figure>
+</div>
 <p>On part d’un modèle à risque constant avec <span class="math inline">\(h_0(t)=0.1\)</span>.</p>
 <p>Comme <span class="math inline">\(h_1(t)=0.2\)</span> quel que soit <span class="math inline">\(t\)</span>, le rapport des risques est toujours égal à <span class="math inline">\(\frac{0.2}{0.1}=2=e^{b}\)</span>. Le coefficient estimé est égal à <span class="math inline">\(log(2)=0.69\)</span>.<br>
 Pour <span class="math inline">\(h_{1b}(t)\)</span>, le rapport de risques augmente avec le temps: <span class="math inline">\(t=1\)</span>, <span class="math inline">\(h_{1b}(1)=0.15\)</span> et <span class="math inline">\(h_{1b}(1000)=0.25\)</span> l’hypothèse de proportionalité n’est donc pas respectée.</p>
@@ -684,6 +691,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       <div class="nav-footer-center">Marc Thévenin - Ined-Sms - Octobre 2022</div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":true,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});</script>
 
 
 

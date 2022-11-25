@@ -104,6 +104,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -426,7 +429,7 @@ On reprend les données de la base <em>transplantation</em>, mais les durées on
 Pour sélectionner cette fonction, on peut tester différents modèles sans covariable additionnelle, et sélectionner la forme qui minimise un critère d’information de type <strong>AIC</strong> ou <strong>BIC</strong> (vraisemblance pénalisée).<br>
 <br> Exemple:<br>
 On va tester les paramétrisations suivante:s une forme linéraire stricte <span class="math inline">\(f(t)=a\times t\)</span> et des effets quadratiques d’ordres 2 et 3: <span class="math inline">\(f(t)=a_1\times t + a_2\times t^{2}\)</span> et <span class="math inline">\(f(t)=a_1\times t + a_2\times t^{2} + a_3\times t^{3}\)</span>.</p>
-<p><strong>Exemple</strong> Estimation des probabilités de décéder selon différents ajustements de la durée (modèle logistique à temps discret) <img src="images/Image11.png" class="img-fluid"></p>
+<p><strong>Exemple</strong> Estimation des probabilités de décéder selon différents ajustements de la durée (modèle logistique à temps discret) <a href="images/Image11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="images/Image11.png" class="img-fluid"></a></p>
 <p><strong>Critères AIC</strong></p>
 <table class="table">
 <thead>
@@ -600,7 +603,11 @@ Risques sur la longueur de l’intervalle.</p>
 <span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="sc">------------------------------------------------------------------------------</span></span>
 <span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>Remarque <span class="sc">:</span> la constante n’est pas reportée.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p><img src="images/Image13.png" class="img-fluid"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Image13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="images/Image13.png" class="img-fluid figure-img"></a></p>
+</figure>
+</div>
 
 
 <!-- -->
@@ -1063,6 +1070,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       <div class="nav-footer-center">Marc Thévenin - Ined-Sms - Octobre 2022</div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"loop":true,"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","openEffect":"zoom"});</script>
 
 
 
