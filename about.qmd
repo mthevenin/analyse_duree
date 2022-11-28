@@ -39,9 +39,8 @@ library(fontawesome)
 
 
 ::: {.callout-note icon="false"}
-## Autres supports
+## Autre support
 
--   **Formation analyse des durées (2017-2020)**: <https://mthevenin.github.io/analyse_duree/>
--   **Support Stata Ined**: <https://mthevenin.github.io/stata_fr/index.html> 
+**Support Stata Ined**: <https://mthevenin.github.io/stata_fr/index.html> 
 :::
 
