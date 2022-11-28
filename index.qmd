@@ -22,7 +22,7 @@ library(fontawesome)
 ::: {.callout-note}  
 ## Objectif 2023: modèles basés sur des pseudo-observations (*Andersen et al - 2003-*)
 
-- Alternative, à première vue intéressante, aux modèles standards (Cox, paramétrique, méthodes à durée discrète).
+- Alternative, à première vue intéressante, aux modèles standards (Cox, paramétriques, méthodes à durée discrète/groupée).
 - Pseudo observation: résidu de type *Jackknife*. Pas d'inquiétude le principe est plutôt simple.
 - Régression sur ces résidus, à un ou plusieurs points de la durée... Fléxible.
   - modèle de type linéaire estimé par le maximum de vraisemblance avec variance robuste.

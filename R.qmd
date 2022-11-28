@@ -111,14 +111,9 @@ library(stargazer)
 
 <br>
 
-## **Survival v2 versus v3**
+**Survival v2 versus v3**: se reporter à la partie sur la proportionnalité des risques.   
 
-
-<br>
-Se reporter à la partie sur les risques proportionnels.   
-
-```{r filename=" installation survival 2.44-1 (30 mars 2019)", eval=FALSE}
-
+```{r filename="installation survival 2.44-1 (30 mars 2019)", eval=FALSE}
 require(remotes)
 install_version("survival", version = "2.44-1", repos = "http://cran.us.r-project.org")
 ```
