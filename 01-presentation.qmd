@@ -1,0 +1,53 @@
+
+# **L'analyse des durées** 
+
+## Questions 
+
+On dispose de données dites "longitudinales", et on cherche à appréhender l'occurence d'un évènement au sein d'une population.
+Les problématiques se basent sur les questions suivantes:  
+<br>
+
+* Observe-t-on la survenue de l'évènement pour l'ensemble des individus?
+* Quelle est la durée jusqu'à la survenue de l'évènement?
+* Quels sont les facteurs qui favorisent la survenue de cet évènement? Facteurs fixes ou  facteurs pouvant apparaitre/changer au cours de la période d'observation: variables dynamiques (**TVC**: *Time Varying Covariate*)
+
+## Terminologies 
+
+| Français                     | Anglais                                                 | 
+| ---------------------------- | ------------------------------------------------------- | 
+| Modèles de durée             | Duration analysis (Econométrie)                         |
+| Analyse de survie            | Survival analysis (Epidémiologie, médecine, démographie)|
+| Analyse de fiabilité         | Failure time data analysis (Statistiques industrielles) |
+| Analyse des transitions      | Event-history analysis (Démographie, Sociologie)        |
+| Données de séjour            | Transition analysis (Sociologie)                        |
+| Histoires de vie             |                                                         |
+
+
+
+## Exemples d'analyse 
+
+* **Nuptialité, Mise en couple**: cohabiter, décohabiter, se marier, Rompre une union ...  
+<br>
+* **Logement**: Changement de statut (locataire <=> propriétaire), mobilité résidentielle ...  
+<br>
+* **Emploi**: Trouver un 1er emploi,  changer d'emploi, entrée ou sortie du chômage ...  
+<br>
+* **Fécondité**: Avoir un premier enfant, avoir un nouvel enfant ...  
+<br>
+* **Mortalité**: Décéder après diagnostic, survivre après l'administration un traitement...  
+
+
+## Elements nécessaire à l'analyse 
+
+1. **Un processus temporel**
+   - Une échelle de mesure ou métrique temprelle: minutes, heures, jours, mois, années....
+   - Une origine définissant un évènement de départ.  
+   - Une définition précise de l'évènement d'étude.  
+   - Une durée entre le début et la fin de la période d'observation, si nécessaire avec la fin de la période d'exposition au risque.  
+
+2. **Une population soumise au risque** de connaître l'évènement (**Risk Set**)
+
+3. ***Des variables explicatives*** ou ***covariables***
+   - Fixes: genre, génération, niveau de diplôme, csp,......
+   - Dynamiques (TVC: *Time varying covariates*): Mesurées à tout moment entre le début et la sortie de l'observation: statut matrimonial, taille du ménage, statut d'activité...
+

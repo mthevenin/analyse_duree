@@ -1,5 +1,16 @@
-.result {
-  background-color: #FFFAF0;
-  border: .4px solid skyblue;
-} 
 
+#quarto-sidebar  {
+  background-color: white;
+  border: 1px;
+}
+
+
+.sidebar nav[role=doc-toc] ul>li>a.active,
+.sidebar nav[role=doc-toc] ul>li>ul>li>a.active {
+ border-left:1px solid #De3831;
+ color:#De3831 !important
+}
+.sidebar nav[role=doc-toc] ul>li>a:hover,
+.sidebar nav[role=doc-toc] ul>li>ul>li>a:hover {
+ color:#De3831 !important
+}

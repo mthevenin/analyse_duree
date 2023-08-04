@@ -1,0 +1,1625 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction à l’analyse des durées - 4&nbsp; Estimations des fonctions de survie</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./05-fsurvie_comp.html" rel="next">
+<link href="./03-theorie.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./04-fsurvie.html">Méthodes non paramétrique</a></li><li class="breadcrumb-item"><a href="./04-fsurvie.html"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">**Estimations des fonctions de survie**</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction à l’analyse des durées</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/mthevenin/analyse_duree" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./introduction_bio_durees.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Recherche"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Le support</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-presentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>L’analyse des durées</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Données et théorie</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>Les Données</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-theorie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>La théorie</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Méthodes non paramétrique</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-fsurvie.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>Estimations des fonctions de survie</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-fsurvie_comp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>Tests de comparaison</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Modèles à risques proportionnels</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-intro_mod.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Introduction</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-cox.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><strong>Le modèle de Cox</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-discret.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-tvc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Variables dynamiques</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Compléments</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Annexe</span></span>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sections</h2>
+   
+  <ul>
+  <li><a href="#les-fonctions-de-survieséjour" id="toc-les-fonctions-de-survieséjour" class="nav-link active" data-scroll-target="#les-fonctions-de-survieséjour"><span class="header-section-number">4.1</span> <strong>Les fonctions de survie/séjour</strong></a>
+  <ul class="collapse">
+  <li><a href="#les-variables-danalyse" id="toc-les-variables-danalyse" class="nav-link" data-scroll-target="#les-variables-danalyse"><span class="header-section-number">4.1.1</span> Les variables d’analyse</a></li>
+  <li><a href="#calcul-de-la-fonction-de-survie" id="toc-calcul-de-la-fonction-de-survie" class="nav-link" data-scroll-target="#calcul-de-la-fonction-de-survie"><span class="header-section-number">4.1.2</span> Calcul de la fonction de survie</a></li>
+  </ul></li>
+  <li><a href="#la-méthode-actuarielle" id="toc-la-méthode-actuarielle" class="nav-link" data-scroll-target="#la-méthode-actuarielle"><span class="header-section-number">4.2</span> <strong>La méthode actuarielle</strong></a>
+  <ul class="collapse">
+  <li><a href="#estimation" id="toc-estimation" class="nav-link" data-scroll-target="#estimation"><span class="header-section-number">4.2.1</span> Estimation</a></li>
+  <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"><span class="header-section-number">4.2.2</span> Application</a></li>
+  </ul></li>
+  <li><a href="#la-méthode-de-kaplan-meier" id="toc-la-méthode-de-kaplan-meier" class="nav-link" data-scroll-target="#la-méthode-de-kaplan-meier"><span class="header-section-number">4.3</span> <strong>La méthode de Kaplan-Meier</strong></a>
+  <ul class="collapse">
+  <li><a href="#estimation-1" id="toc-estimation-1" class="nav-link" data-scroll-target="#estimation-1"><span class="header-section-number">4.3.1</span> Estimation</a></li>
+  <li><a href="#application-1" id="toc-application-1" class="nav-link" data-scroll-target="#application-1"><span class="header-section-number">4.3.2</span> Application</a></li>
+  <li><a href="#quantités-associées-à-lestimateur-kaplan-meier.." id="toc-quantités-associées-à-lestimateur-kaplan-meier.." class="nav-link" data-scroll-target="#quantités-associées-à-lestimateur-kaplan-meier.."><span class="header-section-number">4.3.3</span> Quantités associées à l’estimateur Kaplan-Meier..</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mthevenin/analyse_duree/edit/main/04-fsurvie.qmd" class="toc-action">Modifier cette page</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>Estimations des fonctions de survie</strong></span></h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Montrer tout le code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Cacher tout le code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">Voir les sources</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Les méthodes non paramétriques portent généralement sur l’analyse des fonctions de survie (<span class="math inline">\(S(t\)</span>)) ou sur celles des fonctions de répartitions (<span class="math inline">\(F(t)\)</span>), plus rarement sur les mesures d’incidence données par le risque cumulé. Deux méthodes d’estimations sont proposées : la méthode dite actuarielle et la méthode dite de Kaplan &amp; Meier. Ces deux approches sont adaptées à des mesures différentes de la durée : plutôt discrète/groupée pour la technique actuarielle et plutôt continue pour Kaplan-Meier (KM). Cela induit un traitement différent de la censure dans l’estimation. La seconde est de très très loin la plus utilisée, en partie en raison des tests de comparaison, plus ou moins pertinents, qu’elle permet de réaliser.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>J’insiste sur la nécessité de passer par cette étape avant de se lancer <em>corps perdu</em> dans des modèles, comme ceux à durée discrète.
+<ul>
+<li>Les applications ont des gardes fous permettant d’alerter sur des durées d’exposition incorrecte, en particulier lorsqu’on travaille sur des données prospectives.</li>
+<li>Egalement très utile, la comparaison graphique de courbes de séjour permet de repérer rapidement des violations fortes de l’hypothèse de proportionalité des risques, ou des situations de quasi <em>immunité</em>.</li>
+</ul></li>
+<li>Concernant les tests non paramétriques, ceux utilsant la technique du <em>logrank</em>, présente à mon sens tellement de défauts qu’ils devraient être abandonné. Malheureusement encore très peu diffusée dans les sciences sociales, la comparaison des RMST (<em>Restricted Mean of Survival Time</em>) me semble une solution largement supérieure, tant au niveau statistique qu’au niveau interprétatif.</li>
+</ul>
+</div>
+</div>
+<section id="les-fonctions-de-survieséjour" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="les-fonctions-de-survieséjour"><span class="header-section-number">4.1</span> <strong>Les fonctions de survie/séjour</strong></h2>
+<section id="les-variables-danalyse" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="les-variables-danalyse"><span class="header-section-number">4.1.1</span> Les variables d’analyse</h3>
+<p>On a un échantillon aléatoire de <span class="math inline">\(n\)</span> individus avec:</p>
+<ul>
+<li>Des indicateurs de fin d’épisode <span class="math inline">\(e_1,e_2,....,e_k\)</span> avec <span class="math inline">\(e_i=0\)</span> si censure à droite et <span class="math inline">\(e_i=1\)</span> si évènement observé pendant la période d’observation.</li>
+<li>Des durées d’exposition au risque <span class="math inline">\(t_1,t_2,....,t_k\)</span> jusqu’à l’évènement ou la censure.</li>
+<li>En théorie, il ne peut pas y avoir d’évènement en <span class="math inline">\(t=0\)</span>.</li>
+</ul>
+</section>
+<section id="calcul-de-la-fonction-de-survie" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="calcul-de-la-fonction-de-survie"><span class="header-section-number">4.1.2</span> Calcul de la fonction de survie</h3>
+<p>Rappel: La fonction de survie donne la probabilité que l’évènement survienne après <span class="math inline">\(t_i\)</span>, soit <span class="math inline">\(S(t_i)=P(T&gt;t_i)\)</span>. Pour survivre en <span class="math inline">\(t_i\)</span>, il faut donc avoir survécu en <span class="math inline">\(t_{i-1}\)</span>, <span class="math inline">\(t_{i-2}\)</span>, …., <span class="math inline">\(t_{1}\)</span>.<br>
+La fonction de survie renvoie donc des probabilités conditionnelles: on survit en <span class="math inline">\(t_i\)</span> conditionnellement au fait d’y avoir survécu avant. Il s’agit donc d’un produit de probabilités.</p>
+<p>Soit <span class="math inline">\(d_i=\sum e_i\)</span> le nombre d’évènements observé en <span class="math inline">\(t_i\)</span> et <span class="math inline">\(r_i\)</span> la population encore soumise au risque en <span class="math inline">\(i\)</span>. On peut mesurer l’intensité de l’évènement en <span class="math inline">\(t_i\)</span> en calculant le quotient <span class="math inline">\(q(t_i)=\frac{d_i}{r_i}\)</span>.</p>
+<p>Si le temps est strictement continu on devrait toujours avoir <span class="math inline">\(q(t_i)=\frac{1}{r_i}\)</span>.</p>
+<p><span class="math inline">\(S(t_i) = (1 - \frac{d_i}{r_i})\times{S(t_{i-1})} = S(t_i) = (1 - q(t_i))\times{S(t_{i-1})}\)</span>. En remplaçant <span class="math inline">\(S(t_{i-1})\)</span> par sa valeur: <span class="math inline">\(S(t_i) = (1 - \frac{d_i}{r_i})\times(1 - \frac{d_{i-1}}{r_{i-1}})\times{S(t_{i-2})}\)</span>.</p>
+<p>Au final, en remplaçant toutes les expressions de la survie jusqu’en <span class="math inline">\(t_0\)</span> (<span class="math inline">\(S(0)=1\)</span>):</p>
+<p><span class="math display">\[S(t_i)=\displaystyle \prod_{t_i\leq{k}} (1-q(t_i))\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Application pour la suite du support
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p>On va analyser le risque de décéder (la survie) de personnes souffrant d’une insuffisance cardiaque. Le début de l’exposition est leur inscription dans un registre d’attente pour une greffe du coeur.</p></li>
+<li><p>Les covariables sont dans un premier temps toutes fixes: l’année (<em>year</em>) et l’âge (<em>age</em>) à l’entrée dans le registre, et le fait d’avoir été opéré pour un pontage aorto-coronarien avant l’inscription (<em>surgery</em>).</p></li>
+<li><p>Le début de l’exposition au risque est l’entrée dans le registre, la durée est mesurée en jour (<em>stime</em>). La variable évènement/censure est le décès (<em>died</em>). Les durées de la variable <em>stime</em> ont été regroupée par période de 30 jours pour réaliser des analyses à durée discrete. Cette nouvelle variable de durée a été appelé <em>mois</em>.</p></li>
+<li><p>L’introduction d’une dimension dynamique, la greffe, est donnée par les informations contenues dans les variables <em>transplant</em> et <em>wait</em>.</p></li>
+<li><p>La variable <em>compet</em> est une information simulée pour réaliser des analyses en risques concurrents.</p></li>
+<li><p>Les bases en format .csv, .sas7bdat et .dta sont disponibles dans ce dépôt [<a href="https://github.com/mthevenin/analyse_duree/tree/main/bases">lien</a>]</p></li>
+</ul>
+<p>Extrait de la base:</p>
+<table class="table">
+<colgroup>
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 7%">
+<col style="width: 8%">
+<col style="width: 10%">
+<col style="width: 12%">
+<col style="width: 17%">
+<col style="width: 8%">
+<col style="width: 8%">
+<col style="width: 11%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>id</th>
+<th>year</th>
+<th>age</th>
+<th>died</th>
+<th>stime</th>
+<th>surgery</th>
+<th>transplant</th>
+<th>wait</th>
+<th>mois</th>
+<th>compet</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>15</td>
+<td>68</td>
+<td>53</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>43</td>
+<td>70</td>
+<td>43</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>61</td>
+<td>71</td>
+<td>52</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>75</td>
+<td>72</td>
+<td>52</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>102</td>
+<td>74</td>
+<td>40</td>
+<td>0</td>
+<td>11</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>74</td>
+<td>72</td>
+<td>29</td>
+<td>1</td>
+<td>17</td>
+<td>0</td>
+<td>1</td>
+<td>5</td>
+<td>1</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</section>
+<section id="la-méthode-actuarielle" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="la-méthode-actuarielle"><span class="header-section-number">4.2</span> <strong>La méthode actuarielle</strong></h2>
+<ul>
+<li>Estimation sur des intervalles définies par l’utilisateur.</li>
+<li>Méthode dite «continue», estimation en milieu d’intevalle.</li>
+<li>Méthode apropriée lorsque la durée est mesurée de manière discrète/groupée.</li>
+<li>Méthode, hélas, quasiment abandonnée dans les sciences sociales où les durées sont plus rarement mesurées de manière exacte. L’absence de test de comparaison des fonctions de survie n’y est pas étranger, tout comme le lien de la méthode suivante (Kaplan-Meier) avec le modèle de Cox.</li>
+<li>Contrairement à la méthode de Cox, la méthode actuarielle permet de calculer les quantiles de la durée.</li>
+</ul>
+<section id="estimation" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="estimation"><span class="header-section-number">4.2.1</span> Estimation</h3>
+<p><strong>Echelle temporelle</strong></p>
+<p>La durée est divisée en <span class="math inline">\(J\)</span> intervalles, en choisissant <span class="math inline">\(J\)</span> points: <span class="math inline">\(t_0&lt;t_1&lt;...&lt;t_J\)</span> avec <span class="math inline">\(t_{J+1}=\infty\)</span>.</p>
+<p><strong>Calcul du Risk set</strong></p>
+<ul>
+<li>A <span class="math inline">\(t_{min}=0\)</span>, <span class="math inline">\(n_0=n\)</span> individus soumis au risque: <span class="math inline">\(r_0=n_0\)</span>.</li>
+<li>Le nombre d’exposé.e.s au risque sur un intervalle est calculé en soustrayant la moitié des cas censurés sur la longueur de l’intervalle: <span class="math inline">\(r_i=n_i- 0.5\times{c_i}\)</span>, avec <span class="math inline">\(n_i\)</span> le nombre de personnes soumises au risque au début de l’intervalle et <span class="math inline">\(c_i\)</span> le nombre d’observations censurées sur la longueur de l’intervalle. On suppose donc que les observations censurées <span class="math inline">\(c_i\)</span> sont sorties de l’observation uniformément sur l’intervalle. Les cas censurés le sont en moyenne au millieu de l’intervalle. <br></li>
+</ul>
+<p><strong>Calcul de</strong> <span class="math inline">\(S(t_i)\)</span><br>
+On applique la méthode de la section précédente avec:</p>
+<p><span class="math display">\[q(t_i)=\frac{d_i}{n_i - 0.5\times c_i}\]</span></p>
+<p><strong>Calcul de la durée médiane (ou autre quantiles)</strong></p>
+<p><em>Rappel</em>: en raison de la présence de censures à droite, le dernier intervalle étant ouvert jusqu’à la dernière sortie d’observation, il n’est pas conseillé de calculer des durées moyennes. On préfère utiliser la médiane ou tout autre quantile lorsqu’ils sont calculables.</p>
+<p><strong>Définition</strong>: il s’agit de la durée telle que <span class="math inline">\(S(t_i)=0.5\)</span>.</p>
+<p><em>Calcul</em>: Comme on applique une méthode continue et monotone à l’intérieur d’intervalles, on ne peut pas calculer directement un point de coupure qui correspond à 50% de survivants. On doit donc trouver ce point par interpolation linéaire dans l’intervalle <span class="math inline">\([t_i;t_{i+1}[\)</span> avec <span class="math inline">\(S(t_{i+1})\leq0.5\)</span> et <span class="math inline">\(S(t_{i})&gt;0.5\)</span>.</p>
+<p><strong>R-Stata-Sas-Python</strong></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Sas</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Les fonctions de survie avec la méthode dite actuarielle sont estimables avec le package <strong><code>discSurv</code></strong>. Avec le temps, il s’est étoffé, on peut maintenant paramatrer des intervalles (programmation pénible), mais les quantiles de la durée ne sont toujours pas estimables, ce qui est bien dommage.</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Commande <code>ltable</code>, avec en option la paramétrisation des intervalles de durées. Voir la commande externe <code>qlt</code> (MT) qui calcule les durées médianes (+ autres quartiles) et qui recalcule la fonction de séjour avec une définition des intervalles de durées identique à celle de SAS.</p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p>Sous une <code>proc lifetest</code> avec en option <code>method=lifetable</code>. On peut paramétrer les intervalles d’estimation avec l’option <code>width</code>.</p>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<p>A l’heure actuelle, aucune fonction à ma connaissance</p>
+</div>
+</div>
+</div>
+</section>
+<section id="application" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="application"><span class="header-section-number">4.2.2</span> Application</h3>
+<p>Les résultats qui suivent ont été estimés avec Stata en retenant la définition des bornes de Sas, plus pertinente à mon sens, avec des intervalles fixes de 30 jours.</p>
+<div class="cell">
+<details>
+<summary><strong>Afficher le tableau des estimateurs</strong></summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>     <span class="sc">+----------------------------------------------+</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span>   t0     t1   survival CI <span class="dv">95</span><span class="sc">% low  CI 95%</span> up <span class="sc">|</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span><span class="sc">----------------------------------------------</span><span class="er">|</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.</span> <span class="sc">|</span>    <span class="dv">0</span>     <span class="dv">30</span>          <span class="dv">1</span>          .          . <span class="sc">|</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fl">2.</span> <span class="sc">|</span>   <span class="dv">30</span>     <span class="dv">60</span>   .<span class="dv">7853659</span>   .<span class="dv">6925991</span>   .<span class="dv">8530615</span> <span class="sc">|</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fl">3.</span> <span class="sc">|</span>   <span class="dv">60</span>     <span class="dv">90</span>   .<span class="dv">6461871</span>   .<span class="dv">5449008</span>   .<span class="dv">7304808</span> <span class="sc">|</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fl">4.</span> <span class="sc">|</span>   <span class="dv">90</span>    <span class="dv">120</span>    .<span class="dv">525027</span>   .<span class="dv">4232338</span>   .<span class="dv">6170507</span> <span class="sc">|</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fl">5.</span> <span class="sc">|</span>  <span class="dv">120</span>    <span class="dv">150</span>   .<span class="dv">4740535</span>   .<span class="dv">3737563</span>   .<span class="dv">5677139</span> <span class="sc">|</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span><span class="sc">----------------------------------------------</span><span class="er">|</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fl">6.</span> <span class="sc">|</span>  <span class="dv">150</span>    <span class="dv">180</span>   .<span class="dv">4636348</span>   .<span class="dv">3637283</span>   .<span class="dv">5575485</span> <span class="sc">|</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fl">7.</span> <span class="sc">|</span>  <span class="dv">180</span>    <span class="dv">210</span>   .<span class="dv">4425605</span>   .<span class="dv">3435417</span>   .<span class="dv">5368989</span> <span class="sc">|</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="fl">8.</span> <span class="sc">|</span>  <span class="dv">210</span>    <span class="dv">240</span>   .<span class="dv">4105681</span>   .<span class="dv">3132064</span>   .<span class="dv">5052779</span> <span class="sc">|</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fl">9.</span> <span class="sc">|</span>  <span class="dv">240</span>    <span class="dv">270</span>   .<span class="dv">3997637</span>   .<span class="dv">3030412</span>   .<span class="dv">4945301</span> <span class="sc">|</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> <span class="fl">10.</span> <span class="sc">|</span>  <span class="dv">270</span>    <span class="dv">300</span>   .<span class="dv">3888113</span>   .<span class="dv">2927645</span>   .<span class="dv">4836136</span> <span class="sc">|</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span><span class="sc">----------------------------------------------</span><span class="er">|</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> <span class="fl">11.</span> <span class="sc">|</span>  <span class="dv">300</span>    <span class="dv">330</span>   .<span class="dv">3665935</span>   .<span class="dv">2720434</span>   .<span class="dv">4613676</span> <span class="sc">|</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a> <span class="fl">12.</span> <span class="sc">|</span>  <span class="dv">330</span>    <span class="dv">360</span>   .<span class="dv">3554846</span>   .<span class="dv">2617823</span>   .<span class="dv">4501585</span> <span class="sc">|</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a> <span class="fl">13.</span> <span class="sc">|</span>  <span class="dv">360</span>    <span class="dv">390</span>   .<span class="dv">3216289</span>   .<span class="dv">2308275</span>   .<span class="dv">4157428</span> <span class="sc">|</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> <span class="fl">14.</span> <span class="sc">|</span>  <span class="dv">390</span>    <span class="dv">420</span>   .<span class="dv">3216289</span>   .<span class="dv">2308275</span>   .<span class="dv">4157428</span> <span class="sc">|</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a> <span class="fl">15.</span> <span class="sc">|</span>  <span class="dv">420</span>    <span class="dv">450</span>   .<span class="dv">3216289</span>   .<span class="dv">2308275</span>   .<span class="dv">4157428</span> <span class="sc">|</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span><span class="sc">----------------------------------------------</span><span class="er">|</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a> <span class="fl">16.</span> <span class="sc">|</span>  <span class="dv">480</span>    <span class="dv">510</span>   .<span class="dv">3216289</span>   .<span class="dv">2308275</span>   .<span class="dv">4157428</span> <span class="sc">|</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a> <span class="fl">17.</span> <span class="sc">|</span>  <span class="dv">510</span>    <span class="dv">540</span>   .<span class="dv">3216289</span>   .<span class="dv">2308275</span>   .<span class="dv">4157428</span> <span class="sc">|</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a> <span class="fl">18.</span> <span class="sc">|</span>  <span class="dv">540</span>    <span class="dv">570</span>   .<span class="dv">3216289</span>   .<span class="dv">2308275</span>   .<span class="dv">4157428</span> <span class="sc">|</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a> <span class="fl">19.</span> <span class="sc">|</span>  <span class="dv">570</span>    <span class="dv">600</span>   .<span class="dv">3216289</span>   .<span class="dv">2308275</span>   .<span class="dv">4157428</span> <span class="sc">|</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a> <span class="fl">20.</span> <span class="sc">|</span>  <span class="dv">600</span>    <span class="dv">630</span>   .<span class="dv">3059397</span>   .<span class="dv">2154747</span>   .<span class="dv">4009653</span> <span class="sc">|</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span><span class="sc">----------------------------------------------</span><span class="er">|</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a> <span class="fl">21.</span> <span class="sc">|</span>  <span class="dv">660</span>    <span class="dv">690</span>   .<span class="dv">3059397</span>   .<span class="dv">2154747</span>   .<span class="dv">4009653</span> <span class="sc">|</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a> <span class="fl">22.</span> <span class="sc">|</span>  <span class="dv">720</span>    <span class="dv">750</span>   .<span class="dv">2884574</span>   .<span class="dv">1981834</span>   .<span class="dv">3848506</span> <span class="sc">|</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a> <span class="fl">23.</span> <span class="sc">|</span>  <span class="dv">840</span>    <span class="dv">870</span>   .<span class="dv">2704288</span>   .<span class="dv">1806664</span>   .<span class="dv">3680736</span> <span class="sc">|</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a> <span class="fl">24.</span> <span class="sc">|</span>  <span class="dv">900</span>    <span class="dv">930</span>   .<span class="dv">2517786</span>   .<span class="dv">1628919</span>   .<span class="dv">3505543</span> <span class="sc">|</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a> <span class="fl">25.</span> <span class="sc">|</span>  <span class="dv">930</span>    <span class="dv">960</span>   .<span class="dv">2517786</span>   .<span class="dv">1628919</span>   .<span class="dv">3505543</span> <span class="sc">|</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span><span class="sc">----------------------------------------------</span><span class="er">|</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a> <span class="fl">26.</span> <span class="sc">|</span>  <span class="dv">960</span>    <span class="dv">990</span>   .<span class="dv">2517786</span>   .<span class="dv">1628919</span>   .<span class="dv">3505543</span> <span class="sc">|</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a> <span class="fl">27.</span> <span class="sc">|</span>  <span class="dv">990</span>   <span class="dv">1020</span>   .<span class="dv">2288896</span>   .<span class="dv">1404089</span>   .<span class="dv">3303913</span> <span class="sc">|</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a> <span class="fl">28.</span> <span class="sc">|</span> <span class="dv">1020</span>   <span class="dv">1050</span>   .<span class="dv">2060007</span>   .<span class="dv">1191749</span>   .<span class="dv">3093143</span> <span class="sc">|</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a> <span class="fl">29.</span> <span class="sc">|</span> <span class="dv">1140</span>   <span class="dv">1170</span>   .<span class="dv">1831117</span>   .<span class="dv">0991601</span>   .<span class="dv">2873401</span> <span class="sc">|</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a> <span class="fl">30.</span> <span class="sc">|</span> <span class="dv">1320</span>   <span class="dv">1350</span>   .<span class="dv">1831117</span>   .<span class="dv">0991601</span>   .<span class="dv">2873401</span> <span class="sc">|</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span><span class="sc">----------------------------------------------</span><span class="er">|</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a> <span class="fl">31.</span> <span class="sc">|</span> <span class="dv">1380</span>   <span class="dv">1410</span>   .<span class="dv">1831117</span>   .<span class="dv">0991601</span>   .<span class="dv">2873401</span> <span class="sc">|</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a> <span class="fl">32.</span> <span class="sc">|</span> <span class="dv">1560</span>   <span class="dv">1590</span>   .<span class="dv">1464894</span>   .<span class="dv">0645215</span>   .<span class="dv">2602391</span> <span class="sc">|</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a> <span class="fl">33.</span> <span class="sc">|</span> <span class="dv">1770</span>   <span class="dv">1800</span>   .<span class="dv">1464894</span>   .<span class="dv">0645215</span>   .<span class="dv">2602391</span> <span class="sc">|</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a> <span class="fl">34.</span> <span class="sc">|</span> <span class="dv">1800</span>      .   .<span class="dv">1464894</span>   .<span class="dv">0645215</span>   .<span class="dv">2602391</span> <span class="sc">|</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>     <span class="sc">+----------------------------------------------+</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<table class="table">
+<caption>Quantiles de la fonction de séjour type actuarielle - Bornes Sas</caption>
+<thead>
+<tr class="header">
+<th><strong>S(t)</strong></th>
+<th><strong>t</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.90</td>
+<td>13.977</td>
+</tr>
+<tr class="even">
+<td>0.75</td>
+<td>37.623</td>
+</tr>
+<tr class="odd">
+<td>0.50</td>
+<td>104.729</td>
+</tr>
+<tr class="even">
+<td>0.25</td>
+<td>906.993</td>
+</tr>
+<tr class="odd">
+<td>0.10</td>
+<td>.</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Image7.png" class="lightbox" title="Courbe de survie: estimation méthode actuarielle" data-gallery="quarto-lightbox-gallery-1"><img src="images/Image7.png" class="img-fluid figure-img" style="width:70.0%"></a></p>
+<figcaption class="figure-caption">Courbe de survie: estimation méthode actuarielle</figcaption>
+</figure>
+</div>
+<p>Lecture des résultats: 102 jours après leur inscription dans le registre d’attente pour une greffe, 50% des malades sont toujours en vie. Au bout de 914 jours, 75% sont décédés.</p>
+</section>
+</section>
+<section id="la-méthode-de-kaplan-meier" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="la-méthode-de-kaplan-meier"><span class="header-section-number">4.3</span> <strong>La méthode de Kaplan-Meier</strong></h2>
+<ul>
+<li>L’approche qui exploite toute l’information disponible est celle dite de <strong>Kaplan-Meier</strong> (<em>KM</em>).</li>
+<li>Il y a autant d’intervalles que de durées où l’on observe au moins un évènement.</li>
+<li>Au lieu d’utiliser des intervalles prédéterminés, l’estimateur KM va définir un intervalle entre chaque évènement enregistré.</li>
+<li>La fonction de survie estimée par la méthode KM est une fonction en escalier (stairstep), d’où une estimation dite “discrète”.</li>
+<li>Pour chaque intervalle, on compte le nombe d’évènements et le nombre de censures.</li>
+<li>Méthode adaptée pour une mesure de la durée de type continue.</li>
+</ul>
+<section id="estimation-1" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="estimation-1"><span class="header-section-number">4.3.1</span> Estimation</h3>
+<p><strong>Définition du Risk Set (</strong><span class="math inline">\(r_i\)</span>)</p>
+<p>S’il y a à la fois des évènements et des censures à une durée <span class="math inline">\(t_i\)</span>, les observations censurées sont considérées comme exposées au risque à ce moment, comme si elles étaient censurées très rapidement après. C’est la principale caractéristique de cette méthode, appelé également l’estimateur <strong><em>product-limit</em></strong></p>
+<p><span class="math display">\[r_i=r_{i-1}-d_{i-1}-c_{i-1}\]</span><br>
+<br></p>
+<p><strong>Calcul de</strong> <span class="math inline">\(q_i\)</span><br>
+<br> On applique la méthode de la section précédente avec:</p>
+<p><span class="math display">\[q_i=\frac{d_i}{r_{i-1}-d_{i-1}-c_{i-1}}\]</span> <em>Remarque</em>: la variance de l’estimateur est obtenu par la méthode dite de <em>Greenwood</em>. Il n’y a pas d’intérêt particulier de la décrire dans ce support.</p>
+<p><strong>Récupération de la médiane</strong><br>
+Il n’y a pas de méthode pour calculer directement la durée médiane (ou tout autre quantile) contrairement à l’approche actuarielle.<br>
+La définition retenue est conventionnelle. On va prendre la valeur de la durée qui se situe juste <strong>en dessous</strong> de 50% de survivant.e.s. Elle est donc définie tel que <span class="math inline">\(S(t)\leq0.5\)</span>. Attention, il n’est pas impossible que le % de survivant.e.s soit bien en deçà de 50% pour l’obtention cette durée médiane.</p>
+<p><strong>R-Stata-Sas-Python</strong></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">SAS</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p>Les estimateurs sont obtenus avec fonction <strong><code>survfit</code></strong> du package <code>survival</code>. On peut obtenir des rendus graphiques de meilleures qualité avec le package <code>survminer</code> (fonction <code>ggsurvplot</code>)</p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>Après avoir appelé les variables de durée et de censure en mode <strong>survival</strong> avec <strong><code>stset</code></strong>), le tableau des estimateurs est obtenu avec la commande <strong><code>sts list</code></strong> et le graphique avec <strong><code>sts graph</code></strong>.</p>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>L’estimation de Kaplan-Meier est affichée par défaut par la <code>proc lifetest</code>. <strong><em>Warning</em></strong> : le tableau affiché par SAS est particulièrement pénible à lire voire illisible, en particulier lorsque le nombre de censures est élevé, une ligne étant ajoutée pour chaque observation censurée. Je conseille de ne pas afficher cette partie de l’output (se reporter à la section SAS du chapitre programmation). On récupère pour le reste de l’output les valeurs de la durée pour S(t) =(.75,.5,.25) ainsi que le graphique, ce qui est suffisant.</p>
+</div>
+<div id="tabset-2-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-4-tab">
+<p>Les resultats sont donnés dans la librairie <code>lifeline</code> par des fonctions au nom interminable. Je conseille plutôt l’utilisation de la librairie <strong><code>statmodels</code></strong> (se reporter à la section dédiée à Python).</p>
+</div>
+</div>
+</div>
+</section>
+<section id="application-1" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="application-1"><span class="header-section-number">4.3.2</span> Application</h3>
+<p>On reprend l’exemple précédent.</p>
+<div class="cell">
+<details>
+<summary><strong>Afficher le tableau des estimateurs</strong></summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>Time    Total   Fail   Lost           Function     Error     [<span class="dv">95</span>% Conf. Int.]</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------------------------------------------------------------------------</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>     <span class="dv">1</span>      <span class="dv">103</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.9903</span>    <span class="fl">0.0097</span>     <span class="fl">0.9331</span>    <span class="fl">0.9986</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>     <span class="dv">2</span>      <span class="dv">102</span>      <span class="dv">3</span>      <span class="dv">0</span>             <span class="fl">0.9612</span>    <span class="fl">0.0190</span>     <span class="fl">0.8998</span>    <span class="fl">0.9852</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>     <span class="dv">3</span>       <span class="dv">99</span>      <span class="dv">3</span>      <span class="dv">0</span>             <span class="fl">0.9320</span>    <span class="fl">0.0248</span>     <span class="fl">0.8627</span>    <span class="fl">0.9670</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>     <span class="dv">5</span>       <span class="dv">96</span>      <span class="dv">2</span>      <span class="dv">0</span>             <span class="fl">0.9126</span>    <span class="fl">0.0278</span>     <span class="fl">0.8388</span>    <span class="fl">0.9535</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>     <span class="dv">6</span>       <span class="dv">94</span>      <span class="dv">2</span>      <span class="dv">0</span>             <span class="fl">0.8932</span>    <span class="fl">0.0304</span>     <span class="fl">0.8155</span>    <span class="fl">0.9394</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>     <span class="dv">8</span>       <span class="dv">92</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.8835</span>    <span class="fl">0.0316</span>     <span class="fl">0.8040</span>    <span class="fl">0.9321</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>     <span class="dv">9</span>       <span class="dv">91</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.8738</span>    <span class="fl">0.0327</span>     <span class="fl">0.7926</span>    <span class="fl">0.9247</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    <span class="dv">11</span>       <span class="dv">90</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.8738</span>    <span class="fl">0.0327</span>     <span class="fl">0.7926</span>    <span class="fl">0.9247</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="dv">12</span>       <span class="dv">89</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.8640</span>    <span class="fl">0.0338</span>     <span class="fl">0.7811</span>    <span class="fl">0.9171</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="dv">16</span>       <span class="dv">88</span>      <span class="dv">3</span>      <span class="dv">0</span>             <span class="fl">0.8345</span>    <span class="fl">0.0367</span>     <span class="fl">0.7474</span>    <span class="fl">0.8937</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="dv">17</span>       <span class="dv">85</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.8247</span>    <span class="fl">0.0375</span>     <span class="fl">0.7363</span>    <span class="fl">0.8857</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="dv">18</span>       <span class="dv">84</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.8149</span>    <span class="fl">0.0383</span>     <span class="fl">0.7253</span>    <span class="fl">0.8777</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="dv">21</span>       <span class="dv">83</span>      <span class="dv">2</span>      <span class="dv">0</span>             <span class="fl">0.7952</span>    <span class="fl">0.0399</span>     <span class="fl">0.7034</span>    <span class="fl">0.8614</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="dv">28</span>       <span class="dv">81</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.7854</span>    <span class="fl">0.0406</span>     <span class="fl">0.6926</span>    <span class="fl">0.8531</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="dv">30</span>       <span class="dv">80</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.7756</span>    <span class="fl">0.0412</span>     <span class="fl">0.6819</span>    <span class="fl">0.8448</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="dv">31</span>       <span class="dv">79</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.7756</span>    <span class="fl">0.0412</span>     <span class="fl">0.6819</span>    <span class="fl">0.8448</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>    <span class="dv">32</span>       <span class="dv">78</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.7657</span>    <span class="fl">0.0419</span>     <span class="fl">0.6710</span>    <span class="fl">0.8363</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="dv">35</span>       <span class="dv">77</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.7557</span>    <span class="fl">0.0425</span>     <span class="fl">0.6603</span>    <span class="fl">0.8278</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>    <span class="dv">36</span>       <span class="dv">76</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.7458</span>    <span class="fl">0.0431</span>     <span class="fl">0.6495</span>    <span class="fl">0.8192</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>    <span class="dv">37</span>       <span class="dv">75</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.7358</span>    <span class="fl">0.0436</span>     <span class="fl">0.6388</span>    <span class="fl">0.8106</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="dv">39</span>       <span class="dv">74</span>      <span class="dv">1</span>      <span class="dv">1</span>             <span class="fl">0.7259</span>    <span class="fl">0.0442</span>     <span class="fl">0.6282</span>    <span class="fl">0.8019</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="dv">40</span>       <span class="dv">72</span>      <span class="dv">2</span>      <span class="dv">0</span>             <span class="fl">0.7057</span>    <span class="fl">0.0452</span>     <span class="fl">0.6068</span>    <span class="fl">0.7842</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="dv">43</span>       <span class="dv">70</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6956</span>    <span class="fl">0.0457</span>     <span class="fl">0.5961</span>    <span class="fl">0.7752</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="dv">45</span>       <span class="dv">69</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6856</span>    <span class="fl">0.0461</span>     <span class="fl">0.5855</span>    <span class="fl">0.7662</span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    <span class="dv">50</span>       <span class="dv">68</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6755</span>    <span class="fl">0.0465</span>     <span class="fl">0.5750</span>    <span class="fl">0.7572</span></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="dv">51</span>       <span class="dv">67</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6654</span>    <span class="fl">0.0469</span>     <span class="fl">0.5645</span>    <span class="fl">0.7481</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="dv">53</span>       <span class="dv">66</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6553</span>    <span class="fl">0.0472</span>     <span class="fl">0.5541</span>    <span class="fl">0.7390</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    <span class="dv">58</span>       <span class="dv">65</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6452</span>    <span class="fl">0.0476</span>     <span class="fl">0.5437</span>    <span class="fl">0.7298</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>    <span class="dv">61</span>       <span class="dv">64</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6352</span>    <span class="fl">0.0479</span>     <span class="fl">0.5333</span>    <span class="fl">0.7206</span></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="dv">66</span>       <span class="dv">63</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6251</span>    <span class="fl">0.0482</span>     <span class="fl">0.5230</span>    <span class="fl">0.7113</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>    <span class="dv">68</span>       <span class="dv">62</span>      <span class="dv">2</span>      <span class="dv">0</span>             <span class="fl">0.6049</span>    <span class="fl">0.0487</span>     <span class="fl">0.5026</span>    <span class="fl">0.6926</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="dv">69</span>       <span class="dv">60</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5948</span>    <span class="fl">0.0489</span>     <span class="fl">0.4924</span>    <span class="fl">0.6832</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    <span class="dv">72</span>       <span class="dv">59</span>      <span class="dv">2</span>      <span class="dv">0</span>             <span class="fl">0.5747</span>    <span class="fl">0.0493</span>     <span class="fl">0.4722</span>    <span class="fl">0.6643</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="dv">77</span>       <span class="dv">57</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5646</span>    <span class="fl">0.0494</span>     <span class="fl">0.4621</span>    <span class="fl">0.6548</span></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="dv">78</span>       <span class="dv">56</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5545</span>    <span class="fl">0.0496</span>     <span class="fl">0.4521</span>    <span class="fl">0.6453</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="dv">80</span>       <span class="dv">55</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5444</span>    <span class="fl">0.0497</span>     <span class="fl">0.4422</span>    <span class="fl">0.6357</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="dv">81</span>       <span class="dv">54</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5343</span>    <span class="fl">0.0498</span>     <span class="fl">0.4323</span>    <span class="fl">0.6261</span></span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="dv">85</span>       <span class="dv">53</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5243</span>    <span class="fl">0.0499</span>     <span class="fl">0.4224</span>    <span class="fl">0.6164</span></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="dv">90</span>       <span class="dv">52</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5142</span>    <span class="fl">0.0499</span>     <span class="fl">0.4125</span>    <span class="fl">0.6067</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="dv">96</span>       <span class="dv">51</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5041</span>    <span class="fl">0.0499</span>     <span class="fl">0.4027</span>    <span class="fl">0.5969</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>   <span class="dv">100</span>       <span class="dv">50</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4940</span>    <span class="fl">0.0499</span>     <span class="fl">0.3930</span>    <span class="fl">0.5872</span></span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>   <span class="dv">102</span>       <span class="dv">49</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4839</span>    <span class="fl">0.0499</span>     <span class="fl">0.3833</span>    <span class="fl">0.5773</span></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>   <span class="dv">109</span>       <span class="dv">48</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.4839</span>    <span class="fl">0.0499</span>     <span class="fl">0.3833</span>    <span class="fl">0.5773</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>   <span class="dv">110</span>       <span class="dv">47</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4736</span>    <span class="fl">0.0499</span>     <span class="fl">0.3733</span>    <span class="fl">0.5673</span></span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>   <span class="dv">131</span>       <span class="dv">46</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.4736</span>    <span class="fl">0.0499</span>     <span class="fl">0.3733</span>    <span class="fl">0.5673</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>   <span class="dv">149</span>       <span class="dv">45</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4631</span>    <span class="fl">0.0499</span>     <span class="fl">0.3632</span>    <span class="fl">0.5571</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>   <span class="dv">153</span>       <span class="dv">44</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4526</span>    <span class="fl">0.0499</span>     <span class="fl">0.3531</span>    <span class="fl">0.5468</span></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>   <span class="dv">165</span>       <span class="dv">43</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4421</span>    <span class="fl">0.0498</span>     <span class="fl">0.3430</span>    <span class="fl">0.5364</span></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>   <span class="dv">180</span>       <span class="dv">42</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.4421</span>    <span class="fl">0.0498</span>     <span class="fl">0.3430</span>    <span class="fl">0.5364</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>   <span class="dv">186</span>       <span class="dv">41</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4313</span>    <span class="fl">0.0497</span>     <span class="fl">0.3327</span>    <span class="fl">0.5258</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>   <span class="dv">188</span>       <span class="dv">40</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4205</span>    <span class="fl">0.0497</span>     <span class="fl">0.3225</span>    <span class="fl">0.5152</span></span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>   <span class="dv">207</span>       <span class="dv">39</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4097</span>    <span class="fl">0.0495</span>     <span class="fl">0.3123</span>    <span class="fl">0.5045</span></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>   <span class="dv">219</span>       <span class="dv">38</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.3989</span>    <span class="fl">0.0494</span>     <span class="fl">0.3022</span>    <span class="fl">0.4938</span></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>   <span class="dv">263</span>       <span class="dv">37</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.3881</span>    <span class="fl">0.0492</span>     <span class="fl">0.2921</span>    <span class="fl">0.4830</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>   <span class="dv">265</span>       <span class="dv">36</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3881</span>    <span class="fl">0.0492</span>     <span class="fl">0.2921</span>    <span class="fl">0.4830</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>   <span class="dv">285</span>       <span class="dv">35</span>      <span class="dv">2</span>      <span class="dv">0</span>             <span class="fl">0.3660</span>    <span class="fl">0.0488</span>     <span class="fl">0.2714</span>    <span class="fl">0.4608</span></span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>   <span class="dv">308</span>       <span class="dv">33</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.3549</span>    <span class="fl">0.0486</span>     <span class="fl">0.2612</span>    <span class="fl">0.4496</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>   <span class="dv">334</span>       <span class="dv">32</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.3438</span>    <span class="fl">0.0483</span>     <span class="fl">0.2510</span>    <span class="fl">0.4383</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>   <span class="dv">340</span>       <span class="dv">31</span>      <span class="dv">1</span>      <span class="dv">1</span>             <span class="fl">0.3327</span>    <span class="fl">0.0480</span>     <span class="fl">0.2409</span>    <span class="fl">0.4270</span></span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>   <span class="dv">342</span>       <span class="dv">29</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>   <span class="dv">370</span>       <span class="dv">28</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>   <span class="dv">397</span>       <span class="dv">27</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>   <span class="dv">427</span>       <span class="dv">26</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>   <span class="dv">445</span>       <span class="dv">25</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>   <span class="dv">482</span>       <span class="dv">24</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>   <span class="dv">515</span>       <span class="dv">23</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>   <span class="dv">545</span>       <span class="dv">22</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>   <span class="dv">583</span>       <span class="dv">21</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.3059</span>    <span class="fl">0.0478</span>     <span class="fl">0.2156</span>    <span class="fl">0.4008</span></span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>   <span class="dv">596</span>       <span class="dv">20</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3059</span>    <span class="fl">0.0478</span>     <span class="fl">0.2156</span>    <span class="fl">0.4008</span></span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>   <span class="dv">620</span>       <span class="dv">19</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3059</span>    <span class="fl">0.0478</span>     <span class="fl">0.2156</span>    <span class="fl">0.4008</span></span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>   <span class="dv">670</span>       <span class="dv">18</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3059</span>    <span class="fl">0.0478</span>     <span class="fl">0.2156</span>    <span class="fl">0.4008</span></span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>   <span class="dv">675</span>       <span class="dv">17</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.2879</span>    <span class="fl">0.0483</span>     <span class="fl">0.1976</span>    <span class="fl">0.3844</span></span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>   <span class="dv">733</span>       <span class="dv">16</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.2699</span>    <span class="fl">0.0485</span>     <span class="fl">0.1802</span>    <span class="fl">0.3676</span></span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>   <span class="dv">841</span>       <span class="dv">15</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.2699</span>    <span class="fl">0.0485</span>     <span class="fl">0.1802</span>    <span class="fl">0.3676</span></span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>   <span class="dv">852</span>       <span class="dv">14</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.2507</span>    <span class="fl">0.0487</span>     <span class="fl">0.1616</span>    <span class="fl">0.3497</span></span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>   <span class="dv">915</span>       <span class="dv">13</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.2507</span>    <span class="fl">0.0487</span>     <span class="fl">0.1616</span>    <span class="fl">0.3497</span></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>   <span class="dv">941</span>       <span class="dv">12</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.2507</span>    <span class="fl">0.0487</span>     <span class="fl">0.1616</span>    <span class="fl">0.3497</span></span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>   <span class="dv">979</span>       <span class="dv">11</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.2279</span>    <span class="fl">0.0493</span>     <span class="fl">0.1394</span>    <span class="fl">0.3295</span></span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>   <span class="dv">995</span>       <span class="dv">10</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.2051</span>    <span class="fl">0.0494</span>     <span class="fl">0.1183</span>    <span class="fl">0.3085</span></span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>[Résultats non reportés à partir de t<span class="ot">=</span><span class="dv">1000</span> ]</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------------------------------------------------------------------------</span></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>La durée durée médiane de survie est <span class="math inline">\(t=100\)</span>. Elle correspond à <span class="math inline">\(S(t)=0.4940\)</span>.</p>
+<table class="table">
+<caption>Quantiles de la fonction de séjour type Kaplan-Meier</caption>
+<thead>
+<tr class="header">
+<th><strong>S(t)</strong></th>
+<th><strong>t</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0.90</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td>0.75</td>
+<td>36</td>
+</tr>
+<tr class="odd">
+<td>0.50</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<td>0.25</td>
+<td>979</td>
+</tr>
+<tr class="odd">
+<td>0.1</td>
+<td>.</td>
+</tr>
+</tbody>
+</table>
+<div class="quarto-layout-panel">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="images/Image8.png" class="lightbox" title="Courbe de survie: estimation méthode Kaplan-Meier" data-gallery="quarto-lightbox-gallery-4"><img src="images/Image8.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">Courbe de survie: estimation méthode Kaplan-Meier</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
+<figure class="figure">
+<p><a href="images/Image8b.png" class="lightbox" title="Courbe de survie: méthode Kaplan-Meier + CI" data-gallery="quarto-lightbox-gallery-5"><img src="images/Image8b.png" class="img-fluid figure-img"></a></p>
+<figcaption class="figure-caption">Courbe de survie: méthode Kaplan-Meier + CI</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="quantités-associées-à-lestimateur-kaplan-meier.." class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="quantités-associées-à-lestimateur-kaplan-meier.."><span class="header-section-number">4.3.3</span> Quantités associées à l’estimateur Kaplan-Meier..</h3>
+<p><strong>Le risque cumulé</strong>: estimateur de Nelson AAlen</p>
+<p>Il est simplément égal à:</p>
+<p><span class="math display">\[H(t)=\sum_{t_i\leq k}q(t_i)\]</span></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Image19.png" class="lightbox" title="Risque cumulé: estimateur Nelson-Aalen" data-gallery="quarto-lightbox-gallery-2"><img src="images/Image19.png" class="img-fluid figure-img" style="width:70.0%"></a></p>
+<figcaption class="figure-caption">Risque cumulé: estimateur Nelson-Aalen</figcaption>
+</figure>
+</div>
+<p><strong>Le risque instantané</strong></p>
+<p>Nécessite l’estimateur de risque cumulé de Nelson-Aalen. Le risque est obtenu en lissant les différences - toujours positive - entre <span class="math inline">\(H(t)\)</span> par la méthode dite du <strong>kernel</strong> (cf estimation de la densité des distributions). Elle permet d’obtenir une fonction continue avec la durée (paramétrables sur les largeurs des fenêtres de lissage). D’autres méthodes de lissage sont maintenant possibles, et de plus en plus utilisées, en particulier celles utilisant des splines.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="images/Image20.png" class="lightbox" title="Risque instantané: estimateur du Kernel" data-gallery="quarto-lightbox-gallery-3"><img src="images/Image20.png" class="img-fluid figure-img" style="width:70.0%"></a></p>
+<figcaption class="figure-caption">Risque instantané: estimateur du Kernel</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Il n’est pas inutile de noter qu’il n’y a pas de <em>formule</em> toute faite pour obtenir des valeurs du risque instantané. Ce type de méthode par lissage est pleinement paramétrable, par exemple sa fenêtre, ce qui implique que son profil varie d’un paramétrage à l’autre. Le graphique précédent a été fait avec Stata, si on utilisait le package <code>muhaz</code> les différences de paramétrage par défaut font que les courbes ne se confondent pas.</p>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copié");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copié");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./03-theorie.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>La théorie</strong></span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./05-fsurvie_comp.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>Tests de comparaison</strong></span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Code source</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb3" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#title: "**Estimations des fonctions de survie**"</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="an">filters:</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - lightbox</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="an">lightbox:</span><span class="co"> auto</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Estimations des fonctions de survie**</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>Les méthodes non paramétriques portent généralement sur l'analyse des fonctions de survie ($S(t$)) ou sur celles des fonctions de répartitions ($F(t)$), plus rarement sur les mesures d'incidence données par le risque cumulé.</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>Deux méthodes d'estimations sont proposées : la méthode dite actuarielle et la méthode dite de Kaplan &amp; Meier. Ces deux approches sont adaptées à des mesures différentes de la durée : plutôt discrète/groupée pour la technique</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>actuarielle et plutôt continue pour Kaplan-Meier (KM). Cela induit un traitement différent de la censure dans l'estimation. La seconde est de très très loin la plus utilisée, en partie en raison des tests de comparaison, plus ou moins pertinents, qu'elle permet de réaliser. </span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>J'insiste sur la nécessité de passer par cette étape avant de se lancer *corps perdu* dans des modèles, comme ceux à durée discrète. </span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Les applications ont des gardes fous permettant d'alerter sur des durées d'exposition incorrecte, en particulier lorsqu'on travaille sur des données prospectives. </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Egalement très utile, la comparaison graphique de courbes de séjour permet de repérer rapidement des violations fortes de l'hypothèse de proportionalité des risques, ou des situations de quasi *immunité*.</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Concernant les tests non paramétriques, ceux utilsant la technique du *logrank*, présente à mon sens tellement de défauts qu'ils devraient être abandonné. Malheureusement encore très peu diffusée dans les sciences sociales, la comparaison des RMST (*Restricted Mean of Survival Time*) me semble une solution largement supérieure, tant au niveau statistique qu'au niveau interprétatif. </span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Les fonctions de survie/séjour**</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a><span class="fu">### Les variables d'analyse</span></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>On a un échantillon aléatoire de $n$ individus avec:</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Des indicateurs de fin d'épisode $e_1,e_2,....,e_k$ avec $e_i=0$ si censure </span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>à droite et $e_i=1$ si évènement observé pendant la période d'observation.</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Des durées d'exposition au risque $t_1,t_2,....,t_k$ jusqu'à l'évènement ou la censure.</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>En théorie, il ne peut pas y avoir d'évènement en $t=0$. </span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a><span class="fu">### Calcul de la fonction de survie</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>Rappel: La fonction de survie donne la probabilité que l'évènement</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>survienne après $t_i$, soit $S(t_i)=P(T&gt;t_i)$.</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>Pour survivre en $t_i$, il faut donc  avoir survécu en $t_{i-1}$, $t_{i-2}$,</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>...., $t_{1}$.\</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>La fonction de survie renvoie donc des probabilités conditionnelles:</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>on survit en $t_i$ conditionnellement au fait d'y avoir survécu avant. Il</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>s'agit donc d'un produit de probabilités.</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>Soit $d_i=\sum e_i$ le nombre d'évènements observé en $t_i$ et $r_i$ la</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>population encore soumise au risque en $i$. On peut mesurer l'intensité</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>de l'évènement en $t_i$ en calculant le quotient $q(t_i)=\frac{d_i}{r_i}$. </span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>Si le temps est strictement continu on devrait toujours avoir $q(t_i)=\frac{1}{r_i}$.</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>$S(t_i) = (1 - \frac{d_i}{r_i})\times{S(t_{i-1})} = S(t_i) = (1 - q(t_i))\times{S(t_{i-1})}$.</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>En remplaçant $S(t_{i-1})$ par sa valeur:</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>$S(t_i) = (1 - \frac{d_i}{r_i})\times(1 - \frac{d_{i-1}}{r_{i-1}})\times{S(t_{i-2})}$.</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>Au final, en remplaçant toutes les expressions de la survie jusqu'en $t_0$</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>($S(0)=1$): </span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>$$S(t_i)=\displaystyle \prod_{t_i\leq{k}} (1-q(t_i))$$</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a><span class="fu">## Application pour la suite du support</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>On va analyser le risque de décéder (la survie) de personnes</span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    souffrant d'une insuffisance cardiaque. Le début de l'exposition est</span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    leur inscription dans un registre d'attente pour une greffe du</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>    coeur.</span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Les covariables sont dans un premier temps toutes fixes: l'année</span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>    (*year*) et l'âge (*age*) à l'entrée dans le registre, et le fait</span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>    d'avoir été opéré pour un pontage aorto-coronarien avant</span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>    l'inscription (*surgery*). </span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Le début de l'exposition au risque est l'entrée dans le registre, la durée </span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>    est mesurée en jour (*stime*). La variable évènement/censure est le décès (*died*).</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>    Les durées de la variable *stime* ont été regroupée  par période de 30 jours pour</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    réaliser des analyses à durée discrete. Cette nouvelle variable de durée a été appelé *mois*.</span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>L'introduction d'une dimension dynamique, la greffe, est donnée par</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>    les informations contenues dans les variables *transplant* et</span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>    *wait*.</span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>La variable *compet* est une information simulée pour réaliser des analyses en risques concurrents. </span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Les bases en format .csv, .sas7bdat et .dta sont disponibles dans ce dépôt [<span class="co">[</span><span class="ot">lien</span><span class="co">](https://github.com/mthevenin/analyse_duree/tree/main/bases)</span>]</span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>Extrait de la base: </span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>|  id | year | age | died | stime | surgery | transplant | wait | mois | compet |</span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>|-----|------|-----|------|-------|---------|------------|------|------|--------|</span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>| 15  | 68   | 53  | 1    | 1     | 0       | 0          | 0    | 1    | 1      |</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>| 43  | 70   | 43  | 1    | 2     | 0       | 0          | 0    | 1    | 1      |</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>| 61  | 71   | 52  | 1    | 2     | 0       | 0          | 0    | 1    | 1      |</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>| 75  | 72   | 52  | 1    | 2     | 0       | 0          | 0    | 1    | 1      |</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>| 102 | 74   | 40  | 0    | 11    | 0       | 0          | 0    | 1    | 0      |</span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>| 74  | 72   | 29  | 1    | 17    | 0       | 1          | 5    | 1    | 2      |</span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a><span class="fu">## **La méthode actuarielle**</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Estimation sur des intervalles définies par l'utilisateur.</span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Méthode dite «continue», estimation en milieu d'intevalle.</span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Méthode apropriée lorsque la durée est mesurée de manière discrète/groupée.</span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Méthode, hélas, quasiment abandonnée dans les sciences</span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a>    sociales où les durées sont plus rarement mesurées de manière</span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a>    exacte. L'absence de test de comparaison des fonctions de survie n'y</span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>    est pas étranger, tout comme le lien de la méthode suivante (Kaplan-Meier) avec le modèle de Cox.</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Contrairement à la méthode de Cox, la méthode actuarielle permet de calculer les quantiles de la durée.</span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimation</span></span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>**Echelle temporelle**</span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>La durée est divisée en $J$ intervalles, en choisissant $J$ points:</span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a>$t_0&lt;t_1&lt;...&lt;t_J$ avec $t_{J+1}=\infty$.</span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>**Calcul du Risk set**</span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>A $t_{min}=0$, $n_0=n$ individus soumis au risque: $r_0=n_0$.</span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Le nombre d'exposé.e.s au risque sur un intervalle est calculé en</span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>    soustrayant la moitié des cas censurés sur la longueur de</span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>    l'intervalle: $r_i=n_i- 0.5\times{c_i}$, avec $n_i$ le nombre de</span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>    personnes soumises au risque au début de l'intervalle et $c_i$ le</span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>    nombre d'observations censurées sur la longueur de l'intervalle. On</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>    suppose donc que les observations censurées $c_i$ sont sorties de</span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>    l'observation uniformément sur l'intervalle. Les cas censurés le</span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>    sont en moyenne au millieu de l'intervalle. <span class="kw">&lt;br&gt;</span></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>**Calcul de** $S(t_i)$\</span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>On applique la méthode de la section précédente avec:</span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>$$q(t_i)=\frac{d_i}{n_i - 0.5\times c_i}$$</span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>**Calcul de la durée médiane (ou autre quantiles)**  </span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>*Rappel*: en raison de la présence de censures à droite, le dernier</span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>intervalle étant ouvert jusqu'à la dernière sortie d'observation, il</span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>n'est pas conseillé de calculer des durées moyennes. On préfère utiliser</span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>la médiane ou tout autre quantile lorsqu'ils sont calculables.   </span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a>**Définition**: il s'agit de la durée telle que $S(t_i)=0.5$.  </span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a>*Calcul*: Comme on applique une méthode continue et monotone à</span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a>l'intérieur d'intervalles, on ne peut pas calculer directement un point</span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a>de coupure qui correspond à 50% de survivants. On doit donc trouver ce</span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a>point par interpolation linéaire dans l'intervalle $[t_i;t_{i+1}[$ avec</span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a>$S(t_{i+1})\leq0.5$ et $S(t_{i})&gt;0.5$.</span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a>**R-Stata-Sas-Python**    </span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a><span class="fu">### R</span></span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a>Les fonctions de survie avec la méthode dite actuarielle sont estimables avec le package **`discSurv`**. Avec le temps, il s'est étoffé, on peut maintenant paramatrer des intervalles (programmation pénible), mais les quantiles de la durée ne sont toujours pas estimables, ce qui est bien dommage.  </span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a><span class="fu">### Stata</span></span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a>Commande <span class="in">`ltable`</span>, avec en option la paramétrisation des intervalles de</span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a>durées. Voir la commande externe <span class="in">`qlt`</span> (MT) qui calcule les durées</span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a>médianes (+ autres quartiles) et qui recalcule la fonction de séjour</span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a>avec une définition des intervalles de durées identique à celle de SAS.</span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="fu">### Sas</span></span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a>Sous une <span class="in">`proc lifetest`</span> avec en option <span class="in">`method=lifetable`</span>. On peut</span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a>paramétrer les intervalles d'estimation avec l'option <span class="in">`width`</span>.</span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python</span></span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a>A l'heure actuelle, aucune fonction à ma connaissance</span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a><span class="fu">### Application</span></span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a>Les résultats qui suivent ont été estimés avec Stata en retenant la définition des bornes de Sas, plus pertinente à mon sens, avec des intervalles fixes de 30 jours.</span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "**Afficher le tableau des estimateurs**"</span></span>
+<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a>     <span class="sc">+----------------------------------------------+</span></span>
+<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span>   t0     t1   survival CI <span class="dv">95</span><span class="sc">% low  CI 95%</span> up <span class="sc">|</span></span>
+<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span><span class="sc">----------------------------------------------</span><span class="er">|</span></span>
+<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a>  <span class="fl">1.</span> <span class="sc">|</span>    <span class="dv">0</span>     <span class="dv">30</span>          <span class="dv">1</span>          .          . <span class="sc">|</span></span>
+<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a>  <span class="fl">2.</span> <span class="sc">|</span>   <span class="dv">30</span>     <span class="dv">60</span>   .<span class="dv">7853659</span>   .<span class="dv">6925991</span>   .<span class="dv">8530615</span> <span class="sc">|</span></span>
+<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a>  <span class="fl">3.</span> <span class="sc">|</span>   <span class="dv">60</span>     <span class="dv">90</span>   .<span class="dv">6461871</span>   .<span class="dv">5449008</span>   .<span class="dv">7304808</span> <span class="sc">|</span></span>
+<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a>  <span class="fl">4.</span> <span class="sc">|</span>   <span class="dv">90</span>    <span class="dv">120</span>    .<span class="dv">525027</span>   .<span class="dv">4232338</span>   .<span class="dv">6170507</span> <span class="sc">|</span></span>
+<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a>  <span class="fl">5.</span> <span class="sc">|</span>  <span class="dv">120</span>    <span class="dv">150</span>   .<span class="dv">4740535</span>   .<span class="dv">3737563</span>   .<span class="dv">5677139</span> <span class="sc">|</span></span>
+<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span><span class="sc">----------------------------------------------</span><span class="er">|</span></span>
+<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a>  <span class="fl">6.</span> <span class="sc">|</span>  <span class="dv">150</span>    <span class="dv">180</span>   .<span class="dv">4636348</span>   .<span class="dv">3637283</span>   .<span class="dv">5575485</span> <span class="sc">|</span></span>
+<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a>  <span class="fl">7.</span> <span class="sc">|</span>  <span class="dv">180</span>    <span class="dv">210</span>   .<span class="dv">4425605</span>   .<span class="dv">3435417</span>   .<span class="dv">5368989</span> <span class="sc">|</span></span>
+<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a>  <span class="fl">8.</span> <span class="sc">|</span>  <span class="dv">210</span>    <span class="dv">240</span>   .<span class="dv">4105681</span>   .<span class="dv">3132064</span>   .<span class="dv">5052779</span> <span class="sc">|</span></span>
+<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a>  <span class="fl">9.</span> <span class="sc">|</span>  <span class="dv">240</span>    <span class="dv">270</span>   .<span class="dv">3997637</span>   .<span class="dv">3030412</span>   .<span class="dv">4945301</span> <span class="sc">|</span></span>
+<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a> <span class="fl">10.</span> <span class="sc">|</span>  <span class="dv">270</span>    <span class="dv">300</span>   .<span class="dv">3888113</span>   .<span class="dv">2927645</span>   .<span class="dv">4836136</span> <span class="sc">|</span></span>
+<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span><span class="sc">----------------------------------------------</span><span class="er">|</span></span>
+<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a> <span class="fl">11.</span> <span class="sc">|</span>  <span class="dv">300</span>    <span class="dv">330</span>   .<span class="dv">3665935</span>   .<span class="dv">2720434</span>   .<span class="dv">4613676</span> <span class="sc">|</span></span>
+<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a> <span class="fl">12.</span> <span class="sc">|</span>  <span class="dv">330</span>    <span class="dv">360</span>   .<span class="dv">3554846</span>   .<span class="dv">2617823</span>   .<span class="dv">4501585</span> <span class="sc">|</span></span>
+<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a> <span class="fl">13.</span> <span class="sc">|</span>  <span class="dv">360</span>    <span class="dv">390</span>   .<span class="dv">3216289</span>   .<span class="dv">2308275</span>   .<span class="dv">4157428</span> <span class="sc">|</span></span>
+<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a> <span class="fl">14.</span> <span class="sc">|</span>  <span class="dv">390</span>    <span class="dv">420</span>   .<span class="dv">3216289</span>   .<span class="dv">2308275</span>   .<span class="dv">4157428</span> <span class="sc">|</span></span>
+<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a> <span class="fl">15.</span> <span class="sc">|</span>  <span class="dv">420</span>    <span class="dv">450</span>   .<span class="dv">3216289</span>   .<span class="dv">2308275</span>   .<span class="dv">4157428</span> <span class="sc">|</span></span>
+<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span><span class="sc">----------------------------------------------</span><span class="er">|</span></span>
+<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a> <span class="fl">16.</span> <span class="sc">|</span>  <span class="dv">480</span>    <span class="dv">510</span>   .<span class="dv">3216289</span>   .<span class="dv">2308275</span>   .<span class="dv">4157428</span> <span class="sc">|</span></span>
+<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a> <span class="fl">17.</span> <span class="sc">|</span>  <span class="dv">510</span>    <span class="dv">540</span>   .<span class="dv">3216289</span>   .<span class="dv">2308275</span>   .<span class="dv">4157428</span> <span class="sc">|</span></span>
+<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a> <span class="fl">18.</span> <span class="sc">|</span>  <span class="dv">540</span>    <span class="dv">570</span>   .<span class="dv">3216289</span>   .<span class="dv">2308275</span>   .<span class="dv">4157428</span> <span class="sc">|</span></span>
+<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a> <span class="fl">19.</span> <span class="sc">|</span>  <span class="dv">570</span>    <span class="dv">600</span>   .<span class="dv">3216289</span>   .<span class="dv">2308275</span>   .<span class="dv">4157428</span> <span class="sc">|</span></span>
+<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a> <span class="fl">20.</span> <span class="sc">|</span>  <span class="dv">600</span>    <span class="dv">630</span>   .<span class="dv">3059397</span>   .<span class="dv">2154747</span>   .<span class="dv">4009653</span> <span class="sc">|</span></span>
+<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span><span class="sc">----------------------------------------------</span><span class="er">|</span></span>
+<span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a> <span class="fl">21.</span> <span class="sc">|</span>  <span class="dv">660</span>    <span class="dv">690</span>   .<span class="dv">3059397</span>   .<span class="dv">2154747</span>   .<span class="dv">4009653</span> <span class="sc">|</span></span>
+<span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a> <span class="fl">22.</span> <span class="sc">|</span>  <span class="dv">720</span>    <span class="dv">750</span>   .<span class="dv">2884574</span>   .<span class="dv">1981834</span>   .<span class="dv">3848506</span> <span class="sc">|</span></span>
+<span id="cb3-222"><a href="#cb3-222" aria-hidden="true" tabindex="-1"></a> <span class="fl">23.</span> <span class="sc">|</span>  <span class="dv">840</span>    <span class="dv">870</span>   .<span class="dv">2704288</span>   .<span class="dv">1806664</span>   .<span class="dv">3680736</span> <span class="sc">|</span></span>
+<span id="cb3-223"><a href="#cb3-223" aria-hidden="true" tabindex="-1"></a> <span class="fl">24.</span> <span class="sc">|</span>  <span class="dv">900</span>    <span class="dv">930</span>   .<span class="dv">2517786</span>   .<span class="dv">1628919</span>   .<span class="dv">3505543</span> <span class="sc">|</span></span>
+<span id="cb3-224"><a href="#cb3-224" aria-hidden="true" tabindex="-1"></a> <span class="fl">25.</span> <span class="sc">|</span>  <span class="dv">930</span>    <span class="dv">960</span>   .<span class="dv">2517786</span>   .<span class="dv">1628919</span>   .<span class="dv">3505543</span> <span class="sc">|</span></span>
+<span id="cb3-225"><a href="#cb3-225" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span><span class="sc">----------------------------------------------</span><span class="er">|</span></span>
+<span id="cb3-226"><a href="#cb3-226" aria-hidden="true" tabindex="-1"></a> <span class="fl">26.</span> <span class="sc">|</span>  <span class="dv">960</span>    <span class="dv">990</span>   .<span class="dv">2517786</span>   .<span class="dv">1628919</span>   .<span class="dv">3505543</span> <span class="sc">|</span></span>
+<span id="cb3-227"><a href="#cb3-227" aria-hidden="true" tabindex="-1"></a> <span class="fl">27.</span> <span class="sc">|</span>  <span class="dv">990</span>   <span class="dv">1020</span>   .<span class="dv">2288896</span>   .<span class="dv">1404089</span>   .<span class="dv">3303913</span> <span class="sc">|</span></span>
+<span id="cb3-228"><a href="#cb3-228" aria-hidden="true" tabindex="-1"></a> <span class="fl">28.</span> <span class="sc">|</span> <span class="dv">1020</span>   <span class="dv">1050</span>   .<span class="dv">2060007</span>   .<span class="dv">1191749</span>   .<span class="dv">3093143</span> <span class="sc">|</span></span>
+<span id="cb3-229"><a href="#cb3-229" aria-hidden="true" tabindex="-1"></a> <span class="fl">29.</span> <span class="sc">|</span> <span class="dv">1140</span>   <span class="dv">1170</span>   .<span class="dv">1831117</span>   .<span class="dv">0991601</span>   .<span class="dv">2873401</span> <span class="sc">|</span></span>
+<span id="cb3-230"><a href="#cb3-230" aria-hidden="true" tabindex="-1"></a> <span class="fl">30.</span> <span class="sc">|</span> <span class="dv">1320</span>   <span class="dv">1350</span>   .<span class="dv">1831117</span>   .<span class="dv">0991601</span>   .<span class="dv">2873401</span> <span class="sc">|</span></span>
+<span id="cb3-231"><a href="#cb3-231" aria-hidden="true" tabindex="-1"></a>     <span class="er">|</span><span class="sc">----------------------------------------------</span><span class="er">|</span></span>
+<span id="cb3-232"><a href="#cb3-232" aria-hidden="true" tabindex="-1"></a> <span class="fl">31.</span> <span class="sc">|</span> <span class="dv">1380</span>   <span class="dv">1410</span>   .<span class="dv">1831117</span>   .<span class="dv">0991601</span>   .<span class="dv">2873401</span> <span class="sc">|</span></span>
+<span id="cb3-233"><a href="#cb3-233" aria-hidden="true" tabindex="-1"></a> <span class="fl">32.</span> <span class="sc">|</span> <span class="dv">1560</span>   <span class="dv">1590</span>   .<span class="dv">1464894</span>   .<span class="dv">0645215</span>   .<span class="dv">2602391</span> <span class="sc">|</span></span>
+<span id="cb3-234"><a href="#cb3-234" aria-hidden="true" tabindex="-1"></a> <span class="fl">33.</span> <span class="sc">|</span> <span class="dv">1770</span>   <span class="dv">1800</span>   .<span class="dv">1464894</span>   .<span class="dv">0645215</span>   .<span class="dv">2602391</span> <span class="sc">|</span></span>
+<span id="cb3-235"><a href="#cb3-235" aria-hidden="true" tabindex="-1"></a> <span class="fl">34.</span> <span class="sc">|</span> <span class="dv">1800</span>      .   .<span class="dv">1464894</span>   .<span class="dv">0645215</span>   .<span class="dv">2602391</span> <span class="sc">|</span></span>
+<span id="cb3-236"><a href="#cb3-236" aria-hidden="true" tabindex="-1"></a>     <span class="sc">+----------------------------------------------+</span></span>
+<span id="cb3-237"><a href="#cb3-237" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-238"><a href="#cb3-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-239"><a href="#cb3-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-240"><a href="#cb3-240" aria-hidden="true" tabindex="-1"></a>|**S(t)** | **t**  | </span>
+<span id="cb3-241"><a href="#cb3-241" aria-hidden="true" tabindex="-1"></a>|---------|--------|</span>
+<span id="cb3-242"><a href="#cb3-242" aria-hidden="true" tabindex="-1"></a>| 0.90    | 13.977 |  </span>
+<span id="cb3-243"><a href="#cb3-243" aria-hidden="true" tabindex="-1"></a>| 0.75    | 37.623 | </span>
+<span id="cb3-244"><a href="#cb3-244" aria-hidden="true" tabindex="-1"></a>| 0.50    |104.729 |  </span>
+<span id="cb3-245"><a href="#cb3-245" aria-hidden="true" tabindex="-1"></a>| 0.25    |906.993 |    </span>
+<span id="cb3-246"><a href="#cb3-246" aria-hidden="true" tabindex="-1"></a>| 0.10    |.       |  </span>
+<span id="cb3-247"><a href="#cb3-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-248"><a href="#cb3-248" aria-hidden="true" tabindex="-1"></a>: Quantiles de la fonction de séjour type actuarielle - Bornes Sas</span>
+<span id="cb3-249"><a href="#cb3-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-250"><a href="#cb3-250" aria-hidden="true" tabindex="-1"></a><span class="al">![Courbe de survie: estimation méthode actuarielle](images/Image7.png)</span>{width="70%"}</span>
+<span id="cb3-251"><a href="#cb3-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-252"><a href="#cb3-252" aria-hidden="true" tabindex="-1"></a>Lecture des résultats: 102 jours après leur inscription dans le registre d'attente pour une</span>
+<span id="cb3-253"><a href="#cb3-253" aria-hidden="true" tabindex="-1"></a>greffe, 50% des malades sont toujours en vie. Au bout de 914 jours, 75% sont décédés.</span>
+<span id="cb3-254"><a href="#cb3-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-255"><a href="#cb3-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-256"><a href="#cb3-256" aria-hidden="true" tabindex="-1"></a><span class="fu">## **La méthode de Kaplan-Meier**</span></span>
+<span id="cb3-257"><a href="#cb3-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-258"><a href="#cb3-258" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>L'approche qui exploite toute l'information disponible est celle</span>
+<span id="cb3-259"><a href="#cb3-259" aria-hidden="true" tabindex="-1"></a>    dite de **Kaplan-Meier** (*KM*).</span>
+<span id="cb3-260"><a href="#cb3-260" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Il y a autant d'intervalles que de durées où l'on observe au moins</span>
+<span id="cb3-261"><a href="#cb3-261" aria-hidden="true" tabindex="-1"></a>    un évènement.</span>
+<span id="cb3-262"><a href="#cb3-262" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Au lieu d'utiliser des intervalles prédéterminés, l'estimateur KM va</span>
+<span id="cb3-263"><a href="#cb3-263" aria-hidden="true" tabindex="-1"></a>    définir un intervalle entre chaque évènement enregistré.</span>
+<span id="cb3-264"><a href="#cb3-264" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>La fonction de survie estimée par la méthode KM est une fonction en</span>
+<span id="cb3-265"><a href="#cb3-265" aria-hidden="true" tabindex="-1"></a>    escalier (stairstep), d'où une estimation dite "discrète".</span>
+<span id="cb3-266"><a href="#cb3-266" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Pour chaque intervalle, on compte le nombe d'évènements et le nombre</span>
+<span id="cb3-267"><a href="#cb3-267" aria-hidden="true" tabindex="-1"></a>    de censures.</span>
+<span id="cb3-268"><a href="#cb3-268" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Méthode adaptée pour une mesure de la durée de type continue.</span>
+<span id="cb3-269"><a href="#cb3-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-270"><a href="#cb3-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-271"><a href="#cb3-271" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimation</span></span>
+<span id="cb3-272"><a href="#cb3-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-273"><a href="#cb3-273" aria-hidden="true" tabindex="-1"></a>**Définition du Risk Set (**$r_i$)</span>
+<span id="cb3-274"><a href="#cb3-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-275"><a href="#cb3-275" aria-hidden="true" tabindex="-1"></a>S'il y a à la fois des évènements et des censures à une durée $t_i$, les</span>
+<span id="cb3-276"><a href="#cb3-276" aria-hidden="true" tabindex="-1"></a>observations censurées sont considérées comme exposées au risque à ce</span>
+<span id="cb3-277"><a href="#cb3-277" aria-hidden="true" tabindex="-1"></a>moment, comme si elles étaient censurées très rapidement après. C'est la</span>
+<span id="cb3-278"><a href="#cb3-278" aria-hidden="true" tabindex="-1"></a>principale caractéristique de cette méthode, appelé également</span>
+<span id="cb3-279"><a href="#cb3-279" aria-hidden="true" tabindex="-1"></a>l'estimateur ***product-limit***</span>
+<span id="cb3-280"><a href="#cb3-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-281"><a href="#cb3-281" aria-hidden="true" tabindex="-1"></a>$$r_i=r_{i-1}-d_{i-1}-c_{i-1}$$\</span>
+<span id="cb3-282"><a href="#cb3-282" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb3-283"><a href="#cb3-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-284"><a href="#cb3-284" aria-hidden="true" tabindex="-1"></a>**Calcul de** $q_i$\</span>
+<span id="cb3-285"><a href="#cb3-285" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span> On applique la méthode de la section précédente avec:</span>
+<span id="cb3-286"><a href="#cb3-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-287"><a href="#cb3-287" aria-hidden="true" tabindex="-1"></a>$$q_i=\frac{d_i}{r_{i-1}-d_{i-1}-c_{i-1}}$$</span>
+<span id="cb3-288"><a href="#cb3-288" aria-hidden="true" tabindex="-1"></a>*Remarque*: la variance de l'estimateur est obtenu par la méthode dite de *Greenwood*. Il n'y a pas d'intérêt particulier de la décrire dans ce support. </span>
+<span id="cb3-289"><a href="#cb3-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-290"><a href="#cb3-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-291"><a href="#cb3-291" aria-hidden="true" tabindex="-1"></a>**Récupération de la médiane**     </span>
+<span id="cb3-292"><a href="#cb3-292" aria-hidden="true" tabindex="-1"></a>Il n'y a pas de méthode pour calculer directement la durée médiane (ou</span>
+<span id="cb3-293"><a href="#cb3-293" aria-hidden="true" tabindex="-1"></a>tout autre quantile) contrairement à l'approche actuarielle.  </span>
+<span id="cb3-294"><a href="#cb3-294" aria-hidden="true" tabindex="-1"></a>La définition retenue est conventionnelle. </span>
+<span id="cb3-295"><a href="#cb3-295" aria-hidden="true" tabindex="-1"></a>On va prendre la valeur de la durée qui se situe juste **en dessous** de</span>
+<span id="cb3-296"><a href="#cb3-296" aria-hidden="true" tabindex="-1"></a>50% de survivant.e.s. Elle est donc définie tel que $S(t)\leq0.5$. </span>
+<span id="cb3-297"><a href="#cb3-297" aria-hidden="true" tabindex="-1"></a>Attention, il n'est pas impossible que le % de survivant.e.s soit bien</span>
+<span id="cb3-298"><a href="#cb3-298" aria-hidden="true" tabindex="-1"></a>en deçà de 50% pour l'obtention cette durée médiane.     </span>
+<span id="cb3-299"><a href="#cb3-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-300"><a href="#cb3-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-301"><a href="#cb3-301" aria-hidden="true" tabindex="-1"></a>**R-Stata-Sas-Python**</span>
+<span id="cb3-302"><a href="#cb3-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-303"><a href="#cb3-303" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
+<span id="cb3-304"><a href="#cb3-304" aria-hidden="true" tabindex="-1"></a><span class="fu">### R</span></span>
+<span id="cb3-305"><a href="#cb3-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-306"><a href="#cb3-306" aria-hidden="true" tabindex="-1"></a>Les estimateurs sont obtenus avec fonction **`survfit`** du package <span class="in">`survival`</span>. On peut obtenir des rendus graphiques de meilleures qualité avec le package <span class="in">`survminer`</span> (fonction <span class="in">`ggsurvplot`</span>)</span>
+<span id="cb3-307"><a href="#cb3-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-308"><a href="#cb3-308" aria-hidden="true" tabindex="-1"></a><span class="fu">### Stata</span></span>
+<span id="cb3-309"><a href="#cb3-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-310"><a href="#cb3-310" aria-hidden="true" tabindex="-1"></a>Après avoir appelé les variables de durée et de censure en mode</span>
+<span id="cb3-311"><a href="#cb3-311" aria-hidden="true" tabindex="-1"></a>**survival** avec **`stset`**), le tableau des estimateurs est obtenu avec la</span>
+<span id="cb3-312"><a href="#cb3-312" aria-hidden="true" tabindex="-1"></a>commande **`sts list`** et le graphique avec **`sts graph`**.</span>
+<span id="cb3-313"><a href="#cb3-313" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-314"><a href="#cb3-314" aria-hidden="true" tabindex="-1"></a><span class="fu">### SAS</span></span>
+<span id="cb3-315"><a href="#cb3-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-316"><a href="#cb3-316" aria-hidden="true" tabindex="-1"></a>L'estimation de Kaplan-Meier est affichée par défaut par la</span>
+<span id="cb3-317"><a href="#cb3-317" aria-hidden="true" tabindex="-1"></a><span class="in">`proc lifetest`</span>. </span>
+<span id="cb3-318"><a href="#cb3-318" aria-hidden="true" tabindex="-1"></a>***Warning*** : le tableau affiché par SAS est particulièrement pénible</span>
+<span id="cb3-319"><a href="#cb3-319" aria-hidden="true" tabindex="-1"></a>à lire voire illisible, en particulier lorsque le nombre de censures est</span>
+<span id="cb3-320"><a href="#cb3-320" aria-hidden="true" tabindex="-1"></a>élevé, une ligne étant ajoutée pour chaque observation censurée. Je</span>
+<span id="cb3-321"><a href="#cb3-321" aria-hidden="true" tabindex="-1"></a>conseille de ne pas afficher cette partie de l'output (se reporter à la</span>
+<span id="cb3-322"><a href="#cb3-322" aria-hidden="true" tabindex="-1"></a>section SAS du chapitre programmation). On récupère pour le reste de</span>
+<span id="cb3-323"><a href="#cb3-323" aria-hidden="true" tabindex="-1"></a>l'output les valeurs de la durée pour S(t) =(.75,.5,.25) ainsi que le</span>
+<span id="cb3-324"><a href="#cb3-324" aria-hidden="true" tabindex="-1"></a>graphique, ce qui est suffisant.</span>
+<span id="cb3-325"><a href="#cb3-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-326"><a href="#cb3-326" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python</span></span>
+<span id="cb3-327"><a href="#cb3-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-328"><a href="#cb3-328" aria-hidden="true" tabindex="-1"></a>Les resultats sont donnés dans la librairie <span class="in">`lifeline`</span> par des fonctions</span>
+<span id="cb3-329"><a href="#cb3-329" aria-hidden="true" tabindex="-1"></a>au nom interminable. Je conseille plutôt l'utilisation de la</span>
+<span id="cb3-330"><a href="#cb3-330" aria-hidden="true" tabindex="-1"></a>librairie **`statmodels`** (se reporter à la section dédiée à Python).</span>
+<span id="cb3-331"><a href="#cb3-331" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-332"><a href="#cb3-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-333"><a href="#cb3-333" aria-hidden="true" tabindex="-1"></a><span class="fu">### Application</span></span>
+<span id="cb3-334"><a href="#cb3-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-335"><a href="#cb3-335" aria-hidden="true" tabindex="-1"></a>On reprend l'exemple précédent.</span>
+<span id="cb3-336"><a href="#cb3-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-337"><a href="#cb3-337" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
+<span id="cb3-338"><a href="#cb3-338" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-fold: true</span></span>
+<span id="cb3-339"><a href="#cb3-339" aria-hidden="true" tabindex="-1"></a><span class="co">#| code-summary: "**Afficher le tableau des estimateurs**"</span></span>
+<span id="cb3-340"><a href="#cb3-340" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-341"><a href="#cb3-341" aria-hidden="true" tabindex="-1"></a>Time    Total   Fail   Lost           Function     Error     [<span class="dv">95</span>% Conf. Int.]</span>
+<span id="cb3-342"><a href="#cb3-342" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------------------------------------------------------------------------</span></span>
+<span id="cb3-343"><a href="#cb3-343" aria-hidden="true" tabindex="-1"></a>     <span class="dv">1</span>      <span class="dv">103</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.9903</span>    <span class="fl">0.0097</span>     <span class="fl">0.9331</span>    <span class="fl">0.9986</span></span>
+<span id="cb3-344"><a href="#cb3-344" aria-hidden="true" tabindex="-1"></a>     <span class="dv">2</span>      <span class="dv">102</span>      <span class="dv">3</span>      <span class="dv">0</span>             <span class="fl">0.9612</span>    <span class="fl">0.0190</span>     <span class="fl">0.8998</span>    <span class="fl">0.9852</span></span>
+<span id="cb3-345"><a href="#cb3-345" aria-hidden="true" tabindex="-1"></a>     <span class="dv">3</span>       <span class="dv">99</span>      <span class="dv">3</span>      <span class="dv">0</span>             <span class="fl">0.9320</span>    <span class="fl">0.0248</span>     <span class="fl">0.8627</span>    <span class="fl">0.9670</span></span>
+<span id="cb3-346"><a href="#cb3-346" aria-hidden="true" tabindex="-1"></a>     <span class="dv">5</span>       <span class="dv">96</span>      <span class="dv">2</span>      <span class="dv">0</span>             <span class="fl">0.9126</span>    <span class="fl">0.0278</span>     <span class="fl">0.8388</span>    <span class="fl">0.9535</span></span>
+<span id="cb3-347"><a href="#cb3-347" aria-hidden="true" tabindex="-1"></a>     <span class="dv">6</span>       <span class="dv">94</span>      <span class="dv">2</span>      <span class="dv">0</span>             <span class="fl">0.8932</span>    <span class="fl">0.0304</span>     <span class="fl">0.8155</span>    <span class="fl">0.9394</span></span>
+<span id="cb3-348"><a href="#cb3-348" aria-hidden="true" tabindex="-1"></a>     <span class="dv">8</span>       <span class="dv">92</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.8835</span>    <span class="fl">0.0316</span>     <span class="fl">0.8040</span>    <span class="fl">0.9321</span></span>
+<span id="cb3-349"><a href="#cb3-349" aria-hidden="true" tabindex="-1"></a>     <span class="dv">9</span>       <span class="dv">91</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.8738</span>    <span class="fl">0.0327</span>     <span class="fl">0.7926</span>    <span class="fl">0.9247</span></span>
+<span id="cb3-350"><a href="#cb3-350" aria-hidden="true" tabindex="-1"></a>    <span class="dv">11</span>       <span class="dv">90</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.8738</span>    <span class="fl">0.0327</span>     <span class="fl">0.7926</span>    <span class="fl">0.9247</span></span>
+<span id="cb3-351"><a href="#cb3-351" aria-hidden="true" tabindex="-1"></a>    <span class="dv">12</span>       <span class="dv">89</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.8640</span>    <span class="fl">0.0338</span>     <span class="fl">0.7811</span>    <span class="fl">0.9171</span></span>
+<span id="cb3-352"><a href="#cb3-352" aria-hidden="true" tabindex="-1"></a>    <span class="dv">16</span>       <span class="dv">88</span>      <span class="dv">3</span>      <span class="dv">0</span>             <span class="fl">0.8345</span>    <span class="fl">0.0367</span>     <span class="fl">0.7474</span>    <span class="fl">0.8937</span></span>
+<span id="cb3-353"><a href="#cb3-353" aria-hidden="true" tabindex="-1"></a>    <span class="dv">17</span>       <span class="dv">85</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.8247</span>    <span class="fl">0.0375</span>     <span class="fl">0.7363</span>    <span class="fl">0.8857</span></span>
+<span id="cb3-354"><a href="#cb3-354" aria-hidden="true" tabindex="-1"></a>    <span class="dv">18</span>       <span class="dv">84</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.8149</span>    <span class="fl">0.0383</span>     <span class="fl">0.7253</span>    <span class="fl">0.8777</span></span>
+<span id="cb3-355"><a href="#cb3-355" aria-hidden="true" tabindex="-1"></a>    <span class="dv">21</span>       <span class="dv">83</span>      <span class="dv">2</span>      <span class="dv">0</span>             <span class="fl">0.7952</span>    <span class="fl">0.0399</span>     <span class="fl">0.7034</span>    <span class="fl">0.8614</span></span>
+<span id="cb3-356"><a href="#cb3-356" aria-hidden="true" tabindex="-1"></a>    <span class="dv">28</span>       <span class="dv">81</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.7854</span>    <span class="fl">0.0406</span>     <span class="fl">0.6926</span>    <span class="fl">0.8531</span></span>
+<span id="cb3-357"><a href="#cb3-357" aria-hidden="true" tabindex="-1"></a>    <span class="dv">30</span>       <span class="dv">80</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.7756</span>    <span class="fl">0.0412</span>     <span class="fl">0.6819</span>    <span class="fl">0.8448</span></span>
+<span id="cb3-358"><a href="#cb3-358" aria-hidden="true" tabindex="-1"></a>    <span class="dv">31</span>       <span class="dv">79</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.7756</span>    <span class="fl">0.0412</span>     <span class="fl">0.6819</span>    <span class="fl">0.8448</span></span>
+<span id="cb3-359"><a href="#cb3-359" aria-hidden="true" tabindex="-1"></a>    <span class="dv">32</span>       <span class="dv">78</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.7657</span>    <span class="fl">0.0419</span>     <span class="fl">0.6710</span>    <span class="fl">0.8363</span></span>
+<span id="cb3-360"><a href="#cb3-360" aria-hidden="true" tabindex="-1"></a>    <span class="dv">35</span>       <span class="dv">77</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.7557</span>    <span class="fl">0.0425</span>     <span class="fl">0.6603</span>    <span class="fl">0.8278</span></span>
+<span id="cb3-361"><a href="#cb3-361" aria-hidden="true" tabindex="-1"></a>    <span class="dv">36</span>       <span class="dv">76</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.7458</span>    <span class="fl">0.0431</span>     <span class="fl">0.6495</span>    <span class="fl">0.8192</span></span>
+<span id="cb3-362"><a href="#cb3-362" aria-hidden="true" tabindex="-1"></a>    <span class="dv">37</span>       <span class="dv">75</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.7358</span>    <span class="fl">0.0436</span>     <span class="fl">0.6388</span>    <span class="fl">0.8106</span></span>
+<span id="cb3-363"><a href="#cb3-363" aria-hidden="true" tabindex="-1"></a>    <span class="dv">39</span>       <span class="dv">74</span>      <span class="dv">1</span>      <span class="dv">1</span>             <span class="fl">0.7259</span>    <span class="fl">0.0442</span>     <span class="fl">0.6282</span>    <span class="fl">0.8019</span></span>
+<span id="cb3-364"><a href="#cb3-364" aria-hidden="true" tabindex="-1"></a>    <span class="dv">40</span>       <span class="dv">72</span>      <span class="dv">2</span>      <span class="dv">0</span>             <span class="fl">0.7057</span>    <span class="fl">0.0452</span>     <span class="fl">0.6068</span>    <span class="fl">0.7842</span></span>
+<span id="cb3-365"><a href="#cb3-365" aria-hidden="true" tabindex="-1"></a>    <span class="dv">43</span>       <span class="dv">70</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6956</span>    <span class="fl">0.0457</span>     <span class="fl">0.5961</span>    <span class="fl">0.7752</span></span>
+<span id="cb3-366"><a href="#cb3-366" aria-hidden="true" tabindex="-1"></a>    <span class="dv">45</span>       <span class="dv">69</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6856</span>    <span class="fl">0.0461</span>     <span class="fl">0.5855</span>    <span class="fl">0.7662</span></span>
+<span id="cb3-367"><a href="#cb3-367" aria-hidden="true" tabindex="-1"></a>    <span class="dv">50</span>       <span class="dv">68</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6755</span>    <span class="fl">0.0465</span>     <span class="fl">0.5750</span>    <span class="fl">0.7572</span></span>
+<span id="cb3-368"><a href="#cb3-368" aria-hidden="true" tabindex="-1"></a>    <span class="dv">51</span>       <span class="dv">67</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6654</span>    <span class="fl">0.0469</span>     <span class="fl">0.5645</span>    <span class="fl">0.7481</span></span>
+<span id="cb3-369"><a href="#cb3-369" aria-hidden="true" tabindex="-1"></a>    <span class="dv">53</span>       <span class="dv">66</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6553</span>    <span class="fl">0.0472</span>     <span class="fl">0.5541</span>    <span class="fl">0.7390</span></span>
+<span id="cb3-370"><a href="#cb3-370" aria-hidden="true" tabindex="-1"></a>    <span class="dv">58</span>       <span class="dv">65</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6452</span>    <span class="fl">0.0476</span>     <span class="fl">0.5437</span>    <span class="fl">0.7298</span></span>
+<span id="cb3-371"><a href="#cb3-371" aria-hidden="true" tabindex="-1"></a>    <span class="dv">61</span>       <span class="dv">64</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6352</span>    <span class="fl">0.0479</span>     <span class="fl">0.5333</span>    <span class="fl">0.7206</span></span>
+<span id="cb3-372"><a href="#cb3-372" aria-hidden="true" tabindex="-1"></a>    <span class="dv">66</span>       <span class="dv">63</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.6251</span>    <span class="fl">0.0482</span>     <span class="fl">0.5230</span>    <span class="fl">0.7113</span></span>
+<span id="cb3-373"><a href="#cb3-373" aria-hidden="true" tabindex="-1"></a>    <span class="dv">68</span>       <span class="dv">62</span>      <span class="dv">2</span>      <span class="dv">0</span>             <span class="fl">0.6049</span>    <span class="fl">0.0487</span>     <span class="fl">0.5026</span>    <span class="fl">0.6926</span></span>
+<span id="cb3-374"><a href="#cb3-374" aria-hidden="true" tabindex="-1"></a>    <span class="dv">69</span>       <span class="dv">60</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5948</span>    <span class="fl">0.0489</span>     <span class="fl">0.4924</span>    <span class="fl">0.6832</span></span>
+<span id="cb3-375"><a href="#cb3-375" aria-hidden="true" tabindex="-1"></a>    <span class="dv">72</span>       <span class="dv">59</span>      <span class="dv">2</span>      <span class="dv">0</span>             <span class="fl">0.5747</span>    <span class="fl">0.0493</span>     <span class="fl">0.4722</span>    <span class="fl">0.6643</span></span>
+<span id="cb3-376"><a href="#cb3-376" aria-hidden="true" tabindex="-1"></a>    <span class="dv">77</span>       <span class="dv">57</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5646</span>    <span class="fl">0.0494</span>     <span class="fl">0.4621</span>    <span class="fl">0.6548</span></span>
+<span id="cb3-377"><a href="#cb3-377" aria-hidden="true" tabindex="-1"></a>    <span class="dv">78</span>       <span class="dv">56</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5545</span>    <span class="fl">0.0496</span>     <span class="fl">0.4521</span>    <span class="fl">0.6453</span></span>
+<span id="cb3-378"><a href="#cb3-378" aria-hidden="true" tabindex="-1"></a>    <span class="dv">80</span>       <span class="dv">55</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5444</span>    <span class="fl">0.0497</span>     <span class="fl">0.4422</span>    <span class="fl">0.6357</span></span>
+<span id="cb3-379"><a href="#cb3-379" aria-hidden="true" tabindex="-1"></a>    <span class="dv">81</span>       <span class="dv">54</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5343</span>    <span class="fl">0.0498</span>     <span class="fl">0.4323</span>    <span class="fl">0.6261</span></span>
+<span id="cb3-380"><a href="#cb3-380" aria-hidden="true" tabindex="-1"></a>    <span class="dv">85</span>       <span class="dv">53</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5243</span>    <span class="fl">0.0499</span>     <span class="fl">0.4224</span>    <span class="fl">0.6164</span></span>
+<span id="cb3-381"><a href="#cb3-381" aria-hidden="true" tabindex="-1"></a>    <span class="dv">90</span>       <span class="dv">52</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5142</span>    <span class="fl">0.0499</span>     <span class="fl">0.4125</span>    <span class="fl">0.6067</span></span>
+<span id="cb3-382"><a href="#cb3-382" aria-hidden="true" tabindex="-1"></a>    <span class="dv">96</span>       <span class="dv">51</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.5041</span>    <span class="fl">0.0499</span>     <span class="fl">0.4027</span>    <span class="fl">0.5969</span></span>
+<span id="cb3-383"><a href="#cb3-383" aria-hidden="true" tabindex="-1"></a>   <span class="dv">100</span>       <span class="dv">50</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4940</span>    <span class="fl">0.0499</span>     <span class="fl">0.3930</span>    <span class="fl">0.5872</span></span>
+<span id="cb3-384"><a href="#cb3-384" aria-hidden="true" tabindex="-1"></a>   <span class="dv">102</span>       <span class="dv">49</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4839</span>    <span class="fl">0.0499</span>     <span class="fl">0.3833</span>    <span class="fl">0.5773</span></span>
+<span id="cb3-385"><a href="#cb3-385" aria-hidden="true" tabindex="-1"></a>   <span class="dv">109</span>       <span class="dv">48</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.4839</span>    <span class="fl">0.0499</span>     <span class="fl">0.3833</span>    <span class="fl">0.5773</span></span>
+<span id="cb3-386"><a href="#cb3-386" aria-hidden="true" tabindex="-1"></a>   <span class="dv">110</span>       <span class="dv">47</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4736</span>    <span class="fl">0.0499</span>     <span class="fl">0.3733</span>    <span class="fl">0.5673</span></span>
+<span id="cb3-387"><a href="#cb3-387" aria-hidden="true" tabindex="-1"></a>   <span class="dv">131</span>       <span class="dv">46</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.4736</span>    <span class="fl">0.0499</span>     <span class="fl">0.3733</span>    <span class="fl">0.5673</span></span>
+<span id="cb3-388"><a href="#cb3-388" aria-hidden="true" tabindex="-1"></a>   <span class="dv">149</span>       <span class="dv">45</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4631</span>    <span class="fl">0.0499</span>     <span class="fl">0.3632</span>    <span class="fl">0.5571</span></span>
+<span id="cb3-389"><a href="#cb3-389" aria-hidden="true" tabindex="-1"></a>   <span class="dv">153</span>       <span class="dv">44</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4526</span>    <span class="fl">0.0499</span>     <span class="fl">0.3531</span>    <span class="fl">0.5468</span></span>
+<span id="cb3-390"><a href="#cb3-390" aria-hidden="true" tabindex="-1"></a>   <span class="dv">165</span>       <span class="dv">43</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4421</span>    <span class="fl">0.0498</span>     <span class="fl">0.3430</span>    <span class="fl">0.5364</span></span>
+<span id="cb3-391"><a href="#cb3-391" aria-hidden="true" tabindex="-1"></a>   <span class="dv">180</span>       <span class="dv">42</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.4421</span>    <span class="fl">0.0498</span>     <span class="fl">0.3430</span>    <span class="fl">0.5364</span></span>
+<span id="cb3-392"><a href="#cb3-392" aria-hidden="true" tabindex="-1"></a>   <span class="dv">186</span>       <span class="dv">41</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4313</span>    <span class="fl">0.0497</span>     <span class="fl">0.3327</span>    <span class="fl">0.5258</span></span>
+<span id="cb3-393"><a href="#cb3-393" aria-hidden="true" tabindex="-1"></a>   <span class="dv">188</span>       <span class="dv">40</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4205</span>    <span class="fl">0.0497</span>     <span class="fl">0.3225</span>    <span class="fl">0.5152</span></span>
+<span id="cb3-394"><a href="#cb3-394" aria-hidden="true" tabindex="-1"></a>   <span class="dv">207</span>       <span class="dv">39</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.4097</span>    <span class="fl">0.0495</span>     <span class="fl">0.3123</span>    <span class="fl">0.5045</span></span>
+<span id="cb3-395"><a href="#cb3-395" aria-hidden="true" tabindex="-1"></a>   <span class="dv">219</span>       <span class="dv">38</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.3989</span>    <span class="fl">0.0494</span>     <span class="fl">0.3022</span>    <span class="fl">0.4938</span></span>
+<span id="cb3-396"><a href="#cb3-396" aria-hidden="true" tabindex="-1"></a>   <span class="dv">263</span>       <span class="dv">37</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.3881</span>    <span class="fl">0.0492</span>     <span class="fl">0.2921</span>    <span class="fl">0.4830</span></span>
+<span id="cb3-397"><a href="#cb3-397" aria-hidden="true" tabindex="-1"></a>   <span class="dv">265</span>       <span class="dv">36</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3881</span>    <span class="fl">0.0492</span>     <span class="fl">0.2921</span>    <span class="fl">0.4830</span></span>
+<span id="cb3-398"><a href="#cb3-398" aria-hidden="true" tabindex="-1"></a>   <span class="dv">285</span>       <span class="dv">35</span>      <span class="dv">2</span>      <span class="dv">0</span>             <span class="fl">0.3660</span>    <span class="fl">0.0488</span>     <span class="fl">0.2714</span>    <span class="fl">0.4608</span></span>
+<span id="cb3-399"><a href="#cb3-399" aria-hidden="true" tabindex="-1"></a>   <span class="dv">308</span>       <span class="dv">33</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.3549</span>    <span class="fl">0.0486</span>     <span class="fl">0.2612</span>    <span class="fl">0.4496</span></span>
+<span id="cb3-400"><a href="#cb3-400" aria-hidden="true" tabindex="-1"></a>   <span class="dv">334</span>       <span class="dv">32</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.3438</span>    <span class="fl">0.0483</span>     <span class="fl">0.2510</span>    <span class="fl">0.4383</span></span>
+<span id="cb3-401"><a href="#cb3-401" aria-hidden="true" tabindex="-1"></a>   <span class="dv">340</span>       <span class="dv">31</span>      <span class="dv">1</span>      <span class="dv">1</span>             <span class="fl">0.3327</span>    <span class="fl">0.0480</span>     <span class="fl">0.2409</span>    <span class="fl">0.4270</span></span>
+<span id="cb3-402"><a href="#cb3-402" aria-hidden="true" tabindex="-1"></a>   <span class="dv">342</span>       <span class="dv">29</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb3-403"><a href="#cb3-403" aria-hidden="true" tabindex="-1"></a>   <span class="dv">370</span>       <span class="dv">28</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb3-404"><a href="#cb3-404" aria-hidden="true" tabindex="-1"></a>   <span class="dv">397</span>       <span class="dv">27</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb3-405"><a href="#cb3-405" aria-hidden="true" tabindex="-1"></a>   <span class="dv">427</span>       <span class="dv">26</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb3-406"><a href="#cb3-406" aria-hidden="true" tabindex="-1"></a>   <span class="dv">445</span>       <span class="dv">25</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb3-407"><a href="#cb3-407" aria-hidden="true" tabindex="-1"></a>   <span class="dv">482</span>       <span class="dv">24</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb3-408"><a href="#cb3-408" aria-hidden="true" tabindex="-1"></a>   <span class="dv">515</span>       <span class="dv">23</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb3-409"><a href="#cb3-409" aria-hidden="true" tabindex="-1"></a>   <span class="dv">545</span>       <span class="dv">22</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3212</span>    <span class="fl">0.0477</span>     <span class="fl">0.2305</span>    <span class="fl">0.4153</span></span>
+<span id="cb3-410"><a href="#cb3-410" aria-hidden="true" tabindex="-1"></a>   <span class="dv">583</span>       <span class="dv">21</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.3059</span>    <span class="fl">0.0478</span>     <span class="fl">0.2156</span>    <span class="fl">0.4008</span></span>
+<span id="cb3-411"><a href="#cb3-411" aria-hidden="true" tabindex="-1"></a>   <span class="dv">596</span>       <span class="dv">20</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3059</span>    <span class="fl">0.0478</span>     <span class="fl">0.2156</span>    <span class="fl">0.4008</span></span>
+<span id="cb3-412"><a href="#cb3-412" aria-hidden="true" tabindex="-1"></a>   <span class="dv">620</span>       <span class="dv">19</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3059</span>    <span class="fl">0.0478</span>     <span class="fl">0.2156</span>    <span class="fl">0.4008</span></span>
+<span id="cb3-413"><a href="#cb3-413" aria-hidden="true" tabindex="-1"></a>   <span class="dv">670</span>       <span class="dv">18</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.3059</span>    <span class="fl">0.0478</span>     <span class="fl">0.2156</span>    <span class="fl">0.4008</span></span>
+<span id="cb3-414"><a href="#cb3-414" aria-hidden="true" tabindex="-1"></a>   <span class="dv">675</span>       <span class="dv">17</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.2879</span>    <span class="fl">0.0483</span>     <span class="fl">0.1976</span>    <span class="fl">0.3844</span></span>
+<span id="cb3-415"><a href="#cb3-415" aria-hidden="true" tabindex="-1"></a>   <span class="dv">733</span>       <span class="dv">16</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.2699</span>    <span class="fl">0.0485</span>     <span class="fl">0.1802</span>    <span class="fl">0.3676</span></span>
+<span id="cb3-416"><a href="#cb3-416" aria-hidden="true" tabindex="-1"></a>   <span class="dv">841</span>       <span class="dv">15</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.2699</span>    <span class="fl">0.0485</span>     <span class="fl">0.1802</span>    <span class="fl">0.3676</span></span>
+<span id="cb3-417"><a href="#cb3-417" aria-hidden="true" tabindex="-1"></a>   <span class="dv">852</span>       <span class="dv">14</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.2507</span>    <span class="fl">0.0487</span>     <span class="fl">0.1616</span>    <span class="fl">0.3497</span></span>
+<span id="cb3-418"><a href="#cb3-418" aria-hidden="true" tabindex="-1"></a>   <span class="dv">915</span>       <span class="dv">13</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.2507</span>    <span class="fl">0.0487</span>     <span class="fl">0.1616</span>    <span class="fl">0.3497</span></span>
+<span id="cb3-419"><a href="#cb3-419" aria-hidden="true" tabindex="-1"></a>   <span class="dv">941</span>       <span class="dv">12</span>      <span class="dv">0</span>      <span class="dv">1</span>             <span class="fl">0.2507</span>    <span class="fl">0.0487</span>     <span class="fl">0.1616</span>    <span class="fl">0.3497</span></span>
+<span id="cb3-420"><a href="#cb3-420" aria-hidden="true" tabindex="-1"></a>   <span class="dv">979</span>       <span class="dv">11</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.2279</span>    <span class="fl">0.0493</span>     <span class="fl">0.1394</span>    <span class="fl">0.3295</span></span>
+<span id="cb3-421"><a href="#cb3-421" aria-hidden="true" tabindex="-1"></a>   <span class="dv">995</span>       <span class="dv">10</span>      <span class="dv">1</span>      <span class="dv">0</span>             <span class="fl">0.2051</span>    <span class="fl">0.0494</span>     <span class="fl">0.1183</span>    <span class="fl">0.3085</span></span>
+<span id="cb3-422"><a href="#cb3-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-423"><a href="#cb3-423" aria-hidden="true" tabindex="-1"></a>[Résultats non reportés à partir de t<span class="ot">=</span><span class="dv">1000</span> ]</span>
+<span id="cb3-424"><a href="#cb3-424" aria-hidden="true" tabindex="-1"></a><span class="sc">-------------------------------------------------------------------------------</span></span>
+<span id="cb3-425"><a href="#cb3-425" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb3-426"><a href="#cb3-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-427"><a href="#cb3-427" aria-hidden="true" tabindex="-1"></a>La durée durée médiane de survie est $t=100$. Elle correspond à $S(t)=0.4940$.</span>
+<span id="cb3-428"><a href="#cb3-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-429"><a href="#cb3-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-430"><a href="#cb3-430" aria-hidden="true" tabindex="-1"></a>| **S(t)** | **t** |</span>
+<span id="cb3-431"><a href="#cb3-431" aria-hidden="true" tabindex="-1"></a>|----------|-------|</span>
+<span id="cb3-432"><a href="#cb3-432" aria-hidden="true" tabindex="-1"></a>| 0.90     | 6     |</span>
+<span id="cb3-433"><a href="#cb3-433" aria-hidden="true" tabindex="-1"></a>| 0.75     | 36    |</span>
+<span id="cb3-434"><a href="#cb3-434" aria-hidden="true" tabindex="-1"></a>| 0.50     | 100   |</span>
+<span id="cb3-435"><a href="#cb3-435" aria-hidden="true" tabindex="-1"></a>| 0.25     | 979   |</span>
+<span id="cb3-436"><a href="#cb3-436" aria-hidden="true" tabindex="-1"></a>| 0.1      | .     |</span>
+<span id="cb3-437"><a href="#cb3-437" aria-hidden="true" tabindex="-1"></a>: Quantiles de la fonction de séjour type Kaplan-Meier</span>
+<span id="cb3-438"><a href="#cb3-438" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-439"><a href="#cb3-439" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-440"><a href="#cb3-440" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-441"><a href="#cb3-441" aria-hidden="true" tabindex="-1"></a>::: {.content-visible when-format="html"}</span>
+<span id="cb3-442"><a href="#cb3-442" aria-hidden="true" tabindex="-1"></a>::: {layout-ncol=2}</span>
+<span id="cb3-443"><a href="#cb3-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-444"><a href="#cb3-444" aria-hidden="true" tabindex="-1"></a><span class="al">![Courbe de survie: estimation méthode Kaplan-Meier](images/Image8.png)</span>{width="70%"}</span>
+<span id="cb3-445"><a href="#cb3-445" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-446"><a href="#cb3-446" aria-hidden="true" tabindex="-1"></a><span class="al">![Courbe de survie: méthode Kaplan-Meier + CI](images/Image8b.png)</span>{width="70%"}</span>
+<span id="cb3-447"><a href="#cb3-447" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-448"><a href="#cb3-448" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-449"><a href="#cb3-449" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-450"><a href="#cb3-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-451"><a href="#cb3-451" aria-hidden="true" tabindex="-1"></a>::: {.content-visible when-format="pdf"}</span>
+<span id="cb3-452"><a href="#cb3-452" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-453"><a href="#cb3-453" aria-hidden="true" tabindex="-1"></a><span class="al">![Courbe de survie: estimation méthode actuarielle](images/Image8.png)</span>{width="70%"}</span>
+<span id="cb3-454"><a href="#cb3-454" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-455"><a href="#cb3-455" aria-hidden="true" tabindex="-1"></a><span class="al">![Courbe de survie: estimation méthode actuarielle + CI](images/Image8b.png)</span>{width="70%"}</span>
+<span id="cb3-456"><a href="#cb3-456" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-457"><a href="#cb3-457" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-458"><a href="#cb3-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-459"><a href="#cb3-459" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-460"><a href="#cb3-460" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-461"><a href="#cb3-461" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-462"><a href="#cb3-462" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-463"><a href="#cb3-463" aria-hidden="true" tabindex="-1"></a><span class="fu">### Quantités associées à l'estimateur Kaplan-Meier..</span></span>
+<span id="cb3-464"><a href="#cb3-464" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-465"><a href="#cb3-465" aria-hidden="true" tabindex="-1"></a>**Le risque cumulé**: estimateur de Nelson AAlen</span>
+<span id="cb3-466"><a href="#cb3-466" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-467"><a href="#cb3-467" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-468"><a href="#cb3-468" aria-hidden="true" tabindex="-1"></a>Il est simplément égal à: </span>
+<span id="cb3-469"><a href="#cb3-469" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-470"><a href="#cb3-470" aria-hidden="true" tabindex="-1"></a>$$H(t)=\sum_{t_i\leq k}q(t_i)$$</span>
+<span id="cb3-471"><a href="#cb3-471" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-472"><a href="#cb3-472" aria-hidden="true" tabindex="-1"></a><span class="al">![Risque cumulé: estimateur Nelson-Aalen](images/Image19.png)</span>{width="70%"}</span>
+<span id="cb3-473"><a href="#cb3-473" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-474"><a href="#cb3-474" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-475"><a href="#cb3-475" aria-hidden="true" tabindex="-1"></a>**Le risque instantané** </span>
+<span id="cb3-476"><a href="#cb3-476" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-477"><a href="#cb3-477" aria-hidden="true" tabindex="-1"></a>Nécessite l'estimateur de risque cumulé de Nelson-Aalen. Le risque est obtenu en lissant </span>
+<span id="cb3-478"><a href="#cb3-478" aria-hidden="true" tabindex="-1"></a>les différences - toujours positive - entre $H(t)$ par la méthode dite</span>
+<span id="cb3-479"><a href="#cb3-479" aria-hidden="true" tabindex="-1"></a>du **kernel** (cf estimation de la densité des distributions). Elle permet d'obtenir</span>
+<span id="cb3-480"><a href="#cb3-480" aria-hidden="true" tabindex="-1"></a>une fonction continue avec la durée</span>
+<span id="cb3-481"><a href="#cb3-481" aria-hidden="true" tabindex="-1"></a>(paramétrables sur les largeurs des fenêtres de lissage). D'autres méthodes de lissage</span>
+<span id="cb3-482"><a href="#cb3-482" aria-hidden="true" tabindex="-1"></a>sont maintenant possibles, et de plus en plus utilisées, en particulier celles utilisant des splines.  </span>
+<span id="cb3-483"><a href="#cb3-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-484"><a href="#cb3-484" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-485"><a href="#cb3-485" aria-hidden="true" tabindex="-1"></a><span class="al">![Risque instantané: estimateur du Kernel](images/Image20.png)</span>{width="70%"}</span>
+<span id="cb3-486"><a href="#cb3-486" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-487"><a href="#cb3-487" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-488"><a href="#cb3-488" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb3-489"><a href="#cb3-489" aria-hidden="true" tabindex="-1"></a>Il n'est pas inutile de noter qu'il n'y a pas de *formule* toute faite pour obtenir des valeurs du risque instantané. Ce type de méthode</span>
+<span id="cb3-490"><a href="#cb3-490" aria-hidden="true" tabindex="-1"></a>par lissage est pleinement paramétrable, par exemple sa fenêtre, ce qui implique que son profil varie d'un paramétrage à l'autre. Le graphique précédent a été fait avec Stata, si on utilisait le package <span class="in">`muhaz`</span> les différences de paramétrage par défaut font que les courbes ne se confondent pas.</span>
+<span id="cb3-491"><a href="#cb3-491" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb3-492"><a href="#cb3-492" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+<script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","closeEffect":"zoom","selector":".lightbox","openEffect":"zoom"});</script>
+
+
+
+</body></html>

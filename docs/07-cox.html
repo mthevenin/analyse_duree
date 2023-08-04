@@ -1,0 +1,1740 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction à l’analyse des durées - 7&nbsp; Le modèle de Cox</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./08-discret.html" rel="next">
+<link href="./06-intro_mod.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
+  }
+}</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-intro_mod.html">Modèles à risques proportionnels</a></li><li class="breadcrumb-item"><a href="./07-cox.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">**Le modèle de Cox**</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction à l’analyse des durées</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/mthevenin/analyse_duree" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./introduction_bio_durees.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Recherche"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Le support</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-presentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>L’analyse des durées</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Données et théorie</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>Les Données</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-theorie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>La théorie</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Méthodes non paramétrique</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-fsurvie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>Estimations des fonctions de survie</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-fsurvie_comp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>Tests de comparaison</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Modèles à risques proportionnels</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-intro_mod.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Introduction</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-cox.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><strong>Le modèle de Cox</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-discret.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-tvc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Variables dynamiques</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Compléments</span></span>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Annexe</span></span>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sections</h2>
+   
+  <ul>
+  <li><a href="#le-modèle-semi-paramétrique-de-cox" id="toc-le-modèle-semi-paramétrique-de-cox" class="nav-link active" data-scroll-target="#le-modèle-semi-paramétrique-de-cox"><span class="header-section-number">7.1</span> Le modèle semi-paramétrique de Cox</a>
+  <ul class="collapse">
+  <li><a href="#la-vraisemblance-partielle-et-estimation-des-paramètres" id="toc-la-vraisemblance-partielle-et-estimation-des-paramètres" class="nav-link" data-scroll-target="#la-vraisemblance-partielle-et-estimation-des-paramètres"><span class="header-section-number">7.1.1</span> La vraisemblance partielle et estimation des paramètres</a></li>
+  <li><a href="#estimation-des-paramètres" id="toc-estimation-des-paramètres" class="nav-link" data-scroll-target="#estimation-des-paramètres"><span class="header-section-number">7.1.2</span> Estimation des paramètres</a></li>
+  <li><a href="#lecture-des-résultats" id="toc-lecture-des-résultats" class="nav-link" data-scroll-target="#lecture-des-résultats"><span class="header-section-number">7.1.3</span> Lecture des résultats</a></li>
+  </ul></li>
+  <li><a href="#analyse-de-la-constance-des-rapports-de-risque" id="toc-analyse-de-la-constance-des-rapports-de-risque" class="nav-link" data-scroll-target="#analyse-de-la-constance-des-rapports-de-risque"><span class="header-section-number">7.2</span> Analyse de la constance des rapports de risque</a>
+  <ul class="collapse">
+  <li><a href="#test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld" id="toc-test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld" class="nav-link" data-scroll-target="#test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld"><span class="header-section-number">7.2.1</span> Test de Grambsch-Therneau sur les résidus de Schoenfeld</a></li>
+  <li><a href="#intéraction-avec-la-durée" id="toc-intéraction-avec-la-durée" class="nav-link" data-scroll-target="#intéraction-avec-la-durée"><span class="header-section-number">7.2.2</span> Intéraction avec la durée</a></li>
+  <li><a href="#que-faire" id="toc-que-faire" class="nav-link" data-scroll-target="#que-faire"><span class="header-section-number">7.2.3</span> Que faire ?</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mthevenin/analyse_duree/edit/main/07-cox.qmd" class="toc-action">Modifier cette page</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><strong>Le modèle de Cox</strong></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>On peut ignorer la partie sur l’estimation du modèle. On retiendra tout de même qu’il est déconseillé d’utiliser la méthode dite <em>exacte</em> pour la correction de la vraisemblance, qui ne peut matériellement fonctionner qu’avec un nombre très limité d’évènements observés simultanément. Ce qui est plutôt rare avec des données à durées discrètes ou groupées, très fréquentes dans les sciences sociales.</p>
+<section id="le-modèle-semi-paramétrique-de-cox" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="le-modèle-semi-paramétrique-de-cox"><span class="header-section-number">7.1</span> Le modèle semi-paramétrique de Cox</h2>
+<section id="la-vraisemblance-partielle-et-estimation-des-paramètres" class="level3" data-number="7.1.1">
+<h3 data-number="7.1.1" class="anchored" data-anchor-id="la-vraisemblance-partielle-et-estimation-des-paramètres"><span class="header-section-number">7.1.1</span> La vraisemblance partielle et estimation des paramètres</h3>
+<p>On se situe dans une situation où la durée est mesurée sur une échelle strictement continue. Il ne peut donc y avoir qu’un seul évènement observé en <span class="math inline">\(t_i\)</span> (idem pour la censure).</p>
+<p>On peut représenter le processus aléatoire d’une analyse de survie en présence de censure à droite, avec l’équation de vraisemblance suivante:</p>
+<p><span class="math display">\[L_i=f(t_i)^{\delta_i}S(t_i)^{1-\delta_i}\]</span></p>
+<ul>
+<li><span class="math inline">\(f(t_i)\)</span> est la valeur de la fonction de densité en <span class="math inline">\(t_i\)</span></li>
+<li><span class="math inline">\(S(t_i)\)</span> est la valeur de la fonction de survie en <span class="math inline">\(t_i\)</span></li>
+<li><span class="math inline">\(\delta_i=1\)</span> si l’évènement est observé: <span class="math inline">\(L_i=f(t_i)\)</span></li>
+<li><span class="math inline">\(\delta_i=0\)</span> si l’observation est censurée: <span class="math inline">\(L_i=S(t_i)\)</span></li>
+</ul>
+<p><strong>Vraisemblance partielle de Cox</strong></p>
+<p>Comme <span class="math inline">\(f(t_i)=h(t_i)\times S(t_i)\)</span> <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, on obtient: <span class="math inline">\(L_i=[h(t_i)S(t_i)]^{\delta_i}S(t_i)^{1-\delta_i} = h(t_i)^{\delta_i}S(t_i)\)</span>.</p>
+<p>Pour <span class="math inline">\(i=1,2,.....,n\)</span>, la vraisemblance s’ecrit donc: <span class="math inline">\(L_i=\prod_{i=1}^{n}h(t_i)^{\delta_i}S(t_i)\)</span>.</p>
+<p>On peut réécrire cette vraisemblance en la multipliant et en la divisant par: <span class="math inline">\(\sum_{j\in R_i}h(t_i)\)</span>, où <span class="math inline">\(j\in R_i\)</span> est l’ensemble des observations soumises au risque en <span class="math inline">\(t_i\)</span>.</p>
+<p><span class="math display">\[L=\prod_{i=1}^{n}\left[h(t_i)\frac{\sum_{j\in R}h(t_i)}{\sum_{j\in R}h(t_i)}\right]^{\delta_i}S(t_i)= \prod_{i=1}^{n}\left[\frac{h(t_i)}{\sum_{j\in R_i}h(t_i)}\right]^{\delta_i}\sum_{j\in R_i}h(t_i)^{\delta_i}S(t_i)\]</span></p>
+<p>La vraisemblance partielle retient seulement le premier terme de la vraisemblance, soit:</p>
+<p><span class="math display">\[PL=\prod_{i=1}^{n}\left[\frac{h(t_i)}{\sum_{j\in R}h(t_i)}\right]^{\delta_i}\]</span></p>
+<p>Une fois remplacée la valeur de <span class="math inline">\(h(t_i)\)</span> par son expression en tant que modèle à risques proportionnels, la vraisemblance partielle ne dépendra plus de la durée. <strong>Mais elle va dépendre de l’ordre d’arrivée des évènements, c’est à dire leur rang</strong>.</p>
+<p><em>Remarque</em>: pour les observations censurées(<span class="math inline">\(\delta_i=0\)</span>), <span class="math inline">\(PL=1\)</span>. Toutefois, ces censures à droite entrent dans l’expression <span class="math inline">\(\sum_{j\in R}h(t_i)\)</span> tant qu’elles sont soumises au risque.</p>
+<p>En remplaçant donc <span class="math inline">\(h(t_i)\)</span> par l’expression <span class="math inline">\(h_0(t)e^{X_i^{'}b}\)</span>:</p>
+<p><span class="math display">\[PL=\prod_{i=1}^{n}\left[\frac{h_0(t)e^{X_{i}^{'}b}}{\sum_{j\in R_i}h_0(t)e^{X_{j}^{'}b}}\right]^{\delta_i} =\prod_{i=1}^{n}\left[\frac{e^{X_i^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}\right]^{\delta_i}\]</span></p>
+<p>L’expression <span class="math inline">\(\frac{e^{Xb}}{\sum_{j\in R}e^{Xb}}\)</span> est donc bien une probabilité, et la vraisemblance partielle est donc bien un produit de probabilités. Pour un individu ayant connu l’évènement, la contribution à la vraisemblance partielle est <strong>la probabilité que l’individu observe l’évènement en <span class="math inline">\(t_i\)</span> sachant qu’un évènement (et un seul) s’est produit</strong>.</p>
+<ul>
+<li><p>Si <span class="math inline">\(\delta_i = 0\)</span>: <span class="math inline">\(PL_i = 1\)</span></p></li>
+<li><p>Si <span class="math inline">\(\delta_i = 1\)</span>: <span class="math inline">\(PL_i =\frac{e^{X_i^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}\)</span></p></li>
+</ul>
+<p><em>Condition nécessaire: pas d’évènement simultané</em>: en présence d’évènements mesurés simultanément, l’estimation de la vraisemblance doit faire l’objet d’une correction.</p>
+<p><em>Correction de la vraisemblance avec des évènements simultanés</em>:</p>
+<ul>
+<li><p>La <strong><em>méthode dite exacte</em></strong>: Comme il ne doit pas y avoir d’évènement simultané, on va introduire à la vraisemblance partielle toutes les permutations possibles des évènements observés au même moment. Bien qu’en <span class="math inline">\(t_i\)</span> on observe au même moment l’évènement pour 2 observations (A,B) une métrique temporelle plus précise permettrait de savoir si A s’est produit avant B ou B s’est produit avant A (2 permutations). Comme le nombre de permutations est calculé à l’aide d’une factorielle <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, avec 3 évènements mesurés simultanément, on obtient 6 permutations (<span class="math inline">\(3\times2\times1\)</span>). Problème: le nombre de permutations pour chaque <span class="math inline">\(t_i\)</span> peut devenir très vite particulièrement élevé. Par exemple pour 10 évènements simultanés, le nombre de permutations est égal à 3,628,800. Le temps de calcul devient extrêmement long, et ce type de correction totalement inopérant.</p></li>
+<li><p>La <strong><em>méthode dite de Breslow</em></strong>: il s’agit d’une approximation de la méthode exacte permettant de ne pas avoir à intégrer chaque permutation. <em>Cette approximation est utilisée par défaut par les logiciels Sas et Stata</em>.</p></li>
+<li><p>La <strong><em>méthode dite d’Efron</em></strong>: elle corrige l’approximation de Breslow, et est jugée plus proche de la méthode exacte. <em>C’est la méthode utilisée par défaut avec le logiciel R</em>, et elle est disponible avec les autres applications.</p></li>
+</ul>
+</section>
+<section id="estimation-des-paramètres" class="level3" data-number="7.1.2">
+<h3 data-number="7.1.2" class="anchored" data-anchor-id="estimation-des-paramètres"><span class="header-section-number">7.1.2</span> Estimation des paramètres</h3>
+<p>On utilise la méthode habituelle, à savoir la maximisation de la log-vraisemblance (ici partielle).</p>
+<ul>
+<li>Conditions de premier ordre: calcul des équations de score à partir des dérivées partielles. Solution: <span class="math inline">\(\frac{\partial log(PL)}{\partial{b_k}}=0\)</span>. On ne peut pas obtenir de solution numérique directe.</li>
+</ul>
+<p>Remarque: les équations de score sont utilisées pour tester la validité de l’hypothèse de constance des rapports de risque pour calculer les <strong>résidus de Schoenfeld</strong> (voir plus loin).</p>
+<ul>
+<li><p>Conditions de second ordre: calcul des dérivées secondes qui permettent d’obtenir la matrice d’information de Fisher et la matrice des variances-covariances des paramètres.</p></li>
+<li><p>Comme il n’y a pas de solution numérique directe, on utilise un algorithme d’optimisation (ex: Newton-Raphson) à partir des équations de score et de la matrice d’information de Fisher.</p></li>
+</ul>
+<p><strong>Eléments de calcul</strong></p>
+<p>En logarithme (sans évènement simultané), la vraisemblance partielle s’ecrit:</p>
+<p><span class="math display">\[pl(b)=\sum_{i=1}^n\delta_i\left(log(e^{X_{i}^{'}b})-log\sum_{j\in R_i}e^{X_{j}^{'}b}\right)\]</span></p>
+<p><span class="math display">\[pl(b)=\sum_{i=1}^n\delta_i\left(X_{i}^{'}b-log\sum_{j\in R_i}e^{X_{j}^{'}b}\right)\]</span></p>
+<p>Calcul de l’équation de score pour une covariable <span class="math inline">\(X_k\)</span>:</p>
+<p><span class="math display">\[\frac{\partial pl(b)}{\partial{b_k}}=\sum_{i=1}^n\delta_i\left(X_{ik}-\sum_{j\in R_i}X_{jk}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}\right)\]</span></p>
+<p>Comme <span class="math inline">\(\frac{e^{X_{j}b}}{\sum_{j\in R}e^{X_{j}b}}\)</span> est une probabilité, et <span class="math inline">\(\sum_{j\in R}X_{ik}\times p_i\)</span> est l’espérance (la moyenne) <span class="math inline">\(E(X_k)\)</span> d’avoir la caractéristique <span class="math inline">\(X_k\)</span> lorsqu’un évènement a été observé. Au final:</p>
+<p><span class="math display">\[\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - E(X_{j\in R_i,k}) \right)\]</span></p>
+<p>Cette expression va permettre d’analyser le respect ou non de l’hypothèse de risques proportionnels via les <em>résidus de Schoenfeld</em>.</p>
+</section>
+<section id="lecture-des-résultats" class="level3" data-number="7.1.3">
+<h3 data-number="7.1.3" class="anchored" data-anchor-id="lecture-des-résultats"><span class="header-section-number">7.1.3</span> Lecture des résultats</h3>
+<p>Comme il s’agit d’un modèle à risque proportionnel, <strong>les rapports de risques sont constants pendant toute la période d’observation</strong>. Il s’agit d’une <strong>propriété de l’estimation</strong>.</p>
+<p><strong><em>Covariable binaire (indicatrice)</em></strong> <span class="math inline">\(X=(0,1)\)</span>: <span class="math inline">\(RR=\frac{h(t\ |\ X=1)}{h(t\ |\ X=0)}=e^b\)</span>.<br>
+A chaque moment de la durée <span class="math inline">\(t\)</span>, le risque d’observer l’évènement est <span class="math inline">\(e^b\)</span> fois plus important/plus faible pour <span class="math inline">\(X=1\)</span> que pour <span class="math inline">\(X=0\)</span>.</p>
+<p><strong><em>Covariable quantitative</em></strong> (fixe dans le temps)</p>
+<p><span class="math inline">\(RR=\frac{h(t\ |\ X=a+c)}{h(t\ |\ X=a)}=e^{c \times{b}}\)</span>. On prendra pour illustrer une variable type âge au début de l’exposition au risque (a) et un delta de comparaison avec un âge inférieur c.<br>
+Si <span class="math inline">\(c=1\)</span> (résultat de l’estimation): A un âge donnée, le risque de connaitre l’évènement est <span class="math inline">\(e^b\)</span> fois inférieur/supérieur à celui d’une personne qui a un an de moins.</p>
+<p><strong>Exemple pour les insuffisances cardiaques</strong></p>
+<ul>
+<li><p>Correction de la vraisemblance: méthode d’Efron</p></li>
+<li><p>Nombre d’observations: 103</p></li>
+<li><p>Nombre de décès: 75</p></li>
+<li><p>Log-Vraisemblance: -289.30639</p></li>
+</ul>
+<table class="table-striped table-hover table">
+<caption>Cox: log Hazard Ratio (Risks Ratio)</caption>
+<thead>
+<tr class="header">
+<th>Variables</th>
+<th>logRR</th>
+<th>Std.Err</th>
+<th>z</th>
+<th><span class="math inline">\(P&gt;|z|\)</span></th>
+<th>95% IC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>-0.119</td>
+<td>0.0673</td>
+<td>-1.78</td>
+<td>0.076</td>
+<td>-0.2516;+0.0124</td>
+</tr>
+<tr class="even">
+<td>age</td>
+<td>+0.0296</td>
+<td>0.0135</td>
+<td>2.19</td>
+<td>0.029</td>
+<td>+0.0031;+0.0561</td>
+</tr>
+<tr class="odd">
+<td>surgery</td>
+<td>-0.9873</td>
+<td>0.4363</td>
+<td>-2.26</td>
+<td>0.024</td>
+<td>-1.8424;-0.1323</td>
+</tr>
+</tbody>
+</table>
+<table class="table-striped table-hover table">
+<caption>Cox: Hazard Ratio (Risks Ratio)</caption>
+<thead>
+<tr class="header">
+<th>Variables</th>
+<th>RR</th>
+<th>Std.Err</th>
+<th>z</th>
+<th><span class="math inline">\(P&gt;|z|\)</span></th>
+<th>95%CI</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>0.8872</td>
+<td>0.0597</td>
+<td>-1.78</td>
+<td>0.076</td>
+<td>0.7775; 1.0124</td>
+</tr>
+<tr class="even">
+<td>age</td>
+<td>1.0300</td>
+<td>0.0139</td>
+<td>2.19</td>
+<td>0.029</td>
+<td>1.0031; 1.0577</td>
+</tr>
+<tr class="odd">
+<td>surgery</td>
+<td>0.3726</td>
+<td>0.1625</td>
+<td>-2.26</td>
+<td>0.024</td>
+<td>0.1584; 0.8761</td>
+</tr>
+</tbody>
+</table>
+<p>On retrouve les des tests non paramétriques pour l’opération, à savoir qu’un pontage réduit les risques journaliers de décès pendant la période d’observation (augmente la durée de survie).<br>
+De la même manière, plus on entre à un âge élevé dans la liste d’attente plus le risque de décès augmente. La variable <em>year</em>, qui traduit des progrès en médecine, renvoie à une réduction plutôt modérée du risque journalier de décès durant l’attente d’une greffe.</p>
+<p><strong>R-Stata-Sas-Python</strong></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">SAS</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<p>Le modèle est estimé avec la fonction <strong><code>coxph</code></strong> de la librairie <strong><code>survival</code></strong>. Hors options, la syntaxe est identiques aux fonctions <code>survfit</code> et <code>survdif</code>.</p>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p>Le modèle est estimé avec la commande <strong><code>stcox</code></strong>.</p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p>Le modèle est estimé avec la <strong><code>proc phreg</code></strong>.</p>
+</div>
+<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+<p>Avec la librairie <code>lifelines</code>, le modèle est estimé avec la fonction <strong><code>CoxPHFitter</code></strong>. Avec la librairie <code>statmodels</code>, il est estimé avec la fonction <code>smf.phreg</code>.</p>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="analyse-de-la-constance-des-rapports-de-risque" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="analyse-de-la-constance-des-rapports-de-risque"><span class="header-section-number">7.2</span> Analyse de la constance des rapports de risque</h2>
+<ul>
+<li><p>Les rapports de risque (RR) estimés par le modèle sont contraints à être constant sur toute la période d’observation. C’est une hypothèse forte.</p></li>
+<li><p>Le respect de cette hypothèse doit être analysé, en particulier pour le modèle de Cox où la baseline du risque est habituellement estimée à l’aide de ces rapports (par exemple la méthode dite de Breslow, non traitée). En post-estimation, les valeurs estimées du risque pourront présenter des valeurs aberrantes si on dévie trop de constance, en particulier en obtenant des négatives des taux de risque.</p></li>
+<li><p>Analyser cette hypothèse revient à introduire une interaction entre les rapports et la durée ou plutôt précisément une fonction de la durée).</p></li>
+<li><p>Plusieurs méthodes disponibles, on traitera celles basées sur les <strong>résidus de Schoenfeld</strong>, et l’introduction directe d’une intéraction entre une fonction la durée et les covariables du modèle. Cette dernière fait également office de méthode de correction lorsque la violation de l’hypothèse est jugée trop importante ou problématique du point de vue des résultats obtenus.</p></li>
+<li><p>Si on regarde les courbes de Kaplan-Meier, leurs croisement non tardif impliquera nécessairement un problème sur cette hypothèse.</p></li>
+</ul>
+<section id="test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld"><span class="header-section-number">7.2.1</span> Test de Grambsch-Therneau sur les résidus de Schoenfeld</h3>
+<p>Ce test a été proposé par P.Grambsch et T.Therneau <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> dans un cadre à durée strictement continue. Il repose originellement sur une régression linéaire estimé avec les moindres carrés généralisés (GLS) correction de l’autocorrélation des erreurs avec des sér) . Dans un premier temps pour des raisons plutôt pratiques (informatique), le test a une version moindres carrés ordinaires (OLS). Jusqu’en 2020, tous les logiciels ne proposaient que le test OLS. T.Therneau avec la V3 de package <code>survival</code> a substitué - assez brutalement - le test GLS au test OLS. Si les résultats sont proches dans le cadre d’une durée continue et que le test GLS peut être considéré comme un test <em>exact</em>, cela devient problématique dans une situation de durée discrète/groupée <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Le test OLS reste, à mon sens, la méthode à privilégier dans le cas discret.</p>
+<p>Il est également important de souligner que pour P.Grambsch et T.Therneau <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> n’est qu’un moyen parmi d’autres d’analyser une violation de l’hypothèse de proportionnalité. Ce n’est pas <em>the solution</em> (comme tout autre test au passage). Le croisement des courbes de séjours peut-être suffisant pour alerter sur cette violation.</p>
+<p><strong><em>Principe du test</em></strong>: consiste à regarder la corrélation entre les <strong>résidus de Schoenfeld</strong> obtenus directement avec la fonction de score de la vraisemblanc partielle de Cox et une fonction de la durée.</p>
+<p><strong><em>Principe de calcul des résidus</em></strong></p>
+<ul>
+<li>Les résidus <em>bruts</em> sont directement calculés à partir des équations de scores [voir section estimation].</li>
+<li>Ils ne sont calculés que pour les observations qui ont connues l’évènement, au moment où un évènement s’est produit.</li>
+<li>La somme des résidus pour chaque covariable est égale à 0. Il s’agit de la propriété de l’équation de score à l’équilibre.</li>
+<li>On utilise généralement les <em>résidus standardisés</em> (<em>remis à l’échelle</em> / scaled) - par leur variance -. C’est la mesure de cette variance qui distingue le test OLS du test GLS.</li>
+</ul>
+<p>Pour une observation dont l’évènement s’est produit en <span class="math inline">\(t_i\)</span>, le <em>résidu brut de Schoenfeld</em> pour la covariable <span class="math inline">\(X_k\)</span>, après estimation du modèle, est égal à:</p>
+<p><span class="math display">\[rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{jk}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}= X_{ik} - E(X_{j\in R_i})\]</span></p>
+<ul>
+<li><p>Ce résidu est formellement la contribution d’une observation ou d’un moment d’évènement au score. Il se lit comme la différence entre la valeur observée d’une covariable et sa valeur espérée au moment où l’évènement s’est produit.</p></li>
+<li><p>Si la constance des rapports de risque varie peu les résidus ne doivent pas suivre une tendance précise localement ou globalement, à la hausse ou à la baisse.</p></li>
+</ul>
+<p>Pourquoi?</p>
+<p>Par l’exemple, sans censure à droite et en ne considérant que les résidus bruts: Avec un rapport de risque strictement égal à 1 en début d’exposition, une population soumise au risque <span class="math inline">\(R_i=100\)</span> avec 50 hommes et 50 femmes. Si l’hypothèse PH (strictement) respectée, lorsqu’il reste 90 personnes soumises au risque, on devrait avoir 45 hommes et 45 femmes. Avec <span class="math inline">\(R_i=50\)</span>, 25 hommes et 25 femmes,…….avec <span class="math inline">\(R_i=10\)</span>, 5 hommes et 5 femmes.<br>
+Au final l’espérance d’avoir la caractéristique <span class="math inline">\(X\)</span> est toujours égal à 0.5 et les résidus bruts prendront toujours la valeur -.5 si <span class="math inline">\(X=0\)</span> et .5 si <span class="math inline">\(X=1\)</span>. En faisant une simple régression linéaire entre les résidus, qui alternent ces deux valeurs, et <span class="math inline">\(t\)</span>, le coefficient estimé sera en toute logique très proche de 0.</p>
+<p>De manière encore plus simple, cette proportionnalité avec un risque ratio égal à 1 suggère qu’au cours de la durée d’observation, on observe une succession d’un même nombre d’hommes et de femmes qui connaissent l’évènement. Si tous les hommes ou presque avaient observés l’évènement plutôt en début d’éxposition et si toutes les femmes ou presque avaient observé l’évènement plutôt en fin d’exposition, l’hypothèse de proportionnalité pourraient fortement remise en cause.</p>
+<p>On trouvera des éléments de calcul du test OLS <a href="https://mthevenin.github.io/analyse_duree/annexes/residusch.html">ici</a></p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Avertissement
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><p><strong>Test omnibus</strong>: Ne pas l’utiliser bien qu’il figure généralement en bas des output. Il n’a pas d’interprétation directe, et les p-value peuvent présenter des valeurs très faibles alors que ce n’est pas le cas pour les covariables prises une à une. Rester comme c’est souvent le cas à un test à un degré de liberté.</p></li>
+<li><p><strong>Transformations de la durée</strong>: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: <span class="math inline">\(g(t)=t\)</span> (« identity »), <span class="math inline">\(g(t)=log(t)\)</span>, <span class="math inline">\(g(t)=KM(t)\)</span> ou <span class="math inline">\(g(t)=1- S(t\)</span>) où <span class="math inline">\(S(t\)</span>) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank » est utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple <span class="math inline">\(t=(0.1,0.5,1,2.6,3)\)</span> donne une transformation <span class="math inline">\(t=(1,2,3,4)\)</span>. A savoir : $g(t)=t rend le test relativement sensible aux évènements tardifs lorsque la population restant soumise est peu nombreuse (outliers).</p></li>
+<li><p>Par défaut Stata, Sas, Python: <span class="math inline">\(g(t)=t\)</span></p></li>
+<li><p>Par défaut R: <span class="math inline">\(g(t)= 1 - S(t)\)</span></p></li>
+</ul>
+</div>
+</div>
+<p>Pour des raisons de reproductibilité dans l’espace des logiciels et dans le temps pour les différentes versions du package <code>survival</code> de R, on ne présente ici que la version OLS.</p>
+<p><strong>Test OLS avec <span class="math inline">\(g(t)=t\)</span></strong></p>
+<table class="table">
+<caption>Test OLS Grambsch-Therneau avec <span class="math inline">\(g(t)=t\)</span></caption>
+<thead>
+<tr class="header">
+<th>Variables</th>
+<th>chi2</th>
+<th>df</th>
+<th>P&gt;Chi2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>0.80</td>
+<td>1</td>
+<td>0.3720</td>
+</tr>
+<tr class="even">
+<td>age</td>
+<td>1.61</td>
+<td>1</td>
+<td>0.2043</td>
+</tr>
+<tr class="odd">
+<td>surgery</td>
+<td>5.54</td>
+<td>1</td>
+<td>0.0186</td>
+</tr>
+</tbody>
+</table>
+<p>Ici l’hypothèse de proportionnalité des risques est questionnable pour la variable <em>surgery</em>. Le risque ratio pourrait ne pas constant dans le temps. Ce n’est pas du tout étonnant, le premier décès pour les personnes opérées d’un pontage n’est observé qu’au bout de 165 jours. Au final, un test était-il bien nécessaire pour arriver à ce constat ???????</p>
+<p><strong>Test OLS avec <span class="math inline">\(g(t)=1- S(t)\)</span></strong></p>
+<table class="table">
+<caption>Test Grambsch-Therneau avec <span class="math inline">\(g(t)=1- S(t)\)</span></caption>
+<thead>
+<tr class="header">
+<th>Variables</th>
+<th>chi2</th>
+<th>df</th>
+<th>P&gt;Chi2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>1.96</td>
+<td>1</td>
+<td>0.162</td>
+</tr>
+<tr class="even">
+<td>age</td>
+<td>1.15</td>
+<td>1</td>
+<td>0.284</td>
+</tr>
+<tr class="odd">
+<td>surgery</td>
+<td>3.96</td>
+<td>1</td>
+<td>0.046</td>
+</tr>
+</tbody>
+</table>
+<p><strong>R-Stata-Sas-Python</strong></p>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">SAS</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false">Python</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p><strong><em>Attention seulement version GLS du test depuis le V3 de survival</em></strong>.</p>
+<ul>
+<li>Après avoir créer un objet à l’estimation du modèle de Cox, on utilise la fonction <strong><code>cox.zph</code></strong>. Cette fonction utilise par défaut <span class="math inline">\(g(t)=1-S(t)\)</span> où <span class="math inline">\(S(t)\)</span> sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.</li>
+<li>Test OLS: j’ai récupéré le programme du test antérieur, renommé <strong><code>cox.zphold</code></strong>. On peut le charger simplement, et il est facilement exécutable. Pour le charger: <code>source("https://raw.githubusercontent.com/mthevenin/analyse_duree/main/cox.zphold/cox.zphold.R")</code></li>
+</ul>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p>Le test (OLS) est obtenu avec la commande <strong><code>estat phtest, d</code></strong>. Par défaut Stata utilise <span class="math inline">\(g(t)=t\)</span>. On peut modifier cette fonction.</p>
+</div>
+<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+<p>Le test (OLS) est disponible depuis quelques années avec l’argument <strong><code>zph</code></strong> sur la ligne <code>proc lifetest</code>. Par défaut SAS utilise <span class="math inline">\(g(t)=t\)</span>. On peut modifier cette fonction.</p>
+</div>
+<div id="tabset-2-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-4-tab">
+<p>Le test (OLS) est donné avec la fonction <strong><code>proportional_hazard_test</code></strong> de la librairie <code>lifelines</code>. La fonction utilise par défaut <span class="math inline">\(g(t)=t\)</span>, mais on peut afficher les résultats pour toutes les transformations de <span class="math inline">\(t\)</span> disponibles avec l’option <code>time_transform=’all’</code>.</p>
+</div>
+</div>
+</div>
+</section>
+<section id="intéraction-avec-la-durée" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="intéraction-avec-la-durée"><span class="header-section-number">7.2.2</span> Intéraction avec la durée</h3>
+<p><strong><em>Petit retour sur l’estimation du modèle</em></strong></p>
+<p>Pour estimer le modèle de Cox, les données sont dans un premier temps splitées aux moment où au moins un évènement a été observé.</p>
+<p>Sur l’application, avec 2 individus avec la covariable <em>age</em> (rappel: il s’agit de l’âge en <span class="math inline">\(t_0\)</span>:</p>
+<table class="table">
+<caption>Base spittées sur les intervals d’évènement</caption>
+<thead>
+<tr class="header">
+<th>id</th>
+<th>age</th>
+<th>died</th>
+<th><span class="math inline">\(t_0\)</span></th>
+<th><span class="math inline">\(t\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>51</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>51</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>51</td>
+<td>0</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>51</td>
+<td>0</td>
+<td>3</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>51</td>
+<td>1</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>54</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>54</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>54</td>
+<td>0</td>
+<td>2</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>54</td>
+<td>0</td>
+<td>3</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>54</td>
+<td>0</td>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>54</td>
+<td>0</td>
+<td>6</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>54</td>
+<td>0</td>
+<td>8</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>54</td>
+<td>0</td>
+<td>9</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>54</td>
+<td>1</td>
+<td>12</td>
+<td>16</td>
+</tr>
+</tbody>
+</table>
+<p>Les bornes des intervalles <span class="math inline">\([t_0;t]\)</span> présentent des valeurs seulement lorsqu’un évènement s’est produit (principe de la vraisemblance partielle). Il n’y a donc pas de valeurs pour <span class="math inline">\(t\)</span> et <span class="math inline">\(t_0\)</span> en <span class="math inline">\(t=4\)</span> pour <span class="math inline">\(id=(2,3)\)</span>et <span class="math inline">\(t=7,10,11,13,14,15\)</span> pour <span class="math inline">\(id=3\)</span>.<br>
+Les deux individus observent l’évènement en <span class="math inline">\(t=6\)</span> pour <span class="math inline">\(id=2\)</span>, et en <span class="math inline">\(t=16\)</span> pour <span class="math inline">\(id=3\)</span>. Avant ce moment la valeur de la variable évènement/censure (ici <span class="math inline">\(d\)</span>) prend toujours la valeur 0, et prend la valeur 1 le jour du décès.</p>
+<p>Sur cette base <em>splitée</em> aux moments d’évènement (n=3573), on pourra vérifier facilement que les résultats obtenus par le modèle de Cox sont identiques à ceux obtenus précédemment.</p>
+<p><em>Introduction d’une intéraction avec une fonction de la durée</em></p>
+<p>On a une variable de durée (on prendra <span class="math inline">\(g(t)=t\)</span>) qui sera croisée avec la variable <em>surgery</em>.</p>
+<p>Le modèle s’écrit:</p>
+<p><span class="math display">\[h(t | X,t) = h_0(t)e^{b_1age + b_2year + b_3 surgery + b_4 (surgery\times t)}\]</span></p>
+<p>Le modèle avec cette intéraction donne les résultats suivants:</p>
+<table class="table">
+<caption>Modèle de Cox avec une intéraction entre une fonction de la durée et la variable *surgery</caption>
+<colgroup>
+<col style="width: 28%">
+<col style="width: 10%">
+<col style="width: 13%">
+<col style="width: 10%">
+<col style="width: 14%">
+<col style="width: 22%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th><span class="math inline">\(e^b\)</span></th>
+<th>Std.err</th>
+<th>z</th>
+<th>P&gt;|z|</th>
+<th>95% IC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>year</td>
+<td>0.884</td>
+<td>0.059</td>
+<td>-1.84</td>
+<td>0.066</td>
+<td>0.776 ; 1.008</td>
+</tr>
+<tr class="even">
+<td>age</td>
+<td>1.029</td>
+<td>0.014</td>
+<td>+2.15</td>
+<td>0.032</td>
+<td>1.003 ; 1.057</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(surgery(t_{0+})\)</span></td>
+<td>0.173</td>
+<td>0.117</td>
+<td>-2.60</td>
+<td>0.009</td>
+<td>0.046 ; 0.649</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(surgery\times t\)</span></td>
+<td>1.002</td>
+<td>0.001</td>
+<td>+2.02</td>
+<td>0.043</td>
+<td>1.000 ; 1.004</td>
+</tr>
+</tbody>
+</table>
+<p>On retrouve donc un résultat proche de celui obtenu à partir du test OLS sur les résidus de Schoenfeld pour la variable <em>surgery</em>. Et c’est normal. Avec <span class="math inline">\(g(t)=t\)</span>, il a le mérite de pouvoir être interprété directement. Ce qui ne veut pas dire qu’il s’agit de la meilleure solution.</p>
+<p>Donc, malgré une hypothèse plutôt forte sur la forme fonctionnelle de l’intéraction, et dans les faits surement pas pertinente, on peut dire que chaque jour le rapport des risques entre personnes opérées et personnes non opérées augmente de +0.2%. Pour plus précis, étant à l’origine &lt;1, l’écart se modère. L’effet de l’opération sur la survie des individus s’estompe donc avec le temps.</p>
+<p><strong>A noter</strong></p>
+<ul>
+<li>Le modèle n’est plus un modèle à risque proportionnel. La variable <em>surgery</em> n’est plus une variable <strong>fixe</strong> mais une variable tronquée dynamique qui prend la valeur de <span class="math inline">\(t\)</span> pour les personnes qui ont été opérées d’un pontage avant leur entrée dans le registre de greffe.</li>
+</ul>
+<p>Si <span class="math inline">\(surgery = 0\)</span></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>id</th>
+<th>surgery</th>
+<th>died</th>
+<th><span class="math inline">\(t_0\)</span></th>
+<th><span class="math inline">\(t\)</span></th>
+<th>surgery*t</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>2</td>
+<td>3</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0</td>
+<td>0</td>
+<td>3</td>
+<td>5</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>0</td>
+<td>1</td>
+<td>5</td>
+<td>6</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Si <span class="math inline">\(surgery = 1\)</span> (jusqu’à <span class="math inline">\(t=6\)</span> car aucun décès précoce pour ce groupe)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>id</th>
+<th>surgery</th>
+<th>died</th>
+<th><span class="math inline">\(t_0\)</span></th>
+<th><span class="math inline">\(t\)</span></th>
+<th>surgery*t</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>40</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>40</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>40</td>
+<td>1</td>
+<td>0</td>
+<td>2</td>
+<td>3</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>40</td>
+<td>1</td>
+<td>0</td>
+<td>3</td>
+<td>5</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>40</td>
+<td>1</td>
+<td>1</td>
+<td>5</td>
+<td>6</td>
+<td>6</td>
+</tr>
+</tbody>
+</table>
+<p>Exemple pour une variable quantitative (<em>age</em>)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>id</th>
+<th>age</th>
+<th>died</th>
+<th><span class="math inline">\(t_0\)</span></th>
+<th><span class="math inline">\(t\)</span></th>
+<th>age*t</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2</td>
+<td>51</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>51</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>51</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>102</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>51</td>
+<td>0</td>
+<td>2</td>
+<td>3</td>
+<td>153</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>51</td>
+<td>0</td>
+<td>3</td>
+<td>5</td>
+<td>255</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>51</td>
+<td>1</td>
+<td>5</td>
+<td>6</td>
+<td>306</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>L’altération des rapports de risque dépend de la forme fonctionnelle de l’intéraction choisie. Ici la variation dans la durée du rapport des risque est constante, ce qui est une hypothèse assez forte. On a, en quelques sorte, réintroduit une hypothèse de proportionnalité, ici sur le degré d’altération des écarts de risques dans le temps, qui devient lui même strictement constant.</li>
+</ul>
+</section>
+<section id="que-faire" class="level3" data-number="7.2.3">
+<h3 data-number="7.2.3" class="anchored" data-anchor-id="que-faire"><span class="header-section-number">7.2.3</span> Que faire ?</h3>
+<p><strong><em>Ne rien faire</em></strong></p>
+<p>On interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison). Difficilement soutenable pour l’analyse des effets cliniques, elle peut être envisagée dans d’autres domaines. Attention au nombre de variables qui ne respectent pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée si l’analyse a des visée prédictives. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme très « moyenne » sur la période d’observation.</p>
+<p>On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps des écarts de risque, s’accentuent à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais si cette non proportionnalité conduit à un changement du sens des rapport de risque je suis moins convaincu de la pertinence de cette stratégie. Encore une fois, et il faut le rappeler, l’estimation des courbes de survie doit permette d’anticiper ce dernier cas de figure.</p>
+<p>Il faut également tenir compte de l’intérêt portée par les variables qui présentent un problème par rapport à l’hypothèse. Il n’est peut-être pas nécessaire de complexifier le modèle pour des variables introduites comme simples contrôles.</p>
+<p>Mais plus problématique [<strong>important</strong>]… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de <strong><em>frailty</em></strong> (fragilité) lorsque cette non homogénéité n’est pas observable. Des estimations, plus complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.</p>
+<p><strong><em>Modèle de Cox stratifié</em></strong></p>
+<p>Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie prédites ajustées, et si une seule covariable (binaire) présente un problème. Les HR ne seront pas estimés pour la variable qui ne respecte pas l’hypothèse.</p>
+<p><strong><em>Intéraction</em></strong></p>
+<p>Introduire une interaction avec la durée. Cela peut permettre en plus d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des rapports de risque, dans l’idéal une seule variable. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être strictement linéaire, ce qui est une hypothèse plutôt forte…. on introduit de nouveau une contrainte de proportionnalité dans le modèle.</p>
+<p><strong><em>Modèles alternatifs</em></strong></p>
+<p>Utiliser un modèle alternatif: modèles paramétriques à risques proportionnels si la distribution du risque s’ajuste bien, le modèle paramétrique « flexible » de Parmar-Royston ou un modèle à temps discret. Pour la dernière solution, on peut également corriger la non proportionnalité avec l’introduction d’une intéraction. Si on ne le fait pas, les risques prédits, par définition des probabilités conditionnelles, resteront toujours dans les bornes contrairement au modèle de Cox.<br>
+Utiliser un modèle non paramétrique additif dit d’Aalen ou une de ses variantes (non traité). Mais ces modèles, dont les résultats sont présentés par des graphiques, se commentent assez difficilement.</p>
+<p><strong>Forêt aléatoire</strong><br>
+Autre méthode : les forêts aléatoires. L.Breiman a dès le départ proposé une estimation des modèles de survie par cette méthode. Par définition, pas sensible à l’hypothèse PH. Mais cela reste des méthodes à finalité prédictive, moins riche en interprétation.</p>
+
+
+<!-- -->
+
+</section>
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>Se reporter à la définition des grandeurs dans la section <em>Théorie</em><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p><span class="math inline">\(n! = (n)\times(n-1)\times(n-2)\times....\times3\times2\times1\)</span><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Il s’agit bien de la personne qui maintient le package <strong><code>survival</code></strong> dans R<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>Pour les personnes utilisant R, je donne un moyen pour récupérer et exécuter le test OLS sous R<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Se reporter à leur ouvrage <em>Modeling Survival Data: Extending the Cox Model</em> (2001)<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copié");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copié");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./06-intro_mod.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Introduction</strong></span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./08-discret.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Code source</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#title: "**Le modèle de Cox**"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">filters:</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - lightbox</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">lightbox:</span><span class="co"> auto</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Le modèle de Cox**</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>On peut ignorer la partie sur l’estimation du modèle. On retiendra tout de même qu'il est déconseillé d'utiliser la méthode dite *exacte* pour la correction de la vraisemblance, qui ne peut matériellement fonctionner qu’avec un nombre très limité d’évènements observés simultanément. Ce qui est plutôt rare avec des données à durées discrètes ou groupées, très fréquentes dans les sciences sociales.</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Le modèle semi-paramétrique de Cox</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">### La vraisemblance partielle et estimation des paramètres </span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>On se situe dans une situation où la durée est mesurée sur une échelle strictement continue. Il ne peut donc y avoir qu'un seul évènement observé en $t_i$ (idem pour la censure).</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>On peut représenter le processus aléatoire d'une analyse de survie en présence de censure à droite, avec l'équation de vraisemblance suivante:</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>$$L_i=f(t_i)^{\delta_i}S(t_i)^{1-\delta_i}$$ </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$f(t_i)$ est la valeur de la fonction de densité en $t_i$ </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$S(t_i)$ est la valeur de la fonction de survie en $t_i$ </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\delta_i=1$ si l'évènement est observé: $L_i=f(t_i)$ </span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\delta_i=0$ si l'observation est censurée: $L_i=S(t_i)$                                                                            </span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>**Vraisemblance partielle de Cox**  </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>Comme $f(t_i)=h(t_i)\times S(t_i)$ ^<span class="co">[</span><span class="ot">Se reporter à la définition des grandeurs dans la section *Théorie*</span><span class="co">]</span>, on obtient:  $L_i=<span class="co">[</span><span class="ot">h(t_i)S(t_i)</span><span class="co">]</span>^{\delta_i}S(t_i)^{1-\delta_i} = h(t_i)^{\delta_i}S(t_i)$.  </span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>Pour $i=1,2,.....,n$, la vraisemblance s'ecrit donc:  $L_i=\prod_{i=1}^{n}h(t_i)^{\delta_i}S(t_i)$.  </span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>On peut réécrire cette vraisemblance en la multipliant et en la divisant par: $\sum_{j\in R_i}h(t_i)$, où $j\in R_i$ est l'ensemble des observations soumises au risque en $t_i$.  </span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>$$L=\prod_{i=1}^{n}\left<span class="co">[</span><span class="ot">h(t_i)\frac{\sum_{j\in R}h(t_i)}{\sum_{j\in R}h(t_i)}\right</span><span class="co">]</span>^{\delta_i}S(t_i)= \prod_{i=1}^{n}\left<span class="co">[</span><span class="ot">\frac{h(t_i)}{\sum_{j\in R_i}h(t_i)}\right</span><span class="co">]</span>^{\delta_i}\sum_{j\in R_i}h(t_i)^{\delta_i}S(t_i)$$  </span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>La vraisemblance partielle retient seulement le premier terme de la vraisemblance, soit:   </span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>$$PL=\prod_{i=1}^{n}\left<span class="co">[</span><span class="ot">\frac{h(t_i)}{\sum_{j\in R}h(t_i)}\right</span><span class="co">]</span>^{\delta_i}$$  </span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>Une fois remplacée la valeur de $h(t_i)$ par son expression en tant que modèle à risques proportionnels, la vraisemblance partielle ne dépendra plus de la durée. **Mais elle va dépendre de l'ordre d'arrivée des évènements, c'est à dire leur rang**. </span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>*Remarque*: pour les observations censurées($\delta_i=0$), $PL=1$. Toutefois, ces censures à droite entrent dans l'expression $\sum_{j\in R}h(t_i)$ tant qu'elles sont soumises au risque.  </span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>En remplaçant donc $h(t_i)$ par l'expression $h_0(t)e^{X_i^{'}b}$:  </span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>$$PL=\prod_{i=1}^{n}\left<span class="co">[</span><span class="ot">\frac{h_0(t)e^{X_{i}^{'}b}}{\sum_{j\in R_i}h_0(t)e^{X_{j}^{'}b}}\right</span><span class="co">]</span>^{\delta_i} =\prod_{i=1}^{n}\left<span class="co">[</span><span class="ot">\frac{e^{X_i^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}\right</span><span class="co">]</span>^{\delta_i}$$</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>L'expression $\frac{e^{Xb}}{\sum_{j\in R}e^{Xb}}$ est donc bien une probabilité, et la vraisemblance partielle est donc bien un produit de probabilités. </span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>Pour un individu ayant connu l'évènement, la contribution à la vraisemblance partielle est **la probabilité que l'individu observe l'évènement en $t_i$ sachant qu'un évènement (et un seul) s'est produit**.    </span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Si $\delta_i = 0$: $PL_i = 1$</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Si $\delta_i = 1$: $PL_i =\frac{e^{X_i^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}$</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>*Condition nécessaire: pas d'évènement simultané*:  en présence d'évènements mesurés simultanément, l’estimation de la vraisemblance doit faire l'objet d'une correction.   </span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>*Correction de la vraisemblance avec des évènements simultanés*:    </span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>La ***méthode dite exacte***: Comme il ne doit pas y avoir d’évènement simultané, on va introduire à la vraisemblance partielle toutes les permutations possibles des évènements observés au même moment. Bien  qu'en $t_i$ on observe au  même moment  l’évènement pour 2 observations (A,B) une métrique temporelle plus précise permettrait de savoir si A s'est produit avant B ou B s'est produit avant A (2 permutations). Comme le nombre de permutations est calculé à l'aide d'une factorielle ^<span class="co">[</span><span class="ot">$n! = (n)\times(n-1)\times(n-2)\times....\times3\times2\times1$</span><span class="co">]</span>, avec 3 évènements mesurés simultanément, on obtient 6 permutations ($3\times2\times1$). </span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>Problème: le nombre de permutations pour chaque $t_i$ peut devenir très vite particulièrement élevé. Par exemple pour 10 évènements simultanés, le nombre de permutations est égal à 3,628,800. Le temps de calcul devient extrêmement long, et ce type de correction totalement inopérant.</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>La ***méthode dite de Breslow***: il s'agit d'une approximation de la méthode exacte permettant de ne pas avoir à intégrer chaque permutation. *Cette approximation est utilisée par défaut par les logiciels Sas et Stata*. </span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>La ***méthode dite  d'Efron***: elle corrige l'approximation de Breslow, et est jugée plus proche de la méthode exacte. *C'est la méthode utilisée par défaut avec le logiciel R*, et elle est disponible avec les autres applications.  </span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimation des paramètres</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>On utilise la méthode habituelle, à savoir la maximisation de la log-vraisemblance (ici partielle).  </span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Conditions de premier ordre: calcul des équations de score à partir des dérivées partielles. Solution: $\frac{\partial log(PL)}{\partial{b_k}}=0$. On ne peut pas obtenir de solution numérique directe.  </span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>Remarque: les équations de score sont utilisées pour tester la validité de l'hypothèse de constance des rapports de risque pour calculer les **résidus de Schoenfeld** (voir plus loin). </span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Conditions de second ordre: calcul des dérivées secondes qui permettent d'obtenir la matrice d'information de Fisher et la matrice des variances-covariances des paramètres. </span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Comme il n'y a pas de solution numérique directe, on utilise un algorithme d'optimisation (ex: Newton-Raphson) à partir des équations de score et de la matrice d'information de Fisher.  </span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>**Eléments de calcul**    </span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>En logarithme (sans évènement simultané), la vraisemblance partielle s'ecrit:  </span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>$$pl(b)=\sum_{i=1}^n\delta_i\left(log(e^{X_{i}^{'}b})-log\sum_{j\in R_i}e^{X_{j}^{'}b}\right)$$</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>$$pl(b)=\sum_{i=1}^n\delta_i\left(X_{i}^{'}b-log\sum_{j\in R_i}e^{X_{j}^{'}b}\right)$$</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>Calcul de l'équation de score pour une covariable $X_k$:  </span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>$$\frac{\partial pl(b)}{\partial{b_k}}=\sum_{i=1}^n\delta_i\left(X_{ik}-\sum_{j\in R_i}X_{jk}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}\right)$$</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>Comme $\frac{e^{X_{j}b}}{\sum_{j\in R}e^{X_{j}b}}$ est une probabilité, et  $\sum_{j\in R}X_{ik}\times p_i$ est l'espérance (la moyenne) $E(X_k)$ d'avoir la caractéristique $X_k$ lorsqu'un évènement a été observé. Au final:  </span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>$$\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - E(X_{j\in R_i,k}) \right)$$</span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>Cette expression va permettre d'analyser le respect ou non de l’hypothèse de risques proportionnels via les *résidus de Schoenfeld*. </span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="fu">### Lecture des résultats</span></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>Comme il s'agit d'un modèle à risque proportionnel, **les rapports de risques sont constants pendant toute la période d'observation**. Il s'agit d'une **propriété de l'estimation**.  </span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>***Covariable binaire (indicatrice)*** </span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>$X=(0,1)$: $RR=\frac{h(t\ |\ X=1)}{h(t\ |\ X=0)}=e^b$.  </span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>A chaque moment de la durée $t$, le risque d'observer l'évènement est $e^b$ fois plus important/plus faible pour $X=1$ que pour $X=0$.  </span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>***Covariable quantitative*** (fixe dans le temps) </span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>$RR=\frac{h(t\ |\ X=a+c)}{h(t\ |\ X=a)}=e^{c \times{b}}$. </span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>On prendra pour illustrer une variable type âge au début de l’exposition au risque (a)  et un delta de comparaison avec un âge inférieur c.  </span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>Si $c=1$ (résultat de l'estimation): A un âge donnée, le risque de connaitre l'évènement est $e^b$ fois inférieur/supérieur à celui d'une personne qui a un an de moins. </span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>**Exemple pour les insuffisances cardiaques**  </span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Correction de la vraisemblance: méthode d'Efron</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Nombre d'observations: 103</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Nombre de décès: 75</span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Log-Vraisemblance: -289.30639</span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>| Variables | logRR   | Std.Err | z     | $P&gt;|z|$| 95% IC          |</span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>|-----------|---------|---------|-------|--------|-----------------| </span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>|      year | -0.119  | 0.0673  | -1.78 | 0.076  | -0.2516;+0.0124 |</span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>|      age  | +0.0296 | 0.0135  |  2.19 | 0.029  | +0.0031;+0.0561 |</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>|  surgery  | -0.9873 | 0.4363  | -2.26 | 0.024  | -1.8424;-0.1323 |</span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>: Cox: log Hazard Ratio (Risks Ratio) {.striped .hover}</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>| Variables | RR      | Std.Err | z     | $P&gt;|z|$| 95%CI            |</span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>|-----------|---------|---------|-------|--------|------------------| </span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>|      year | 0.8872  | 0.0597  |-1.78  | 0.076  |  0.7775; 1.0124  |</span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>|       age | 1.0300  | 0.0139  | 2.19  | 0.029  |  1.0031; 1.0577  |</span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>|   surgery | 0.3726  | 0.1625  |-2.26  | 0.024  |  0.1584; 0.8761  |</span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>: Cox: Hazard Ratio (Risks Ratio) {.striped .hover}</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>On retrouve les  des tests non paramétriques pour l'opération, à savoir qu’un pontage réduit les risques journaliers de décès pendant la période d’observation (augmente la durée de survie).     </span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>De la même manière, plus on entre à un âge élevé dans la liste d'attente plus le risque de décès augmente. La variable *year*, qui traduit des progrès en médecine, renvoie à une réduction plutôt modérée du risque journalier de décès durant l'attente d'une greffe.   </span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>**R-Stata-Sas-Python**   </span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a><span class="fu">### R</span></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>Le modèle est  estimé avec la fonction **`coxph`** de la librairie **`survival`**.  Hors options, la syntaxe est identiques aux fonctions <span class="in">`survfit`</span> et <span class="in">`survdif`</span>.</span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a><span class="fu">### Stata</span></span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>Le modèle est estimé avec la commande **`stcox`**.</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="fu">### SAS</span></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>Le modèle est estimé avec la **`proc phreg`**.</span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python</span></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>Avec la librairie <span class="in">`lifelines`</span>, le modèle est estimé avec la fonction **`CoxPHFitter`**. Avec la librairie <span class="in">`statmodels`</span>, il est estimé avec la fonction <span class="in">`smf.phreg`</span>.</span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a><span class="fu">## Analyse de la constance des rapports de risque</span></span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Les rapports de risque (RR) estimés par le modèle sont contraints à être constant sur toute la période d’observation. C’est une hypothèse forte.</span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Le respect de cette hypothèse doit être analysé, en particulier pour le modèle de Cox où la baseline du risque est habituellement estimée à l’aide de ces rapports (par exemple la méthode dite de Breslow, non traitée). En post-estimation, les valeurs estimées du risque pourront présenter des valeurs aberrantes si on dévie trop de constance, en particulier en obtenant des négatives des taux de risque.</span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Analyser cette hypothèse revient à introduire une interaction entre les rapports et la durée ou plutôt précisément une fonction de la durée).</span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Plusieurs méthodes disponibles, on traitera  celles basées sur les **résidus de Schoenfeld**, et l'introduction directe d'une intéraction entre une fonction la durée et les covariables du modèle. Cette dernière fait également office de méthode de correction lorsque la violation de l'hypothèse est jugée trop importante ou problématique du point de vue des résultats obtenus. </span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si on regarde les courbes de Kaplan-Meier, leurs croisement non tardif impliquera nécessairement un problème sur cette hypothèse. </span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a><span class="fu">### Test de Grambsch-Therneau sur les résidus de Schoenfeld</span></span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a>Ce test a été proposé par P.Grambsch et T.Therneau ^<span class="co">[</span><span class="ot">Il s'agit bien de la personne qui maintient le package **`survival`** dans R</span><span class="co">]</span> dans un cadre à durée strictement continue. Il repose originellement sur une régression linéaire estimé avec les moindres carrés généralisés (GLS) correction de l'autocorrélation des erreurs avec des sér) . </span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>Dans un premier temps pour des raisons plutôt pratiques (informatique), le test a une version moindres carrés ordinaires (OLS). Jusqu'en 2020, tous les logiciels ne proposaient que le test OLS. T.Therneau avec la V3 de package <span class="in">`survival`</span> a substitué - assez brutalement - le test GLS au test OLS. Si les résultats sont proches dans le cadre d'une durée continue et que le test GLS peut être considéré comme un test *exact*, cela devient problématique dans une situation de durée discrète/groupée ^<span class="co">[</span><span class="ot">Pour les personnes utilisant R, je donne un moyen pour récupérer et exécuter le test OLS sous R</span><span class="co">]</span>.  Le test OLS reste, à mon sens, la méthode à privilégier dans le cas discret.  </span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>Il est également important de souligner que pour P.Grambsch et T.Therneau ^<span class="co">[</span><span class="ot">Se reporter à leur ouvrage *Modeling Survival Data: Extending the Cox Model* (2001)</span><span class="co">]</span> n'est qu'un moyen parmi d'autres d'analyser une violation de l'hypothèse de proportionnalité. Ce n'est pas *the solution* (comme tout autre test au passage). Le croisement des courbes de séjours peut-être suffisant pour alerter sur cette violation.  </span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>***Principe du test***:  consiste à regarder la corrélation entre les **résidus de Schoenfeld** obtenus directement avec la fonction de score de la vraisemblanc partielle de Cox et une fonction de la durée.  </span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>***Principe de calcul des résidus***</span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Les résidus *bruts* sont directement calculés à partir des équations de scores <span class="co">[</span><span class="ot">voir section estimation</span><span class="co">]</span>.</span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Ils ne sont calculés que pour les observations qui ont connues l’évènement, au moment où un évènement s’est produit.</span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>La somme des résidus pour chaque covariable est égale à 0. Il s'agit de la propriété de l’équation de score à l’équilibre.</span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>On utilise généralement les *résidus standardisés* (*remis à l'échelle* / scaled) - par leur variance -. C'est la mesure de cette variance qui distingue le test OLS du test GLS.</span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a>Pour une observation dont l’évènement s’est produit en $t_i$, le *résidu brut de Schoenfeld* pour la covariable $X_k$, après estimation du modèle, est égal à:</span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a>$$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{jk}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}= X_{ik} - E(X_{j\in R_i})$$</span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Ce résidu est formellement la contribution d'une observation ou d'un moment d'évènement au score. Il se lit comme la différence entre la valeur observée d'une covariable  et sa valeur espérée au moment où l'évènement s'est produit. </span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si la constance des rapports de risque varie peu les résidus ne doivent pas suivre une tendance précise localement ou globalement,  à la hausse ou à la baisse.  </span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a>Pourquoi?  </span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a>Par l'exemple, sans censure à droite et en ne considérant que les résidus bruts: </span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>Avec un rapport de risque strictement égal à 1 en début d'exposition, une population soumise au risque $R_i=100$ avec 50 hommes et 50 femmes. Si l'hypothèse PH (strictement) respectée, lorsqu'il reste 90 personnes soumises au risque, on devrait avoir 45 hommes et 45 femmes. Avec $R_i=50$, 25 hommes et 25 femmes,.......avec $R_i=10$, 5 hommes et 5 femmes.    </span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a>Au final l'espérance d'avoir la caractéristique $X$ est toujours égal à 0.5 et les résidus bruts prendront toujours la valeur -.5 si $X=0$ et .5 si $X=1$. En faisant une simple régression linéaire entre les résidus, qui alternent ces deux valeurs, et $t$, le coefficient estimé sera en toute logique très proche de 0. </span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a>De manière encore plus simple, cette proportionnalité avec un risque ratio égal à 1 suggère qu'au cours de la durée d'observation, on observe une succession d'un même nombre d'hommes et de femmes qui connaissent l'évènement. Si tous les hommes ou presque  avaient observés l'évènement plutôt en début d'éxposition et si toutes les femmes  ou presque avaient observé l'évènement plutôt en fin d'exposition, l'hypothèse de proportionnalité pourraient fortement remise en cause.</span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a>On trouvera des éléments de calcul du test OLS <span class="co">[</span><span class="ot">ici</span><span class="co">](https://mthevenin.github.io/analyse_duree/annexes/residusch.html)</span> </span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a>::: callout-warning</span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Test omnibus**: Ne pas l'utiliser bien qu'il figure généralement en bas des output. Il n'a pas d'interprétation directe, et les p-value peuvent présenter des valeurs très faibles alors que ce n'est pas le cas pour les covariables prises une à une. Rester comme c'est souvent le cas à un test à un degré de liberté.</span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Transformations de la durée**: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: $g(t)=t$ (« identity »), $g(t)=log(t)$, $g(t)=KM(t)$ ou $g(t)=1- S(t$) où $S(t$) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank » est  utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple $t=(0.1,0.5,1,2.6,3)$ donne une transformation $t=(1,2,3,4)$. A savoir : $g(t)=t rend le test relativement sensible aux évènements tardifs lorsque la population restant soumise est peu nombreuse (outliers).</span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a><span class="ss"> * </span>Par défaut Stata, Sas, Python: $g(t)=t$</span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a><span class="ss"> * </span>Par défaut R: $g(t)= 1 - S(t)$ </span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a>Pour des raisons de reproductibilité dans l'espace des logiciels et dans le temps pour les différentes versions du package <span class="in">`survival`</span> de R, on ne présente ici que la version OLS. </span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a>**Test OLS avec $g(t)=t$**</span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a>| Variables | chi2    | df    | P&gt;Chi2 | </span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a>|-----------|---------|-------|--------| </span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a>| year      | 0.80    |    1  | 0.3720 |</span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>| age       | 1.61    |    1  | 0.2043 |</span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a>| surgery   | 5.54    |    1  | 0.0186 |</span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a>: Test OLS Grambsch-Therneau avec $g(t)=t$</span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a>Ici l'hypothèse de proportionnalité des risques est questionnable pour la variable *surgery*. Le risque ratio  pourrait ne pas constant dans le temps.  Ce n'est pas du tout étonnant,  le premier décès pour les personnes opérées d'un pontage n'est observé qu'au bout de 165 jours. Au final, un test était-il bien nécessaire pour arriver à ce constat ???????</span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a>**Test OLS avec $g(t)=1- S(t)$**</span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a>| Variables | chi2    | df    | P&gt;Chi2 | </span>
+<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a>|-----------|---------|-------|--------| </span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a>| year      | 1.96    |    1  | 0.162  |</span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a>| age       | 1.15    |    1  | 0.284  |</span>
+<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a>| surgery   | 3.96    |    1  | 0.046  |</span>
+<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a>: Test Grambsch-Therneau avec $g(t)=1- S(t)$</span>
+<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a>**R-Stata-Sas-Python**   </span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a><span class="fu">### R</span></span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a>***Attention seulement version GLS du test depuis le V3 de survival***.</span>
+<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a><span class="ss">*  </span>Après avoir créer un objet  à l’estimation du modèle de Cox, on utilise la fonction **`cox.zph`**. Cette fonction utilise par défaut $g(t)=1-S(t)$ où $S(t)$ sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.</span>
+<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a><span class="ss">*  </span>Test OLS: j’ai récupéré le programme du test antérieur, renommé **`cox.zphold`**. On peut le charger simplement, et il est facilement exécutable.</span>
+<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a>   Pour le charger: <span class="in">`source("https://raw.githubusercontent.com/mthevenin/analyse_duree/main/cox.zphold/cox.zphold.R")`</span></span>
+<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a><span class="fu">### Stata</span></span>
+<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a>Le test (OLS) est obtenu avec la commande **`estat phtest, d`**. Par défaut Stata utilise $g(t)=t$. On peut modifier cette fonction. </span>
+<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a><span class="fu">### SAS</span></span>
+<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a>Le test (OLS) est disponible depuis quelques années avec l’argument **`zph`** sur la ligne <span class="in">`proc lifetest`</span>. Par défaut SAS utilise $g(t)=t$. On peut modifier cette fonction.</span>
+<span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python</span></span>
+<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a>Le test (OLS)  est donné avec la  fonction **`proportional_hazard_test`** de la librairie <span class="in">`lifelines`</span>. La fonction utilise par défaut $g(t)=t$, mais on peut afficher les résultats pour toutes les transformations de $t$ disponibles avec l’option <span class="in">`time_transform=’all’`</span>. </span>
+<span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-308"><a href="#cb1-308" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a><span class="fu">### Intéraction avec la durée</span></span>
+<span id="cb1-310"><a href="#cb1-310" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-311"><a href="#cb1-311" aria-hidden="true" tabindex="-1"></a>***Petit retour sur l'estimation du modèle***  </span>
+<span id="cb1-312"><a href="#cb1-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-313"><a href="#cb1-313" aria-hidden="true" tabindex="-1"></a>Pour estimer le modèle de Cox, les données sont dans un premier temps splitées aux moment où au moins un évènement a été observé. </span>
+<span id="cb1-314"><a href="#cb1-314" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-315"><a href="#cb1-315" aria-hidden="true" tabindex="-1"></a>Sur l'application, avec 2 individus avec la covariable *age* (rappel: il s'agit de l'âge en $t_0$:</span>
+<span id="cb1-316"><a href="#cb1-316" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-317"><a href="#cb1-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-318"><a href="#cb1-318" aria-hidden="true" tabindex="-1"></a>| id  | age      | died |$t_0$| $t$ |</span>
+<span id="cb1-319"><a href="#cb1-319" aria-hidden="true" tabindex="-1"></a>|-----|----------|------|-----|-----|</span>
+<span id="cb1-320"><a href="#cb1-320" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 0   | 1   |</span>
+<span id="cb1-321"><a href="#cb1-321" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 1   | 2   |</span>
+<span id="cb1-322"><a href="#cb1-322" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 2   | 3   |</span>
+<span id="cb1-323"><a href="#cb1-323" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 3   | 5   |</span>
+<span id="cb1-324"><a href="#cb1-324" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 1    | 5   | 6   |</span>
+<span id="cb1-325"><a href="#cb1-325" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 0   | 1   |</span>
+<span id="cb1-326"><a href="#cb1-326" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 1   | 2   |</span>
+<span id="cb1-327"><a href="#cb1-327" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 2   | 3   |</span>
+<span id="cb1-328"><a href="#cb1-328" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 3   | 5   |</span>
+<span id="cb1-329"><a href="#cb1-329" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 5   | 6   |</span>
+<span id="cb1-330"><a href="#cb1-330" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 6   | 8   |</span>
+<span id="cb1-331"><a href="#cb1-331" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 8   | 9   |</span>
+<span id="cb1-332"><a href="#cb1-332" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 9   | 12  |</span>
+<span id="cb1-333"><a href="#cb1-333" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 1    | 12  | 16  |</span>
+<span id="cb1-334"><a href="#cb1-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-335"><a href="#cb1-335" aria-hidden="true" tabindex="-1"></a>: Base spittées sur les intervals d'évènement</span>
+<span id="cb1-336"><a href="#cb1-336" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-337"><a href="#cb1-337" aria-hidden="true" tabindex="-1"></a>Les bornes des intervalles $<span class="co">[</span><span class="ot">t_0;t</span><span class="co">]</span>$ présentent des valeurs seulement lorsqu'un évènement s'est produit (principe de la vraisemblance partielle). Il n'y a donc pas de valeurs pour $t$ et $t_0$ en $t=4$ pour $id=(2,3)$et $t=7,10,11,13,14,15$ pour $id=3$.  </span>
+<span id="cb1-338"><a href="#cb1-338" aria-hidden="true" tabindex="-1"></a>Les deux individus observent l'évènement en $t=6$ pour $id=2$, et en $t=16$ pour $id=3$. Avant ce moment la valeur de la variable évènement/censure (ici $d$) prend toujours la valeur 0, et prend la valeur 1 le jour du décès.  </span>
+<span id="cb1-339"><a href="#cb1-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-340"><a href="#cb1-340" aria-hidden="true" tabindex="-1"></a>Sur cette base *splitée* aux moments d'évènement (n=3573), on pourra vérifier facilement que les résultats obtenus par le modèle de Cox sont  identiques à ceux obtenus précédemment. </span>
+<span id="cb1-341"><a href="#cb1-341" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-342"><a href="#cb1-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-343"><a href="#cb1-343" aria-hidden="true" tabindex="-1"></a>*Introduction d'une intéraction avec une fonction de la durée*  </span>
+<span id="cb1-344"><a href="#cb1-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-345"><a href="#cb1-345" aria-hidden="true" tabindex="-1"></a>On a une variable de durée (on prendra $g(t)=t$) qui sera croisée avec la variable *surgery*. </span>
+<span id="cb1-346"><a href="#cb1-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-347"><a href="#cb1-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-348"><a href="#cb1-348" aria-hidden="true" tabindex="-1"></a>Le modèle s'écrit:      </span>
+<span id="cb1-349"><a href="#cb1-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-350"><a href="#cb1-350" aria-hidden="true" tabindex="-1"></a>$$h(t | X,t) = h_0(t)e^{b_1age + b_2year + b_3 surgery + b_4 (surgery\times t)}$$</span>
+<span id="cb1-351"><a href="#cb1-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-352"><a href="#cb1-352" aria-hidden="true" tabindex="-1"></a>Le modèle avec cette intéraction donne les résultats suivants: </span>
+<span id="cb1-353"><a href="#cb1-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-354"><a href="#cb1-354" aria-hidden="true" tabindex="-1"></a>| Variable          | $e^b$ | Std.err | z     | P<span class="sc">\&gt;</span>\|z\| | 95% IC        |</span>
+<span id="cb1-355"><a href="#cb1-355" aria-hidden="true" tabindex="-1"></a>|-------------------|-------|---------|-------|----------|---------------|</span>
+<span id="cb1-356"><a href="#cb1-356" aria-hidden="true" tabindex="-1"></a>| year              | 0.884 | 0.059   | -1.84 | 0.066    | 0.776 ; 1.008 |</span>
+<span id="cb1-357"><a href="#cb1-357" aria-hidden="true" tabindex="-1"></a>| age               | 1.029 | 0.014   | +2.15 | 0.032    | 1.003 ; 1.057 |</span>
+<span id="cb1-358"><a href="#cb1-358" aria-hidden="true" tabindex="-1"></a>| $surgery(t_{0+})$ | 0.173 | 0.117   | -2.60 | 0.009    | 0.046 ; 0.649 |</span>
+<span id="cb1-359"><a href="#cb1-359" aria-hidden="true" tabindex="-1"></a>| $surgery\times t$ | 1.002 | 0.001   | +2.02 | 0.043    | 1.000 ; 1.004 |</span>
+<span id="cb1-360"><a href="#cb1-360" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-361"><a href="#cb1-361" aria-hidden="true" tabindex="-1"></a>: Modèle de Cox avec une intéraction entre une fonction de la durée et la variable *surgery</span>
+<span id="cb1-362"><a href="#cb1-362" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-363"><a href="#cb1-363" aria-hidden="true" tabindex="-1"></a>On retrouve donc un résultat proche de celui obtenu à partir du test OLS sur les résidus de Schoenfeld pour la variable *surgery*. Et c'est normal. Avec $g(t)=t$, il a le mérite de pouvoir être interprété directement. Ce qui ne veut pas dire qu'il s'agit de la meilleure solution. </span>
+<span id="cb1-364"><a href="#cb1-364" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-365"><a href="#cb1-365" aria-hidden="true" tabindex="-1"></a>Donc, malgré  une hypothèse plutôt forte sur la forme fonctionnelle de l'intéraction, et dans les faits surement pas pertinente, on peut dire  que chaque jour le rapport des risques entre personnes opérées et personnes non opérées augmente de +0.2%. Pour plus précis, étant à l'origine &lt;1, l'écart se modère.  L'effet de l'opération sur la survie des individus s'estompe donc avec le temps.</span>
+<span id="cb1-366"><a href="#cb1-366" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-367"><a href="#cb1-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-368"><a href="#cb1-368" aria-hidden="true" tabindex="-1"></a>**A noter** </span>
+<span id="cb1-369"><a href="#cb1-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-370"><a href="#cb1-370" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Le modèle n'est plus un modèle à risque proportionnel. La variable *surgery* n'est plus une variable **fixe** mais une variable tronquée dynamique qui prend la valeur de $t$ pour les personnes qui ont été opérées d'un pontage avant leur entrée dans le registre de greffe.</span>
+<span id="cb1-371"><a href="#cb1-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-372"><a href="#cb1-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-373"><a href="#cb1-373" aria-hidden="true" tabindex="-1"></a>Si $surgery = 0$ </span>
+<span id="cb1-374"><a href="#cb1-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-375"><a href="#cb1-375" aria-hidden="true" tabindex="-1"></a>| id  | surgery  | died |$t_0$| $t$ |  surgery*t |</span>
+<span id="cb1-376"><a href="#cb1-376" aria-hidden="true" tabindex="-1"></a>|-----|----------|------|-----|-----|------------|</span>
+<span id="cb1-377"><a href="#cb1-377" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 0    | 0   | 1   | 0          |  </span>
+<span id="cb1-378"><a href="#cb1-378" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 0    | 1   | 2   | 0          |</span>
+<span id="cb1-379"><a href="#cb1-379" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 0    | 2   | 3   | 0          |</span>
+<span id="cb1-380"><a href="#cb1-380" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 0    | 3   | 5   | 0          |</span>
+<span id="cb1-381"><a href="#cb1-381" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 1    | 5   | 6   | 0          |</span>
+<span id="cb1-382"><a href="#cb1-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-383"><a href="#cb1-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-384"><a href="#cb1-384" aria-hidden="true" tabindex="-1"></a>Si $surgery = 1$ (jusqu'à $t=6$ car aucun décès précoce pour ce groupe)</span>
+<span id="cb1-385"><a href="#cb1-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-386"><a href="#cb1-386" aria-hidden="true" tabindex="-1"></a>| id  | surgery  | died |$t_0$| $t$ | surgery*t |</span>
+<span id="cb1-387"><a href="#cb1-387" aria-hidden="true" tabindex="-1"></a>|-----|----------|------|-----|-----|-----------|</span>
+<span id="cb1-388"><a href="#cb1-388" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 0    | 0   | 1   | 1         |  </span>
+<span id="cb1-389"><a href="#cb1-389" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 0    | 1   | 2   | 2         |</span>
+<span id="cb1-390"><a href="#cb1-390" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 0    | 2   | 3   | 3         |</span>
+<span id="cb1-391"><a href="#cb1-391" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 0    | 3   | 5   | 5         |</span>
+<span id="cb1-392"><a href="#cb1-392" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 1    | 5   | 6   | 6         |</span>
+<span id="cb1-393"><a href="#cb1-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-394"><a href="#cb1-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-395"><a href="#cb1-395" aria-hidden="true" tabindex="-1"></a>Exemple pour une variable quantitative (*age*)</span>
+<span id="cb1-396"><a href="#cb1-396" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-397"><a href="#cb1-397" aria-hidden="true" tabindex="-1"></a>| id  | age      | died |$t_0$| $t$ | age*t     |</span>
+<span id="cb1-398"><a href="#cb1-398" aria-hidden="true" tabindex="-1"></a>|-----|----------|------|-----|-----|-----------|</span>
+<span id="cb1-399"><a href="#cb1-399" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 0   | 1   | 51        |</span>
+<span id="cb1-400"><a href="#cb1-400" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 1   | 2   | 102       |</span>
+<span id="cb1-401"><a href="#cb1-401" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 2   | 3   | 153       |</span>
+<span id="cb1-402"><a href="#cb1-402" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 3   | 5   | 255       |</span>
+<span id="cb1-403"><a href="#cb1-403" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 1    | 5   | 6   | 306       |</span>
+<span id="cb1-404"><a href="#cb1-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-405"><a href="#cb1-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-406"><a href="#cb1-406" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-407"><a href="#cb1-407" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>L'altération des rapports de risque dépend de la forme fonctionnelle de l'intéraction choisie. Ici la variation dans la durée du rapport des risque est constante, ce qui est une hypothèse assez forte. On a, en quelques sorte, réintroduit une hypothèse de proportionnalité, ici sur le degré d'altération des écarts de risques dans le temps, qui devient lui même strictement constant.</span>
+<span id="cb1-408"><a href="#cb1-408" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-409"><a href="#cb1-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-410"><a href="#cb1-410" aria-hidden="true" tabindex="-1"></a><span class="fu">###  Que faire ?</span></span>
+<span id="cb1-411"><a href="#cb1-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-412"><a href="#cb1-412" aria-hidden="true" tabindex="-1"></a>***Ne rien faire***   </span>
+<span id="cb1-413"><a href="#cb1-413" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-414"><a href="#cb1-414" aria-hidden="true" tabindex="-1"></a>On interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison). Difficilement soutenable pour l’analyse des effets cliniques, elle peut être envisagée dans d’autres domaines. Attention au nombre de variables qui ne respectent pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée si l'analyse a des visée prédictives. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme très « moyenne » sur la période d’observation. </span>
+<span id="cb1-415"><a href="#cb1-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-416"><a href="#cb1-416" aria-hidden="true" tabindex="-1"></a>On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps des écarts de risque, s’accentuent  à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais si cette non proportionnalité conduit à un changement du sens des rapport de risque je suis moins convaincu de la pertinence de cette stratégie. Encore une fois, et il faut le rappeler, l'estimation des courbes de survie doit permette d'anticiper ce dernier cas de figure.</span>
+<span id="cb1-417"><a href="#cb1-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-418"><a href="#cb1-418" aria-hidden="true" tabindex="-1"></a>Il faut également tenir compte de l’intérêt portée par les variables qui présentent un problème par rapport à l’hypothèse. Il n’est peut-être pas nécessaire de complexifier le modèle pour des variables introduites comme simples contrôles.</span>
+<span id="cb1-419"><a href="#cb1-419" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-420"><a href="#cb1-420" aria-hidden="true" tabindex="-1"></a>Mais plus problématique <span class="co">[</span><span class="ot">**important**</span><span class="co">]</span>… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de ***frailty*** (fragilité) lorsque cette non homogénéité n’est pas observable. Des estimations, plus complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.  </span>
+<span id="cb1-421"><a href="#cb1-421" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-422"><a href="#cb1-422" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-423"><a href="#cb1-423" aria-hidden="true" tabindex="-1"></a>***Modèle de Cox stratifié***   </span>
+<span id="cb1-424"><a href="#cb1-424" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-425"><a href="#cb1-425" aria-hidden="true" tabindex="-1"></a>Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie prédites ajustées, et si une seule covariable (binaire) présente un problème. Les HR ne seront pas estimés pour la variable qui ne respecte pas l'hypothèse.    </span>
+<span id="cb1-426"><a href="#cb1-426" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-427"><a href="#cb1-427" aria-hidden="true" tabindex="-1"></a>***Intéraction***    </span>
+<span id="cb1-428"><a href="#cb1-428" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-429"><a href="#cb1-429" aria-hidden="true" tabindex="-1"></a>Introduire une interaction avec la durée. Cela peut permettre en plus d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des rapports de risque, dans l'idéal une seule variable. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être strictement linéaire, ce qui est une hypothèse plutôt forte....  on introduit de nouveau une contrainte de proportionnalité dans le modèle.  </span>
+<span id="cb1-430"><a href="#cb1-430" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-431"><a href="#cb1-431" aria-hidden="true" tabindex="-1"></a>***Modèles alternatifs***  </span>
+<span id="cb1-432"><a href="#cb1-432" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-433"><a href="#cb1-433" aria-hidden="true" tabindex="-1"></a>Utiliser un modèle alternatif: modèles paramétriques à risques proportionnels si la distribution du risque s’ajuste bien, le modèle paramétrique « flexible » de Parmar-Royston ou un modèle à temps discret. Pour la dernière solution, on peut également corriger la non proportionnalité avec l'introduction  d'une intéraction. Si on ne le fait pas, les risques prédits, par définition des probabilités conditionnelles, resteront toujours dans les bornes contrairement au modèle de Cox.      </span>
+<span id="cb1-434"><a href="#cb1-434" aria-hidden="true" tabindex="-1"></a>Utiliser un modèle non paramétrique additif dit d’Aalen ou une de ses variantes (non traité). Mais ces modèles, dont les résultats sont présentés par des graphiques, se commentent assez difficilement.  </span>
+<span id="cb1-435"><a href="#cb1-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-436"><a href="#cb1-436" aria-hidden="true" tabindex="-1"></a>**Forêt aléatoire**    </span>
+<span id="cb1-437"><a href="#cb1-437" aria-hidden="true" tabindex="-1"></a>Autre méthode : les forêts aléatoires. L.Breiman a dès le départ proposé une estimation des modèles de survie par cette méthode. Par définition, pas sensible à l’hypothèse PH. Mais cela reste des méthodes à finalité prédictive, moins riche en interprétation. </span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

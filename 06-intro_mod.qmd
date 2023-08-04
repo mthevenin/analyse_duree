@@ -1,0 +1,85 @@
+---
+title: "**Introduction**"
+
+filters:
+  - lightbox
+lightbox: auto
+---
+
+
+# Proprortionalité des risques
+
+
+La spécification usuelle d'un modèle à risque proportionnel est:
+
+$$h(t)=h_0(t)\times e^{X^{'}b}$$
+
+
+* $h(t)$ est une fonction de risque (ou taux de risque).  
+
+* $h_0(t)$ est une fonction qui dépend de la durée mais pas des caractéristiques individuelles. Il définiera le risque de base, et jouera donc le rôle de la constante dans un modèle classique.  
+
+* $e^{X^{'}b}$ est une fonction qui ne dépend pas de la durée, mais des caractéristiques individuelles $X^{'}b=\sum_{k=1}^{p}b_kX_k$. La forme exponentielle assurera sa positivité ^[On rappelera qu'en durée continue, seule positivité du risque doit être assurée, d'où l'expression *hazard rate*].  
+
+
+**Le risque de base**     
+
+
+**$h(t)=h_0(t)$** donc **$e^{X^{'}b}=1$**.  Observations pour lesquelles $X=0$ 
+
+
+**Risques proportionnels**  
+
+
+Cette hypothèse stipule l'invariance dans la durée du *rapport des risques* (**hazard ratio**).   
+
+Exemple:  
+Avec une seule covariable $X$ introduite au modèle, et 2 observations disons $A$ et $B$:  
+
+* $h_A(t)=h_0(t)e^{bX_{A}}$
+* $h_B(t)=h_0(t)e^{bX_{B}}$.  
+
+
+Le rapport des risques entre $A$ et $B$ est simplement égal à:   
+
+$$\frac{h_A(t)}{h_B(t)}= \frac{e^{bX_A}}{e^{bX_B}}=e^{b(X_A-X_B)}$$  
+
+Autrement dit, cette proportionnalité des risques est la traduction d'une absence d'interaction entre les rapports de risques estimés par un modèle à risque proportionnel et la durée (ou une fonction de celle-ci).   
+
+
+
+![L'hypothèse de proportionalite des risques](images/Image18.png){width=70%}
+
+
+Si on part d'un modèle tel que $h_0(t)=0.1$ quelque soit $t$ (baseline à risque constant).
+
+
+Si $h_1(t)$ est lui même constant, le rapport entre $h_1(t)$ et $h_0(t)$  sera lui même constant dans la durée. On dit que les risques sont proportionnels.
+Ici,  $h_1(t)=0.2$ quel que soit $t$, le rapport des risques est toujours égal à $\frac{0.2}{0.1}=2=e^{b}$. Le paramètre estimé par un modèle à risque proportionnel sera égal à $log(2)=0.69$. 
+
+Pour $h_{1b}(t)$, le risque augmente de manière à un rythme constant (linéaire): $h_{1b}(1)=0.15$ et $h_{1b}(1000)=0.25$. Comme $h_0(t)*$ est constant, le rapport des risques s'accroît également. On dit que les risques ne sont pas proportionnels.
+
+Si on est dans le deuxième cas de figure, un modèle à risque proportionnel estimera un rapport toujours égal à 2. Il estimera un *rapport moyen* sur la période d'observation. 
+
+
+# Les modèles
+
+* **Modèle semi-paramétrique de Cox (1972)**    
+Le modèle estime directement les $b$ indépendamment de $h_0(t)$. C'est pour cela qu'il est appelé modèle ***semi-paramétrique de Cox***. Les rapports de risque ($e^{b}$) seront utilisés dans un deuxième temps pour estimer la baseline $h_0(t)$, qui peut s'avérer nécessaire pour calculer des fonctions de survie ajustées. Le respect de l’hypothèse de proportionnalité est donc importante et doit donc être analysée.
+
+*    ***Modèle à durée discrète***
+Sa spécification diffère quelque peu de la présentation usuelle d'un modèle à risque proportionnel. Toutefois, il est régi par une hypothèse de proportionnalité. Le non respect de l'hypothèse est moins critique car la baseline du taux de risque est estimée simultanément aux autres paramètres. Il est comme son nom l'indique, particulièrement adapté au durées discrètes ou groupées. Avec une spécification logistique, les Odds vont sous certaines conditions (souvent respectée), se confondre avec des probabilités/risques. Lorsque le nombre de points d'observations ($t$) n'est pas trop faible, les résultats obtenus sont très proches de ceux issus directement d'un modèle de Cox. On peut souligné que ce modèle a été à l'origine proposé par Cox lui même à la fin des années 60. 
+ 
+
+* **Les modèles paramétriques standards**  
+Les modèles dits de Weibull, exponentiel, Gompertz ont une spécification sous hypothèse de risque proportionnel. Ils seront traités brièvement dans les compléments. Historiquement, le modèle de Cox est une réponse à une possible difficulté dans l’ajustement du risque par une loi de distribution du risque a priori.  
+
+
+* **Modèle paramétrique de Parmar-Royston** (non traité)  
+$h_0(t)$, via le risque cumulé $H(t)$, est estimé simultanément avec les rapports de risques en utilisant la méthode des *splines cubiques*. Il est maintenant implémenté dans les logiciels standards (R, Stata, Sas). Les rapports de risque obtenus sont très proches de ceux estimés par le modèle classique de Cox.  Il offre donc une alternative surement intéressante au Cox standard, et il s'est maintenant largement diffusé dans l’analyse des effets cliniques.
+
+* **Modèle à non proportionnalité**: on a bien évidemment les modèles paramétriques de type *AFT* (Accelerated Failure Time), le peut-être très prometteur modèle à *pseudo observations* d'Andersen (j'espère en faire une courte présentation rapidement après avoir évaluer son passage en durée discrète). Dans le champ du machine learning, il y a depuis son origine une version modèle de survie dans les *forêts aléatoires*.
+
+
+
+

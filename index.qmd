@@ -1,68 +1,45 @@
----
-Title:  "FORMATION INED 2022: ANALYSE DES DUREES"   
-format:
-  html:
-    toc: false
-filters:
-   - nutshell
----
-
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, render = knitr::normal_print)
-library(knitr)
-library (shiny)
-library (rsconnect)
-library(haven)
-library(pander)
-library(memisc)
-library(fontawesome)
-```
 
 
-::: {.callout-note}  
-## Objectif 2023: modèles basés sur des pseudo-observations (*Andersen et al - 2003-*)
 
-- Alternative, à première vue intéressante, aux modèles standards (Cox, paramétriques, méthodes à durée discrète/groupée).
-- Pseudo observation: résidu de type *Jackknife*. Pas d'inquiétude le principe est plutôt simple.
-- Régression sur ces résidus, à un ou plusieurs points de la durée... Fléxible.
-  - modèle de type linéaire estimé par le maximum de vraisemblance avec variance robuste.
-  - choix d'une fonction de lien pour faciliter l'interprétation des paramètres
-- S'applique à: fonction de Survie et Rmst (Kaplan Meier), CIF (risques concurrents).
-- Pas d'hypothèse de proportionnalité requise. 
-- Warning: très très forte dépendance à l'hypothèse de censure non informative. Les *pseudos observation* sont calculées pour les censures antérieures à la durée sélectionnée.
-- Quelques références (application R et Stata):
-  - <https://www.jstatsoft.org/article/download/v102i09/4297>
-  - <https://journals.sagepub.com/doi/pdf/10.1177/1536867X1501500313>
-- Comme les Rmst, bonne diffusion de la méthode en médecine et en épidémiologie
-- Mise à jour de ce support pour le premier semestre 2023, beaucoup de tests doivent être fait avec de données type biographiques. La question des évènements simultanés et plus généralement des durées discrètes/groupées n'est pas traitée dans la littérature.
-:::
+## Le support {-}
 
-::: {.callout-important}  
-## Test Grambsch-Therneau: version simplifiée versus version exacte
+**MISE A JOUR DU SUPPORT EN COURS**
 
-Depuis la version 3 du pkg `survival` (2020), le test permettant d'étudier la validé de l'hypothèse de constance des risques suite à l'estimation d'un modèle de Cox, est celui  proposé dans l'article de P.Grambsch et T.Therneau.  
-Jusqu'à cette version du pkg, une version simplifiée du test était implémenté. C'est également le cas actuellement dans les autres applications statistiques tels que Stata (`estat phtest`), Sas (`proc phreg`), Python (`lifelines`,`statmodels`). 
+- L'ensemble des sections devraient être disponible la semaine du 07 Aout 2022
 
-Dans son principe le test (du score) n'est pas compliqué puisqu'il consiste à introduire une intéraction entre une fonction de la durée et un rapport de risque.  
+- Le support est maintenant intégralement disponible en format pdf en cliquant sur l'icône au dessus de la barre de recherche.
 
-Différence entre le test simplifié et le test exact:   
-
-- ***Test simplifié***: La variance des résidus est celle de l'estimateur du rapport de risque de la covariable. Le test se réduit à une régression linéaire (ordinaire), la standardisation des résidus se fait en leur appliquant la variance du paramètre estimé par le modèle . 
-- ***Test exact***: pour chaque résidu on calcule leur variance exacte à partir de la dérivée de l'équation de score. Le test consiste alors à estimer pour chaque covariable une régression linéaire généralisée. On peut retrouver les détails (très) techniques de la méthode dans l'[Article de Grambsch-Therneau](https://www.jstor.org/stable/2337123#metadata_info_tab_contents). 
- 
-Pour les personnes qui utilisent **R**, le test "simplifié" a été supprimé du package, ce qui ne me semble pas du tout une bonne idée. Je donne néanmoins un moyen simple de le récupérer et de l'exécuter.  
-Sur quelques applications (données réelles et simulations réalisées avec le pkg `coxed`), le choix de la version du test ne semble pas neutre à la métrique temporelle utilisée: continue ou discrète/groupée. Se pose également un problème assez critique de reproductibilité, les résultats variants donc maintenant d'une solution logicielle à une autre ( R versus Stata-Sas-Python), et entre les deux versions du package `survival`. Comme si le type de transformation/fonction de la durée appliquée au test, également débattu dans la littérature, ne suffisait pas.  
-:::
-
-::: {.callout-note icon=false}  
-## Bibliographie (courte mais efficace)
-
-- **Cours de Gilbert Colletaz (version 2016)**: [`r fa("link", fill = "steelblue")`](https://docplayer.fr/69359088-Modeles-de-survie-notes-de-cours-master-2-esa-voies-professionnelle-et-recherche-gilbert-colletaz.html) 
-- **Document de travail Insee de Simon Quantin (2019)**: [`r fa("link", fill = "steelblue")`](https://www.insee.fr/fr/statistiques/3695681) [avec version 2 de la librarie *`survival`*]  
-:::
+- Quelques mises à jour de contenu seront réalisées d'ici la fin septembre: 
 
 
-<br>
-`r fa("r-project")` Support réalisé avec [Rstudio](href:https://www.rstudio.com) - [Quarto](https://quarto.org/)  
-`r fa("code")` Langages utilisés pour la partie programmation: [R](https://www.r-project.org/) - [Stata](https://www.stata.com/) - [Sas](https://www.sas.com/fr_fr/home.html) - [Python](https://www.python.org/) 
+
+## Bibliographie vf {-}
+
+Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine, qui est ici l'espace privilégié de l'ingénierie méthodologique. On trouve également de (trop) nombreux tutoriels à dominante *mise en pratique avec R*.  
+
+**Accès en ligne**
+
+* **Cours Gilbert Colletaz** (Université d’Orléans - master d'économétrie).
+  - Le cours est mis à jour tous les ans, applications uniquement avec Sas. 
+  - Dernière version 2020: [lien](https://www.master-esa.fr/wp-content/uploads/2021/04/Econometrie-des-donnees-de-survie.pdf)
+
+* **Document de travail de Simon Quantin** (Insee).
+  - Couvre l’ensemble des techniques de base d’analyse des durées en durée dite continue. Il propose surement la meilleure introduction en langue française à la problématique de la *fragilité*. 
+  - Application en R seulement (attention au passage de la v3 du package `survival`)
+  - 2019 - pas de mise à jour: [lien](https://www.insee.fr/fr/statistiques/3695681)
+
+**Ouvrage de référence** en démographie:   
+***L'analyse démographique des biographies*** de *Daniel Courgeau* et *Eva Lelièvre* (Edition de l'Ined - 1989). 
+
+
+## Outils {-}
+
+* Support réalisé sous [Rstudio](https://posit.co/) avec le système de publication [Quarto](https://quarto.org/)  
+
+* Langages utilisés pour la partie programmation: 
+
+  - [R](https://www.r-project.org/) 
+  - [Stata v18](https://www.stata.com/) 
+  - [Sas](https://www.sas.com/fr_fr/home.html) 
+  - [Python](https://www.python.org/) 
 

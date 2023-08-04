@@ -1,83 +1,87 @@
 project:
-  type: website
+  type: book
   output-dir: docs
   
-website:
-  title: "Analyse des durées"
-  search: 
+execute:
+  freeze: auto
+
+lang: fr
+
+book:
+  title: "Introduction à l'analyse des durées"
+  subtitle: "Support de formation 2023"
+  author: "**Marc Thévenin**"
+  language: fr
+  output-file: introduction_bio_durees
+  downloads: [pdf]
+  repo-url: https://github.com/mthevenin/analyse_duree
+  repo-actions: [edit]
+  date: today
+  search:
     location: sidebar
-  page-navigation: true
-  page-footer: 
-    center: "Marc Thévenin - Ined-Sms - Octobre 2022" 
-    background: dark
-
-  navbar:
-    collapse-below: lg
-    left:
-      - icon: github
-        href: https://github.com/mthevenin/analyse_duree
-      - icon: envelope
-        href: mailto:marc.thevenin@ined.fr          
-      - href: about.qmd 
-        text: "A propos"
-
+    type: textbox
+  reader-mode: false
   sidebar:
-      title: "PLAN"
-      style: "docked"
-      background: "info"
-      collapse-level: 1
-      contents:
-        - section: "**Données et théorie**"
-          contents:
-          - introduction.qmd
-          - Donnees.qmd
-          - Theorie.qmd 
-        - text: "---"      
-        - section: "**Méthodes non paramétriques**"
-          contents:
-          - fsurvie.qmd
-          - comp_fsurvie.qmd
-        - text: "---"  
-        - section: "**Modèles à risques proportionnels**"
-          contents:
-          - intro_mod.qmd
-          - cox.qmd
-          - discret.qmd
-          - dynamiques.qmd
-        - text: "---"  
-        - section: "**Compléments**"
-          contents:
-          - parametrique.qmd
-          - concurrent.qmd
-          - frailty.qmd
-        - text: "---"  
-        - section: "**Programmation**"
-          contents:
-          - R.qmd
-          - Stata.qmd
-          - Sas.qmd
-          - Python.qmd
-        - text: "---"  
-        - section: "**Annexes**"
-          contents:
-          - annexes.qmd
+    style: "docked"
+    collapse-level: 2
 
+  chapters:
+    - part: "Introduction"
+      chapters:
+        - index.qmd
+        - 01-presentation.qmd
+    - part: "Données et théorie"
+      chapters:
+        - 02-donnees.qmd
+        - 03-theorie.qmd       
+    - part: "Méthodes non paramétrique"
+      chapters:
+        - 04-fsurvie.qmd
+        - 05-fsurvie_comp.qmd  
+    - part: "Modèles à risques proportionnels"
+      chapters:
+        - 06-intro_mod.qmd
+        - 07-cox.qmd  
+        - 08-discret.qmd  
+        - 09-tvc.qmd  
+    - part: "Compléments"
+    - part: "Annexe"
+    
 format:
   html:
-    theme: 
-      light: yeti
+    theme: zephyr
     css: style.css
     highlight-style: zenburn
-#    code-block-bg: true
-#    code-block-border-left: "#31BAE9"
+    linkcolor: "#De3831"
     code-background: true
     code-copy: true
     toc: true
     toc-depth: 3
-    toc-title: Sections
+    toc-title: "Sections"
     code-tools:
       source: true
-filters:
-   - lightbox
-lightbox: auto
+    grid:
+      sidebar-width: 290px
+      body-width: 860px
+      margin-width: 350px
+      gutter-width: 1.5rem
+
+  pdf:
+    fontsize: 12pt
+    documentclass: scrreprt
+    classoption: ["onepage", "openany"]
+    number-sections: true
+    toc: true
+    lot: true
+    lof: true
+    cap-location: top
+    colorlinks: true
+    highlight-style: zenburn
+    fontfamily: cabin 
+    toc-depth: 4
+    geometry: 
+      - top=20mm
+      - left=15mm
+      - right=15mm
+      - bottom=20mm      
 
