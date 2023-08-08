@@ -1,8 +1,6 @@
----
 
----
 
-# Annexes
+# **Annexes**
 
 
 ## Tests Grambsch-Therneau OLS sur les résidus de Schoenfeld
