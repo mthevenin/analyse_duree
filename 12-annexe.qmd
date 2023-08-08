@@ -1,15 +1,17 @@
 ---
-title: "Tests GT simplifié sur les résidus de Schoenfeld"
-author: "Marc Thevenin"
-date: "11-09-2022"
+
 ---
+
+# Annexes
+
+
+## Tests Grambsch-Therneau OLS sur les résidus de Schoenfeld
 
 
 ::: callout-important
-Attention il ne s'agit pas du test actuellement implémenté dans la nouvelle version de `survival` (v3) qui, malheureusement, lui a substitué la version dite "exacte". Le programme de la fonction 
-du test simplifié est néanmoins facilement récupérable et exécutable. [lien](https://github.com/mthevenin/analyse_duree/blob/main/cox.zphold/cox.zphold.R).  
+Attention il ne s'agit pas du test actuellement implémenté dans la nouvelle version de `survival` (v3) qui, malheureusement, lui a substitué la version dite *exacte* (moindres carrés généralisés). Le programme de la fonction  du test OLS est néanmoins facilement récupérable et exécutable. [lien](https://github.com/mthevenin/analyse_duree/blob/main/cox.zphold/cox.zphold.R).  
 
-Je continue de préconiser l'utilisation de cette version non "exact" du test, reproductible avec les autres applications statistiques (Stata,Sas,Python).
+Je continue de préconiser l'utilisation de cette version OLS du test, reproductible avec les autres applications statistiques (Stata,Sas,Python).
 :::
 
 * Le test dit "simplifié", qui n'apparait pas dans le texte original de P.Gramsch et T.Thernau [lien](https://www.jstor.org/stable/2337123#metadata_info_tab_contents), répond à un soucis d'instabilité des variances des résidus de Schoenfeld en fin de durée d'observation lorsque peu d'observation restent soumises au risque. Cet argument est soulevé dans leur ouvrage de 2022  [lien](https://link.springer.com/book/10.1007/978-1-4757-3294-8) avant d'en présenter sa version.
@@ -112,4 +114,5 @@ source("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/cox.zph
 ```{r}
 cox.zphold(fit, transform="identity")
 ```
+
 

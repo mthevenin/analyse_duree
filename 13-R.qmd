@@ -1,0 +1,632 @@
+---
+filters:
+   - lightbox
+
+lightbox: auto
+---
+
+```{r setup, include=FALSE}
+#knitr::opts_chunk$set(echo = TRUE, render = knitr::normal_print)
+library(knitr)
+library (rsconnect)
+library(memisc)
+
+
+#options(scipen=999)
+options(show.signif.stars=FALSE)
+```
+
+
+# **R**
+
+Programme de cette section: [Lien](programme_R.R)
+
+
+## Packages et fonctions
+
+
++-----------------------------------------+-------------------------------------------------------+
+| **Analyse**                             | Packages - Fonctions                                  |
++=========================================+=======================================================+
+| **Non paramétrique**                    | -   `discsurv`                                        |
+|                                         |                                                       |
+|                                         |     -   `lifetable`                                   |
+|                                         |     -   `contToDisc`                                  |
+|                                         |                                                       |
+|                                         | -   `survival`                                        |
+|                                         |                                                       |
+|                                         |     -   `survfit`                                     |
+|                                         |     -   `survdif`                                     |
+|                                         |                                                       |
+|                                         | -   `survRM2`                                         |
+|                                         |                                                       |
+|                                         |     -   `rmst2`                                       |
++-----------------------------------------+-------------------------------------------------------+
+| **Modèles à risques proportionnel**     | -   `survival`                                        |
+|                                         |     -   `coxph`                                       |
+|                                         |     -   `cox.zph` (v3) `cox.zphold` (récupération v2) |
+|                                         |     -   `survsplit`                                   |
+|                                         | -   base et `tydir`                                   |
+|                                         |     -   `uncount`                                     |
+|                                         |     -   `glm`                                         |
++-----------------------------------------+-------------------------------------------------------+
+| **Modèles paramétriques (ph ou aft)**   | -   `survival`                                        |
+|                                         |                                                       |
+|                                         |     -   `survreg`                                     |
+|                                         |                                                       |
+|                                         | -   `flexsurv`                                        |
+|                                         |                                                       |
+|                                         |     -   `survreg`                                     |
++-----------------------------------------+-------------------------------------------------------+
+| **Risques concurents**                  | -   `cmprsk`                                          |
+|                                         |                                                       |
+|                                         |     -   `cuminc`                                      |
+|                                         |                                                       |
+|                                         | -   `nnet`                                            |
+|                                         |                                                       |
+|                                         |     -   `multinom`                                    |
++-----------------------------------------+-------------------------------------------------------+
+| **Autres (graphiques - mise en forme)** | -   `survminer`                                       |
+|                                         |                                                       |
+|                                         | -   `jtools`                                          |
+|                                         |                                                       |
+|                                         | -  `gtsummary`                                        |
++-----------------------------------------+-------------------------------------------------------+
+
+
+**Installation**
+
+Les dernières versions de certains packages peuvent être installées via Github (ex: `survminer`). Pour les récupérer, passer par le package ```devtools```.  
+
+
+```{r, message=FALSE, warning=FALSE}
+#install.packages("survival")
+#install.packages("survminer")
+#install.packages("flexsurv")
+#install.packages("survRM2")
+#install.packages("tidyr")
+#install.packages("dplyr")
+#install.packages("jtools")
+#install.packages("gtools")
+#install.packages("cmprsk")
+#install.package("gtsummary")
+#install.packages("muhaz")
+#install.packages("nnet")
+
+library(survival)
+library(survminer)
+library(flexsurv)
+library(survRM2)
+library(tidyr)
+library(dplyr)
+library(jtools)
+library(gtools)
+library(cmprsk)
+library(discSurv)
+library(gtsummary)
+library(muhaz)
+library(nnet)
+```
+
+
+
+## Analyse Non paramétrique
+
+Chargement de la base transplantation
+
+```{r}
+library(readr)
+trans <- read.csv("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv")
+```
+
+
+### Méthode actuarielle
+
+La fonction disponible du paquet `discsurv`, *`lifetable`*, a des fonctionalités plutôt limitées. Si on peut depuis une MAJ récente définir des intervalles de durée, il n'y a toujours pas d'estimateurs les différents quantiles de la courbe de survie.   
+
+La programmation est rendue un peu compliquée pour pas grand chose. Je donne les codes pour info, sans plus de commentaires.
+
+```{r}
+trans = as.data.frame(trans)
+```
+
+
+**Fonction `lifeTable`**  
+
+***Intervalle par defaut $dt=1$***  
+
+```{r, warning=FALSE}
+#| fig-cap: "S(t) méthode actuarielle avec `discSurv` (1)"
+
+lt = lifeTable(dataShort=trans, timeColumn="stime", eventColumn = "died")
+
+plot(lt, x = 1:dim(lt$Output)[1], y = lt$Output$S, xlab = "Intervalles t = journalier", ylab="S(t)")
+```
+
+***Intervalle $dt=30$***
+```{r, warning=FALSE}
+#| fig-cap:  "Méthode actuarielle avec `discSurv` (2)"
+
+# On définit un vecteur définissant les intervalles (il n'y avait pas plus simple????)
+dt <- 1:ceiling(max(trans$stime)/30)*30
+
+# Base dis avec une nouvelle variable de durée => timeDisc 
+
+dis <- contToDisc(dataShort=trans, timeColumn="stime", intervalLimits = dt )
+
+lt <- lifeTable(dataShort=dis, timeColumn="timeDisc", eventColumn = "died")
+
+plot(lt, x = 1:dim(lt$Output)[1], y = lt$Output$S, xlab = "Intervalles dt = 30 jours", ylab="S(t)")
+```
+
+Sur les abscisses, ce sont les valeurs des intervalles qui sont reportés: 10=300 jours. Ce n'est vraiment pas terrible. Pour ce type d'estimateurs, il est préférable d'utiliser Sas ou Stata.
+
+
+### Méthode Kaplan-Meier
+
+Le package survival est le principal outil d'analyse des durée. Le package **`survminer`** permet d'améliorer la présentation des graphiques. 
+
+
+**Estimation des fonctions de survie**  
+
+Fonction **`survfit`**  
+
+```{r filename="syntaxe", eval=F}
+fit <- survfit(Surv(time, status) ~ x, data = base)
+```
+
+On peut renseigner directement les variables permettant de calculer la durée et non la variable de durée elle-même. Cette méthode est utilisée lorsqu'on introduit une variable dynamique dans un modèle semi-paramétrique de Cox (`coxph`).
+
+```{r filename="Syntaxe", eval=F}
+fit <- survfit(Surv(variable_start, variable_end, status) ~ x, data = nom_base)
+```
+
+
+Sans comparaison de groupes:  
+
+```{r}
+fit <- survfit(Surv(stime, died) ~ 1, data = trans)
+
+fit
+
+summary(fit)
+
+plot(fit)
+```
+
+Le premier output `fit` permet d'obtenir la durée médiane, ici égale à 100 ($S(100)=0.494$). Le second  avec la fonction **`summary`** permet d'obtenir une table des estimateurs. La fonction de survie peut être tracée avec la fonction **`plot`** (en pointillés les intervalles de confiance).  
+
+
+On peut obtenir des graphes de  meilleur qualité avec la librairie **`survminer`**, avec la fonction **`ggsurvplot`**
+
+```{r}
+ggsurvplot(fit, conf.int = TRUE)
+```
+
+On peut ajouter la population encore soumise au risque à plusieurs points d'observation avec l'argument `risk.table = TRUE`
+
+```{r}
+ggsurvplot(fit, conf.int = TRUE, risk.table = TRUE)
+```
+
+
+### Comparaison des S(t) méthode KM
+
+On va comparer les deuxfonctions de survie pour la variable *surgery*, celle pour les personnes non opérées et celle pour les personnes opérées.  
+
+```{r}
+fit <- survfit(Surv(stime, died) ~ surgery, data = trans)
+fit
+
+ggsurvplot(fit, conf.int = TRUE, risk.table = TRUE)
+```
+
+
+**Tests du logrank**
+
+On utilise la fonction **`survdiff`**, avec comme variante le test de Peto-Peto (`rho=1`).  
+La syntaxe est quasiment identique à la fonction `survdiff`.  
+
+```{r}
+survdiff(Surv(stime, died) ~ surgery, rho=1, data = trans)
+```
+
+Ici la variable est binaire. Si on veux tester deux à deux les niveaux d'une variable catégorielle à plus de deux modalités, il est fortement conseillé d'utiliser la fonction **`pairwise_survdiff`** de `survminer` (syntaxe identique que `survdiff`).  
+
+**Comparaison des RMST**
+
+La fonction **`rmst2`** du package **`survRM2`** permet de comparer les RMST entre 2 groupes . La strate
+pour les comparaisons doit être impérativement renommée *arm*. La fonction, issue d'une commande de Stata, n'est pas très souple.
+
+```{r}
+trans$arm=trans$surgery
+a=rmst2(trans$stime, trans$died, trans$arm, tau=NULL)
+print(a)
+plot(a)
+```
+
+
+## Modèle de Cox
+
+Ici tout est estimé de nouveau avec des fonctions du package `survival`:  
+
+* Estimation du modèle: `coxph`.
+* Test de Grambsch-Therneau: ```cox.zph``` et `cox.oldzph`.
+* Introduction d'une variable dynamique: allongement de la base avec ```survsplit```.
+
+### Estimation du modèle
+
+Par défaut, R utilise la correction d'Efron pour les évènements simultanés. Il est préférable de ne pas la modifier.
+
+Syntaxe:
+
+```{e filename="Syntaxe", eval=FALSE}
+coxph(Surv(time, status) ~ x1 + x2 + ....., data=base, ties="nom_correction"))
+```
+
+```{r}
+coxfit = coxph(formula = Surv(stime, died) ~ year + age + surgery, data = trans)
+summary(coxfit)
+
+tbl_regression(coxfit, exponentiate = TRUE,)
+```
+
+
+L'output des résultats reporte le logarithme des Risques Ratios (coef) ainsi que les RR (exp(coef)). Il est intéressant de regarder la valeur de concordance (Harrel's) qui donne des indications sur la qualité de l'ajustement (proche de l'AUC/ROC d'un modèle probabiliste standard).  
+
+On peut représenter sous forme graphique les résultats avec la fonction **`ggforest`** de `survminer`
+
+```{r}
+ggforest(coxfit)
+```
+
+### Hypothèse PH
+
+
+#### Test Grambsch-Therneau
+
+**Résidus de Schoenfeld**  
+
+On utilise la fonction **`cox.zph`** pour effectuer le test GLS (moindre carrés généralisés) qui a été substitué au test OLS (moindres carrés ordinaires) avec le passage à la v3 du package. **Je donne plus loin un moyen de récupérer et d'exécuter le test OLS, que je conseille d'utiliser en présence de durées discrètes/groupées**.
+
+Le test peut utiliser plusieurs fonctions de la durée. Par défaut la fonction utilise $1-KM$, soit le complémentaire de l'estimateur de Kaplan-Meier (option `transform="km"`).
+
+
+* **Test GLS (V3 de survival)**
+
+Avec `transform="km"`
+
+```{r}
+cox.zph(coxfit)
+```
+
+Avec `transform="identity"` ($f(t)=t$)
+
+```{r}
+cox.zph(coxfit, transform="identity")
+```
+
+Remarque: avec la v3 de survival, quelques options ont été ajoutées tel que *`terms`* qui permet pour une variable catégorielle à plus de deux modalités de choisir entre un sous test multiple sur la variable (k modalités => k-1 degré de liberté) et une série de tests à 1 degré de liberté sur chaque modalité (k-1 tests). De mon point de vue préférer la seconde solution avec **`terms=FALSE`**. le test de Grambsch-Therneau est particulièrement sensible au nombre de degré de liberté, et il convient donc d'éviter de l'utiliser dans un cadre multiple.
+
+
+* **Test OLS (V2 de survival - Stata - Sas - Python)**
+
+```{r filename="Récupération du test ols"}
+source("https://raw.githubusercontent.com/mthevenin/analyse_duree/main/cox.zphold/cox.zphold.R")
+```
+
+```{r filename="Exécution du test ols"}
+cox.zphold(coxfit, transform="identity")
+```
+
+
+#### Introduction d'une intéraction
+
+Lorsque la covariable n'est pas continue, elle doit être impérativement transformée en indicatrice ^[c'est le cas ici, la variable *surgery* est bien codée (0;1)]. Penser à vérifier en amont que les résultats du modèle sont bien identiques avec le modèle estimé précédemment (ne pas oublier d'omettre le niveau en référence).  
+
+La variable d'intéraction est **`tt(nom_variable)`**, la fonction de la durée (ici forme linéaire simple) est indiquée en option de la fonction: **`tt = function(x, t, ...) x*t`**. 
+
+```{r}
+coxfit2 = coxph(formula = Surv(stime, died) ~ year + age + surgery + tt(surgery), data = trans, tt = function(x, t, ...) x*t)
+
+summary(coxfit2)
+
+tbl_regression(coxfit2, exponentiate = TRUE, estimate_fun = purrr::partial(style_ratio, digits = 3))
+
+```
+
+**Rappel**: le paramètre estimé pour **`tt(surgery)`** ne reporte pas un rapport de risques, mais un rapport de de deux rapports de risques. C'est bien une double différence sur l'échelle d'estimation (log).  
+
+
+### Introduction d'une variable dynamique (binaire)
+
+La dimension dynamique est ici le fait d'avoir été opéré pour une greffe du coeur.  
+
+* **Etape 1**: créer un vecteur donnant les durées aux temps d'évènement.
+* **Etape 2**: appliquer ce vecteurs de points de coupure à la fonction ```survsplit```.
+* **Etape 3**: modifier la variable transplant (ou créer une nouvelle) à l'aide de la variable **wait** qui prend la valeur 1 à partir du jour de la greffe, 0 avant.
+
+* *Etape 1*: création de l'objet cut (vecteur), qui récupère les moments où au moins un évènement est observé.
+```{R}
+cut= unique(trans$stime[trans$died == 1])
+
+cut
+```
+
+*Etape 2*: allonger la base aux durées d'évènement
+
+```{r}
+tvc = survSplit(data = trans, cut = cut, end = "stime", start = "stime0", event = "died")
+
+head(tvc, n=20 )
+```
+
+
+On vérifie qu'on obtient les même résultats avec le modèle sans tvc
+
+```{r}
+coxph(formula = Surv(stime0, stime, died) ~ year + age + surgery, data = tvc)
+```
+
+* *Etape 3*: on génère la variable dynamique de sorte que les personnes n'apparaissent pas greffés avant l'opération
+
+```{r}
+tvc$tvc=ifelse(tvc$transplant==1 & tvc$wait<=tvc$stime,1,0)
+```
+
+**Estimation du modèle**  
+En format long, on doit préciser dans la formule l'intervalle de durée avec les variables stime0 (début) et stime(fin) 
+```{r}
+tvcfit = coxph(formula = Surv(stime0, stime, died) ~ year + age + surgery + tvc, data = tvc)
+
+summary(tvcfit)
+
+
+tbl_regression(tvcfit, exponentiate = TRUE, estimate_fun = purrr::partial(style_ratio, digits = 3))
+```
+
+
+```{r}
+ggforest(tvcfit)
+```
+
+
+
+## **Analyse en durée discrète**
+
+Pour la durée, on va utiliser la variable mois (regroupement sur 30 jours).  
+
+La fonction **`uncount`** du package ```tidyr``` permettra de splitter la base aux durées d'observation. C'est ici la principale différence avec le modèle de Cox qui est une estimation aux durées d'évènement   
+
+```{r}
+trans <- read.csv("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv")
+```
+
+
+La variable *mois*, va être supprimée avec `uncount`. Comme on en aura besoin plus loin pour générer proprement la variable évènement, on peut créer ici une variable mirroir.
+
+```{r}
+trans$T = trans$mois
+```
+
+```{r}
+dt = uncount(trans,mois)
+dt = dt[order(dt$id),]
+```
+
+```{r}
+head(dt,11) 
+```
+
+
+On va générer une variable type compteur pour mesurer la durée à chaque point d'observation. 
+
+```{r}
+dt$x=1
+dt$t = ave(dt$x,dt$id, FUN=cumsum)
+
+head(dt, n=8)
+```
+
+
+Si un individu est décédé, died=1 est reporté sur toute les lignes (idem qu'avec la variable dynamique). On va modifier la variable tel que *died=0 si t<T$*.
+
+```{r}
+dt = arrange(dt,id,t)
+
+dt$died[dt$t<dt$T]=0
+
+head(dt, n=8)
+```
+
+### **$f(t)$ quantitative**
+
+Avec un effet quadratique d'ordre 3 ^[Attention ici cela marche bien. Bien vérifier qu'il n'y a pas un problème d'overfitting, comme c'est le cas dans le TP. 
+
+On centre également les variables *year* et *age* sur leur valeur moyenne pour donner un sens à la constante 
+
+
+```{r}
+
+dt$t2=dt$t^2
+dt$t3=dt$t^3
+
+my = mean(dt$year)
+dt$yearb = dt$year - my
+ma = mean(dt$age)
+dt$ageb = dt$age  - ma
+
+
+dtfit = glm(died ~ t + t2 + t3 + yearb + ageb + surgery, data=dt, family="binomial")
+summ(dtfit, confint=TRUE, exp=TRUE)
+
+tbl_regression(dtfit, exponentiate = TRUE, estimate_fun = purrr::partial(style_ratio, digits = 3))
+
+```
+
+
+
+### **$f(t)$ en indicatrices **
+
+On va créer une variable de type dicrète regroupant la variable *t* sur ses quartiles (pour l'exemple seulement, tous types de regroupement est envisageable).  
+On va utiliser la fonction `quantcut` du package `gtools`.
+
+
+```{r}
+dt$ct4 <- quantcut(dt$t)
+table(dt$ct4) 
+```
+
+On va générer un compteur et un total d'observations sur la strate regroupant *id* et *ct4*.
+
+```{r}
+dt$n = ave(dt$x,dt$id, dt$ct4, FUN=cumsum)
+dt$N = ave(dt$x,dt$id, dt$ct4, FUN=sum)
+```
+
+On conserve la dernière observation dans la strate.  
+
+```{r}
+dt2 = subset(dt, n==N)
+```
+
+**Estimation du modèle**
+
+```{r}
+fit = glm(died ~ ct4 + yearb + ageb + surgery, data=dt2, family=binomial)
+summ(fit, confint=TRUE, exp=TRUE)
+
+tbl_regression(fit, exponentiate = TRUE, estimate_fun = purrr::partial(style_ratio, digits = 3))
+
+```
+
+
+
+
+## Modèles paramétriques usuels
+
+
+Pour le modèle de **Weibull** par exemple.
+
+* De type **AFT** 
+
+On utilise la fonction `survreg` du package **`survival`**
+
+```{r, message=FALSE}
+weibull = survreg(formula = Surv(stime, died) ~ year + age + surgery, data = trans, dist="weibull")
+summary(weibull)
+
+tbl_regression(weibull, exponentiate = TRUE, estimate_fun = purrr::partial(style_ratio, digits = 3))
+```
+
+* De type **PH**  
+
+La paramétrisation PH n'est pas possible avec la fonction `survreg`.   Il faut utiliser le package **`flexsurv`**, qui permet également d'estimer les modèles paramétriques disponibles avec `survival`. La syntaxe est quasiment identique.  
+
+Pour estimer le modèle de Weibull de type PH, on utilise en option l'agument `dist="weibullPH`.  
+
+```{r}
+weibullph = flexsurvreg(formula = Surv(stime, died) ~ year + age + surgery, data = trans, dist="weibullPH")
+weibullph
+
+```
+
+
+## Risques concurrents
+
+Le package `cmprsk` pour l'analyse non paramétrique et le modèle de Fine-Gray (non traité).  
+
+Package cmprsk pour l’analyse non paramétrique et le modèle de Fine-Gray.
+La variable de censure/évènement, *compet*, correspond à la variable died avec une modalité supplémentaire simulée. On suppose l’existence d’une cause supplémentaire au décès autre qu’une malformation cardiaque et non strictement indépendante de cell-ci.
+
+
+```{R, message=F}
+compet <- read.csv("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv")
+# variable compet
+table(compet$compet) 
+# variable died
+table(compet$died) 
+```
+
+
+#### Incidences cumulées
+
+On utilise la fonction `cuminc` du package **`cmprsk`**.  
+
+
+*Pas de comparaison de groupes*
+
+```{r}
+ic = cuminc(compet$stime, compet$compet)
+ic 
+plot(ic)
+```
+
+Avec `survminer`
+
+```{r}
+ggcompetingrisks(fit = ic)
+```
+
+*Comparaison de groupes*
+
+Le test de Gray est automatiquement exécuté.
+
+```{R, message=FALSE}
+ic = cuminc(compet$stime, compet$compet, group=compet$surgery, rho=1)
+ic 
+plot(ic)
+```
+
+Avec `survminer`, pour obtenir un seul graphique pour toutes les courbes ajouter l'option **`multiple_panels = F`**
+
+```{R, message=FALSE}
+ggcompetingrisks(fit = ic)
+
+ggcompetingrisks(fit = ic, multiple_panels = F)
+```
+
+
+#### **Modèles**
+
+
+On va utilisé seulement le modèle multinomial à durée discrète, le modèle *fine-gray* pendant du modèle de Cox pour les risques concurrents étant fortement critiqué. Si une analyse de type *cause-specific* est envisageable (issues concurrentes traitées comme des censures à droites) on utilise simplement la fonction `coxph` de `survival`.
+
+On va de nouveau utiliser la variable mois (durée discrète).  Le modèle sera estimé à l'aide la fonction **`multinom`** du très vieillissant package `nnet`, les p-values doivent-être programmées, l'output ne donnant que les erreurs-types.  
+
+*Mise en formae de la base*  
+
+```{R, message=FALSE}
+
+compet <- read.csv("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv")
+
+compet$T = compet$mois
+td = uncount(compet, mois)
+td = arrange(td, id)
+
+td$x=1
+td$t = ave(td$x, td$id, FUN=cumsum)
+td$t2 = td$t^2
+
+my = mean(td$year)
+td$yearb = td$year - my
+ma = mean(td$age)
+td$ageb = td$age  - ma
+
+td$e = ifelse(td$t<td$T,0, td$compet)
+```
+
+*Estimation*
+
+Pour estimer le modèle, on utilise la fonction **`mlogit`**. Les p-values seront calculées à partir d'un test bilatéral (statistique z). 
+
+```{R, message=FALSE, message=FALSE, warning=FALSE}
+
+competfit = multinom(formula = e ~ t + t2 + yearb + ageb + surgery, data = td)
+
+tbl_regression(competfit, exponentiate = TRUE,)
+```
+
+
+
+

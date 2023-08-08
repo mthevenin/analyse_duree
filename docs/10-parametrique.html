@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Introduction à l’analyse des durées - 11&nbsp; Modèles paramétriques</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./11-concurrent.html" rel="next">
+<link href="./09-tvc.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "Pas de résultats",
+    "search-matching-documents-text": "documents trouvés",
+    "search-copy-link-title": "Copier le lien vers la recherche",
+    "search-hide-matches-text": "Cacher les correspondances additionnelles",
+    "search-more-match-text": "correspondance de plus dans ce document",
+    "search-more-matches-text": "correspondances de plus dans ce document",
+    "search-clear-button-title": "Effacer",
+    "search-detached-cancel-button-title": "Annuler",
+    "search-submit-button-title": "Envoyer",
+    "search-label": "Recherche"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./10-parametrique.html">Compléments</a></li><li class="breadcrumb-item"><a href="./10-parametrique.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">**Modèles paramétriques**</span></a></li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Introduction à l’analyse des durées</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/mthevenin/analyse_duree" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+    <a href="./introduction_bio_durees.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Recherche"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text">Introduction</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Présentation - bibliographie - outils</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./01-presentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>L’analyse des durées</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">Données et théorie</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02-donnees.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Les Données</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./03-theorie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>La théorie</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true">
+ <span class="menu-text">Méthodes non paramétrique</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./04-fsurvie.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>Estimations des fonctions de survie</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05-fsurvie_comp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Tests de comparaison</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true">
+ <span class="menu-text">Modèles à risques proportionnels</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06-intro_mod.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><strong>Introduction</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07-cox.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Le modèle de Cox</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08-discret.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09-tvc.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><strong>Variables dynamiques</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Compléments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-parametrique.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title"><strong>Modèles paramétriques</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-concurrent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title"><strong>Risques concurrents</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-annexe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Annexes</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Programmation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title"><strong>R</strong></span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Sections</h2>
+   
+  <ul>
+  <li><a href="#principes" id="toc-principes" class="nav-link active" data-scroll-target="#principes"><span class="header-section-number">11.1</span> Principes</a></li>
+  <li><a href="#hypothèse-aft-accelerated-failure-time" id="toc-hypothèse-aft-accelerated-failure-time" class="nav-link" data-scroll-target="#hypothèse-aft-accelerated-failure-time"><span class="header-section-number">11.2</span> Hypothèse AFT: Accelerated Failure Time</a></li>
+  <li><a href="#principe-de-construction-des-modèles-aft" id="toc-principe-de-construction-des-modèles-aft" class="nav-link" data-scroll-target="#principe-de-construction-des-modèles-aft"><span class="header-section-number">11.3</span> Principe de construction des modèles AFT</a></li>
+  <li><a href="#quelques-modèles-paramétriques-usuels" id="toc-quelques-modèles-paramétriques-usuels" class="nav-link" data-scroll-target="#quelques-modèles-paramétriques-usuels"><span class="header-section-number">11.4</span> Quelques modèles paramétriques usuels</a></li>
+  <li><a href="#exemple-avec-le-modèle-de-weibull" id="toc-exemple-avec-le-modèle-de-weibull" class="nav-link" data-scroll-target="#exemple-avec-le-modèle-de-weibull"><span class="header-section-number">11.5</span> Exemple avec le modèle de Weibull</a></li>
+  <li><a href="#le-modèle-de-parmar-royston" id="toc-le-modèle-de-parmar-royston" class="nav-link" data-scroll-target="#le-modèle-de-parmar-royston"><span class="header-section-number">11.6</span> Le modèle de Parmar-Royston</a></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mthevenin/analyse_duree/edit/main/10-parametrique.qmd" class="toc-action">Modifier cette page</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title"><strong>Modèles paramétriques</strong></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p><strong>Objectifs</strong>: présenter, assez rapidement, la logique des modèles de type <strong>AFT</strong> (<strong>Accelerated Failure Time</strong>), principalement celui de <em>Weibull</em>.</p>
+<section id="principes" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="principes"><span class="header-section-number">11.1</span> Principes</h2>
+<ul>
+<li>Dans les modèles paramétriques usuels, la durée de survie est distribuée selon une loi dont la densité <span class="math inline">\(f(t)\)</span> pleinement paramétrée.<br>
+</li>
+<li>Pour utiliser l’approche paramétrique, il faut avoir de bonnes raisons de penser que durée de survie sont distribués selon une certaine loi connue plutôt qu’une autre.</li>
+<li>La majorité des distributions reposent sur une hypothèse dite AFT (<strong>Acceleretad Failure Time</strong>). Une autre, <em>Gompertz</em>, très utilisée en démographie (mortalité), repose seulement sur la proportionnalité des risques. Certaines peuvent reposer sur les deux comme le modèle de <em>Weibull</em>. Enfin, les modèles <em>log-logistique</em> ou <em>log-normal</em> n’ont qu’une paramétrisation de type <em>AFT</em>.</li>
+</ul>
+</section>
+<section id="hypothèse-aft-accelerated-failure-time" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="hypothèse-aft-accelerated-failure-time"><span class="header-section-number">11.2</span> Hypothèse AFT: Accelerated Failure Time</h2>
+<p>L’hypothèse <strong>AFT</strong> signifie que l’effet des covariables est multiplicatif par rapport à la durée de survie/séjour. Par opposition, les modèles PH décrivent un effet multiplicatif par rapport au risque.</p>
+<p>Selon les caractérisques des individus, le temps <em>ne s’écoulent pas à la même vitesse</em>, ils ne partagent donc plus la même métrique temporelle. Cela renvoie a des interprétations de type <em>dilation/contraction</em> du temps, par analogie à la théorie de la relativité.</p>
+<p>Exemple simple: la durée de vie d’un être humain et d’un chien.<br>
+On dit qu’une année de vie d’un être humain est équivalent à 7 années de vie d’un chien. C’est typiquement une hypothèse d’AFT.<br>
+<span class="math inline">\(S_h(t) = S_c(7\times t)\)</span>.</p>
+<p>C’est ce facteur multiplicatif qu’estime un modèle paramétrique de type AFT.</p>
+<p><span class="math display">\[S(t_i | X_1)=  S(\phi t_i | X_0)\]</span></p>
+<p>Remarque: si un modèle s’estime AFT s’estime également sous hypothèse PH comme celui de Weibull: <span class="math inline">\(h(t_i | X_1)= -\rho \phi h(t_i | X_0)\)</span></p>
+<ul>
+<li>Avantage: l’interprétation des modèles est directement liée aux fonctions de survie. Cela s’avère donc pratique après une analyse non paramétrique de type Kaplan-Meier par exemple.</li>
+<li>Inconvénient: ne permet pas l’introduction de variables dynamiques.</li>
+</ul>
+<p><em>Humain versus chien</em>: la probabilité qu’un être humain survive 80 ans est égale à la probabilité qu’un chien survive 11 ans (80/7). Le temps s’écoulerait donc plus vite pour le chien que pour l’être humain du point de vue d’un référentiel extérieur. Ce raisonnement peut s’appliquer aux quantile du temps de survie: le temps de survie médian d’un être humain est 7 fois plus élevé que celui d’un chien. En terme d’interprétation des paramètres estimés, si la durée de survie est plus courte, alors le risque est plus élevé.</p>
+</section>
+<section id="principe-de-construction-des-modèles-aft" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="principe-de-construction-des-modèles-aft"><span class="header-section-number">11.3</span> Principe de construction des modèles AFT</h2>
+<p>Le raisonnement mathématique est ici plus complexe que pour les modèles de Cox ou à durée discrète. On donnera juste quelques pistes en début de raisonnement. On part d’une expression proche du modèle linéaire à une transformation logarithmique près de la variable dépendante. En imposant la contrainte <span class="math inline">\(t_i&gt;0\)</span>, en ne posant qu’une seule covariable <span class="math inline">\(X\)</span> de type binaire, et en se situant de nouveau dans une logique de temps continu (pas d’évènement simultané):</p>
+<p><span class="math display">\[log(t_i)= \alpha_0 +  \alpha_1X_i + bu_i\]</span></p>
+<p><span class="math inline">\(b\)</span> est un paramètre d’échelle identique pour toutes les observations et <span class="math inline">\(u_i\)</span> un terme terme d’erreur qui suit une loi de distribution de densité <span class="math inline">\(f(u)\)</span>. Cette combinaison linéaire définira le paramètre de position. C’est la forme de <span class="math inline">\(f(u)\)</span> qui définie le type de modèle paramétrique.</p>
+<p>On peut écrire: <span class="math inline">\(f(u_i) = f(\frac{log(t_i)- \alpha_0 - \alpha_1X_i}{b})\)</span>.</p>
+<p>Remarque: pour une distibution normale/gaussienne, le paramètre de position est l’espérance et le paramètre d’échelle l’écart-type.</p>
+</section>
+<section id="quelques-modèles-paramétriques-usuels" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="quelques-modèles-paramétriques-usuels"><span class="header-section-number">11.4</span> Quelques modèles paramétriques usuels</h2>
+<p><strong>Modèle exponentiel et de Weibull</strong></p>
+<p><strong>Weibull</strong></p>
+<ul>
+<li>Peut estimer un modèle PH ou AFT, d’où sa popularité.</li>
+<li>Distribution monotone des durées d’évènement, toujours croissante ou décroissante.</li>
+<li><span class="math inline">\(f(t)=\lambda\alpha t^{\alpha - 1}e^{-\alpha t^\lambda}\)</span> et <span class="math inline">\(h(t)=\lambda\alpha(\lambda t)^{\alpha - 1}\)</span>, <span class="math inline">\(\alpha&gt;0\)</span> et <span class="math inline">\(\lambda&gt;0\)</span>. Si <span class="math inline">\(\lambda&gt;1\)</span> le risque est croissant, décroissant si <span class="math inline">\(\lambda&lt;1\)</span>, et est constant (loi exponentielle) si <span class="math inline">\(\lambda=1\)</span>.</li>
+</ul>
+<p><em>Exponentiel</em></p>
+<ul>
+<li>Processus sans mémoire, utilisé pour étudier par exemple la durée de vie composants électriques ou électroniques.</li>
+<li>La fonction de risque est une constante.</li>
+<li>Cas limite de la loi de Weibull. Un modèle de type exponentiel peut-être de type AFT ou PH.</li>
+<li>Pour contourner la constance du risque dans le temps, on peut estimer un modèle en scindant la durée en plusieurs intervalles. Le risque sera constant à l’intérieur de ces intervalles, il s’agit d’un modèle “exponential piecewise” (exponentiel par morceau).</li>
+</ul>
+<p><strong>Log-logistique</strong></p>
+<ul>
+<li>Estime un modèle de type AFT seulement. Proche du modèle log-normal (plus difficile à estimer).</li>
+<li>Permet une interprétation en terme d’Odds de survie.</li>
+<li>La fontion du risque peut-être “U-shaped” (unimodale croissante puis décroissante).</li>
+</ul>
+<p><strong>Autres lois</strong>: Gompertz (PH seulement), Gamma et Gamma généralisé…..</p>
+<p><strong>Sélection de la loi</strong> On peut sélectionner la loi en comprarant les AIC où les BIC des modèles. Pour le modèle de Weibull, on peut regarder s’il ajuste bien les données si la transformation <span class="math inline">\(log(-log(S(t_i)))\)</span> est linéaire par rapport à <span class="math inline">\(log(t_i)\)</span>.</p>
+<p><strong><em>Application</em></strong></p>
+<p><strong><em>Comparaison des AIC (sans covariable)</em></strong></p>
+<ul>
+<li>Weibull: 400.1<br>
+</li>
+<li>Exponentiel: 461.0<br>
+</li>
+<li>Gompertz: 409.6<br>
+</li>
+<li>Log-logistique: 391.8*</li>
+</ul>
+</section>
+<section id="exemple-avec-le-modèle-de-weibull" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="exemple-avec-le-modèle-de-weibull"><span class="header-section-number">11.5</span> Exemple avec le modèle de Weibull</h2>
+<p><strong>AFT</strong></p>
+<div class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+        Failure _d: died
+  Analysis time _t: stime</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code></code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>------------------------------------------------------------------------------</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          _t | Time ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-------------+----------------------------------------------------------------</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        year |</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      1.176      0.143     1.33   0.184        0.926       1.493</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         age |      0.940      0.023    -2.49   0.013        0.896       0.987
+     surgery |      7.173      5.591     2.53   0.011        1.557      33.048
+       _cons |      0.049      0.425    -0.35   0.729        0.000    1.31e+06
+-------------+----------------------------------------------------------------
+       /ln_p |     -0.587      0.093    -6.33   0.000       -0.769      -0.405</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>-------------+----------------------------------------------------------------</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           p |</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      0.556      0.052                         0.464       0.667
+         1/p |      1.798      0.167                         1.499       2.157
+------------------------------------------------------------------------------</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Note: _cons estimates baseline time.</code></pre>
+</div>
+</div>
+<p>Un jour de survie d’une personne qui n’a pas été opérée d’un pontage correspond environ à 7 jours de survie d’une personne opérée. Cette remise à l’échelle de la métrique temporelle entre les deux groupes exprime bien le gain en durée de survie pour les personnes opérées, soit des risques journaliers de décès plus faibles (et plus faibles à valeurs constantes, proportionnalité oblige).</p>
+<p><strong>PH</strong></p>
+<div class="cell" data-execution_count="2">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+        Failure _d: died
+  Analysis time _t: stime</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code></code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>------------------------------------------------------------------------------
+          _t | Haz. ratio   Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+        year |      0.914      0.061    -1.36   0.175        0.802       1.041
+         age |      1.035      0.014     2.47   0.014        1.007       1.063
+     surgery |      0.334      0.145    -2.52   0.012        0.143       0.783
+       _cons |      5.368     25.895     0.35   0.728        0.000   68506.303
+-------------+----------------------------------------------------------------
+       /ln_p |     -0.587      0.093    -6.33   0.000       -0.769      -0.405
+-------------+----------------------------------------------------------------
+           p |      0.556      0.052                         0.464       0.667
+         1/p |      1.798      0.167                         1.499       2.157
+------------------------------------------------------------------------------
+Note: _cons estimates baseline hazard.</code></pre>
+</div>
+</div>
+<p>Remarque: Si on avait reporté les coefficients (échelle log) <span class="math inline">\(b_{ph} = -\rho \times b_{aft}\)</span>. Ici <span class="math inline">\(-0.556 \times (1.97) = -1.096\)</span>. Et <span class="math inline">\(e^{-1.096}=0.334\)</span></p>
+<p>Attention: on ne peut pas comparer la qualité d’un modèle paramétrique à celle d’un modèle de Cox par des critères type AIC ou BIC. Les deux méthodes d’estimation diffèrent.</p>
+</section>
+<section id="le-modèle-de-parmar-royston" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="le-modèle-de-parmar-royston"><span class="header-section-number">11.6</span> Le modèle de Parmar-Royston</h2>
+<ul>
+<li>Le bon ajustement par une loi de distribution predéfinie peut s’avérer contraignante. Le modèle de Cox avait justement pour objectif de se défaire de cette contrainte, la plupart des distributions utilisée étant monotone ou unimodale (log-logistique ou log-normal).</li>
+<li>Le principe des splines peut-être rapproché de celui qui a été utilisé plus haut dans le modèle logistique à durée discrète avec l’introduction des polynomes [ <span class="math inline">\(f(t)= (a_1\times t) + (a_2\times t^2) + (a_3\times t^3) + ...+ (a_k\times t^k)\)</span>.
+<ul>
+<li>Cette méthode brute d’ajustement consiste finalement à introduire une intéraction ou plusieurs intéractions entre la variable de durée avec elle-même.</li>
+<li>Elle est sujette à une forte sensibilité aux outliers (overfitting) au delà de <span class="math inline">\(k&gt;2\)</span> [lors la formation il suffit de la tester pour k=3 et calculer la probabilité conditionnelle pour s’en convaincre].</li>
+</ul></li>
+<li>Les <strong>splines cubiques restreintes</strong> propose une méthode d’ajustement et de lissage de meilleure qualité et permet de contrôler les effets overfitting.
+<ul>
+<li>les splines cubiques sont donc basées sur des polynomes d’ordre 3 (d’où cubique) mais estimé par morceau (intervalles). les morceaux sont définis manuellement ou par un nombre de degrés de liberté obtenu par quantile du logarithme de la fonction de survie après avoir exclu les observation censurées.
+<ul>
+<li>Deux degrés de liberté (1 noeud) avec un intervalle allant jusqu’au log de la moitié des survivants et un second à partir de cette seconde moitié.</li>
+<li>Sur le même principe trois degrés de liberté (2 noeuds) coupe la durée en 3 intervalles sur ses terciles.</li>
+<li>En pratique, il est préférable de donner à l’application de nombre de degré de liberté plutôt que d’indiquer manuellement la position des noeuds.</li>
+<li>Il convient également de ne pas être trop gourmand sur le nombre de noeuds, un ou deux étant souvant suffisant (donc 2 ou 3 degrés de liberté).</li>
+<li>On peut choisir le nombre de degrés de liberté en estimant des modèles sans covariables et comparer les AIC (vraisemblance pénalisée).</li>
+</ul></li>
+</ul></li>
+<li>Contrairement aux autres modèles, et sans rentrer dans les détails, le modèle de Parmar-Royston part de la fonction de risque cumulée et non des taux de risque/hasard. Les risk ratios sont obtenus en utilisant les relations entre les différentes grandeurs (voir section *théorie).</li>
+</ul>
+<p><strong>Exemple</strong></p>
+<p>Avec 2 degrés de liberté (un noeud):</p>
+<div class="cell" data-execution_count="3">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Log likelihood = -183.14497                                Number of obs = 103
+</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>------------------------------------------------------------------------------
+             |     exp(b)   Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+xb           |
+        year |      0.885      0.059    -1.83   0.067        0.777       1.008
+         age |      1.030      0.014     2.23   0.026        1.004       1.058
+     surgery |      0.373      0.162    -2.26   0.024        0.159       0.876
+       _rcs1 |      3.157      0.374     9.72   0.000        2.503       3.981
+       _rcs2 |      1.289      0.105     3.12   0.002        1.099       1.511
+       _cons |    729.507   3487.989     1.38   0.168        0.062    8.57e+06
+------------------------------------------------------------------------------
+Note: Estimates are transformed only in the first equation.</code></pre>
+</div>
+</div>
+<p>A savoir:</p>
+<ul>
+<li>Avec un degré de liberté, le modèle de Parmar-Royston estime un modèle de Weibull sous paramétrisation PH.</li>
+<li>Les paramètres pour les splines sont difficilement interprétables voire impossibles à interpréter directement. Elles servent calculer la baseline du risque via l’équation du polynome (non reporté car expression bien corsée).</li>
+</ul>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copié");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copié");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./09-tvc.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><strong>Variables dynamiques</strong></span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./11-concurrent.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title"><strong>Risques concurrents</strong></span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Code source</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb18" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># title: "Modèles paramétriques"</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> nbstata</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Modèles paramétriques**</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>**Objectifs**: présenter, assez rapidement, la logique des modèles de type **AFT** (**Accelerated Failure Time**), principalement celui de *Weibull*. </span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Principes</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Dans les modèles paramétriques usuels, la durée de survie est distribuée selon une loi dont la densité $f(t)$ pleinement paramétrée.  </span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Pour utiliser l’approche paramétrique, il faut avoir de bonnes raisons de penser que durée de survie sont distribués selon une certaine loi connue plutôt qu’une autre. </span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>La majorité des distributions reposent sur une hypothèse dite AFT (**Acceleretad Failure Time**). Une autre, *Gompertz*, très utilisée en démographie (mortalité), repose seulement sur la proportionnalité des risques. Certaines peuvent reposer sur les deux comme le modèle de *Weibull*. Enfin, les modèles *log-logistique* ou *log-normal* n'ont qu'une paramétrisation de type *AFT*.</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="fu">## Hypothèse AFT: Accelerated Failure Time</span></span>
+<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a>L’hypothèse **AFT** signifie que l’effet des covariables est multiplicatif par rapport à la durée de survie/séjour.</span>
+<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a>Par opposition, les modèles PH décrivent un effet multiplicatif par rapport au risque.</span>
+<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a>Selon les caractérisques des individus, le temps *ne s'écoulent pas à la même vitesse*, ils ne partagent donc plus la même métrique temporelle. Cela renvoie a des interprétations de type *dilation/contraction* du temps, par analogie à la théorie de la relativité.  </span>
+<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a>Exemple simple: la durée de vie d'un être humain et d'un chien.  </span>
+<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>On dit qu'une année de vie d'un être humain est équivalent à 7 années de vie d'un chien. C'est typiquement une hypothèse d'AFT.  </span>
+<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>$S_h(t) = S_c(7\times t)$. </span>
+<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a>C'est ce facteur multiplicatif qu'estime un modèle paramétrique de type AFT.</span>
+<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a>$$S(t_i | X_1)=  S(\phi t_i | X_0)$$</span>
+<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a>Remarque: si un modèle s'estime AFT s'estime également sous hypothèse PH comme celui de Weibull: $h(t_i | X_1)= -\rho \phi h(t_i | X_0)$</span>
+<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Avantage: l'interprétation des modèles est directement liée aux fonctions de survie. Cela s'avère donc pratique après une analyse non paramétrique de type Kaplan-Meier par exemple.</span>
+<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Inconvénient: ne permet pas l'introduction de variables dynamiques.  </span>
+<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a>*Humain versus chien*: la probabilité qu'un être humain survive 80 ans est égale à la probabilité qu'un chien survive 11 ans (80/7). Le temps s'écoulerait donc plus vite pour le chien que pour l'être humain du point de vue d'un référentiel extérieur. Ce raisonnement peut s'appliquer aux quantile du temps de survie: le temps de survie médian d'un être humain est 7 fois plus élevé que celui d'un chien. En terme d’interprétation des paramètres estimés, si la durée de survie est plus courte, alors le risque est plus élevé.</span>
+<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a><span class="fu">## Principe de construction des modèles AFT </span></span>
+<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>Le raisonnement mathématique est ici  plus complexe que pour les modèles de Cox ou à durée discrète. On donnera juste quelques pistes en début de raisonnement.</span>
+<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>On part d'une expression proche du modèle linéaire à une transformation logarithmique près de la variable dépendante. En imposant la contrainte $t_i&gt;0$, en ne posant qu'une seule covariable $X$ de type binaire, et en se situant de nouveau dans une logique de temps continu (pas d'évènement simultané):</span>
+<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a>$$log(t_i)= \alpha_0 +  \alpha_1X_i + bu_i$$</span>
+<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a>$b$ est un paramètre d'échelle identique pour toutes les observations et $u_i$ un terme terme d'erreur qui suit une loi de distribution de densité $f(u)$. Cette combinaison linéaire définira le paramètre de position.  C'est la forme de $f(u)$ qui définie le type de modèle paramétrique.     </span>
+<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a>On peut écrire: $f(u_i) = f(\frac{log(t_i)- \alpha_0 -  \alpha_1X_i}{b})$. </span>
+<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a>Remarque: pour une distibution normale/gaussienne, le paramètre de position est l'espérance et le paramètre d'échelle l'écart-type. </span>
+<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a><span class="fu">## Quelques modèles paramétriques usuels</span></span>
+<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a>**Modèle exponentiel et de Weibull**    </span>
+<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-59"><a href="#cb18-59" aria-hidden="true" tabindex="-1"></a>**Weibull**</span>
+<span id="cb18-60"><a href="#cb18-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-61"><a href="#cb18-61" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Peut estimer un modèle PH ou AFT, d'où sa popularité.</span>
+<span id="cb18-62"><a href="#cb18-62" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Distribution monotone des durées d'évènement, toujours croissante ou décroissante.</span>
+<span id="cb18-63"><a href="#cb18-63" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$f(t)=\lambda\alpha t^{\alpha - 1}e^{-\alpha t^\lambda}$ et  $h(t)=\lambda\alpha(\lambda t)^{\alpha - 1}$, $\alpha&gt;0$ et $\lambda&gt;0$. Si $\lambda&gt;1$ le risque est croissant, décroissant si $\lambda&lt;1$, et est constant (loi exponentielle) si $\lambda=1$.  </span>
+<span id="cb18-64"><a href="#cb18-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-65"><a href="#cb18-65" aria-hidden="true" tabindex="-1"></a>*Exponentiel*  </span>
+<span id="cb18-66"><a href="#cb18-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-67"><a href="#cb18-67" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Processus sans mémoire,  utilisé pour étudier par exemple la durée de vie composants électriques ou électroniques. </span>
+<span id="cb18-68"><a href="#cb18-68" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>La fonction de risque est une constante. </span>
+<span id="cb18-69"><a href="#cb18-69" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Cas limite de la loi de Weibull. Un modèle de type exponentiel peut-être de type AFT ou PH.</span>
+<span id="cb18-70"><a href="#cb18-70" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Pour contourner la constance du risque dans le temps, on peut estimer un modèle en scindant la durée en plusieurs intervalles. Le risque sera constant à l'intérieur de ces intervalles, il s'agit d'un modèle "exponential piecewise" (exponentiel par morceau).   </span>
+<span id="cb18-71"><a href="#cb18-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-72"><a href="#cb18-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-73"><a href="#cb18-73" aria-hidden="true" tabindex="-1"></a>**Log-logistique**</span>
+<span id="cb18-74"><a href="#cb18-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-75"><a href="#cb18-75" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Estime un modèle de type AFT seulement. Proche du modèle log-normal (plus difficile à estimer).</span>
+<span id="cb18-76"><a href="#cb18-76" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Permet une interprétation en terme d'Odds de survie.</span>
+<span id="cb18-77"><a href="#cb18-77" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>La fontion du risque peut-être "U-shaped" (unimodale croissante puis décroissante).  </span>
+<span id="cb18-78"><a href="#cb18-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-79"><a href="#cb18-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-80"><a href="#cb18-80" aria-hidden="true" tabindex="-1"></a>**Autres lois**: Gompertz (PH seulement), Gamma et Gamma généralisé.....</span>
+<span id="cb18-81"><a href="#cb18-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-82"><a href="#cb18-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-83"><a href="#cb18-83" aria-hidden="true" tabindex="-1"></a>**Sélection de la loi**</span>
+<span id="cb18-84"><a href="#cb18-84" aria-hidden="true" tabindex="-1"></a>On peut sélectionner la loi en comprarant les AIC où les BIC des modèles. Pour le modèle de Weibull, on peut regarder s'il ajuste bien les données si la transformation $log(-log(S(t_i)))$ est linéaire par rapport à $log(t_i)$.</span>
+<span id="cb18-85"><a href="#cb18-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-86"><a href="#cb18-86" aria-hidden="true" tabindex="-1"></a>***Application***</span>
+<span id="cb18-87"><a href="#cb18-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-88"><a href="#cb18-88" aria-hidden="true" tabindex="-1"></a>***Comparaison des AIC (sans covariable)***    </span>
+<span id="cb18-89"><a href="#cb18-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-90"><a href="#cb18-90" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Weibull:   400.1  </span>
+<span id="cb18-91"><a href="#cb18-91" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Exponentiel: 461.0  </span>
+<span id="cb18-92"><a href="#cb18-92" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Gompertz:  409.6  </span>
+<span id="cb18-93"><a href="#cb18-93" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Log-logistique: 391.8*</span>
+<span id="cb18-94"><a href="#cb18-94" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-95"><a href="#cb18-95" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-96"><a href="#cb18-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exemple avec le modèle de Weibull</span></span>
+<span id="cb18-97"><a href="#cb18-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-98"><a href="#cb18-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-99"><a href="#cb18-99" aria-hidden="true" tabindex="-1"></a>**AFT**</span>
+<span id="cb18-100"><a href="#cb18-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-103"><a href="#cb18-103" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb18-104"><a href="#cb18-104" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo  : false</span></span>
+<span id="cb18-105"><a href="#cb18-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-106"><a href="#cb18-106" aria-hidden="true" tabindex="-1"></a><span class="in">qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear</span></span>
+<span id="cb18-107"><a href="#cb18-107" aria-hidden="true" tabindex="-1"></a><span class="in">qui stset stime, f(died)</span></span>
+<span id="cb18-108"><a href="#cb18-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-109"><a href="#cb18-109" aria-hidden="true" tabindex="-1"></a><span class="in">streg year age surgery, dist(weibull) time tr noheader nolog</span></span>
+<span id="cb18-110"><a href="#cb18-110" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-111"><a href="#cb18-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-112"><a href="#cb18-112" aria-hidden="true" tabindex="-1"></a>Un jour de survie d’une personne qui n’a pas été opérée d’un pontage correspond environ à 7 jours de survie d’une personne opérée. Cette remise à l’échelle de la métrique temporelle entre les deux groupes exprime bien le gain en durée de survie pour les personnes opérées, soit des risques journaliers de décès plus faibles (et plus faibles à valeurs constantes, proportionnalité oblige).</span>
+<span id="cb18-113"><a href="#cb18-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-114"><a href="#cb18-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-115"><a href="#cb18-115" aria-hidden="true" tabindex="-1"></a>**PH**</span>
+<span id="cb18-116"><a href="#cb18-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-119"><a href="#cb18-119" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb18-120"><a href="#cb18-120" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo  : false</span></span>
+<span id="cb18-121"><a href="#cb18-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-122"><a href="#cb18-122" aria-hidden="true" tabindex="-1"></a><span class="in">streg year age surgery, dist(weibull)  hr  noheader nolog</span></span>
+<span id="cb18-123"><a href="#cb18-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-124"><a href="#cb18-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-125"><a href="#cb18-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-126"><a href="#cb18-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-127"><a href="#cb18-127" aria-hidden="true" tabindex="-1"></a>Remarque: Si on avait reporté les coefficients (échelle log) $b_{ph} = -\rho \times b_{aft}$. Ici $-0.556 \times (1.97) = -1.096$. Et $e^{-1.096}=0.334$</span>
+<span id="cb18-128"><a href="#cb18-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-129"><a href="#cb18-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-130"><a href="#cb18-130" aria-hidden="true" tabindex="-1"></a>Attention: on ne peut pas comparer la qualité d'un modèle paramétrique à celle d'un modèle de Cox par des critères type AIC ou BIC. Les deux méthodes d'estimation diffèrent.</span>
+<span id="cb18-131"><a href="#cb18-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-132"><a href="#cb18-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-133"><a href="#cb18-133" aria-hidden="true" tabindex="-1"></a><span class="fu">## Le modèle de Parmar-Royston</span></span>
+<span id="cb18-134"><a href="#cb18-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-135"><a href="#cb18-135" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Le bon ajustement par une loi de distribution predéfinie peut s'avérer contraignante. Le modèle de Cox avait justement pour objectif de se défaire de cette contrainte, la plupart des distributions utilisée étant monotone ou unimodale (log-logistique ou log-normal). </span>
+<span id="cb18-136"><a href="#cb18-136" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Le principe des splines peut-être rapproché de celui qui a été utilisé plus haut dans le modèle logistique à durée discrète avec l'introduction des polynomes [ $f(t)= (a_1\times t) + (a_2\times t^2) + (a_3\times t^3) + ...+ (a_k\times t^k)$. </span>
+<span id="cb18-137"><a href="#cb18-137" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Cette méthode brute d'ajustement consiste finalement à introduire une intéraction ou plusieurs intéractions entre la variable de durée avec elle-même.</span>
+<span id="cb18-138"><a href="#cb18-138" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Elle est sujette à une forte sensibilité aux outliers (overfitting) au delà de $k&gt;2$ <span class="co">[</span><span class="ot">lors la formation il suffit de la tester pour k=3 et calculer la probabilité conditionnelle pour s'en convaincre</span><span class="co">]</span>.</span>
+<span id="cb18-139"><a href="#cb18-139" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Les **splines cubiques restreintes** propose une méthode d'ajustement et de lissage de meilleure qualité et permet de contrôler les effets overfitting.</span>
+<span id="cb18-140"><a href="#cb18-140" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>les splines cubiques sont donc basées sur des polynomes d'ordre 3 (d'où cubique) mais estimé par morceau (intervalles). les morceaux sont définis manuellement ou par un nombre de degrés de liberté obtenu par quantile du logarithme de la fonction de survie après avoir exclu les observation censurées. </span>
+<span id="cb18-141"><a href="#cb18-141" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Deux degrés de liberté (1 noeud) avec un intervalle allant jusqu'au log de la moitié des survivants et un second à partir de cette seconde moitié.</span>
+<span id="cb18-142"><a href="#cb18-142" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Sur le même principe trois degrés de liberté (2 noeuds) coupe la durée en 3 intervalles sur ses terciles.</span>
+<span id="cb18-143"><a href="#cb18-143" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>En pratique, il est préférable de donner à l'application de nombre de degré de liberté plutôt que d'indiquer manuellement la position des noeuds. </span>
+<span id="cb18-144"><a href="#cb18-144" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Il convient également de ne pas être trop gourmand sur le nombre de noeuds, un ou deux étant souvant suffisant (donc 2 ou 3 degrés de liberté).</span>
+<span id="cb18-145"><a href="#cb18-145" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>On peut choisir le nombre de degrés de liberté en estimant des modèles sans covariables et comparer les AIC (vraisemblance pénalisée).</span>
+<span id="cb18-146"><a href="#cb18-146" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Contrairement aux autres modèles, et sans rentrer dans les détails, le modèle de Parmar-Royston part de la fonction de risque cumulée et non des taux de risque/hasard. Les risk ratios sont obtenus en utilisant les relations entre les différentes grandeurs (voir section *théorie).</span>
+<span id="cb18-147"><a href="#cb18-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-148"><a href="#cb18-148" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb18-149"><a href="#cb18-149" aria-hidden="true" tabindex="-1"></a>**Exemple**  </span>
+<span id="cb18-150"><a href="#cb18-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-151"><a href="#cb18-151" aria-hidden="true" tabindex="-1"></a>Avec 2 degrés de liberté (un noeud): </span>
+<span id="cb18-152"><a href="#cb18-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-155"><a href="#cb18-155" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb18-156"><a href="#cb18-156" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo  : false</span></span>
+<span id="cb18-157"><a href="#cb18-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-158"><a href="#cb18-158" aria-hidden="true" tabindex="-1"></a><span class="in">*qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear</span></span>
+<span id="cb18-159"><a href="#cb18-159" aria-hidden="true" tabindex="-1"></a><span class="in">*qui stset stime, f(died)</span></span>
+<span id="cb18-160"><a href="#cb18-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-161"><a href="#cb18-161" aria-hidden="true" tabindex="-1"></a><span class="in">stpm2 year age surgery  , df(2) scale(hazard) nolog eform</span></span>
+<span id="cb18-162"><a href="#cb18-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb18-163"><a href="#cb18-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-164"><a href="#cb18-164" aria-hidden="true" tabindex="-1"></a>A savoir: </span>
+<span id="cb18-165"><a href="#cb18-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-166"><a href="#cb18-166" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Avec un degré de liberté, le modèle de Parmar-Royston estime un modèle de Weibull sous paramétrisation PH.</span>
+<span id="cb18-167"><a href="#cb18-167" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Les paramètres pour les splines sont difficilement interprétables voire impossibles à interpréter directement. Elles servent calculer la baseline du risque via l'équation du polynome (non reporté car expression bien corsée). </span>
+<span id="cb18-168"><a href="#cb18-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-169"><a href="#cb18-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-170"><a href="#cb18-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-171"><a href="#cb18-171" aria-hidden="true" tabindex="-1"></a></span>
+</code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+</body></html>

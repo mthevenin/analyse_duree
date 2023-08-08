@@ -45,11 +45,19 @@ book:
         - 08-discret.qmd  
         - 09-tvc.qmd  
     - part: "Compléments"
-    - part: "Annexe"
-    
+      chapters:
+        - 10-parametrique.qmd 
+        - 11-concurrent.qmd            
+        - 12-annexe.qmd 
+    - part: "Programmation"
+      chapters:
+        - 13-R.qmd
+#        - 14-Stata.qmd
+#        - 15-Sas.qmd
+#        - 16-Python.qmd
 format:
   html:
-    theme: zephyr
+    theme: [zephyr, style.scss]
     css: style.css
     highlight-style: zenburn
     linkcolor: "#De3831"

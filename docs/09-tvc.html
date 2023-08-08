@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction à l’analyse des durées - 9&nbsp; Variables dynamiques</title>
+<title>Introduction à l’analyse des durées - 10&nbsp; Variables dynamiques</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,6 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./10-parametrique.html" rel="next">
 <link href="./08-discret.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -110,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-intro_mod.html">Modèles à risques proportionnels</a></li><li class="breadcrumb-item"><a href="./09-tvc.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">**Variables dynamiques**</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-intro_mod.html">Modèles à risques proportionnels</a></li><li class="breadcrumb-item"><a href="./09-tvc.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">**Variables dynamiques**</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -151,13 +152,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Le support</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Présentation - bibliographie - outils</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-presentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>L’analyse des durées</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>L’analyse des durées</strong></span></span></a>
   </div>
 </li>
       </ul>
@@ -174,13 +175,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-donnees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>Les Données</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Les Données</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-theorie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>La théorie</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>La théorie</strong></span></span></a>
   </div>
 </li>
       </ul>
@@ -197,13 +198,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-fsurvie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>Estimations des fonctions de survie</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>Estimations des fonctions de survie</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-fsurvie_comp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>Tests de comparaison</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Tests de comparaison</strong></span></span></a>
   </div>
 </li>
       </ul>
@@ -220,36 +221,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-intro_mod.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Introduction</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><strong>Introduction</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-cox.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><strong>Le modèle de Cox</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Le modèle de Cox</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-discret.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-tvc.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Variables dynamiques</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><strong>Variables dynamiques</strong></span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Compléments</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Compléments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-parametrique.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title"><strong>Modèles paramétriques</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-concurrent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title"><strong>Risques concurrents</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-annexe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Annexes</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Annexe</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Programmation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title"><strong>R</strong></span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
     </ul>
     </div>
@@ -261,13 +300,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Sections</h2>
    
   <ul>
-  <li><a href="#facteur-dynamique-traitée-de-manière-fixe" id="toc-facteur-dynamique-traitée-de-manière-fixe" class="nav-link active" data-scroll-target="#facteur-dynamique-traitée-de-manière-fixe"><span class="header-section-number">9.1</span> Facteur dynamique traitée de manière fixe</a></li>
-  <li><a href="#estimation-avec-une-variable-dynamique" id="toc-estimation-avec-une-variable-dynamique" class="nav-link" data-scroll-target="#estimation-avec-une-variable-dynamique"><span class="header-section-number">9.2</span> Estimation avec une variable dynamique</a>
+  <li><a href="#facteur-dynamique-traitée-de-manière-fixe" id="toc-facteur-dynamique-traitée-de-manière-fixe" class="nav-link active" data-scroll-target="#facteur-dynamique-traitée-de-manière-fixe"><span class="header-section-number">10.1</span> Facteur dynamique traitée de manière fixe</a></li>
+  <li><a href="#estimation-avec-une-variable-dynamique" id="toc-estimation-avec-une-variable-dynamique" class="nav-link" data-scroll-target="#estimation-avec-une-variable-dynamique"><span class="header-section-number">10.2</span> Estimation avec une variable dynamique</a>
   <ul class="collapse">
-  <li><a href="#modèle-de-cox" id="toc-modèle-de-cox" class="nav-link" data-scroll-target="#modèle-de-cox"><span class="header-section-number">9.2.1</span> Modèle de Cox</a></li>
-  <li><a href="#modèle-à-temps-discret" id="toc-modèle-à-temps-discret" class="nav-link" data-scroll-target="#modèle-à-temps-discret"><span class="header-section-number">9.2.2</span> Modèle à temps discret</a></li>
+  <li><a href="#modèle-de-cox" id="toc-modèle-de-cox" class="nav-link" data-scroll-target="#modèle-de-cox"><span class="header-section-number">10.2.1</span> Modèle de Cox</a></li>
+  <li><a href="#modèle-à-temps-discret" id="toc-modèle-à-temps-discret" class="nav-link" data-scroll-target="#modèle-à-temps-discret"><span class="header-section-number">10.2.2</span> Modèle à temps discret</a></li>
   </ul></li>
-  <li><a href="#précautions" id="toc-précautions" class="nav-link" data-scroll-target="#précautions"><span class="header-section-number">9.3</span> Précautions</a></li>
+  <li><a href="#précautions" id="toc-précautions" class="nav-link" data-scroll-target="#précautions"><span class="header-section-number">10.3</span> Précautions</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mthevenin/analyse_duree/edit/main/09-tvc.qmd" class="toc-action">Modifier cette page</a></p></div></div></nav>
     </div>
@@ -276,7 +315,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Variables dynamiques</strong></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><strong>Variables dynamiques</strong></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -298,8 +337,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Ne pas tenir compte du caractère dynamique d’une dimension peut conduire à des interprétations erronées.</li>
 <li><strong><em>Warning</em></strong>: La façon de modéliser les dimensions dynamiques en analyse des durées peut conduire à des biais de causalité, en particulier en sciences sociales, en omettant les <em>effets d’anticipation</em>. C’est une situation classique avec des covariables dynamiques de type discrètes. Les techniques standards ne peuvent modéliser que des <em>effets d’adaptation</em> : la cause - observée - précède l’effet.</li>
 </ul>
-<section id="facteur-dynamique-traitée-de-manière-fixe" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="facteur-dynamique-traitée-de-manière-fixe"><span class="header-section-number">9.1</span> Facteur dynamique traitée de manière fixe</h2>
+<section id="facteur-dynamique-traitée-de-manière-fixe" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="facteur-dynamique-traitée-de-manière-fixe"><span class="header-section-number">10.1</span> Facteur dynamique traitée de manière fixe</h2>
 <p>On reprend l’exemple sur malformation cardiaque, en ajoutant la variable relative à la greffe. La question est donc de savoir si une transplantation du coeur réduitle risque journalier de décéder (ou augmente la durée de survie).<br>
 On a dans la base 2 variables: une variable binaire pour savoir si l’individu à été greffé ou non, <strong>transplant</strong>, et la variable <em>wait</em> de type continue tronquée donnant la durée en jour jusqu’à l’opération depuis l’inscription dans le registre (0 si <span class="math inline">\(transplant=0\)</span>).<br>
 On va dans un premier temps estimer le modèle de Cox avec la variable fixe <em>transplant</em>.</p>
@@ -535,12 +574,12 @@ On va dans un premier temps estimer le modèle de Cox avec la variable fixe <em>
 </table>
 <p>Une personne est codée greffée avant le jour de la transplantation. L’<strong><em>effet causal</em></strong> est donc mal mesuré si sa dimension temporelle a été ignorée, ici le jour exact de l’opération. C’est le même principe pour l’évènement, la personne est codée décédée (1) le jour du décès, et vivante avant (0).</p>
 </section>
-<section id="estimation-avec-une-variable-dynamique" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="estimation-avec-une-variable-dynamique"><span class="header-section-number">9.2</span> Estimation avec une variable dynamique</h2>
+<section id="estimation-avec-une-variable-dynamique" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="estimation-avec-une-variable-dynamique"><span class="header-section-number">10.2</span> Estimation avec une variable dynamique</h2>
 <p>Il convient donc de modifier l’information avec le délai d’attente jusqu’à la greffe. Le principe de construction de la variable dynamique, quelle que soit le logiciel utilisé, doit suivre la logique suivante:</p>
 <p><span class="math inline">\(tvc = transplant\)</span> , si <span class="math inline">\(transplant=1\)</span> et <span class="math inline">\(t&lt;wait\)</span> alors <span class="math inline">\(tvc=0\)</span></p>
-<section id="modèle-de-cox" class="level3" data-number="9.2.1">
-<h3 data-number="9.2.1" class="anchored" data-anchor-id="modèle-de-cox"><span class="header-section-number">9.2.1</span> Modèle de Cox</h3>
+<section id="modèle-de-cox" class="level3" data-number="10.2.1">
+<h3 data-number="10.2.1" class="anchored" data-anchor-id="modèle-de-cox"><span class="header-section-number">10.2.1</span> Modèle de Cox</h3>
 <table class="table">
 <caption>Mapping correct de la base avec une variable dynamique binaire</caption>
 <colgroup>
@@ -810,8 +849,8 @@ On va dans un premier temps estimer le modèle de Cox avec la variable fixe <em>
 </div>
 </div>
 </section>
-<section id="modèle-à-temps-discret" class="level3" data-number="9.2.2">
-<h3 data-number="9.2.2" class="anchored" data-anchor-id="modèle-à-temps-discret"><span class="header-section-number">9.2.2</span> Modèle à temps discret</h3>
+<section id="modèle-à-temps-discret" class="level3" data-number="10.2.2">
+<h3 data-number="10.2.2" class="anchored" data-anchor-id="modèle-à-temps-discret"><span class="header-section-number">10.2.2</span> Modèle à temps discret</h3>
 <p>Même principe pour la construction de la variable dynamique. Pour rappel l’échelle temporelle est le mois, on a créé en amont une variable qui regroupe les valeurs de la variable <em>wait</em> en périodes de 30 jours.</p>
 <table class="table">
 <caption>Modèle logistique à durée discrète avec variable dynamique binaire</caption>
@@ -910,8 +949,8 @@ On va dans un premier temps estimer le modèle de Cox avec la variable fixe <em>
 </table>
 </section>
 </section>
-<section id="précautions" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="précautions"><span class="header-section-number">9.3</span> Précautions</h2>
+<section id="précautions" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="précautions"><span class="header-section-number">10.3</span> Précautions</h2>
 <ul>
 <li><p>Rappel: la cause doit précèder l’effet.</p></li>
 <li><p>Lorsque l’évènement étudié n’est pas intrinsèquement de type absorbant comme le décès, la <em>cause</em> peut se manifester ou plutôt être observée après la survenue de l’évènement étudié. Les modèles de durée standards ne peuvent pas gérer ces situations car l’observation sort du risque après la survenue de l’évènement. Il y a d’autres techniques, par exemple de type économétrique, qui sont plus à même de traiter ce genre de situations.</p></li>
@@ -1216,10 +1255,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./08-discret.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./10-parametrique.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title"><strong>Modèles paramétriques</strong></span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Code source</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>

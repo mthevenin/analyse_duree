@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Introduction à l’analyse des durées - 7&nbsp; Le modèle de Cox</title>
+<title>Introduction à l’analyse des durées - 8&nbsp; Le modèle de Cox</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -111,7 +111,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-intro_mod.html">Modèles à risques proportionnels</a></li><li class="breadcrumb-item"><a href="./07-cox.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">**Le modèle de Cox**</span></a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-intro_mod.html">Modèles à risques proportionnels</a></li><li class="breadcrumb-item"><a href="./07-cox.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">**Le modèle de Cox**</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -152,13 +152,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Le support</span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Présentation - bibliographie - outils</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-presentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>L’analyse des durées</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>L’analyse des durées</strong></span></span></a>
   </div>
 </li>
       </ul>
@@ -175,13 +175,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-donnees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>Les Données</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Les Données</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-theorie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>La théorie</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>La théorie</strong></span></span></a>
   </div>
 </li>
       </ul>
@@ -198,13 +198,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-fsurvie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>Estimations des fonctions de survie</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>Estimations des fonctions de survie</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-fsurvie_comp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>Tests de comparaison</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Tests de comparaison</strong></span></span></a>
   </div>
 </li>
       </ul>
@@ -221,36 +221,74 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-intro_mod.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Introduction</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><strong>Introduction</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-cox.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><strong>Le modèle de Cox</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Le modèle de Cox</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-discret.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-tvc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Variables dynamiques</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><strong>Variables dynamiques</strong></span></span></a>
   </div>
 </li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Compléments</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true">
+ <span class="menu-text">Compléments</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10-parametrique.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title"><strong>Modèles paramétriques</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11-concurrent.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title"><strong>Risques concurrents</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12-annexe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Annexes</span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
-      <span class="sidebar-item-text sidebar-link text-start">
- <span class="menu-text">Annexe</span></span>
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true">
+ <span class="menu-text">Programmation</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="true" aria-label="Basculer la section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title"><strong>R</strong></span></span></a>
+  </div>
+</li>
+      </ul>
   </li>
     </ul>
     </div>
@@ -262,17 +300,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Sections</h2>
    
   <ul>
-  <li><a href="#le-modèle-semi-paramétrique-de-cox" id="toc-le-modèle-semi-paramétrique-de-cox" class="nav-link active" data-scroll-target="#le-modèle-semi-paramétrique-de-cox"><span class="header-section-number">7.1</span> Le modèle semi-paramétrique de Cox</a>
+  <li><a href="#le-modèle-semi-paramétrique-de-cox" id="toc-le-modèle-semi-paramétrique-de-cox" class="nav-link active" data-scroll-target="#le-modèle-semi-paramétrique-de-cox"><span class="header-section-number">8.1</span> Le modèle semi-paramétrique de Cox</a>
   <ul class="collapse">
-  <li><a href="#la-vraisemblance-partielle-et-estimation-des-paramètres" id="toc-la-vraisemblance-partielle-et-estimation-des-paramètres" class="nav-link" data-scroll-target="#la-vraisemblance-partielle-et-estimation-des-paramètres"><span class="header-section-number">7.1.1</span> La vraisemblance partielle et estimation des paramètres</a></li>
-  <li><a href="#estimation-des-paramètres" id="toc-estimation-des-paramètres" class="nav-link" data-scroll-target="#estimation-des-paramètres"><span class="header-section-number">7.1.2</span> Estimation des paramètres</a></li>
-  <li><a href="#lecture-des-résultats" id="toc-lecture-des-résultats" class="nav-link" data-scroll-target="#lecture-des-résultats"><span class="header-section-number">7.1.3</span> Lecture des résultats</a></li>
+  <li><a href="#la-vraisemblance-partielle-et-estimation-des-paramètres" id="toc-la-vraisemblance-partielle-et-estimation-des-paramètres" class="nav-link" data-scroll-target="#la-vraisemblance-partielle-et-estimation-des-paramètres"><span class="header-section-number">8.1.1</span> La vraisemblance partielle et estimation des paramètres</a></li>
+  <li><a href="#estimation-des-paramètres" id="toc-estimation-des-paramètres" class="nav-link" data-scroll-target="#estimation-des-paramètres"><span class="header-section-number">8.1.2</span> Estimation des paramètres</a></li>
+  <li><a href="#lecture-des-résultats" id="toc-lecture-des-résultats" class="nav-link" data-scroll-target="#lecture-des-résultats"><span class="header-section-number">8.1.3</span> Lecture des résultats</a></li>
   </ul></li>
-  <li><a href="#analyse-de-la-constance-des-rapports-de-risque" id="toc-analyse-de-la-constance-des-rapports-de-risque" class="nav-link" data-scroll-target="#analyse-de-la-constance-des-rapports-de-risque"><span class="header-section-number">7.2</span> Analyse de la constance des rapports de risque</a>
+  <li><a href="#analyse-de-la-constance-des-rapports-de-risque" id="toc-analyse-de-la-constance-des-rapports-de-risque" class="nav-link" data-scroll-target="#analyse-de-la-constance-des-rapports-de-risque"><span class="header-section-number">8.2</span> Analyse de la constance des rapports de risque</a>
   <ul class="collapse">
-  <li><a href="#test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld" id="toc-test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld" class="nav-link" data-scroll-target="#test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld"><span class="header-section-number">7.2.1</span> Test de Grambsch-Therneau sur les résidus de Schoenfeld</a></li>
-  <li><a href="#intéraction-avec-la-durée" id="toc-intéraction-avec-la-durée" class="nav-link" data-scroll-target="#intéraction-avec-la-durée"><span class="header-section-number">7.2.2</span> Intéraction avec la durée</a></li>
-  <li><a href="#que-faire" id="toc-que-faire" class="nav-link" data-scroll-target="#que-faire"><span class="header-section-number">7.2.3</span> Que faire ?</a></li>
+  <li><a href="#test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld" id="toc-test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld" class="nav-link" data-scroll-target="#test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld"><span class="header-section-number">8.2.1</span> Test de Grambsch-Therneau sur les résidus de Schoenfeld</a></li>
+  <li><a href="#intéraction-avec-la-durée" id="toc-intéraction-avec-la-durée" class="nav-link" data-scroll-target="#intéraction-avec-la-durée"><span class="header-section-number">8.2.2</span> Intéraction avec la durée</a></li>
+  <li><a href="#que-faire" id="toc-que-faire" class="nav-link" data-scroll-target="#que-faire"><span class="header-section-number">8.2.3</span> Que faire ?</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mthevenin/analyse_duree/edit/main/07-cox.qmd" class="toc-action">Modifier cette page</a></p></div></div></nav>
@@ -282,7 +320,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><strong>Le modèle de Cox</strong></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Le modèle de Cox</strong></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -298,10 +336,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>On peut ignorer la partie sur l’estimation du modèle. On retiendra tout de même qu’il est déconseillé d’utiliser la méthode dite <em>exacte</em> pour la correction de la vraisemblance, qui ne peut matériellement fonctionner qu’avec un nombre très limité d’évènements observés simultanément. Ce qui est plutôt rare avec des données à durées discrètes ou groupées, très fréquentes dans les sciences sociales.</p>
-<section id="le-modèle-semi-paramétrique-de-cox" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="le-modèle-semi-paramétrique-de-cox"><span class="header-section-number">7.1</span> Le modèle semi-paramétrique de Cox</h2>
-<section id="la-vraisemblance-partielle-et-estimation-des-paramètres" class="level3" data-number="7.1.1">
-<h3 data-number="7.1.1" class="anchored" data-anchor-id="la-vraisemblance-partielle-et-estimation-des-paramètres"><span class="header-section-number">7.1.1</span> La vraisemblance partielle et estimation des paramètres</h3>
+<section id="le-modèle-semi-paramétrique-de-cox" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="le-modèle-semi-paramétrique-de-cox"><span class="header-section-number">8.1</span> Le modèle semi-paramétrique de Cox</h2>
+<section id="la-vraisemblance-partielle-et-estimation-des-paramètres" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="la-vraisemblance-partielle-et-estimation-des-paramètres"><span class="header-section-number">8.1.1</span> La vraisemblance partielle et estimation des paramètres</h3>
 <p>On se situe dans une situation où la durée est mesurée sur une échelle strictement continue. Il ne peut donc y avoir qu’un seul évènement observé en <span class="math inline">\(t_i\)</span> (idem pour la censure).</p>
 <p>On peut représenter le processus aléatoire d’une analyse de survie en présence de censure à droite, avec l’équation de vraisemblance suivante:</p>
 <p><span class="math display">\[L_i=f(t_i)^{\delta_i}S(t_i)^{1-\delta_i}\]</span></p>
@@ -335,8 +373,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p>La <strong><em>méthode dite d’Efron</em></strong>: elle corrige l’approximation de Breslow, et est jugée plus proche de la méthode exacte. <em>C’est la méthode utilisée par défaut avec le logiciel R</em>, et elle est disponible avec les autres applications.</p></li>
 </ul>
 </section>
-<section id="estimation-des-paramètres" class="level3" data-number="7.1.2">
-<h3 data-number="7.1.2" class="anchored" data-anchor-id="estimation-des-paramètres"><span class="header-section-number">7.1.2</span> Estimation des paramètres</h3>
+<section id="estimation-des-paramètres" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="estimation-des-paramètres"><span class="header-section-number">8.1.2</span> Estimation des paramètres</h3>
 <p>On utilise la méthode habituelle, à savoir la maximisation de la log-vraisemblance (ici partielle).</p>
 <ul>
 <li>Conditions de premier ordre: calcul des équations de score à partir des dérivées partielles. Solution: <span class="math inline">\(\frac{\partial log(PL)}{\partial{b_k}}=0\)</span>. On ne peut pas obtenir de solution numérique directe.</li>
@@ -356,8 +394,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="math display">\[\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - E(X_{j\in R_i,k}) \right)\]</span></p>
 <p>Cette expression va permettre d’analyser le respect ou non de l’hypothèse de risques proportionnels via les <em>résidus de Schoenfeld</em>.</p>
 </section>
-<section id="lecture-des-résultats" class="level3" data-number="7.1.3">
-<h3 data-number="7.1.3" class="anchored" data-anchor-id="lecture-des-résultats"><span class="header-section-number">7.1.3</span> Lecture des résultats</h3>
+<section id="lecture-des-résultats" class="level3" data-number="8.1.3">
+<h3 data-number="8.1.3" class="anchored" data-anchor-id="lecture-des-résultats"><span class="header-section-number">8.1.3</span> Lecture des résultats</h3>
 <p>Comme il s’agit d’un modèle à risque proportionnel, <strong>les rapports de risques sont constants pendant toute la période d’observation</strong>. Il s’agit d’une <strong>propriété de l’estimation</strong>.</p>
 <p><strong><em>Covariable binaire (indicatrice)</em></strong> <span class="math inline">\(X=(0,1)\)</span>: <span class="math inline">\(RR=\frac{h(t\ |\ X=1)}{h(t\ |\ X=0)}=e^b\)</span>.<br>
 A chaque moment de la durée <span class="math inline">\(t\)</span>, le risque d’observer l’évènement est <span class="math inline">\(e^b\)</span> fois plus important/plus faible pour <span class="math inline">\(X=1\)</span> que pour <span class="math inline">\(X=0\)</span>.</p>
@@ -471,8 +509,8 @@ De la même manière, plus on entre à un âge élevé dans la liste d’attente
 </div>
 </section>
 </section>
-<section id="analyse-de-la-constance-des-rapports-de-risque" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="analyse-de-la-constance-des-rapports-de-risque"><span class="header-section-number">7.2</span> Analyse de la constance des rapports de risque</h2>
+<section id="analyse-de-la-constance-des-rapports-de-risque" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="analyse-de-la-constance-des-rapports-de-risque"><span class="header-section-number">8.2</span> Analyse de la constance des rapports de risque</h2>
 <ul>
 <li><p>Les rapports de risque (RR) estimés par le modèle sont contraints à être constant sur toute la période d’observation. C’est une hypothèse forte.</p></li>
 <li><p>Le respect de cette hypothèse doit être analysé, en particulier pour le modèle de Cox où la baseline du risque est habituellement estimée à l’aide de ces rapports (par exemple la méthode dite de Breslow, non traitée). En post-estimation, les valeurs estimées du risque pourront présenter des valeurs aberrantes si on dévie trop de constance, en particulier en obtenant des négatives des taux de risque.</p></li>
@@ -480,8 +518,8 @@ De la même manière, plus on entre à un âge élevé dans la liste d’attente
 <li><p>Plusieurs méthodes disponibles, on traitera celles basées sur les <strong>résidus de Schoenfeld</strong>, et l’introduction directe d’une intéraction entre une fonction la durée et les covariables du modèle. Cette dernière fait également office de méthode de correction lorsque la violation de l’hypothèse est jugée trop importante ou problématique du point de vue des résultats obtenus.</p></li>
 <li><p>Si on regarde les courbes de Kaplan-Meier, leurs croisement non tardif impliquera nécessairement un problème sur cette hypothèse.</p></li>
 </ul>
-<section id="test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld" class="level3" data-number="7.2.1">
-<h3 data-number="7.2.1" class="anchored" data-anchor-id="test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld"><span class="header-section-number">7.2.1</span> Test de Grambsch-Therneau sur les résidus de Schoenfeld</h3>
+<section id="test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld" class="level3" data-number="8.2.1">
+<h3 data-number="8.2.1" class="anchored" data-anchor-id="test-de-grambsch-therneau-sur-les-résidus-de-schoenfeld"><span class="header-section-number">8.2.1</span> Test de Grambsch-Therneau sur les résidus de Schoenfeld</h3>
 <p>Ce test a été proposé par P.Grambsch et T.Therneau <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> dans un cadre à durée strictement continue. Il repose originellement sur une régression linéaire estimé avec les moindres carrés généralisés (GLS) correction de l’autocorrélation des erreurs avec des sér) . Dans un premier temps pour des raisons plutôt pratiques (informatique), le test a une version moindres carrés ordinaires (OLS). Jusqu’en 2020, tous les logiciels ne proposaient que le test OLS. T.Therneau avec la V3 de package <code>survival</code> a substitué - assez brutalement - le test GLS au test OLS. Si les résultats sont proches dans le cadre d’une durée continue et que le test GLS peut être considéré comme un test <em>exact</em>, cela devient problématique dans une situation de durée discrète/groupée <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. Le test OLS reste, à mon sens, la méthode à privilégier dans le cas discret.</p>
 <p>Il est également important de souligner que pour P.Grambsch et T.Therneau <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> n’est qu’un moyen parmi d’autres d’analyser une violation de l’hypothèse de proportionnalité. Ce n’est pas <em>the solution</em> (comme tout autre test au passage). Le croisement des courbes de séjours peut-être suffisant pour alerter sur cette violation.</p>
 <p><strong><em>Principe du test</em></strong>: consiste à regarder la corrélation entre les <strong>résidus de Schoenfeld</strong> obtenus directement avec la fonction de score de la vraisemblanc partielle de Cox et une fonction de la durée.</p>
@@ -610,8 +648,8 @@ Avertissement
 </div>
 </div>
 </section>
-<section id="intéraction-avec-la-durée" class="level3" data-number="7.2.2">
-<h3 data-number="7.2.2" class="anchored" data-anchor-id="intéraction-avec-la-durée"><span class="header-section-number">7.2.2</span> Intéraction avec la durée</h3>
+<section id="intéraction-avec-la-durée" class="level3" data-number="8.2.2">
+<h3 data-number="8.2.2" class="anchored" data-anchor-id="intéraction-avec-la-durée"><span class="header-section-number">8.2.2</span> Intéraction avec la durée</h3>
 <p><strong><em>Petit retour sur l’estimation du modèle</em></strong></p>
 <p>Pour estimer le modèle de Cox, les données sont dans un premier temps splitées aux moment où au moins un évènement a été observé.</p>
 <p>Sur l’application, avec 2 individus avec la covariable <em>age</em> (rappel: il s’agit de l’âge en <span class="math inline">\(t_0\)</span>:</p>
@@ -965,8 +1003,8 @@ Les deux individus observent l’évènement en <span class="math inline">\(t=6\
 <li>L’altération des rapports de risque dépend de la forme fonctionnelle de l’intéraction choisie. Ici la variation dans la durée du rapport des risque est constante, ce qui est une hypothèse assez forte. On a, en quelques sorte, réintroduit une hypothèse de proportionnalité, ici sur le degré d’altération des écarts de risques dans le temps, qui devient lui même strictement constant.</li>
 </ul>
 </section>
-<section id="que-faire" class="level3" data-number="7.2.3">
-<h3 data-number="7.2.3" class="anchored" data-anchor-id="que-faire"><span class="header-section-number">7.2.3</span> Que faire ?</h3>
+<section id="que-faire" class="level3" data-number="8.2.3">
+<h3 data-number="8.2.3" class="anchored" data-anchor-id="que-faire"><span class="header-section-number">8.2.3</span> Que faire ?</h3>
 <p><strong><em>Ne rien faire</em></strong></p>
 <p>On interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison). Difficilement soutenable pour l’analyse des effets cliniques, elle peut être envisagée dans d’autres domaines. Attention au nombre de variables qui ne respectent pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée si l’analyse a des visée prédictives. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme très « moyenne » sur la période d’observation.</p>
 <p>On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps des écarts de risque, s’accentuent à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais si cette non proportionnalité conduit à un changement du sens des rapport de risque je suis moins convaincu de la pertinence de cette stratégie. Encore une fois, et il faut le rappeler, l’estimation des courbes de survie doit permette d’anticiper ce dernier cas de figure.</p>
@@ -1286,12 +1324,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./06-intro_mod.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Introduction</strong></span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><strong>Introduction</strong></span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./08-discret.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Code source</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

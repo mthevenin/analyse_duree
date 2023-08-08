@@ -1,0 +1,166 @@
+---
+# title: "Modèles paramétriques"
+
+jupyter: nbstata
+---
+
+
+# **Modèles paramétriques**
+
+
+**Objectifs**: présenter, assez rapidement, la logique des modèles de type **AFT** (**Accelerated Failure Time**), principalement celui de *Weibull*. 
+
+## Principes
+
+* Dans les modèles paramétriques usuels, la durée de survie est distribuée selon une loi dont la densité $f(t)$ pleinement paramétrée.  
+* Pour utiliser l’approche paramétrique, il faut avoir de bonnes raisons de penser que durée de survie sont distribués selon une certaine loi connue plutôt qu’une autre. 
+* La majorité des distributions reposent sur une hypothèse dite AFT (**Acceleretad Failure Time**). Une autre, *Gompertz*, très utilisée en démographie (mortalité), repose seulement sur la proportionnalité des risques. Certaines peuvent reposer sur les deux comme le modèle de *Weibull*. Enfin, les modèles *log-logistique* ou *log-normal* n'ont qu'une paramétrisation de type *AFT*.
+
+## Hypothèse AFT: Accelerated Failure Time
+L’hypothèse **AFT** signifie que l’effet des covariables est multiplicatif par rapport à la durée de survie/séjour.
+Par opposition, les modèles PH décrivent un effet multiplicatif par rapport au risque.
+
+Selon les caractérisques des individus, le temps *ne s'écoulent pas à la même vitesse*, ils ne partagent donc plus la même métrique temporelle. Cela renvoie a des interprétations de type *dilation/contraction* du temps, par analogie à la théorie de la relativité.  
+
+Exemple simple: la durée de vie d'un être humain et d'un chien.  
+On dit qu'une année de vie d'un être humain est équivalent à 7 années de vie d'un chien. C'est typiquement une hypothèse d'AFT.  
+$S_h(t) = S_c(7\times t)$. 
+
+C'est ce facteur multiplicatif qu'estime un modèle paramétrique de type AFT.
+
+$$S(t_i | X_1)=  S(\phi t_i | X_0)$$
+
+Remarque: si un modèle s'estime AFT s'estime également sous hypothèse PH comme celui de Weibull: $h(t_i | X_1)= -\rho \phi h(t_i | X_0)$
+
+* Avantage: l'interprétation des modèles est directement liée aux fonctions de survie. Cela s'avère donc pratique après une analyse non paramétrique de type Kaplan-Meier par exemple.
+* Inconvénient: ne permet pas l'introduction de variables dynamiques.  
+
+*Humain versus chien*: la probabilité qu'un être humain survive 80 ans est égale à la probabilité qu'un chien survive 11 ans (80/7). Le temps s'écoulerait donc plus vite pour le chien que pour l'être humain du point de vue d'un référentiel extérieur. Ce raisonnement peut s'appliquer aux quantile du temps de survie: le temps de survie médian d'un être humain est 7 fois plus élevé que celui d'un chien. En terme d’interprétation des paramètres estimés, si la durée de survie est plus courte, alors le risque est plus élevé.
+ 
+
+## Principe de construction des modèles AFT 
+
+Le raisonnement mathématique est ici  plus complexe que pour les modèles de Cox ou à durée discrète. On donnera juste quelques pistes en début de raisonnement.
+On part d'une expression proche du modèle linéaire à une transformation logarithmique près de la variable dépendante. En imposant la contrainte $t_i>0$, en ne posant qu'une seule covariable $X$ de type binaire, et en se situant de nouveau dans une logique de temps continu (pas d'évènement simultané):
+
+$$log(t_i)= \alpha_0 +  \alpha_1X_i + bu_i$$
+
+$b$ est un paramètre d'échelle identique pour toutes les observations et $u_i$ un terme terme d'erreur qui suit une loi de distribution de densité $f(u)$. Cette combinaison linéaire définira le paramètre de position.  C'est la forme de $f(u)$ qui définie le type de modèle paramétrique.     
+
+On peut écrire: $f(u_i) = f(\frac{log(t_i)- \alpha_0 -  \alpha_1X_i}{b})$. 
+
+Remarque: pour une distibution normale/gaussienne, le paramètre de position est l'espérance et le paramètre d'échelle l'écart-type. 
+
+
+## Quelques modèles paramétriques usuels
+
+**Modèle exponentiel et de Weibull**    
+
+**Weibull**
+
+* Peut estimer un modèle PH ou AFT, d'où sa popularité.
+* Distribution monotone des durées d'évènement, toujours croissante ou décroissante.
+* $f(t)=\lambda\alpha t^{\alpha - 1}e^{-\alpha t^\lambda}$ et  $h(t)=\lambda\alpha(\lambda t)^{\alpha - 1}$, $\alpha>0$ et $\lambda>0$. Si $\lambda>1$ le risque est croissant, décroissant si $\lambda<1$, et est constant (loi exponentielle) si $\lambda=1$.  
+
+*Exponentiel*  
+
+* Processus sans mémoire,  utilisé pour étudier par exemple la durée de vie composants électriques ou électroniques. 
+* La fonction de risque est une constante. 
+* Cas limite de la loi de Weibull. Un modèle de type exponentiel peut-être de type AFT ou PH.
+* Pour contourner la constance du risque dans le temps, on peut estimer un modèle en scindant la durée en plusieurs intervalles. Le risque sera constant à l'intérieur de ces intervalles, il s'agit d'un modèle "exponential piecewise" (exponentiel par morceau).   
+
+
+**Log-logistique**
+
+* Estime un modèle de type AFT seulement. Proche du modèle log-normal (plus difficile à estimer).
+* Permet une interprétation en terme d'Odds de survie.
+* La fontion du risque peut-être "U-shaped" (unimodale croissante puis décroissante).  
+
+
+**Autres lois**: Gompertz (PH seulement), Gamma et Gamma généralisé.....
+
+
+**Sélection de la loi**
+On peut sélectionner la loi en comprarant les AIC où les BIC des modèles. Pour le modèle de Weibull, on peut regarder s'il ajuste bien les données si la transformation $log(-log(S(t_i)))$ est linéaire par rapport à $log(t_i)$.
+
+***Application***
+
+***Comparaison des AIC (sans covariable)***    
+
+* Weibull:   400.1  
+* Exponentiel: 461.0  
+* Gompertz:  409.6  
+* Log-logistique: 391.8*
+
+
+## Exemple avec le modèle de Weibull
+
+
+**AFT**
+
+```{stata}
+*| echo  : false
+
+qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear
+qui stset stime, f(died)
+
+streg year age surgery, dist(weibull) time tr noheader nolog
+```
+
+Un jour de survie d’une personne qui n’a pas été opérée d’un pontage correspond environ à 7 jours de survie d’une personne opérée. Cette remise à l’échelle de la métrique temporelle entre les deux groupes exprime bien le gain en durée de survie pour les personnes opérées, soit des risques journaliers de décès plus faibles (et plus faibles à valeurs constantes, proportionnalité oblige).
+
+
+**PH**
+
+```{stata}
+*| echo  : false
+
+streg year age surgery, dist(weibull)  hr  noheader nolog
+```
+
+
+
+Remarque: Si on avait reporté les coefficients (échelle log) $b_{ph} = -\rho \times b_{aft}$. Ici $-0.556 \times (1.97) = -1.096$. Et $e^{-1.096}=0.334$
+
+
+Attention: on ne peut pas comparer la qualité d'un modèle paramétrique à celle d'un modèle de Cox par des critères type AIC ou BIC. Les deux méthodes d'estimation diffèrent.
+
+
+## Le modèle de Parmar-Royston
+
+* Le bon ajustement par une loi de distribution predéfinie peut s'avérer contraignante. Le modèle de Cox avait justement pour objectif de se défaire de cette contrainte, la plupart des distributions utilisée étant monotone ou unimodale (log-logistique ou log-normal). 
+* Le principe des splines peut-être rapproché de celui qui a été utilisé plus haut dans le modèle logistique à durée discrète avec l'introduction des polynomes [ $f(t)= (a_1\times t) + (a_2\times t^2) + (a_3\times t^3) + ...+ (a_k\times t^k)$. 
+  * Cette méthode brute d'ajustement consiste finalement à introduire une intéraction ou plusieurs intéractions entre la variable de durée avec elle-même.
+  * Elle est sujette à une forte sensibilité aux outliers (overfitting) au delà de $k>2$ [lors la formation il suffit de la tester pour k=3 et calculer la probabilité conditionnelle pour s'en convaincre].
+* Les **splines cubiques restreintes** propose une méthode d'ajustement et de lissage de meilleure qualité et permet de contrôler les effets overfitting.
+  * les splines cubiques sont donc basées sur des polynomes d'ordre 3 (d'où cubique) mais estimé par morceau (intervalles). les morceaux sont définis manuellement ou par un nombre de degrés de liberté obtenu par quantile du logarithme de la fonction de survie après avoir exclu les observation censurées. 
+    * Deux degrés de liberté (1 noeud) avec un intervalle allant jusqu'au log de la moitié des survivants et un second à partir de cette seconde moitié.
+    * Sur le même principe trois degrés de liberté (2 noeuds) coupe la durée en 3 intervalles sur ses terciles.
+    * En pratique, il est préférable de donner à l'application de nombre de degré de liberté plutôt que d'indiquer manuellement la position des noeuds. 
+    * Il convient également de ne pas être trop gourmand sur le nombre de noeuds, un ou deux étant souvant suffisant (donc 2 ou 3 degrés de liberté).
+    * On peut choisir le nombre de degrés de liberté en estimant des modèles sans covariables et comparer les AIC (vraisemblance pénalisée).
+* Contrairement aux autres modèles, et sans rentrer dans les détails, le modèle de Parmar-Royston part de la fonction de risque cumulée et non des taux de risque/hasard. Les risk ratios sont obtenus en utilisant les relations entre les différentes grandeurs (voir section *théorie).
+
+    
+**Exemple**  
+
+Avec 2 degrés de liberté (un noeud): 
+
+```{stata}
+*| echo  : false
+
+*qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear
+*qui stset stime, f(died)
+
+stpm2 year age surgery  , df(2) scale(hazard) nolog eform
+```
+
+A savoir: 
+
+- Avec un degré de liberté, le modèle de Parmar-Royston estime un modèle de Weibull sous paramétrisation PH.
+- Les paramètres pour les splines sont difficilement interprétables voire impossibles à interpréter directement. Elles servent calculer la baseline du risque via l'équation du polynome (non reporté car expression bien corsée). 
+
+
+
+
+

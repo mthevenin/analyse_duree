@@ -1,0 +1,269 @@
+---
+# title: "Risques concurrents"
+
+filters:
+  - lightbox
+lightbox: auto
+
+jupyter: nbstata
+
+---
+
+# **Risques concurrents**
+
+Le problème des événements multiples dans les analyses de survie a été posé dans les années 1970 avec la notion de **risques concurrents** (*competing risks*) : il s'agit d'événements survenant au cours de la période d'observations et qui *empêchent* l'occurence de l'événement d'intérêt. 
+
+## Problématique
+
+On étudie un processus dont l’occurence a plusieurs modalités, *types* ou *causes*: 
+
+* La mortalité par cause de décès, les types de sortie du chômage: formation, emploi, radiation.
+* Les types de sortie de l'emploi: chômage, longue maladie, sortie du marché du travail hors retraite. 
+* Les lieux de migration ou les espaces de mobilité résidentielle
+* Les types de rupture d'union: séparation-divorce, veuvage). 
+
+Rappel: Déjà abordé dans la partie théorie, avec un recueil de données de type prospectif les  "perdu.e.s de vue" peuvent difficilement être  assimilés à des sorties d'observation non informatives (censures).
+
+
+L'analyse des risques concurrents est un cas particulier des modèles **multi-états** avec différents risques considérés comme absorbants.
+
+
+En présence de risques concurrents, l’estimation de Kaplan-Meier ne peut se faire que sous **l’hypothèse d’indépendance entre chacun des risques**. Sinon l’estimateur de Kaplan-Meier n’est plus une probabilité.
+Une estimation de type KM d’un évènement en concurrence avec d’autres impose que ces derniers soient traités comme des censures à droites non informatives. Mais il n’est pas possible de tester cette hypothèse.
+
+
+## Risques *cause-specific* et biais sur les estimateurs KM
+
+Si les risques ne sont pas indépendants les uns par rapport aux autres, la somme des estimateurs de (1-KM) pour chaque risque n’est pas égale - elle est **supérieure** - à l’estimateur de (1-KM) où les risques concurrents sont regroupés en un évènement unique. Par exemple les décès si on analyse ses causes.
+
+Le risque calculé en considérant les risques concurrents comme des censures à droite est appelé "**cause-specific risk**.  
+
+
+**Cause specific risk**  
+
+Pour le risque de type $k$, le risque *cause-spécific*  en $t_i$ est égal à:  
+
+$$h_k(t_i)=\frac{d_{i,k}}{R_i}$$
+Où $d_{i,k}$ est le nombre d'évènement de type $k$ survenu en $t_i$ et $R_i$ la population soumise en $t_i$.
+
+<br>
+Conséquence: si les risques ne sont pas indépendants, la fonction de survie estimée avec la méthode Kaplan Meier n'exprime plus une probabilité.   
+
+
+**Exemple sur les décès causés par une malformation cardiaque**  
+
+Dans la base d’origine, il n’y a pas directement cette dimension de risque concurrent, même si on trouve dans la littérature médicale des études prenant le décès rapide post greffe comme un risque de ce type. Les données étant assez anciennes, avec beaucoup de décès post-opératoire, je ne me suis pas « risquer » à générer directement un risque concurrent sur cette information.  Une sortie concurrente a donc été simulée sans plus de précision (variable *compet*), que l’on considèrera non strictement indépendante à la cause d’intérêt.
+Ce risque entre donc en concurrence avec la cause du décès directement liée à la malformation cardiaque, que la personne ait été transplantée ou non. 
+
+
+```{stata}
+*| echo  : false
+
+qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear
+
+tab compet died
+```
+
+
+Variable compet:  
+
+cause 1 => décès directement provoquer par la malformation: compet=1
+cause 2 => autre cause
+compet=0 => censure à droite
+
+Lorsqu'on a analysé le décès par la méthode KM, la proportion de survivant.e.s était de 15%.   
+
+Si on applique la méthode de Kaplan Meier à la cause 1 en traitant la cause 2 comme une censure à droite ($n=18+29=48$), puis en sommant les deux estimateurs, la fonction de répartition excède 100% au bout de 1000 jours environs. La proportion de survivant.e.s est donc négative.
+
+
+![Fonction de répartition avec une cause concurrente traitée comme une censure à droite](images/Image16.png)
+
+
+## **Estimations en présence de risques concurrents (CIF)**
+
+### Estimation non paramétrique
+
+* Utiliser l'estimateur de Nelson Aalen: il s'agit du risque instantané cumulé. Comme il ne s'agit pas d'une probabilité, il a été longtemps utilisé comme mesure de l'incidence en présence de risques concurrents dans une logique dite *cause specific*.
+
+$$H_k (t_i)=\sum_{t_i\leq t}\left(\frac{e_{i,k}}{n_i}\right) $$
+
+* Actuellement, l'estimateur le plus utilisé est la fonction dite d'**incidence cumulée - CIF-**  de Kalbfleisch-Prentice et Marubini-Valscchi:
+
+  * Il repose sur une probabilité tout en supportant la non indépendance des risques.
+  * Son interprétation est identique à la fonction de répartition $F(t)=1-S(t)$. Cette fonction est donc croissante.
+  * Il est possible de tester les différences entres CIF: *test de Gray* (R, SAS) ou *test de Pepe-Mori* (Stata).
+  
+**CIF (Cumulative Incidence Function)**  
+
+* Si $h_k(t_i)$ est le risque *cause-spécific* en $t_i$ et $S(t_i-1)$ l'estimateur de Kaplan-Meier en $t_i-1$ lorsque tous les risques sont regroupés en un évènement unique, l'incidence cumulée pour le risque $k$ en $t_i$ est égale à:  
+
+$$IC_k(t_i)= \sum_{t_i\leq t}S(t_i-1)h_k(t_i)$$
+
+* Les valeurs prises par cette fonction pour la cause  $k$  ne dépendent donc pas seulement des individus ayant observé l'évènement à partir de cette seule cause, mais aussi du nombre de personnes qui n'ont pas encore observés l'évènement à partir des autres causes identifiées. Cette dernière information est donnée par $S(t_i-1)$.
+* L'incidence cumulée peut ainsi s'interpréter, simplement, comme la proportion d'individus qui sont sortis du risque jusqu'en $t_i$  en raison de la cause $k$.  
+
+
+![Risques concurrent: estimation de la CIF](images/Image17.png)
+
+
+
+```{stata}
+*| echo  : false
+
+qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear
+qui stset stime, f(compet==1)
+
+stcomlist, compet1(2)
+```
+
+En présence du risque concurrent, et traité comme tel, la moitié des personnes sont décédées suite à la malformation cardiaque au bout de 308 jours (200 jours avec une estimation de type « cause specific »).  
+
+
+On peut vérifier que la somme des estimateurs permet d’obtenir la survie *toutes causes confondues*. Il n’y a pas de surprise à cela, dans l’estimateur Marubini-Valscchi la survie d’ensemble intervient comme un facteur de pondération du quotient d'intensité dite « cause-specific ».   
+
+   
+::: callout-tip
+
+### **R-Stata-Sas-Python**
+
+L’estimation avec des risques de type « cause-specific » demande juste de recoder la variable évènement/censure, en glissant les risques concurrents en censure à droite.  
+
+Pour l'estimation des CIF (risque de sous répartition):
+
+* **R**: la librairie **`cmprsk`** permet d’estimer simplement les incidences cumulées avec la fonction **`cuminc`**.
+
+* **Sas**: maintenant directement estimable avec `proc lifetest`. Il suffit d’indiquer le ou les risques d'intérêt dans l’instruction indiquant la variable de durée et de censure avec l’option **`failcode=valeur`**.
+
+* **Stata**:  Estimation avec la commande externe **`stcompet`**. La commande génère des variables qui demande des manipulations supplémentaires pour afficher les résultats sous forme de tableau par exemple. On peut utiliser et préférer la commande externe **`stcomlist`**. 
+
+* **Python**: le wrapper de R (`cmprsk`) ne fonctionne plus à ce jour à défaut de mise à jour [2022].
+
+:::
+
+
+### Compararaison des CIF
+
+*	**Test d’homogénéité de Gray**: est basé sur une autre mesure du risque en évènement concurrent. Sur le principe, identique à la philosopjie des test du logrank. Il s’agit du « subdistribution risks (« risque de sous-répartition », A.Latouche). Son interprétation n’est pas aisée car les personnes ayant observé un risque concurrent sont remises dans le Risk Set. Mais il est directement lié à l’estimation des CIF. Disponible avec SAS et R. Il est également sensible l’hypothèse de proportionnalité et à la distribution des censures à droites entre les groupes comparés. A ma connaissance il n’y a pas de variantes pondérées. 
+
+*	**Test de Pepe & Mori**: teste directement deux courbes d’incidences et seulement 2. Je n'ai pas le recul nécessaire sur cette alternative, qui n'est implémenté que dans Stata. 
+
+
+| Risques | Chi2 | P>Chi2 |
+|---------|------|--------|
+| Cause1  |5.783 | 0.0161 |
+| Cause2  |0.129 | 0.7191 |
+: Test de Gray pour la variable surgery
+
+
+
+| Risques | Chi2 | P>Chi2 |
+|---------|------|--------|
+| Cause1  |6.203 | 0.0127 |
+| Cause2  |1.880 | 0.7038 |
+: Test de Pepe-Mori pour la variable surgery
+
+
+
+
+::: callout-tip
+
+### **R-Stata-Sas-Python**
+
+* **Sas**: le test de Gray est estimé si on ajoute l’option strata=nom_variable à la proc lifetest sous risque concurrent (voir encadré précédent). Le test de Pepe-Mori est disponible via une macro externe  (`%compcif`: non testée) :  
+
+* **Stata**: Le test de Gray n’est pas disponible, il faut passer par une exécution de la fonction cuminc de la librairie R cmprsk directement dans stata (voir la commande `rsource`). Pour faire plus simple, on peut estimer le modèle de Fine-Gray avec une seule variable (discrète). Le résultat est comparable à celui du test (voir plus bas). Le test de Pepe-Mori est disponible via la commande externe `stpepemori`. 
+* **R**: On ajoute une variable à la fonction `cuminc` de la librairie **`cmprsk`**. Pas de test de *Pepe-Mori* sur les fonctions d’incidence à ma connaissance.
+* **Python**: ne pas essayer d’utiliser la librairie cmprsk qui n’est pas mis à jour et ne fonctionne plus.
+
+:::
+
+
+## **Modèles**
+
+
+### Modèles Semi paramétriques
+
+Cette présentation sera plutôt brève. Dans le domaine des sciences sociales, je préconise plutôt l’utilisation d’un modèle multinomial à temps discret de type logistique. Le modèle de Cox en présence de risques concurrent n’est valable que dans une logique de risques « cause-specific », le modèle de Fine et Gray bien que directement relié à l’estimation des incidences cumulées, repose sur une définition du risque (de sous répartition) dont l’interprétation n’est pas naturelle. Il est également soumis à l’hypothèse de proportionnalité des risques. 
+
+**Modélisation des risques « cause-specific » : Cox**      
+Modèle de Cox «standard» pour chaque évènement, les évènements concurrents sont traités comme des censures à droite. Aucune interprétation sur les fonctions d’incidence ne peut-être faite.  
+
+
+**Modèle de Fine-Gray: subdistribution hazard regression**  
+Modèle de type semi-paramétrique avec une redéfinition du risque lié à l’estimation des fonctions d’incidence (voir test de Gray). La différence avec le Cox classique réside dans le calcul du risk-set : les évènements concurrents ne sont pas considérés comme des censures, on laisse les individus leur « survivre » jusqu’à la durée maximale observée dans l’échantillon. L’interprétation n’est donc pas très intuitive (Fine et Gray le soulignent). Ce modèle est relativement contreversé. 
+Il ne sera donc pas exécuté pour l'application
+
+<br>
+
+Pour les questions liées à l’interprétation de ces deux types de modèles, se reporter à: <https://onlinelibrary.wiley.com/doi/epdf/10.1002/sim.7501>
+
+
+
+::: callout-tip
+
+### R-Stata-Sas-Python  
+
+* **R**: on utilise la fonction **`crr`** du package cmprsk.
+
+* **Sas**: même principe que pour l’estimation non paramétrique, on ajoute l’option `eventcode=valeur` à l’instruction `model` de la `proc phreg`.
+
+* **Stata**: on utilise la commande interne **`stcrreg`**.
+
+* **Python** : ne pas essayer d’utiliser la librairie cmprsk qui n’est pas mis à jour et ne fonctionne donc plus.
+
+:::
+
+
+### Modèle à temps discret 
+
+*	Il s’agit d’une extension du modèle à temps discret à évènement unique (toutes causes regroupées) avec ici le modèle logistique multinomial.
+
+*	S’il ne permet pas une interprétation sur les fonctions d’incidences, les risques concurrents ne sont pas traitées comme des censures à droite. 
+
+*	Le modèle multinomial repose sur une hypothèse dite « d’indépendance  des alternatives non pertinentes » (IIA). Cela peut donc paraitre contradictoire d’utiliser ce modèle pour des évènements qui sont supposés non indépendants. Néanmoins la dépendance entre risques concurrents n’est pas non plus stricte et cette hypothèse d’IIA, seulement testable par le bon sens, est souvent illustrée par l’exemple des couleurs des bus dans le choix du mode de transport, ou les couleurs de chaussure dans les études marketing. Soit est une situation relativement limite. 
+
+*	En terme de lecture, les estiupateurs du modèle logistique multinomial  peuvent directement s’interpréter comme des rapports de risque (ou relative risk ratio). 
+
+*	En sciences sociales, il me semble que ce type de modèle soit à privilégier.
+
+*	On peut également envisager un modèle de type probit multinomial, mais on peut rencontrer des problèmes d’estimations (repose sur la loi normale multivariée). Prévoir un regroupement des causes concurrentes, et dans tous les cas de figure ne pas dépasser trois causes. 
+
+* Niveau lecture, on peut utiliser une méthode de standardisation, de type **AME** (*Average Marginal Effect*).
+
+Pour l'application, nous avons pris le mois (30 jours) comme métrique temporelle.
+On rappelle que les valeurs des estimateurs sont fictives en raison de la simulation des évènement pour le risque concurrent (cause2)
+
+
+
+
+```{stata}
+*| echo : false
+
+qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear
+
+	
+qui sum year
+gen year2 = year - `r(mean)'
+qui sum age
+qui gen age2 = age - `r(mean)'
+
+qui drop year age
+qui rename year2 year
+qui rename age2 age
+
+qui expand mois
+qui bysort id: gen t=_n
+qui gen e = compet
+qui gen t2 = t^2
+
+qui bysort id: replace e=0 if t<_N
+
+mlogit e t t2  year age surgery, rrr noheader nolog
+
+```
+
+Note: les variables *year* et *age* ont été centrées sur leur valeur moyenne pour donner aux constantes des valeurs acceptables. 
+
+
+
+

@@ -1,6 +1,5 @@
 # Introduction analyse des durées [données biographiques]
 
-
 **Maj 2023**
 
 * Passage en format book avec téléchargement direct du pdf
@@ -9,7 +8,6 @@
 
 * Formation HED: octobre
 * Cours université de Strasbourg: décembre 
-
 
 **2022**
 * Ajout section Annexes (novembre 2022)

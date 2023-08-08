@@ -1,7 +1,36 @@
 /*-- scss:defaults --*/
+
 // Base document colors
+
+$code-block-stdoutcolor:  #8B0000;
+$code-block-stdoutcolor-light: rgba($code-block-stdoutcolor, 0.5);
+$code-block-stdoutcolor-lighter: rgba($code-block-stdoutcolor, 0.1);
+
+
+
 //$body-bg: white ;
 @import url('https://fonts.googleapis.com/css2?family=Oswald');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css2?family=Roboto');
+
+
+
+/*-- scss:rules --*/
+
+.cell-output-display pre, .cell-output-stdout pre {
+    background-color: $code-block-stdoutcolor-lighter !important;
+    border: 1.5px solid $code-block-stdoutcolor-light;
+    border-radius: .25rem;
+    border-left: 4px;
+    border-left-style: solid;
+    border-left-color: $code-block-stdoutcolor;
+    padding: .4em;
+    color:  #8B0000
+}
+
+
+.cell-output pre code {
+    background-color: transparent;
+}
+
 
