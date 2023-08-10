@@ -52,7 +52,7 @@ book:
     - part: "Programmation"
       chapters:
         - 13-R.qmd
-#        - 14-Stata.qmd
+        - 14-Stata.qmd
 #        - 15-Sas.qmd
 #        - 16-Python.qmd
 format:
@@ -69,9 +69,9 @@ format:
     code-tools:
       source: true
     grid:
-      sidebar-width: 290px
-      body-width: 860px
-      margin-width: 350px
+      sidebar-width: 350px
+      body-width: 950px
+      margin-width: 300px
       gutter-width: 1.5rem
 
   pdf:

@@ -5,7 +5,6 @@
 
 ## Tests Grambsch-Therneau OLS sur les résidus de Schoenfeld
 
-
 ::: callout-important
 Attention il ne s'agit pas du test actuellement implémenté dans la nouvelle version de `survival` (v3) qui, malheureusement, lui a substitué la version dite *exacte* (moindres carrés généralisés). Le programme de la fonction  du test OLS est néanmoins facilement récupérable et exécutable. [lien](https://github.com/mthevenin/analyse_duree/blob/main/cox.zphold/cox.zphold.R).  
 

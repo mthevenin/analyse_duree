@@ -1,7 +1,7 @@
 ---
 # title: "Modèles paramétriques"
 
-jupyter: nbstata
+#jupyter: nbstata
 ---
 
 
@@ -90,37 +90,37 @@ On peut sélectionner la loi en comprarant les AIC où les BIC des modèles. Pou
 * Weibull:   400.1  
 * Exponentiel: 461.0  
 * Gompertz:  409.6  
-* Log-logistique: 391.8*
+* Log-logistique: 391.8
 
 
 ## Exemple avec le modèle de Weibull
 
+::: {#tbl-panel layout-ncol="2"}
+| Variables | Time Ratio | p\>\|z\| | 95% IC         |
+|-----------|------------|----------|----------------|
+| $year$    | 1.176      | 0.184    | 0.926 - 1.493  |
+| $age$     | 0.940      | 0.013    | 0.896 - 0.987  |
+| $surgery$ | 7.173      | 0.011    | 1.557 - 33.048 |
+| $\rho$    | 0.556      | \-       | 0.464 - 0.667  |
+: Accelerated Failure Time (AFT) {#tbl-first}
 
-**AFT**
+| Variables |    HR      | p\>\|z\| | 95% IC         |
+|-----------|------------|----------|----------------|
+| $year$    | 0.914      | 0.175    | 0.802 - 1.041  |
+| $age$     | 1.035      | 0.014    | 1.007 - 1.063  |
+| $surgery$ | 0.334      | 0.012    | 0.143 - 0.783  |
+| $\rho$    | 0.556      | \-       | 0.464 - 0.667  |
+: Proportional hazard (PH) {#tbl-second}
 
-```{stata}
-*| echo  : false
+Modèle de Weibull
+:::
 
-qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear
-qui stset stime, f(died)
-
-streg year age surgery, dist(weibull) time tr noheader nolog
-```
-
-Un jour de survie d’une personne qui n’a pas été opérée d’un pontage correspond environ à 7 jours de survie d’une personne opérée. Cette remise à l’échelle de la métrique temporelle entre les deux groupes exprime bien le gain en durée de survie pour les personnes opérées, soit des risques journaliers de décès plus faibles (et plus faibles à valeurs constantes, proportionnalité oblige).
-
-
-**PH**
-
-```{stata}
-*| echo  : false
-
-streg year age surgery, dist(weibull)  hr  noheader nolog
-```
-
+Note: la constante n'est pas reporté. $\rho$ indique la valeur estimé d'un paramètre de *forme*. Son signe indique sur le risque est décroissant ou croissant (1 si risque constant), et permet de passer de la paramétrisation AFT à la paramétrisation PH (et inversement).
 
 
-Remarque: Si on avait reporté les coefficients (échelle log) $b_{ph} = -\rho \times b_{aft}$. Ici $-0.556 \times (1.97) = -1.096$. Et $e^{-1.096}=0.334$
+* **AFT**: Un jour de survie d’une personne qui n’a pas été opérée d’un pontage correspond environ à 7 jours de survie d’une personne opérée. Cette remise à l’échelle de la métrique temporelle entre les deux groupes exprime bien le gain en durée de survie pour les personnes opérées, soit des risques journaliers de décès plus faibles (et plus faibles à valeurs constantes, proportionnalité oblige).
+
+* **PH**: Lecture en rapport de risque ou *hazard rate* (idem Cox). Si on avait reporté les coefficients (échelle log) $b_{ph} = -\rho \times b_{aft}$. Ici $-0.556 \times (1.97) = -1.096$. Et $e^{-1.096}=0.334$
 
 
 Attention: on ne peut pas comparer la qualité d'un modèle paramétrique à celle d'un modèle de Cox par des critères type AIC ou BIC. Les deux méthodes d'estimation diffèrent.
@@ -133,7 +133,7 @@ Attention: on ne peut pas comparer la qualité d'un modèle paramétrique à cel
   * Cette méthode brute d'ajustement consiste finalement à introduire une intéraction ou plusieurs intéractions entre la variable de durée avec elle-même.
   * Elle est sujette à une forte sensibilité aux outliers (overfitting) au delà de $k>2$ [lors la formation il suffit de la tester pour k=3 et calculer la probabilité conditionnelle pour s'en convaincre].
 * Les **splines cubiques restreintes** propose une méthode d'ajustement et de lissage de meilleure qualité et permet de contrôler les effets overfitting.
-  * les splines cubiques sont donc basées sur des polynomes d'ordre 3 (d'où cubique) mais estimé par morceau (intervalles). les morceaux sont définis manuellement ou par un nombre de degrés de liberté obtenu par quantile du logarithme de la fonction de survie après avoir exclu les observation censurées. 
+  * les splines cubiques sont donc basées sur des polynomes d'ordre 3 (d'où cubique) avec une estimation par morceau (intervalles). les morceaux sont définis manuellement ou par un nombre de degrés de liberté obtenu par quantile du logarithme de la fonction de survie après avoir exclu les observation censurées. 
     * Deux degrés de liberté (1 noeud) avec un intervalle allant jusqu'au log de la moitié des survivants et un second à partir de cette seconde moitié.
     * Sur le même principe trois degrés de liberté (2 noeuds) coupe la durée en 3 intervalles sur ses terciles.
     * En pratique, il est préférable de donner à l'application de nombre de degré de liberté plutôt que d'indiquer manuellement la position des noeuds. 
@@ -146,19 +146,20 @@ Attention: on ne peut pas comparer la qualité d'un modèle paramétrique à cel
 
 Avec 2 degrés de liberté (un noeud): 
 
-```{stata}
-*| echo  : false
-
-*qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear
-*qui stset stime, f(died)
-
-stpm2 year age surgery  , df(2) scale(hazard) nolog eform
-```
+| Variables  |   $e^(b)   | p\>\|z\| | 95% IC         |
+|------------|------------|----------|----------------|
+| $year$     | 0.885      | 0.067    | 0.777 - 1.008  |
+| $age$      | 1.030      | 0.026    | 1.004 - 1.058  |
+| $surgery$  | 0.373      | 0.025    | 0.159 - 0.876  |
+| $spline 1$ | 3.157      | 0.000    | 2.503 - 3.981  |
+| $spline 2$ | 1.289      | 0.002    | 1.099 - 1.511  |
+| $constante$| 0.510      | 0.000    | 0.386 - 0.674  |
+: Modèle de Parmar-Roytston
 
 A savoir: 
 
 - Avec un degré de liberté, le modèle de Parmar-Royston estime un modèle de Weibull sous paramétrisation PH.
-- Les paramètres pour les splines sont difficilement interprétables voire impossibles à interpréter directement. Elles servent calculer la baseline du risque via l'équation du polynome (non reporté car expression bien corsée). 
+- Les paramètres pour les splines ne sont pas interprétables directement. Ils servent calculer la baseline du risque via l'équation du polynome (non reporté car expression bien corsée). 
 
 
 

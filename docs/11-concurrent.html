@@ -271,7 +271,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-annexe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Annexes</span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><strong>Annexes</strong></span></span></a>
   </div>
 </li>
       </ul>
@@ -289,6 +289,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./13-R.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title"><strong>R</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./14-Stata.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title"><strong>Stata</strong></span></span></a>
   </div>
 </li>
       </ul>
@@ -382,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Si on applique la méthode de Kaplan Meier à la cause 1 en traitant la cause 2 comme une censure à droite (<span class="math inline">\(n=18+29=48\)</span>), puis en sommant les deux estimateurs, la fonction de répartition excède 100% au bout de 1000 jours environs. La proportion de survivant.e.s est donc négative.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Image16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Fonction de répartition avec une cause concurrente traitée comme une censure à droite"><img src="images/Image16.png" class="img-fluid figure-img"></a></p>
+<p><a href="images/Image16.png" class="lightbox" title="Fonction de répartition avec une cause concurrente traitée comme une censure à droite" data-gallery="quarto-lightbox-gallery-1"><img src="images/Image16.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Fonction de répartition avec une cause concurrente traitée comme une censure à droite</figcaption>
 </figure>
 </div>
@@ -414,7 +420,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Image17.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Risques concurrent: estimation de la CIF"><img src="images/Image17.png" class="img-fluid figure-img"></a></p>
+<p><a href="images/Image17.png" class="lightbox" title="Risques concurrent: estimation de la CIF" data-gallery="quarto-lightbox-gallery-2"><img src="images/Image17.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Risques concurrent: estimation de la CIF</figcaption>
 </figure>
 </div>
@@ -429,16 +435,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
        1    0.0097     0.0097     0.0009    0.0477
        2    0.0388     0.0190     0.0127    0.0892
        3    0.0583     0.0231     0.0239    0.1149
-       5    0.0777     0.0264     0.0363    0.1395</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       6    0.0874     0.0278     0.0429    0.1515
+       5    0.0777     0.0264     0.0363    0.1395
+       6    0.0874     0.0278     0.0429    0.1515
        8    0.0971     0.0292     0.0497    0.1634
        9    0.1068     0.0304     0.0566    0.1751
       12    0.1166     0.0316     0.0638    0.1868
       16    0.1362     0.0338     0.0785    0.2099
-      18    0.1461     0.0349     0.0860    0.2212
-      21    0.1657     0.0367     0.1014    0.2437
+      18    0.1461     0.0349     0.0860    0.2212</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      21    0.1657     0.0367     0.1014    0.2437
       32    0.1756     0.0376     0.1093    0.2550
       37    0.1856     0.0384     0.1173    0.2662
       40    0.1957     0.0393     0.1254    0.2775
@@ -638,33 +644,121 @@ R-Stata-Sas-Python
 <li><p>Niveau lecture, on peut utiliser une méthode de standardisation, de type <strong>AME</strong> (<em>Average Marginal Effect</em>).</p></li>
 </ul>
 <p>Pour l’application, nous avons pris le mois (30 jours) comme métrique temporelle. On rappelle que les valeurs des estimateurs sont fictives en raison de la simulation des évènement pour le risque concurrent (cause2)</p>
-<div class="cell" data-execution_count="3">
-<div class="cell-output cell-output-stdout">
-<pre><code>------------------------------------------------------------------------------
-           e |        RRR   Std. err.      z    P&gt;|z|     [95% conf. interval]
--------------+----------------------------------------------------------------
-0            |  (base outcome)
--------------+----------------------------------------------------------------
-1            |
-           t |      0.816      0.034    -4.91   0.000        0.752       0.885
-          t2 |      1.003      0.001     3.53   0.000        1.001       1.005
-        year |      0.879      0.072    -1.57   0.116        0.749       1.032
-         age |      1.045      0.018     2.51   0.012        1.010       1.081
-     surgery |      0.318      0.171    -2.13   0.033        0.110       0.913
-       _cons |      0.231      0.052    -6.49   0.000        0.148       0.360
--------------+----------------------------------------------------------------
-2            |
-           t |      0.817      0.056    -2.93   0.003        0.713       0.935
-          t2 |      1.003      0.002     1.94   0.052        1.000       1.006
-        year |      0.816      0.113    -1.47   0.141        0.622       1.070
-         age |      1.011      0.025     0.45   0.654        0.964       1.061
-     surgery |      0.541      0.422    -0.79   0.431        0.117       2.496
-       _cons |      0.076      0.028    -6.96   0.000        0.037       0.157
-------------------------------------------------------------------------------
-Note: _cons estimates baseline relative risk for each outcome.</code></pre>
+<div id="tbl-panel" class="tbl-parent quarto-layout-panel anchored">
+<div class="panel-caption table-caption">
+<p>Table&nbsp;12.1: Modèle logistique multinomial avec risques concurrent</p>
+</div>
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div id="tbl-first" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-panel" style="flex-basis: 50.0%;justify-content: center;">
+<table class="table">
+<caption>(a) Cause 1</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Cause 1</th>
+<th style="text-align: left;">RRR</th>
+<th style="text-align: left;">p&gt;|z|</th>
+<th style="text-align: left;">95% IC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(t\)</span></td>
+<td style="text-align: left;">0.816</td>
+<td style="text-align: left;">0.000</td>
+<td style="text-align: left;">0.752 - 0.885</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(t^2\)</span></td>
+<td style="text-align: left;">1.003</td>
+<td style="text-align: left;">0.000</td>
+<td style="text-align: left;">1.001 - 1.005</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(year\)</span></td>
+<td style="text-align: left;">0.879</td>
+<td style="text-align: left;">0.116</td>
+<td style="text-align: left;">0.749 - 1.032</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(age\)</span></td>
+<td style="text-align: left;">1.045</td>
+<td style="text-align: left;">0.012</td>
+<td style="text-align: left;">1.010 - 1.081</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(surgery\)</span></td>
+<td style="text-align: left;">0.318</td>
+<td style="text-align: left;">0.033</td>
+<td style="text-align: left;">0.110 - 0.913</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(constante\)</span></td>
+<td style="text-align: left;">0.231</td>
+<td style="text-align: left;">0.000</td>
+<td style="text-align: left;">0.148 - 0.360</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="tbl-second" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-panel" style="flex-basis: 50.0%;justify-content: center;">
+<table class="table">
+<caption>(b) Cause 2</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Cause 2</th>
+<th style="text-align: left;">RRR</th>
+<th style="text-align: left;">p&gt;|z|</th>
+<th style="text-align: left;">95% IC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(t\)</span></td>
+<td style="text-align: left;">0.817</td>
+<td style="text-align: left;">0.003</td>
+<td style="text-align: left;">0.713 - 0.935</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(t^2\)</span></td>
+<td style="text-align: left;">1.003</td>
+<td style="text-align: left;">0.052</td>
+<td style="text-align: left;">1.000 - 1.006</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(year\)</span></td>
+<td style="text-align: left;">0.816</td>
+<td style="text-align: left;">0.141</td>
+<td style="text-align: left;">0.622 - 1.070</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(age\)</span></td>
+<td style="text-align: left;">1.011</td>
+<td style="text-align: left;">0.654</td>
+<td style="text-align: left;">0.964 - 1.061</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><span class="math inline">\(surgery\)</span></td>
+<td style="text-align: left;">0.541</td>
+<td style="text-align: left;">0.431</td>
+<td style="text-align: left;">0.117 - 2.496</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><span class="math inline">\(constante\)</span></td>
+<td style="text-align: left;">0.076</td>
+<td style="text-align: left;">0.000</td>
+<td style="text-align: left;">0.037 - 0.157</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
-<p>Note: les variables <em>year</em> et <em>age</em> ont été centrées sur leur valeur moyenne pour donner aux constantes des valeurs acceptables.</p>
+</div>
+<p>Notes:</p>
+<ul>
+<li>On a utilisé le terme RRR - Relative Risk Ratio - pour la colonne raportant les estimations. Dans un cadre de risque concurrent il est un peu difficile d’utiliser formellement la notion de <em>hazard rate</em> tel qu’il a été difini plus haut, enfin les modèles multinomiaux ne reportent pas formellement des Odds Ratios dont l’utilisation devrait être réservé exclusivement à une alternative binaire.</li>
+<li>les variables <em>year</em> et <em>age</em> ont été centrées sur leur valeur moyenne pour donner aux constantes des valeurs acceptables.</li>
+<li>Pour faciliter la lecture on peut utiliser une méthode de standardisation de type AME (Average Marginal Effect).</li>
+</ul>
 
 
 <!-- -->
@@ -965,282 +1059,285 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./12-annexe.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Annexes</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><strong>Annexes</strong></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Code source</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co"># title: "Risques concurrents"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="an">filters:</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - lightbox</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="an">lightbox:</span><span class="co"> auto</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> nbstata</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Risques concurrents**</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>Le problème des événements multiples dans les analyses de survie a été posé dans les années 1970 avec la notion de **risques concurrents** (*competing risks*) : il s'agit d'événements survenant au cours de la période d'observations et qui *empêchent* l'occurence de l'événement d'intérêt. </span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Problématique</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>On étudie un processus dont l’occurence a plusieurs modalités, *types* ou *causes*: </span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>La mortalité par cause de décès, les types de sortie du chômage: formation, emploi, radiation.</span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Les types de sortie de l'emploi: chômage, longue maladie, sortie du marché du travail hors retraite. </span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Les lieux de migration ou les espaces de mobilité résidentielle</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Les types de rupture d'union: séparation-divorce, veuvage). </span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>Rappel: Déjà abordé dans la partie théorie, avec un recueil de données de type prospectif les  "perdu.e.s de vue" peuvent difficilement être  assimilés à des sorties d'observation non informatives (censures).</span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>L'analyse des risques concurrents est un cas particulier des modèles **multi-états** avec différents risques considérés comme absorbants.</span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>En présence de risques concurrents, l’estimation de Kaplan-Meier ne peut se faire que sous **l’hypothèse d’indépendance entre chacun des risques**. Sinon l’estimateur de Kaplan-Meier n’est plus une probabilité.</span>
-<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a>Une estimation de type KM d’un évènement en concurrence avec d’autres impose que ces derniers soient traités comme des censures à droites non informatives. Mais il n’est pas possible de tester cette hypothèse.</span>
-<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-35"><a href="#cb5-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## Risques *cause-specific* et biais sur les estimateurs KM</span></span>
-<span id="cb5-36"><a href="#cb5-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-37"><a href="#cb5-37" aria-hidden="true" tabindex="-1"></a>Si les risques ne sont pas indépendants les uns par rapport aux autres, la somme des estimateurs de (1-KM) pour chaque risque n’est pas égale - elle est **supérieure** - à l’estimateur de (1-KM) où les risques concurrents sont regroupés en un évènement unique. Par exemple les décès si on analyse ses causes.</span>
-<span id="cb5-38"><a href="#cb5-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-39"><a href="#cb5-39" aria-hidden="true" tabindex="-1"></a>Le risque calculé en considérant les risques concurrents comme des censures à droite est appelé "**cause-specific risk**.  </span>
-<span id="cb5-40"><a href="#cb5-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-41"><a href="#cb5-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-42"><a href="#cb5-42" aria-hidden="true" tabindex="-1"></a>**Cause specific risk**  </span>
-<span id="cb5-43"><a href="#cb5-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-44"><a href="#cb5-44" aria-hidden="true" tabindex="-1"></a>Pour le risque de type $k$, le risque *cause-spécific*  en $t_i$ est égal à:  </span>
-<span id="cb5-45"><a href="#cb5-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-46"><a href="#cb5-46" aria-hidden="true" tabindex="-1"></a>$$h_k(t_i)=\frac{d_{i,k}}{R_i}$$</span>
-<span id="cb5-47"><a href="#cb5-47" aria-hidden="true" tabindex="-1"></a>Où $d_{i,k}$ est le nombre d'évènement de type $k$ survenu en $t_i$ et $R_i$ la population soumise en $t_i$.</span>
-<span id="cb5-48"><a href="#cb5-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-49"><a href="#cb5-49" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb5-50"><a href="#cb5-50" aria-hidden="true" tabindex="-1"></a>Conséquence: si les risques ne sont pas indépendants, la fonction de survie estimée avec la méthode Kaplan Meier n'exprime plus une probabilité.   </span>
-<span id="cb5-51"><a href="#cb5-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-52"><a href="#cb5-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-53"><a href="#cb5-53" aria-hidden="true" tabindex="-1"></a>**Exemple sur les décès causés par une malformation cardiaque**  </span>
-<span id="cb5-54"><a href="#cb5-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-55"><a href="#cb5-55" aria-hidden="true" tabindex="-1"></a>Dans la base d’origine, il n’y a pas directement cette dimension de risque concurrent, même si on trouve dans la littérature médicale des études prenant le décès rapide post greffe comme un risque de ce type. Les données étant assez anciennes, avec beaucoup de décès post-opératoire, je ne me suis pas « risquer » à générer directement un risque concurrent sur cette information.  Une sortie concurrente a donc été simulée sans plus de précision (variable *compet*), que l’on considèrera non strictement indépendante à la cause d’intérêt.</span>
-<span id="cb5-56"><a href="#cb5-56" aria-hidden="true" tabindex="-1"></a>Ce risque entre donc en concurrence avec la cause du décès directement liée à la malformation cardiaque, que la personne ait été transplantée ou non. </span>
-<span id="cb5-57"><a href="#cb5-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-58"><a href="#cb5-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-61"><a href="#cb5-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb5-62"><a href="#cb5-62" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo  : false</span></span>
-<span id="cb5-63"><a href="#cb5-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-64"><a href="#cb5-64" aria-hidden="true" tabindex="-1"></a><span class="in">qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear</span></span>
-<span id="cb5-65"><a href="#cb5-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-66"><a href="#cb5-66" aria-hidden="true" tabindex="-1"></a><span class="in">tab compet died</span></span>
-<span id="cb5-67"><a href="#cb5-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-68"><a href="#cb5-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-69"><a href="#cb5-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-70"><a href="#cb5-70" aria-hidden="true" tabindex="-1"></a>Variable compet:  </span>
-<span id="cb5-71"><a href="#cb5-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-72"><a href="#cb5-72" aria-hidden="true" tabindex="-1"></a>cause 1 =&gt; décès directement provoquer par la malformation: compet=1</span>
-<span id="cb5-73"><a href="#cb5-73" aria-hidden="true" tabindex="-1"></a>cause 2 =&gt; autre cause</span>
-<span id="cb5-74"><a href="#cb5-74" aria-hidden="true" tabindex="-1"></a>compet=0 =&gt; censure à droite</span>
-<span id="cb5-75"><a href="#cb5-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-76"><a href="#cb5-76" aria-hidden="true" tabindex="-1"></a>Lorsqu'on a analysé le décès par la méthode KM, la proportion de survivant.e.s était de 15%.   </span>
-<span id="cb5-77"><a href="#cb5-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-78"><a href="#cb5-78" aria-hidden="true" tabindex="-1"></a>Si on applique la méthode de Kaplan Meier à la cause 1 en traitant la cause 2 comme une censure à droite ($n=18+29=48$), puis en sommant les deux estimateurs, la fonction de répartition excède 100% au bout de 1000 jours environs. La proportion de survivant.e.s est donc négative.</span>
-<span id="cb5-79"><a href="#cb5-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-80"><a href="#cb5-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-81"><a href="#cb5-81" aria-hidden="true" tabindex="-1"></a><span class="al">![Fonction de répartition avec une cause concurrente traitée comme une censure à droite](images/Image16.png)</span></span>
-<span id="cb5-82"><a href="#cb5-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-83"><a href="#cb5-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-84"><a href="#cb5-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Estimations en présence de risques concurrents (CIF)**</span></span>
-<span id="cb5-85"><a href="#cb5-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-86"><a href="#cb5-86" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimation non paramétrique</span></span>
-<span id="cb5-87"><a href="#cb5-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-88"><a href="#cb5-88" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Utiliser l'estimateur de Nelson Aalen: il s'agit du risque instantané cumulé. Comme il ne s'agit pas d'une probabilité, il a été longtemps utilisé comme mesure de l'incidence en présence de risques concurrents dans une logique dite *cause specific*.</span>
-<span id="cb5-89"><a href="#cb5-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-90"><a href="#cb5-90" aria-hidden="true" tabindex="-1"></a>$$H_k (t_i)=\sum_{t_i\leq t}\left(\frac{e_{i,k}}{n_i}\right) $$</span>
-<span id="cb5-91"><a href="#cb5-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-92"><a href="#cb5-92" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Actuellement, l'estimateur le plus utilisé est la fonction dite d'**incidence cumulée - CIF-**  de Kalbfleisch-Prentice et Marubini-Valscchi:</span>
-<span id="cb5-93"><a href="#cb5-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-94"><a href="#cb5-94" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Il repose sur une probabilité tout en supportant la non indépendance des risques.</span>
-<span id="cb5-95"><a href="#cb5-95" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Son interprétation est identique à la fonction de répartition $F(t)=1-S(t)$. Cette fonction est donc croissante.</span>
-<span id="cb5-96"><a href="#cb5-96" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Il est possible de tester les différences entres CIF: *test de Gray* (R, SAS) ou *test de Pepe-Mori* (Stata).</span>
-<span id="cb5-97"><a href="#cb5-97" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb5-98"><a href="#cb5-98" aria-hidden="true" tabindex="-1"></a>**CIF (Cumulative Incidence Function)**  </span>
-<span id="cb5-99"><a href="#cb5-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-100"><a href="#cb5-100" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si $h_k(t_i)$ est le risque *cause-spécific* en $t_i$ et $S(t_i-1)$ l'estimateur de Kaplan-Meier en $t_i-1$ lorsque tous les risques sont regroupés en un évènement unique, l'incidence cumulée pour le risque $k$ en $t_i$ est égale à:  </span>
-<span id="cb5-101"><a href="#cb5-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-102"><a href="#cb5-102" aria-hidden="true" tabindex="-1"></a>$$IC_k(t_i)= \sum_{t_i\leq t}S(t_i-1)h_k(t_i)$$</span>
-<span id="cb5-103"><a href="#cb5-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-104"><a href="#cb5-104" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Les valeurs prises par cette fonction pour la cause  $k$  ne dépendent donc pas seulement des individus ayant observé l'évènement à partir de cette seule cause, mais aussi du nombre de personnes qui n'ont pas encore observés l'évènement à partir des autres causes identifiées. Cette dernière information est donnée par $S(t_i-1)$.</span>
-<span id="cb5-105"><a href="#cb5-105" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>L'incidence cumulée peut ainsi s'interpréter, simplement, comme la proportion d'individus qui sont sortis du risque jusqu'en $t_i$  en raison de la cause $k$.  </span>
-<span id="cb5-106"><a href="#cb5-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-107"><a href="#cb5-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-108"><a href="#cb5-108" aria-hidden="true" tabindex="-1"></a><span class="al">![Risques concurrent: estimation de la CIF](images/Image17.png)</span></span>
-<span id="cb5-109"><a href="#cb5-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-110"><a href="#cb5-110" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-111"><a href="#cb5-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-114"><a href="#cb5-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb5-115"><a href="#cb5-115" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo  : false</span></span>
-<span id="cb5-116"><a href="#cb5-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-117"><a href="#cb5-117" aria-hidden="true" tabindex="-1"></a><span class="in">qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear</span></span>
-<span id="cb5-118"><a href="#cb5-118" aria-hidden="true" tabindex="-1"></a><span class="in">qui stset stime, f(compet==1)</span></span>
-<span id="cb5-119"><a href="#cb5-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-120"><a href="#cb5-120" aria-hidden="true" tabindex="-1"></a><span class="in">stcomlist, compet1(2)</span></span>
-<span id="cb5-121"><a href="#cb5-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-122"><a href="#cb5-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-123"><a href="#cb5-123" aria-hidden="true" tabindex="-1"></a>En présence du risque concurrent, et traité comme tel, la moitié des personnes sont décédées suite à la malformation cardiaque au bout de 308 jours (200 jours avec une estimation de type « cause specific »).  </span>
-<span id="cb5-124"><a href="#cb5-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-125"><a href="#cb5-125" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a>On peut vérifier que la somme des estimateurs permet d’obtenir la survie *toutes causes confondues*. Il n’y a pas de surprise à cela, dans l’estimateur Marubini-Valscchi la survie d’ensemble intervient comme un facteur de pondération du quotient d'intensité dite « cause-specific ».   </span>
-<span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
-<span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### **R-Stata-Sas-Python**</span></span>
-<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a>L’estimation avec des risques de type « cause-specific » demande juste de recoder la variable évènement/censure, en glissant les risques concurrents en censure à droite.  </span>
-<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a>Pour l'estimation des CIF (risque de sous répartition):</span>
-<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**R**: la librairie **`cmprsk`** permet d’estimer simplement les incidences cumulées avec la fonction **`cuminc`**.</span>
-<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Sas**: maintenant directement estimable avec `proc lifetest`. Il suffit d’indiquer le ou les risques d'intérêt dans l’instruction indiquant la variable de durée et de censure avec l’option **`failcode=valeur`**.</span>
-<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Stata**:  Estimation avec la commande externe **`stcompet`**. La commande génère des variables qui demande des manipulations supplémentaires pour afficher les résultats sous forme de tableau par exemple. On peut utiliser et préférer la commande externe **`stcomlist`**. </span>
-<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Python**: le wrapper de R (<span class="in">`cmprsk`</span>) ne fonctionne plus à ce jour à défaut de mise à jour <span class="co">[</span><span class="ot">2022</span><span class="co">]</span>.</span>
-<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a><span class="fu">### Compararaison des CIF</span></span>
-<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-150"><a href="#cb5-150" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>**Test d’homogénéité de Gray**: est basé sur une autre mesure du risque en évènement concurrent. Sur le principe, identique à la philosopjie des test du logrank. Il s’agit du « subdistribution risks (« risque de sous-répartition », A.Latouche). Son interprétation n’est pas aisée car les personnes ayant observé un risque concurrent sont remises dans le Risk Set. Mais il est directement lié à l’estimation des CIF. Disponible avec SAS et R. Il est également sensible l’hypothèse de proportionnalité et à la distribution des censures à droites entre les groupes comparés. A ma connaissance il n’y a pas de variantes pondérées. </span>
-<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-152"><a href="#cb5-152" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>**Test de Pepe &amp; Mori**: teste directement deux courbes d’incidences et seulement 2. Je n'ai pas le recul nécessaire sur cette alternative, qui n'est implémenté que dans Stata. </span>
-<span id="cb5-153"><a href="#cb5-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-154"><a href="#cb5-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-155"><a href="#cb5-155" aria-hidden="true" tabindex="-1"></a>| Risques | Chi2 | P&gt;Chi2 |</span>
-<span id="cb5-156"><a href="#cb5-156" aria-hidden="true" tabindex="-1"></a>|---------|------|--------|</span>
-<span id="cb5-157"><a href="#cb5-157" aria-hidden="true" tabindex="-1"></a>| Cause1  |5.783 | 0.0161 |</span>
-<span id="cb5-158"><a href="#cb5-158" aria-hidden="true" tabindex="-1"></a>| Cause2  |0.129 | 0.7191 |</span>
-<span id="cb5-159"><a href="#cb5-159" aria-hidden="true" tabindex="-1"></a>: Test de Gray pour la variable surgery</span>
-<span id="cb5-160"><a href="#cb5-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-161"><a href="#cb5-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-162"><a href="#cb5-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-163"><a href="#cb5-163" aria-hidden="true" tabindex="-1"></a>| Risques | Chi2 | P&gt;Chi2 |</span>
-<span id="cb5-164"><a href="#cb5-164" aria-hidden="true" tabindex="-1"></a>|---------|------|--------|</span>
-<span id="cb5-165"><a href="#cb5-165" aria-hidden="true" tabindex="-1"></a>| Cause1  |6.203 | 0.0127 |</span>
-<span id="cb5-166"><a href="#cb5-166" aria-hidden="true" tabindex="-1"></a>| Cause2  |1.880 | 0.7038 |</span>
-<span id="cb5-167"><a href="#cb5-167" aria-hidden="true" tabindex="-1"></a>: Test de Pepe-Mori pour la variable surgery</span>
-<span id="cb5-168"><a href="#cb5-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-169"><a href="#cb5-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-170"><a href="#cb5-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-171"><a href="#cb5-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-172"><a href="#cb5-172" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
-<span id="cb5-173"><a href="#cb5-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-174"><a href="#cb5-174" aria-hidden="true" tabindex="-1"></a><span class="fu">### **R-Stata-Sas-Python**</span></span>
-<span id="cb5-175"><a href="#cb5-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-176"><a href="#cb5-176" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Sas**: le test de Gray est estimé si on ajoute l’option strata=nom_variable à la proc lifetest sous risque concurrent (voir encadré précédent). Le test de Pepe-Mori est disponible via une macro externe  (<span class="in">`%compcif`</span>: non testée) :  </span>
-<span id="cb5-177"><a href="#cb5-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-178"><a href="#cb5-178" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Stata**: Le test de Gray n’est pas disponible, il faut passer par une exécution de la fonction cuminc de la librairie R cmprsk directement dans stata (voir la commande <span class="in">`rsource`</span>). Pour faire plus simple, on peut estimer le modèle de Fine-Gray avec une seule variable (discrète). Le résultat est comparable à celui du test (voir plus bas). Le test de Pepe-Mori est disponible via la commande externe <span class="in">`stpepemori`</span>. </span>
-<span id="cb5-179"><a href="#cb5-179" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**R**: On ajoute une variable à la fonction `cuminc` de la librairie **`cmprsk`**. Pas de test de *Pepe-Mori* sur les fonctions d’incidence à ma connaissance.</span>
-<span id="cb5-180"><a href="#cb5-180" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Python**: ne pas essayer d’utiliser la librairie cmprsk qui n’est pas mis à jour et ne fonctionne plus.</span>
-<span id="cb5-181"><a href="#cb5-181" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-182"><a href="#cb5-182" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-183"><a href="#cb5-183" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-184"><a href="#cb5-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-185"><a href="#cb5-185" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Modèles**</span></span>
-<span id="cb5-186"><a href="#cb5-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-187"><a href="#cb5-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-188"><a href="#cb5-188" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modèles Semi paramétriques</span></span>
-<span id="cb5-189"><a href="#cb5-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-190"><a href="#cb5-190" aria-hidden="true" tabindex="-1"></a>Cette présentation sera plutôt brève. Dans le domaine des sciences sociales, je préconise plutôt l’utilisation d’un modèle multinomial à temps discret de type logistique. Le modèle de Cox en présence de risques concurrent n’est valable que dans une logique de risques « cause-specific », le modèle de Fine et Gray bien que directement relié à l’estimation des incidences cumulées, repose sur une définition du risque (de sous répartition) dont l’interprétation n’est pas naturelle. Il est également soumis à l’hypothèse de proportionnalité des risques. </span>
-<span id="cb5-191"><a href="#cb5-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-192"><a href="#cb5-192" aria-hidden="true" tabindex="-1"></a>**Modélisation des risques « cause-specific » : Cox**      </span>
-<span id="cb5-193"><a href="#cb5-193" aria-hidden="true" tabindex="-1"></a>Modèle de Cox «standard» pour chaque évènement, les évènements concurrents sont traités comme des censures à droite. Aucune interprétation sur les fonctions d’incidence ne peut-être faite.  </span>
-<span id="cb5-194"><a href="#cb5-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-195"><a href="#cb5-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-196"><a href="#cb5-196" aria-hidden="true" tabindex="-1"></a>**Modèle de Fine-Gray: subdistribution hazard regression**  </span>
-<span id="cb5-197"><a href="#cb5-197" aria-hidden="true" tabindex="-1"></a>Modèle de type semi-paramétrique avec une redéfinition du risque lié à l’estimation des fonctions d’incidence (voir test de Gray). La différence avec le Cox classique réside dans le calcul du risk-set : les évènements concurrents ne sont pas considérés comme des censures, on laisse les individus leur « survivre » jusqu’à la durée maximale observée dans l’échantillon. L’interprétation n’est donc pas très intuitive (Fine et Gray le soulignent). Ce modèle est relativement contreversé. </span>
-<span id="cb5-198"><a href="#cb5-198" aria-hidden="true" tabindex="-1"></a>Il ne sera donc pas exécuté pour l'application</span>
-<span id="cb5-199"><a href="#cb5-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-200"><a href="#cb5-200" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
-<span id="cb5-201"><a href="#cb5-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-202"><a href="#cb5-202" aria-hidden="true" tabindex="-1"></a>Pour les questions liées à l’interprétation de ces deux types de modèles, se reporter à: <span class="ot">&lt;https://onlinelibrary.wiley.com/doi/epdf/10.1002/sim.7501&gt;</span></span>
-<span id="cb5-203"><a href="#cb5-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-204"><a href="#cb5-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-205"><a href="#cb5-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-206"><a href="#cb5-206" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
-<span id="cb5-207"><a href="#cb5-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-208"><a href="#cb5-208" aria-hidden="true" tabindex="-1"></a><span class="fu">### R-Stata-Sas-Python  </span></span>
-<span id="cb5-209"><a href="#cb5-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-210"><a href="#cb5-210" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**R**: on utilise la fonction **`crr`** du package cmprsk.</span>
-<span id="cb5-211"><a href="#cb5-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-212"><a href="#cb5-212" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Sas**: même principe que pour l’estimation non paramétrique, on ajoute l’option <span class="in">`eventcode=valeur`</span> à l’instruction <span class="in">`model`</span> de la <span class="in">`proc phreg`</span>.</span>
-<span id="cb5-213"><a href="#cb5-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-214"><a href="#cb5-214" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Stata**: on utilise la commande interne **`stcrreg`**.</span>
-<span id="cb5-215"><a href="#cb5-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-216"><a href="#cb5-216" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Python** : ne pas essayer d’utiliser la librairie cmprsk qui n’est pas mis à jour et ne fonctionne donc plus.</span>
-<span id="cb5-217"><a href="#cb5-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-218"><a href="#cb5-218" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb5-219"><a href="#cb5-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-220"><a href="#cb5-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-221"><a href="#cb5-221" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modèle à temps discret </span></span>
-<span id="cb5-222"><a href="#cb5-222" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-223"><a href="#cb5-223" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Il s’agit d’une extension du modèle à temps discret à évènement unique (toutes causes regroupées) avec ici le modèle logistique multinomial.</span>
-<span id="cb5-224"><a href="#cb5-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-225"><a href="#cb5-225" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>S’il ne permet pas une interprétation sur les fonctions d’incidences, les risques concurrents ne sont pas traitées comme des censures à droite. </span>
-<span id="cb5-226"><a href="#cb5-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-227"><a href="#cb5-227" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Le modèle multinomial repose sur une hypothèse dite « d’indépendance  des alternatives non pertinentes » (IIA). Cela peut donc paraitre contradictoire d’utiliser ce modèle pour des évènements qui sont supposés non indépendants. Néanmoins la dépendance entre risques concurrents n’est pas non plus stricte et cette hypothèse d’IIA, seulement testable par le bon sens, est souvent illustrée par l’exemple des couleurs des bus dans le choix du mode de transport, ou les couleurs de chaussure dans les études marketing. Soit est une situation relativement limite. </span>
-<span id="cb5-228"><a href="#cb5-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-229"><a href="#cb5-229" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>En terme de lecture, les estiupateurs du modèle logistique multinomial  peuvent directement s’interpréter comme des rapports de risque (ou relative risk ratio). </span>
-<span id="cb5-230"><a href="#cb5-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-231"><a href="#cb5-231" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>En sciences sociales, il me semble que ce type de modèle soit à privilégier.</span>
-<span id="cb5-232"><a href="#cb5-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-233"><a href="#cb5-233" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>On peut également envisager un modèle de type probit multinomial, mais on peut rencontrer des problèmes d’estimations (repose sur la loi normale multivariée). Prévoir un regroupement des causes concurrentes, et dans tous les cas de figure ne pas dépasser trois causes. </span>
-<span id="cb5-234"><a href="#cb5-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-235"><a href="#cb5-235" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Niveau lecture, on peut utiliser une méthode de standardisation, de type **AME** (*Average Marginal Effect*).</span>
-<span id="cb5-236"><a href="#cb5-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-237"><a href="#cb5-237" aria-hidden="true" tabindex="-1"></a>Pour l'application, nous avons pris le mois (30 jours) comme métrique temporelle.</span>
-<span id="cb5-238"><a href="#cb5-238" aria-hidden="true" tabindex="-1"></a>On rappelle que les valeurs des estimateurs sont fictives en raison de la simulation des évènement pour le risque concurrent (cause2)</span>
-<span id="cb5-239"><a href="#cb5-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-240"><a href="#cb5-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-241"><a href="#cb5-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-242"><a href="#cb5-242" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-245"><a href="#cb5-245" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb5-246"><a href="#cb5-246" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo : false</span></span>
-<span id="cb5-247"><a href="#cb5-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-248"><a href="#cb5-248" aria-hidden="true" tabindex="-1"></a><span class="in">qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear</span></span>
-<span id="cb5-249"><a href="#cb5-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-250"><a href="#cb5-250" aria-hidden="true" tabindex="-1"></a><span class="in">    </span></span>
-<span id="cb5-251"><a href="#cb5-251" aria-hidden="true" tabindex="-1"></a><span class="in">qui sum year</span></span>
-<span id="cb5-252"><a href="#cb5-252" aria-hidden="true" tabindex="-1"></a><span class="in">gen year2 = year - `r(mean)'</span></span>
-<span id="cb5-253"><a href="#cb5-253" aria-hidden="true" tabindex="-1"></a><span class="in">qui sum age</span></span>
-<span id="cb5-254"><a href="#cb5-254" aria-hidden="true" tabindex="-1"></a><span class="in">qui gen age2 = age - `r(mean)'</span></span>
-<span id="cb5-255"><a href="#cb5-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-256"><a href="#cb5-256" aria-hidden="true" tabindex="-1"></a><span class="in">qui drop year age</span></span>
-<span id="cb5-257"><a href="#cb5-257" aria-hidden="true" tabindex="-1"></a><span class="in">qui rename year2 year</span></span>
-<span id="cb5-258"><a href="#cb5-258" aria-hidden="true" tabindex="-1"></a><span class="in">qui rename age2 age</span></span>
-<span id="cb5-259"><a href="#cb5-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-260"><a href="#cb5-260" aria-hidden="true" tabindex="-1"></a><span class="in">qui expand mois</span></span>
-<span id="cb5-261"><a href="#cb5-261" aria-hidden="true" tabindex="-1"></a><span class="in">qui bysort id: gen t=_n</span></span>
-<span id="cb5-262"><a href="#cb5-262" aria-hidden="true" tabindex="-1"></a><span class="in">qui gen e = compet</span></span>
-<span id="cb5-263"><a href="#cb5-263" aria-hidden="true" tabindex="-1"></a><span class="in">qui gen t2 = t^2</span></span>
-<span id="cb5-264"><a href="#cb5-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-265"><a href="#cb5-265" aria-hidden="true" tabindex="-1"></a><span class="in">qui bysort id: replace e=0 if t&lt;_N</span></span>
-<span id="cb5-266"><a href="#cb5-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-267"><a href="#cb5-267" aria-hidden="true" tabindex="-1"></a><span class="in">mlogit e t t2  year age surgery, rrr noheader nolog</span></span>
-<span id="cb5-268"><a href="#cb5-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-269"><a href="#cb5-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb5-270"><a href="#cb5-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-271"><a href="#cb5-271" aria-hidden="true" tabindex="-1"></a>Note: les variables *year* et *age* ont été centrées sur leur valeur moyenne pour donner aux constantes des valeurs acceptables. </span>
-<span id="cb5-272"><a href="#cb5-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-273"><a href="#cb5-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-274"><a href="#cb5-274" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode" id="cb4" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co"># title: "Risques concurrents"</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="an">filters:</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - lightbox</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="an">lightbox:</span><span class="co"> auto</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> nbstata</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Risques concurrents**</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>Le problème des événements multiples dans les analyses de survie a été posé dans les années 1970 avec la notion de **risques concurrents** (*competing risks*) : il s'agit d'événements survenant au cours de la période d'observations et qui *empêchent* l'occurence de l'événement d'intérêt. </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Problématique</span></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>On étudie un processus dont l’occurence a plusieurs modalités, *types* ou *causes*: </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>La mortalité par cause de décès, les types de sortie du chômage: formation, emploi, radiation.</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Les types de sortie de l'emploi: chômage, longue maladie, sortie du marché du travail hors retraite. </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Les lieux de migration ou les espaces de mobilité résidentielle</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Les types de rupture d'union: séparation-divorce, veuvage). </span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>Rappel: Déjà abordé dans la partie théorie, avec un recueil de données de type prospectif les  "perdu.e.s de vue" peuvent difficilement être  assimilés à des sorties d'observation non informatives (censures).</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>L'analyse des risques concurrents est un cas particulier des modèles **multi-états** avec différents risques considérés comme absorbants.</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>En présence de risques concurrents, l’estimation de Kaplan-Meier ne peut se faire que sous **l’hypothèse d’indépendance entre chacun des risques**. Sinon l’estimateur de Kaplan-Meier n’est plus une probabilité.</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>Une estimation de type KM d’un évènement en concurrence avec d’autres impose que ces derniers soient traités comme des censures à droites non informatives. Mais il n’est pas possible de tester cette hypothèse.</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="fu">## Risques *cause-specific* et biais sur les estimateurs KM</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>Si les risques ne sont pas indépendants les uns par rapport aux autres, la somme des estimateurs de (1-KM) pour chaque risque n’est pas égale - elle est **supérieure** - à l’estimateur de (1-KM) où les risques concurrents sont regroupés en un évènement unique. Par exemple les décès si on analyse ses causes.</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>Le risque calculé en considérant les risques concurrents comme des censures à droite est appelé "**cause-specific risk**.  </span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>**Cause specific risk**  </span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>Pour le risque de type $k$, le risque *cause-spécific*  en $t_i$ est égal à:  </span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>$$h_k(t_i)=\frac{d_{i,k}}{R_i}$$</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>Où $d_{i,k}$ est le nombre d'évènement de type $k$ survenu en $t_i$ et $R_i$ la population soumise en $t_i$.</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>Conséquence: si les risques ne sont pas indépendants, la fonction de survie estimée avec la méthode Kaplan Meier n'exprime plus une probabilité.   </span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>**Exemple sur les décès causés par une malformation cardiaque**  </span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>Dans la base d’origine, il n’y a pas directement cette dimension de risque concurrent, même si on trouve dans la littérature médicale des études prenant le décès rapide post greffe comme un risque de ce type. Les données étant assez anciennes, avec beaucoup de décès post-opératoire, je ne me suis pas « risquer » à générer directement un risque concurrent sur cette information.  Une sortie concurrente a donc été simulée sans plus de précision (variable *compet*), que l’on considèrera non strictement indépendante à la cause d’intérêt.</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>Ce risque entre donc en concurrence avec la cause du décès directement liée à la malformation cardiaque, que la personne ait été transplantée ou non. </span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo  : false</span></span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="in">qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear</span></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="in">tab compet died</span></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>Variable compet:  </span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>cause 1 =&gt; décès directement provoquer par la malformation: compet=1</span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>cause 2 =&gt; autre cause</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>compet=0 =&gt; censure à droite</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>Lorsqu'on a analysé le décès par la méthode KM, la proportion de survivant.e.s était de 15%.   </span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>Si on applique la méthode de Kaplan Meier à la cause 1 en traitant la cause 2 comme une censure à droite ($n=18+29=48$), puis en sommant les deux estimateurs, la fonction de répartition excède 100% au bout de 1000 jours environs. La proportion de survivant.e.s est donc négative.</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a><span class="al">![Fonction de répartition avec une cause concurrente traitée comme une censure à droite](images/Image16.png)</span></span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Estimations en présence de risques concurrents (CIF)**</span></span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a><span class="fu">### Estimation non paramétrique</span></span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Utiliser l'estimateur de Nelson Aalen: il s'agit du risque instantané cumulé. Comme il ne s'agit pas d'une probabilité, il a été longtemps utilisé comme mesure de l'incidence en présence de risques concurrents dans une logique dite *cause specific*.</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>$$H_k (t_i)=\sum_{t_i\leq t}\left(\frac{e_{i,k}}{n_i}\right) $$</span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Actuellement, l'estimateur le plus utilisé est la fonction dite d'**incidence cumulée - CIF-**  de Kalbfleisch-Prentice et Marubini-Valscchi:</span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Il repose sur une probabilité tout en supportant la non indépendance des risques.</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Son interprétation est identique à la fonction de répartition $F(t)=1-S(t)$. Cette fonction est donc croissante.</span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Il est possible de tester les différences entres CIF: *test de Gray* (R, SAS) ou *test de Pepe-Mori* (Stata).</span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>**CIF (Cumulative Incidence Function)**  </span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si $h_k(t_i)$ est le risque *cause-spécific* en $t_i$ et $S(t_i-1)$ l'estimateur de Kaplan-Meier en $t_i-1$ lorsque tous les risques sont regroupés en un évènement unique, l'incidence cumulée pour le risque $k$ en $t_i$ est égale à:  </span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>$$IC_k(t_i)= \sum_{t_i\leq t}S(t_i-1)h_k(t_i)$$</span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Les valeurs prises par cette fonction pour la cause  $k$  ne dépendent donc pas seulement des individus ayant observé l'évènement à partir de cette seule cause, mais aussi du nombre de personnes qui n'ont pas encore observés l'évènement à partir des autres causes identifiées. Cette dernière information est donnée par $S(t_i-1)$.</span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>L'incidence cumulée peut ainsi s'interpréter, simplement, comme la proportion d'individus qui sont sortis du risque jusqu'en $t_i$  en raison de la cause $k$.  </span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a><span class="al">![Risques concurrent: estimation de la CIF](images/Image17.png)</span></span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo  : false</span></span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a><span class="in">qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear</span></span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a><span class="in">qui stset stime, f(compet==1)</span></span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a><span class="in">stcomlist, compet1(2)</span></span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a>En présence du risque concurrent, et traité comme tel, la moitié des personnes sont décédées suite à la malformation cardiaque au bout de 308 jours (200 jours avec une estimation de type « cause specific »).  </span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>On peut vérifier que la somme des estimateurs permet d’obtenir la survie *toutes causes confondues*. Il n’y a pas de surprise à cela, dans l’estimateur Marubini-Valscchi la survie d’ensemble intervient comme un facteur de pondération du quotient d'intensité dite « cause-specific ».   </span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### **R-Stata-Sas-Python**</span></span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a>L’estimation avec des risques de type « cause-specific » demande juste de recoder la variable évènement/censure, en glissant les risques concurrents en censure à droite.  </span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a>Pour l'estimation des CIF (risque de sous répartition):</span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**R**: la librairie **`cmprsk`** permet d’estimer simplement les incidences cumulées avec la fonction **`cuminc`**.</span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Sas**: maintenant directement estimable avec `proc lifetest`. Il suffit d’indiquer le ou les risques d'intérêt dans l’instruction indiquant la variable de durée et de censure avec l’option **`failcode=valeur`**.</span>
+<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-141"><a href="#cb4-141" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Stata**:  Estimation avec la commande externe **`stcompet`**. La commande génère des variables qui demande des manipulations supplémentaires pour afficher les résultats sous forme de tableau par exemple. On peut utiliser et préférer la commande externe **`stcomlist`**. </span>
+<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Python**: le wrapper de R (<span class="in">`cmprsk`</span>) ne fonctionne plus à ce jour à défaut de mise à jour <span class="co">[</span><span class="ot">2022</span><span class="co">]</span>.</span>
+<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a><span class="fu">### Compararaison des CIF</span></span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>**Test d’homogénéité de Gray**: est basé sur une autre mesure du risque en évènement concurrent. Sur le principe, identique à la philosopjie des test du logrank. Il s’agit du « subdistribution risks (« risque de sous-répartition », A.Latouche). Son interprétation n’est pas aisée car les personnes ayant observé un risque concurrent sont remises dans le Risk Set. Mais il est directement lié à l’estimation des CIF. Disponible avec SAS et R. Il est également sensible l’hypothèse de proportionnalité et à la distribution des censures à droites entre les groupes comparés. A ma connaissance il n’y a pas de variantes pondérées. </span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>**Test de Pepe &amp; Mori**: teste directement deux courbes d’incidences et seulement 2. Je n'ai pas le recul nécessaire sur cette alternative, qui n'est implémenté que dans Stata. </span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>| Risques | Chi2 | P&gt;Chi2 |</span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>|---------|------|--------|</span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>| Cause1  |5.783 | 0.0161 |</span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a>| Cause2  |0.129 | 0.7191 |</span>
+<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a>: Test de Gray pour la variable surgery</span>
+<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a>| Risques | Chi2 | P&gt;Chi2 |</span>
+<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a>|---------|------|--------|</span>
+<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a>| Cause1  |6.203 | 0.0127 |</span>
+<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a>| Cause2  |1.880 | 0.7038 |</span>
+<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a>: Test de Pepe-Mori pour la variable surgery</span>
+<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
+<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a><span class="fu">### **R-Stata-Sas-Python**</span></span>
+<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Sas**: le test de Gray est estimé si on ajoute l’option strata=nom_variable à la proc lifetest sous risque concurrent (voir encadré précédent). Le test de Pepe-Mori est disponible via une macro externe  (<span class="in">`%compcif`</span>: non testée) :  </span>
+<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Stata**: Le test de Gray n’est pas disponible, il faut passer par une exécution de la fonction cuminc de la librairie R cmprsk directement dans stata (voir la commande <span class="in">`rsource`</span>). Pour faire plus simple, on peut estimer le modèle de Fine-Gray avec une seule variable (discrète). Le résultat est comparable à celui du test (voir plus bas). Le test de Pepe-Mori est disponible via la commande externe <span class="in">`stpepemori`</span>. </span>
+<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**R**: On ajoute une variable à la fonction `cuminc` de la librairie **`cmprsk`**. Pas de test de *Pepe-Mori* sur les fonctions d’incidence à ma connaissance.</span>
+<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Python**: ne pas essayer d’utiliser la librairie cmprsk qui n’est pas mis à jour et ne fonctionne plus.</span>
+<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Modèles**</span></span>
+<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modèles Semi paramétriques</span></span>
+<span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-190"><a href="#cb4-190" aria-hidden="true" tabindex="-1"></a>Cette présentation sera plutôt brève. Dans le domaine des sciences sociales, je préconise plutôt l’utilisation d’un modèle multinomial à temps discret de type logistique. Le modèle de Cox en présence de risques concurrent n’est valable que dans une logique de risques « cause-specific », le modèle de Fine et Gray bien que directement relié à l’estimation des incidences cumulées, repose sur une définition du risque (de sous répartition) dont l’interprétation n’est pas naturelle. Il est également soumis à l’hypothèse de proportionnalité des risques. </span>
+<span id="cb4-191"><a href="#cb4-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-192"><a href="#cb4-192" aria-hidden="true" tabindex="-1"></a>**Modélisation des risques « cause-specific » : Cox**      </span>
+<span id="cb4-193"><a href="#cb4-193" aria-hidden="true" tabindex="-1"></a>Modèle de Cox «standard» pour chaque évènement, les évènements concurrents sont traités comme des censures à droite. Aucune interprétation sur les fonctions d’incidence ne peut-être faite.  </span>
+<span id="cb4-194"><a href="#cb4-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-195"><a href="#cb4-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-196"><a href="#cb4-196" aria-hidden="true" tabindex="-1"></a>**Modèle de Fine-Gray: subdistribution hazard regression**  </span>
+<span id="cb4-197"><a href="#cb4-197" aria-hidden="true" tabindex="-1"></a>Modèle de type semi-paramétrique avec une redéfinition du risque lié à l’estimation des fonctions d’incidence (voir test de Gray). La différence avec le Cox classique réside dans le calcul du risk-set : les évènements concurrents ne sont pas considérés comme des censures, on laisse les individus leur « survivre » jusqu’à la durée maximale observée dans l’échantillon. L’interprétation n’est donc pas très intuitive (Fine et Gray le soulignent). Ce modèle est relativement contreversé. </span>
+<span id="cb4-198"><a href="#cb4-198" aria-hidden="true" tabindex="-1"></a>Il ne sera donc pas exécuté pour l'application</span>
+<span id="cb4-199"><a href="#cb4-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-200"><a href="#cb4-200" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;br&gt;</span></span>
+<span id="cb4-201"><a href="#cb4-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-202"><a href="#cb4-202" aria-hidden="true" tabindex="-1"></a>Pour les questions liées à l’interprétation de ces deux types de modèles, se reporter à: <span class="ot">&lt;https://onlinelibrary.wiley.com/doi/epdf/10.1002/sim.7501&gt;</span></span>
+<span id="cb4-203"><a href="#cb4-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-204"><a href="#cb4-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-205"><a href="#cb4-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-206"><a href="#cb4-206" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
+<span id="cb4-207"><a href="#cb4-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-208"><a href="#cb4-208" aria-hidden="true" tabindex="-1"></a><span class="fu">### R-Stata-Sas-Python  </span></span>
+<span id="cb4-209"><a href="#cb4-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-210"><a href="#cb4-210" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**R**: on utilise la fonction **`crr`** du package cmprsk.</span>
+<span id="cb4-211"><a href="#cb4-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-212"><a href="#cb4-212" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Sas**: même principe que pour l’estimation non paramétrique, on ajoute l’option <span class="in">`eventcode=valeur`</span> à l’instruction <span class="in">`model`</span> de la <span class="in">`proc phreg`</span>.</span>
+<span id="cb4-213"><a href="#cb4-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-214"><a href="#cb4-214" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Stata**: on utilise la commande interne **`stcrreg`**.</span>
+<span id="cb4-215"><a href="#cb4-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-216"><a href="#cb4-216" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Python** : ne pas essayer d’utiliser la librairie cmprsk qui n’est pas mis à jour et ne fonctionne donc plus.</span>
+<span id="cb4-217"><a href="#cb4-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-218"><a href="#cb4-218" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-219"><a href="#cb4-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-220"><a href="#cb4-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-221"><a href="#cb4-221" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modèle à temps discret </span></span>
+<span id="cb4-222"><a href="#cb4-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-223"><a href="#cb4-223" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Il s’agit d’une extension du modèle à temps discret à évènement unique (toutes causes regroupées) avec ici le modèle logistique multinomial.</span>
+<span id="cb4-224"><a href="#cb4-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-225"><a href="#cb4-225" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>S’il ne permet pas une interprétation sur les fonctions d’incidences, les risques concurrents ne sont pas traitées comme des censures à droite. </span>
+<span id="cb4-226"><a href="#cb4-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-227"><a href="#cb4-227" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Le modèle multinomial repose sur une hypothèse dite « d’indépendance  des alternatives non pertinentes » (IIA). Cela peut donc paraitre contradictoire d’utiliser ce modèle pour des évènements qui sont supposés non indépendants. Néanmoins la dépendance entre risques concurrents n’est pas non plus stricte et cette hypothèse d’IIA, seulement testable par le bon sens, est souvent illustrée par l’exemple des couleurs des bus dans le choix du mode de transport, ou les couleurs de chaussure dans les études marketing. Soit est une situation relativement limite. </span>
+<span id="cb4-228"><a href="#cb4-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-229"><a href="#cb4-229" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>En terme de lecture, les estiupateurs du modèle logistique multinomial  peuvent directement s’interpréter comme des rapports de risque (ou relative risk ratio). </span>
+<span id="cb4-230"><a href="#cb4-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-231"><a href="#cb4-231" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>En sciences sociales, il me semble que ce type de modèle soit à privilégier.</span>
+<span id="cb4-232"><a href="#cb4-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-233"><a href="#cb4-233" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>On peut également envisager un modèle de type probit multinomial, mais on peut rencontrer des problèmes d’estimations (repose sur la loi normale multivariée). Prévoir un regroupement des causes concurrentes, et dans tous les cas de figure ne pas dépasser trois causes. </span>
+<span id="cb4-234"><a href="#cb4-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-235"><a href="#cb4-235" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Niveau lecture, on peut utiliser une méthode de standardisation, de type **AME** (*Average Marginal Effect*).</span>
+<span id="cb4-236"><a href="#cb4-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-237"><a href="#cb4-237" aria-hidden="true" tabindex="-1"></a>Pour l'application, nous avons pris le mois (30 jours) comme métrique temporelle.</span>
+<span id="cb4-238"><a href="#cb4-238" aria-hidden="true" tabindex="-1"></a>On rappelle que les valeurs des estimateurs sont fictives en raison de la simulation des évènement pour le risque concurrent (cause2)</span>
+<span id="cb4-239"><a href="#cb4-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-240"><a href="#cb4-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-241"><a href="#cb4-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-242"><a href="#cb4-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-243"><a href="#cb4-243" aria-hidden="true" tabindex="-1"></a>::: {#tbl-panel layout-ncol="2"}</span>
+<span id="cb4-244"><a href="#cb4-244" aria-hidden="true" tabindex="-1"></a>| Cause 1     | RRR    | p<span class="sc">\&gt;</span>\|z\| | 95% IC          |</span>
+<span id="cb4-245"><a href="#cb4-245" aria-hidden="true" tabindex="-1"></a>|-------------|--------|----------|-----------------|</span>
+<span id="cb4-246"><a href="#cb4-246" aria-hidden="true" tabindex="-1"></a>| $t$         | 0.816  | 0.000    | 0.752 - 0.885   |</span>
+<span id="cb4-247"><a href="#cb4-247" aria-hidden="true" tabindex="-1"></a>| $t^2$       | 1.003  | 0.000    | 1.001 - 1.005   |</span>
+<span id="cb4-248"><a href="#cb4-248" aria-hidden="true" tabindex="-1"></a>| $year$      | 0.879  | 0.116    | 0.749 - 1.032   |</span>
+<span id="cb4-249"><a href="#cb4-249" aria-hidden="true" tabindex="-1"></a>| $age$       | 1.045  | 0.012    | 1.010 - 1.081   |</span>
+<span id="cb4-250"><a href="#cb4-250" aria-hidden="true" tabindex="-1"></a>| $surgery$   | 0.318  | 0.033    | 0.110 - 0.913   |</span>
+<span id="cb4-251"><a href="#cb4-251" aria-hidden="true" tabindex="-1"></a>| $constante$ | 0.231  | 0.000    | 0.148 - 0.360   |</span>
+<span id="cb4-252"><a href="#cb4-252" aria-hidden="true" tabindex="-1"></a>: Cause 1 {#tbl-first}</span>
+<span id="cb4-253"><a href="#cb4-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-254"><a href="#cb4-254" aria-hidden="true" tabindex="-1"></a>| Cause 2     | RRR    | p<span class="sc">\&gt;</span>\|z\| | 95% IC          |</span>
+<span id="cb4-255"><a href="#cb4-255" aria-hidden="true" tabindex="-1"></a>|-------------|--------|----------|-----------------|</span>
+<span id="cb4-256"><a href="#cb4-256" aria-hidden="true" tabindex="-1"></a>| $t$         | 0.817  | 0.003    | 0.713 - 0.935   |</span>
+<span id="cb4-257"><a href="#cb4-257" aria-hidden="true" tabindex="-1"></a>| $t^2$       | 1.003  | 0.052    | 1.000 - 1.006   |</span>
+<span id="cb4-258"><a href="#cb4-258" aria-hidden="true" tabindex="-1"></a>| $year$      | 0.816  | 0.141    | 0.622 - 1.070   |</span>
+<span id="cb4-259"><a href="#cb4-259" aria-hidden="true" tabindex="-1"></a>| $age$       | 1.011  | 0.654    | 0.964 - 1.061   |</span>
+<span id="cb4-260"><a href="#cb4-260" aria-hidden="true" tabindex="-1"></a>| $surgery$   | 0.541  | 0.431    | 0.117 - 2.496   |</span>
+<span id="cb4-261"><a href="#cb4-261" aria-hidden="true" tabindex="-1"></a>| $constante$ | 0.076  | 0.000    | 0.037 - 0.157   |</span>
+<span id="cb4-262"><a href="#cb4-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-263"><a href="#cb4-263" aria-hidden="true" tabindex="-1"></a>: Cause 2 {#tbl-second}</span>
+<span id="cb4-264"><a href="#cb4-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-265"><a href="#cb4-265" aria-hidden="true" tabindex="-1"></a>Modèle logistique multinomial avec risques concurrent</span>
+<span id="cb4-266"><a href="#cb4-266" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-267"><a href="#cb4-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-268"><a href="#cb4-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-269"><a href="#cb4-269" aria-hidden="true" tabindex="-1"></a>Notes: </span>
+<span id="cb4-270"><a href="#cb4-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-271"><a href="#cb4-271" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>On a utilisé le terme RRR - Relative Risk Ratio - pour la colonne raportant les estimations. Dans un cadre de risque concurrent il est un peu difficile d'utiliser formellement la notion de *hazard rate* tel qu'il a été difini plus haut, enfin les modèles multinomiaux ne reportent pas formellement des Odds Ratios dont l'utilisation devrait être réservé exclusivement à une alternative binaire.</span>
+<span id="cb4-272"><a href="#cb4-272" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>les variables *year* et *age* ont été centrées sur leur valeur moyenne pour donner aux constantes des valeurs acceptables. </span>
+<span id="cb4-273"><a href="#cb4-273" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pour faciliter la lecture on peut utiliser une méthode de standardisation de type AME (Average Marginal Effect).</span>
+<span id="cb4-274"><a href="#cb4-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-275"><a href="#cb4-275" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":true,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","openEffect":"zoom","closeEffect":"zoom","selector":".lightbox"});</script>
 
 
 

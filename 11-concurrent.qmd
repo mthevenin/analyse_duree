@@ -236,34 +236,37 @@ On rappelle que les valeurs des estimateurs sont fictives en raison de la simula
 
 
 
-```{stata}
-*| echo : false
+::: {#tbl-panel layout-ncol="2"}
+| Cause 1     | RRR    | p\>\|z\| | 95% IC          |
+|-------------|--------|----------|-----------------|
+| $t$         | 0.816  | 0.000    | 0.752 - 0.885   |
+| $t^2$       | 1.003  | 0.000    | 1.001 - 1.005   |
+| $year$      | 0.879  | 0.116    | 0.749 - 1.032   |
+| $age$       | 1.045  | 0.012    | 1.010 - 1.081   |
+| $surgery$   | 0.318  | 0.033    | 0.110 - 0.913   |
+| $constante$ | 0.231  | 0.000    | 0.148 - 0.360   |
+: Cause 1 {#tbl-first}
 
-qui use "D:\D\Marc\SMS\FORMATIONS\2022\Durée2\a distribuer\cours\transplantation.dta" , clear
+| Cause 2     | RRR    | p\>\|z\| | 95% IC          |
+|-------------|--------|----------|-----------------|
+| $t$         | 0.817  | 0.003    | 0.713 - 0.935   |
+| $t^2$       | 1.003  | 0.052    | 1.000 - 1.006   |
+| $year$      | 0.816  | 0.141    | 0.622 - 1.070   |
+| $age$       | 1.011  | 0.654    | 0.964 - 1.061   |
+| $surgery$   | 0.541  | 0.431    | 0.117 - 2.496   |
+| $constante$ | 0.076  | 0.000    | 0.037 - 0.157   |
 
-	
-qui sum year
-gen year2 = year - `r(mean)'
-qui sum age
-qui gen age2 = age - `r(mean)'
+: Cause 2 {#tbl-second}
 
-qui drop year age
-qui rename year2 year
-qui rename age2 age
+Modèle logistique multinomial avec risques concurrent
+:::
 
-qui expand mois
-qui bysort id: gen t=_n
-qui gen e = compet
-qui gen t2 = t^2
 
-qui bysort id: replace e=0 if t<_N
+Notes: 
 
-mlogit e t t2  year age surgery, rrr noheader nolog
-
-```
-
-Note: les variables *year* et *age* ont été centrées sur leur valeur moyenne pour donner aux constantes des valeurs acceptables. 
-
+- On a utilisé le terme RRR - Relative Risk Ratio - pour la colonne raportant les estimations. Dans un cadre de risque concurrent il est un peu difficile d'utiliser formellement la notion de *hazard rate* tel qu'il a été difini plus haut, enfin les modèles multinomiaux ne reportent pas formellement des Odds Ratios dont l'utilisation devrait être réservé exclusivement à une alternative binaire.
+- les variables *year* et *age* ont été centrées sur leur valeur moyenne pour donner aux constantes des valeurs acceptables. 
+- Pour faciliter la lecture on peut utiliser une méthode de standardisation de type AME (Average Marginal Effect).
 
 
 
