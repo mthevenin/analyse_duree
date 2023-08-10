@@ -31,7 +31,14 @@
     "objectID": "15-Sas.html#risques-concurrents",
     "href": "15-Sas.html#risques-concurrents",
     "title": "16  SAS",
-    "section": "17.1 Risques concurrents",
-    "text": "17.1 Risques concurrents\n\n17.1.1 Non paramétrique\nOn indique en option la cause d’intérêt avec eventcode=valeur , les autres étant considérées commes des risques concurrents.\n\nproc lifetest data=trans plots=CIF;\ntime stime*compet(0) / eventcode=1; run;\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nPour récupérer le test de Gray, on utilise l’instruction strata.\n\nproc lifetest data=trans plots=CIF;\ntime stime*compet(0) / eventcode=1\nstrata surgery; run;\n\n\n\n\n\n\n\n\n\n\n\n\n\n17.1.2 Modèle logistique multinomial à durée discrète\n\ndata td; set trans; \ndo t=1 to mois; \n     output; \n     end; \nrun;\ndata td; set td;\nif t&lt;mois then compet=0;\nt2=t*t\nrun;\n\n\nproc logistic data=td;\nmodel compet(ref=\"0\") = t t2 year age surgery / link=glogit;\nrun;"
+    "section": "16.5 Risques concurrents",
+    "text": "16.5 Risques concurrents\n\n16.5.1 Non paramétrique\nOn indique en option la cause d’intérêt avec eventcode=valeur , les autres étant considérées commes des risques concurrents.\n\nproc lifetest data=trans plots=CIF;\ntime stime*compet(0) / eventcode=1; run;\n\n\n\n\nPour récupérer le test de Gray, on utilise l’instruction strata.\n\nproc lifetest data=trans plots=CIF;\ntime stime*compet(0) / eventcode=1\nstrata surgery; run;\n\n\n\n\n\n16.5.2 Modèle logistique multinomial à durée discrète\n\ndata td; set trans; \ndo t=1 to mois; \n     output; \n     end; \nrun;\ndata td; set td;\nif t&lt;mois then compet=0;\nt2=t*t\nrun;\n\n\nproc logistic data=td;\nmodel compet(ref=\"0\") = t t2 year age surgery / link=glogit;\nrun;"
+  },
+  {
+    "objectID": "15-Sas.html#modèles-paramétrique",
+    "href": "15-Sas.html#modèles-paramétrique",
+    "title": "16  SAS",
+    "section": "16.4 Modèles paramétrique",
+    "text": "16.4 Modèles paramétrique\nOn utilise la procédure proc lifereg et on indique le type de distribution\n\nproc lifereg data=trans;\nmodel stime*died(0) = year age surgery /D=WEIBULL;\nrun;\n\n\n\n\nproc lifereg data=trans;\nmodel stime*died(0) = year age surgery /D=LLOGISTIC;\nrun;"
   }
 ]

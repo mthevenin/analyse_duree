@@ -335,9 +335,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#durée-continue" id="toc-durée-continue" class="nav-link" data-scroll-target="#durée-continue"><span class="header-section-number">16.3.2</span> Durée continue</a></li>
   <li><a href="#durée-discrète" id="toc-durée-discrète" class="nav-link" data-scroll-target="#durée-discrète"><span class="header-section-number">16.3.3</span> Durée discrète</a></li>
   </ul></li>
-  <li><a href="#modèles-paramétrique" id="toc-modèles-paramétrique" class="nav-link" data-scroll-target="#modèles-paramétrique"><span class="header-section-number">17</span> Modèles paramétrique</a>
+  <li><a href="#modèles-paramétrique" id="toc-modèles-paramétrique" class="nav-link" data-scroll-target="#modèles-paramétrique"><span class="header-section-number">16.4</span> Modèles paramétrique</a></li>
+  <li><a href="#risques-concurrents" id="toc-risques-concurrents" class="nav-link" data-scroll-target="#risques-concurrents"><span class="header-section-number">16.5</span> Risques concurrents</a>
   <ul class="collapse">
-  <li><a href="#risques-concurrents" id="toc-risques-concurrents" class="nav-link" data-scroll-target="#risques-concurrents"><span class="header-section-number">17.0.1</span> Risques concurrents</a></li>
+  <li><a href="#non-paramétrique" id="toc-non-paramétrique" class="nav-link" data-scroll-target="#non-paramétrique"><span class="header-section-number">16.5.1</span> Non paramétrique</a></li>
+  <li><a href="#modèle-logistique-multinomial-à-durée-discrète" id="toc-modèle-logistique-multinomial-à-durée-discrète" class="nav-link" data-scroll-target="#modèle-logistique-multinomial-à-durée-discrète"><span class="header-section-number">16.5.2</span> Modèle logistique multinomial à durée discrète</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mthevenin/analyse_duree/edit/main/15-Sas.qmd" class="toc-action">Modifier cette page</a></p></div></div></nav>
@@ -615,8 +617,8 @@ La covariable doit être sous forme d’indicatrice (binaire: (0,1)). Ce qui est
 <p><img src="sas/7d.PNG" class="img-fluid"></p>
 </section>
 </section>
-<section id="modèles-paramétrique" class="level1" data-number="17">
-<h1 data-number="17"><span class="header-section-number">17</span> Modèles paramétrique</h1>
+<section id="modèles-paramétrique" class="level2" data-number="16.4">
+<h2 data-number="16.4" class="anchored" data-anchor-id="modèles-paramétrique"><span class="header-section-number">16.4</span> Modèles paramétrique</h2>
 <p>On utilise la procédure proc <strong><code>lifereg</code></strong> et on indique le type de distribution</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>proc lifereg data<span class="ot">=</span>trans;</span>
@@ -632,10 +634,11 @@ La covariable doit être sous forme d’indicatrice (binaire: (0,1)). Ce qui est
 </div>
 <p><img src="sas/8c.PNG" class="img-fluid"></p>
 <p><img src="sas/8d.PNG" class="img-fluid"></p>
-<section id="risques-concurrents" class="level3" data-number="17.0.1">
-<h3 data-number="17.0.1" class="anchored" data-anchor-id="risques-concurrents"><span class="header-section-number">17.0.1</span> Risques concurrents</h3>
-<section id="non-paramétrique" class="level4" data-number="17.0.1.1">
-<h4 data-number="17.0.1.1" class="anchored" data-anchor-id="non-paramétrique"><span class="header-section-number">17.0.1.1</span> Non paramétrique</h4>
+</section>
+<section id="risques-concurrents" class="level2" data-number="16.5">
+<h2 data-number="16.5" class="anchored" data-anchor-id="risques-concurrents"><span class="header-section-number">16.5</span> Risques concurrents</h2>
+<section id="non-paramétrique" class="level3" data-number="16.5.1">
+<h3 data-number="16.5.1" class="anchored" data-anchor-id="non-paramétrique"><span class="header-section-number">16.5.1</span> Non paramétrique</h3>
 <p>On indique en option la cause d’intérêt avec <strong><code>eventcode=valeur</code></strong> , les autres étant considérées commes des risques concurrents.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>proc lifetest data<span class="ot">=</span>trans plots<span class="ot">=</span>CIF;</span>
@@ -653,8 +656,8 @@ La covariable doit être sous forme d’indicatrice (binaire: (0,1)). Ce qui est
 <p><img src="sas/9f.PNG" class="img-fluid"></p>
 <p><img src="sas/9g.PNG" class="img-fluid"></p>
 </section>
-<section id="modèle-logistique-multinomial-à-durée-discrète" class="level4" data-number="17.0.1.2">
-<h4 data-number="17.0.1.2" class="anchored" data-anchor-id="modèle-logistique-multinomial-à-durée-discrète"><span class="header-section-number">17.0.1.2</span> Modèle logistique multinomial à durée discrète</h4>
+<section id="modèle-logistique-multinomial-à-durée-discrète" class="level3" data-number="16.5.2">
+<h3 data-number="16.5.2" class="anchored" data-anchor-id="modèle-logistique-multinomial-à-durée-discrète"><span class="header-section-number">16.5.2</span> Modèle logistique multinomial à durée discrète</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>data td; set trans; </span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>do t<span class="ot">=</span><span class="dv">1</span> to mois; </span>
@@ -677,7 +680,6 @@ La covariable doit être sous forme d’indicatrice (binaire: (0,1)). Ce qui est
 
 <!-- -->
 
-</section>
 </section>
 </section>
 
@@ -1293,7 +1295,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-313"><a href="#cb23-313" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-314"><a href="#cb23-314" aria-hidden="true" tabindex="-1"></a><span class="al">![](sas/7d.PNG)</span></span>
 <span id="cb23-315"><a href="#cb23-315" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-316"><a href="#cb23-316" aria-hidden="true" tabindex="-1"></a><span class="fu"># Modèles paramétrique</span></span>
+<span id="cb23-316"><a href="#cb23-316" aria-hidden="true" tabindex="-1"></a><span class="fu">## Modèles paramétrique</span></span>
 <span id="cb23-317"><a href="#cb23-317" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-318"><a href="#cb23-318" aria-hidden="true" tabindex="-1"></a>On utilise la procédure proc **`lifereg`** et on indique le type de distribution</span>
 <span id="cb23-319"><a href="#cb23-319" aria-hidden="true" tabindex="-1"></a></span>
@@ -1317,9 +1319,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-337"><a href="#cb23-337" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-338"><a href="#cb23-338" aria-hidden="true" tabindex="-1"></a><span class="al">![](sas/8d.PNG)</span></span>
 <span id="cb23-339"><a href="#cb23-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-340"><a href="#cb23-340" aria-hidden="true" tabindex="-1"></a><span class="fu">### Risques concurrents</span></span>
+<span id="cb23-340"><a href="#cb23-340" aria-hidden="true" tabindex="-1"></a><span class="fu">## Risques concurrents</span></span>
 <span id="cb23-341"><a href="#cb23-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-342"><a href="#cb23-342" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Non paramétrique</span></span>
+<span id="cb23-342"><a href="#cb23-342" aria-hidden="true" tabindex="-1"></a><span class="fu">### Non paramétrique</span></span>
 <span id="cb23-343"><a href="#cb23-343" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-344"><a href="#cb23-344" aria-hidden="true" tabindex="-1"></a>On indique en option la cause d'intérêt avec **`eventcode=valeur`** , les autres étant considérées commes des risques concurrents. </span>
 <span id="cb23-345"><a href="#cb23-345" aria-hidden="true" tabindex="-1"></a></span>
@@ -1347,7 +1349,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb23-367"><a href="#cb23-367" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-368"><a href="#cb23-368" aria-hidden="true" tabindex="-1"></a><span class="al">![](sas/9g.PNG)</span></span>
 <span id="cb23-369"><a href="#cb23-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-370"><a href="#cb23-370" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Modèle logistique multinomial à durée discrète</span></span>
+<span id="cb23-370"><a href="#cb23-370" aria-hidden="true" tabindex="-1"></a><span class="fu">### Modèle logistique multinomial à durée discrète</span></span>
 <span id="cb23-371"><a href="#cb23-371" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb23-372"><a href="#cb23-372" aria-hidden="true" tabindex="-1"></a><span class="in">```{r eval=FALSE}</span></span>
 <span id="cb23-373"><a href="#cb23-373" aria-hidden="true" tabindex="-1"></a>data td; set trans; </span>

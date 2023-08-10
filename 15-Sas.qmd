@@ -313,7 +313,7 @@ model died(ref="0") = tq4 year age surgery; run;
 
 ![](sas/7d.PNG)
 
-# Modèles paramétrique
+## Modèles paramétrique
 
 On utilise la procédure proc **`lifereg`** et on indique le type de distribution
 
@@ -337,9 +337,9 @@ run;
 
 ![](sas/8d.PNG)
 
-### Risques concurrents
+## Risques concurrents
 
-#### Non paramétrique
+### Non paramétrique
 
 On indique en option la cause d'intérêt avec **`eventcode=valeur`** , les autres étant considérées commes des risques concurrents. 
 
@@ -367,7 +367,7 @@ strata surgery; run;
 
 ![](sas/9g.PNG)
 
-#### Modèle logistique multinomial à durée discrète
+### Modèle logistique multinomial à durée discrète
 
 ```{r eval=FALSE}
 data td; set trans; 
