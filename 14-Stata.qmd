@@ -13,7 +13,7 @@ jupyter: nbstata
 ::: callout-note
 
 * Le document a été compilé avec le magique kernel jupyter [**nbstata**](https://github.com/hugetim/nbstata) programmé par **Tim Huegerich**. Comparé à l'ancienne solution **statamarkdown** qui exécutait Stata en mode batch, il n'y a pas photo au niveau du runtime, avec pratiquement aucune latence une fois le noyau chargé (attendre une quinzaine de seconde à la première compilation).
-* Ce pas à pas Stata n'a pas été inclus à la version PDF du support, les mises en application des formations qui lui sont associé étant maintenant exclusivement réalisée avec R. 
+* Ce pas à pas Stata n'a pas été inclus à la version PDF du support, les mises en application des formations qui lui sont associé étant maintenant exclusivement réalisées avec R. 
 
 :::
 
