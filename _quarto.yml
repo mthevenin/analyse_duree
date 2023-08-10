@@ -8,7 +8,7 @@ execute:
 lang: fr
 
 book:
-  title: "Introduction à l'analyse des durées"
+  title: "Introduction à l'analyse biographique des durées"
   subtitle: "Support de formation 2023"
   author: "**Marc Thévenin**"
   language: fr
@@ -23,7 +23,7 @@ book:
   reader-mode: false
   sidebar:
     style: "docked"
-    collapse-level: 2
+    collapse-level: 1
 
   chapters:
     - part: "Introduction"
