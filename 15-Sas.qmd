@@ -1,3 +1,10 @@
+---
+filters:
+  - lightbox
+  
+lightbox: auto
+---
+
 
 # **SAS**
 
