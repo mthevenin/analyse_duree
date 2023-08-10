@@ -13,7 +13,7 @@ jupyter: nbstata
 ::: callout-note
 
 * Le document a été compilé avec le magique kernel jupyter [**nbstata**](https://github.com/hugetim/nbstata) programmé par **Tim Huegerich**. Comparé à l'ancienne solution **statamarkdown** qui exécutait Stata en mode batch, il n'y a pas photo au niveau du runtime, avec pratiquement aucune latence une fois le noyau chargé (attendre une quinzaine de seconde à la première compilation).
-* Ce pas à pas Stata n'a pas été inclus à la version PDF du support, les mises en application des formations qui lui sont associé étant maintenant exclusivement réalisées avec R. 
+* Le document n'a pas été compilé en PDF, seule cette version html est disponible.
 
 :::
 
@@ -133,7 +133,8 @@ stci, p(25)
 Pour afficher le graphique des estimateurs KM, on utilise la commande **`sts graph`**. On ajoute ici l'affichage des intervalles de confiance avec l'option `ci`
 
 ```{stata}
-sts graph, ci 
+
+sts graph, ci
 ```
 
 
@@ -149,7 +150,7 @@ On va comparer les fonctions de survie pour la variable *surgery*.
 On ajoute l'option `by(surgery)` à la commande `sts graph`
 
 ```{stata}
-sts graph, by(surgery) ci legend(pos(6))
+sts graph, by(surgery) ci ci1opts(fc(stc1%40))  ci2opts(fc(stc2%40)) legend(pos(6))
 ```
 
 
@@ -278,7 +279,7 @@ stcox year age surgery tvc, nolog noshow efron nohr
 
 ```
 
-### Modèle  à temps discret
+### Modèle  à durée discrète
 
 Variable de durée = *mois*
 
@@ -293,7 +294,6 @@ Variable de durée = *mois*
 webuse set "https://raw.githubusercontent.com//mthevenin/analyse_duree/master/bases/"
 webuse  "transplantation_m", clear
 webuse set
-
 ```
 
 
@@ -342,7 +342,7 @@ logit e t t2 t3 year2 age2 surgery, nolog or
 ```
 
 
-### Paramétrisation avec durée discrète
+#### Paramétrisation avec durée discrète
 
 Pour l'exemple seulement, on procède à un regroupement des intervalles découpés sur les quartiles de la durée
 
@@ -378,7 +378,7 @@ logit e i.ct4  year age surgery,  nolog or
 ```
 
 
-### Modèles paramétriques
+## Modèles paramétriques
 
 Juste un exemple pour le modèle de **weibull**
 
@@ -417,7 +417,7 @@ streg year age surgery , dist(weibull) time nolog noheader
 
 
 
-### Risques concurrents
+## Risques concurrents
 
 ### Non paramétrique: estimation des IC
 

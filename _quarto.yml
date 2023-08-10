@@ -53,8 +53,8 @@ book:
       chapters:
         - 13-R.qmd
         - 14-Stata.qmd
-#        - 15-Sas.qmd
-#        - 16-Python.qmd
+        - 15-Sas.qmd
+        - 16-Python.qmd
 format:
   html:
     theme: [zephyr, style.scss]

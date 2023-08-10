@@ -1,11 +1,18 @@
----
-title: "SAS"
----
+
+# **SAS**
+
+::: callout-note
+
+* Ce pas à pas n'a pas fait de mise à jour depuis 3 ans. 
+* Pour les personnes de l'Ined, à noter que SAS Studio (serveur margaux) a été mis à jour, et qu'il est maintenant possible d'estimer les RMST avec `proc lifetest`.
+- Le document n'a pas été compilé en PDF, seule cette version html est disponible.
+
+:::
 
 
 
-<br>
-**Remarque: Sélection des outputs**  
+**Remarque: Sélection des outputs**
+
 Selon le type d'analyse la totalité des outputs ne seront pas reproduits (```ods include``` ou ```ods exclude``` pour la sélection). Un problème spécifique s'observe pour le tableau des estimateurs de Kaplan-Meier qui est particulièrement illisible en présence d'un nombre important d'observations censurées.
 
 Exemple pour ```proc lifetest```: noms des outputs récupérés dans la log
@@ -54,10 +61,10 @@ Utiliser de préférence le nom figurant dans la ligne **path:** (si comparaison
 
 
 
-# Analyse non paramétrique
+## Analyse non paramétrique
 
 
-## Méthode actuarielle
+### Méthode actuarielle
 
 Avec une longueur d'intervalle fixe égale à 30 jours.
 
@@ -76,7 +83,7 @@ time stime*died(0);run;
 ![](sas/1c.png)
 
 
-## Méthode Kaplan-Meier
+### Méthode Kaplan-Meier
 
 Le tableau des estimateurs ne sera pas reporté (voir intro du document).  
 Pour récupérer ces estimateurs, on peut les récupérer via l'instruction output et les exporter, par exemple, dans un tableur.
@@ -98,7 +105,8 @@ Sauf exception ne pas interpréter le tableau donnant la durée moyenne. Se repo
 
 **Comparaison des fonctions de survie**
 
-*Tests du log rank*  
+*Tests du log rank* 
+
 ```{r eval=FALSE}
 ods exclude Lifetest.Stratum1.ProductLimitEstimates Lifetest.Stratum2.ProductLimitEstimates ;
 proc lifetest data=trans;
@@ -129,16 +137,13 @@ strata surgery; run;
 ```
 
 ![](sas/4.PNG)
-<br>
-**SAS STUDIO: en attente de la mise à jour du module SAS-STAT (on a 5 ans de retard)**  
 
-<br>
 
-# **Modèle de Cox**
+## Modèle de Cox
 
-## **Estimation du modèle**
+### Estimation du modèle
 
-```{} 
+```{r eval=FALSE} 
 proc phreg data=trans;
 model stime*died(0) = year age surgery ;
 run;
@@ -149,9 +154,9 @@ run;
 
 
 
-## Tests de l'hypothèse PH
+### Tests de l'hypothèse PH
 
-### Test de Grambsch Therneau
+#### Test de Grambsch Therneau
 
 Demande au moins l'avant dernière version de Sas/Stat (2016?).  
 
@@ -177,13 +182,13 @@ run;
 
 ![](sas/5c.PNG)
 
-### Interaction avec la durée
+#### Interaction avec la durée
 
 **Estimation d'un modèle avec indicatrices**  
 La covariable doit être sous forme d'indicatrice (binaire: (0,1)). Ce qui est le cas ici avec la variable *surgery*.  
-<br>
+
 Exemple avec une covariable X à 3 modalités codée 1,2,3.  
-<br>
+
 Estimation du modèle de Cox avec l'instruction ```class``` (ref: X=1)
 ```{r eval=FALSE}
 proc phreg data=base;
@@ -215,7 +220,7 @@ run;
 
 ![](sas/5d.PNG)
 
-## Variable dynamique
+### Variable dynamique
 
 **Warning: opération en 'aveugle'**
 
@@ -233,9 +238,9 @@ run;
 
 ![](sas/6.PNG)
 
-# Modèle à temps discret
+## Modèle à temps discret
 
-## Mise en forme
+### Mise en forme
 
 On utilise une boucle pour répliquer les lignes sur la valeur de la durée. La nouvelle variable de durée (t) sous forme de compteur est générée automatiquement. 
 
@@ -251,7 +256,7 @@ t2=t*t;
 t3=t2*t; run;
 ```
 
-## Durée continue
+### Durée continue
 
 
 *Estimation du modèle*
@@ -264,7 +269,7 @@ model died(ref="0") = t t2 t3 year age surgery  ; run;
 
 ![](sas/7a.PNG)
 
-## Durée discrète
+### Durée discrète
 
 Pour l'exemple on va regrouper la durée par ses quartiles.
 Pour chaque individu, on conserve seulement une observation dans chaque quartile.
@@ -323,9 +328,9 @@ run;
 
 ![](sas/8d.PNG)
 
-# Risques concurrents
+## Risques concurrents
 
-## Non paramétrique
+### Non paramétrique
 
 On indique en option la cause d'intérêt avec **`eventcode=valeur`** , les autres étant considérées commes des risques concurrents. 
 
@@ -353,19 +358,7 @@ strata surgery; run;
 
 ![](sas/9g.PNG)
 
-## Modèles
-
-**Modèle de Fine-Gray**
-
-```{r eval=FALSE}
-proc phreg data=trans;
-model stime*compet(0) = year age surgery / eventcode=1  ;
-run;
-```
-
-![](sas/9h.PNG)
-
-**Modèle logistique multinomial à temps discret**
+### Modèle logistique multinomial à durée discrète
 
 ```{r eval=FALSE}
 data td; set trans; 
