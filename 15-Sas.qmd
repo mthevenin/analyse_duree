@@ -1,10 +1,7 @@
 ---
-
 filters:
   - lightbox
-  
 lightbox: auto
-
 ---
 
 
