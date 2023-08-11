@@ -113,3 +113,28 @@ cox.zphold(fit, transform="identity")
 ```
 
 
+
+## Fragilité et immunité
+
+
+Seulement quelques remarques, le traitement de ces problématiques dépassant largement le contenu de la formation.
+
+### Fragilité (Frailty)
+
+Pour la *fragilité*, je conseille fortement de lire la dernière section du document de travail de ***Simon Quantin** (cf bibliographie), il n'y a pas meilleure présentation du problème que la sienne ^[petite maj par rapport à la version précédente: il ne traite que la fragilité individuelle stricto sensu et non la fragilité plus connu sous le terme de *shared frailty* (proche modèle multiniveau). Problèmatique importante, car une des origines de la non proportionnalité des risques réside dans l’omission de variables. Ici on va être confronté une omission sur des traits non observables ou latents, qui **accélèrent** dès le début de la période d’exposition la survenue de l’évènement. L’introduction d’un facteur de fragilité se fait par l’introduction d’un effet aléatoire dans le modèle, de nature plus complexe, et rendant l’interprétation des modèles plus compliquée. 
+
+On peut distinguer deux types de modèles:
+
+- les modèles à *fragilité partagée*, c'est la situation la plus simple car la logique se rapproche des modèles multiniveaux, des groupes d'individus, identifiables, partagent une même *fragilité*, par exemple  géographique.
+- les modèles à *fragilité non partagée*, avec des caractéristiques latentes non observable comme les préférences, ou en médecine certains traits génétiques non identifiés.
+
+### Immunité (Cure fraction)
+
+Le phénomène d’immunité est un cas particulier du précédent, et a été étudié dès le début des années 1950, en questionnant l’exposition au risque d’une partie des observations. On s'interrogeait par exemple sur les risques de rechute et de décès après le traitement d'un premier cancer. 
+Visuellement on peut commencer à se proser des questions sur la présence d'une fraction *immunisée* ou non *susceptible* de connaître l'évènement lorsque la fonction de séjour ne tend pas vers 0 mais présente une longue asymptote (plateau) sur une valeur  supérieure à 0: $\lim_{t \to \infty}S(t)=a$. 
+
+Les modèles avec une fraction immunisée peuvent être de ***type mixte*** en associant une probabilité d'être immunisé aux observations censurées à droite à un modèle de durée ^[Le plus classique utilise un algorithme *Expectation Maximisation* utilisé en imputation: on estime une probabilité d'être susceptible de connaitre l'évènement aux observations censurées à droite, qui intervient comme facteur de pondération dans le modèle de durée. Cette probabilité et le modèle de durée qui lui est associé est réévalué à chaque boucle de l'algorithme jusqu'à convergence. Le principale problème de cette méthode résite dans l'estimation de la variance, souvent effectué par bootstrap. Cette méthode à l'avantage d'être implémentable en durée discrète, bien qu'à ma connaissance aucun logiciel ne la propose (j'ai une commande Stata encore perfectible sous le coude). On trouve en revanche ce type d'estimation sous R, pour les modèles de Cox ou les modèles paramétriques dans le package **`smcure`**].  Plus dans le vent je crois, on a également des modèles de **type non mixte**, avec il me semble une connotation bayesienne qui semble s'accroître.  Il n’y a donc pas de méthode unifiée à ce jour [[Si vous voulez vous en convaincre](https://www.annualreviews.org/doi/10.1146/annurev-statistics-031017-100101)]. 
+
+ Il est également à noter, c'est important, que cette problématique affecte les analyses avec des évènements dits récurrents. Ici, la stratégie classique qui consiste à introduire dans un modèle un simple effet aléatoire de type fragilité partagée (shared frailty) pour contrôler risque d'être insuffisante. Ici le *groupe* est constitué de chaque séquence de remise dans le risque. Exemple pour la fécondité: une personne ayant eu un enfant est exposée au risque d'en avoir un autre, l'horloge temporelle étant alors simplement réinitialisée. Et donc, quid des préférences individuelles en terme de fécondité ^[en situation de récurrence, toujours penser à *remettre à jour* des conditions initiales, par exemple pour la fécondite l'âge de la mère à la naissance de l'enfant pour les rang supérieur à 1]. 
+
+Enfin, les modèles à fragilité ou à fraction immunisée repose tous sur une hypothèse très forte. La fragilité ou le degré d'immunité est toujours défini (estimé) en début d'exposition, et il ne varie pas. Cela peut ne pas toujours faire sens, en particulier pour les préférences, pas forcément stables ou fixes dans le temps.

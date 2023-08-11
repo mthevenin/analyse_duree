@@ -6,12 +6,14 @@
 
 **MISE A JOUR DU SUPPORT EN COURS**
 
-- L'ensemble des sections devraient être disponible la semaine du 07 Aout 2022
-
 - Le support est maintenant intégralement disponible en format pdf en cliquant sur l'icône au dessus de la barre de recherche.
 
-- Quelques mises à jour de contenu seront réalisées d'ici la fin septembre: 
-
+- D'ici la fin septembre 2023: 
+  - Une introduction du support à cet endroit. 
+  - Quelques ajouts:  
+    * par l'exemple, un gros warning sur l'utilisation mal maîtrisée des données prospectives (on visera l'EDP - Echantillon Démographique Permanent), à mon sens survendu par certain.e.s, et qui peut aboutir sous l'angle de  l'analyse de survie à des résultats bien étranges, et malheureusement publiés.
+    * j'avais retiré la courte présentation des fonctions de lien probit et surtout complémentaire-loglog dans les modèles à durée discrète....maivaise idée que j'ai eu (voir point précédent). 
+    * Je ne pense pas avoir le temps mais on sait jamais: une première présentation des *modèles à pseudo observations* dans la section annexe dans un première temps.
 
 
 ## Bibliographie vf {-}
