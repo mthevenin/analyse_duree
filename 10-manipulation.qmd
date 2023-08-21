@@ -67,7 +67,7 @@ A ce niveau il est donc important de ne pas encore remplacer la date de censure 
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df$e = ifelse(is.na(df$fin), 0,1)
 
@@ -78,7 +78,7 @@ Pour la variable de durée ^[La mesure est ici discrète/groupée, il me semble 
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df$dur = ifelse(df$e==1, df$fin - df$deb + 1, 2025 - df$deb + 1)
 
@@ -115,7 +115,7 @@ De nouveau on sélectionne la première séquence, et pour la lisibilité de la 
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df2 = filter(df2,nseq==1)
 df2 = select(df2, -c(x,nseq))
@@ -127,7 +127,7 @@ On génère la variable censure/évènement (toujours à faire avant la variable
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df2$e = ifelse(is.na(df2$fin), 0, 1)
 
@@ -141,7 +141,7 @@ Durée selon les valeurs de *e*:
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df2$dur1 = ifelse(df2$e==1, 12*(df2$fin - df2$deb) + (df2$finm - df2$debm),  0) 
 df2$dur0 = ifelse(df2$e==0, 12*(2025 - df2$deb)    + (df2$enqm  - df2$debm), 0) 
@@ -153,7 +153,7 @@ On regroupe par simple sommation (le *else* étant 0).
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df2$dur  = df2$dur1 + df2$dur0
 
@@ -195,7 +195,7 @@ On suppose maintenant que x traduit des situations sur le marché du travail. Pa
 
 ```{r }
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 etude = data.frame(id = c(1,2,3), fin_etude = c(2020,2021,2023))
 kable(etude)
 ```
@@ -215,7 +215,7 @@ Avant la fusion, on peut conserver seulement les informations nécessaires (id, 
 
 ```{r }
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df = filter(df, nseq==1)
 df = select(df, -c(fin,x,nseq))
@@ -228,7 +228,7 @@ Après la fusion:
 
 ```{r }
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df = full_join(etude, df,  by = c('id'))
 
@@ -241,7 +241,7 @@ On a toutes les informations pour générer la variable censure/évènement et l
 
 ```{r }
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df$e = ifelse(is.na(df$fin),0,1)
 
@@ -284,7 +284,7 @@ On ne génère pas des variables d'analyse, on aurait besoin de l'information su
 
 ```{r }
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df$fin[is.na(df$fin)] = 2025
 
@@ -297,7 +297,7 @@ Allongement de la base:
 
 ```{r }
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df1 = df
 df1$dur1 = df1$fin - df1$deb
@@ -313,7 +313,7 @@ Pour générer la variable période (année), on a besoin d'un compteur qui sera
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 
 df1$c = 1
@@ -334,7 +334,7 @@ On reprend donc les opérations précédentes mais avec **durée = fin - debut +
 
 ```{r }
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df2 = df
 df2$dur2 = df2$fin - df2$deb + 1
@@ -351,7 +351,7 @@ kable(df2)
 
 ```{r }
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 df2$c = 1
 df2 = df2 %>% group_by(id,nseq) %>% mutate(year = deb  + cumsum(c) - 1)
 
@@ -371,7 +371,7 @@ Les applications ont des fonctions qui permettent de supprimer les doublons^[ave
 
 ```{r }
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 df2 = df2 %>% group_by(id,year) %>% mutate(nyear = cumsum(c))
 
 kable(df2)
@@ -382,7 +382,7 @@ Si on souhaite conserver les années de fin de séquence:
 
 ```{r }
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df2 = filter(df2, nyear==1)
 
@@ -413,7 +413,7 @@ Une façon simple de boucher ce type "trous", est d'utiliser les années de nais
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 dftout = data.frame(id  =  c(1, 2),
                     t0  =  c(2018, 2018))
@@ -429,7 +429,7 @@ kable(dftout)
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 dftout$tmax = 2025
 
@@ -451,7 +451,7 @@ On peut maintenant apparier cette couverture de toutes les années de vie jusqu'
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 df2 = full_join(df2, dftout, by = c("id","year"))
 
 df2 = arrange(df2, id, year)
@@ -462,7 +462,7 @@ Pour supprimer les informations qui précèdent la première séquence de la bio
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df2$x[is.na(df2$x)] = 0
 
@@ -475,7 +475,7 @@ On supprime les lignes lorsque nx=0.
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df2 = filter(df2, nx>0)
 
@@ -495,7 +495,7 @@ Supposons que le base ci-dessous traduit la naissance et potentiellement le déc
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 dfy = data.frame(id  =  c(1, 2, 2),
                 deb =  c(2022, 2019, 2023),
@@ -516,7 +516,7 @@ Si on reprend les manipulations précédentes jusqu'à la création de la variab
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 dfy$fin[is.na(dfy$fin)] = 2025
 dfy$dur = dfy$fin - dfy$deb + 1
@@ -539,7 +539,7 @@ On peut s'intéresser au fait d'avoir ou non un enfant, ou de manière plus gén
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 dfy = dfy %>% group_by(id,year) %>% mutate(ny = cumsum(c))
 dfy = dfy %>% group_by(id,year) %>% mutate(tot_y =  sum(c))
@@ -552,7 +552,7 @@ Il ne reste plus qu'à supprimer les lignes où *ny>1*
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 dfy = filter(dfy, ny==1)
 dfy = select(dfy, -c(ny,deb, fin, dur, nseq, c))
@@ -564,7 +564,7 @@ Avec une ligne par année, on peut la fusionner avec une autre base biographique
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df2y = full_join(dfy, df2, by = c("id","year"))
 
@@ -587,7 +587,7 @@ kable(df2y)
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df =  data.frame(id  =  c( 1, 1, 1, 2, 3, 3, 4),
                  deb =  c(2018, 2022, 2024, 2019, 2023, 2024, 2023),
@@ -612,7 +612,7 @@ On peut repérer la présence d'une des deux séquences d'intérêt avec une ind
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df$e = ifelse(df$y==2 | df$y==3,1,0)
 
@@ -623,7 +623,7 @@ De nouveau l'utilisation d'un compteur sur cette variable indicatrice, peut s'av
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df = df %>% group_by(id) %>% mutate(n  = cumsum(e)) 
 
@@ -636,7 +636,7 @@ Cela peut être fait, en faisant un compteur sur le compteur précédent:
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df = df %>% group_by(id) %>% mutate(nn  = cumsum(n)) 
 
@@ -649,7 +649,7 @@ Pour récupérer l'information sur les observations qui seront censurée, on peu
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df = df %>% group_by(id) %>% mutate(N  = sum(n)) 
 
@@ -666,7 +666,7 @@ cette sur toute les lignes en la repérant (ici en générant une nouvelle varia
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df$ debexp = ifelse(df$nseq==1, df$deb, 0)                    # <1>
                     
@@ -685,7 +685,7 @@ On peut maintenant conserver les lignes qui nous intéresse à savoir celle où 
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df = filter(df, nn==1 | N==0)
 
@@ -698,7 +698,7 @@ variable de durée.
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df$fin[is.na(df$fin)] = 2025
 
@@ -721,7 +721,7 @@ Cela va un peu (voir plus) se compliquer. On va repartir de la base de départ p
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df =  data.frame(id  =  c( 1, 1, 1, 2, 3, 3, 4, 5, 5, 5 , 5),
                  deb =  c(2018, 2022, 2024, 2019, 2023, 2024, 2023, 2019, 2021, 2023, 2024),
@@ -740,7 +740,7 @@ connu l'évènement dont on analyse la durée.
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df$e23 = ifelse(df$y==2 | df$y==3,1,0)                       # <1>
 
@@ -768,7 +768,7 @@ On va utilise ici des ***lead*** et donc pouvoir repérer les changements d'éta
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df$e = ifelse(df$y==1,1,0)                                     # <1>
 
@@ -787,7 +787,7 @@ on peut déjà construire l'information.
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df$e = ifelse(df$diff_e==-1,1,0)
 df$e[is.na(df$e)] = 0
@@ -805,7 +805,7 @@ On va de nouveau utiliser un lead, mais sur la variable *e23*.
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df = select(df, -c(nseq, diff_e)) # <1>  
 
@@ -830,7 +830,7 @@ sur la première.
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 
 df$fin[is.na(df$fin)] = 2025                # <1>
@@ -856,7 +856,7 @@ On peut [enfin] sélectionner et conserver une seule ligne par individu et gén�
 
 ```{r}
 #| code-fold: true
-#| code-summary: "Show the code"
+#| code-summary: "Code"
 
 df= select(df,-truefin)
 
@@ -870,21 +870,3 @@ df = select(df, -c(n23,nn23))
 kable(df)
 
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

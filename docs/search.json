@@ -1,0 +1,30 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Introduction à l’analyse biographique des durées",
+    "section": "",
+    "text": "1 Présentation - Bibliographie - Outils"
+  },
+  {
+    "objectID": "index.html#le-support",
+    "href": "index.html#le-support",
+    "title": "Introduction à l’analyse biographique des durées",
+    "section": "Le support",
+    "text": "Le support\nMISE A JOUR DU SUPPORT EN COURS\n\nLe support est maintenant intégralement disponible en format pdf en cliquant sur l’icône au dessus de la barre de recherche.\nD’ici la fin septembre 2023:\n\nUne introduction du support à cet endroit.\nQuelques ajouts:\n\nUn nouveau chapitre sur la manipulation des données [OK].\npar l’exemple, un gros warning sur des utilisations douteuses de données prospectives (on visera l’EDP - Echantillon Démographique Permanent).\nj’avais retiré la courte présentation des fonctions de lien probit et surtout complémentaire-loglog dans les modèles à durée discrète….maivaise idée que j’ai eu (voir point précédent).\nJe ne pense pas avoir le temps mais on sait jamais: une première présentation des modèles à pseudo observations dans la section annexe.\n\n\n\nVersion pdf:\n\nDernière maj: le 21 août 2023\nPour le chapitre programmation, seulement la section dédiée à R a été ajoutée. Pour les 3 autres applications, il n’y a qu’une version HTML."
+  },
+  {
+    "objectID": "index.html#bibliographie-vf",
+    "href": "index.html#bibliographie-vf",
+    "title": "Introduction à l’analyse biographique des durées",
+    "section": "Bibliographie vf",
+    "text": "Bibliographie vf\nLes éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine, qui est ici l’espace privilégié de l’ingénierie méthodologique. On trouve également de (trop) nombreux tutoriels à dominante mise en pratique avec R.\nAccès en ligne\n\nCours Gilbert Colletaz (Université d’Orléans - Master d’économétrie).\n\nLe cours est mis à jour tous les ans, applications uniquement avec Sas.\nDernière version 2020: lien\n\nDocument de travail de Simon Quantin (Insee).\n\nCouvre l’ensemble des techniques de base d’analyse des durées en durée dite continue. Il propose surement la meilleure introduction en langue française à la problématique de la fragilité.\nApplication en R seulement (attention au passage de la v3 du package survival)\n2019 - pas de mise à jour: lien\n\n\nOuvrage de référence en démographie:\nL’analyse démographique des biographies de Daniel Courgeau et Eva Lelièvre (Edition de l’Ined - 1989)."
+  },
+  {
+    "objectID": "index.html#outils",
+    "href": "index.html#outils",
+    "title": "Introduction à l’analyse biographique des durées",
+    "section": "Outils",
+    "text": "Outils\n\nSupport réalisé sous Rstudio avec le système de publication Quarto\nLangages utilisés pour la partie programmation:\n\nR\nStata v18\nSas\nPython"
+  }
+]

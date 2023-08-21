@@ -1,8 +1,8 @@
 
 
-# **Présentation - bibliographie - outils**
+# **Présentation - Bibliographie - Outils**
 
-## Le support {-}
+## Le support {-} 
 
 **MISE A JOUR DU SUPPORT EN COURS**
 
@@ -11,9 +11,16 @@
 - D'ici la fin septembre 2023: 
   - Une introduction du support à cet endroit. 
   - Quelques ajouts:  
-    * par l'exemple, un gros warning sur l'utilisation mal maîtrisée des données prospectives (on visera l'EDP - Echantillon Démographique Permanent), à mon sens survendu par certain.e.s, et qui peut aboutir sous l'angle de  l'analyse de survie à des résultats bien étranges, et malheureusement publiés.
+    * Un nouveau chapitre sur la manipulation des données [**OK**]. 
+    * par l'exemple, un gros warning sur des utilisations douteuses de données prospectives (on visera l'EDP - Echantillon Démographique Permanent).
     * j'avais retiré la courte présentation des fonctions de lien probit et surtout complémentaire-loglog dans les modèles à durée discrète....maivaise idée que j'ai eu (voir point précédent). 
-    * Je ne pense pas avoir le temps mais on sait jamais: une première présentation des *modèles à pseudo observations* dans la section annexe dans un première temps.
+    * Je ne pense pas avoir le temps mais on sait jamais: une première présentation des *modèles à pseudo observations* dans la section annexe.
+
+
+**Version pdf**: 
+
+- Dernière maj: le 21 août 2023
+- Pour le chapitre programmation, seulement la section dédiée à R a été ajoutée. Pour les 3 autres applications, il n'y a qu'une version HTML.
 
 
 ## Bibliographie vf {-}
@@ -22,7 +29,7 @@ Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des
 
 **Accès en ligne**
 
-* **Cours Gilbert Colletaz** (Université d’Orléans - master d'économétrie).
+* **Cours Gilbert Colletaz** (Université d’Orléans - Master d'économétrie).
   - Le cours est mis à jour tous les ans, applications uniquement avec Sas. 
   - Dernière version 2020: [lien](https://www.master-esa.fr/wp-content/uploads/2021/04/Econometrie-des-donnees-de-survie.pdf)
 
