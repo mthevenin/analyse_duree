@@ -253,8 +253,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./10-parametrique.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title"><strong>Modèles paramétriques</strong></span></span></a>
+  <a href="./10-manipulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Eléments de mise en forme des données</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -265,8 +265,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./12-annexe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><strong>Annexes</strong></span></span></a>
+  <a href="./12-parametrique.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><strong>Modèles paramétriques</strong></span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./13-annexe.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title"><strong>Annexes</strong></span></span></a>
   </div>
 </li>
       </ul>
@@ -282,26 +288,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth1 ">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./13-R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title"><strong>R</strong></span></span></a>
+  <a href="./14-R.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title"><strong>R</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./14-Stata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title"><strong>Stata</strong></span></span></a>
+  <a href="./15-Stata.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title"><strong>Stata</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./15-Sas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title"><strong>SAS</strong></span></span></a>
+  <a href="./16-Sas.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title"><strong>SAS</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./16-Python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title"><strong>Python</strong></span></span></a>
+  <a href="./17-Python.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><strong>Python</strong></span></span></a>
   </div>
 </li>
       </ul>
@@ -320,6 +326,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#terminologies" id="toc-terminologies" class="nav-link" data-scroll-target="#terminologies"><span class="header-section-number">2.2</span> Terminologies</a></li>
   <li><a href="#exemples-danalyse" id="toc-exemples-danalyse" class="nav-link" data-scroll-target="#exemples-danalyse"><span class="header-section-number">2.3</span> Exemples d’analyse</a></li>
   <li><a href="#elements-nécessaire-à-lanalyse" id="toc-elements-nécessaire-à-lanalyse" class="nav-link" data-scroll-target="#elements-nécessaire-à-lanalyse"><span class="header-section-number">2.4</span> Elements nécessaire à l’analyse</a></li>
+  <li><a href="#types-danalyses" id="toc-types-danalyses" class="nav-link" data-scroll-target="#types-danalyses"><span class="header-section-number">2.5</span> Types d’analyses</a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mthevenin/analyse_duree/edit/main/01-presentation.qmd" class="toc-action">Modifier cette page</a></p></div></div></nav>
     </div>
@@ -369,27 +376,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <tbody>
 <tr class="odd">
 <td>Modèles de durée</td>
-<td>Duration analysis (Econométrie)</td>
+<td>Duration analysis</td>
 </tr>
 <tr class="even">
 <td>Analyse de survie</td>
-<td>Survival analysis (Epidémiologie, médecine, démographie)</td>
+<td>Survival analysis</td>
 </tr>
 <tr class="odd">
 <td>Analyse de fiabilité</td>
-<td>Failure time data analysis (Statistiques industrielles)</td>
+<td>Failure time data analysis</td>
 </tr>
 <tr class="even">
 <td>Analyse des transitions</td>
-<td>Event-history analysis (Démographie, Sociologie)</td>
+<td>Event-history analysis</td>
 </tr>
 <tr class="odd">
 <td>Données de séjour</td>
-<td>Transition analysis (Sociologie)</td>
-</tr>
-<tr class="even">
-<td>Histoires de vie</td>
-<td></td>
+<td>Transition analysis</td>
 </tr>
 </tbody>
 </table>
@@ -423,6 +426,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Dynamiques (TVC: <em>Time varying covariates</em>): Mesurées à tout moment entre le début et la sortie de l’observation: statut matrimonial, taille du ménage, statut d’activité…</li>
 </ul></li>
 </ol>
+</section>
+<section id="types-danalyses" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="types-danalyses"><span class="header-section-number">2.5</span> Types d’analyses</h2>
+<p>[A faire]</p>
 
 
 <!-- -->
@@ -742,12 +749,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>| Français                     | Anglais                                                 | </span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>| ---------------------------- | ------------------------------------------------------- | </span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>| Modèles de durée             | Duration analysis (Econométrie)                         |</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>| Analyse de survie            | Survival analysis (Epidémiologie, médecine, démographie)|</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>| Analyse de fiabilité         | Failure time data analysis (Statistiques industrielles) |</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>| Analyse des transitions      | Event-history analysis (Démographie, Sociologie)        |</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>| Données de séjour            | Transition analysis (Sociologie)                        |</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>| Histoires de vie             |                                                         |</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>| Modèles de durée             | Duration analysis                                       |</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>| Analyse de survie            | Survival analysis                                       |</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>| Analyse de fiabilité         | Failure time data analysis                              |</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>| Analyse des transitions      | Event-history analysis                                  |</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>| Données de séjour            | Transition analysis                                     |</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
@@ -778,7 +785,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Fixes: genre, génération, niveau de diplôme, csp,......</span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Dynamiques (TVC: *Time varying covariates*): Mesurées à tout moment entre le début et la sortie de l'observation: statut matrimonial, taille du ménage, statut d'activité...</span>
 <span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="fu">## Types d'analyses</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">A faire</span><span class="co">]</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

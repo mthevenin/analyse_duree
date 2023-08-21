@@ -46,15 +46,16 @@ book:
         - 09-tvc.qmd  
     - part: "Compléments"
       chapters:
-        - 10-parametrique.qmd 
-        - 11-concurrent.qmd            
-        - 12-annexe.qmd 
+        - 10-manipulation.qmd
+        - 11-concurrent.qmd                 
+        - 12-parametrique.qmd 
+        - 13-annexe.qmd 
     - part: "Programmation"
       chapters:
-        - 13-R.qmd
-        - 14-Stata.qmd
-        - 15-Sas.qmd
-        - 16-Python.qmd
+        - 14-R.qmd
+        - 15-Stata.qmd
+        - 16-Sas.qmd
+        - 17-Python.qmd
 format:
   html:
     theme: [zephyr, style.scss]

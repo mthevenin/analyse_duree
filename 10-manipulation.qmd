@@ -1,0 +1,890 @@
+
+
+# **Eléments de mise en forme des données**
+
+Ce qui suit est un premier jet réalisé en 2023 
+
+
+Packages utilisés:
+
+```{r, message=FALSE}
+#| code-fold: true
+#| code-summary: "Code"
+
+library(dplyr)
+library(tidyr)
+library(knitr)
+```
+
+
+
+## Calcul des variables d'analyses
+
+Construction de la base: 
+
+```{r }
+#| code-fold: true
+#| code-summary: "Code"
+
+df = data.frame(id  =  c(1, 1, 1, 2),
+                deb =  c(2020, 2023, 2024, 2022),
+                fin =  c(2021, 2024, 2025, NA), 
+                  x =  c(1,2,1,2))
+kable(df)
+```
+
+On supposera que l'année de collecte, pour toutes les observations, est **2025** ^[Ici on a une enquête réalisée une même année pour toute les observations, ce n'est pas toujours le cas. De même au lieu de l'année, si les datations avaient été données par l'âge, au moment de l'enquête l'âge varierait d'une personne à une autre. Ces datations différentes (année ou âge) peuvent être présentes dans chaque module biographique d'une enquête, ou dans le fichier des caractéristiques fixes. Dans ce cas l'information devra être récupérée].
+
+Si cela n'est pas donné dans le module biographique, il peut être intéressant de construire les numéros de séquences des trajectoires.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+
+df$nseq = 1 
+df = df %>% group_by(id) %>% mutate(nseq = cumsum(nseq))  
+
+kable(df)
+```
+
+**Exemple 1 : durée de séjour de la première séquence observée** 
+
+Supposons que x traduit un type de relation/union, par exemple x=1 est une relation non cohabitante et x=2 est une relation cohabitante.
+On s'intéresse à la durée de la première relation, sans distinction entre 1 et 2. Il suffit de séléctionner la première séquence.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Code"
+
+df = filter(df, nseq==1)
+```
+
+La variable de fin va permettre de repérer les informations censurées, et de générer la variable d'évènement. 
+A ce niveau il est donc important de ne pas encore remplacer la date de censure par sa valeur.
+
+* Si *fin* est une valeur manquante: observation censurée.
+* Si *fin* est une valeur renseignée: occurence de l'évènement.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df$e = ifelse(is.na(df$fin), 0,1)
+
+kable(df)
+```
+
+Pour la variable de durée ^[La mesure est ici discrète/groupée, il me semble toujours préférable d'allonger les durées à +1. On démarre donc toujours un premier janvier pour terminer un 31 décembre sur l'information est donnée par des année. Ici t=1 représente la première année après la sortie des études. Une personne qui aura eu un emploi durant cette année, l'aura eu durant cette première année, que ce soit 2 semaines après ou 11 mois après. Si on disposait des mois, cela pourrait être intéressant de modifier cette métrique temporelle. Voir exemple 3], une repéré les observations censurées, elle est calculée directement avec les variables *fin* et *deb*. 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df$dur = ifelse(df$e==1, df$fin - df$deb + 1, 2025 - df$deb + 1)
+
+kable(df)
+```
+
+**Exemple 2 : changement de métrique temporelle**
+
+Toujours avec le même exemple, mais en ajoutant une observation, supposons que l'on dispose également de l'information sur les mois. Sur les mois où l'évènement à eu lieu, mais également sur les mois où l'enquête a été réalisée.
+
+```{r }
+#| code-fold: true
+#| code-summary: "Code"
+
+df2 = data.frame(id  = c(1, 1, 1, 2,3),
+                deb  = c(2020, 2023, 2024, 2022, 2021),
+                debm = c(2,5,3,10,9),
+                fin  = c(2021, 2024, 2025, NA,2021), 
+                finm = c(4,2,12,NA,11), 
+                x    = c(1,2,1,2,1),
+                enq  = c(2025,2025,2025,2025,2025),
+                enqm = c(4,4,4,5,4))
+
+df2$nseq = 1 
+df2 = df2 %>% group_by(id) %>% mutate(nseq = cumsum(nseq))  
+
+kable(df2)
+```
+
+On remarque que la nouvelle observation (id=3) a connu l'évènement, ici la fin de la relation, la même année qu'au début d'exposition (le début de la relation).... mais au bout de 2,6,11 mois???? Commeon dispose de l'information sur les mois de début et de fin cela peut être intéressant de l'exploite. De la même manière si l'enquête a été réalisée la même année, les entretiens n'ont pas eu lieu le même mois. On aura besoin de cette information pour les observations censurées.
+
+
+De nouveau on sélectionne la première séquence, et pour la lisibilité de la base on retire les informations qui ne seront pas ou plus exploitées (*nseq*, *x*).
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df2 = filter(df2,nseq==1)
+df2 = select(df2, -c(x,nseq))
+
+kable(df2)
+```
+
+On génère la variable censure/évènement (toujours à faire avant la variable de durée) de la même manière que pour l'exemple 1.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df2$e = ifelse(is.na(df2$fin), 0, 1)
+
+kable(df2)
+```
+
+Pour la variable de durée, le principe est de multiplié par 12 la différence entre l'année de fin et l'année de début et d'ajouter la différence entre le mois de fin et le mois de début.  
+Pour les observations censurées, ici l'année de fin est identique mais les mois varient. En terme de programmation, surtout si avec R on utilise `ifelse`, il est préférable d'y aller doucement en créant une durée pour les observations qui ont connu l'évènement et une durée pour les observations censurées. Puis de regrouper les deux cas. C'est ce qui est fait dans le code qui suit. 
+
+Durée selon les valeurs de *e*: 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df2$dur1 = ifelse(df2$e==1, 12*(df2$fin - df2$deb) + (df2$finm - df2$debm),  0) 
+df2$dur0 = ifelse(df2$e==0, 12*(2025 - df2$deb)    + (df2$enqm  - df2$debm), 0) 
+
+kable(df2)
+```
+
+On regroupe par simple sommation (le *else* étant 0).
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df2$dur  = df2$dur1 + df2$dur0
+
+df2 = select(df2, -c(dur1,dur0))
+
+kable(df2)
+```
+
+On dispose ainsi des éléments nécessaire pour faire une analyse de durée avec une métrique mensuelle ^[Contrairement au durée annuelle je n'ai pas ajouté 1 à chaque durée, ce qui est de nouveau envisageable par exemple si on veut explicitement indiquer les évènements qui ont lieu le premier mois. Pour id=3 la relation a t-elle durée du 1er septembre au 30 novembre, ou du 30 septembre au 1er novembre?? On a toujours un problème de précision, mais ici d'une trentaine de jours].
+
+
+**Exemple 3 : importation d'un début d'expositon externe** 
+
+On repart de la première base
+
+```{r }
+#| echo: false
+
+df = data.frame(id  =  c(1, 1, 1, 2),
+                deb =  c(2020, 2023, 2024, 2022),
+                fin =  c(2021, 2024, 2025, NA), 
+                  x =  c(1,2,1,2))
+df$nseq = 1 
+df = df %>% group_by(id) %>% mutate(nseq = cumsum(nseq))  
+```
+
+```{r }
+#| echo: false
+kable(df)
+```
+
+
+On suppose maintenant que x traduit des situations sur le marché du travail. Par exemple **x=1** est un emploi en CDD et **x=2** un emploi en CDI. On s'intéresse à la durée entre la fin des études et le premier emploi, quel que soit sont type.
+
+- On ne dispose pas ici de toutes l'information pour calculer la durée, soit la fin des études. Elle peut être donnée dans une base classique regroupant l'ensemble des caractéristiques individuelles de type fixe (année de naissance, sexe...).
+- Comme on s'intéresse à la durée de recherche du premier emploi, dans le module biographique la date de début va devenir la date de fin.
+- Pour les observations présente dans la base biographique, il n'y a pas de censure à droite. Mais si on regarde le fichier des caractéristiques générales, fixe:
+
+
+```{r }
+#| code-fold: true
+#| code-summary: "Show the code"
+etude = data.frame(id = c(1,2,3), fin_etude = c(2020,2021,2023))
+kable(etude)
+```
+
+Une nouvelle observation  (id=3) apparaît. Au moment de l'enquête, elle n'a pas (**encore**) trouvé un emploi depuis la fin de ces études. On a donc une observation qui sera censurée.
+
+::: callout-note
+Certaines bases biographiques peuvent être structurées avec des trajectoires strictement continue, l'année (l'âge) de fin étant l'année (l'âge) de début de la trajectoire suivante. Dans ce cas, l'information serait immédiatement disponible, avec la présence d'un nombre de séquences plus important dans la base. 
+:::
+
+On va devoir: 
+
+* Sélectionner la première sequence d'emploi dans la base df (variable *nseq*).
+* La fusionner avec la base étude.
+
+Avant la fusion, on peut conserver seulement les informations nécessaires (id, deb). La variable *deb* va changer également de statut en devenant l'année de *fin* de la période de recherche d'emploi.  
+
+```{r }
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df = filter(df, nseq==1)
+df = select(df, -c(fin,x,nseq))
+
+df = rename(df, fin = deb)
+kable(df)
+```
+
+Après la fusion: 
+
+```{r }
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df = full_join(etude, df,  by = c('id'))
+
+df = rename(df, deb = fin_etude)
+
+kable(df)
+```
+
+On a toutes les informations pour générer la variable censure/évènement et la variable de durée:
+
+```{r }
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df$e = ifelse(is.na(df$fin),0,1)
+
+df$dur = ifelse(df$e, df$fin - df$deb + 1, 2025 - df$deb + 1)
+kable(df)
+
+```
+
+
+## Appariement de modules biographiques 
+
+On repart de la première base, avec les numéros de séquence.
+
+```{r}
+#| echo: false
+
+df = data.frame(id  =  c(1, 1, 1, 2),
+                deb =  c(2020, 2023, 2024, 2022),
+                fin =  c(2021, 2024, 2025, NA), 
+                  x =  c(1,2,1,2))
+
+df$nseq = 1 
+df = df %>% group_by(id) %>% mutate(nseq = cumsum(nseq))  
+ 
+kable(df)                              
+```
+
+### Mise en forme d'une base
+
+Pour apparier des informations de plusieurs modules biographiques, on doit transformer les bases en format individus-séquences en format individus-périodes (ici individus années).
+
+* **Etape 1**: allongement sur chaque séquence après avoir générées leur durée
+* **Etape 2**: générer une variable de période (année) sur chaque ligne. Elle servira pour l'appariement.
+
+**Pourquoi ne pas utiliser la simple différence entre la fin et le début ?**
+
+Durée (fin - début) et allongement de la base:
+
+On ne génère pas des variables d'analyse, on aurait besoin de l'information sur l'année de l'enquête pour les informations censurées. 
+
+```{r }
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df$fin[is.na(df$fin)] = 2025
+
+kable(df)
+
+```
+
+
+Allongement de la base:
+
+```{r }
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df1 = df
+df1$dur1 = df1$fin - df1$deb
+
+df1$dur1b = df1$dur1 # uncount supprime la variable d'origine 
+df1 = uncount(df1,dur1b)
+
+kable(df1)
+```
+
+
+Pour générer la variable période (année), on a besoin d'un compteur qui sera associé à la variable *deb*. On doit bien contrôler l'opération par identifiant et numéro de séquence.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+
+df1$c = 1
+df1 = df1 %>% group_by(id,nseq) %>% mutate(year = deb  + cumsum(c)) 
+
+kable(df1)
+```
+
+**Problème**: les années de début ne sont pas correncte: 2021 au lieu de 2020 pour la première séquence de id=1 par exemple. 
+
+::: callout-important
+On doit donc impérativement augmenter la différence entre la fin et le début par +1 pour que l'ensemble des périodes (années) soit couvertes. 
+:::
+
+On reprend donc les opérations précédentes mais avec **durée = fin - debut + 1**
+
+* Allongement de la base avec durée augmentée 
+
+```{r }
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df2 = df
+df2$dur2 = df2$fin - df2$deb + 1
+
+df2$dur2b = df2$dur2 # uncount supprime la variable d'origine 
+df2 = uncount(df2,dur2b)
+
+kable(df2)
+```
+
+
+* Création de la variable *year*: **sur chaque individus-séquences, la somme entre le compteur et l'année de début doit être réduite de 11**.
+
+
+```{r }
+#| code-fold: true
+#| code-summary: "Show the code"
+df2$c = 1
+df2 = df2 %>% group_by(id,nseq) %>% mutate(year = deb  + cumsum(c) - 1)
+
+df2 = select(df2, -c(deb,fin,dur2))
+
+
+kable(df2)
+```
+
+Les années sont toutes couvertes....mais un peu trop. En effet, lorsque les trajectoires sont continues soit
+lorsque l'année de fin d'une séquence est identique à l'année de début de la suivante, les années vont être doublonnées. On doit dont supprimer ce doublon. 
+
+* Suppression des doublons des trajectoires continues.
+
+De nouveaux on doit faire un choix, soit on priviligie l'année de fin, soit on privilégie l'année de début. 
+Les applications ont des fonctions qui permettent de supprimer les doublons^[avec R par exemple la fonction `unique` de dplyr]. On peut le faire manuellement en regardant pour chaque personnes-années le nombre de doublon. Cela se fait facilement à l'aide d'un compteur, ici la variable *nyear*.
+
+```{r }
+#| code-fold: true
+#| code-summary: "Show the code"
+df2 = df2 %>% group_by(id,year) %>% mutate(nyear = cumsum(c))
+
+kable(df2)
+```
+
+Si on souhaite garder l'année de fin on filtre les observations en conservant celles dont nyear=1. Si on souhaite privilégier les années de début on foltre les observations en conservant celles dont nyear=2. 
+Si on souhaite conserver les années de fin de séquence:
+
+```{r }
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df2 = filter(df2, nyear==1)
+
+df2 = select(df2, -c(nseq,c,nyear))
+
+kable(df2)
+```
+
+
+::: callout-important
+
+### En résumé
+
+* A la date (année/âge) de censure remplacer la valeur manquante par sa valeur. Si ultérieurement on a besoin  de garder l'information sur la censure -  valeur manquante  - , on peut générer une variable mirroir de *fin*.
+* Sur chaque séquence calculer la durée avec une augmentation de +1.
+* Créer une variable période (année) sur chaque ligne. Elle servira à définir la clé d'appariement. 
+* Supprimer les doublons sur les transition continue $fin_t = debut_{t+1}$.
+
+:::
+
+### Fusion des informations biographiques
+
+
+#### Fusion avec l'ensemble des périodes observables
+
+Pour commencer par un exemple plutôt simple, on note que pour id=1 l'année 2022 n'est pas renseignée (trajectoire non continue). Si on reprend un exemple précédent (relations de couple), cette année pourrait être identifiée comme une période sans relation. 
+Une façon simple de boucher ce type "trous", est d'utiliser les années de naissances des individus, et de créer une base individus-périodes  qui couvre toutes les années de vie de l'individu jusqu'à l'enquête. On remontera jusque là, mais on va par exemple considérer que pour id=1 et id=2 ce *début de tout* est en 2018.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+dftout = data.frame(id  =  c(1, 2),
+                    t0  =  c(2018, 2018))
+
+kable(dftout)    
+```
+
+
+* On ajoute l'information sur l'année de l'enquête (2025).
+* On génère la durée 
+* On allonge la base
+* On génère la variable année sur chaque ligne (on contrôle seulement sur *id*)
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+dftout$tmax = 2025
+
+dftout$dur  = dftout$tmax - dftout$t0 + 1
+
+dftout = uncount(dftout,dur)
+
+
+dftout$c = 1
+dftout = dftout %>% group_by(id) %>% mutate(year = t0  + cumsum(c) - 1)
+
+dftout = select(dftout, -c(t0,tmax,c))
+
+kable(dftout)    
+```
+
+On peut maintenant apparier cette couverture de toutes les années de vie jusqu'à l'enquête à la base biographique:
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+df2 = full_join(df2, dftout, by = c("id","year"))
+
+df2 = arrange(df2, id, year)
+kable(df2)    
+```
+
+Pour supprimer les informations qui précèdent la première séquence de la biographie, on peut générer un compteur sur la variable x après avoir remplacer ses valeurs manquantes par des 0. On gardera les lignes pour lesquels ce compteur est supérieur à 1.  
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df2$x[is.na(df2$x)] = 0
+
+df2 = df2 %>% group_by(id) %>% mutate(nx = cumsum(x))
+
+kable(df2)    
+```
+
+On supprime les lignes lorsque nx=0.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df2 = filter(df2, nx>0)
+
+df2 = select(df2, -c(nx))
+
+kable(df2)    
+```
+
+
+#### Fusion avec une autre base biographique
+
+On peut être amené à fusionner plusieurs modules biographique. Jusqu'à présent, une même année, tous les individus ne pouvaient être que dans une situation, par exemple une seul emploi, un seul lieu de résidence etc... 
+Pour certains phénomènes, une même années ou pendant une période plus longue on peut observer simultanément plusieurs états différent, ou plus classiquement observer une somme d'un même état. On parle ici d'***overlapping***.
+Ce type de situation est typiquement celle qu'on observe avec le nombre d'enfants.
+
+Supposons que le base ci-dessous traduit la naissance et potentiellement le décès des enfants.  
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+dfy = data.frame(id  =  c(1, 2, 2),
+                deb =  c(2022, 2019, 2023),
+                fin =  c(NA, 2024,NA), 
+                nseq =  c(1,1,2))
+
+kable(dfy)
+```
+
+
+* id=1 a un premier enfant en 2022 qui est toujours en vie au moment de l'enquête (2025)
+* id=2:
+  * A un premier enfant en 2019 qui décède en 2024
+  * A un second  enfant en 2023, toujours en vie au moment de l'enquête
+  * De la naissance du second enfant au décès du premier, on va donc avoir des doublons (overlapping) sur les années
+  
+Si on reprend les manipulations précédentes jusqu'à la création de la variable *year*: 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+dfy$fin[is.na(dfy$fin)] = 2025
+dfy$dur = dfy$fin - dfy$deb + 1
+
+dfy$durb = dfy$dur  # Uncount supprime la variable d'origine 
+dfy = uncount(dfy,durb)
+
+dfy$c = 1
+dfy = dfy %>% group_by(id,nseq) %>% mutate(year = deb  + cumsum(c) - 1)
+```
+
+La variable *year* est bien renseignée 2 fois pour les années 2023 et 2024. 
+
+On peut s'intéresser au fait d'avoir ou non un enfant, ou de manière plus générale au nombre d'enfant. En créant cette information, on se donne également le moyen de corriger cet overlapping: 
+
+- On peut de nouveau générer un compteur contrôlé par individu année
+- En génerant un total de ligne doublonnée, on récupèrera par exemple ici le nombre d'enfant en vie chaque année. 
+- En ne gardant que la ligne ou le compteur est égal à 1, on supprime les doublons tout en gardant l'information sur le nombre d'enfant en vie une année donnée.
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+dfy = dfy %>% group_by(id,year) %>% mutate(ny = cumsum(c))
+dfy = dfy %>% group_by(id,year) %>% mutate(tot_y =  sum(c))
+
+kable(dfy)
+```
+
+Il ne reste plus qu'à supprimer les lignes où *ny>1*
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+dfy = filter(dfy, ny==1)
+dfy = select(dfy, -c(ny,deb, fin, dur, nseq, c))
+
+kable(dfy)
+```
+
+Avec une ligne par année, on peut la fusionner avec une autre base biographique en format individus-années (même principe qu'avec la fusion avec la base sur toutes les années de vie).
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df2y = full_join(dfy, df2, by = c("id","year"))
+
+df2y = arrange(df2y, id,year)
+
+df2y = select(df2y, c(id,year,x,tot_y))
+
+df2y$tot_y[is.na(df2y$tot_y)] = 0
+df2y$x[is.na(df2y$x)]   = 0
+
+kable(df2y)
+```
+
+
+## Sélection d'un type de séquence et mise en forme pour l'analyse 
+
+
+
+## Durée jusqu'à la première séquence
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df =  data.frame(id  =  c( 1, 1, 1, 2, 3, 3, 4),
+                 deb =  c(2018, 2022, 2024, 2019, 2023, 2024, 2023),
+                 fin =  c(2021, 2024, 2025, NA, 2024, NA, NA), 
+                 y  =   c(1, 2, 1, 2, 3, 2, 1),
+                 nseq = c(1, 2, 3, 1, 1, 2, 1)
+                 )
+
+kable(df)
+```
+
+On va s'intéresser à la durée jusqu'à l'occurence de la séquence de type 2 ou 3 (variable *y*). On considéra que le début de l'exposition est donné par la variable *deb* sur la première séquence.
+
+* id=1: début de l'exposition/observation en 2018, observe l'évènement en 2022.
+* id=2: début de l'exposition/observation en 2019, observe l'évènement la même année.
+* id=3: début de l'exposition/observation en 2019, observe l'évènement la même année. 
+* id=4: début de l'exposition/observation en 2023, n'a pas connu l'évènement au moment de l'enquête.
+
+**Recupération de l'année de l'évènement**
+
+On peut repérer la présence d'une des deux séquences d'intérêt avec une indicatrice. 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df$e = ifelse(df$y==2 | df$y==3,1,0)
+
+kable(df)
+```
+
+De nouveau l'utilisation d'un compteur sur cette variable indicatrice, peut s'avérer utile pour repérer le moment de l'occurence. 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df = df %>% group_by(id) %>% mutate(n  = cumsum(e)) 
+
+kable(df)
+```
+
+Pour id=(2,3,4), ce compteur permet d'obtenir l'information souhaitée, à savoir n=0 en situation d'attente/séjour/survie et n=1 l'année de l'évènement. 
+Pour id=1 cependant, l'alternance en y=1 et y=(2,3) ne permet pas de récupérer l'année d'occurence (première fois en 2 ou 3). 
+Cela peut être fait, en faisant un compteur sur le compteur précédent: 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df = df %>% group_by(id) %>% mutate(nn  = cumsum(n)) 
+
+kable(df)
+```
+
+**Récupération des information censurée**
+
+Pour récupérer l'information sur les observations qui seront censurée, on peut faire un total sur la variable *n* ou *e*: si n=0, l'individu n'aura pas connu l'évènement.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df = df %>% group_by(id) %>% mutate(N  = sum(n)) 
+
+kable(df)
+```
+
+Pour id=4, N est bien égal à 0.
+
+**Récupération du début de l'exposition**
+
+Le début de l'exposition étant ici l'année de début de la première séquence. On peut facilement récupérer
+cette sur toute les lignes en la repérant (ici en générant une nouvelle variable avec la fonction `ifelse`), et en sommant sa valeur sur les autres lignes (=0).
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df$ debexp = ifelse(df$nseq==1, df$deb, 0)                    # <1>
+                    
+df = df %>% group_by(id) %>% mutate(debexp  = sum(debexp))    # <2>
+
+kable(df)
+```
+
+1. La variable *debex* est égale à *deb* si *nseq=1*, 0 sinon.
+2. On somme cette valeur sur chaque individu pour l'ajouter aux séquences suivantes.
+
+
+**Mise en forme finale de la base**
+
+On peut maintenant conserver les lignes qui nous intéresse à savoir celle où *nn=1* (évènement) ou *N=0* (censure).
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df = filter(df, nn==1 | N==0)
+
+kable(df)
+```
+
+
+On dispose déjà de la variable d'évènement/censure (*e* ou *n* = (0,1), on finit donc par la 
+variable de durée.  
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df$fin[is.na(df$fin)] = 2025
+
+df$dur = ifelse(df$e==1, df$deb - df$debexp + 1, df$fin - df$debexp + 1)
+
+df = select(df, c(id,e,dur))
+
+kable(df)
+```
+
+Ces informations sont suffisantes pour estimer une fonction de séjour et on peut ajouter, si elles ne sont pas présentes, des covariables fixes issues du fichier des caractéristiques générales. Pour l'ajout de covariables dynamiques, leur ajout n'est pas forcément difficile pour une analyse en durée discrète ^[En conservant l'information sur les années, on transformera la base en format individu-période et on procédera à une fusion des informations]. Pour les analyses type Cox, selon la nature de la variable dynamique, l'opération (quel que soit le logiciel utilisé) risque d'être plus ou moins compliquée.
+
+
+## Durée de séjour dans la séquence d'intérêt et variables d'analyse
+
+En première ou deuxième analyse, on peut également voir s'intéresser à la durée de séjour dans l'état précédent. Par exemple, si l'analyse précédent consistait à regarder la durée de séjour dans le premier emploi, on pourrait regarder ensuite la durée jusqu'à sa reprise.
+
+Cela va un peu (voir plus) se compliquer. On va repartir de la base de départ précédente en ajoutant une observation. 
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df =  data.frame(id  =  c( 1, 1, 1, 2, 3, 3, 4, 5, 5, 5 , 5),
+                 deb =  c(2018, 2022, 2024, 2019, 2023, 2024, 2023, 2019, 2021, 2023, 2024),
+                 fin =  c(2021, 2024, 2025, NA, 2024, NA, NA, 2021, 2023, 2024, NA), 
+                 y  =   c(1, 2, 1, 2, 3, 2, 1, 1, 2, 1,3),
+                 nseq = c(1, 2, 3, 1, 1, 2, 1, 1, 2, 3, 4)
+)
+
+kable(df)
+```
+
+**Filtrage des observations hors champs** 
+
+On peut déjà supprimer les observations hors champs, à savoir ici id=4 qui n'a pas 
+connu l'évènement dont on analyse la durée.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df$e23 = ifelse(df$y==2 | df$y==3,1,0)                       # <1>
+
+df = df %>%  group_by(id) %>% mutate(n23  = cumsum(e23)) 
+df = filter(df, n23!=0)                                      # <2>
+
+kable(df)
+```
+
+1. Nom de la variable *e23* pour repérer la présence de l'évènement dont on analyse la durée.
+2. Ce compteur est suffisant car l'observation n'a qu'une ligne.
+
+**Récupération de l'évènement analysé**
+
+Ici l'évènement sera un *retour* dans l'état y=1. Il y a de nouveau une possibilité de censure à 
+droite si une observation reste dans l'état 2 ou 3 jusqu'au moment de l'enquête.
+
+Il peut être utile d'utiliser des variables décalées pour repérer les changements d'état d'une séquence à une autre. Ces décalages sont appelées *lead* ou *lag*:
+
+* ***lead***:  $x_t = x_{t+1}$
+* ***lag***:   $x_t = x_{t-1}$
+
+On va utilise ici des ***lead*** et donc pouvoir repérer les changements d'état d'une séquence à une autre. Comme on s'intéresse au retour à l'état 1:
+
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df$e = ifelse(df$y==1,1,0)                                     # <1>
+
+df = df %>%  group_by(id) %>% mutate(diff_e  = e - lead(e))    # <2>
+
+kable(df)
+```
+
+1. *e* est une indicatrice qui repère l'état 1
+2. On fait *redescendre* la valeur de *e* sur la séquence précédente, et on calcule la difference.
+
+Pour chaque dernière séquence la valeur du lag est une valeur manquante.
+On repère l'évènement avec une valeur de -1 (transition de 0 à 1). On ne peut pas 
+encore filtrer les informations car il va falloir récupérer la fin de la séquence, mais
+on peut déjà construire l'information. 
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df$e = ifelse(df$diff_e==-1,1,0)
+df$e[is.na(df$e)] = 0
+df = df %>%  group_by(id) %>% mutate(e  = sum(e)) 
+
+kable(df)
+```
+
+**Récupération de l'année final avec succesion d'états de même type**
+
+La difficulté ici est apportée seulement par id=3. Jusqu'à 2025, on a successivement l'état 2 puis 3. Il va donc falloir récupérer cette dernière année de succession de 2 et 3, jusqu'à la censure ou jusqu'à un retour dans l'état 1.
+S'il n'y avait pas ce genre de situation, l'utilisation de la variable *diff_e* aurait été suffisante pour récupérer l'année de fin lorsqu'on a plusieurs séquences (situations pour id=1,5).
+
+On va de nouveau utiliser un lead, mais sur la variable *e23*.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df = select(df, -c(nseq, diff_e)) # <1>  
+
+df = df %>%  group_by(id) %>% mutate(lead_e23 = lead(e23, n = 1, default = NA))  # <2>
+
+df$idem = ifelse(df$e23 == df$lead_e23, 1, 0) # <3>
+df$idem[is.na(df$idem)]=0
+df = df %>%  group_by(id) %>% mutate(idem  = sum(idem)) # <4> 
+
+
+kable(df)
+```
+
+1. On supprime les colonnes non utilisées pour gagner ici de la lisibilité
+2. *lead* sur la variable e23.
+3. La variable *idem* permet de repérer une suite d'état 2 et 3. On ne passe pas ici par une variable de différence (le faire par prudence si on le souhaite).
+4. Ici le total est égal à 1. Si on avait eu une séquence supplémentaire de 3, il serait égal à 2. L'important ici est de repérer la situation, soit 0 ou supérieur à 0.  
+
+
+On doit maintenant récupérer la dernière année de fin des situations où idem>0, et la placer
+sur la première.
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+
+df$fin[is.na(df$fin)] = 2025                # <1>
+df$lead_e23[is.na(df$lead_e23)]   = -10     # <2>
+
+df$truefin = ifelse((df$lead_e23 != df$e23) & df$idem>0, df$fin,0) # <3>
+
+df = df %>% group_by(id) %>% mutate(truefin = sum(truefin))  # <4> 
+df$fin = ifelse(df$idem>0, df$truefin, df$fin)  # <4>
+
+df = select(df, -c(y,e23,lead_e23,idem))
+
+kable(df)
+```
+
+1. On remplace l'année de la censure par sa valeur (important pour id=3).
+2. Pour régler un problème de gestion des NA avec `ifelse`. A tester avec `if_else` ou `case_when`.
+3. On recupère la valeur de l'année de fin lorsqu'il y a une succession d'états de même nature pour l'analyse.
+4. on remplace la valeur dans la variable *fin* en cas de succession seulement.
+
+
+On peut [enfin] sélectionner et conserver une seule ligne par individu et générer la variable de durée
+
+```{r}
+#| code-fold: true
+#| code-summary: "Show the code"
+
+df= select(df,-truefin)
+
+df = df %>%  group_by(id) %>% mutate(nn23     = cumsum(n23)) 
+df = filter(df, n23==nn23)
+
+df$dur= df$fin - df$deb + 1 
+
+df = select(df, -c(n23,nn23))
+
+kable(df)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -15,12 +15,12 @@ Les problématiques se basent sur les questions suivantes:
 
 | Français                     | Anglais                                                 | 
 | ---------------------------- | ------------------------------------------------------- | 
-| Modèles de durée             | Duration analysis (Econométrie)                         |
-| Analyse de survie            | Survival analysis (Epidémiologie, médecine, démographie)|
-| Analyse de fiabilité         | Failure time data analysis (Statistiques industrielles) |
-| Analyse des transitions      | Event-history analysis (Démographie, Sociologie)        |
-| Données de séjour            | Transition analysis (Sociologie)                        |
-| Histoires de vie             |                                                         |
+| Modèles de durée             | Duration analysis                                       |
+| Analyse de survie            | Survival analysis                                       |
+| Analyse de fiabilité         | Failure time data analysis                              |
+| Analyse des transitions      | Event-history analysis                                  |
+| Données de séjour            | Transition analysis                                     |
+
 
 
 
@@ -50,6 +50,13 @@ Les problématiques se basent sur les questions suivantes:
 3. ***Des variables explicatives*** ou ***covariables***
    - Fixes: genre, génération, niveau de diplôme, csp,......
    - Dynamiques (TVC: *Time varying covariates*): Mesurées à tout moment entre le début et la sortie de l'observation: statut matrimonial, taille du ménage, statut d'activité...
+
+## Types d'analyses
+
+[A faire]
+
+
+
 
 
 
