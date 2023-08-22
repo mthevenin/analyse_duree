@@ -13,14 +13,12 @@ Les problématiques se basent sur les questions suivantes:
 
 ## Terminologies 
 
-| Français                     | Anglais                                                 | 
-| ---------------------------- | ------------------------------------------------------- | 
-| Modèles de durée             | Duration analysis                                       |
-| Analyse de survie            | Survival analysis                                       |
-| Analyse de fiabilité         | Failure time data analysis                              |
-| Analyse des transitions      | Event-history analysis                                  |
-| Données de séjour            | Transition analysis                                     |
-
+| Français                     | Anglais                        | 
+| ---------------------------- | ------------------------------ | 
+| Analyse des durées           | Duration analysis              |
+| Analyse de survie/séjour     | Survival analysis              |
+| Analyse de fiabilité         | Failure time data analysis     |
+| Analyse des transitions      | Event-history analysis         |
 
 
 
@@ -28,35 +26,32 @@ Les problématiques se basent sur les questions suivantes:
 
 * **Nuptialité, Mise en couple**: cohabiter, décohabiter, se marier, Rompre une union ...  
 
-* **Logement**: Changement de statut (locataire <=> propriétaire), mobilité résidentielle ...  
+* **Logement**: Changement de statut (locataire <=> propriétaire), mobilité résidentielle/migration ...  
 
 * **Emploi**: Trouver un 1er emploi,  changer d'emploi, entrée ou sortie du chômage ...  
 
 * **Fécondité**: Avoir un premier enfant, avoir un nouvel enfant ...  
 
-* **Mortalité**: Décéder après diagnostic, survivre après l'administration un traitement...  
+* **Mortalité**: Décéder après diagnostic, survivre après l'administration un traitement, rechute...  
 
 
 ## Elements nécessaire à l'analyse 
 
 1. **Un processus temporel**
    - Une échelle de mesure ou métrique temprelle: minutes, heures, jours, mois, années....
-   - Une origine définissant un évènement de départ.  
+   - Une origine **commune** définissant un évènement de départ ^[Attention, dans le cadre des données prospectives ou de suivi, cela ne peut pas être le moment de l'inclusion à la base données]: naissance, mariage si on analyse la séparation, ..... 
    - Une définition précise de l'évènement d'étude.  
-   - Une durée entre le début et la fin de la période d'observation, si nécessaire avec la fin de la période d'exposition au risque.  
+   - Une durée entre le début et la fin de la période d'observation, si nécessaire avec la fin de la période d'exposition au risque. Cette durée doit être généralement calculée à l'aide des informations de datation. 
 
 2. **Une population soumise au risque** de connaître l'évènement (**Risk Set**)
 
 3. ***Des variables explicatives*** ou ***covariables***
-   - Fixes: genre, génération, niveau de diplôme, csp,......
+   - Fixes: sexe/genre, génération, niveau de diplôme le plus élevé,......
    - Dynamiques (TVC: *Time varying covariates*): Mesurées à tout moment entre le début et la sortie de l'observation: statut matrimonial, taille du ménage, statut d'activité...
 
 ## Types d'analyses
 
 [A faire]
-
-
-
 
 
 

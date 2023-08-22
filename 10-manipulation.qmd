@@ -2,7 +2,39 @@
 
 # **Eléments de mise en forme des données**
 
-Ce qui suit est un premier jet réalisé en 2023 
+Ce qui suit est un premier jet réalisé en 2023, encore très perfectible, mais j'avais bien conscience depuis très longtemps que l'absence d'une partie dédiée aux manipulations des données biographiques était problématique. 
+Ce qui suit ne peut pas couvrir toutes les problématiques que l'on peut rencontrer lorsqu'on met en forme ce type de données: le format de mise à disposition, l'extraction de l'information pertinente correspondant à la question analysée, voire le logiciel utilisé, rend quasiment impossible la production d'un guide clé en main.
+
+**Quelques conseils**  
+
+* Comme l'analyse des durées/survie consiste à extraire une (ou plusieurs) séquence(s) bien identifier les situations types que l'on sera conduit à rencontrer et à traiter. Ici il peut être intéressant, de manière exploratoire, à conduire une analyse de séquences au préalable. 
+* Vérifier à chaque étape de la programmation la validité ou la cohérence des informations contenues dans les variables créées et/ou de la mise en forme.
+
+**Le format des données utilisé dans cette section** 
+
+* Il est identique à celui utilisé dans l'enquête MAFE [[lien](https://mafeproject.site.ined.fr/fr/)]^[Des éléments de manipulation/programmation pour un exemple volontairement très compliqué sont donnés dans ***méthodes*** => ***notes méthodologiques***. Ayant été fait en 2015, le code pour R est largement *out of date*] , donc de type individus-séquences avec un marquage des informations temporelles de type *année*. 
+* Sur chaque séquence l'année de début et l'année de fin sont indiquée.
+* Les trajectoires peuvent être continues ou non. Si elle ne sont pas continues, un exemple montre comment récupérer les séquences en "creux".
+
+**Programmation** 
+
+* Cette section n'est pas centrée sur la méthode de programmation, mais plutôt sur les questions que l'on doit se poser et leur résolution. 
+* Comme la formation est appliquée en R, j'ai néanmoins donné les codes que j'ai utilisé. 
+  * Les codes R sont ici largement hérité d'une programmation Stata que je maîtrise encore bien mieux. 
+  * On pourrait aller *plus vite*, mais j'applique une programmation assumée prudente. 
+  * Le type de programmation applique assez massivement l'utilisation de compteurs ou de double compteurs, et si nécessaire l'utilisation de variables décalée de type *lead* ou *lag*. 
+
+
+::: callout-note
+
+## Le support **assistoolsms**
+
+Le service SMS de l'Ined a mis en place récemment un support de programmation dédié principalement à R [[Lien](https://mthevenin.github.io/assistoolsms/)]. Ce support est construit sur l'idée d'une liste de fiches thématiques qui trouvent leur origine, mais pas que, dans des demandes d'assistances de programmation de la part de chercheur.e.s, (post)doctorant.e.s ou stagiaires. 
+Bien que cela ne soit pas pour tout de suite, il est prévu d'alimenter ce support sur la question des manipulations des données biographiques avec: d'autres exemples, des alternatives aux codes proposés plus loin, ou l'application des exemples traités ici mais avec un format de mise à disposition des données différents.
+
+... Ceci au mieux pour l'été 2024.
+
+:::
 
 
 Packages utilisés:
@@ -17,10 +49,9 @@ library(knitr)
 ```
 
 
-
 ## Calcul des variables d'analyses
 
-Construction de la base: 
+On partira de la base individus-séquences suivante: 
 
 ```{r }
 #| code-fold: true
