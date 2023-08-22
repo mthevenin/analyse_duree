@@ -20,6 +20,8 @@ Les problématiques se basent sur les questions suivantes:
 | Analyse de fiabilité         | Failure time data analysis     |
 | Analyse des transitions      | Event-history analysis         |
 
+Pour ce support, le choix de son titre me pose toujours problème pour éviter qu'il soit trop à rallonge. 
+Si j'avais à trancher, il devrait un peu s'éterniser sous l'appelation **Introduction à l'analyse biographique des durées en présence de données censurée (à droite^[ce qui est déjà bien suffisant])**.
 
 
 ## Exemples d'analyse 
@@ -47,7 +49,11 @@ Les problématiques se basent sur les questions suivantes:
 
 3. ***Des variables explicatives*** ou ***covariables***
    - Fixes: sexe/genre, génération, niveau de diplôme le plus élevé,......
-   - Dynamiques (TVC: *Time varying covariates*): Mesurées à tout moment entre le début et la sortie de l'observation: statut matrimonial, taille du ménage, statut d'activité...
+   - Dynamiques (TVC: *Time varying covariates*): 
+     - Mesurées à tout moment entre le début et la sortie de l'observation: statut matrimonial, taille du ménage, statut d'activité...
+     - Pour les modèles et à l'exception d'une méthode traité pluse loin, à savoir le modèle semi-paramétrique de Cox, en présence de données censurée, la durée ou une transformation de celle-ci est une variable dynamique qui est également introduite comme variable indépendante pour assurer le bon ajustement des données. L'introduction de la durée ou une transformation de celle-ci comme variable dépendante ne peut se faire qu'en absence d'observation censurée, en particulier à droite.
+
+
 
 ## Types d'analyses
 

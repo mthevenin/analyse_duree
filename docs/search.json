@@ -123,7 +123,7 @@
     "href": "01-presentation.html#terminologies",
     "title": "2  L’analyse biographique des durées",
     "section": "2.2 Terminologies",
-    "text": "2.2 Terminologies\n\n\n\nFrançais\nAnglais\n\n\n\n\nAnalyse des durées\nDuration analysis\n\n\nAnalyse de survie/séjour\nSurvival analysis\n\n\nAnalyse de fiabilité\nFailure time data analysis\n\n\nAnalyse des transitions\nEvent-history analysis"
+    "text": "2.2 Terminologies\n\n\n\nFrançais\nAnglais\n\n\n\n\nAnalyse des durées\nDuration analysis\n\n\nAnalyse de survie/séjour\nSurvival analysis\n\n\nAnalyse de fiabilité\nFailure time data analysis\n\n\nAnalyse des transitions\nEvent-history analysis\n\n\n\nPour ce support, le choix de son titre me pose toujours problème pour éviter qu’il soit trop à rallonge. Si j’avais à trancher, il devrait un peu s’éterniser sous l’appelation Introduction à l’analyse biographique des durées en présence de données censurée (à droite1)."
   },
   {
     "objectID": "01-presentation.html#exemples-danalyse",
@@ -137,7 +137,7 @@
     "href": "01-presentation.html#elements-nécessaire-à-lanalyse",
     "title": "2  L’analyse biographique des durées",
     "section": "2.4 Elements nécessaire à l’analyse",
-    "text": "2.4 Elements nécessaire à l’analyse\n\nUn processus temporel\n\nUne échelle de mesure ou métrique temprelle: minutes, heures, jours, mois, années….\nUne origine commune définissant un évènement de départ 1: naissance, mariage si on analyse la séparation, …..\nUne définition précise de l’évènement d’étude.\n\nUne durée entre le début et la fin de la période d’observation, si nécessaire avec la fin de la période d’exposition au risque. Cette durée doit être généralement calculée à l’aide des informations de datation.\n\nUne population soumise au risque de connaître l’évènement (Risk Set)\nDes variables explicatives ou covariables\n\nFixes: sexe/genre, génération, niveau de diplôme le plus élevé,……\nDynamiques (TVC: Time varying covariates): Mesurées à tout moment entre le début et la sortie de l’observation: statut matrimonial, taille du ménage, statut d’activité…"
+    "text": "2.4 Elements nécessaire à l’analyse\n\nUn processus temporel\n\nUne échelle de mesure ou métrique temprelle: minutes, heures, jours, mois, années….\nUne origine commune définissant un évènement de départ 2: naissance, mariage si on analyse la séparation, …..\nUne définition précise de l’évènement d’étude.\n\nUne durée entre le début et la fin de la période d’observation, si nécessaire avec la fin de la période d’exposition au risque. Cette durée doit être généralement calculée à l’aide des informations de datation.\n\nUne population soumise au risque de connaître l’évènement (Risk Set)\nDes variables explicatives ou covariables\n\nFixes: sexe/genre, génération, niveau de diplôme le plus élevé,……\nDynamiques (TVC: Time varying covariates):\n\nMesurées à tout moment entre le début et la sortie de l’observation: statut matrimonial, taille du ménage, statut d’activité…\nPour les modèles et à l’exception d’une méthode traité pluse loin, à savoir le modèle semi-paramétrique de Cox, en présence de données censurée, la durée ou une transformation de celle-ci est une variable dynamique qui est également introduite comme variable indépendante pour assurer le bon ajustement des données. L’introduction de la durée ou une transformation de celle-ci comme variable dépendante ne peut se faire qu’en absence d’observation censurée, en particulier à droite."
   },
   {
     "objectID": "01-presentation.html#types-danalyses",
@@ -151,7 +151,7 @@
     "href": "01-presentation.html#footnotes",
     "title": "2  L’analyse biographique des durées",
     "section": "",
-    "text": "Attention, dans le cadre des données prospectives ou de suivi, cela ne peut pas être le moment de l’inclusion à la base données↩︎"
+    "text": "ce qui est déjà bien suffisant↩︎\nAttention, dans le cadre des données prospectives ou de suivi, cela ne peut pas être le moment de l’inclusion à la base données↩︎"
   },
   {
     "objectID": "08-discret.html#organisation-des-données",
@@ -193,7 +193,7 @@
     "href": "03-theorie.html#le-risk-set",
     "title": "4  La théorie",
     "section": "4.2 Le Risk Set",
-    "text": "4.2 Le Risk Set\n\nIl s’agit de la population “soumise” ou “exposée” au risque lorsque \\(T=t_i\\). \nCette population varie dans le temps car:\n\nCertaines personnes ont connu l’évènement, donc ne peuvent plus être soumises au risque (ex: décès si on analyse la mortalité).\nCertaines personnes sortent de l’observation sans avoir (encore) observé l’évènement: décès si on analyse un autre type d’évènement, perdu.e.s de vue, fin de l’observation dans un recueil rétrospectif."
+    "text": "4.2 Le Risk Set\n\n\nIl s’agit de la population soumise ou exposée au risque lorsque \\(T=t_i\\).\n\n\nCette population varie dans le temps car:\n\n\nCertaines personnes ont connu l’évènement, donc ne peuvent plus être soumises au risque (ex: décès si on analyse la mortalité).\nCertaines personnes sortent de l’observation sans avoir (encore) observé l’évènement: décès si on analyse un autre type d’évènement, perdu.e.s de vue, fin de l’observation dans un recueil rétrospectif."
   },
   {
     "objectID": "03-theorie.html#la-censure",

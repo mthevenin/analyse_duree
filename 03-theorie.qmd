@@ -38,14 +38,13 @@ d'anniversaire des contrats pour l'analyse des résiliation). Généralement dan
 
 ## **Le Risk Set**
 
-1. Il s'agit de la population "soumise" ou "exposée" au risque lorsque $T=t_i$. 
-<br>
-2. Cette population varie dans le temps car:
-   * Certaines personnes ont connu l'évènement, donc ne peuvent plus être soumises au risque (ex: décès si on analyse la mortalité). 
-   * Certaines personnes sortent de l'observation sans avoir (encore) observé l'évènement: décès si on analyse un autre type d'évènement, perdu.e.s de vue, fin de l'observation dans un recueil rétrospectif.  
+* 1. Il s'agit de la population ***soumise*** ou ***exposée*** au risque lorsque $T=t_i$. 
+* 2. Cette population varie dans le temps car:
+  * Certaines personnes ont connu l'évènement, donc ne peuvent plus être soumises au risque (ex: décès si on analyse la mortalité). 
+  * Certaines personnes sortent de l'observation sans avoir (encore) observé l'évènement: décès si on analyse un autre type d'évènement, perdu.e.s de vue, fin de l'observation dans un recueil rétrospectif.  
+
 
 ## **La Censure**
-
 
 ::: callout-important  
 **Une observation est dite censurée lorsque la durée d'observation est inférieure à la durée d'exposition au risque**  
@@ -122,9 +121,7 @@ Un évènement peut se produire entre 2 temps d'observations sans qu'on puisse l
 **Troncature**   
 Par l’exemple, on analyse la survie d’une population. Seule la survie des individus vivants à l’inclusion peut être analysée (*troncature à gauche*). On peut également  trouver un phénomène de troncature lorsqu’on mesure la durée à partir ou jusqu'à un certain seuil niveau.   
  
-  
 Ces situations sont généralement plutôt bien contrôlées dans les recueils rétrospectifs. Elles sont assez courantes lorsque le recueil est de type prospectif.
-
 
 **Durée d’observation supérieure à la durée d’exposition**   
 A l’inverse des individus peuvent sortir de l’exposition avant la fin de la période d’observation, et il convient donc de corriger la durée de cette sortie.   
@@ -132,7 +129,6 @@ Un exemple simple : si au moment de l’enquête une femme sans enfant a 70 ans,
 
 
 ## **Les grandeurs**
-
 
 
 ### **Les grandeurs utilisées**

@@ -388,6 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
+<p>Pour ce support, le choix de son titre me pose toujours problème pour éviter qu’il soit trop à rallonge. Si j’avais à trancher, il devrait un peu s’éterniser sous l’appelation <strong>Introduction à l’analyse biographique des durées en présence de données censurée (à droite<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>)</strong>.</p>
 </section>
 <section id="exemples-danalyse" class="level2" data-number="2.3">
 <h2 data-number="2.3" class="anchored" data-anchor-id="exemples-danalyse"><span class="header-section-number">2.3</span> Exemples d’analyse</h2>
@@ -405,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong>Un processus temporel</strong></p>
 <ul>
 <li>Une échelle de mesure ou métrique temprelle: minutes, heures, jours, mois, années….</li>
-<li>Une origine <strong>commune</strong> définissant un évènement de départ <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>: naissance, mariage si on analyse la séparation, …..</li>
+<li>Une origine <strong>commune</strong> définissant un évènement de départ <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>: naissance, mariage si on analyse la séparation, …..</li>
 <li>Une définition précise de l’évènement d’étude.<br>
 </li>
 <li>Une durée entre le début et la fin de la période d’observation, si nécessaire avec la fin de la période d’exposition au risque. Cette durée doit être généralement calculée à l’aide des informations de datation.</li>
@@ -414,7 +415,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><p><strong><em>Des variables explicatives</em></strong> ou <strong><em>covariables</em></strong></p>
 <ul>
 <li>Fixes: sexe/genre, génération, niveau de diplôme le plus élevé,……</li>
-<li>Dynamiques (TVC: <em>Time varying covariates</em>): Mesurées à tout moment entre le début et la sortie de l’observation: statut matrimonial, taille du ménage, statut d’activité…</li>
+<li>Dynamiques (TVC: <em>Time varying covariates</em>):
+<ul>
+<li>Mesurées à tout moment entre le début et la sortie de l’observation: statut matrimonial, taille du ménage, statut d’activité…</li>
+<li>Pour les modèles et à l’exception d’une méthode traité pluse loin, à savoir le modèle semi-paramétrique de Cox, en présence de données censurée, la durée ou une transformation de celle-ci est une variable dynamique qui est également introduite comme variable indépendante pour assurer le bon ajustement des données. L’introduction de la durée ou une transformation de celle-ci comme variable dépendante ne peut se faire qu’en absence d’observation censurée, en particulier à droite.</li>
+</ul></li>
 </ul></li>
 </ol>
 </section>
@@ -429,7 +434,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>Attention, dans le cadre des données prospectives ou de suivi, cela ne peut pas être le moment de l’inclusion à la base données<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>ce qui est déjà bien suffisant<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Attention, dans le cadre des données prospectives ou de suivi, cela ne peut pas être le moment de l’inclusion à la base données<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -751,40 +757,46 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>| Analyse de fiabilité         | Failure time data analysis     |</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>| Analyse des transitions      | Event-history analysis         |</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exemples d'analyse </span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>Pour ce support, le choix de son titre me pose toujours problème pour éviter qu'il soit trop à rallonge. </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>Si j'avais à trancher, il devrait un peu s'éterniser sous l'appelation **Introduction à l'analyse biographique des durées en présence de données censurée (à droite^[ce qui est déjà bien suffisant])**.</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Nuptialité, Mise en couple**: cohabiter, décohabiter, se marier, Rompre une union ...  </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exemples d'analyse </span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Logement**: Changement de statut (locataire &lt;=&gt; propriétaire), mobilité résidentielle/migration ...  </span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Nuptialité, Mise en couple**: cohabiter, décohabiter, se marier, Rompre une union ...  </span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Emploi**: Trouver un 1er emploi,  changer d'emploi, entrée ou sortie du chômage ...  </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Logement**: Changement de statut (locataire &lt;=&gt; propriétaire), mobilité résidentielle/migration ...  </span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Fécondité**: Avoir un premier enfant, avoir un nouvel enfant ...  </span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Emploi**: Trouver un 1er emploi,  changer d'emploi, entrée ou sortie du chômage ...  </span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Mortalité**: Décéder après diagnostic, survivre après l'administration un traitement, rechute...  </span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Fécondité**: Avoir un premier enfant, avoir un nouvel enfant ...  </span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## Elements nécessaire à l'analyse </span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Mortalité**: Décéder après diagnostic, survivre après l'administration un traitement, rechute...  </span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Un processus temporel**</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Une échelle de mesure ou métrique temprelle: minutes, heures, jours, mois, années....</span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Une origine **commune** définissant un évènement de départ ^<span class="co">[</span><span class="ot">Attention, dans le cadre des données prospectives ou de suivi, cela ne peut pas être le moment de l'inclusion à la base données</span><span class="co">]</span>: naissance, mariage si on analyse la séparation, ..... </span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Une définition précise de l'évènement d'étude.  </span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Une durée entre le début et la fin de la période d'observation, si nécessaire avec la fin de la période d'exposition au risque. Cette durée doit être généralement calculée à l'aide des informations de datation. </span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Une population soumise au risque** de connaître l'évènement (**Risk Set**)</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Elements nécessaire à l'analyse </span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Un processus temporel**</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Une échelle de mesure ou métrique temprelle: minutes, heures, jours, mois, années....</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Une origine **commune** définissant un évènement de départ ^<span class="co">[</span><span class="ot">Attention, dans le cadre des données prospectives ou de suivi, cela ne peut pas être le moment de l'inclusion à la base données</span><span class="co">]</span>: naissance, mariage si on analyse la séparation, ..... </span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Une définition précise de l'évènement d'étude.  </span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Une durée entre le début et la fin de la période d'observation, si nécessaire avec la fin de la période d'exposition au risque. Cette durée doit être généralement calculée à l'aide des informations de datation. </span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>***Des variables explicatives*** ou ***covariables***</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Fixes: sexe/genre, génération, niveau de diplôme le plus élevé,......</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Dynamiques (TVC: *Time varying covariates*): Mesurées à tout moment entre le début et la sortie de l'observation: statut matrimonial, taille du ménage, statut d'activité...</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## Types d'analyses</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">A faire</span><span class="co">]</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Une population soumise au risque** de connaître l'évènement (**Risk Set**)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>***Des variables explicatives*** ou ***covariables***</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Fixes: sexe/genre, génération, niveau de diplôme le plus élevé,......</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">   - </span>Dynamiques (TVC: *Time varying covariates*): </span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>Mesurées à tout moment entre le début et la sortie de l'observation: statut matrimonial, taille du ménage, statut d'activité...</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">     - </span>Pour les modèles et à l'exception d'une méthode traité pluse loin, à savoir le modèle semi-paramétrique de Cox, en présence de données censurée, la durée ou une transformation de celle-ci est une variable dynamique qui est également introduite comme variable indépendante pour assurer le bon ajustement des données. L'introduction de la durée ou une transformation de celle-ci comme variable dépendante ne peut se faire qu'en absence d'observation censurée, en particulier à droite.</span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## Types d'analyses</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">A faire</span><span class="co">]</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
