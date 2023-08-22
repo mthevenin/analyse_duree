@@ -164,6 +164,20 @@ On trouve des résultats proches de ceux éstimés avec un ajustement continu de
 | $surgery$   | 0.330              |  0.364             |
 
 
+::: callout-note
+
+## Lien avec des modèles usuels à durée continue
+
+Si la durée discrète/groupé sous tend une durée continue (ce qui est le cas ici):  
+
+* L'ajustement avec des indicatrices correspond au modèle à durée discrète défini par Cox, et le plus proche du modèle semi-paramétrique. Il est également assimilable à un modèle de type *exponential piecewice constant* (cf modèle de poisson)
+* Si l'ajustement se fait en utilisation une transformation de la durée par une fonction: 
+  - $f(t)= log(t)$ correspond à un modèle de Weibull de type *risque proportionnel* ^[voir la courte section sur les modèle paramétriques usuels].
+* Si l'ajustement se fait avec des splines cubiques, le modèle à durée discrète correspond à un modèle de type *Parmar-Royston*. Si on utilise une forme quadratique standard et bien ajustée, on obtient également cette correspondance.
+
+:::
+
+
 
 ## Proportionnalité des risques
 

@@ -12,15 +12,15 @@
   - Une introduction du support à cet endroit. 
   - Quelques ajouts:  
     * Un nouveau chapitre sur la manipulation des données [**OK**]. 
-    * par l'exemple, un gros warning sur des utilisations douteuses de données prospectives (on visera l'EDP - Echantillon Démographique Permanent).
-    * j'avais retiré la courte présentation des fonctions de lien probit et surtout complémentaire-loglog dans les modèles à durée discrète....maivaise idée que j'ai eu (voir point précédent). 
-    * Je ne pense pas avoir le temps mais on sait jamais: une première présentation des *modèles à pseudo observations* dans la section annexe.
+    * Par l'exemple, un  warning assez soutenu sur des utilisations douteuses de données prospectives (on visera l'EDP - Echantillon Démographique Permanent).
+    * J'avais retiré la courte présentation des fonctions de lien probit et surtout complémentaire-loglog dans les modèles à durée discrète....maivaise idée que j'ai eu (voir point précédent). 
+    * Je ne pense pas avoir le temps mais on sait jamais: une première présentation des *modèles à pseudo observations* dans la section annexe (sinon en fin d'année ou à l'été prochain).
 
 
 **Version pdf**: 
 
 - Dernière maj: le 21 août 2023
-- Pour le chapitre programmation, seulement la section dédiée à R a été ajoutée. Pour les 3 autres applications, il n'y a qu'une version HTML.
+- Pour le chapitre programmation, seulement la section dédiée à R a été ajoutée. Pour les 3 autres applications, seulement la version HTML.
 
 
 ## Bibliographie {-}
@@ -44,7 +44,7 @@ Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des
 
 **Ouvrage de référence** en démographie:
 
-* ***L'analyse démographique des biographies*** de *Daniel Courgeau* et *Eva Lelièvre* (Edition de l'Ined - 1989). Malheureusement cet ouvrage ne dispose pas de version epub ou pdf disponible en ligne ^[pour les résident.e.s du campus Condorcet, l'ouvrage est disponible au GED [[lien](https://campus-condorcet.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma991006553559705786&context=L&vid=33CCP_INST:CCP&lang=fr&search_scope=ALL&adaptor=Local%20Search%20Engine&tab=ALL&query=any,contains,courgeau%20leli%C3%A8vre&offset=0)]].  
+* ***L'analyse démographique des biographies*** de *Daniel Courgeau* et *Eva Lelièvre* (Edition de l'Ined - 1989). Malheureusement cet ouvrage ne dispose pas de version epub ou pdf disponible en ligne ^[Pour les résident.e.s du campus Condorcet, l'ouvrage est disponible au GED [[lien](https://campus-condorcet.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma991006553559705786&context=L&vid=33CCP_INST:CCP&lang=fr&search_scope=ALL&adaptor=Local%20Search%20Engine&tab=ALL&query=any,contains,courgeau%20leli%C3%A8vre&offset=0)]].  
 
 
 ## Outils {-}

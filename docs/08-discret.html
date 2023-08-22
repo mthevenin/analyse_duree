@@ -155,7 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Présentation - bibliographie - outils</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Présentation - Bibliographie - Outils</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -259,7 +259,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-manipulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Eléments de mise en forme des données</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title"><strong>Eléments de mise en forme des données</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -757,6 +757,27 @@ On va tester les paramétrisations suivante:s une forme linéraire stricte <span
 </tr>
 </tbody>
 </table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Lien avec des modèles usuels à durée continue
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si la durée discrète/groupé sous tend une durée continue (ce qui est le cas ici):</p>
+<ul>
+<li>L’ajustement avec des indicatrices correspond au modèle à durée discrète défini par Cox, et le plus proche du modèle semi-paramétrique. Il est également assimilable à un modèle de type <em>exponential piecewice constant</em> (cf modèle de poisson)</li>
+<li>Si l’ajustement se fait en utilisation une transformation de la durée par une fonction:
+<ul>
+<li><span class="math inline">\(f(t)= log(t)\)</span> correspond à un modèle de Weibull de type <em>risque proportionnel</em> <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</li>
+</ul></li>
+<li>Si l’ajustement se fait avec des splines cubiques, le modèle à durée discrète correspond à un modèle de type <em>Parmar-Royston</em>. Si on utilise une forme quadratique standard et bien ajustée, on obtient également cette correspondance.</li>
+</ul>
+</div>
+</div>
 </section>
 </section>
 <section id="proportionnalité-des-risques" class="level2" data-number="9.3">
@@ -864,6 +885,12 @@ On va tester les paramétrisations suivante:s une forme linéraire stricte <span
 
 <!-- -->
 
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>voir la courte section sur les modèle paramétriques usuels<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
 </section>
 
 </main> <!-- /main -->
@@ -1329,42 +1356,56 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>| $surgery$   | 0.330              |  0.364             |</span>
 <span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## Proportionnalité des risques</span></span>
-<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Formellement un modèle logistique à temps discret repose sur une hypothèse d'Odds proportionnel <span class="co">[</span><span class="ot">Odds ratios constants pendant la durée d'observation</span><span class="co">]</span>. Contrairement au modèle de Cox, l'estimation des probabilités (risque) n'est pas biaisée si l'hypothèse PH n'est pas respectée, les paramètres estimés sont considérés au pire comme des approximation.</span>
-<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Comme pour le modèle de Cox, la correction de la non proportionnalité peut se faire en intégrant une interaction avec la durée dans le modèle.</span>
-<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>Avec un ajustement continue, on remarque de nouveau que le résultat du modèle est de nouveau très proche de celui estimé avec un modèle de Cox. </span>
-<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>| Variables         | OR - RR | Std. err | z       | P<span class="sc">\&gt;</span>\|z\| | 95% CI           |</span>
-<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>|-------------------|---------|----------|---------|----------|------------------|</span>
-<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>| $t$               | 0.702   | 0.059    | -4.2    | 0.000    | 0.595 ; 0.828    |</span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>| $surgery(t=0)$    | 0.155   | 0.108    | -2.67   | 0.008    | 0.039 ; 0.609    |</span>
-<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>| $surgery\times t$ | 1.072   | 0.036    | 2.08    | 0.037    | 1.004 ; 1.145    |</span>
-<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>| $t^2$             | 1.013   | 0.005    | 2.37    | 0.018    | 1.002 ; 1.023    |</span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>| $t^3$             | 1.00    | 0.000    | -1.71   | 0.086    | 1.000 ; 1.000    |</span>
-<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>| $year$            | 0.872   | 0.064    | -1.86   | 0.062    |  0.755 ; 1.007   |</span>
-<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>| $age$             | 1.033   | 0.015    | 2.23    | 0.026    | 1.004 ; 1.063    |</span>
-<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>| $constante$       | *0.445* | *0.112*  | *-3.22* | *0.001*  | *0.272 ; 0.728*  |</span>
-<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>: Modèle logistique à durée discrète avec correction de la non proportionnalité</span>
-<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lien avec des modèles usuels à durée continue</span></span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>Si la durée discrète/groupé sous tend une durée continue (ce qui est le cas ici):  </span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>L'ajustement avec des indicatrices correspond au modèle à durée discrète défini par Cox, et le plus proche du modèle semi-paramétrique. Il est également assimilable à un modèle de type *exponential piecewice constant* (cf modèle de poisson)</span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si l'ajustement se fait en utilisation une transformation de la durée par une fonction: </span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>$f(t)= log(t)$ correspond à un modèle de Weibull de type *risque proportionnel* ^<span class="co">[</span><span class="ot">voir la courte section sur les modèle paramétriques usuels</span><span class="co">]</span>.</span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si l'ajustement se fait avec des splines cubiques, le modèle à durée discrète correspond à un modèle de type *Parmar-Royston*. Si on utilise une forme quadratique standard et bien ajustée, on obtient également cette correspondance.</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a><span class="fu">## Proportionnalité des risques</span></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Formellement un modèle logistique à temps discret repose sur une hypothèse d'Odds proportionnel <span class="co">[</span><span class="ot">Odds ratios constants pendant la durée d'observation</span><span class="co">]</span>. Contrairement au modèle de Cox, l'estimation des probabilités (risque) n'est pas biaisée si l'hypothèse PH n'est pas respectée, les paramètres estimés sont considérés au pire comme des approximation.</span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Comme pour le modèle de Cox, la correction de la non proportionnalité peut se faire en intégrant une interaction avec la durée dans le modèle.</span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>Avec un ajustement continue, on remarque de nouveau que le résultat du modèle est de nouveau très proche de celui estimé avec un modèle de Cox. </span>
 <span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>Si on avait omis les variables *year* et *age* du modèle:</span>
-<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a><span class="al">![Probabilité de décéder après correction de la non proportionnalité pour la variable surgery](images/Image13.png)</span>{width=70%}</span>
-<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>| Variables         | OR - RR | Std. err | z       | P<span class="sc">\&gt;</span>\|z\| | 95% CI           |</span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>|-------------------|---------|----------|---------|----------|------------------|</span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a>| $t$               | 0.702   | 0.059    | -4.2    | 0.000    | 0.595 ; 0.828    |</span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a>| $surgery(t=0)$    | 0.155   | 0.108    | -2.67   | 0.008    | 0.039 ; 0.609    |</span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a>| $surgery\times t$ | 1.072   | 0.036    | 2.08    | 0.037    | 1.004 ; 1.145    |</span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a>| $t^2$             | 1.013   | 0.005    | 2.37    | 0.018    | 1.002 ; 1.023    |</span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a>| $t^3$             | 1.00    | 0.000    | -1.71   | 0.086    | 1.000 ; 1.000    |</span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>| $year$            | 0.872   | 0.064    | -1.86   | 0.062    |  0.755 ; 1.007   |</span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a>| $age$             | 1.033   | 0.015    | 2.23    | 0.026    | 1.004 ; 1.063    |</span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>| $constante$       | *0.445* | *0.112*  | *-3.22* | *0.001*  | *0.272 ; 0.728*  |</span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a>: Modèle logistique à durée discrète avec correction de la non proportionnalité</span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a>Si on avait omis les variables *year* et *age* du modèle:</span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="al">![Probabilité de décéder après correction de la non proportionnalité pour la variable surgery](images/Image13.png)</span>{width=70%}</span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true,"openEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});</script>
 
 
 

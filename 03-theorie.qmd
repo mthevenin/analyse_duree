@@ -216,10 +216,11 @@ $$h(t)=\lim\limits_{dt\to{0}} \frac{P(t\leq{T}< t + dt | T\geq{t})}{dt}$$
 - A priori cette quantité n’est pas une probabilité. C’est la nature de l’évènement, en particulier sa non récurrence, et la métrique temporelle choisie ou disponible qui peut la rendre assimilable à une probabilité. Tout comme la densité, on est plutôt dans la définition d'un *taux* (d'où l'expression ***hazard rate*** en anglais). 
 
 On peut également écrire:
-$h(t)=\frac{f(t)}{S(t)}=\frac{F'(t)}{S(t)}=-\frac{S'(t)}{S(t)}$ 
 
+$h(t)=\frac{f(t)}{S(t)}=\frac{F'(t)}{S(t)}=-\frac{S'(t)}{S(t)}$ ^[La relation $h(t)=\frac{f(t)}{S(t)}$ et donc $f(t)= h(t) \times S(t)$ est intéressante et importante car elle permet
+d'écrire la vraisemblance du processus probabiliste permettant d'estimer les paramètres des différentes analyses. On voit déjà sa proximité avec la fonction de masse de Bernouilli: $f(y_i) = p^{y_i} \times (1-p)^{1-y_i}$. Se reporté à la section qui décrit qui la vraisemblance partielle de Cox pour s'en faire une idée plus précise.]
 
-On remarque que la fonction de risque n’est pas une probabilité car $\frac{f(t)}{S(t)}$ ne peut pas contraindre la valeur obtenue à ne pas être supérieure à 1.
+On remarque que cette fonction de risque (ou *hazard rate*) n’est pas une probabilité car $\frac{f(t)}{S(t)}$ ne peut pas contraindre la valeur obtenue à ne pas être supérieure à 1.
 
 
 ### Le risque cumulé $H(t)$
