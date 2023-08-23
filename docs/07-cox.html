@@ -152,7 +152,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Présentation - bibliographie - outils</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Présentation - Bibliographie - Outils</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -256,7 +256,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-manipulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Eléments de mise en forme des données</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title"><strong>Eléments de mise en forme des données</strong></span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -515,19 +515,22 @@ Si <span class="math inline">\(c=1\)</span> (résultat de l’estimation): A un 
 De la même manière, plus on entre à un âge élevé dans la liste d’attente plus le risque de décès augmente. La variable <em>year</em>, qui traduit des progrès en médecine, renvoie à une réduction plutôt modérée du risque journalier de décès durant l’attente d’une greffe.</p>
 <p><strong>R-Stata-Sas-Python</strong></p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">SAS</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-4" role="tab" aria-controls="tabset-1-4" aria-selected="false">Python</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" aria-current="page">R</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <p>Le modèle est estimé avec la fonction <strong><code>coxph</code></strong> de la librairie <strong><code>survival</code></strong>. Hors options, la syntaxe est identiques aux fonctions <code>survfit</code> et <code>survdif</code>.</p>
-</div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<section id="stata" class="level4" data-number="8.1.3.1">
+<h4 data-number="8.1.3.1" class="anchored" data-anchor-id="stata"><span class="header-section-number">8.1.3.1</span> Stata</h4>
 <p>Le modèle est estimé avec la commande <strong><code>stcox</code></strong>.</p>
-</div>
-<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+</section>
+<section id="sas" class="level4" data-number="8.1.3.2">
+<h4 data-number="8.1.3.2" class="anchored" data-anchor-id="sas"><span class="header-section-number">8.1.3.2</span> SAS</h4>
 <p>Le modèle est estimé avec la <strong><code>proc phreg</code></strong>.</p>
-</div>
-<div id="tabset-1-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-4-tab">
+</section>
+<section id="python" class="level4" data-number="8.1.3.3">
+<h4 data-number="8.1.3.3" class="anchored" data-anchor-id="python"><span class="header-section-number">8.1.3.3</span> Python</h4>
 <p>Avec la librairie <code>lifelines</code>, le modèle est estimé avec la fonction <strong><code>CoxPHFitter</code></strong>. Avec la librairie <code>statmodels</code>, il est estimé avec la fonction <code>smf.phreg</code>.</p>
+</section>
 </div>
 </div>
 </div>
@@ -651,7 +654,7 @@ Avertissement
 </table>
 <p><strong>R-Stata-Sas-Python</strong></p>
 <div class="tabset-margin-container"></div><div class="panel-tabset">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">Stata</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-3" role="tab" aria-controls="tabset-2-3" aria-selected="false">SAS</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-4" role="tab" aria-controls="tabset-2-4" aria-selected="false">Python</a></li></ul>
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">R</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
 <p><strong><em>Attention seulement version GLS du test depuis le V3 de survival</em></strong>.</p>
@@ -659,15 +662,18 @@ Avertissement
 <li>Après avoir créer un objet à l’estimation du modèle de Cox, on utilise la fonction <strong><code>cox.zph</code></strong>. Cette fonction utilise par défaut <span class="math inline">\(g(t)=1-S(t)\)</span> où <span class="math inline">\(S(t)\)</span> sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.</li>
 <li>Test OLS: j’ai récupéré le programme du test antérieur, renommé <strong><code>cox.zphold</code></strong>. On peut le charger simplement, et il est facilement exécutable. Pour le charger: <code>source("https://raw.githubusercontent.com/mthevenin/analyse_duree/main/cox.zphold/cox.zphold.R")</code></li>
 </ul>
-</div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<section id="stata-1" class="level4" data-number="8.2.1.1">
+<h4 data-number="8.2.1.1" class="anchored" data-anchor-id="stata-1"><span class="header-section-number">8.2.1.1</span> Stata</h4>
 <p>Le test (OLS) est obtenu avec la commande <strong><code>estat phtest, d</code></strong>. Par défaut Stata utilise <span class="math inline">\(g(t)=t\)</span>. On peut modifier cette fonction.</p>
-</div>
-<div id="tabset-2-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-3-tab">
+</section>
+<section id="sas-1" class="level4" data-number="8.2.1.2">
+<h4 data-number="8.2.1.2" class="anchored" data-anchor-id="sas-1"><span class="header-section-number">8.2.1.2</span> SAS</h4>
 <p>Le test (OLS) est disponible depuis quelques années avec l’argument <strong><code>zph</code></strong> sur la ligne <code>proc lifetest</code>. Par défaut SAS utilise <span class="math inline">\(g(t)=t\)</span>. On peut modifier cette fonction.</p>
-</div>
-<div id="tabset-2-4" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-4-tab">
+</section>
+<section id="python-1" class="level4" data-number="8.2.1.3">
+<h4 data-number="8.2.1.3" class="anchored" data-anchor-id="python-1"><span class="header-section-number">8.2.1.3</span> Python</h4>
 <p>Le test (OLS) est donné avec la fonction <strong><code>proportional_hazard_test</code></strong> de la librairie <code>lifelines</code>. La fonction utilise par défaut <span class="math inline">\(g(t)=t\)</span>, mais on peut afficher les résultats pour toutes les transformations de <span class="math inline">\(t\)</span> disponibles avec l’option <code>time_transform=’all’</code>.</p>
+</section>
 </div>
 </div>
 </div>
@@ -1530,16 +1536,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>Le modèle est  estimé avec la fonction **`coxph`** de la librairie **`survival`**.  Hors options, la syntaxe est identiques aux fonctions <span class="in">`survfit`</span> et <span class="in">`survdif`</span>.</span>
 <span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a><span class="fu">### Stata</span></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Stata</span></span>
 <span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>Le modèle est estimé avec la commande **`stcox`**.</span>
 <span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="fu">### SAS</span></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="fu">#### SAS</span></span>
 <span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>Le modèle est estimé avec la **`proc phreg`**.</span>
 <span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python</span></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Python</span></span>
 <span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>Avec la librairie <span class="in">`lifelines`</span>, le modèle est estimé avec la fonction **`CoxPHFitter`**. Avec la librairie <span class="in">`statmodels`</span>, il est estimé avec la fonction <span class="in">`smf.phreg`</span>.</span>
 <span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>:::</span>
@@ -1557,243 +1563,240 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Plusieurs méthodes disponibles, on traitera  celles basées sur les **résidus de Schoenfeld**, et l'introduction directe d'une intéraction entre une fonction la durée et les covariables du modèle. Cette dernière fait également office de méthode de correction lorsque la violation de l'hypothèse est jugée trop importante ou problématique du point de vue des résultats obtenus. </span>
 <span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si on regarde les courbes de Kaplan-Meier, leurs croisement non tardif impliquera nécessairement un problème sur cette hypothèse. </span>
 <span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si on regarde les courbes de Kaplan-Meier, leurs croisement non tardif impliquera nécessairement un problème sur cette hypothèse. </span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="fu">### Test de Grambsch-Therneau sur les résidus de Schoenfeld</span></span>
 <span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a><span class="fu">### Test de Grambsch-Therneau sur les résidus de Schoenfeld</span></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>Ce test a été proposé par P.Grambsch et T.Therneau ^<span class="co">[</span><span class="ot">Il s'agit bien de la personne qui maintient le package **`survival`** dans R</span><span class="co">]</span> dans un cadre à durée strictement continue. Il repose originellement sur une régression linéaire estimé avec les moindres carrés généralisés (GLS) correction de l'autocorrélation des erreurs avec des sér) . </span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a>Dans un premier temps pour des raisons plutôt pratiques (informatique), le test a une version moindres carrés ordinaires (OLS). Jusqu'en 2020, tous les logiciels ne proposaient que le test OLS. T.Therneau avec la V3 de package <span class="in">`survival`</span> a substitué - assez brutalement - le test GLS au test OLS. Si les résultats sont proches dans le cadre d'une durée continue et que le test GLS peut être considéré comme un test *exact*, cela devient problématique dans une situation de durée discrète/groupée ^<span class="co">[</span><span class="ot">Pour les personnes utilisant R, je donne un moyen pour récupérer et exécuter le test OLS sous R</span><span class="co">]</span>.  Le test OLS reste, à mon sens, la méthode à privilégier dans le cas discret.  </span>
 <span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a>Ce test a été proposé par P.Grambsch et T.Therneau ^<span class="co">[</span><span class="ot">Il s'agit bien de la personne qui maintient le package **`survival`** dans R</span><span class="co">]</span> dans un cadre à durée strictement continue. Il repose originellement sur une régression linéaire estimé avec les moindres carrés généralisés (GLS) correction de l'autocorrélation des erreurs avec des sér) . </span>
-<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>Dans un premier temps pour des raisons plutôt pratiques (informatique), le test a une version moindres carrés ordinaires (OLS). Jusqu'en 2020, tous les logiciels ne proposaient que le test OLS. T.Therneau avec la V3 de package <span class="in">`survival`</span> a substitué - assez brutalement - le test GLS au test OLS. Si les résultats sont proches dans le cadre d'une durée continue et que le test GLS peut être considéré comme un test *exact*, cela devient problématique dans une situation de durée discrète/groupée ^<span class="co">[</span><span class="ot">Pour les personnes utilisant R, je donne un moyen pour récupérer et exécuter le test OLS sous R</span><span class="co">]</span>.  Le test OLS reste, à mon sens, la méthode à privilégier dans le cas discret.  </span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a>Il est également important de souligner que pour P.Grambsch et T.Therneau ^<span class="co">[</span><span class="ot">Se reporter à leur ouvrage *Modeling Survival Data: Extending the Cox Model* (2001)</span><span class="co">]</span> n'est qu'un moyen parmi d'autres d'analyser une violation de l'hypothèse de proportionnalité. Ce n'est pas *the solution* (comme tout autre test au passage). Le croisement des courbes de séjours peut-être suffisant pour alerter sur cette violation.  </span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>Il est également important de souligner que pour P.Grambsch et T.Therneau ^<span class="co">[</span><span class="ot">Se reporter à leur ouvrage *Modeling Survival Data: Extending the Cox Model* (2001)</span><span class="co">]</span> n'est qu'un moyen parmi d'autres d'analyser une violation de l'hypothèse de proportionnalité. Ce n'est pas *the solution* (comme tout autre test au passage). Le croisement des courbes de séjours peut-être suffisant pour alerter sur cette violation.  </span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>***Principe du test***:  consiste à regarder la corrélation entre les **résidus de Schoenfeld** obtenus directement avec la fonction de score de la vraisemblanc partielle de Cox et une fonction de la durée.  </span>
 <span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>***Principe du test***:  consiste à regarder la corrélation entre les **résidus de Schoenfeld** obtenus directement avec la fonction de score de la vraisemblanc partielle de Cox et une fonction de la durée.  </span>
-<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>***Principe de calcul des résidus***</span>
-<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Les résidus *bruts* sont directement calculés à partir des équations de scores <span class="co">[</span><span class="ot">voir section estimation</span><span class="co">]</span>.</span>
-<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Ils ne sont calculés que pour les observations qui ont connues l’évènement, au moment où un évènement s’est produit.</span>
-<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>La somme des résidus pour chaque covariable est égale à 0. Il s'agit de la propriété de l’équation de score à l’équilibre.</span>
-<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>On utilise généralement les *résidus standardisés* (*remis à l'échelle* / scaled) - par leur variance -. C'est la mesure de cette variance qui distingue le test OLS du test GLS.</span>
-<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a>Pour une observation dont l’évènement s’est produit en $t_i$, le *résidu brut de Schoenfeld* pour la covariable $X_k$, après estimation du modèle, est égal à:</span>
-<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a>$$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{jk}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}= X_{ik} - E(X_{j\in R_i})$$</span>
-<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Ce résidu est formellement la contribution d'une observation ou d'un moment d'évènement au score. Il se lit comme la différence entre la valeur observée d'une covariable  et sa valeur espérée au moment où l'évènement s'est produit. </span>
-<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si la constance des rapports de risque varie peu les résidus ne doivent pas suivre une tendance précise localement ou globalement,  à la hausse ou à la baisse.  </span>
-<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a>Pourquoi?  </span>
-<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a>Par l'exemple, sans censure à droite et en ne considérant que les résidus bruts: </span>
-<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>Avec un rapport de risque strictement égal à 1 en début d'exposition, une population soumise au risque $R_i=100$ avec 50 hommes et 50 femmes. Si l'hypothèse PH (strictement) respectée, lorsqu'il reste 90 personnes soumises au risque, on devrait avoir 45 hommes et 45 femmes. Avec $R_i=50$, 25 hommes et 25 femmes,.......avec $R_i=10$, 5 hommes et 5 femmes.    </span>
-<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a>Au final l'espérance d'avoir la caractéristique $X$ est toujours égal à 0.5 et les résidus bruts prendront toujours la valeur -.5 si $X=0$ et .5 si $X=1$. En faisant une simple régression linéaire entre les résidus, qui alternent ces deux valeurs, et $t$, le coefficient estimé sera en toute logique très proche de 0. </span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>***Principe de calcul des résidus***</span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Les résidus *bruts* sont directement calculés à partir des équations de scores <span class="co">[</span><span class="ot">voir section estimation</span><span class="co">]</span>.</span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Ils ne sont calculés que pour les observations qui ont connues l’évènement, au moment où un évènement s’est produit.</span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>La somme des résidus pour chaque covariable est égale à 0. Il s'agit de la propriété de l’équation de score à l’équilibre.</span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>On utilise généralement les *résidus standardisés* (*remis à l'échelle* / scaled) - par leur variance -. C'est la mesure de cette variance qui distingue le test OLS du test GLS.</span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a>Pour une observation dont l’évènement s’est produit en $t_i$, le *résidu brut de Schoenfeld* pour la covariable $X_k$, après estimation du modèle, est égal à:</span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>$$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{jk}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}= X_{ik} - E(X_{j\in R_i})$$</span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Ce résidu est formellement la contribution d'une observation ou d'un moment d'évènement au score. Il se lit comme la différence entre la valeur observée d'une covariable  et sa valeur espérée au moment où l'évènement s'est produit. </span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si la constance des rapports de risque varie peu les résidus ne doivent pas suivre une tendance précise localement ou globalement,  à la hausse ou à la baisse.  </span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a>Pourquoi?  </span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a>Par l'exemple, sans censure à droite et en ne considérant que les résidus bruts: </span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a>Avec un rapport de risque strictement égal à 1 en début d'exposition, une population soumise au risque $R_i=100$ avec 50 hommes et 50 femmes. Si l'hypothèse PH (strictement) respectée, lorsqu'il reste 90 personnes soumises au risque, on devrait avoir 45 hommes et 45 femmes. Avec $R_i=50$, 25 hommes et 25 femmes,.......avec $R_i=10$, 5 hommes et 5 femmes.    </span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a>Au final l'espérance d'avoir la caractéristique $X$ est toujours égal à 0.5 et les résidus bruts prendront toujours la valeur -.5 si $X=0$ et .5 si $X=1$. En faisant une simple régression linéaire entre les résidus, qui alternent ces deux valeurs, et $t$, le coefficient estimé sera en toute logique très proche de 0. </span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>De manière encore plus simple, cette proportionnalité avec un risque ratio égal à 1 suggère qu'au cours de la durée d'observation, on observe une succession d'un même nombre d'hommes et de femmes qui connaissent l'évènement. Si tous les hommes ou presque  avaient observés l'évènement plutôt en début d'éxposition et si toutes les femmes  ou presque avaient observé l'évènement plutôt en fin d'exposition, l'hypothèse de proportionnalité pourraient fortement remise en cause.</span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a>De manière encore plus simple, cette proportionnalité avec un risque ratio égal à 1 suggère qu'au cours de la durée d'observation, on observe une succession d'un même nombre d'hommes et de femmes qui connaissent l'évènement. Si tous les hommes ou presque  avaient observés l'évènement plutôt en début d'éxposition et si toutes les femmes  ou presque avaient observé l'évènement plutôt en fin d'exposition, l'hypothèse de proportionnalité pourraient fortement remise en cause.</span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a>On trouvera des éléments de calcul du test OLS <span class="co">[</span><span class="ot">ici</span><span class="co">](https://mthevenin.github.io/analyse_duree/annexes/residusch.html)</span> </span>
 <span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a>On trouvera des éléments de calcul du test OLS <span class="co">[</span><span class="ot">ici</span><span class="co">](https://mthevenin.github.io/analyse_duree/annexes/residusch.html)</span> </span>
-<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a>::: callout-warning</span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Test omnibus**: Ne pas l'utiliser bien qu'il figure généralement en bas des output. Il n'a pas d'interprétation directe, et les p-value peuvent présenter des valeurs très faibles alors que ce n'est pas le cas pour les covariables prises une à une. Rester comme c'est souvent le cas à un test à un degré de liberté.</span>
 <span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a>::: callout-warning</span>
-<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Test omnibus**: Ne pas l'utiliser bien qu'il figure généralement en bas des output. Il n'a pas d'interprétation directe, et les p-value peuvent présenter des valeurs très faibles alors que ce n'est pas le cas pour les covariables prises une à une. Rester comme c'est souvent le cas à un test à un degré de liberté.</span>
-<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Transformations de la durée**: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: $g(t)=t$ (« identity »), $g(t)=log(t)$, $g(t)=KM(t)$ ou $g(t)=1- S(t$) où $S(t$) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank » est  utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple $t=(0.1,0.5,1,2.6,3)$ donne une transformation $t=(1,2,3,4)$. A savoir : $g(t)=t rend le test relativement sensible aux évènements tardifs lorsque la population restant soumise est peu nombreuse (outliers).</span>
-<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a><span class="ss"> * </span>Par défaut Stata, Sas, Python: $g(t)=t$</span>
-<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a><span class="ss"> * </span>Par défaut R: $g(t)= 1 - S(t)$ </span>
-<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Transformations de la durée**: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: $g(t)=t$ (« identity »), $g(t)=log(t)$, $g(t)=KM(t)$ ou $g(t)=1- S(t$) où $S(t$) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank » est  utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple $t=(0.1,0.5,1,2.6,3)$ donne une transformation $t=(1,2,3,4)$. A savoir : $g(t)=t rend le test relativement sensible aux évènements tardifs lorsque la population restant soumise est peu nombreuse (outliers).</span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a><span class="ss"> * </span>Par défaut Stata, Sas, Python: $g(t)=t$</span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a><span class="ss"> * </span>Par défaut R: $g(t)= 1 - S(t)$ </span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a>Pour des raisons de reproductibilité dans l'espace des logiciels et dans le temps pour les différentes versions du package <span class="in">`survival`</span> de R, on ne présente ici que la version OLS. </span>
 <span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a>Pour des raisons de reproductibilité dans l'espace des logiciels et dans le temps pour les différentes versions du package <span class="in">`survival`</span> de R, on ne présente ici que la version OLS. </span>
-<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a>**Test OLS avec $g(t)=t$**</span>
-<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a>| Variables | chi2    | df    | P&gt;Chi2 | </span>
-<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a>|-----------|---------|-------|--------| </span>
-<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a>| year      | 0.80    |    1  | 0.3720 |</span>
-<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>| age       | 1.61    |    1  | 0.2043 |</span>
-<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a>| surgery   | 5.54    |    1  | 0.0186 |</span>
-<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a>: Test OLS Grambsch-Therneau avec $g(t)=t$</span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a>**Test OLS avec $g(t)=t$**</span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a>| Variables | chi2    | df    | P&gt;Chi2 | </span>
+<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a>|-----------|---------|-------|--------| </span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a>| year      | 0.80    |    1  | 0.3720 |</span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a>| age       | 1.61    |    1  | 0.2043 |</span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a>| surgery   | 5.54    |    1  | 0.0186 |</span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>: Test OLS Grambsch-Therneau avec $g(t)=t$</span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a>Ici l'hypothèse de proportionnalité des risques est questionnable pour la variable *surgery*. Le risque ratio  pourrait ne pas constant dans le temps.  Ce n'est pas du tout étonnant,  le premier décès pour les personnes opérées d'un pontage n'est observé qu'au bout de 165 jours. Au final, un test était-il bien nécessaire pour arriver à ce constat ???????</span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a>Ici l'hypothèse de proportionnalité des risques est questionnable pour la variable *surgery*. Le risque ratio  pourrait ne pas constant dans le temps.  Ce n'est pas du tout étonnant,  le premier décès pour les personnes opérées d'un pontage n'est observé qu'au bout de 165 jours. Au final, un test était-il bien nécessaire pour arriver à ce constat ???????</span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a>**Test OLS avec $g(t)=1- S(t)$**</span>
 <span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a>**Test OLS avec $g(t)=1- S(t)$**</span>
-<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a>| Variables | chi2    | df    | P&gt;Chi2 | </span>
-<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a>|-----------|---------|-------|--------| </span>
-<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a>| year      | 1.96    |    1  | 0.162  |</span>
-<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a>| age       | 1.15    |    1  | 0.284  |</span>
-<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a>| surgery   | 3.96    |    1  | 0.046  |</span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a>| Variables | chi2    | df    | P&gt;Chi2 | </span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a>|-----------|---------|-------|--------| </span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a>| year      | 1.96    |    1  | 0.162  |</span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a>| age       | 1.15    |    1  | 0.284  |</span>
+<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a>| surgery   | 3.96    |    1  | 0.046  |</span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a>: Test Grambsch-Therneau avec $g(t)=1- S(t)$</span>
+<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a>: Test Grambsch-Therneau avec $g(t)=1- S(t)$</span>
+<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a>**R-Stata-Sas-Python**   </span>
 <span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a>**R-Stata-Sas-Python**   </span>
-<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
-<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a><span class="fu">### R</span></span>
-<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a>***Attention seulement version GLS du test depuis le V3 de survival***.</span>
-<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a><span class="ss">*  </span>Après avoir créer un objet  à l’estimation du modèle de Cox, on utilise la fonction **`cox.zph`**. Cette fonction utilise par défaut $g(t)=1-S(t)$ où $S(t)$ sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.</span>
-<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a><span class="ss">*  </span>Test OLS: j’ai récupéré le programme du test antérieur, renommé **`cox.zphold`**. On peut le charger simplement, et il est facilement exécutable.</span>
-<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a>   Pour le charger: <span class="in">`source("https://raw.githubusercontent.com/mthevenin/analyse_duree/main/cox.zphold/cox.zphold.R")`</span></span>
-<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a><span class="fu">### Stata</span></span>
-<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a>Le test (OLS) est obtenu avec la commande **`estat phtest, d`**. Par défaut Stata utilise $g(t)=t$. On peut modifier cette fonction. </span>
-<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a><span class="fu">### SAS</span></span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a>::: panel-tabset</span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a><span class="fu">### R</span></span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a>***Attention seulement version GLS du test depuis le V3 de survival***.</span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a><span class="ss">*  </span>Après avoir créer un objet  à l’estimation du modèle de Cox, on utilise la fonction **`cox.zph`**. Cette fonction utilise par défaut $g(t)=1-S(t)$ où $S(t)$ sont les estimateurs de la courbe de Kaplan-Meier. On peut modifier cette fonction. Il est préférable de conserver cette fonction par défaut.</span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a><span class="ss">*  </span>Test OLS: j’ai récupéré le programme du test antérieur, renommé **`cox.zphold`**. On peut le charger simplement, et il est facilement exécutable.</span>
+<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a>   Pour le charger: <span class="in">`source("https://raw.githubusercontent.com/mthevenin/analyse_duree/main/cox.zphold/cox.zphold.R")`</span></span>
+<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Stata</span></span>
+<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a>Le test (OLS) est obtenu avec la commande **`estat phtest, d`**. Par défaut Stata utilise $g(t)=t$. On peut modifier cette fonction. </span>
+<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a><span class="fu">#### SAS</span></span>
+<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a>Le test (OLS) est disponible depuis quelques années avec l’argument **`zph`** sur la ligne <span class="in">`proc lifetest`</span>. Par défaut SAS utilise $g(t)=t$. On peut modifier cette fonction.</span>
+<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a>Le test (OLS) est disponible depuis quelques années avec l’argument **`zph`** sur la ligne <span class="in">`proc lifetest`</span>. Par défaut SAS utilise $g(t)=t$. On peut modifier cette fonction.</span>
+<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Python</span></span>
 <span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a><span class="fu">### Python</span></span>
-<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a>Le test (OLS)  est donné avec la  fonction **`proportional_hazard_test`** de la librairie <span class="in">`lifelines`</span>. La fonction utilise par défaut $g(t)=t$, mais on peut afficher les résultats pour toutes les transformations de $t$ disponibles avec l’option <span class="in">`time_transform=’all’`</span>. </span>
+<span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a>Le test (OLS)  est donné avec la  fonction **`proportional_hazard_test`** de la librairie <span class="in">`lifelines`</span>. La fonction utilise par défaut $g(t)=t$, mais on peut afficher les résultats pour toutes les transformations de $t$ disponibles avec l’option <span class="in">`time_transform=’all’`</span>. </span>
+<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a><span class="fu">### Intéraction avec la durée</span></span>
 <span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-308"><a href="#cb1-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a><span class="fu">### Intéraction avec la durée</span></span>
-<span id="cb1-310"><a href="#cb1-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-311"><a href="#cb1-311" aria-hidden="true" tabindex="-1"></a>***Petit retour sur l'estimation du modèle***  </span>
-<span id="cb1-312"><a href="#cb1-312" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-313"><a href="#cb1-313" aria-hidden="true" tabindex="-1"></a>Pour estimer le modèle de Cox, les données sont dans un premier temps splitées aux moment où au moins un évènement a été observé. </span>
+<span id="cb1-308"><a href="#cb1-308" aria-hidden="true" tabindex="-1"></a>***Petit retour sur l'estimation du modèle***  </span>
+<span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-310"><a href="#cb1-310" aria-hidden="true" tabindex="-1"></a>Pour estimer le modèle de Cox, les données sont dans un premier temps splitées aux moment où au moins un évènement a été observé. </span>
+<span id="cb1-311"><a href="#cb1-311" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-312"><a href="#cb1-312" aria-hidden="true" tabindex="-1"></a>Sur l'application, avec 2 individus avec la covariable *age* (rappel: il s'agit de l'âge en $t_0$:</span>
+<span id="cb1-313"><a href="#cb1-313" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-314"><a href="#cb1-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-315"><a href="#cb1-315" aria-hidden="true" tabindex="-1"></a>Sur l'application, avec 2 individus avec la covariable *age* (rappel: il s'agit de l'âge en $t_0$:</span>
-<span id="cb1-316"><a href="#cb1-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-317"><a href="#cb1-317" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-318"><a href="#cb1-318" aria-hidden="true" tabindex="-1"></a>| id  | age      | died |$t_0$| $t$ |</span>
-<span id="cb1-319"><a href="#cb1-319" aria-hidden="true" tabindex="-1"></a>|-----|----------|------|-----|-----|</span>
-<span id="cb1-320"><a href="#cb1-320" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 0   | 1   |</span>
-<span id="cb1-321"><a href="#cb1-321" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 1   | 2   |</span>
-<span id="cb1-322"><a href="#cb1-322" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 2   | 3   |</span>
-<span id="cb1-323"><a href="#cb1-323" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 3   | 5   |</span>
-<span id="cb1-324"><a href="#cb1-324" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 1    | 5   | 6   |</span>
-<span id="cb1-325"><a href="#cb1-325" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 0   | 1   |</span>
-<span id="cb1-326"><a href="#cb1-326" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 1   | 2   |</span>
-<span id="cb1-327"><a href="#cb1-327" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 2   | 3   |</span>
-<span id="cb1-328"><a href="#cb1-328" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 3   | 5   |</span>
-<span id="cb1-329"><a href="#cb1-329" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 5   | 6   |</span>
-<span id="cb1-330"><a href="#cb1-330" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 6   | 8   |</span>
-<span id="cb1-331"><a href="#cb1-331" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 8   | 9   |</span>
-<span id="cb1-332"><a href="#cb1-332" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 9   | 12  |</span>
-<span id="cb1-333"><a href="#cb1-333" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 1    | 12  | 16  |</span>
-<span id="cb1-334"><a href="#cb1-334" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-335"><a href="#cb1-335" aria-hidden="true" tabindex="-1"></a>: Base spittées sur les intervals d'évènement</span>
+<span id="cb1-315"><a href="#cb1-315" aria-hidden="true" tabindex="-1"></a>| id  | age      | died |$t_0$| $t$ |</span>
+<span id="cb1-316"><a href="#cb1-316" aria-hidden="true" tabindex="-1"></a>|-----|----------|------|-----|-----|</span>
+<span id="cb1-317"><a href="#cb1-317" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 0   | 1   |</span>
+<span id="cb1-318"><a href="#cb1-318" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 1   | 2   |</span>
+<span id="cb1-319"><a href="#cb1-319" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 2   | 3   |</span>
+<span id="cb1-320"><a href="#cb1-320" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 3   | 5   |</span>
+<span id="cb1-321"><a href="#cb1-321" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 1    | 5   | 6   |</span>
+<span id="cb1-322"><a href="#cb1-322" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 0   | 1   |</span>
+<span id="cb1-323"><a href="#cb1-323" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 1   | 2   |</span>
+<span id="cb1-324"><a href="#cb1-324" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 2   | 3   |</span>
+<span id="cb1-325"><a href="#cb1-325" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 3   | 5   |</span>
+<span id="cb1-326"><a href="#cb1-326" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 5   | 6   |</span>
+<span id="cb1-327"><a href="#cb1-327" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 6   | 8   |</span>
+<span id="cb1-328"><a href="#cb1-328" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 8   | 9   |</span>
+<span id="cb1-329"><a href="#cb1-329" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 0    | 9   | 12  |</span>
+<span id="cb1-330"><a href="#cb1-330" aria-hidden="true" tabindex="-1"></a>| 3   | 54       | 1    | 12  | 16  |</span>
+<span id="cb1-331"><a href="#cb1-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-332"><a href="#cb1-332" aria-hidden="true" tabindex="-1"></a>: Base spittées sur les intervals d'évènement</span>
+<span id="cb1-333"><a href="#cb1-333" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-334"><a href="#cb1-334" aria-hidden="true" tabindex="-1"></a>Les bornes des intervalles $<span class="co">[</span><span class="ot">t_0;t</span><span class="co">]</span>$ présentent des valeurs seulement lorsqu'un évènement s'est produit (principe de la vraisemblance partielle). Il n'y a donc pas de valeurs pour $t$ et $t_0$ en $t=4$ pour $id=(2,3)$et $t=7,10,11,13,14,15$ pour $id=3$.  </span>
+<span id="cb1-335"><a href="#cb1-335" aria-hidden="true" tabindex="-1"></a>Les deux individus observent l'évènement en $t=6$ pour $id=2$, et en $t=16$ pour $id=3$. Avant ce moment la valeur de la variable évènement/censure (ici $d$) prend toujours la valeur 0, et prend la valeur 1 le jour du décès.  </span>
 <span id="cb1-336"><a href="#cb1-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-337"><a href="#cb1-337" aria-hidden="true" tabindex="-1"></a>Les bornes des intervalles $<span class="co">[</span><span class="ot">t_0;t</span><span class="co">]</span>$ présentent des valeurs seulement lorsqu'un évènement s'est produit (principe de la vraisemblance partielle). Il n'y a donc pas de valeurs pour $t$ et $t_0$ en $t=4$ pour $id=(2,3)$et $t=7,10,11,13,14,15$ pour $id=3$.  </span>
-<span id="cb1-338"><a href="#cb1-338" aria-hidden="true" tabindex="-1"></a>Les deux individus observent l'évènement en $t=6$ pour $id=2$, et en $t=16$ pour $id=3$. Avant ce moment la valeur de la variable évènement/censure (ici $d$) prend toujours la valeur 0, et prend la valeur 1 le jour du décès.  </span>
+<span id="cb1-337"><a href="#cb1-337" aria-hidden="true" tabindex="-1"></a>Sur cette base *splitée* aux moments d'évènement (n=3573), on pourra vérifier facilement que les résultats obtenus par le modèle de Cox sont  identiques à ceux obtenus précédemment. </span>
+<span id="cb1-338"><a href="#cb1-338" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-339"><a href="#cb1-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-340"><a href="#cb1-340" aria-hidden="true" tabindex="-1"></a>Sur cette base *splitée* aux moments d'évènement (n=3573), on pourra vérifier facilement que les résultats obtenus par le modèle de Cox sont  identiques à ceux obtenus précédemment. </span>
+<span id="cb1-340"><a href="#cb1-340" aria-hidden="true" tabindex="-1"></a>*Introduction d'une intéraction avec une fonction de la durée*  </span>
 <span id="cb1-341"><a href="#cb1-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-342"><a href="#cb1-342" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-343"><a href="#cb1-343" aria-hidden="true" tabindex="-1"></a>*Introduction d'une intéraction avec une fonction de la durée*  </span>
+<span id="cb1-342"><a href="#cb1-342" aria-hidden="true" tabindex="-1"></a>On a une variable de durée (on prendra $g(t)=t$) qui sera croisée avec la variable *surgery*. </span>
+<span id="cb1-343"><a href="#cb1-343" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-344"><a href="#cb1-344" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-345"><a href="#cb1-345" aria-hidden="true" tabindex="-1"></a>On a une variable de durée (on prendra $g(t)=t$) qui sera croisée avec la variable *surgery*. </span>
+<span id="cb1-345"><a href="#cb1-345" aria-hidden="true" tabindex="-1"></a>Le modèle s'écrit:      </span>
 <span id="cb1-346"><a href="#cb1-346" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-347"><a href="#cb1-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-348"><a href="#cb1-348" aria-hidden="true" tabindex="-1"></a>Le modèle s'écrit:      </span>
-<span id="cb1-349"><a href="#cb1-349" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-350"><a href="#cb1-350" aria-hidden="true" tabindex="-1"></a>$$h(t | X,t) = h_0(t)e^{b_1age + b_2year + b_3 surgery + b_4 (surgery\times t)}$$</span>
-<span id="cb1-351"><a href="#cb1-351" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-352"><a href="#cb1-352" aria-hidden="true" tabindex="-1"></a>Le modèle avec cette intéraction donne les résultats suivants: </span>
-<span id="cb1-353"><a href="#cb1-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-354"><a href="#cb1-354" aria-hidden="true" tabindex="-1"></a>| Variable          | $e^b$ | Std.err | z     | P<span class="sc">\&gt;</span>\|z\| | 95% IC        |</span>
-<span id="cb1-355"><a href="#cb1-355" aria-hidden="true" tabindex="-1"></a>|-------------------|-------|---------|-------|----------|---------------|</span>
-<span id="cb1-356"><a href="#cb1-356" aria-hidden="true" tabindex="-1"></a>| year              | 0.884 | 0.059   | -1.84 | 0.066    | 0.776 ; 1.008 |</span>
-<span id="cb1-357"><a href="#cb1-357" aria-hidden="true" tabindex="-1"></a>| age               | 1.029 | 0.014   | +2.15 | 0.032    | 1.003 ; 1.057 |</span>
-<span id="cb1-358"><a href="#cb1-358" aria-hidden="true" tabindex="-1"></a>| $surgery(t_{0+})$ | 0.173 | 0.117   | -2.60 | 0.009    | 0.046 ; 0.649 |</span>
-<span id="cb1-359"><a href="#cb1-359" aria-hidden="true" tabindex="-1"></a>| $surgery\times t$ | 1.002 | 0.001   | +2.02 | 0.043    | 1.000 ; 1.004 |</span>
-<span id="cb1-360"><a href="#cb1-360" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-361"><a href="#cb1-361" aria-hidden="true" tabindex="-1"></a>: Modèle de Cox avec une intéraction entre une fonction de la durée et la variable *surgery</span>
-<span id="cb1-362"><a href="#cb1-362" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-363"><a href="#cb1-363" aria-hidden="true" tabindex="-1"></a>On retrouve donc un résultat proche de celui obtenu à partir du test OLS sur les résidus de Schoenfeld pour la variable *surgery*. Et c'est normal. Avec $g(t)=t$, il a le mérite de pouvoir être interprété directement. Ce qui ne veut pas dire qu'il s'agit de la meilleure solution. </span>
+<span id="cb1-347"><a href="#cb1-347" aria-hidden="true" tabindex="-1"></a>$$h(t | X,t) = h_0(t)e^{b_1age + b_2year + b_3 surgery + b_4 (surgery\times t)}$$</span>
+<span id="cb1-348"><a href="#cb1-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-349"><a href="#cb1-349" aria-hidden="true" tabindex="-1"></a>Le modèle avec cette intéraction donne les résultats suivants: </span>
+<span id="cb1-350"><a href="#cb1-350" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-351"><a href="#cb1-351" aria-hidden="true" tabindex="-1"></a>| Variable          | $e^b$ | Std.err | z     | P<span class="sc">\&gt;</span>\|z\| | 95% IC        |</span>
+<span id="cb1-352"><a href="#cb1-352" aria-hidden="true" tabindex="-1"></a>|-------------------|-------|---------|-------|----------|---------------|</span>
+<span id="cb1-353"><a href="#cb1-353" aria-hidden="true" tabindex="-1"></a>| year              | 0.884 | 0.059   | -1.84 | 0.066    | 0.776 ; 1.008 |</span>
+<span id="cb1-354"><a href="#cb1-354" aria-hidden="true" tabindex="-1"></a>| age               | 1.029 | 0.014   | +2.15 | 0.032    | 1.003 ; 1.057 |</span>
+<span id="cb1-355"><a href="#cb1-355" aria-hidden="true" tabindex="-1"></a>| $surgery(t_{0+})$ | 0.173 | 0.117   | -2.60 | 0.009    | 0.046 ; 0.649 |</span>
+<span id="cb1-356"><a href="#cb1-356" aria-hidden="true" tabindex="-1"></a>| $surgery\times t$ | 1.002 | 0.001   | +2.02 | 0.043    | 1.000 ; 1.004 |</span>
+<span id="cb1-357"><a href="#cb1-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-358"><a href="#cb1-358" aria-hidden="true" tabindex="-1"></a>: Modèle de Cox avec une intéraction entre une fonction de la durée et la variable *surgery</span>
+<span id="cb1-359"><a href="#cb1-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-360"><a href="#cb1-360" aria-hidden="true" tabindex="-1"></a>On retrouve donc un résultat proche de celui obtenu à partir du test OLS sur les résidus de Schoenfeld pour la variable *surgery*. Et c'est normal. Avec $g(t)=t$, il a le mérite de pouvoir être interprété directement. Ce qui ne veut pas dire qu'il s'agit de la meilleure solution. </span>
+<span id="cb1-361"><a href="#cb1-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-362"><a href="#cb1-362" aria-hidden="true" tabindex="-1"></a>Donc, malgré  une hypothèse plutôt forte sur la forme fonctionnelle de l'intéraction, et dans les faits surement pas pertinente, on peut dire  que chaque jour le rapport des risques entre personnes opérées et personnes non opérées augmente de +0.2%. Pour plus précis, étant à l'origine &lt;1, l'écart se modère.  L'effet de l'opération sur la survie des individus s'estompe donc avec le temps.</span>
+<span id="cb1-363"><a href="#cb1-363" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-364"><a href="#cb1-364" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-365"><a href="#cb1-365" aria-hidden="true" tabindex="-1"></a>Donc, malgré  une hypothèse plutôt forte sur la forme fonctionnelle de l'intéraction, et dans les faits surement pas pertinente, on peut dire  que chaque jour le rapport des risques entre personnes opérées et personnes non opérées augmente de +0.2%. Pour plus précis, étant à l'origine &lt;1, l'écart se modère.  L'effet de l'opération sur la survie des individus s'estompe donc avec le temps.</span>
+<span id="cb1-365"><a href="#cb1-365" aria-hidden="true" tabindex="-1"></a>**A noter** </span>
 <span id="cb1-366"><a href="#cb1-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-367"><a href="#cb1-367" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-368"><a href="#cb1-368" aria-hidden="true" tabindex="-1"></a>**A noter** </span>
+<span id="cb1-367"><a href="#cb1-367" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Le modèle n'est plus un modèle à risque proportionnel. La variable *surgery* n'est plus une variable **fixe** mais une variable tronquée dynamique qui prend la valeur de $t$ pour les personnes qui ont été opérées d'un pontage avant leur entrée dans le registre de greffe.</span>
+<span id="cb1-368"><a href="#cb1-368" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-369"><a href="#cb1-369" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-370"><a href="#cb1-370" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Le modèle n'est plus un modèle à risque proportionnel. La variable *surgery* n'est plus une variable **fixe** mais une variable tronquée dynamique qui prend la valeur de $t$ pour les personnes qui ont été opérées d'un pontage avant leur entrée dans le registre de greffe.</span>
+<span id="cb1-370"><a href="#cb1-370" aria-hidden="true" tabindex="-1"></a>Si $surgery = 0$ </span>
 <span id="cb1-371"><a href="#cb1-371" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-372"><a href="#cb1-372" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-373"><a href="#cb1-373" aria-hidden="true" tabindex="-1"></a>Si $surgery = 0$ </span>
-<span id="cb1-374"><a href="#cb1-374" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-375"><a href="#cb1-375" aria-hidden="true" tabindex="-1"></a>| id  | surgery  | died |$t_0$| $t$ |  surgery*t |</span>
-<span id="cb1-376"><a href="#cb1-376" aria-hidden="true" tabindex="-1"></a>|-----|----------|------|-----|-----|------------|</span>
-<span id="cb1-377"><a href="#cb1-377" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 0    | 0   | 1   | 0          |  </span>
-<span id="cb1-378"><a href="#cb1-378" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 0    | 1   | 2   | 0          |</span>
-<span id="cb1-379"><a href="#cb1-379" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 0    | 2   | 3   | 0          |</span>
-<span id="cb1-380"><a href="#cb1-380" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 0    | 3   | 5   | 0          |</span>
-<span id="cb1-381"><a href="#cb1-381" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 1    | 5   | 6   | 0          |</span>
+<span id="cb1-372"><a href="#cb1-372" aria-hidden="true" tabindex="-1"></a>| id  | surgery  | died |$t_0$| $t$ |  surgery*t |</span>
+<span id="cb1-373"><a href="#cb1-373" aria-hidden="true" tabindex="-1"></a>|-----|----------|------|-----|-----|------------|</span>
+<span id="cb1-374"><a href="#cb1-374" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 0    | 0   | 1   | 0          |  </span>
+<span id="cb1-375"><a href="#cb1-375" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 0    | 1   | 2   | 0          |</span>
+<span id="cb1-376"><a href="#cb1-376" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 0    | 2   | 3   | 0          |</span>
+<span id="cb1-377"><a href="#cb1-377" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 0    | 3   | 5   | 0          |</span>
+<span id="cb1-378"><a href="#cb1-378" aria-hidden="true" tabindex="-1"></a>| 2   | 0        | 1    | 5   | 6   | 0          |</span>
+<span id="cb1-379"><a href="#cb1-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-380"><a href="#cb1-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-381"><a href="#cb1-381" aria-hidden="true" tabindex="-1"></a>Si $surgery = 1$ (jusqu'à $t=6$ car aucun décès précoce pour ce groupe)</span>
 <span id="cb1-382"><a href="#cb1-382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-383"><a href="#cb1-383" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-384"><a href="#cb1-384" aria-hidden="true" tabindex="-1"></a>Si $surgery = 1$ (jusqu'à $t=6$ car aucun décès précoce pour ce groupe)</span>
-<span id="cb1-385"><a href="#cb1-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-386"><a href="#cb1-386" aria-hidden="true" tabindex="-1"></a>| id  | surgery  | died |$t_0$| $t$ | surgery*t |</span>
-<span id="cb1-387"><a href="#cb1-387" aria-hidden="true" tabindex="-1"></a>|-----|----------|------|-----|-----|-----------|</span>
-<span id="cb1-388"><a href="#cb1-388" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 0    | 0   | 1   | 1         |  </span>
-<span id="cb1-389"><a href="#cb1-389" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 0    | 1   | 2   | 2         |</span>
-<span id="cb1-390"><a href="#cb1-390" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 0    | 2   | 3   | 3         |</span>
-<span id="cb1-391"><a href="#cb1-391" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 0    | 3   | 5   | 5         |</span>
-<span id="cb1-392"><a href="#cb1-392" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 1    | 5   | 6   | 6         |</span>
+<span id="cb1-383"><a href="#cb1-383" aria-hidden="true" tabindex="-1"></a>| id  | surgery  | died |$t_0$| $t$ | surgery*t |</span>
+<span id="cb1-384"><a href="#cb1-384" aria-hidden="true" tabindex="-1"></a>|-----|----------|------|-----|-----|-----------|</span>
+<span id="cb1-385"><a href="#cb1-385" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 0    | 0   | 1   | 1         |  </span>
+<span id="cb1-386"><a href="#cb1-386" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 0    | 1   | 2   | 2         |</span>
+<span id="cb1-387"><a href="#cb1-387" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 0    | 2   | 3   | 3         |</span>
+<span id="cb1-388"><a href="#cb1-388" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 0    | 3   | 5   | 5         |</span>
+<span id="cb1-389"><a href="#cb1-389" aria-hidden="true" tabindex="-1"></a>| 40  | 1        | 1    | 5   | 6   | 6         |</span>
+<span id="cb1-390"><a href="#cb1-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-391"><a href="#cb1-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-392"><a href="#cb1-392" aria-hidden="true" tabindex="-1"></a>Exemple pour une variable quantitative (*age*)</span>
 <span id="cb1-393"><a href="#cb1-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-394"><a href="#cb1-394" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-395"><a href="#cb1-395" aria-hidden="true" tabindex="-1"></a>Exemple pour une variable quantitative (*age*)</span>
-<span id="cb1-396"><a href="#cb1-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-397"><a href="#cb1-397" aria-hidden="true" tabindex="-1"></a>| id  | age      | died |$t_0$| $t$ | age*t     |</span>
-<span id="cb1-398"><a href="#cb1-398" aria-hidden="true" tabindex="-1"></a>|-----|----------|------|-----|-----|-----------|</span>
-<span id="cb1-399"><a href="#cb1-399" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 0   | 1   | 51        |</span>
-<span id="cb1-400"><a href="#cb1-400" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 1   | 2   | 102       |</span>
-<span id="cb1-401"><a href="#cb1-401" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 2   | 3   | 153       |</span>
-<span id="cb1-402"><a href="#cb1-402" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 3   | 5   | 255       |</span>
-<span id="cb1-403"><a href="#cb1-403" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 1    | 5   | 6   | 306       |</span>
-<span id="cb1-404"><a href="#cb1-404" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-394"><a href="#cb1-394" aria-hidden="true" tabindex="-1"></a>| id  | age      | died |$t_0$| $t$ | age*t     |</span>
+<span id="cb1-395"><a href="#cb1-395" aria-hidden="true" tabindex="-1"></a>|-----|----------|------|-----|-----|-----------|</span>
+<span id="cb1-396"><a href="#cb1-396" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 0   | 1   | 51        |</span>
+<span id="cb1-397"><a href="#cb1-397" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 1   | 2   | 102       |</span>
+<span id="cb1-398"><a href="#cb1-398" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 2   | 3   | 153       |</span>
+<span id="cb1-399"><a href="#cb1-399" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 0    | 3   | 5   | 255       |</span>
+<span id="cb1-400"><a href="#cb1-400" aria-hidden="true" tabindex="-1"></a>| 2   | 51       | 1    | 5   | 6   | 306       |</span>
+<span id="cb1-401"><a href="#cb1-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-402"><a href="#cb1-402" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-403"><a href="#cb1-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-404"><a href="#cb1-404" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>L'altération des rapports de risque dépend de la forme fonctionnelle de l'intéraction choisie. Ici la variation dans la durée du rapport des risque est constante, ce qui est une hypothèse assez forte. On a, en quelques sorte, réintroduit une hypothèse de proportionnalité, ici sur le degré d'altération des écarts de risques dans le temps, qui devient lui même strictement constant.</span>
 <span id="cb1-405"><a href="#cb1-405" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-406"><a href="#cb1-406" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-407"><a href="#cb1-407" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>L'altération des rapports de risque dépend de la forme fonctionnelle de l'intéraction choisie. Ici la variation dans la durée du rapport des risque est constante, ce qui est une hypothèse assez forte. On a, en quelques sorte, réintroduit une hypothèse de proportionnalité, ici sur le degré d'altération des écarts de risques dans le temps, qui devient lui même strictement constant.</span>
+<span id="cb1-407"><a href="#cb1-407" aria-hidden="true" tabindex="-1"></a><span class="fu">###  Que faire ?</span></span>
 <span id="cb1-408"><a href="#cb1-408" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-409"><a href="#cb1-409" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-410"><a href="#cb1-410" aria-hidden="true" tabindex="-1"></a><span class="fu">###  Que faire ?</span></span>
-<span id="cb1-411"><a href="#cb1-411" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-412"><a href="#cb1-412" aria-hidden="true" tabindex="-1"></a>***Ne rien faire***   </span>
-<span id="cb1-413"><a href="#cb1-413" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-414"><a href="#cb1-414" aria-hidden="true" tabindex="-1"></a>On interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison). Difficilement soutenable pour l’analyse des effets cliniques, elle peut être envisagée dans d’autres domaines. Attention au nombre de variables qui ne respectent pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée si l'analyse a des visée prédictives. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme très « moyenne » sur la période d’observation. </span>
-<span id="cb1-415"><a href="#cb1-415" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-416"><a href="#cb1-416" aria-hidden="true" tabindex="-1"></a>On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps des écarts de risque, s’accentuent  à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais si cette non proportionnalité conduit à un changement du sens des rapport de risque je suis moins convaincu de la pertinence de cette stratégie. Encore une fois, et il faut le rappeler, l'estimation des courbes de survie doit permette d'anticiper ce dernier cas de figure.</span>
-<span id="cb1-417"><a href="#cb1-417" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-418"><a href="#cb1-418" aria-hidden="true" tabindex="-1"></a>Il faut également tenir compte de l’intérêt portée par les variables qui présentent un problème par rapport à l’hypothèse. Il n’est peut-être pas nécessaire de complexifier le modèle pour des variables introduites comme simples contrôles.</span>
+<span id="cb1-409"><a href="#cb1-409" aria-hidden="true" tabindex="-1"></a>***Ne rien faire***   </span>
+<span id="cb1-410"><a href="#cb1-410" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-411"><a href="#cb1-411" aria-hidden="true" tabindex="-1"></a>On interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison). Difficilement soutenable pour l’analyse des effets cliniques, elle peut être envisagée dans d’autres domaines. Attention au nombre de variables qui ne respectent pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée si l'analyse a des visée prédictives. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme très « moyenne » sur la période d’observation. </span>
+<span id="cb1-412"><a href="#cb1-412" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-413"><a href="#cb1-413" aria-hidden="true" tabindex="-1"></a>On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps des écarts de risque, s’accentuent  à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais si cette non proportionnalité conduit à un changement du sens des rapport de risque je suis moins convaincu de la pertinence de cette stratégie. Encore une fois, et il faut le rappeler, l'estimation des courbes de survie doit permette d'anticiper ce dernier cas de figure.</span>
+<span id="cb1-414"><a href="#cb1-414" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-415"><a href="#cb1-415" aria-hidden="true" tabindex="-1"></a>Il faut également tenir compte de l’intérêt portée par les variables qui présentent un problème par rapport à l’hypothèse. Il n’est peut-être pas nécessaire de complexifier le modèle pour des variables introduites comme simples contrôles.</span>
+<span id="cb1-416"><a href="#cb1-416" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-417"><a href="#cb1-417" aria-hidden="true" tabindex="-1"></a>Mais plus problématique <span class="co">[</span><span class="ot">**important**</span><span class="co">]</span>… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de ***frailty*** (fragilité) lorsque cette non homogénéité n’est pas observable. Des estimations, plus complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.  </span>
+<span id="cb1-418"><a href="#cb1-418" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-419"><a href="#cb1-419" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-420"><a href="#cb1-420" aria-hidden="true" tabindex="-1"></a>Mais plus problématique <span class="co">[</span><span class="ot">**important**</span><span class="co">]</span>… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de ***frailty*** (fragilité) lorsque cette non homogénéité n’est pas observable. Des estimations, plus complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.  </span>
+<span id="cb1-420"><a href="#cb1-420" aria-hidden="true" tabindex="-1"></a>***Modèle de Cox stratifié***   </span>
 <span id="cb1-421"><a href="#cb1-421" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-422"><a href="#cb1-422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-423"><a href="#cb1-423" aria-hidden="true" tabindex="-1"></a>***Modèle de Cox stratifié***   </span>
-<span id="cb1-424"><a href="#cb1-424" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-425"><a href="#cb1-425" aria-hidden="true" tabindex="-1"></a>Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie prédites ajustées, et si une seule covariable (binaire) présente un problème. Les HR ne seront pas estimés pour la variable qui ne respecte pas l'hypothèse.    </span>
-<span id="cb1-426"><a href="#cb1-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-427"><a href="#cb1-427" aria-hidden="true" tabindex="-1"></a>***Intéraction***    </span>
-<span id="cb1-428"><a href="#cb1-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-429"><a href="#cb1-429" aria-hidden="true" tabindex="-1"></a>Introduire une interaction avec la durée. Cela peut permettre en plus d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des rapports de risque, dans l'idéal une seule variable. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être strictement linéaire, ce qui est une hypothèse plutôt forte....  on introduit de nouveau une contrainte de proportionnalité dans le modèle.  </span>
-<span id="cb1-430"><a href="#cb1-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-431"><a href="#cb1-431" aria-hidden="true" tabindex="-1"></a>***Modèles alternatifs***  </span>
+<span id="cb1-422"><a href="#cb1-422" aria-hidden="true" tabindex="-1"></a>Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie prédites ajustées, et si une seule covariable (binaire) présente un problème. Les HR ne seront pas estimés pour la variable qui ne respecte pas l'hypothèse.    </span>
+<span id="cb1-423"><a href="#cb1-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-424"><a href="#cb1-424" aria-hidden="true" tabindex="-1"></a>***Intéraction***    </span>
+<span id="cb1-425"><a href="#cb1-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-426"><a href="#cb1-426" aria-hidden="true" tabindex="-1"></a>Introduire une interaction avec la durée. Cela peut permettre en plus d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des rapports de risque, dans l'idéal une seule variable. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être strictement linéaire, ce qui est une hypothèse plutôt forte....  on introduit de nouveau une contrainte de proportionnalité dans le modèle.  </span>
+<span id="cb1-427"><a href="#cb1-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-428"><a href="#cb1-428" aria-hidden="true" tabindex="-1"></a>***Modèles alternatifs***  </span>
+<span id="cb1-429"><a href="#cb1-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-430"><a href="#cb1-430" aria-hidden="true" tabindex="-1"></a>Utiliser un modèle alternatif: modèles paramétriques à risques proportionnels si la distribution du risque s’ajuste bien, le modèle paramétrique « flexible » de Parmar-Royston ou un modèle à temps discret. Pour la dernière solution, on peut également corriger la non proportionnalité avec l'introduction  d'une intéraction. Si on ne le fait pas, les risques prédits, par définition des probabilités conditionnelles, resteront toujours dans les bornes contrairement au modèle de Cox.      </span>
+<span id="cb1-431"><a href="#cb1-431" aria-hidden="true" tabindex="-1"></a>Utiliser un modèle non paramétrique additif dit d’Aalen ou une de ses variantes (non traité). Mais ces modèles, dont les résultats sont présentés par des graphiques, se commentent assez difficilement.  </span>
 <span id="cb1-432"><a href="#cb1-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-433"><a href="#cb1-433" aria-hidden="true" tabindex="-1"></a>Utiliser un modèle alternatif: modèles paramétriques à risques proportionnels si la distribution du risque s’ajuste bien, le modèle paramétrique « flexible » de Parmar-Royston ou un modèle à temps discret. Pour la dernière solution, on peut également corriger la non proportionnalité avec l'introduction  d'une intéraction. Si on ne le fait pas, les risques prédits, par définition des probabilités conditionnelles, resteront toujours dans les bornes contrairement au modèle de Cox.      </span>
-<span id="cb1-434"><a href="#cb1-434" aria-hidden="true" tabindex="-1"></a>Utiliser un modèle non paramétrique additif dit d’Aalen ou une de ses variantes (non traité). Mais ces modèles, dont les résultats sont présentés par des graphiques, se commentent assez difficilement.  </span>
-<span id="cb1-435"><a href="#cb1-435" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-436"><a href="#cb1-436" aria-hidden="true" tabindex="-1"></a>**Forêt aléatoire**    </span>
-<span id="cb1-437"><a href="#cb1-437" aria-hidden="true" tabindex="-1"></a>Autre méthode : les forêts aléatoires. L.Breiman a dès le départ proposé une estimation des modèles de survie par cette méthode. Par définition, pas sensible à l’hypothèse PH. Mais cela reste des méthodes à finalité prédictive, moins riche en interprétation. </span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-433"><a href="#cb1-433" aria-hidden="true" tabindex="-1"></a>**Forêt aléatoire**    </span>
+<span id="cb1-434"><a href="#cb1-434" aria-hidden="true" tabindex="-1"></a>Autre méthode : les forêts aléatoires. L.Breiman a dès le départ proposé une estimation des modèles de survie par cette méthode. Par définition, pas sensible à l’hypothèse PH. Mais cela reste des méthodes à finalité prédictive, moins riche en interprétation. </span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

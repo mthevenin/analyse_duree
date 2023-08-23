@@ -124,7 +124,7 @@ On peut vérifier que la somme des estimateurs permet d’obtenir la survie *tou
    
 ::: callout-tip
 
-### **R-Stata-Sas-Python**
+#### **R-Stata-Sas-Python**
 
 L’estimation avec des risques de type « cause-specific » demande juste de recoder la variable évènement/censure, en glissant les risques concurrents en censure à droite.  
 
@@ -201,7 +201,7 @@ Pour les questions liées à l’interprétation de ces deux types de modèles, 
 
 ::: callout-tip
 
-### R-Stata-Sas-Python  
+#### R-Stata-Sas-Python  
 
 * **R**: on utilise la fonction **`crr`** du package cmprsk.
 

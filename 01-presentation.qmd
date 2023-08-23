@@ -51,7 +51,7 @@ Si j'avais à trancher, il devrait un peu s'éterniser sous l'appelation **Intro
    - Fixes: sexe/genre, génération, niveau de diplôme le plus élevé,......
    - Dynamiques (TVC: *Time varying covariates*): 
      - Mesurées à tout moment entre le début et la sortie de l'observation: statut matrimonial, taille du ménage, statut d'activité...
-     - Pour les modèles et à l'exception d'une méthode traité pluse loin, à savoir le modèle semi-paramétrique de Cox, en présence de données censurée, la durée ou une transformation de celle-ci est une variable dynamique qui est également introduite comme variable indépendante pour assurer le bon ajustement des données. L'introduction de la durée ou une transformation de celle-ci comme variable dépendante ne peut se faire qu'en absence d'observation censurée, en particulier à droite.
+     - Pour les modèles,  à l'exception du semi-paramétrique de Cox, en présence de données censurée la durée ou une transformation de celle-ci est une variable dynamique qui est également introduite comme variable indépendante pour assurer le bon ajustement des données. L'introduction directe d'une fonction de la durée comme variable dépendante ne peut se faire qu'en absence d'observation censurée, en particulier à droite.
 
 
 

@@ -171,16 +171,16 @@ De la même manière, plus on entre à un âge élevé dans la liste d'attente p
 
 Le modèle est  estimé avec la fonction **`coxph`** de la librairie **`survival`**.  Hors options, la syntaxe est identiques aux fonctions `survfit` et `survdif`.
 
-### Stata
+#### Stata
 
 Le modèle est estimé avec la commande **`stcox`**.
 
-### SAS
+#### SAS
 
 Le modèle est estimé avec la **`proc phreg`**.
 
 
-### Python
+#### Python
 
 Avec la librairie `lifelines`, le modèle est estimé avec la fonction **`CoxPHFitter`**. Avec la librairie `statmodels`, il est estimé avec la fonction `smf.phreg`.
 :::
@@ -196,9 +196,6 @@ Avec la librairie `lifelines`, le modèle est estimé avec la fonction **`CoxPHF
 *	Analyser cette hypothèse revient à introduire une interaction entre les rapports et la durée ou plutôt précisément une fonction de la durée).
 
 *	Plusieurs méthodes disponibles, on traitera  celles basées sur les **résidus de Schoenfeld**, et l'introduction directe d'une intéraction entre une fonction la durée et les covariables du modèle. Cette dernière fait également office de méthode de correction lorsque la violation de l'hypothèse est jugée trop importante ou problématique du point de vue des résultats obtenus. 
-
-
-
 
 
 * Si on regarde les courbes de Kaplan-Meier, leurs croisement non tardif impliquera nécessairement un problème sur cette hypothèse. 
@@ -290,16 +287,16 @@ Ici l'hypothèse de proportionnalité des risques est questionnable pour la vari
 *  Test OLS: j’ai récupéré le programme du test antérieur, renommé **`cox.zphold`**. On peut le charger simplement, et il est facilement exécutable.
    Pour le charger: `source("https://raw.githubusercontent.com/mthevenin/analyse_duree/main/cox.zphold/cox.zphold.R")`
 
-### Stata
+#### Stata
 
 Le test (OLS) est obtenu avec la commande **`estat phtest, d`**. Par défaut Stata utilise $g(t)=t$. On peut modifier cette fonction. 
 
-### SAS
+#### SAS
 
 Le test (OLS) est disponible depuis quelques années avec l’argument **`zph`** sur la ligne `proc lifetest`. Par défaut SAS utilise $g(t)=t$. On peut modifier cette fonction.
 
 
-### Python
+#### Python
 
 Le test (OLS)  est donné avec la  fonction **`proportional_hazard_test`** de la librairie `lifelines`. La fonction utilise par défaut $g(t)=t$, mais on peut afficher les résultats pour toutes les transformations de $t$ disponibles avec l’option `time_transform=’all’`. 
 

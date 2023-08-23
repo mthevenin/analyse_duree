@@ -158,24 +158,24 @@ $S(t_{i+1})\leq0.5$ et $S(t_{i})>0.5$.
 **R-Stata-Sas-Python**    
 
 ::: panel-tabset
-### R
+#### R
 
 Les fonctions de survie avec la méthode dite actuarielle sont estimables avec le package **`discSurv`**. Avec le temps, il s'est étoffé, on peut maintenant paramatrer des intervalles (programmation pénible), mais les quantiles de la durée ne sont toujours pas estimables, ce qui est bien dommage.  
 
 
-### Stata
+#### Stata
 
 Commande `ltable`, avec en option la paramétrisation des intervalles de
 durées. Voir la commande externe `qlt` (MT) qui calcule les durées
 médianes (+ autres quartiles) et qui recalcule la fonction de séjour
 avec une définition des intervalles de durées identique à celle de SAS.
 
-### Sas
+#### Sas
 
 Sous une `proc lifetest` avec en option `method=lifetable`. On peut
 paramétrer les intervalles d'estimation avec l'option `width`.
 
-### Python
+#### Python
 
 A l'heure actuelle, aucune fonction à ma connaissance
 :::
@@ -301,17 +301,18 @@ en deçà de 50% pour l'obtention cette durée médiane.
 **R-Stata-Sas-Python**
 
 ::: panel-tabset
-### R
+
+#### R
 
 Les estimateurs sont obtenus avec fonction **`survfit`** du package `survival`. On peut obtenir des rendus graphiques de meilleures qualité avec le package `survminer` (fonction `ggsurvplot`)
 
-### Stata
+#### Stata
 
 Après avoir appelé les variables de durée et de censure en mode
 **survival** avec **`stset`**), le tableau des estimateurs est obtenu avec la
 commande **`sts list`** et le graphique avec **`sts graph`**.
 
-### SAS
+#### SAS
 
 L'estimation de Kaplan-Meier est affichée par défaut par la
 `proc lifetest`. 
@@ -323,7 +324,7 @@ section SAS du chapitre programmation). On récupère pour le reste de
 l'output les valeurs de la durée pour S(t) =(.75,.5,.25) ainsi que le
 graphique, ce qui est suffisant.
 
-### Python
+#### Python
 
 Les resultats sont donnés dans la librairie `lifeline` par des fonctions
 au nom interminable. Je conseille plutôt l'utilisation de la
@@ -472,7 +473,7 @@ $$H(t)=\sum_{t_i\leq k}q(t_i)$$
 ![Risque cumulé: estimateur Nelson-Aalen](images/Image19.png){width="70%"}
 
 
-**Le risque instantané** 
+**Le risque ou taux de hasard instantané** 
 
 Nécessite l'estimateur de risque cumulé de Nelson-Aalen. Le risque est obtenu en lissant 
 les différences - toujours positive - entre $H(t)$ par la méthode dite

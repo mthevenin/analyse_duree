@@ -98,6 +98,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Recherche"
   }
 }</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -387,6 +390,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><strong>Exemple sur les décès causés par une malformation cardiaque</strong></p>
 <p>Dans la base d’origine, il n’y a pas directement cette dimension de risque concurrent, même si on trouve dans la littérature médicale des études prenant le décès rapide post greffe comme un risque de ce type. Les données étant assez anciennes, avec beaucoup de décès post-opératoire, je ne me suis pas « risquer » à générer directement un risque concurrent sur cette information. Une sortie concurrente a donc été simulée sans plus de précision (variable <em>compet</em>), que l’on considèrera non strictement indépendante à la cause d’intérêt. Ce risque entre donc en concurrence avec la cause du décès directement liée à la malformation cardiaque, que la personne ait été transplantée ou non.</p>
 <div class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
            |    Survival Status
@@ -406,7 +412,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Si on applique la méthode de Kaplan Meier à la cause 1 en traitant la cause 2 comme une censure à droite (<span class="math inline">\(n=18+29=48\)</span>), puis en sommant les deux estimateurs, la fonction de répartition excède 100% au bout de 1000 jours environs. La proportion de survivant.e.s est donc négative.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Image16.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Fonction de répartition avec une cause concurrente traitée comme une censure à droite"><img src="images/Image16.png" class="img-fluid figure-img"></a></p>
+<p><a href="images/Image16.png" class="lightbox" title="Fonction de répartition avec une cause concurrente traitée comme une censure à droite" data-gallery="quarto-lightbox-gallery-1"><img src="images/Image16.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Fonction de répartition avec une cause concurrente traitée comme une censure à droite</figcaption>
 </figure>
 </div>
@@ -438,7 +444,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Image17.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Risques concurrent: estimation de la CIF"><img src="images/Image17.png" class="img-fluid figure-img"></a></p>
+<p><a href="images/Image17.png" class="lightbox" title="Risques concurrent: estimation de la CIF" data-gallery="quarto-lightbox-gallery-2"><img src="images/Image17.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Risques concurrent: estimation de la CIF</figcaption>
 </figure>
 </div>
@@ -452,17 +458,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 --------------------------------------------------
        1    0.0097     0.0097     0.0009    0.0477
        2    0.0388     0.0190     0.0127    0.0892
-       3    0.0583     0.0231     0.0239    0.1149
-       5    0.0777     0.0264     0.0363    0.1395
+       3    0.0583     0.0231     0.0239    0.1149</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       5    0.0777     0.0264     0.0363    0.1395
        6    0.0874     0.0278     0.0429    0.1515
        8    0.0971     0.0292     0.0497    0.1634
        9    0.1068     0.0304     0.0566    0.1751
       12    0.1166     0.0316     0.0638    0.1868
       16    0.1362     0.0338     0.0785    0.2099
-      18    0.1461     0.0349     0.0860    0.2212</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>      21    0.1657     0.0367     0.1014    0.2437
+      18    0.1461     0.0349     0.0860    0.2212
+      21    0.1657     0.0367     0.1014    0.2437
       32    0.1756     0.0376     0.1093    0.2550
       37    0.1856     0.0384     0.1173    0.2662
       40    0.1957     0.0393     0.1254    0.2775
@@ -1207,7 +1213,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a>   </span>
 <span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
 <span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a><span class="fu">### **R-Stata-Sas-Python**</span></span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a><span class="fu">#### **R-Stata-Sas-Python**</span></span>
 <span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a>L’estimation avec des risques de type « cause-specific » demande juste de recoder la variable évènement/censure, en glissant les risques concurrents en censure à droite.  </span>
 <span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a></span>
@@ -1284,7 +1290,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb4-205"><a href="#cb4-205" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-206"><a href="#cb4-206" aria-hidden="true" tabindex="-1"></a>::: callout-tip</span>
 <span id="cb4-207"><a href="#cb4-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-208"><a href="#cb4-208" aria-hidden="true" tabindex="-1"></a><span class="fu">### R-Stata-Sas-Python  </span></span>
+<span id="cb4-208"><a href="#cb4-208" aria-hidden="true" tabindex="-1"></a><span class="fu">#### R-Stata-Sas-Python  </span></span>
 <span id="cb4-209"><a href="#cb4-209" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-210"><a href="#cb4-210" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**R**: on utilise la fonction **`crr`** du package cmprsk.</span>
 <span id="cb4-211"><a href="#cb4-211" aria-hidden="true" tabindex="-1"></a></span>
@@ -1355,7 +1361,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":true});</script>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","openEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":true});</script>
 
 
 

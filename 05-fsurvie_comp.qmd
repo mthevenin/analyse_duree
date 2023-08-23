@@ -67,22 +67,22 @@ Le principe de construction des effectifs observés et espérés reste le même 
   
 ::: panel-tabset
 
-### R 
+#### R 
 
 On utilise la fonction **`survdiff`** de la librairie `survival`. Le résultat du test de Peto-Peto est affiché par défaut (`rho=1`). Si on souhaite utiliser le test non pondéré, on ajoute l’option `rho=0`. Pour obtenir le résultat d'un test multiple corrigé (plus d’un degré de liberté), on peut utiliser la fonction **`pairwise_survdiff`** du package **`survminer`**. Cette fonction permet également d'obtenir des tests 2 à 2.  
 
 Je conseille de rester sur l'option ***Peto-Peto*** et dans le cas d'une variable à plus de deux modalités, d'utiliser la fonction de `survminer` **`pairwise_survdiff`**.
 
-### Stata 
+#### Stata 
 
 On utilise la commande **`sts test`** avec le nom de la version du test: `peto`, `wilcoxon` . Sans préciser le nom de la variante, le test non pondéré est exécuté.
 
-### Sas
+#### Sas
 
 Le test non pondéré et la version Wilcoxon sont données avec l’option **`strata`** de la `proc lifetest`. Attention : ne jamais utiliser la version *LR Test* qui est biaisée. Pour obtenir d’autres versions du test du log-rank, on ajoute **`/test=all`** à l’option `strata`.
 
 
-### Python
+#### Python
 
 Avec la librairie `lifelines`, on utilise la fonction **`logrank_test`**. Quatre variantes sont disponibles (Wilcoxon, Tarone-Ware, Peto-Peto et Fleming-Harrigton). On peut également utiliser la fonction **`duration.survdiff`** de `statmodels` (non pondéré, Wilcoxon - appelé ici Breslow- et Tarone-Ware).  
 
@@ -137,21 +137,21 @@ Pour l'exemple, la durée maximale utilisée par R est de 1407 jours alors que p
   
 ::: panel-tabset
 
-### R  
+#### R  
 
 Librairie **`SurvRm2`**. Programmée par les mêmes personnes que la commande Stata, la fonction proposée n'est pas très souple.
 
-### Stata
+#### Stata
 
 Commande externe **`strmst2`**. La plus ancienne fonction proposée par les logiciels. Au final plus limitée que la solution Sas. J’ai programmé une commande, `diffrmst`, qui représente graphiquement les estimations des Rmst pour chaque temps d’évènement, leurs différences et les p-value issues des comparaisons. 
 
 
-### SAS 
+#### SAS 
 
 Disponible depuis la version 15.1 de SAS/Stat (fin 2018). Les estimations et le résultat du test de comparaison sont récupérables très simplement dans une `proc lifetest`, avec en option **`plots=(rmst)**` . Bien que sortie tardivement par rapport Stata et R, les résultats sont particulièrement complets.
 
 
-### Python
+#### Python
 
 Estimation un peu pénible. A partir de l'estimateur KM obtenu avec la fonction `KaplanMeierFitter` de `lifelines`, on peut obtenir les RMST avec la fonction  `restricted_mean_survival_time`. 
 On peut tracer les fonctions, en revanche le test de comparaison n'est pas implémenté.
@@ -160,7 +160,6 @@ On peut tracer les fonctions, en revanche le test de comparaison n'est pas impl�
 
 
 **Application**  
-
 
 
 Avec $tmax=1407$:
