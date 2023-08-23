@@ -40,7 +40,7 @@ Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des
 
 * **Les notes de cours de German Rodriguez** (en)
   - Démographe à l'université de Princeton. 
-  - Les dernières mises à jour doivent dater de 2017-2018: https://grodri.github.io/glms/notes/c7.pdf
+  - Les dernières mises à jour doivent dater de 2017-2018: [lien](https://grodri.github.io/glms/notes/c7.pdf)
 
 **Ouvrage de référence** en démographie:
 

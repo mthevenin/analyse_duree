@@ -17,14 +17,20 @@ On distingue deux types de données: les données prospectives et rétrospective
 
 ### Les données prospectives
 
--	Individus suivis à des dates successives.
+-	Individus suivis à des dates successives. On parle souvent de données de stock mises à jour à intervalle de temps plus ou moins réguliers. 
 -	Instrument de mesure identique à chaque vague (si possible).
--	Avantages: qualité des données (moins de biais de mémoire).  
--	Inconvénients: délais pour les exploiter dans une analyse, mêmes hypothèses entre deux passages pas forcément respectées, attrition, problèmes liés aux âges d'inclusion.
+
+-	Avantages: qualité des données et techniquement l'absence de biais de mémoire^[Cet avantage peut se trouver contrebalancé par des phénomènes de censure par intervalles, donc de *trous* tout aussi problématique que ceux liés à la mémoire]. 
+
+-	Inconvénients: 
+  - Délais pour les exploiter dans une analyse, 
+  - Mêmes hypothèses entre deux passages pas forcément respectées
+  - Attrition, censure ou troncature à gauche liés aux âges d'inclusion.
 
 
-A noter l’exploitation croissante des données administratives qui peuvent regorger d’informations biographiques. Déjà disponibles, le problème du coût de collecte est contourné. Ce type de données comprend par exemple les informations issues des fichiers des Ressources Humaines des entreprises, qui sont par exemples actuellement exploitées à l’Ined, par exemple dans le cadre du projet « worklife » (<https://worklife.site.ined.fr/>). Elles engendrent en revanche des questionnements techniques liésà l’inférence ((on ne travaille directement pas sur des échantillons).
+A noter l’exploitation croissante des données administratives qui peuvent regorger d’informations biographiques. Déjà disponibles, le problème du coût de collecte peut-être est contourné^[Je ne suis par forcément à l'aise avec cet argument souvent avancé. La maintenance et l'alimentation de ce type de données  est également coûteuse, elle ne se fait pas par magie. Malheureusement cet argument est sûrement une des raisons qui explique les problèmes de financement des enquêtes retrospective]. Ce type de données comprend par exemple les informations issues des fichiers des Ressources Humaines des entreprises, qui ont été exploitées à l’Ined dans le cadre du projet « worklife » (<https://worklife.site.ined.fr/>). Une des sources de plus en plus utilisée en France est maintenant l'EDP^[Echantillon Démographique Permanent. Un bon exemple de données administrative dont le coût de production est loin d'être négligeable]. Elles engendrent en revanche des questionnements techniques liés à l’inférence (on ne travaille directement pas sur des échantillons), et à une présence potentiellement massive de problèmes de censures à gauche ou par intervalles, ou de troncature à gauche^[Se reporter par exemple à la présentation du très rigoureux guide de l'utilisateur de l'EDP: ***Les informations disponibles : des informations à géométrie variable et à trous***].  
 
+Un exemple de mauvaise pratique avec ce type de données sera développé plus loin dans la section relative aux censures et aux troncatures.
 
 
 ### Les données rétrospectives
@@ -36,13 +42,14 @@ A noter l’exploitation croissante des données administratives qui peuvent reg
 -	Inconvénients:  questionnaire long, informations datées qui font appel à la mémoire de l’enquêté.e. A de rares exceptions (enfant, mariage), il est difficile d’aller chercher des datations trop fines avec une retrospectivité assez longue.
 
 
-Les deux types de recueil peuvent être mixés avec des enquêtes à passages répétés (prospectifs) comprenant des informations retrospectives entre 2 vagues (Exemple: la cohorte Elfe de l’Ined-Inserm ou la Millenium-Cohort-Study en Grande Bretagne).
+Les deux types de recueil peuvent être mixés avec des enquêtes à passages répétés comprenant des informations retrospectives entre 2 vagues. Par exemple la cohorte [**Elfe**](https://www.elfe-france.fr/) de l’Ined-Inserm ou la [***Millenium-Cohort-Study***](https://cls.ucl.ac.uk/cls-studies/millennium-cohort-study/) en Grande Bretagne^[Pour avoir exploité ces données, cette cohorte souffre contrairement à Elfe de changement assez récurrent d'un passage à un autre (parait-il lié à ses changements de direction, chacune souhaitant laisser sa "patte"). En revanche elle a le mérite de s'être investi sur la récupération de l'attrition au cours du temps. Cela rend les données difficile à exploiter dans un cadre longitudinal, mais cela à le mérite de donner une certaine stabilisation de l'échantillon de départ].
 
 
 ## Grille AGEVEN
 
 Pour recueillir des informations biographiques retrospectives, on utilise généralement la méthode des grilles AGEVEN.  
 Il s’agit d’une grille âge-évènement, de type chronologique, avec des repères temporels en ligne (âge, année). En colonne, sont complétés de manière progressive et relative, les évènements relatifs à des domaines, par exemple la biographie professionnelle, familiale, résidentielle…  
+
 
 
 ::: callout-note  
