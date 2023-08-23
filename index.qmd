@@ -19,8 +19,7 @@
 
 **Version pdf**: 
 
-- Dernière maj: le 21 août 2023
-- Pour le chapitre programmation, seulement la section dédiée à R a été ajoutée. Pour les 3 autres applications, seulement la version HTML.
+Pour le chapitre programmation, seulement la section dédiée à R a été ajoutée. Pour les 3 autres applications, seulement la version HTML.
 
 
 ## Bibliographie {-}
