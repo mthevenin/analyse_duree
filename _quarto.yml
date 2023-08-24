@@ -61,7 +61,7 @@ format:
     theme: [zephyr, style.scss]
     css: style.css
     highlight-style: zenburn
-    linkcolor: "#De3831"
+    linkcolor: "#e83283"
     code-background: true
     code-copy: true
     toc: true

@@ -146,6 +146,6 @@ Deux enquêtes biographiques de type rétrospectives produite par l’Ined, avec
 
 ![MAFE: base biographique logement](images/Image4.png)
 
-
+Quelques éléments de manipulation de ce type de données biographiques sont présentés dans le chapitre compléments^[Il s'agit d'un premier jet réalisé pour la version 2023 et qui ne peut pas viser l'exhaustivité] [[lien](https://mthevenin.github.io/analyse_duree/10-manipulation.html)]
 
 

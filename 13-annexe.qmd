@@ -1,3 +1,8 @@
+---
+filters:
+  - lightbox
+lightbox: auto
+---
 
 
 # **Annexes**
@@ -138,3 +143,57 @@ Les modèles avec une fraction immunisée peuvent être de ***type mixte*** en a
  Il est également à noter, c'est important, que cette problématique affecte les analyses avec des évènements dits récurrents. Ici, la stratégie classique qui consiste à introduire dans un modèle un simple effet aléatoire de type fragilité partagée (shared frailty) pour contrôler risque d'être insuffisante. Ici le *groupe* est constitué de chaque séquence de remise dans le risque. Exemple pour la fécondité: une personne ayant eu un enfant est exposée au risque d'en avoir un autre, l'horloge temporelle étant alors simplement réinitialisée. Et donc, quid des préférences individuelles en terme de fécondité ^[en situation de récurrence, toujours penser à *remettre à jour* des conditions initiales, par exemple pour la fécondite l'âge de la mère à la naissance de l'enfant pour les rang supérieur à 1]. 
 
 Enfin, les modèles à fragilité ou à fraction immunisée repose tous sur une hypothèse très forte. La fragilité ou le degré d'immunité est toujours défini (estimé) en début d'exposition, et il ne varie pas. Cela peut ne pas toujours faire sens, en particulier pour les préférences, pas forcément stables ou fixes dans le temps.
+
+
+## Exemple d'analyse de durées ***Canada Dry***
+
+
+::: callout-important
+Ce qui suit pourra apparaître un peu polémique. Il conteste, dans une étude publiée, l'utilisation abusive des concepts empruntés au type d'analyse développé dans ce support. Il ne juge ni de l'intérêt de l'étude, ni des résultats obtenus peut-être parfaitement valide dans une autre perspective. 
+Nous estimons, contrairement à ce qu'un chercheur de l'Ined a pu avancé, que l'autrice revendique pleinement l'utilisation d'une méthodologie empruntée à l'analyse de durée ou de survie.
+
+Il n'est par ailleurs pas conseillé de lire ce qui suit sans maîtriser a minima les concepts de bases en analyses de durée: durée d'exposition, censure et troncature, taux de risque etc....
+
+:::
+
+Une étude récente prétend reposer, par la terminologie utilisée, sur une analyse de durée a été publiée  dans la revue *Population* [[Lien](https://www.cairn.info/revue-population-2022-3-page-411.htm)]. Sans surprise les données mobilisées sont de type prospectives, à savoir l'EDP. L'étude cherche à mettre à profit l'ajout de données fiscales à cet échantillon pour analyser la fécondité des femmes nullipares au sein des couples. L'inclusion de ces données fiscale  débute pour l'année 2011, et la sélection de l'échantillon de départ a été faite sur cette année. Au final aucune durée d'exposition n'est clairement définie pour cette première année, alors que les inclusions pour les années suivantes (jusqu'en 2017) se font et de manière plutôt cohérente sur des nouveaux couples cohabitants. De même aucune variable de durée n'a été définie, forcément pour les inclusions de 2011 mais aussi pour les inclusions postérieures. On a simplement retranché 18 à l'âge de la personne de 2011 à 2017. Mais quel est réellement le début de l'exposition alors que c'est dans une situation de couple, dont on ne connait pas la durée en 2011 et qui a moins d'un an pour les inclusions suivante?
+
+Pour les inclusions de 2011, le graphique ci-dessous décrit la construction de la durée construite dans l'article pour les femmes âgées de 18 à 26 ans: pas d'origine commune, pas de mesure de risque au sens de l'analyse de la survie, pas de fonction de séjour etc....
+
+![](images/image22.png)
+
+
+Ici ce ne sont pas les résultats en soit qui posent vraiment problème, mais les termes utilisés lors de la présentation de la méthode et  tout du long de l'analyse des résultats.  
+
+On peut lire par exemple dans l'article:
+
+* "***des modèles de risque instantané à temps discret***" [page 419].
+
+*  En note de bas de page: ***Le risque instantané est la probabilité conditionnelle que l’événement survienne entre le moment t et t + Δt, sachant qu’il n’a pas eu lieu avant t.^[Cette définition est très légère. Le risque instantané est lié à la fonction de survie comme cela a été présneté dans le chapitre "Théorie". Mais aucune fonction de séjour n'est ici estimable dans cet article]*** [page 419]
+
+* "***Le deuxième modèle peut se passer de l’hypothèse des risques instantanés proportionnels***" [page 420]. 
+
+* "***Le quatrième modèle enfin inclut l’interaction des revenus relatifs avec le temps d’exposition au risque***" [page 421]. Il n'y a malheureusement pas de temps d'exposition au risque clairement défini dans l'étude. On peut néanmoins remarquer que pour les couples dont la femmes est très jeune (18-20 ans), l'inclusion en 2011 pourrait correspondre à l'année de mis en couple. 
+
+* Dans le même ordre d'idée: "***La spécification quadratique de la durée d’exposition indique une augmentation initiale de la fonction de risque...**" [page 423]. 
+
+* "***L’équation suivante représente le calcul du risque continu cumulé***", alors qu'aucune fonction de survie n'est estimable. Ce qui par ailleurs justifie l'utilisation d'une fonction de lien de type complémentaire log-log dans l'article (on passera sur le fait que les incidences sont quand même bien trop élevées dans l'article pour utiliser cette transformation, plutôt réservé à des situations de rareté/) [pages 421].
+
+Au final:  
+Après de brefs échanges avec la rédaction en chef de l'Ined^[Nous étions 3 à avoir exprimé de l'étonnement sur le contenu de cet article], il a été convenu qu'il ne s'agissait pas en effet d'une analyse de durée ou de survie....Ouf!.... Mais que l'autrice, via une réponse peu inspirée^[D'un spécialiste de l'Ined sur les questions de fécondité...pas un.e méthodologue], n'avait pas souhaité faire une analyse de ce type... Ha bon?  Je laisserai juge à toute personne de se positionner sur cette dernière affirmation. 
+
+::: callout-warning 
+
+### L'ouvrage de Singer et Willet 
+
+Clairement présenté dans l'article, la *stratégie méthodologique* repose sur une section du fameux ouvrage de J.Singer et J.Willet ***Applied longitudinal data analysis: Modeling change and event occurrence***. Considéré comme une véritable bible des modèles à durée discrètes, il a reposé plusieurs années dans mon bureau et donc été utilisé régulièrement. Il n'en reste pas moins exempt de défauts, avec une structure peu conventionnelle, à côté supermarché à modèle excessif, mais également des partis pris méthodologiques peu discutés comme le test et la correction contestable de la non proportionnalité des risques pour des variables dynamiques. 
+
+Il n'en reste pas moins, qu'à l'exception du dernier chapitre dédié aux temps continu, toutes la méthodologie et les applications sont réalisés dans le cadre stricte de la censure à droite non informative. Les auteurs avaient pourtant  pris le soins d'alerter très clairement les lecteurs des problèmes posés par présence de censure ou de troncature à gauche: 
+
+> pages 320 et 321: ***In what follows, we typically assume that all censoring occurs on the right***. In section 15.6, however, we describe what you can do when your data set includes what are known as late entrants into the risk set. You are most likely to encounter late entrants if you study stock samples, age-heterogeneous groups of people who already occupy the initial state when data collection begins—for example, a random sample of adults who have yet to experience a depressive episode. Your plan is to follow everyone for a fixed period of time—say ten years— and record whether and when sample participants experience their first episode. Because each sample member was a different age when data collection began, however, the ten years you cover do not cover the same ten years of peoples’ lives: you follow the 20-year-olds until they are 30, the 21-year-olds until they are 31, the 22-year-olds until they are 32, and so on. For an outcome like depression onset, it makes little sense to clock “time” using chronological years (2009,2010, etc). Instead, you would like to clock “time” in terms of age, but you do not observe everyone during the identical set of ages.]
+
+On trouvera également les programmes associés aux exemples de l'ouvrage [[ici](https://stats.oarc.ucla.edu/other/examples/alda/)]
+
+:::
+
+
