@@ -180,7 +180,7 @@ On peut lire par exemple dans l'article:
 * "***L’équation suivante représente le calcul du risque continu cumulé***", alors qu'aucune fonction de survie n'est estimable. Ce qui par ailleurs justifie l'utilisation d'une fonction de lien de type complémentaire log-log dans l'article (on passera sur le fait que les incidences sont quand même bien trop élevées dans l'article pour utiliser cette transformation, plutôt réservé à des situations de rareté/) [pages 421].
 
 Au final:  
-Après de brefs échanges avec la rédaction en chef de l'Ined^[Nous étions 3 à avoir exprimé de l'étonnement sur le contenu de cet article], il a été convenu qu'il ne s'agissait pas en effet d'une analyse de durée ou de survie....Ouf!.... Mais que l'autrice, via une réponse peu inspirée^[D'un spécialiste de l'Ined sur les questions de fécondité...pas un.e méthodologue], n'avait pas souhaité faire une analyse de ce type... Ha bon?  Je laisserai juge à toute personne de se positionner sur cette dernière affirmation. 
+Après de brefs échanges avec la rédaction en chef de l'Ined^[Nous étions 3 à avoir exprimé de l'étonnement sur le contenu de cet article], il a été convenu qu'il ne s'agissait pas en effet d'une analyse de durée ou de survie....Ouf!.... Mais que l'autrice, via une réponse peu inspirée^[D'un spécialiste de l'Ined sur les questions de fécondité...pas un.e méthodologue], n'avait pas souhaité faire une analyse de ce type... Ha bon?
 
 ::: callout-warning 
 
