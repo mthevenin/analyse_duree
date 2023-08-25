@@ -81,7 +81,6 @@ Par exemple en analysant des décès avec un recueil prospectif, si un individu 
 - A l’Ined l’exploitation du registre des personnes atteintes de mucoviscidose (G.Belis) donne une autre illustration de ce phénomène. Chaque année un nombre significatif de personnes sortent du registre (pas de résultats aux examens annuels). Si certain.e.s perdu.e.s de vue s’expliquent par des déménagements, émigration ou par un simple problème d’enregistrement des informations, on note qu’ils/elles sont nombreu.se.s à présenter une forme « légère » de la maladie. L’information pouvant être donnée ici par la mutation du gène. Comme il n’est pas recommandé de supprimer ou de traiter ces observations comme des censures à droite non informatives, on peut les appréhender comme un risque concurrent au décès ou à tout autre évènement analysé à partir de ce registre (voir section dédiée). 
 - 
 
-
 Les graphiques suivant représentent, en temps calendaire et après sa transformation en durée, la logique des censures à droite. Le recueil des informations est ici de nature prospectives, et bien évidemment on suppose que le début de l'observation correspond à un début d'exposition cohérent avec l'analyse réalisée (année de diagnostic d'une maladie, début d'une séquence d'emploi, de lieu de résidence, de couple ou de célibat strict etc....).
 
 *	Trait plein : durée observée
@@ -199,7 +198,7 @@ Propriétés:
 - Pour une valeur de $t$ donnée, la fonction de densité de l'évènement donne la distribution des moments où les évènement ont eu lieu. Elle est donnée dans un premier temps par la probabilité de connaitre l'évènement dans un petit intervalle de temps $dt$. Si $dt$ est proche de 0 (temps continu) alors cette probabilité tend également vers 0. On norme donc cette probabilité par $dt$. Rappel: on est toujours ici dans la théorie.  
 - En temps continu, la fonction de densité est donnée par la dérivée de la fonction de répartition: $f(t)=F'(t)=-S'(t)$. 
 
-Formellement la fonction de densité $f(t)$ s'écrit:  
+Formellement la fonction de densité $f(t)$ s'écrit: 
 
 $$f(t)=\lim\limits_{dt\to{0}}  \frac{P(t\leq{T}< t + dt)}{dt}$$  
 
@@ -220,7 +219,15 @@ On peut également écrire:
 $h(t)=\frac{f(t)}{S(t)}=\frac{F'(t)}{S(t)}=-\frac{S'(t)}{S(t)}$ ^[La relation $h(t)=\frac{f(t)}{S(t)}$ et donc $f(t)= h(t) \times S(t)$ est intéressante et importante car elle permet
 d'écrire la vraisemblance du processus probabiliste permettant d'estimer les paramètres des différentes analyses. On voit déjà sa proximité avec la fonction de masse de Bernouilli: $f(y_i) = p^{y_i} \times (1-p)^{1-y_i}$. Se reporté à la section qui décrit qui la vraisemblance partielle de Cox pour s'en faire une idée plus précise.]
 
-On remarque que cette fonction de risque (ou *hazard rate*) n’est pas une probabilité car $\frac{f(t)}{S(t)}$ ne peut pas contraindre la valeur obtenue à ne pas être supérieure à 1.
+On remarque que cette fonction de risque (ou *hazard rate*) n’est pas une probabilité car $\frac{f(t)}{S(t)}$ ne peut pas contraindre ici la valeur obtenue à ne pas être supérieure à 1.
+
+::: callout-important
+
+## Grandeurs avec des durées discrètes/groupées
+
+Les expressions de la densité et du risque dit instantané se simplifie: $f(t)=P(t\leq{T}< t + dt)$ et $h(t)=P(t\leq{T}< t + dt | T\geq{t})$. Ces deux grandeurs ne sont plus des taux tel qu'ils ont été définit précedemment, mais des probabilités.  
+Néanmoins les relations entre les grandeurs, en particulier celle qui lie risque, densité et survie reste toujours valable. Ceci est fondamental, car elle permet de définir la fonction de vraisemblance sur laquelle repose le calcul de tous les estimateurs 
+:::
 
 
 ### Le risque cumulé $H(t)$
