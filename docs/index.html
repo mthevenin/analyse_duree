@@ -179,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-theorie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">lightbox: auto</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>La théorie</strong></span></span></a>
   </div>
 </li>
       </ul>
@@ -354,7 +354,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Date de publication</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">24 août 2023</p>
+      <p class="date">25 août 2023</p>
     </div>
   </div>
   
@@ -368,27 +368,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h1 data-number="1"><span class="header-section-number">1</span> <strong>Présentation - Bibliographie - Outils</strong></h1>
 <section id="le-support" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="le-support">Le support</h2>
-<p><strong>MISE A JOUR DU SUPPORT EN COURS</strong></p>
-<ul>
-<li><p>Le support est maintenant intégralement disponible en format pdf en cliquant sur l’icône au dessus de la barre de recherche.</p></li>
-<li><p>D’ici la fin septembre 2023:</p>
-<ul>
-<li>Une introduction du support à cet endroit.</li>
-<li>Quelques ajouts:
-<ul>
-<li>Un nouveau chapitre sur la manipulation des données [<strong>OK</strong>].</li>
-<li>Par l’exemple, un warning assez soutenu sur des utilisations douteuses de données prospectives (on visera l’EDP - Echantillon Démographique Permanent).</li>
-<li>J’avais retiré la courte présentation des fonctions de lien probit et surtout complémentaire-loglog dans les modèles à durée discrète….maivaise idée que j’ai eu (voir point précédent).</li>
-<li>Je ne pense pas avoir le temps mais on sait jamais: une première présentation des <em>modèles à pseudo observations</em> dans la section annexe (sinon en fin d’année ou à l’été prochain).</li>
-</ul></li>
-</ul></li>
-</ul>
-<p><strong>Version pdf</strong>:</p>
-<p>Pour le chapitre programmation, seulement la section dédiée à R a été ajoutée. Pour les 3 autres applications, seulement la version HTML est disponible.</p>
+<p>Ce document est utilisé comme de support de formation, principalement pour des formations internes à l’Ined, des formations dans le cadre d’HED, et le cours de master 2 de démographie de l’Université de Strasbourg. En terme de contenu il reste classique, il s’agit d’une introduction, même si certaines nouveautés méthodologiques (pas si récente non plus) sont présentées comme l’estimation des RMST. Encore très voire trop dominé par les techniques d’estimations à risques proportionnels, j’espère pouvoir ajouter pour la version 2024 les modèles à pseudo-observations qui me semble très prometteurs. En analyse de durée, la théorie et la techniques sont à rares exceptions près construites sur la base d’une métrique temporelle dite continue, le passage à une métrique discrètes/groupées, standard dans les sciences sociales, devra être évaluée. Cela prendra surement un peu de temps.</p>
+<p>Pour cette version 2023, le principal ajout concerne un chapitre sur les manipulations des données biographiques [<a href="https://mthevenin.github.io/analyse_duree/10-manipulation.html">Lien</a>]. C’est un premier jet, il ne peut pas être exhaustif ou représentatif de toutes les manipulations auxquelles on peut être confrontées, mais il permet à partir d’un format de données de s’en faire une idée. Dans une démarche plus collective, le nouveau support mis en place par le service Sms de l’Ined, et dédié principalement à la programmation sous R [<a href="https://mthevenin.github.io/assistoolsms/">lien</a>] sera alimenté par des fiches d’exemples sur cette problématiques.</p>
+<p>Sur la forme, le support a été passé en format ouvrage (sans en avoir l’ambition je précise) et une version pdf peut-être directement téléchargée. Il est identique à la version htm, sauf pour le chapitre programmation ou seulement les éléments relatifs à R sont inclus.</p>
+<p>Un petit mot sur l’application présente dans le support. Issu de la médecine, survie de personnes souffrant d’une insuffisance cardiaque, elle pourrait décevoir vu son éloignement avec des problématiques issues des sciences sociales. Cette base d’analyse permet néanmoins de couvrir avec peut d’information, la quasi totalité des points traités dans ce support. Je l’admets qu’il serait préférable de trouver un jour autre chose, ou de donner par exemple en annexe quelques exemples d’applications supplémentaires.<br>
+Néanmoins pour les personnes participant à la formation, les jeux de données sont bien issus des sciences sociales. Je pourrais mettre ces exemples sur le dépôt github, mais je dois également gérer un examen annuel.</p>
+<p>Il ne s’agit pas d’un support validé institutionnellement. J’assume seul et totalement certains partis pris ou erreurs conceptuelles. J’en profite également pour remercier, quelques soient leur statut, l’ensemble des personnes ayant fait appel sur ce domaine à mon assistance, ainsi que l’ensembe les participant.e.s aux formations et cours. Par leurs remarques, les problématiques traitées, ils me permettent de réviser ce document chaque année. Enfin, je remercie plus particulierement <em>Eva Lelièvre</em> et <em>Arnaud Bringé</em> pour l’ensemble du savoir qu’ils m’ont transmis sur ce domaine.</p>
 </section>
 <section id="bibliographie" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="bibliographie">Bibliographie</h2>
-<p>Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine, qui est ici l’espace privilégié de l’ingénierie méthodologique. On trouve également de (trop) nombreux tutoriels à dominante <em>mise en pratique avec R</em>.</p>
+<p>Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est volontairement courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine, qui est ici l’espace privilégié de l’ingénierie méthodologique. On trouve également de (trop) nombreux tutoriels généraliste à dominante <em>mise en pratique avec R</em>, dont je ne conseille pas forcément l’utilisation.</p>
 <p><strong>Accès en ligne</strong></p>
 <ul>
 <li><strong>Cours Gilbert Colletaz</strong> (Université d’Orléans - Master d’économétrie).
@@ -398,13 +387,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li><strong>Document de travail de Simon Quantin</strong> (Insee).
 <ul>
-<li>Couvre l’ensemble des techniques de base d’analyse des durées en durée dite continue. Il propose surement la meilleure introduction en langue française à la problématique de la <em>fragilité</em>.</li>
-<li>Application en R seulement (attention au passage de la v3 du package <code>survival</code>)</li>
+<li>Couvre l’ensemble des techniques de base d’analyse des durées en durée dite continue. Il propose surement la meilleure introduction en langue française à la problématique de la <em>fragilité</em>, qui sera ici seulement présenté trop brièvement.</li>
+<li>Application en R seulement (Attention au passage de la v3 du package <code>survival</code>)</li>
 <li>2019 - pas de mise à jour: <a href="https://www.insee.fr/fr/statistiques/3695681">lien</a></li>
 </ul></li>
 <li><strong>Les notes de cours de German Rodriguez</strong> (en)
 <ul>
-<li>Démographe à l’université de Princeton.</li>
+<li>Démographe à l’université de Princeton.<br>
+</li>
 <li>Les dernières mises à jour doivent dater de 2017-2018: <a href="https://grodri.github.io/glms/notes/c7.pdf">lien</a></li>
 </ul></li>
 </ul>
@@ -741,63 +731,60 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Le support {-} </span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>**MISE A JOUR DU SUPPORT EN COURS**</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Le support est maintenant intégralement disponible en format pdf en cliquant sur l'icône au dessus de la barre de recherche.</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>D'ici la fin septembre 2023: </span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Une introduction du support à cet endroit. </span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Quelques ajouts:  </span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Un nouveau chapitre sur la manipulation des données <span class="co">[</span><span class="ot">**OK**</span><span class="co">]</span>. </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Par l'exemple, un  warning assez soutenu sur des utilisations douteuses de données prospectives (on visera l'EDP - Echantillon Démographique Permanent).</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>J'avais retiré la courte présentation des fonctions de lien probit et surtout complémentaire-loglog dans les modèles à durée discrète....maivaise idée que j'ai eu (voir point précédent). </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ss">    * </span>Je ne pense pas avoir le temps mais on sait jamais: une première présentation des *modèles à pseudo observations* dans la section annexe (sinon en fin d'année ou à l'été prochain).</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>**Version pdf**: </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Ce document est utilisé comme de support de formation, principalement pour des formations internes à l'Ined, des formations dans le cadre d'HED, et le cours de master 2 de démographie de l'Université de Strasbourg. </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>En terme de contenu il reste classique, il s'agit d'une introduction, même si certaines nouveautés méthodologiques (pas si récente non plus) sont présentées comme l'estimation des RMST. Encore très voire trop dominé par les techniques d'estimations à risques proportionnels, j'espère pouvoir ajouter  pour la version 2024 les modèles à pseudo-observations qui me semble très prometteurs. En analyse de durée, la théorie et la techniques  sont à rares exceptions près construites sur la base d'une métrique temporelle dite continue, le passage à une métrique discrètes/groupées, standard dans les sciences sociales, devra être évaluée. Cela prendra surement un peu de temps.  </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Pour cette version 2023, le principal ajout concerne un chapitre sur les manipulations des données biographiques [<span class="co">[</span><span class="ot">Lien</span><span class="co">](https://mthevenin.github.io/analyse_duree/10-manipulation.html)</span>]. C'est un premier jet, il ne peut pas être exhaustif ou représentatif de toutes les manipulations auxquelles on peut être confrontées, mais il permet à partir d'un format de données de s'en faire une idée. Dans une démarche plus collective, le nouveau support mis en place par le service Sms de l'Ined, et dédié principalement à la programmation sous R [<span class="co">[</span><span class="ot">lien</span><span class="co">](https://mthevenin.github.io/assistoolsms/)</span>] sera alimenté par des fiches d'exemples sur cette problématiques.</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Sur la forme, le support a été passé en format ouvrage (sans en avoir l'ambition je précise) et une version pdf peut-être directement téléchargée. Il est identique à la version htm, sauf pour le chapitre programmation ou seulement les éléments relatifs à R sont inclus.</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>Un petit mot sur l'application présente dans le support. Issu de la médecine, survie de personnes souffrant d'une insuffisance cardiaque, elle pourrait décevoir vu son éloignement avec des problématiques issues des sciences sociales. Cette base d'analyse permet néanmoins de couvrir avec peut d'information, la quasi totalité des points traités dans ce support. Je l'admets qu'il serait préférable de trouver un jour autre chose, ou de donner par exemple en annexe quelques exemples d'applications supplémentaires.  </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>Néanmoins pour les personnes participant à la formation, les jeux de données sont bien issus des sciences sociales. Je pourrais mettre ces exemples sur le dépôt github, mais je dois également gérer un examen annuel. </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>Il ne s'agit pas d'un support validé institutionnellement. J'assume seul et totalement certains partis pris ou erreurs conceptuelles.</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>J'en profite également pour remercier, quelques soient leur statut, l'ensemble des personnes ayant fait appel sur ce domaine à mon assistance, ainsi que l'ensembe les participant.e.s aux formations et cours. Par leurs remarques, les problématiques traitées, ils me permettent de réviser ce document chaque année. </span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>Enfin, je remercie plus particulierement *Eva Lelièvre* et *Arnaud Bringé* pour l'ensemble du savoir qu'ils m'ont transmis sur ce domaine.</span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>Pour le chapitre programmation, seulement la section dédiée à R a été ajoutée. Pour les 3 autres applications, seulement la version HTML est disponible.</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bibliographie {-}</span></span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bibliographie {-}</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est volontairement courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine, qui est ici l'espace privilégié de l'ingénierie méthodologique. On trouve également de (trop) nombreux tutoriels généraliste à dominante *mise en pratique avec R*, dont je ne conseille pas forcément l'utilisation.  </span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine, qui est ici l'espace privilégié de l'ingénierie méthodologique. On trouve également de (trop) nombreux tutoriels à dominante *mise en pratique avec R*.  </span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>**Accès en ligne**</span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>**Accès en ligne**</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Cours Gilbert Colletaz** (Université d’Orléans - Master d'économétrie).</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Le cours est mis à jour tous les ans, applications uniquement avec Sas. </span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Dernière version 2020: <span class="co">[</span><span class="ot">lien</span><span class="co">](https://www.master-esa.fr/wp-content/uploads/2021/04/Econometrie-des-donnees-de-survie.pdf)</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Document de travail de Simon Quantin** (Insee).</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Couvre l’ensemble des techniques de base d’analyse des durées en durée dite continue. Il propose surement la meilleure introduction en langue française à la problématique de la *fragilité*. </span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Application en R seulement (attention au passage de la v3 du package <span class="in">`survival`</span>)</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>2019 - pas de mise à jour: <span class="co">[</span><span class="ot">lien</span><span class="co">](https://www.insee.fr/fr/statistiques/3695681)</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Les notes de cours de German Rodriguez** (en)</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Démographe à l'université de Princeton. </span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Les dernières mises à jour doivent dater de 2017-2018: <span class="co">[</span><span class="ot">lien</span><span class="co">](https://grodri.github.io/glms/notes/c7.pdf)</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Cours Gilbert Colletaz** (Université d’Orléans - Master d'économétrie).</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Le cours est mis à jour tous les ans, applications uniquement avec Sas. </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Dernière version 2020: <span class="co">[</span><span class="ot">lien</span><span class="co">](https://www.master-esa.fr/wp-content/uploads/2021/04/Econometrie-des-donnees-de-survie.pdf)</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Document de travail de Simon Quantin** (Insee).</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Couvre l’ensemble des techniques de base d’analyse des durées en durée dite continue. Il propose surement la meilleure introduction en langue française à la problématique de la *fragilité*, qui sera ici seulement présenté trop brièvement. </span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Application en R seulement (Attention au passage de la v3 du package <span class="in">`survival`</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>2019 - pas de mise à jour: <span class="co">[</span><span class="ot">lien</span><span class="co">](https://www.insee.fr/fr/statistiques/3695681)</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Les notes de cours de German Rodriguez** (en)</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Démographe à l'université de Princeton.  </span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Les dernières mises à jour doivent dater de 2017-2018: <span class="co">[</span><span class="ot">lien</span><span class="co">](https://grodri.github.io/glms/notes/c7.pdf)</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>**Ouvrage de référence** en démographie:</span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>**Ouvrage de référence** en démographie:</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>***L'analyse démographique des biographies*** de *Daniel Courgeau* et *Eva Lelièvre* (Edition de l'Ined - 1989). Malheureusement cet ouvrage ne dispose pas de version epub ou pdf disponible en ligne ^<span class="co">[</span><span class="ot">Pour les résident.e.s du campus Condorcet, l'ouvrage est disponible au GED [[lien](https://campus-condorcet.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma991006553559705786&amp;context=L&amp;vid=33CCP_INST:CCP&amp;lang=fr&amp;search_scope=ALL&amp;adaptor=Local%20Search%20Engine&amp;tab=ALL&amp;query=any,contains,courgeau%20leli%C3%A8vre&amp;offset=0)</span><span class="co">]</span>].  </span>
 <span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>***L'analyse démographique des biographies*** de *Daniel Courgeau* et *Eva Lelièvre* (Edition de l'Ined - 1989). Malheureusement cet ouvrage ne dispose pas de version epub ou pdf disponible en ligne ^<span class="co">[</span><span class="ot">Pour les résident.e.s du campus Condorcet, l'ouvrage est disponible au GED [[lien](https://campus-condorcet.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma991006553559705786&amp;context=L&amp;vid=33CCP_INST:CCP&amp;lang=fr&amp;search_scope=ALL&amp;adaptor=Local%20Search%20Engine&amp;tab=ALL&amp;query=any,contains,courgeau%20leli%C3%A8vre&amp;offset=0)</span><span class="co">]</span>].  </span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">## Outils {-}</span></span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="fu">## Outils {-}</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Support réalisé sous <span class="co">[</span><span class="ot">Rstudio</span><span class="co">](https://posit.co/)</span> avec l'outil d'édition <span class="co">[</span><span class="ot">Quarto</span><span class="co">](https://quarto.org/)</span>  </span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Langages utilisés pour la partie programmation: </span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">R</span><span class="co">](https://www.r-project.org/)</span> </span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Stata v18</span><span class="co">](https://www.stata.com/)</span> </span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Sas</span><span class="co">](https://www.sas.com/fr_fr/home.html)</span> </span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Python</span><span class="co">](https://www.python.org/)</span> </span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="al">![](noai.png)</span>{fig-align="center"}</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Support réalisé sous <span class="co">[</span><span class="ot">Rstudio</span><span class="co">](https://posit.co/)</span> avec l'outil d'édition <span class="co">[</span><span class="ot">Quarto</span><span class="co">](https://quarto.org/)</span>  </span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Langages utilisés pour la partie programmation: </span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">R</span><span class="co">](https://www.r-project.org/)</span> </span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Stata v18</span><span class="co">](https://www.stata.com/)</span> </span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Sas</span><span class="co">](https://www.sas.com/fr_fr/home.html)</span> </span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Python</span><span class="co">](https://www.python.org/)</span> </span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="al">![](noai.png)</span>{fig-align="center"}</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

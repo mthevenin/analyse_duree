@@ -4,27 +4,25 @@
 
 ## Le support {-} 
 
-**MISE A JOUR DU SUPPORT EN COURS**
+Ce document est utilisé comme de support de formation, principalement pour des formations internes à l'Ined, des formations dans le cadre d'HED, et le cours de master 2 de démographie de l'Université de Strasbourg. 
+En terme de contenu il reste classique, il s'agit d'une introduction, même si certaines nouveautés méthodologiques (pas si récente non plus) sont présentées comme l'estimation des RMST. Encore très voire trop dominé par les techniques d'estimations à risques proportionnels, j'espère pouvoir ajouter  pour la version 2024 les modèles à pseudo-observations qui me semble très prometteurs. En analyse de durée, la théorie et la techniques  sont à rares exceptions près construites sur la base d'une métrique temporelle dite continue, le passage à une métrique discrètes/groupées, standard dans les sciences sociales, devra être évaluée. Cela prendra surement un peu de temps.  
 
-- Le support est maintenant intégralement disponible en format pdf en cliquant sur l'icône au dessus de la barre de recherche.
+Pour cette version 2023, le principal ajout concerne un chapitre sur les manipulations des données biographiques [[Lien](https://mthevenin.github.io/analyse_duree/10-manipulation.html)]. C'est un premier jet, il ne peut pas être exhaustif ou représentatif de toutes les manipulations auxquelles on peut être confrontées, mais il permet à partir d'un format de données de s'en faire une idée. Dans une démarche plus collective, le nouveau support mis en place par le service Sms de l'Ined, et dédié principalement à la programmation sous R [[lien](https://mthevenin.github.io/assistoolsms/)] sera alimenté par des fiches d'exemples sur cette problématiques.
 
-- D'ici la fin septembre 2023: 
-  - Une introduction du support à cet endroit. 
-  - Quelques ajouts:  
-    * Un nouveau chapitre sur la manipulation des données [**OK**]. 
-    * Par l'exemple, un  warning assez soutenu sur des utilisations douteuses de données prospectives (on visera l'EDP - Echantillon Démographique Permanent).
-    * J'avais retiré la courte présentation des fonctions de lien probit et surtout complémentaire-loglog dans les modèles à durée discrète....maivaise idée que j'ai eu (voir point précédent). 
-    * Je ne pense pas avoir le temps mais on sait jamais: une première présentation des *modèles à pseudo observations* dans la section annexe (sinon en fin d'année ou à l'été prochain).
+Sur la forme, le support a été passé en format ouvrage (sans en avoir l'ambition je précise) et une version pdf peut-être directement téléchargée. Il est identique à la version htm, sauf pour le chapitre programmation ou seulement les éléments relatifs à R sont inclus.
+
+Un petit mot sur l'application présente dans le support. Issu de la médecine, survie de personnes souffrant d'une insuffisance cardiaque, elle pourrait décevoir vu son éloignement avec des problématiques issues des sciences sociales. Cette base d'analyse permet néanmoins de couvrir avec peut d'information, la quasi totalité des points traités dans ce support. Je l'admets qu'il serait préférable de trouver un jour autre chose, ou de donner par exemple en annexe quelques exemples d'applications supplémentaires.  
+Néanmoins pour les personnes participant à la formation, les jeux de données sont bien issus des sciences sociales. Je pourrais mettre ces exemples sur le dépôt github, mais je dois également gérer un examen annuel. 
 
 
-**Version pdf**: 
-
-Pour le chapitre programmation, seulement la section dédiée à R a été ajoutée. Pour les 3 autres applications, seulement la version HTML est disponible.
+Il ne s'agit pas d'un support validé institutionnellement. J'assume seul et totalement certains partis pris ou erreurs conceptuelles.
+J'en profite également pour remercier, quelques soient leur statut, l'ensemble des personnes ayant fait appel sur ce domaine à mon assistance, ainsi que l'ensembe les participant.e.s aux formations et cours. Par leurs remarques, les problématiques traitées, ils me permettent de réviser ce document chaque année. 
+Enfin, je remercie plus particulierement *Eva Lelièvre* et *Arnaud Bringé* pour l'ensemble du savoir qu'ils m'ont transmis sur ce domaine.
 
 
 ## Bibliographie {-}
 
-Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine, qui est ici l'espace privilégié de l'ingénierie méthodologique. On trouve également de (trop) nombreux tutoriels à dominante *mise en pratique avec R*.  
+Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est volontairement courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine, qui est ici l'espace privilégié de l'ingénierie méthodologique. On trouve également de (trop) nombreux tutoriels généraliste à dominante *mise en pratique avec R*, dont je ne conseille pas forcément l'utilisation.  
 
 **Accès en ligne**
 
@@ -33,18 +31,17 @@ Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des
   - Dernière version 2020: [lien](https://www.master-esa.fr/wp-content/uploads/2021/04/Econometrie-des-donnees-de-survie.pdf)
 
 * **Document de travail de Simon Quantin** (Insee).
-  - Couvre l’ensemble des techniques de base d’analyse des durées en durée dite continue. Il propose surement la meilleure introduction en langue française à la problématique de la *fragilité*. 
-  - Application en R seulement (attention au passage de la v3 du package `survival`)
+  - Couvre l’ensemble des techniques de base d’analyse des durées en durée dite continue. Il propose surement la meilleure introduction en langue française à la problématique de la *fragilité*, qui sera ici seulement présenté trop brièvement. 
+  - Application en R seulement (Attention au passage de la v3 du package `survival`)
   - 2019 - pas de mise à jour: [lien](https://www.insee.fr/fr/statistiques/3695681)
 
 * **Les notes de cours de German Rodriguez** (en)
-  - Démographe à l'université de Princeton. 
+  - Démographe à l'université de Princeton.  
   - Les dernières mises à jour doivent dater de 2017-2018: [lien](https://grodri.github.io/glms/notes/c7.pdf)
 
 **Ouvrage de référence** en démographie:
 
 * ***L'analyse démographique des biographies*** de *Daniel Courgeau* et *Eva Lelièvre* (Edition de l'Ined - 1989). Malheureusement cet ouvrage ne dispose pas de version epub ou pdf disponible en ligne ^[Pour les résident.e.s du campus Condorcet, l'ouvrage est disponible au GED [[lien](https://campus-condorcet.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma991006553559705786&context=L&vid=33CCP_INST:CCP&lang=fr&search_scope=ALL&adaptor=Local%20Search%20Engine&tab=ALL&query=any,contains,courgeau%20leli%C3%A8vre&offset=0)]].  
-
 
 
 ## Outils {-}
