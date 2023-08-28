@@ -340,16 +340,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#la-fonction-de-survie-st" id="toc-la-fonction-de-survie-st" class="nav-link" data-scroll-target="#la-fonction-de-survie-st"><span class="header-section-number">4.4.2</span> La fonction de Survie <span class="math inline">\(S(t)\)</span></a></li>
   <li><a href="#la-fonction-de-répartition-ft" id="toc-la-fonction-de-répartition-ft" class="nav-link" data-scroll-target="#la-fonction-de-répartition-ft"><span class="header-section-number">4.4.3</span> La fonction de répartition <span class="math inline">\(F(t)\)</span></a></li>
   <li><a href="#la-fonction-de-densité-ft" id="toc-la-fonction-de-densité-ft" class="nav-link" data-scroll-target="#la-fonction-de-densité-ft"><span class="header-section-number">4.4.4</span> La fonction de densité <span class="math inline">\(f(t)\)</span></a></li>
+  <li><a href="#le-risque-instantané-ht" id="toc-le-risque-instantané-ht" class="nav-link" data-scroll-target="#le-risque-instantané-ht"><span class="header-section-number">4.4.5</span> Le risque instantané <span class="math inline">\(h(t)\)</span></a></li>
+  <li><a href="#le-risque-cumulé-ht" id="toc-le-risque-cumulé-ht" class="nav-link" data-scroll-target="#le-risque-cumulé-ht"><span class="header-section-number">4.4.6</span> Le risque cumulé <span class="math inline">\(H(t)\)</span></a></li>
   </ul></li>
-  <li><a href="#le-risque-instantané-ht" id="toc-le-risque-instantané-ht" class="nav-link" data-scroll-target="#le-risque-instantané-ht"><span class="header-section-number">4.5</span> Le risque instantané <span class="math inline">\(h(t)\)</span></a>
+  <li><a href="#remarques-complémentaires" id="toc-remarques-complémentaires" class="nav-link" data-scroll-target="#remarques-complémentaires"><span class="header-section-number">4.5</span> <strong>Remarques complémentaires</strong></a>
   <ul class="collapse">
-  <li><a href="#le-risque-cumulé-ht" id="toc-le-risque-cumulé-ht" class="nav-link" data-scroll-target="#le-risque-cumulé-ht"><span class="header-section-number">4.5.1</span> Le risque cumulé <span class="math inline">\(H(t)\)</span></a></li>
-  </ul></li>
-  <li><a href="#remarques-complémentaires" id="toc-remarques-complémentaires" class="nav-link" data-scroll-target="#remarques-complémentaires"><span class="header-section-number">4.6</span> <strong>Remarques complémentaires</strong></a>
-  <ul class="collapse">
-  <li><a href="#formes-typiques-de-la-fonction-de-survie" id="toc-formes-typiques-de-la-fonction-de-survie" class="nav-link" data-scroll-target="#formes-typiques-de-la-fonction-de-survie"><span class="header-section-number">4.6.1</span> Formes typiques de la fonction de survie</a></li>
-  <li><a href="#absence-de-censures-à-droites" id="toc-absence-de-censures-à-droites" class="nav-link" data-scroll-target="#absence-de-censures-à-droites"><span class="header-section-number">4.6.2</span> Absence de censures à droites</a></li>
-  <li><a href="#utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues" id="toc-utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues" class="nav-link" data-scroll-target="#utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues"><span class="header-section-number">4.6.3</span> Utilisation des pondérations dans un schema retrospectif avec des biographies longues</a></li>
+  <li><a href="#formes-typiques-de-la-fonction-de-survie" id="toc-formes-typiques-de-la-fonction-de-survie" class="nav-link" data-scroll-target="#formes-typiques-de-la-fonction-de-survie"><span class="header-section-number">4.5.1</span> Formes typiques de la fonction de survie</a></li>
+  <li><a href="#absence-de-censures-à-droites" id="toc-absence-de-censures-à-droites" class="nav-link" data-scroll-target="#absence-de-censures-à-droites"><span class="header-section-number">4.5.2</span> Absence de censures à droites</a></li>
+  <li><a href="#utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues" id="toc-utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues" class="nav-link" data-scroll-target="#utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues"><span class="header-section-number">4.5.3</span> Utilisation des pondérations dans un schema retrospectif avec des biographies longues</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mthevenin/analyse_duree/edit/main/03-theorie.qmd" class="toc-action">Modifier cette page</a></p></div></div></nav>
@@ -557,9 +555,8 @@ A l’inverse de la censure, des individus peuvent sortir de l’exposition avan
 <p>Formellement la fonction de densité <span class="math inline">\(f(t)\)</span> s’écrit:</p>
 <p><span class="math display">\[f(t)=\lim\limits_{dt\to{0}}  \frac{P(t\leq{T}&lt; t + dt)}{dt}\]</span></p>
 </section>
-</section>
-<section id="le-risque-instantané-ht" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="le-risque-instantané-ht"><span class="header-section-number">4.5</span> Le risque instantané <span class="math inline">\(h(t)\)</span></h2>
+<section id="le-risque-instantané-ht" class="level3" data-number="4.4.5">
+<h3 data-number="4.4.5" class="anchored" data-anchor-id="le-risque-instantané-ht"><span class="header-section-number">4.4.5</span> Le risque instantané <span class="math inline">\(h(t)\)</span></h3>
 <p>Concept fondamental de l’analyse des durées:</p>
 <p><span class="math display">\[h(t)=\lim\limits_{dt\to{0}} \frac{P(t\leq{T}&lt; t + dt | T\geq{t})}{dt}\]</span></p>
 <ul>
@@ -599,8 +596,9 @@ Par analogie seulement, on retrouve ici un concept classique en analyse démogra
 <li>Pour le rhume, la durée moyenne est de <span class="math inline">\((1.44^{-1}=0.69\)</span> du trimestre hivernal. On peut donc s’attendre, en moyenne, à attraper un rhume approximativement le début du mois de mars. Bien évidemment, certain.e.s attraperons un rhume avant, certaine.s après, certain.e.s aucun<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</li>
 <li>Pour l’année sabbatique, la durée moyenne de survie est de <span class="math inline">\(3.96^{-1}=0.25\)</span> d’une année soit 3 mois après l’arrivée dans la région.</li>
 </ul>
-<section id="le-risque-cumulé-ht" class="level3" data-number="4.5.1">
-<h3 data-number="4.5.1" class="anchored" data-anchor-id="le-risque-cumulé-ht"><span class="header-section-number">4.5.1</span> Le risque cumulé <span class="math inline">\(H(t)\)</span></h3>
+</section>
+<section id="le-risque-cumulé-ht" class="level3" data-number="4.4.6">
+<h3 data-number="4.4.6" class="anchored" data-anchor-id="le-risque-cumulé-ht"><span class="header-section-number">4.4.6</span> Le risque cumulé <span class="math inline">\(H(t)\)</span></h3>
 <p>Le risque cumulé est égal à :</p>
 <p><span class="math display">\[H(t)=\int_{0}^{t} h(u)du = -log(S(t))\]</span></p>
 <p>On peut alors réécrire toutes les autres quantités à partir de celle-ci:</p>
@@ -693,10 +691,10 @@ Par analogie seulement, on retrouve ici un concept classique en analyse démogra
 <p>A quel âge le risque de mourir des cochons d’Inde est-il le plus élevé? Et quelle est sa valeur?</p>
 </section>
 </section>
-<section id="remarques-complémentaires" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="remarques-complémentaires"><span class="header-section-number">4.6</span> <strong>Remarques complémentaires</strong></h2>
-<section id="formes-typiques-de-la-fonction-de-survie" class="level3" data-number="4.6.1">
-<h3 data-number="4.6.1" class="anchored" data-anchor-id="formes-typiques-de-la-fonction-de-survie"><span class="header-section-number">4.6.1</span> Formes typiques de la fonction de survie</h3>
+<section id="remarques-complémentaires" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="remarques-complémentaires"><span class="header-section-number">4.5</span> <strong>Remarques complémentaires</strong></h2>
+<section id="formes-typiques-de-la-fonction-de-survie" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="formes-typiques-de-la-fonction-de-survie"><span class="header-section-number">4.5.1</span> Formes typiques de la fonction de survie</h3>
 <p>Une des propriétés de la fonction de survie ou de séjour est qu’elles tendent vers 0. A la lecture du graphique suivant, cela peut correspondre à la forme de la courbe S2, bien que le % de survivant tend à baisser de moins en moins à mesure que la durée augmente. Deux cas limites doivent être considéré.</p>
 <p>Par anticipation, on peut déjà signalée que les fonctions de séjours qui sont représentées ci-dessous, font l’objet d’une estimation de type Kaplan-Meier.</p>
 <div class="quarto-figure quarto-figure-center">
@@ -717,12 +715,12 @@ Par analogie seulement, on retrouve ici un concept classique en analyse démogra
 </figure>
 </div>
 </section>
-<section id="absence-de-censures-à-droites" class="level3" data-number="4.6.2">
-<h3 data-number="4.6.2" class="anchored" data-anchor-id="absence-de-censures-à-droites"><span class="header-section-number">4.6.2</span> Absence de censures à droites</h3>
+<section id="absence-de-censures-à-droites" class="level3" data-number="4.5.2">
+<h3 data-number="4.5.2" class="anchored" data-anchor-id="absence-de-censures-à-droites"><span class="header-section-number">4.5.2</span> Absence de censures à droites</h3>
 <p>Les méthodes qui vont être présentées plus tard <strong><em>gèrent</em></strong> la présence de censures à droite. En leur absence, elles restent néanmoins parfaitement valables. L’absence de censure facilite certaines analyses, par exemple celles des fonctions de séjour où le calcul direct des durées moyennes est rendu possible. On peut alors utiliser d’autres méthodes plus, en première intentions plus simples, en analysant directement la distribution des évènement dans le temps. La durée ou une fonction de celle-ci pouvant être directement passées comme variable dépendante.</p>
 </section>
-<section id="utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues" class="level3" data-number="4.6.3">
-<h3 data-number="4.6.3" class="anchored" data-anchor-id="utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues"><span class="header-section-number">4.6.3</span> Utilisation des pondérations dans un schema retrospectif avec des biographies longues</h3>
+<section id="utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues" class="level3" data-number="4.5.3">
+<h3 data-number="4.5.3" class="anchored" data-anchor-id="utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues"><span class="header-section-number">4.5.3</span> Utilisation des pondérations dans un schema retrospectif avec des biographies longues</h3>
 <p>Une question assez récurrente concerne l’utilisation des poids de sondage dans les analyses de durées avec longueurs biographiques souvent assez longues. Leur utilisation ne me semble pas recommandée voire à exclure sauf exceptions. En effet les pondérations sont générées au moment de l’enquête, alors que les évènements étudiés peuvent remonter dans un passé plus ou moins lointain pour une partie de la population analysée. Si on regarde de plus près, la création de poids longitudinaux ne résoudrait pas grand chose , les pondérations devant être recalculées à chaque moment d’observation ou à chaque moment où des évènements se produisent. Par ailleurs on mélangerait régulièrement à un instant donné des personnes issues de générations différentes ce qui rend impossible tout calage sur des caractéristiques d’un population. Supposons une personne âgée de 25 ans et un personne âgée de 70 ans au moment de l’enquête en 2022, avec un début d’observation à l’âge de 18 ans . A 20 ans (<span class="math inline">\(t=2\)</span>), pour la première personne les caractéristiques de la population sont celles de 2017, pour celle de 70 ans celles de 1972. On fait comment??????</p>
 
 
@@ -1244,7 +1242,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a>$$f(t)=\lim\limits_{dt\to{0}}  \frac{P(t\leq{T}&lt; t + dt)}{dt}$$  </span>
 <span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="fu">## Le risque instantané $h(t)$</span></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="fu">### Le risque instantané $h(t)$</span></span>
 <span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a>Concept fondamental de l'analyse des durées:  </span>
 <span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a></span>
@@ -1381,7 +1379,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-340"><a href="#cb1-340" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","closeEffect":"zoom"});</script>
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":true});</script>
 
 
 

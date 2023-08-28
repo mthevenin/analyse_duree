@@ -203,7 +203,7 @@ Formellement la fonction de densité $f(t)$ s'écrit:
 $$f(t)=\lim\limits_{dt\to{0}}  \frac{P(t\leq{T}< t + dt)}{dt}$$  
 
 
-## Le risque instantané $h(t)$
+### Le risque instantané $h(t)$
 
 Concept fondamental de l'analyse des durées:  
 
