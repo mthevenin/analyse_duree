@@ -581,10 +581,24 @@ Grandeurs avec des durées discrètes/groupées
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Les expressions de la densité et du risque dit instantané se simplifie: <span class="math inline">\(f(t)=P(t\leq{T}&lt; t + dt)\)</span> et <span class="math inline">\(h(t)=P(t\leq{T}&lt; t + dt | T\geq{t})\)</span>. Ces deux grandeurs ne sont plus des taux tel qu’ils ont été définit précedemment, mais des probabilités.<br>
+<p>Les expressions de la densité et du risque dit instantané se simplifie: <span class="math inline">\(f(t)=P(t\leq{T}&lt; t + dt)\)</span> et <span class="math inline">\(h(t)=P(t\leq{T}&lt; t + dt | T\geq{t})\)</span>. Ces deux grandeurs ne sont plus des taux tel qu’ils ont été définit précedemment, mais des probabilités. En durée discrète, on aurait donc <span class="math inline">\(dt=1\)</span><br>
 Néanmoins les relations entre les grandeurs, en particulier celle qui lie risque, densité et survie reste toujours valable. Ceci est fondamental, car elle permet de définir la fonction de vraisemblance sur laquelle repose le calcul de tous les estimateurs</p>
 </div>
 </div>
+<p><strong>Illustration du concept</strong></p>
+<p>Cette notion de <em>taux de risque</em> ou <em>hazard rate</em> non réductible à un probabilité, est à mon sens très bien illustré par G.Colletaz dans ces notes de cours (pages 11-12). Dans ce qui suit, j’en fait un quasi copier-coller. En ce positionnant sur des échelle temporelle plus facilement saisissable pour la description de phénomènes socio-démographiques (on supprime la limite des expressions données pour <span class="math inline">\(f(t)\)</span> et <span class="math inline">\(h(t)\)</span>:</p>
+<ol type="1">
+<li><p>On s’intéresse au risque d’attraper un rhume durant les mois d’hiver, disons entre le 1er janvier et le 1er avril [3 mois]. Si la probabilité, constante, d’attraper un rhume chaque mois est de 48% (il s’agit bien évidemment d’un risque). Quelle est le risque d’attraper le rhume durant l’unité de temps qu’est cette saison froide de 3 mois?<br>
+<span class="math inline">\(\frac{0.48}{1/3}=1.44\)</span>. On peut donc s’attendre a attraper 1.44 rhume durant la période d’hiver.</p></li>
+<li><p>On passe une année en vacances dans une région, franchement pas très accueillante, où la probabilité de décéder chaque mois est évaluée à 33%. Quelle est le risque de décéder pendant cette année? <span class="math inline">\(\frac{0.33}{1/12}=3.96\)</span></p></li>
+</ol>
+<p>On le voit, cette mesure du risque peut donc être supérieur à 1. En soit cela ne pose pas de problème comme il s’agit d’un nombre moyen d’évènements espérés, mais pour des évènements qui ne peuvent pas se répéter, évènements dits <em>absorbants</em>, l’interprétation n’est pas très intuitive.</p>
+<p>Le risque étant constant dans chaque intervalle (mois), on peut prendre son inverse qui va mesurer la durée moyenne (espérée) jusqu’à l’occurence de l’évènement.<br>
+Par analogie seulement, on retrouve ici un concept classique en analyse démographique comme l’espérance de vie (survie): la question n’est pas de savoir si on va mourir ou non, ce risque inconditionnellement à la durée étant par définition égal à 1, mais jusqu’à quand on peut espérer survivre.</p>
+<ul>
+<li>Pour le rhume, la durée moyenne est de <span class="math inline">\((1.44^{-1}=0.69\)</span> du trimestre hivernal. On peut donc s’attendre, en moyenne, à attraper un rhume approximativement le début du mois de mars. Bien évidemment, certain.e.s attraperons un rhume avant, certaine.s après, certain.e.s aucun<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</li>
+<li>Pour l’année sabbatique, la durée moyenne de survie est de <span class="math inline">\(3.96^{-1}=0.25\)</span> d’une année soit 3 mois après l’arrivée dans la région.</li>
+</ul>
 <section id="le-risque-cumulé-ht" class="level3" data-number="4.5.1">
 <h3 data-number="4.5.1" class="anchored" data-anchor-id="le-risque-cumulé-ht"><span class="header-section-number">4.5.1</span> Le risque cumulé <span class="math inline">\(H(t)\)</span></h3>
 <p>Le risque cumulé est égal à :</p>
@@ -598,7 +612,7 @@ Néanmoins les relations entre les grandeurs, en particulier celle qui lie risqu
 <li><span class="math inline">\(f(t)=h(t)\times{e^{-H(t)}}\)</span></li>
 </ul>
 <p><em>Exemple avec la loi exponentielle (risque constant)</em></p>
-<p>Si on pose que le risque est strictement constant au cours du temps: <span class="math inline">\(h(t)=a\)</span>. Cette forme du risque suit une <strong>loi exponentielle</strong>. Cette situation est, par exemple, typique des processus dits sans mémoire comme la durée de vie des ampoules:</p>
+<p>Si on pose que le risque (ou taux de risque) est strictement constant au cours du temps: <span class="math inline">\(h(t)=a\)</span>, on dira que ce profilsuit une <strong>loi exponentielle</strong>. Cette situation est, par exemple, typique des processus dits sans mémoire comme la durée de vie des ampoules. Sans trop de difficulté, toutes les expressions peuvent être formellement définies:</p>
 <ul>
 <li><span class="math inline">\(h(t)=a\)</span><br>
 </li>
@@ -616,20 +630,6 @@ Néanmoins les relations entre les grandeurs, en particulier celle qui lie risqu
 <figcaption class="figure-caption">Grandeurs de la loi exponentielle avec h(t)=0.04</figcaption>
 </figure>
 </div>
-<p><strong>Application: risque et échelles temporelles</strong>:</p>
-<p>Attention on sort ici très clairement de la durée continue, il s’agit seulement de manipuler les concepts et de voir la dépendance de la mesure du risque à l’échelle temporelle choisie ou disponible.</p>
-<ol type="1">
-<li><p>Durant les mois d’hiver, entre le 1er janvier et le 1er avril [3 mois], la probabilité d’attraper un rhume chaque mois est de 48% (il s’agit bien d’un risque). Quelle est le risque d’attraper le rhume durant la saison froide?<br>
-<span class="math inline">\(\frac{0.48}{1/3}=1.44\)</span>. On peut donc s’attendre a attraper 1.44 rhume durant la période d’hiver.</p></li>
-<li><p>On passe une année en vacances dans une région où la probabilité de décéder chaque mois est évaluée à 33%. Quelle est le risque de décéder pendant cette année sabbatique? <span class="math inline">\(\frac{0.33}{1/12}=3.96\)</span></p></li>
-</ol>
-<p>Le risque peut donc être supérieur à 1. C’est donc plutôt un taux tel qu’il est défini généralement. En soit cela ne pose pas de problème comme il s’agit d’un nombre moyen d’évènements espérés (exemple: <em>taux</em> de fécondité), mais pour des évènements qui ne peuvent pas se répéter, évènements dits <em>absorbants</em>, l’interprétation n’est pas très intuitive.</p>
-<p>Le risque étant constant, on peut prendre son inverse qui mesure la durée moyenne (espérée) jusqu’à l’occurence de l’évènement.<br>
-On retrouve donc un concept classique en analyse démographique comme l’espérance de vie (survie): la question n’est pas de savoir si on va mourir ou non, ce risque indépendamment de la durée étant par définition égal à 1, mais jusqu’à quand on peut espérer survivre.</p>
-<ul>
-<li>Pour le rhume, la durée moyenne est de <span class="math inline">\((1.44^{-1}=0.69\)</span> du trimestre hivernal, soit approximativement le début du mois de mars.</li>
-<li>Pour l’année sabbatique, la durée moyenne de survie est de <span class="math inline">\(3.96^{-1}=0.25\)</span> d’une année soit 3 mois après l’arrivée dans la région.</li>
-</ul>
 <p><strong>Exercice</strong></p>
 <ul>
 <li>On a une population de 100 cochons d’Inde.</li>
@@ -637,7 +637,7 @@ On retrouve donc un concept classique en analyse démographique comme l’espér
 </li>
 <li>Ici l’analyse est en temps discret.</li>
 <li>La durée représente le nombre d’année de vie.</li>
-<li>Il n’y a pas de censure à droite.</li>
+<li>Il n’y a pas de censure ou troncature à droite.</li>
 </ul>
 <table class="table">
 <thead>
@@ -690,7 +690,7 @@ On retrouve donc un concept classique en analyse démographique comme l’espér
 </tbody>
 </table>
 <p><strong>N=100</strong></p>
-<p>A quel âge le risque de mourir des cochons d’Inde est-il le plus élevé? Quelle est la valeur de ce risque?</p>
+<p>A quel âge le risque de mourir des cochons d’Inde est-il le plus élevé? Et quelle est sa valeur?</p>
 </section>
 </section>
 <section id="remarques-complémentaires" class="level2" data-number="4.6">
@@ -698,6 +698,7 @@ On retrouve donc un concept classique en analyse démographique comme l’espér
 <section id="formes-typiques-de-la-fonction-de-survie" class="level3" data-number="4.6.1">
 <h3 data-number="4.6.1" class="anchored" data-anchor-id="formes-typiques-de-la-fonction-de-survie"><span class="header-section-number">4.6.1</span> Formes typiques de la fonction de survie</h3>
 <p>Une des propriétés de la fonction de survie ou de séjour est qu’elles tendent vers 0. A la lecture du graphique suivant, cela peut correspondre à la forme de la courbe S2, bien que le % de survivant tend à baisser de moins en moins à mesure que la durée augmente. Deux cas limites doivent être considéré.</p>
+<p>Par anticipation, on peut déjà signalée que les fonctions de séjours qui sont représentées ci-dessous, font l’objet d’une estimation de type Kaplan-Meier.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><a href="images/Image5b.png" class="lightbox" title="Fonction de survie: 3 situtation typiques" data-gallery="quarto-lightbox-gallery-2"><img src="images/Image5b.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
@@ -718,7 +719,7 @@ On retrouve donc un concept classique en analyse démographique comme l’espér
 </section>
 <section id="absence-de-censures-à-droites" class="level3" data-number="4.6.2">
 <h3 data-number="4.6.2" class="anchored" data-anchor-id="absence-de-censures-à-droites"><span class="header-section-number">4.6.2</span> Absence de censures à droites</h3>
-<p>Les méthodes qui vont être présentées plus tard <strong><em>gèrent</em></strong> la présence de censures à droite. S’il n’y en a pas, elle restent néanmoins parfaitement valables. L’absence de censure facilite certaines analyses, par exemple celles des fonctions de séjour où le calcul direct des durées moyennes est rendu possible.</p>
+<p>Les méthodes qui vont être présentées plus tard <strong><em>gèrent</em></strong> la présence de censures à droite. En leur absence, elles restent néanmoins parfaitement valables. L’absence de censure facilite certaines analyses, par exemple celles des fonctions de séjour où le calcul direct des durées moyennes est rendu possible. On peut alors utiliser d’autres méthodes plus, en première intentions plus simples, en analysant directement la distribution des évènement dans le temps. La durée ou une fonction de celle-ci pouvant être directement passées comme variable dépendante.</p>
 </section>
 <section id="utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues" class="level3" data-number="4.6.3">
 <h3 data-number="4.6.3" class="anchored" data-anchor-id="utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues"><span class="header-section-number">4.6.3</span> Utilisation des pondérations dans un schema retrospectif avec des biographies longues</h3>
@@ -737,6 +738,7 @@ On retrouve donc un concept classique en analyse démographique comme l’espér
 <li id="fn3"><p>Voir exemple plus haut sur le registre de la mucoviscidose<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"></li>
 <li id="fn5"><p>La relation <span class="math inline">\(h(t)=\frac{f(t)}{S(t)}\)</span> et donc <span class="math inline">\(f(t)= h(t) \times S(t)\)</span> est intéressante et importante car elle permet d’écrire la vraisemblance du processus probabiliste permettant d’estimer les paramètres des différentes analyses. On voit déjà sa proximité avec la fonction de masse de Bernouilli: <span class="math inline">\(f(y_i) = p^{y_i} \times (1-p)^{1-y_i}\)</span>. Se reporté à la section qui décrit qui la vraisemblance partielle de Cox pour s’en faire une idée plus précise.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>et une analyse plus fine pourrait s’intéresser sur l’effet du port du masque sur ce risque d’attraper le rhume<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -1264,90 +1266,90 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a><span class="fu">## Grandeurs avec des durées discrètes/groupées</span></span>
 <span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a>Les expressions de la densité et du risque dit instantané se simplifie: $f(t)=P(t\leq{T}&lt; t + dt)$ et $h(t)=P(t\leq{T}&lt; t + dt | T\geq{t})$. Ces deux grandeurs ne sont plus des taux tel qu'ils ont été définit précedemment, mais des probabilités.  </span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a>Les expressions de la densité et du risque dit instantané se simplifie: $f(t)=P(t\leq{T}&lt; t + dt)$ et $h(t)=P(t\leq{T}&lt; t + dt | T\geq{t})$. Ces deux grandeurs ne sont plus des taux tel qu'ils ont été définit précedemment, mais des probabilités. En durée discrète, on aurait donc $dt=1$  </span>
 <span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>Néanmoins les relations entre les grandeurs, en particulier celle qui lie risque, densité et survie reste toujours valable. Ceci est fondamental, car elle permet de définir la fonction de vraisemblance sur laquelle repose le calcul de tous les estimateurs </span>
 <span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a><span class="fu">### Le risque cumulé $H(t)$</span></span>
-<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a>Le risque cumulé est égal à : </span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a>**Illustration du concept**</span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a>Cette notion de  *taux de risque* ou *hazard rate* non réductible à un probabilité, est à mon sens très bien illustré par G.Colletaz dans ces notes de cours (pages 11-12). Dans ce qui suit, j'en fait un quasi copier-coller. </span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a>En ce positionnant sur des échelle temporelle plus facilement saisissable pour la description de phénomènes socio-démographiques (on supprime la limite des expressions données pour $f(t)$ et $h(t)$: </span>
 <span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a>$$H(t)=\int_{0}^{t} h(u)du = -log(S(t))$$  </span>
-<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a>On peut alors réécrire toutes les autres quantités à partir de celle-ci:  </span>
-<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$S(t)=e^{-H(t)}$   </span>
-<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$F(t)=1-e^{-H(t)}$   </span>
-<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$f(t)=h(t)\times{e^{-H(t)}}$   </span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>On s'intéresse au risque d'attraper un rhume durant les mois d'hiver, disons entre le 1er janvier et le 1er avril <span class="co">[</span><span class="ot">3 mois</span><span class="co">]</span>. Si la probabilité, constante, d'attraper un rhume chaque mois est de 48% (il s'agit bien évidemment d'un risque). Quelle est le risque d'attraper le rhume durant l'unité de temps qu'est cette saison froide de 3 mois?   </span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a>$\frac{0.48}{1/3}=1.44$. On peut donc s'attendre a attraper 1.44 rhume durant la période d'hiver. </span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>On passe une année en vacances dans une région, franchement pas très accueillante, où la probabilité de décéder chaque mois est évaluée à 33%. Quelle est le risque de décéder pendant cette année? </span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a>$\frac{0.33}{1/12}=3.96$  </span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a>On le voit, cette mesure du risque peut donc être supérieur à 1. En soit cela ne pose pas de problème comme il s'agit d'un nombre moyen d'évènements espérés, mais pour des évènements qui ne peuvent pas se répéter, évènements dits *absorbants*, l'interprétation n'est pas très intuitive.    </span>
 <span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a>*Exemple avec la loi exponentielle (risque constant)*  </span>
-<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a>Si on pose que le risque est strictement constant au cours du temps: $h(t)=a$. Cette forme du risque suit une **loi exponentielle**. Cette situation est, par exemple, typique des processus dits sans mémoire comme la durée de vie des ampoules:</span>
-<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$h(t)=a$  </span>
-<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$H(t)=a\times{t}$  </span>
-<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$S(t)=e^{-a\times{t}}$  </span>
-<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$F(t)=1-e^{-a\times{t}}$  </span>
-<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$f(t)=a\times{e^{-a\times{t}}}$  </span>
-<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a>Le risque étant constant dans chaque intervalle (mois), on peut prendre son inverse qui va mesurer la durée moyenne (espérée) jusqu'à l'occurence de l'évènement.  </span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a>Par analogie seulement, on retrouve ici un concept classique en analyse démographique comme l'espérance de vie (survie): la question n'est pas de savoir si on va mourir ou non, ce risque inconditionnellement à la durée étant par définition égal à 1, mais jusqu'à quand on peut espérer survivre.  </span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pour le rhume, la durée moyenne est de $(1.44^{-1}=0.69$ du trimestre hivernal. On peut donc s'attendre, en moyenne, à attraper un rhume  approximativement le début du mois de mars. Bien évidemment, certain.e.s attraperons un rhume avant, certaine.s après, certain.e.s aucun^<span class="co">[</span><span class="ot">et une analyse plus fine pourrait s'intéresser sur l'effet du port du masque sur ce risque d'attraper le rhume</span><span class="co">]</span>.</span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pour l'année sabbatique, la durée moyenne de survie est de $3.96^{-1}=0.25$ d'une année soit 3 mois après l'arrivée dans la région. </span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a><span class="fu">### Le risque cumulé $H(t)$</span></span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a>Le risque cumulé est égal à : </span>
 <span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a><span class="al">![Grandeurs de la loi exponentielle avec h(t)=0.04](images/Image5.png)</span>{width=70%}</span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a>$$H(t)=\int_{0}^{t} h(u)du = -log(S(t))$$  </span>
 <span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a>**Application: risque et échelles temporelles**:  </span>
-<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a>Attention on sort ici très clairement de la durée continue, il s’agit seulement de manipuler les concepts et de voir la dépendance de la mesure du risque à l’échelle temporelle choisie ou disponible.  </span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a>On peut alors réécrire toutes les autres quantités à partir de celle-ci:  </span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$S(t)=e^{-H(t)}$   </span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$F(t)=1-e^{-H(t)}$   </span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$f(t)=h(t)\times{e^{-H(t)}}$   </span>
 <span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Durant les mois d'hiver, entre le 1er janvier et le 1er avril <span class="co">[</span><span class="ot">3 mois</span><span class="co">]</span>, la probabilité d'attraper un rhume chaque mois est de 48% (il s'agit bien d'un risque). Quelle est le risque d'attraper le rhume durant la saison froide?   </span>
-<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a>$\frac{0.48}{1/3}=1.44$. On peut donc s'attendre a attraper 1.44 rhume durant la période d'hiver. </span>
-<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>On passe une année en vacances dans une région où la probabilité de décéder chaque mois est évaluée à 33%. Quelle est le risque de décéder pendant cette année sabbatique? </span>
-<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a>$\frac{0.33}{1/12}=3.96$  </span>
-<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a>Le risque peut donc être supérieur à 1. C’est donc plutôt un taux tel qu’il est défini généralement. En soit cela ne pose pas de problème comme il s'agit d'un nombre moyen d'évènements espérés (exemple: *taux* de fécondité), mais pour des évènements qui ne peuvent pas se répéter, évènements dits *absorbants*, l'interprétation n'est pas très intuitive.    </span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a>*Exemple avec la loi exponentielle (risque constant)*  </span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a>Si on pose que le risque (ou taux de risque) est strictement constant au cours du temps: $h(t)=a$, on dira que ce profilsuit une **loi exponentielle**. Cette situation est, par exemple, typique des processus dits sans mémoire comme la durée de vie des ampoules. Sans trop de difficulté, toutes les expressions peuvent être formellement définies:</span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$h(t)=a$  </span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$H(t)=a\times{t}$  </span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$S(t)=e^{-a\times{t}}$  </span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$F(t)=1-e^{-a\times{t}}$  </span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$f(t)=a\times{e^{-a\times{t}}}$  </span>
 <span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a>Le risque étant constant, on peut prendre son inverse qui mesure la durée moyenne (espérée) jusqu'à l'occurence de l'évènement.  </span>
-<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a>On retrouve donc un concept classique en analyse démographique comme l'espérance de vie (survie): la question n'est pas de savoir si on va mourir ou non, ce risque indépendamment de la durée étant par définition égal à 1, mais jusqu'à quand on peut espérer survivre.  </span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a><span class="al">![Grandeurs de la loi exponentielle avec h(t)=0.04](images/Image5.png)</span>{width=70%}</span>
 <span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pour le rhume, la durée moyenne est de $(1.44^{-1}=0.69$ du trimestre hivernal, soit approximativement le début du mois de mars. </span>
-<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pour l'année sabbatique, la durée moyenne de survie est de $3.96^{-1}=0.25$ d'une année soit 3 mois après l'arrivée dans la région. </span>
+<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a>**Exercice**   </span>
 <span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a>**Exercice**   </span>
-<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>On a une population de 100 cochons d'Inde. </span>
-<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>On analyse leur mortalité (naturelle).  </span>
-<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ici l'analyse est en temps discret. </span>
-<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>La durée représente le nombre d'année de vie. </span>
-<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Il n'y a pas de censure à droite.</span>
-<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a>| Durée | Nombre de décès |</span>
-<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a>|-------|-----------------|</span>
-<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a>| 1     | 1               |</span>
-<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a>| 2     | 1               |</span>
-<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a>| 3     | 3               |</span>
-<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a>| 4     | 9               |</span>
-<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a>| 5     | 30              |</span>
-<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a>| 6     | 40              |</span>
-<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a>| 7     | 10              |</span>
-<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a>| 8     | 3               |</span>
-<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a>| 9     | 2               |</span>
-<span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a>| 10    | 1               |</span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>On a une population de 100 cochons d'Inde. </span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>On analyse leur mortalité (naturelle).  </span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ici l'analyse est en temps discret. </span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>La durée représente le nombre d'année de vie. </span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Il n'y a pas de censure ou troncature à droite.</span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a>| Durée | Nombre de décès |</span>
+<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a>|-------|-----------------|</span>
+<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a>| 1     | 1               |</span>
+<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a>| 2     | 1               |</span>
+<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a>| 3     | 3               |</span>
+<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a>| 4     | 9               |</span>
+<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a>| 5     | 30              |</span>
+<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a>| 6     | 40              |</span>
+<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a>| 7     | 10              |</span>
+<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a>| 8     | 3               |</span>
+<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a>| 9     | 2               |</span>
+<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a>| 10    | 1               |</span>
+<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a>**N=100**</span>
 <span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a>**N=100**</span>
+<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a>A quel âge le risque de mourir des cochons d'Inde est-il le plus élevé? Et quelle est sa valeur?</span>
 <span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a>A quel âge le risque de mourir des cochons d'Inde est-il le plus élevé? Quelle est la valeur de ce risque?</span>
-<span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Remarques complémentaires**</span></span>
 <span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Remarques complémentaires**</span></span>
+<span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a><span class="fu">### Formes typiques de la fonction de survie</span></span>
 <span id="cb1-308"><a href="#cb1-308" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a><span class="fu">### Formes typiques de la fonction de survie</span></span>
+<span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a>Une des propriétés de la fonction de survie ou de séjour est qu'elles tendent vers 0. A la lecture du graphique suivant, cela peut correspondre à la forme de la courbe S2, bien que le % de survivant tend à baisser de moins en moins à mesure que la durée augmente. Deux cas limites doivent être considéré. </span>
 <span id="cb1-310"><a href="#cb1-310" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-311"><a href="#cb1-311" aria-hidden="true" tabindex="-1"></a>Une des propriétés de la fonction de survie ou de séjour est qu'elles tendent vers 0. A la lecture du graphique suivant, cela peut correspondre à la forme de la courbe S2, bien que le % de survivant tend à baisser de moins en moins à mesure que la durée augmente. Deux cas limites doivent être considéré. </span>
+<span id="cb1-311"><a href="#cb1-311" aria-hidden="true" tabindex="-1"></a>Par anticipation, on peut déjà signalée que les fonctions de séjours qui sont représentées ci-dessous, font l'objet d'une estimation de type Kaplan-Meier.</span>
 <span id="cb1-312"><a href="#cb1-312" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-313"><a href="#cb1-313" aria-hidden="true" tabindex="-1"></a><span class="al">![Fonction de survie: 3 situtation typiques](images/Image5b.png)</span>{width=90%}</span>
 <span id="cb1-314"><a href="#cb1-314" aria-hidden="true" tabindex="-1"></a></span>
@@ -1363,7 +1365,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-324"><a href="#cb1-324" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-325"><a href="#cb1-325" aria-hidden="true" tabindex="-1"></a><span class="fu">### Absence de censures à droites </span></span>
 <span id="cb1-326"><a href="#cb1-326" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-327"><a href="#cb1-327" aria-hidden="true" tabindex="-1"></a>Les méthodes qui vont être présentées plus tard ***gèrent*** la présence de censures à droite. S'il n'y en a pas, elle restent néanmoins parfaitement valables. L'absence de censure facilite certaines analyses, par exemple celles des fonctions de séjour où le calcul direct des durées moyennes est rendu possible. </span>
+<span id="cb1-327"><a href="#cb1-327" aria-hidden="true" tabindex="-1"></a>Les méthodes qui vont être présentées plus tard ***gèrent*** la présence de censures à droite. En leur absence, elles restent néanmoins parfaitement valables. L'absence de censure facilite certaines analyses, par exemple celles des fonctions de séjour où le calcul direct des durées moyennes est rendu possible. On peut alors utiliser d'autres méthodes plus, en première intentions plus simples, en analysant directement la distribution des évènement dans le temps. La durée ou une fonction de celle-ci pouvant être directement passées comme variable dépendante.</span>
 <span id="cb1-328"><a href="#cb1-328" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-329"><a href="#cb1-329" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-330"><a href="#cb1-330" aria-hidden="true" tabindex="-1"></a><span class="fu">### Utilisation des pondérations dans un schema retrospectif avec des biographies longues </span></span>
@@ -1379,7 +1381,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-340"><a href="#cb1-340" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","openEffect":"zoom","closeEffect":"zoom","loop":true,"descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"descPosition":"bottom","openEffect":"zoom","selector":".lightbox","closeEffect":"zoom"});</script>
 
 
 
