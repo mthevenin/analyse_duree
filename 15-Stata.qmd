@@ -20,7 +20,6 @@ jupyter: nbstata
 Ouverture de la base
 
 ```{stata}
-*| echo : false
 *| message : false
 *| warning : false
 

@@ -328,12 +328,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#tests-grambsch-therneau-ols-sur-les-résidus-de-schoenfeld" id="toc-tests-grambsch-therneau-ols-sur-les-résidus-de-schoenfeld" class="nav-link active" data-scroll-target="#tests-grambsch-therneau-ols-sur-les-résidus-de-schoenfeld"><span class="header-section-number">14.1</span> Tests Grambsch-Therneau OLS sur les résidus de Schoenfeld</a></li>
-  <li><a href="#fragilité-et-immunité" id="toc-fragilité-et-immunité" class="nav-link" data-scroll-target="#fragilité-et-immunité"><span class="header-section-number">14.2</span> Fragilité et immunité</a>
+  <li><a href="#analyses-avec-des-pseudo-observations" id="toc-analyses-avec-des-pseudo-observations" class="nav-link" data-scroll-target="#analyses-avec-des-pseudo-observations"><span class="header-section-number">14.2</span> Analyses avec des pseudo-observations</a></li>
+  <li><a href="#fragilité-et-immunité" id="toc-fragilité-et-immunité" class="nav-link" data-scroll-target="#fragilité-et-immunité"><span class="header-section-number">14.3</span> Fragilité et immunité</a>
   <ul class="collapse">
-  <li><a href="#fragilité-frailty" id="toc-fragilité-frailty" class="nav-link" data-scroll-target="#fragilité-frailty"><span class="header-section-number">14.2.1</span> Fragilité (Frailty)</a></li>
-  <li><a href="#immunité-cure-fraction" id="toc-immunité-cure-fraction" class="nav-link" data-scroll-target="#immunité-cure-fraction"><span class="header-section-number">14.2.2</span> Immunité (Cure fraction)</a></li>
+  <li><a href="#fragilité-frailty" id="toc-fragilité-frailty" class="nav-link" data-scroll-target="#fragilité-frailty"><span class="header-section-number">14.3.1</span> Fragilité (Frailty)</a></li>
+  <li><a href="#immunité-cure-fraction" id="toc-immunité-cure-fraction" class="nav-link" data-scroll-target="#immunité-cure-fraction"><span class="header-section-number">14.3.2</span> Immunité (Cure fraction)</a></li>
   </ul></li>
-  <li><a href="#exemple-danalyse-de-durées-canada-dry" id="toc-exemple-danalyse-de-durées-canada-dry" class="nav-link" data-scroll-target="#exemple-danalyse-de-durées-canada-dry"><span class="header-section-number">14.3</span> Exemple d’analyse de durées <strong><em>Canada Dry</em></strong></a></li>
+  <li><a href="#exemple-danalyse-de-durées-canada-dry" id="toc-exemple-danalyse-de-durées-canada-dry" class="nav-link" data-scroll-target="#exemple-danalyse-de-durées-canada-dry"><span class="header-section-number">14.4</span> Exemple d’analyse de durées <strong><em>Canada Dry</em></strong></a></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mthevenin/analyse_duree/edit/main/13-annexe.qmd" class="toc-action">Modifier cette page</a></p></div></div></nav>
     </div>
@@ -506,11 +507,27 @@ X -0.688  1.49 0.222</code></pre>
 </div>
 </div>
 </section>
-<section id="fragilité-et-immunité" class="level2" data-number="14.2">
-<h2 data-number="14.2" class="anchored" data-anchor-id="fragilité-et-immunité"><span class="header-section-number">14.2</span> Fragilité et immunité</h2>
+<section id="analyses-avec-des-pseudo-observations" class="level2" data-number="14.2">
+<h2 data-number="14.2" class="anchored" data-anchor-id="analyses-avec-des-pseudo-observations"><span class="header-section-number">14.2</span> Analyses avec des pseudo-observations</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Il s’agit d’un premier jet d’explication d’une méthode d’analyse qui fête ses 20 ans. Dans la version future du support (disons version 2024), j’essaierai d’en faire une description plus précise. On se contentera pour le moment d’une présentation rapide des concepts de base avec des élément de calculs, ainsi que les limites. Bien évidemment quelques exemples avec la base d’exemple seront montrés</p>
+</div>
+</div>
+</section>
+<section id="fragilité-et-immunité" class="level2" data-number="14.3">
+<h2 data-number="14.3" class="anchored" data-anchor-id="fragilité-et-immunité"><span class="header-section-number">14.3</span> Fragilité et immunité</h2>
 <p>Seulement quelques remarques, le traitement de ces problématiques dépassant largement le contenu de la formation.</p>
-<section id="fragilité-frailty" class="level3" data-number="14.2.1">
-<h3 data-number="14.2.1" class="anchored" data-anchor-id="fragilité-frailty"><span class="header-section-number">14.2.1</span> Fragilité (Frailty)</h3>
+<section id="fragilité-frailty" class="level3" data-number="14.3.1">
+<h3 data-number="14.3.1" class="anchored" data-anchor-id="fragilité-frailty"><span class="header-section-number">14.3.1</span> Fragilité (Frailty)</h3>
 <p>Pour la <em>fragilité</em>, je conseille fortement de lire la dernière section du document de travail de <em><strong>Simon Quantin</strong> (cf bibliographie), il n’y a pas meilleure présentation du problème que la sienne ^[petite maj par rapport à la version précédente: il ne traite que la fragilité individuelle stricto sensu et non la fragilité plus connu sous le terme de </em>shared frailty* (proche modèle multiniveau). Problèmatique importante, car une des origines de la non proportionnalité des risques réside dans l’omission de variables. Ici on va être confronté une omission sur des traits non observables ou latents, qui <strong>accélèrent</strong> dès le début de la période d’exposition la survenue de l’évènement. L’introduction d’un facteur de fragilité se fait par l’introduction d’un effet aléatoire dans le modèle, de nature plus complexe, et rendant l’interprétation des modèles plus compliquée.</p>
 <p>On peut distinguer deux types de modèles:</p>
 <ul>
@@ -518,16 +535,16 @@ X -0.688  1.49 0.222</code></pre>
 <li>les modèles à <em>fragilité non partagée</em>, avec des caractéristiques latentes non observable comme les préférences, ou en médecine certains traits génétiques non identifiés.</li>
 </ul>
 </section>
-<section id="immunité-cure-fraction" class="level3" data-number="14.2.2">
-<h3 data-number="14.2.2" class="anchored" data-anchor-id="immunité-cure-fraction"><span class="header-section-number">14.2.2</span> Immunité (Cure fraction)</h3>
+<section id="immunité-cure-fraction" class="level3" data-number="14.3.2">
+<h3 data-number="14.3.2" class="anchored" data-anchor-id="immunité-cure-fraction"><span class="header-section-number">14.3.2</span> Immunité (Cure fraction)</h3>
 <p>Le phénomène d’immunité est un cas particulier du précédent, et a été étudié dès le début des années 1950, en questionnant l’exposition au risque d’une partie des observations. On s’interrogeait par exemple sur les risques de rechute et de décès après le traitement d’un premier cancer. Visuellement on peut commencer à se proser des questions sur la présence d’une fraction <em>immunisée</em> ou non <em>susceptible</em> de connaître l’évènement lorsque la fonction de séjour ne tend pas vers 0 mais présente une longue asymptote (plateau) sur une valeur supérieure à 0: <span class="math inline">\(\lim_{t \to \infty}S(t)=a\)</span>.</p>
 <p>Les modèles avec une fraction immunisée peuvent être de <strong><em>type mixte</em></strong> en associant une probabilité d’être immunisé aux observations censurées à droite à un modèle de durée <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Plus dans le vent je crois, on a également des modèles de <strong>type non mixte</strong>, avec il me semble une connotation bayesienne qui semble s’accroître. Il n’y a donc pas de méthode unifiée à ce jour [<a href="https://www.annualreviews.org/doi/10.1146/annurev-statistics-031017-100101">Si vous voulez vous en convaincre</a>].</p>
 <p>On peut également noter, c’est important, que cette problématique affecte les analyses avec des évènements dits récurrents. Ici, la stratégie classique qui consiste à introduire dans un modèle un simple effet aléatoire de type fragilité partagée (shared frailty) pour contrôler risque d’être insuffisante. Ici le <em>groupe</em> est constitué de chaque séquence de remise dans le risque set. Exemple pour la fécondité: une personne ayant eu un enfant est exposée au risque d’en avoir un autre, l’horloge temporelle étant alors simplement réinitialisée. Et donc, quid des préférences individuelles en terme de fécondité <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <p>Enfin, les modèles à fragilité ou à fraction immunisée repose tous sur une hypothèse très forte. La fragilité ou le degré d’immunité est toujours défini (estimé) en début d’exposition, et il ne varie pas. Cela peut ne pas toujours faire sens, en particulier pour les préférences, pas forcément stables ou fixes dans le temps.</p>
 </section>
 </section>
-<section id="exemple-danalyse-de-durées-canada-dry" class="level2" data-number="14.3">
-<h2 data-number="14.3" class="anchored" data-anchor-id="exemple-danalyse-de-durées-canada-dry"><span class="header-section-number">14.3</span> Exemple d’analyse de durées <strong><em>Canada Dry</em></strong></h2>
+<section id="exemple-danalyse-de-durées-canada-dry" class="level2" data-number="14.4">
+<h2 data-number="14.4" class="anchored" data-anchor-id="exemple-danalyse-de-durées-canada-dry"><span class="header-section-number">14.4</span> Exemple d’analyse de durées <strong><em>Canada Dry</em></strong></h2>
 <p>En remettant en cause l’utilisation abusive de concepts empruntés à l’analyse de survie dans une étude publiée récemment, ce qui suit pourra paraître un peu polémique. Dans ce qui suit, il s’agit seulement de contester l’utilisation abusive d’une terminologie très typée et conditionnée au respect de certaines hypothèses de base, et non de remettre en cause l’ensemble des résultats obtenus, bien qu’à la lecture des quelques informations descriptives contenues dans l’étude ont peu s’interroger sur la présence assez substentielles d’affet de sélection…Ce qui n’est pas étonnant vu la manière dont a été créée l’échantillon. L’étude en question [<a href="https://www.cairn.info/revue-population-2022-3-page-411.htm">Lien</a>] mobilise des données de suivi de stock, à savoir l’EDP (Echantillon Démographique Permanent). L’étude cherche à mettre à profit l’ajout par l’Insee de données fiscales à cet échantillon pour analyser la fécondité des femmes nullipares <strong>au sein des couples</strong>. L’inclusion de cette données fiscale à cet échantillon a été initiée pour l’année 2011.</p>
 <p><strong><em>Sélection initiale de l’échantillon sur la première année d’inclusion</em></strong> En sélectionnant l’échantillon de départ sur 2011, année d’ajout d’une nouvelle information, aucune durée d’exposition ne peut être clairement définie pour cette première année. Ces le béaba des analyses de durée/survie, une origine commune doit être clairement définie ce qui ne peut pas être ici. Cette origine commune permet lors du suivi de construire une population initiale soumise au risque sur la <strong><em>même ligne de départ</em></strong><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Il n’y avait pas d’autre choix compte tenu de la problématique de prendre l’année de mise en couple (cohabitant) pour définir le point d’origine, et donc demarrer l’observation à l’année 2012. Cela aurait permis en comparant les données fiscales d’une année sur l’autre de repérer les femmes qui se sont mis en couple. Et c’est ce qui est fait pour les inclusions sur les années suivantes.</p>
 <p>On peut noter que ce biais d’inclusion joue de manière différenciée selon l’âge de la femme en 2011: surement nul ou très faible pour les femmes les plus jeunes, et selon le rang de l’union, plus ou moins élevé pour les femmes plus âgées. Sur ce dernier point le rang de l’union qui n’est visiblement pas mesurable avec les données utilisées, constituait également une dimension de contrôle importante.</p>
@@ -904,208 +921,220 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Annexes**</span></span>
 <span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tests Grambsch-Therneau OLS sur les résidus de Schoenfeld</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>Attention il ne s'agit pas du test actuellement implémenté dans la nouvelle version de <span class="in">`survival`</span> (v3) qui, malheureusement, lui a substitué la version dite *exacte* (moindres carrés généralisés). Le programme de la fonction  du test OLS est néanmoins facilement récupérable et exécutable. <span class="co">[</span><span class="ot">lien</span><span class="co">](https://github.com/mthevenin/analyse_duree/blob/main/cox.zphold/cox.zphold.R)</span>.  </span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>Je continue de préconiser l'utilisation de cette version OLS du test, reproductible avec les autres applications statistiques (Stata,Sas,Python).</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Le test dit "simplifié", qui n'apparait pas dans le texte original de P.Gramsch et T.Thernau <span class="co">[</span><span class="ot">lien</span><span class="co">](https://www.jstor.org/stable/2337123#metadata_info_tab_contents)</span>, répond à un soucis d'instabilité des variances des résidus de Schoenfeld en fin de durée d'observation lorsque peu d'observation restent soumises au risque. Cet argument est soulevé dans leur ouvrage de 2022  <span class="co">[</span><span class="ot">lien</span><span class="co">](https://link.springer.com/book/10.1007/978-1-4757-3294-8)</span> avant d'en présenter sa version.</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Il est simplifié car on applique à tous les résidus bruts la variance du paramètre ($b$) estimés par le modèle de Cox. </span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Le test devient alors un simple test de corrélation entre les résidus et une fonction de la durée (centrée). Dans l'esprit, il peut être également approché par une regression linéaire par les moindre carrés ordinaires entre les résidus et une fonction de la durée (voir page 134 de l'ouvrage de Grambsch et Therneau).</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tests Grambsch-Therneau OLS sur les résidus de Schoenfeld</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>::: callout-important</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>Attention il ne s'agit pas du test actuellement implémenté dans la nouvelle version de <span class="in">`survival`</span> (v3) qui, malheureusement, lui a substitué la version dite *exacte* (moindres carrés généralisés). Le programme de la fonction  du test OLS est néanmoins facilement récupérable et exécutable. <span class="co">[</span><span class="ot">lien</span><span class="co">](https://github.com/mthevenin/analyse_duree/blob/main/cox.zphold/cox.zphold.R)</span>.  </span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>Je continue de préconiser l'utilisation de cette version OLS du test, reproductible avec les autres applications statistiques (Stata,Sas,Python).</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Le test dit "simplifié", qui n'apparait pas dans le texte original de P.Gramsch et T.Thernau <span class="co">[</span><span class="ot">lien</span><span class="co">](https://www.jstor.org/stable/2337123#metadata_info_tab_contents)</span>, répond à un soucis d'instabilité des variances des résidus de Schoenfeld en fin de durée d'observation lorsque peu d'observation restent soumises au risque. Cet argument est soulevé dans leur ouvrage de 2022  <span class="co">[</span><span class="ot">lien</span><span class="co">](https://link.springer.com/book/10.1007/978-1-4757-3294-8)</span> avant d'en présenter sa version.</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Il est simplifié car on applique à tous les résidus bruts la variance du paramètre ($b$) estimés par le modèle de Cox. </span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Le test devient alors un simple test de corrélation entre les résidus et une fonction de la durée (centrée). Dans l'esprit, il peut être également approché par une regression linéaire par les moindre carrés ordinaires entre les résidus et une fonction de la durée (voir page 134 de l'ouvrage de Grambsch et Therneau).</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>Soit les données suivantes, avec *t* la variable de durées, *Y* la variable de censure et *X* la seule et unique covariable.</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Pas d'évènement simultané (donc pas de correction de la vraisemblance)</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Covariable de type indicatrice</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>| $t_i$ | $Y_i$ | $X_i$ |</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>|-----|-----|-----|</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>| 1   | 1   | 1   |</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>| 2   | 0   | 0   |</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>| 3   | 0   | 0   |</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>| 4   | 1   | 1   |</span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>| 5   | 1   | 1   |</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>| 6   | 1   | 0   |</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>| 7   | 0   | 1   |</span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>test <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">time=</span>  <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>),</span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Y=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a>                    <span class="at">X=</span>     <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a>Estimation du modèle de Cox:</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(time, Y) <span class="sc">~</span> X, <span class="at">data=</span>test)</span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a>fit</span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a>Calcul des résidus brut (si et seulement si $Y=1$) dans le cas d'une seule covariable avec $b$ égal à **0.62**:  </span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>$$rs_{i}=X_{i}- \sum_{j\in R_i}X_{i}\frac{e^{0.62\times X}}{\sum_{j\in R_i}e^{0.62\times X}}= X_{i} - E(X_{j\in R_i})$$</span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a>Il y a ici 4 résidus à calculer, pour $t=(1,4,5,6)$   </span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a>**Résidus pour $t=1$**    </span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$a_1= \sum_{j\in R_i}e^{0.62\times X} = e^{0.62} + 1 + 1 + e^{0.62} + 1 + e^{0.62}= 10.43$</span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$b_1= \sum_{j\in R_i}X_{i}\frac{e^{0.62\times X}}{\sum_{j\in R_i}e^{0.62\times X}} = 4\times\frac{e^{0.62}}{10.43} = 0.71$ </span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$r_1 = 1 - 0.71 = 0.29$</span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a>**Résidus pour $t=4$**  </span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$a_4 = e^{0.62} + e^{0.62} + 1 + e^{0.62} = 6.58$</span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$b_4 =  4\times\frac{e^{0.62}}{6.58} = 0.84$ </span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$r_4 = 1 - 0.84 = 0.15$</span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a>**Résidus pour $t=5$**  </span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$a_5 = e^{0.62} + e^{0.62} + 1 = 4.71$</span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$b_5 = 2\times\frac{e^{0.62}}{4.71} = 0.78$</span>
-<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$r_5 = 1 - 0.78 = 0.21$</span>
-<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a>**Résidus pour $t=6$**  </span>
-<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$a_6 = e^{0.62} + 1 = 2.86$</span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$b_6 = \frac{e^{0.62}}{2.86} = 0.65$</span>
-<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$r_6 = 0 - 0.65 = -0.65$</span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a>Les résidus "standardisés", ou plutôt *scaled residuals* (je cale sur une traduction correcte en français) sont égaux à: </span>
-<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a>$$sr_i = b + nd \times Var(b) \times r_i$$</span>
-<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a> Avec $nd= \sum Y_i$</span>
-<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a> </span>
-<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\sum Y_i = 4$</span>
-<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$Var(b) = (1.1723)^2=1.37$</span>
-<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$sr_1 = 0.62 + 4\times 1.37 \times 0.29 = 2.20$</span>
-<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$sr_4 = 0.62 + 4\times 1.37 \times 0.15 = 1.47$</span>
-<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$sr_5 = 0.62 + 4\times 1.37 \times 0.21 = 1.78$</span>
-<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$sr_6 = 0.62 + 4\times 1.37 \times (-0.65) = -2.95$</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>Soit les données suivantes, avec *t* la variable de durées, *Y* la variable de censure et *X* la seule et unique covariable.</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Pas d'évènement simultané (donc pas de correction de la vraisemblance)</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Covariable de type indicatrice</span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>| $t_i$ | $Y_i$ | $X_i$ |</span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>|-----|-----|-----|</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>| 1   | 1   | 1   |</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>| 2   | 0   | 0   |</span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>| 3   | 0   | 0   |</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a>| 4   | 1   | 1   |</span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>| 5   | 1   | 1   |</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>| 6   | 1   | 0   |</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a>| 7   | 0   | 1   |</span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a>test <span class="ot">=</span> <span class="fu">data.frame</span>(<span class="at">time=</span>  <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>),</span>
+<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a>                    <span class="at">Y=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>),</span>
+<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a>                    <span class="at">X=</span>     <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))</span>
+<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a>Estimation du modèle de Cox:</span>
+<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survival)</span>
+<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(time, Y) <span class="sc">~</span> X, <span class="at">data=</span>test)</span>
+<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a>fit</span>
+<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a>Calcul des résidus brut (si et seulement si $Y=1$) dans le cas d'une seule covariable avec $b$ égal à **0.62**:  </span>
+<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a>$$rs_{i}=X_{i}- \sum_{j\in R_i}X_{i}\frac{e^{0.62\times X}}{\sum_{j\in R_i}e^{0.62\times X}}= X_{i} - E(X_{j\in R_i})$$</span>
+<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a>Il y a ici 4 résidus à calculer, pour $t=(1,4,5,6)$   </span>
+<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a>**Résidus pour $t=1$**    </span>
+<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$a_1= \sum_{j\in R_i}e^{0.62\times X} = e^{0.62} + 1 + 1 + e^{0.62} + 1 + e^{0.62}= 10.43$</span>
+<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$b_1= \sum_{j\in R_i}X_{i}\frac{e^{0.62\times X}}{\sum_{j\in R_i}e^{0.62\times X}} = 4\times\frac{e^{0.62}}{10.43} = 0.71$ </span>
+<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$r_1 = 1 - 0.71 = 0.29$</span>
+<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a>**Résidus pour $t=4$**  </span>
+<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$a_4 = e^{0.62} + e^{0.62} + 1 + e^{0.62} = 6.58$</span>
+<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$b_4 =  4\times\frac{e^{0.62}}{6.58} = 0.84$ </span>
+<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$r_4 = 1 - 0.84 = 0.15$</span>
+<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a>**Résidus pour $t=5$**  </span>
+<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$a_5 = e^{0.62} + e^{0.62} + 1 = 4.71$</span>
+<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$b_5 = 2\times\frac{e^{0.62}}{4.71} = 0.78$</span>
+<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$r_5 = 1 - 0.78 = 0.21$</span>
+<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a>**Résidus pour $t=6$**  </span>
+<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$a_6 = e^{0.62} + 1 = 2.86$</span>
+<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$b_6 = \frac{e^{0.62}}{2.86} = 0.65$</span>
+<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$r_6 = 0 - 0.65 = -0.65$</span>
+<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a>Les résidus "standardisés", ou plutôt *scaled residuals* (je cale sur une traduction correcte en français) sont égaux à: </span>
+<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a>$$sr_i = b + nd \times Var(b) \times r_i$$</span>
+<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a> Avec $nd= \sum Y_i$</span>
+<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\sum Y_i = 4$</span>
+<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$Var(b) = (1.1723)^2=1.37$</span>
+<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$sr_1 = 0.62 + 4\times 1.37 \times 0.29 = 2.20$</span>
+<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$sr_4 = 0.62 + 4\times 1.37 \times 0.15 = 1.47$</span>
+<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$sr_5 = 0.62 + 4\times 1.37 \times 0.21 = 1.78$</span>
+<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$sr_6 = 0.62 + 4\times 1.37 \times (-0.65) = -2.95$</span>
+<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a>Avec $g(t_i)$ une fonction de la durée ($g(t_i)=t_i$, $g(t_i)=1-KM(t_i)$...) et $\overline{g(t)}$ sa valeur moyenne, la statistique  du test score simplifié pour une covariable est égale à :   </span>
-<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a>$$\frac{<span class="co">[</span><span class="ot">\sum_i(g(t_i) - \overline{g(t_i)}\times sr_i)</span><span class="co">]</span>^2}{nd \times Var(b) \times (\sum_i(g(t_i) - \overline{g(t_i)})^2}$$</span>
-<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a>Et suis un $\chi^2$ à 1 degré de liberté.  </span>
-<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a>Avec $\overline{g(t_i)}=t_i$, le calcul de la statistique de test est:  </span>
-<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a><span class="ss">*  </span>$\overline{g(t_i)}= \frac{28}{7}=4$</span>
-<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\frac{<span class="co">[</span><span class="ot">(1-4)\times 2.20</span><span class="co">]</span> + <span class="co">[</span><span class="ot">(4-4)\times 1.47 + (5-4)\times 1.78 + (6-4)\times (-2.95)</span><span class="co">]</span>^2 }{4\times 1.37 \times <span class="co">[</span><span class="ot">(1-4)^2 + (4-4)^2 + (5-4)^2 + (6-4)^2</span><span class="co">]</span> } = \frac{114.9}{76.72} = 1.49$</span>
+<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a>Avec $g(t_i)$ une fonction de la durée ($g(t_i)=t_i$, $g(t_i)=1-KM(t_i)$...) et $\overline{g(t)}$ sa valeur moyenne, la statistique  du test score simplifié pour une covariable est égale à :   </span>
+<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a>$$\frac{<span class="co">[</span><span class="ot">\sum_i(g(t_i) - \overline{g(t_i)}\times sr_i)</span><span class="co">]</span>^2}{nd \times Var(b) \times (\sum_i(g(t_i) - \overline{g(t_i)})^2}$$</span>
+<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a>Et suis un $\chi^2$ à 1 degré de liberté.  </span>
+<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a>Avec $\overline{g(t_i)}=t_i$, le calcul de la statistique de test est:  </span>
+<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a><span class="ss">*  </span>$\overline{g(t_i)}= \frac{28}{7}=4$</span>
+<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$\frac{<span class="co">[</span><span class="ot">(1-4)\times 2.20</span><span class="co">]</span> + <span class="co">[</span><span class="ot">(4-4)\times 1.47 + (5-4)\times 1.78 + (6-4)\times (-2.95)</span><span class="co">]</span>^2 }{4\times 1.37 \times <span class="co">[</span><span class="ot">(1-4)^2 + (4-4)^2 + (5-4)^2 + (6-4)^2</span><span class="co">]</span> } = \frac{114.9}{76.72} = 1.49$</span>
+<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a><span class="co">#source("D:/D/Marc/SMS/FORMATIONS/analyse_duree/cox.zphold/cox.zphold.R")</span></span>
-<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/mthevenin/analyse_duree/master/cox.zphold/cox.zphold.R"</span>)</span>
-<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zphold</span>(fit, <span class="at">transform=</span><span class="st">"identity"</span>)</span>
-<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a><span class="co">#source("D:/D/Marc/SMS/FORMATIONS/analyse_duree/cox.zphold/cox.zphold.R")</span></span>
+<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"https://raw.githubusercontent.com/mthevenin/analyse_duree/master/cox.zphold/cox.zphold.R"</span>)</span>
+<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a><span class="fu">cox.zphold</span>(fit, <span class="at">transform=</span><span class="st">"identity"</span>)</span>
+<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a><span class="fu">## Analyses avec des pseudo-observations</span></span>
 <span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fragilité et immunité</span></span>
-<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a>Seulement quelques remarques, le traitement de ces problématiques dépassant largement le contenu de la formation.</span>
+<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a>Il s'agit d'un premier jet d'explication d'une méthode d'analyse qui fête ses 20 ans. Dans la version future du support (disons version 2024), j'essaierai d'en faire une description plus précise. On se contentera pour le moment d'une présentation rapide des concepts de base avec des élément de calculs, ainsi que les limites. Bien évidemment quelques exemples avec la base d'exemple seront montrés </span>
+<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fragilité (Frailty)</span></span>
+<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a>Pour la *fragilité*, je conseille fortement de lire la dernière section du document de travail de ***Simon Quantin** (cf bibliographie), il n'y a pas meilleure présentation du problème que la sienne ^[petite maj par rapport à la version précédente: il ne traite que la fragilité individuelle stricto sensu et non la fragilité plus connu sous le terme de *shared frailty* (proche modèle multiniveau). Problèmatique importante, car une des origines de la non proportionnalité des risques réside dans l’omission de variables. Ici on va être confronté une omission sur des traits non observables ou latents, qui **accélèrent** dès le début de la période d’exposition la survenue de l’évènement. L’introduction d’un facteur de fragilité se fait par l’introduction d’un effet aléatoire dans le modèle, de nature plus complexe, et rendant l’interprétation des modèles plus compliquée. </span>
+<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a>On peut distinguer deux types de modèles:</span>
+<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>les modèles à *fragilité partagée*, c'est la situation la plus simple car la logique se rapproche des modèles multiniveaux, des groupes d'individus, identifiables, partagent une même *fragilité*, par exemple  géographique.</span>
-<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>les modèles à *fragilité non partagée*, avec des caractéristiques latentes non observable comme les préférences, ou en médecine certains traits génétiques non identifiés.</span>
+<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fragilité et immunité</span></span>
 <span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a><span class="fu">### Immunité (Cure fraction)</span></span>
-<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a>Le phénomène d’immunité est un cas particulier du précédent, et a été étudié dès le début des années 1950, en questionnant l’exposition au risque d’une partie des observations. On s'interrogeait par exemple sur les risques de rechute et de décès après le traitement d'un premier cancer. </span>
-<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a>Visuellement on peut commencer à se proser des questions sur la présence d'une fraction *immunisée* ou non *susceptible* de connaître l'évènement lorsque la fonction de séjour ne tend pas vers 0 mais présente une longue asymptote (plateau) sur une valeur  supérieure à 0: $\lim_{t \to \infty}S(t)=a$. </span>
+<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a>Seulement quelques remarques, le traitement de ces problématiques dépassant largement le contenu de la formation.</span>
+<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a><span class="fu">### Fragilité (Frailty)</span></span>
 <span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a>Les modèles avec une fraction immunisée peuvent être de ***type mixte*** en associant une probabilité d'être immunisé aux observations censurées à droite à un modèle de durée ^[Le plus classique utilise un algorithme *Expectation Maximisation* utilisé en imputation: on estime une probabilité d'être susceptible de connaitre l'évènement aux observations censurées à droite, qui intervient comme facteur de pondération dans le modèle de durée. Cette probabilité et le modèle de durée qui lui est associé est réévalué à chaque boucle de l'algorithme jusqu'à convergence. Le principale problème de cette méthode résite dans l'estimation de la variance, souvent effectué par bootstrap. Cette méthode à l'avantage d'être implémentable en durée discrète, bien qu'à ma connaissance aucun logiciel ne la propose (j'ai une commande Stata encore perfectible sous le coude). On trouve en revanche ce type d'estimation sous R, pour les modèles de Cox ou les modèles paramétriques dans le package **`smcure`**].  Plus dans le vent je crois, on a également des modèles de **type non mixte**, avec il me semble une connotation bayesienne qui semble s'accroître.  Il n’y a donc pas de méthode unifiée à ce jour [<span class="co">[</span><span class="ot">Si vous voulez vous en convaincre</span><span class="co">](https://www.annualreviews.org/doi/10.1146/annurev-statistics-031017-100101)</span>]. </span>
+<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a>Pour la *fragilité*, je conseille fortement de lire la dernière section du document de travail de ***Simon Quantin** (cf bibliographie), il n'y a pas meilleure présentation du problème que la sienne ^[petite maj par rapport à la version précédente: il ne traite que la fragilité individuelle stricto sensu et non la fragilité plus connu sous le terme de *shared frailty* (proche modèle multiniveau). Problèmatique importante, car une des origines de la non proportionnalité des risques réside dans l’omission de variables. Ici on va être confronté une omission sur des traits non observables ou latents, qui **accélèrent** dès le début de la période d’exposition la survenue de l’évènement. L’introduction d’un facteur de fragilité se fait par l’introduction d’un effet aléatoire dans le modèle, de nature plus complexe, et rendant l’interprétation des modèles plus compliquée. </span>
 <span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a> On peut également noter, c'est important, que cette problématique affecte les analyses avec des évènements dits récurrents. Ici, la stratégie classique qui consiste à introduire dans un modèle un simple effet aléatoire de type fragilité partagée (shared frailty) pour contrôler risque d'être insuffisante. Ici le *groupe* est constitué de chaque séquence de remise dans le risque set. Exemple pour la fécondité: une personne ayant eu un enfant est exposée au risque d'en avoir un autre, l'horloge temporelle étant alors simplement réinitialisée. Et donc, quid des préférences individuelles en terme de fécondité ^[en situation de récurrence, toujours penser à *remettre à jour* les conditions initiales, par exemple pour la fécondite l'âge de la mère à la naissance de l'enfant pour les rang supérieur à 1]. </span>
+<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a>On peut distinguer deux types de modèles:</span>
 <span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a>Enfin, les modèles à fragilité ou à fraction immunisée repose tous sur une hypothèse très forte. La fragilité ou le degré d'immunité est toujours défini (estimé) en début d'exposition, et il ne varie pas. Cela peut ne pas toujours faire sens, en particulier pour les préférences, pas forcément stables ou fixes dans le temps.</span>
-<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>les modèles à *fragilité partagée*, c'est la situation la plus simple car la logique se rapproche des modèles multiniveaux, des groupes d'individus, identifiables, partagent une même *fragilité*, par exemple  géographique.</span>
+<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>les modèles à *fragilité non partagée*, avec des caractéristiques latentes non observable comme les préférences, ou en médecine certains traits génétiques non identifiés.</span>
 <span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exemple d'analyse de durées ***Canada Dry***</span></span>
+<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a><span class="fu">### Immunité (Cure fraction)</span></span>
 <span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a>En remettant en cause l'utilisation abusive de concepts empruntés à l'analyse de survie dans une étude publiée récemment, ce qui suit pourra paraître un peu polémique. Dans ce qui suit, il s'agit seulement de contester l'utilisation abusive d'une terminologie très typée et conditionnée au respect de certaines hypothèses de base, et non de remettre en cause l'ensemble des résultats obtenus, bien qu'à la lecture des quelques informations descriptives contenues dans l'étude ont peu s'interroger sur la présence assez substentielles d'affet de sélection...Ce qui n'est pas étonnant vu la manière dont a été créée l'échantillon.</span>
-<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a>L'étude en question [<span class="co">[</span><span class="ot">Lien</span><span class="co">](https://www.cairn.info/revue-population-2022-3-page-411.htm)</span>] mobilise des données de suivi de stock, à savoir l'EDP (Echantillon Démographique Permanent). L'étude cherche à mettre à profit l'ajout par l'Insee de données fiscales à cet échantillon pour analyser la fécondité des femmes nullipares **au sein des couples**.  L'inclusion de cette données fiscale à cet échantillon a été initiée pour l'année 2011.</span>
+<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a>Le phénomène d’immunité est un cas particulier du précédent, et a été étudié dès le début des années 1950, en questionnant l’exposition au risque d’une partie des observations. On s'interrogeait par exemple sur les risques de rechute et de décès après le traitement d'un premier cancer. </span>
+<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a>Visuellement on peut commencer à se proser des questions sur la présence d'une fraction *immunisée* ou non *susceptible* de connaître l'évènement lorsque la fonction de séjour ne tend pas vers 0 mais présente une longue asymptote (plateau) sur une valeur  supérieure à 0: $\lim_{t \to \infty}S(t)=a$. </span>
 <span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a>***Sélection initiale de l'échantillon sur la première année d'inclusion***</span>
-<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a>En sélectionnant l'échantillon de départ sur 2011, année d'ajout d'une nouvelle information, aucune durée d'exposition ne peut être  clairement définie pour cette première année. Ces le béaba des analyses de durée/survie, une origine commune doit être clairement définie ce qui ne peut pas être ici. Cette origine commune permet lors du suivi de construire une population initiale soumise au risque sur la ***même ligne de départ***^<span class="co">[</span><span class="ot">Ceci ayant été écrit pendant des mondiaux d'athlétisme, dont les épreuves de courses sont pas définition des épreuves de durée, on pourra dire ici que les *faux départs* sont généralisés et autorisés</span><span class="co">]</span>. Il n'y avait pas d'autre choix compte tenu de la problématique de prendre l'année de mise en couple (cohabitant) pour définir le point d'origine, et donc demarrer l'observation à l'année 2012. Cela aurait permis en comparant les données fiscales d'une année sur l'autre de repérer les femmes qui se sont mis en couple. Et c'est ce qui est fait pour les inclusions sur les années suivantes. </span>
-<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a>On peut noter que ce biais d'inclusion joue de manière différenciée selon l'âge de la femme en 2011: surement nul ou très faible pour les femmes les plus jeunes, et selon le rang de l'union, plus ou moins élevé pour les femmes plus âgées. Sur ce dernier point le rang de l'union qui n'est visiblement pas mesurable avec les données utilisées, constituait également une dimension de contrôle importante. </span>
-<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a>***Sélection  les années suivantes (jusqu'en 2017)***  </span>
-<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a>Comme indiqué juste juste au dessus, les inclusions suivantes se font sur la base d'une origine commune à savoir l'année de mise en couple.</span>
-<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a>Au final, on se retrouve avec un échantillon dont la logique d'inclusion repose sur des critères différents: ajout des données fiscales pour 2011, et pour les années suivantes les mises en couples observées durant l'année écoulée.</span>
-<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a>***Une fausse variable de durée***</span>
-<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a>En conservant la mise en couple comme origine, et en analysant la fécondité des femmes nullipares sur les 5 premières années, une analyse de survie reposant sur un suivi sur les 5 premières années de vie en couple cohabitant était facilement réalisable. En retranchant au âges observés durant les années de suivi l'âge de 18 ans, l'autrice, je pense en allant piocher maladroitement et partiellement dans un ouvrage de méthodologie très connu (voir encadré ci-dessous) a été conduit à créer une pseudo variable de durée dont la longueur est artificielle, et ne permet pas de mesurer proprement les durées d'exposition observées. </span>
-<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/image22.png)</span></span>
-<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a>Au final, et toujours sous l'angle revendiqué d'une analyse des durée ou de survie, aucune fonction de séjour sous jacente n'est correctement estimable, et donc par définition aucune interprétation en termes de risques instantané n'est possible. Sur le modèle présenté, la construction de la vraisemblance n'est pas compatible avec ce type d'analyse.</span>
-<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a>Mais malheureusement on peut lire:</span>
+<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a>Les modèles avec une fraction immunisée peuvent être de ***type mixte*** en associant une probabilité d'être immunisé aux observations censurées à droite à un modèle de durée ^[Le plus classique utilise un algorithme *Expectation Maximisation* utilisé en imputation: on estime une probabilité d'être susceptible de connaitre l'évènement aux observations censurées à droite, qui intervient comme facteur de pondération dans le modèle de durée. Cette probabilité et le modèle de durée qui lui est associé est réévalué à chaque boucle de l'algorithme jusqu'à convergence. Le principale problème de cette méthode résite dans l'estimation de la variance, souvent effectué par bootstrap. Cette méthode à l'avantage d'être implémentable en durée discrète, bien qu'à ma connaissance aucun logiciel ne la propose (j'ai une commande Stata encore perfectible sous le coude). On trouve en revanche ce type d'estimation sous R, pour les modèles de Cox ou les modèles paramétriques dans le package **`smcure`**].  Plus dans le vent je crois, on a également des modèles de **type non mixte**, avec il me semble une connotation bayesienne qui semble s'accroître.  Il n’y a donc pas de méthode unifiée à ce jour [<span class="co">[</span><span class="ot">Si vous voulez vous en convaincre</span><span class="co">](https://www.annualreviews.org/doi/10.1146/annurev-statistics-031017-100101)</span>]. </span>
+<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a> On peut également noter, c'est important, que cette problématique affecte les analyses avec des évènements dits récurrents. Ici, la stratégie classique qui consiste à introduire dans un modèle un simple effet aléatoire de type fragilité partagée (shared frailty) pour contrôler risque d'être insuffisante. Ici le *groupe* est constitué de chaque séquence de remise dans le risque set. Exemple pour la fécondité: une personne ayant eu un enfant est exposée au risque d'en avoir un autre, l'horloge temporelle étant alors simplement réinitialisée. Et donc, quid des préférences individuelles en terme de fécondité ^[en situation de récurrence, toujours penser à *remettre à jour* les conditions initiales, par exemple pour la fécondite l'âge de la mère à la naissance de l'enfant pour les rang supérieur à 1]. </span>
+<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a>Enfin, les modèles à fragilité ou à fraction immunisée repose tous sur une hypothèse très forte. La fragilité ou le degré d'immunité est toujours défini (estimé) en début d'exposition, et il ne varie pas. Cela peut ne pas toujours faire sens, en particulier pour les préférences, pas forcément stables ou fixes dans le temps.</span>
+<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a><span class="fu">## Exemple d'analyse de durées ***Canada Dry***</span></span>
+<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a>En remettant en cause l'utilisation abusive de concepts empruntés à l'analyse de survie dans une étude publiée récemment, ce qui suit pourra paraître un peu polémique. Dans ce qui suit, il s'agit seulement de contester l'utilisation abusive d'une terminologie très typée et conditionnée au respect de certaines hypothèses de base, et non de remettre en cause l'ensemble des résultats obtenus, bien qu'à la lecture des quelques informations descriptives contenues dans l'étude ont peu s'interroger sur la présence assez substentielles d'affet de sélection...Ce qui n'est pas étonnant vu la manière dont a été créée l'échantillon.</span>
+<span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a>L'étude en question [<span class="co">[</span><span class="ot">Lien</span><span class="co">](https://www.cairn.info/revue-population-2022-3-page-411.htm)</span>] mobilise des données de suivi de stock, à savoir l'EDP (Echantillon Démographique Permanent). L'étude cherche à mettre à profit l'ajout par l'Insee de données fiscales à cet échantillon pour analyser la fécondité des femmes nullipares **au sein des couples**.  L'inclusion de cette données fiscale à cet échantillon a été initiée pour l'année 2011.</span>
+<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a>***Sélection initiale de l'échantillon sur la première année d'inclusion***</span>
+<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a>En sélectionnant l'échantillon de départ sur 2011, année d'ajout d'une nouvelle information, aucune durée d'exposition ne peut être  clairement définie pour cette première année. Ces le béaba des analyses de durée/survie, une origine commune doit être clairement définie ce qui ne peut pas être ici. Cette origine commune permet lors du suivi de construire une population initiale soumise au risque sur la ***même ligne de départ***^<span class="co">[</span><span class="ot">Ceci ayant été écrit pendant des mondiaux d'athlétisme, dont les épreuves de courses sont pas définition des épreuves de durée, on pourra dire ici que les *faux départs* sont généralisés et autorisés</span><span class="co">]</span>. Il n'y avait pas d'autre choix compte tenu de la problématique de prendre l'année de mise en couple (cohabitant) pour définir le point d'origine, et donc demarrer l'observation à l'année 2012. Cela aurait permis en comparant les données fiscales d'une année sur l'autre de repérer les femmes qui se sont mis en couple. Et c'est ce qui est fait pour les inclusions sur les années suivantes. </span>
+<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a>On peut noter que ce biais d'inclusion joue de manière différenciée selon l'âge de la femme en 2011: surement nul ou très faible pour les femmes les plus jeunes, et selon le rang de l'union, plus ou moins élevé pour les femmes plus âgées. Sur ce dernier point le rang de l'union qui n'est visiblement pas mesurable avec les données utilisées, constituait également une dimension de contrôle importante. </span>
+<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a>***Sélection  les années suivantes (jusqu'en 2017)***  </span>
+<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a>Comme indiqué juste juste au dessus, les inclusions suivantes se font sur la base d'une origine commune à savoir l'année de mise en couple.</span>
 <span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>"***des modèles de risque instantané à temps discret***" <span class="co">[</span><span class="ot">page 419</span><span class="co">]</span>.</span>
+<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a>Au final, on se retrouve avec un échantillon dont la logique d'inclusion repose sur des critères différents: ajout des données fiscales pour 2011, et pour les années suivantes les mises en couples observées durant l'année écoulée.</span>
 <span id="cb7-182"><a href="#cb7-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a><span class="ss">*  </span>En note de bas de page: ***Le risque instantané est la probabilité conditionnelle que l’événement survienne entre le moment t et t + Δt, sachant qu’il n’a pas eu lieu avant t***  <span class="co">[</span><span class="ot">page 419</span><span class="co">]</span>.</span>
-<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a><span class="ss">   * </span>Cette définition est très légère. Le risque *instantané* n'est formellement une probabilité qu'avec des durées discrètes, ce qui est effectivement le cas ici. La conditionnalité repose sur  une fonction de séjour qui n'est pas ici correctement estimable, et c'est la relation fondamentale qui lie risque (hazard rate), survie et densité qui identifie la vraisemblance d'un modèle de durée ou de survie. Cette relation est incontournable et elle n'est pas respectée ici.</span>
+<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a>***Une fausse variable de durée***</span>
+<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a>En conservant la mise en couple comme origine, et en analysant la fécondité des femmes nullipares sur les 5 premières années, une analyse de survie reposant sur un suivi sur les 5 premières années de vie en couple cohabitant était facilement réalisable. En retranchant au âges observés durant les années de suivi l'âge de 18 ans, l'autrice, je pense en allant piocher maladroitement et partiellement dans un ouvrage de méthodologie très connu (voir encadré ci-dessous) a été conduit à créer une pseudo variable de durée dont la longueur est artificielle, et ne permet pas de mesurer proprement les durées d'exposition observées. </span>
 <span id="cb7-185"><a href="#cb7-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>"***Le deuxième modèle peut se passer de l’hypothèse des risques instantanés proportionnels***" <span class="co">[</span><span class="ot">page 420</span><span class="co">]</span>. </span>
-<span id="cb7-187"><a href="#cb7-187" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Comment peut on soulever l'hypothèse de proportionnalité lorsque les individus ne sont pas observé à des durées identiques, ????</span>
-<span id="cb7-188"><a href="#cb7-188" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Dans l'article cette correction est faite également sur les variables dynamique. Il s'agit d'un emprunt à l'ouvrage de Singer et Willet. L'autrice n'en ait pas responsable, mais l'idée même de cette hypothèse est très contestable avec des covariables non fixes^<span class="co">[</span><span class="ot">Avec une variable fixe une des méthodes de correction, via l'introduction d'une intéraction, consiste justement à la transformer en variable dynamique</span><span class="co">]</span>.   </span>
-<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-190"><a href="#cb7-190" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>"***Le quatrième modèle enfin inclut l’interaction des revenus relatifs avec le temps d’exposition au risque***" <span class="co">[</span><span class="ot">page 421</span><span class="co">]</span>. </span>
-<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Il n'y a malheureusement pas de durée d'exposition au risque clairement défini dans l'étude. On peut néanmoins concéder que pour les couples dont la femme est très jeune (18-20 ans), l'inclusion en 2011 pourrait correspondre à l'année de mis en couple. </span>
-<span id="cb7-192"><a href="#cb7-192" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Voir le point précédent pour l'introduction de cette intéraction.</span>
-<span id="cb7-193"><a href="#cb7-193" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-194"><a href="#cb7-194" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>"***L’équation suivante représente le calcul du risque continu cumulé***" <span class="co">[</span><span class="ot">pages 421</span><span class="co">]</span>, alors qu'aucune fonction de survie, et donc de risque cumulé ne peut être correctement obtenu (je sais je me répète dans la répétition). Mais cela permet à l'autrice de justifier l'utilisation de la fonction de lien *complémentaire log-log*. Et donc de faire, sous un angle paramétrique un modèle une variante d'un modèle de Cox à durée discrète. Mais en présence de censure à gauche, massive dans l'étude, ou de troncature à gauche, il est fortement biaisé. </span>
-<span id="cb7-195"><a href="#cb7-195" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-196"><a href="#cb7-196" aria-hidden="true" tabindex="-1"></a>Au final:  </span>
-<span id="cb7-197"><a href="#cb7-197" aria-hidden="true" tabindex="-1"></a>Après de brefs échanges avec la rédaction en chef de l'Ined^<span class="co">[</span><span class="ot">Nous étions 3 à avoir exprimé de l'étonnement sur le contenu de cet article</span><span class="co">]</span>, il a été convenu qu'il ne s'agissait pas en effet d'une analyse de durée ou de survie....Ouf!....  Mais que l'autrice, via une réponse peu inspirée d'un spécialiste de l'Ined sur les questions de fécondité, n'avait pas souhaité faire une analyse de ce type... Ha bon ^<span class="co">[</span><span class="ot">Argument lunaire: l'autrice n'utilise pas la durée comme variable dépendante mais comme une simple covariable. Alors 1) en présence de censure à droite, c'est quand même compliquer d'introduire la durée directement comme variable dépendante, c'est le béaba et 2) l'introduction de la durée ou d'une fonction de celle-ci comme covariable ou variable d'ajustement est une caractéristique commune à toute type de modèle de durée de type paramétrique. Sur les modèles usuels, seul le modèle de Cox figure comme exception</span><span class="co">]</span>...</span>
-<span id="cb7-198"><a href="#cb7-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-200"><a href="#cb7-200" aria-hidden="true" tabindex="-1"></a>::: callout-warning </span>
+<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-187"><a href="#cb7-187" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/image22.png)</span></span>
+<span id="cb7-188"><a href="#cb7-188" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a>Au final, et toujours sous l'angle revendiqué d'une analyse des durée ou de survie, aucune fonction de séjour sous jacente n'est correctement estimable, et donc par définition aucune interprétation en termes de risques instantané n'est possible. Sur le modèle présenté, la construction de la vraisemblance n'est pas compatible avec ce type d'analyse.</span>
+<span id="cb7-190"><a href="#cb7-190" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a>Mais malheureusement on peut lire:</span>
+<span id="cb7-192"><a href="#cb7-192" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-193"><a href="#cb7-193" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>"***des modèles de risque instantané à temps discret***" <span class="co">[</span><span class="ot">page 419</span><span class="co">]</span>.</span>
+<span id="cb7-194"><a href="#cb7-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-195"><a href="#cb7-195" aria-hidden="true" tabindex="-1"></a><span class="ss">*  </span>En note de bas de page: ***Le risque instantané est la probabilité conditionnelle que l’événement survienne entre le moment t et t + Δt, sachant qu’il n’a pas eu lieu avant t***  <span class="co">[</span><span class="ot">page 419</span><span class="co">]</span>.</span>
+<span id="cb7-196"><a href="#cb7-196" aria-hidden="true" tabindex="-1"></a><span class="ss">   * </span>Cette définition est très légère. Le risque *instantané* n'est formellement une probabilité qu'avec des durées discrètes, ce qui est effectivement le cas ici. La conditionnalité repose sur  une fonction de séjour qui n'est pas ici correctement estimable, et c'est la relation fondamentale qui lie risque (hazard rate), survie et densité qui identifie la vraisemblance d'un modèle de durée ou de survie. Cette relation est incontournable et elle n'est pas respectée ici.</span>
+<span id="cb7-197"><a href="#cb7-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-198"><a href="#cb7-198" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>"***Le deuxième modèle peut se passer de l’hypothèse des risques instantanés proportionnels***" <span class="co">[</span><span class="ot">page 420</span><span class="co">]</span>. </span>
+<span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Comment peut on soulever l'hypothèse de proportionnalité lorsque les individus ne sont pas observé à des durées identiques, ????</span>
+<span id="cb7-200"><a href="#cb7-200" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Dans l'article cette correction est faite également sur les variables dynamique. Il s'agit d'un emprunt à l'ouvrage de Singer et Willet. L'autrice n'en ait pas responsable, mais l'idée même de cette hypothèse est très contestable avec des covariables non fixes^<span class="co">[</span><span class="ot">Avec une variable fixe une des méthodes de correction, via l'introduction d'une intéraction, consiste justement à la transformer en variable dynamique</span><span class="co">]</span>.   </span>
 <span id="cb7-201"><a href="#cb7-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-202"><a href="#cb7-202" aria-hidden="true" tabindex="-1"></a><span class="fu">### L'ouvrage de Singer et Willet </span></span>
-<span id="cb7-203"><a href="#cb7-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-204"><a href="#cb7-204" aria-hidden="true" tabindex="-1"></a>Clairement revendiqué dans l'article, la *stratégie méthodologique* repose sur une section du fameux ouvrage de J.Singer et J.Willet ***Applied longitudinal data analysis: Modeling change and event occurrence***. Considéré comme une véritable bible des modèles à durée discrètes, il a reposé plusieurs années dans mon bureau et donc été utilisé régulièrement. Il n'en reste pas moins exempt de défauts, avec un chapitrage peu conventionnel, un côté supermarché à modèles excessif, mais également des partis pris méthodologiques non discutés comme le test et la correction contestable de la non proportionnalité des risques pour des variables dynamiques. </span>
+<span id="cb7-202"><a href="#cb7-202" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>"***Le quatrième modèle enfin inclut l’interaction des revenus relatifs avec le temps d’exposition au risque***" <span class="co">[</span><span class="ot">page 421</span><span class="co">]</span>. </span>
+<span id="cb7-203"><a href="#cb7-203" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Il n'y a malheureusement pas de durée d'exposition au risque clairement défini dans l'étude. On peut néanmoins concéder que pour les couples dont la femme est très jeune (18-20 ans), l'inclusion en 2011 pourrait correspondre à l'année de mis en couple. </span>
+<span id="cb7-204"><a href="#cb7-204" aria-hidden="true" tabindex="-1"></a><span class="ss">  * </span>Voir le point précédent pour l'introduction de cette intéraction.</span>
 <span id="cb7-205"><a href="#cb7-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-206"><a href="#cb7-206" aria-hidden="true" tabindex="-1"></a>Il n'en reste pas moins, qu'à l'exception du dernier chapitre dédié aux temps continu, toutes la méthodologie et les applications sont réalisés dans le cadre stricte de la censure à droite non informative, et les auteurs prennent clairement le soins d'alerter les lecteurs des problèmes posés par présence de censure ou de troncature à gauche avec les données prospectives ou de suvi de stock, tel que l'EDP: </span>
+<span id="cb7-206"><a href="#cb7-206" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>"***L’équation suivante représente le calcul du risque continu cumulé***" <span class="co">[</span><span class="ot">pages 421</span><span class="co">]</span>, alors qu'aucune fonction de survie, et donc de risque cumulé ne peut être correctement obtenu (je sais je me répète dans la répétition). Mais cela permet à l'autrice de justifier l'utilisation de la fonction de lien *complémentaire log-log*. Et donc de faire, sous un angle paramétrique un modèle une variante d'un modèle de Cox à durée discrète. Mais en présence de censure à gauche, massive dans l'étude, ou de troncature à gauche, il est fortement biaisé. </span>
 <span id="cb7-207"><a href="#cb7-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-208"><a href="#cb7-208" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; pages 320 et 321: ***In what follows, we typically assume that all censoring occurs on the right***. In section 15.6, however, we describe what you can do when your data set includes what are known as late entrants into the risk set. You are most likely to encounter late entrants if you study stock samples, age-heterogeneous groups of people who already occupy the initial state when data collection begins—for example, a random sample of adults who have yet to experience a depressive episode. Your plan is to follow everyone for a fixed period of time—say ten years— and record whether and when sample participants experience their first episode. Because each sample member was a different age when data collection began, however, the ten years you cover do not cover the same ten years of peoples’ lives: you follow the 20-year-olds until they are 30, the 21-year-olds until they are 31, the 22-year-olds until they are 32, and so on. For an outcome like depression onset, it makes little sense to clock “time” using chronological years (2009,2010, etc). Instead, you would like to clock “time” in terms of age, but you do not observe everyone during the identical set of ages.]</span></span>
-<span id="cb7-209"><a href="#cb7-209" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-210"><a href="#cb7-210" aria-hidden="true" tabindex="-1"></a>On trouvera également les programmes associés aux exemples de l'ouvrage [<span class="co">[</span><span class="ot">ici</span><span class="co">](https://stats.oarc.ucla.edu/other/examples/alda/)</span>]. </span>
-<span id="cb7-211"><a href="#cb7-211" aria-hidden="true" tabindex="-1"></a>On trouvera dans l'ouvrage, mot pour mot, le modèle utilisé par l'autrice. Mais l'exemple utilisait des données retrospéctives avec une stricte censure à droite non informative^<span class="co">[</span><span class="ot">On pourrait également questionner cet article paru dans Population, sur la nature non informative des ruptures d'union par rapport à la fécondité</span><span class="co">]</span>.</span>
-<span id="cb7-212"><a href="#cb7-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-213"><a href="#cb7-213" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb7-214"><a href="#cb7-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-208"><a href="#cb7-208" aria-hidden="true" tabindex="-1"></a>Au final:  </span>
+<span id="cb7-209"><a href="#cb7-209" aria-hidden="true" tabindex="-1"></a>Après de brefs échanges avec la rédaction en chef de l'Ined^<span class="co">[</span><span class="ot">Nous étions 3 à avoir exprimé de l'étonnement sur le contenu de cet article</span><span class="co">]</span>, il a été convenu qu'il ne s'agissait pas en effet d'une analyse de durée ou de survie....Ouf!....  Mais que l'autrice, via une réponse peu inspirée d'un spécialiste de l'Ined sur les questions de fécondité, n'avait pas souhaité faire une analyse de ce type... Ha bon ^<span class="co">[</span><span class="ot">Argument lunaire: l'autrice n'utilise pas la durée comme variable dépendante mais comme une simple covariable. Alors 1) en présence de censure à droite, c'est quand même compliquer d'introduire la durée directement comme variable dépendante, c'est le béaba et 2) l'introduction de la durée ou d'une fonction de celle-ci comme covariable ou variable d'ajustement est une caractéristique commune à toute type de modèle de durée de type paramétrique. Sur les modèles usuels, seul le modèle de Cox figure comme exception</span><span class="co">]</span>...</span>
+<span id="cb7-210"><a href="#cb7-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-211"><a href="#cb7-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-212"><a href="#cb7-212" aria-hidden="true" tabindex="-1"></a>::: callout-warning </span>
+<span id="cb7-213"><a href="#cb7-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-214"><a href="#cb7-214" aria-hidden="true" tabindex="-1"></a><span class="fu">### L'ouvrage de Singer et Willet </span></span>
 <span id="cb7-215"><a href="#cb7-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-216"><a href="#cb7-216" aria-hidden="true" tabindex="-1"></a>Clairement revendiqué dans l'article, la *stratégie méthodologique* repose sur une section du fameux ouvrage de J.Singer et J.Willet ***Applied longitudinal data analysis: Modeling change and event occurrence***. Considéré comme une véritable bible des modèles à durée discrètes, il a reposé plusieurs années dans mon bureau et donc été utilisé régulièrement. Il n'en reste pas moins exempt de défauts, avec un chapitrage peu conventionnel, un côté supermarché à modèles excessif, mais également des partis pris méthodologiques non discutés comme le test et la correction contestable de la non proportionnalité des risques pour des variables dynamiques. </span>
+<span id="cb7-217"><a href="#cb7-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-218"><a href="#cb7-218" aria-hidden="true" tabindex="-1"></a>Il n'en reste pas moins, qu'à l'exception du dernier chapitre dédié aux temps continu, toutes la méthodologie et les applications sont réalisés dans le cadre stricte de la censure à droite non informative, et les auteurs prennent clairement le soins d'alerter les lecteurs des problèmes posés par présence de censure ou de troncature à gauche avec les données prospectives ou de suvi de stock, tel que l'EDP: </span>
+<span id="cb7-219"><a href="#cb7-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-220"><a href="#cb7-220" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; pages 320 et 321: ***In what follows, we typically assume that all censoring occurs on the right***. In section 15.6, however, we describe what you can do when your data set includes what are known as late entrants into the risk set. You are most likely to encounter late entrants if you study stock samples, age-heterogeneous groups of people who already occupy the initial state when data collection begins—for example, a random sample of adults who have yet to experience a depressive episode. Your plan is to follow everyone for a fixed period of time—say ten years— and record whether and when sample participants experience their first episode. Because each sample member was a different age when data collection began, however, the ten years you cover do not cover the same ten years of peoples’ lives: you follow the 20-year-olds until they are 30, the 21-year-olds until they are 31, the 22-year-olds until they are 32, and so on. For an outcome like depression onset, it makes little sense to clock “time” using chronological years (2009,2010, etc). Instead, you would like to clock “time” in terms of age, but you do not observe everyone during the identical set of ages.]</span></span>
+<span id="cb7-221"><a href="#cb7-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-222"><a href="#cb7-222" aria-hidden="true" tabindex="-1"></a>On trouvera également les programmes associés aux exemples de l'ouvrage [<span class="co">[</span><span class="ot">ici</span><span class="co">](https://stats.oarc.ucla.edu/other/examples/alda/)</span>]. </span>
+<span id="cb7-223"><a href="#cb7-223" aria-hidden="true" tabindex="-1"></a>On trouvera dans l'ouvrage, mot pour mot, le modèle utilisé par l'autrice. Mais l'exemple utilisait des données retrospéctives avec une stricte censure à droite non informative^<span class="co">[</span><span class="ot">On pourrait également questionner cet article paru dans Population, sur la nature non informative des ruptures d'union par rapport à la fécondité</span><span class="co">]</span>.</span>
+<span id="cb7-224"><a href="#cb7-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-225"><a href="#cb7-225" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb7-226"><a href="#cb7-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-227"><a href="#cb7-227" aria-hidden="true" tabindex="-1"></a></span>
 </code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","selector":".lightbox","loop":true,"descPosition":"bottom"});</script>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":true,"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom"});</script>
 
 
 

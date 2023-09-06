@@ -7,7 +7,6 @@ lightbox: auto
 
 # **Annexes**
 
-
 ## Tests Grambsch-Therneau OLS sur les résidus de Schoenfeld
 
 ::: callout-important
@@ -116,6 +115,19 @@ source("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/cox.zph
 ```{r}
 cox.zphold(fit, transform="identity")
 ```
+
+
+## Analyses avec des pseudo-observations
+
+::: callout-note
+Il s'agit d'un premier jet d'explication d'une méthode d'analyse qui fête ses 20 ans. Dans la version future du support (disons version 2024), j'essaierai d'en faire une description plus précise. On se contentera pour le moment d'une présentation rapide des concepts de base avec des élément de calculs, ainsi que les limites. Bien évidemment quelques exemples avec la base d'exemple seront montrés 
+:::
+
+
+
+
+
+
 
 
 
