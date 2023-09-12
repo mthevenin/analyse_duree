@@ -340,14 +340,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#la-fonction-de-survie-st" id="toc-la-fonction-de-survie-st" class="nav-link" data-scroll-target="#la-fonction-de-survie-st"><span class="header-section-number">4.4.2</span> La fonction de Survie <span class="math inline">\(S(t)\)</span></a></li>
   <li><a href="#la-fonction-de-répartition-ft" id="toc-la-fonction-de-répartition-ft" class="nav-link" data-scroll-target="#la-fonction-de-répartition-ft"><span class="header-section-number">4.4.3</span> La fonction de répartition <span class="math inline">\(F(t)\)</span></a></li>
   <li><a href="#la-fonction-de-densité-ft" id="toc-la-fonction-de-densité-ft" class="nav-link" data-scroll-target="#la-fonction-de-densité-ft"><span class="header-section-number">4.4.4</span> La fonction de densité <span class="math inline">\(f(t)\)</span></a></li>
-  <li><a href="#le-risque-instantané-ht" id="toc-le-risque-instantané-ht" class="nav-link" data-scroll-target="#le-risque-instantané-ht"><span class="header-section-number">4.4.5</span> Le risque instantané <span class="math inline">\(h(t)\)</span></a></li>
-  <li><a href="#le-risque-cumulé-ht" id="toc-le-risque-cumulé-ht" class="nav-link" data-scroll-target="#le-risque-cumulé-ht"><span class="header-section-number">4.4.6</span> Le risque cumulé <span class="math inline">\(H(t)\)</span></a></li>
   </ul></li>
-  <li><a href="#remarques-complémentaires" id="toc-remarques-complémentaires" class="nav-link" data-scroll-target="#remarques-complémentaires"><span class="header-section-number">4.5</span> <strong>Remarques complémentaires</strong></a>
+  <li><a href="#le-risque-instantané-ht" id="toc-le-risque-instantané-ht" class="nav-link" data-scroll-target="#le-risque-instantané-ht"><span class="header-section-number">4.5</span> Le risque instantané <span class="math inline">\(h(t)\)</span></a>
   <ul class="collapse">
-  <li><a href="#formes-typiques-de-la-fonction-de-survie" id="toc-formes-typiques-de-la-fonction-de-survie" class="nav-link" data-scroll-target="#formes-typiques-de-la-fonction-de-survie"><span class="header-section-number">4.5.1</span> Formes typiques de la fonction de survie</a></li>
-  <li><a href="#absence-de-censures-à-droites" id="toc-absence-de-censures-à-droites" class="nav-link" data-scroll-target="#absence-de-censures-à-droites"><span class="header-section-number">4.5.2</span> Absence de censures à droites</a></li>
-  <li><a href="#utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues" id="toc-utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues" class="nav-link" data-scroll-target="#utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues"><span class="header-section-number">4.5.3</span> Utilisation des pondérations dans un schema retrospectif avec des biographies longues</a></li>
+  <li><a href="#le-risque-cumulé-ht" id="toc-le-risque-cumulé-ht" class="nav-link" data-scroll-target="#le-risque-cumulé-ht"><span class="header-section-number">4.5.1</span> Le risque cumulé <span class="math inline">\(H(t)\)</span></a></li>
+  </ul></li>
+  <li><a href="#remarques-complémentaires" id="toc-remarques-complémentaires" class="nav-link" data-scroll-target="#remarques-complémentaires"><span class="header-section-number">4.6</span> <strong>Remarques complémentaires</strong></a>
+  <ul class="collapse">
+  <li><a href="#formes-typiques-de-la-fonction-de-survie" id="toc-formes-typiques-de-la-fonction-de-survie" class="nav-link" data-scroll-target="#formes-typiques-de-la-fonction-de-survie"><span class="header-section-number">4.6.1</span> Formes typiques de la fonction de survie</a></li>
+  <li><a href="#absence-de-censures-à-droites" id="toc-absence-de-censures-à-droites" class="nav-link" data-scroll-target="#absence-de-censures-à-droites"><span class="header-section-number">4.6.2</span> Absence de censures à droites</a></li>
+  <li><a href="#utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues" id="toc-utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues" class="nav-link" data-scroll-target="#utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues"><span class="header-section-number">4.6.3</span> Utilisation des pondérations dans un schema retrospectif avec des biographies longues</a></li>
   </ul></li>
   </ul>
 <div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mthevenin/analyse_duree/edit/main/03-theorie.qmd" class="toc-action">Modifier cette page</a></p></div></div></nav>
@@ -468,13 +470,13 @@ Par exemple en analysant des décès avec un recueil prospectif, si un individu 
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
 <figure class="figure">
-<p><a href="images/cens1.png" class="lightbox" title="Schéma évènement/censure en temps calendaire" data-gallery="quarto-lightbox-gallery-4"><img src="images/cens1.png" class="img-fluid figure-img"></a></p>
+<p><a href="images/cens1.png" class="lightbox" data-gallery="quarto-lightbox-gallery-4" title="Schéma évènement/censure en temps calendaire"><img src="images/cens1.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption"><strong>Schéma évènement/censure en temps calendaire</strong></figcaption>
 </figure>
 </div>
 <div class="quarto-figure quarto-figure-center" style="flex-basis: 50.0%;justify-content: center;">
 <figure class="figure">
-<p><a href="images/cens2.png" class="lightbox" title="Schéma évènement/censure sous forme de durée" data-gallery="quarto-lightbox-gallery-5"><img src="images/cens2.png" class="img-fluid figure-img"></a></p>
+<p><a href="images/cens2.png" class="lightbox" data-gallery="quarto-lightbox-gallery-5" title="Schéma évènement/censure sous forme de durée"><img src="images/cens2.png" class="img-fluid figure-img"></a></p>
 <figcaption class="figure-caption">Schéma évènement/censure sous forme de durée</figcaption>
 </figure>
 </div>
@@ -488,13 +490,13 @@ L’évènement a pu se produire avant le début période d’observation, mais 
 <p><strong>Censure par intervalle</strong><br>
 Traditionnellement la censure par intervalle est définie sur l’impossibilité de dater exactement la survenue d’un évènement dans un intervalle de temps<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Dans ce sens, on pourrait donc affirmer qu’elle est une caractéristique propre aux temporalité groupées dites à durée discrète<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. On peut sans problème généraliser ce phénomène de censure à l’occurence: un évènement peut se produire entre 2 temps d’observations sans qu’on puisse l’observer. Un exemple classique en criminologie est celle de la récidive d’un délit entre deux arrestations ou deux condamnation: on sait qu’une personne a récidivé en raison de son arrestation, mais on est pas en mesure de savoir s’il a récidivé plus tôt….Pas vu pas pris. A notr également, toujours dans un recueil prospectif, qu’un phénomène de censure à droite lié aux <em>perdu.e de vue</em> peut se transformer en censure par intervalle lorsque la personne “réapparait” et est de nouveau incluse à l’échantillon<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
 <p><strong>Troncature</strong><br>
-Par l’exemple, on analyse la survie d’une population. Seule la survie des individus vivants à l’inclusion peut être analysée (<em>troncature à gauche</em>). On peut donc rencontré un phénomène de sélection difficement contrôlable. On peut également avoir de la troncature à droite lorsqu’on mesure la durée à partir ou jusqu’à un certain seuil niveau. Celle-ci n’est pas forcément problématique.</p>
-<p>Ces situations sont généralement plutôt bien contrôlées dans les recueils rétrospectifs, en particulier pour la censure ou la troncature à gauche. Elles sont en revanche assez courantes lorsque le recueil est de type prospectif, et certaines études passent complètement à travers. En annexe de ce support, on trouvera un examen critique d’une études publiées récemment dans Population qui ressemble, par le vocabulaire utilisé, à une analyse de type durée/survie mais qui en est pas une [<a href="https://mthevenin.github.io/analyse_duree/13-annexe.html#exemple-danalyse-de-durées-canada-dry">lien</a>]. Je ne conseille pas de lire cette section à ce moment du support</p>
+Par l’exemple, on analyse la survie d’une population. Seule la survie des individus vivants à l’inclusion peut être analysée (<em>troncature à gauche</em>). On peut donc rencontrer un phénomène de sélection difficement contrôlable. On peut également avoir de la troncature à droite lorsqu’on mesure la durée à partir ou jusqu’à un certain seuil niveau. Celle-ci n’est pas forcément problématique.</p>
+<p>Ces situations sont généralement plutôt bien contrôlées dans les recueils rétrospectifs, en particulier pour la censure ou la troncature à gauche. Elles sont en revanche assez courantes lorsque le recueil est de type prospectif, et certaines études passent complètement à travers.</p>
 <p><strong>Durée d’observation supérieure à la durée d’exposition</strong><br>
 A l’inverse de la censure, des individus peuvent sortir de l’exposition avant la fin de la période d’observation, et il convient donc de corriger la durée de cette sortie.</p>
 <ul>
 <li>Si au moment de l’enquête une femme sans enfant a 70 ans, cela n’a pas de sens de continuer de l’exposer au risque au-delà d’un certain âge. Si on ne dispose pas d’information sur l’âge à la ménopause on peut tronquer la durée un peu au-delà de l’âge le plus élevé à la première naissance observée dans les données.</li>
-<li>Situation traitée dans le TP de la formation: on analyse la durée de la première séquence d’emploi ou d’une suite de séquence d’emploi sans rupture (chômage, maladie, sortie du marché du travail etc…). Il conviendra pour les personnes qui n’on pas connu de rupture (d’au moins un an par exemple) de faire sortir certaines personnes au moment de la retraite et non au moment de l’enquête, si elle sont déjà retraitées à ce moment. On pourra considérer ces âges à la retraite censures comme des censures à droites non informatives<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></li>
+<li>Situation traitée dans le TP de la formation: on analyse la durée de la première séquence d’emploi ou d’une suite de séquence d’emploi sans rupture (chômage, maladie, sortie du marché du travail etc…). Il conviendra pour les personnes qui n’on pas connu de rupture (d’au moins un an par exemple) de faire sortir certaines personnes au moment de la retraite et non au moment de l’enquête, si elle sont déjà retraitées à ce moment. On pourra considérer ces âges à la retraite censures comme des censures à droites non informatives.</li>
 </ul>
 </section>
 </section>
@@ -555,8 +557,9 @@ A l’inverse de la censure, des individus peuvent sortir de l’exposition avan
 <p>Formellement la fonction de densité <span class="math inline">\(f(t)\)</span> s’écrit:</p>
 <p><span class="math display">\[f(t)=\lim\limits_{dt\to{0}}  \frac{P(t\leq{T}&lt; t + dt)}{dt}\]</span></p>
 </section>
-<section id="le-risque-instantané-ht" class="level3" data-number="4.4.5">
-<h3 data-number="4.4.5" class="anchored" data-anchor-id="le-risque-instantané-ht"><span class="header-section-number">4.4.5</span> Le risque instantané <span class="math inline">\(h(t)\)</span></h3>
+</section>
+<section id="le-risque-instantané-ht" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="le-risque-instantané-ht"><span class="header-section-number">4.5</span> Le risque instantané <span class="math inline">\(h(t)\)</span></h2>
 <p>Concept fondamental de l’analyse des durées:</p>
 <p><span class="math display">\[h(t)=\lim\limits_{dt\to{0}} \frac{P(t\leq{T}&lt; t + dt | T\geq{t})}{dt}\]</span></p>
 <ul>
@@ -566,7 +569,7 @@ A l’inverse de la censure, des individus peuvent sortir de l’exposition avan
 <li>A priori cette quantité n’est pas une probabilité. C’est la nature de l’évènement, en particulier sa non récurrence, et la métrique temporelle choisie ou disponible qui peut la rendre assimilable à une probabilité. Tout comme la densité, on est plutôt dans la définition d’un <em>taux</em> (d’où l’expression <strong><em>hazard rate</em></strong> en anglais).</li>
 </ul>
 <p>On peut également écrire:</p>
-<p><span class="math inline">\(h(t)=\frac{f(t)}{S(t)}=\frac{F'(t)}{S(t)}=-\frac{S'(t)}{S(t)}\)</span> <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+<p><span class="math inline">\(h(t)=\frac{f(t)}{S(t)}=\frac{F'(t)}{S(t)}=-\frac{S'(t)}{S(t)}\)</span> <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a></p>
 <p>On remarque que cette fonction de risque (ou <em>hazard rate</em>) n’est pas une probabilité car <span class="math inline">\(\frac{f(t)}{S(t)}\)</span> ne peut pas contraindre ici la valeur obtenue à ne pas être supérieure à 1.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -593,12 +596,11 @@ Néanmoins les relations entre les grandeurs, en particulier celle qui lie risqu
 <p>Le risque étant constant dans chaque intervalle (mois), on peut prendre son inverse qui va mesurer la durée moyenne (espérée) jusqu’à l’occurence de l’évènement.<br>
 Par analogie seulement, on retrouve ici un concept classique en analyse démographique comme l’espérance de vie (survie): la question n’est pas de savoir si on va mourir ou non, ce risque inconditionnellement à la durée étant par définition égal à 1, mais jusqu’à quand on peut espérer survivre.</p>
 <ul>
-<li>Pour le rhume, la durée moyenne est de <span class="math inline">\((1.44^{-1}=0.69\)</span> du trimestre hivernal. On peut donc s’attendre, en moyenne, à attraper un rhume approximativement le début du mois de mars. Bien évidemment, certain.e.s attraperons un rhume avant, certaine.s après, certain.e.s aucun<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</li>
+<li>Pour le rhume, la durée moyenne est de <span class="math inline">\((1.44^{-1}=0.69\)</span> du trimestre hivernal. On peut donc s’attendre, en moyenne, à attraper un rhume approximativement le début du mois de mars. Bien évidemment, certain.e.s attraperons un rhume avant, certaine.s après, certain.e.s aucun<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</li>
 <li>Pour l’année sabbatique, la durée moyenne de survie est de <span class="math inline">\(3.96^{-1}=0.25\)</span> d’une année soit 3 mois après l’arrivée dans la région.</li>
 </ul>
-</section>
-<section id="le-risque-cumulé-ht" class="level3" data-number="4.4.6">
-<h3 data-number="4.4.6" class="anchored" data-anchor-id="le-risque-cumulé-ht"><span class="header-section-number">4.4.6</span> Le risque cumulé <span class="math inline">\(H(t)\)</span></h3>
+<section id="le-risque-cumulé-ht" class="level3" data-number="4.5.1">
+<h3 data-number="4.5.1" class="anchored" data-anchor-id="le-risque-cumulé-ht"><span class="header-section-number">4.5.1</span> Le risque cumulé <span class="math inline">\(H(t)\)</span></h3>
 <p>Le risque cumulé est égal à :</p>
 <p><span class="math display">\[H(t)=\int_{0}^{t} h(u)du = -log(S(t))\]</span></p>
 <p>On peut alors réécrire toutes les autres quantités à partir de celle-ci:</p>
@@ -624,7 +626,7 @@ Par analogie seulement, on retrouve ici un concept classique en analyse démogra
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Image5.png" class="lightbox" title="Grandeurs de la loi exponentielle avec h(t)=0.04" data-gallery="quarto-lightbox-gallery-1"><img src="images/Image5.png" class="img-fluid figure-img" style="width:70.0%"></a></p>
+<p><a href="images/Image5.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Grandeurs de la loi exponentielle avec h(t)=0.04"><img src="images/Image5.png" class="img-fluid figure-img" style="width:70.0%"></a></p>
 <figcaption class="figure-caption">Grandeurs de la loi exponentielle avec h(t)=0.04</figcaption>
 </figure>
 </div>
@@ -691,15 +693,15 @@ Par analogie seulement, on retrouve ici un concept classique en analyse démogra
 <p>A quel âge le risque de mourir des cochons d’Inde est-il le plus élevé? Et quelle est sa valeur?</p>
 </section>
 </section>
-<section id="remarques-complémentaires" class="level2" data-number="4.5">
-<h2 data-number="4.5" class="anchored" data-anchor-id="remarques-complémentaires"><span class="header-section-number">4.5</span> <strong>Remarques complémentaires</strong></h2>
-<section id="formes-typiques-de-la-fonction-de-survie" class="level3" data-number="4.5.1">
-<h3 data-number="4.5.1" class="anchored" data-anchor-id="formes-typiques-de-la-fonction-de-survie"><span class="header-section-number">4.5.1</span> Formes typiques de la fonction de survie</h3>
+<section id="remarques-complémentaires" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="remarques-complémentaires"><span class="header-section-number">4.6</span> <strong>Remarques complémentaires</strong></h2>
+<section id="formes-typiques-de-la-fonction-de-survie" class="level3" data-number="4.6.1">
+<h3 data-number="4.6.1" class="anchored" data-anchor-id="formes-typiques-de-la-fonction-de-survie"><span class="header-section-number">4.6.1</span> Formes typiques de la fonction de survie</h3>
 <p>Une des propriétés de la fonction de survie ou de séjour est qu’elles tendent vers 0. A la lecture du graphique suivant, cela peut correspondre à la forme de la courbe S2, bien que le % de survivant tend à baisser de moins en moins à mesure que la durée augmente. Deux cas limites doivent être considéré.</p>
 <p>Par anticipation, on peut déjà signalée que les fonctions de séjours qui sont représentées ci-dessous, font l’objet d’une estimation de type Kaplan-Meier.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Image5b.png" class="lightbox" title="Fonction de survie: 3 situtation typiques" data-gallery="quarto-lightbox-gallery-2"><img src="images/Image5b.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
+<p><a href="images/Image5b.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Fonction de survie: 3 situtation typiques"><img src="images/Image5b.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
 <figcaption class="figure-caption">Fonction de survie: 3 situtation typiques</figcaption>
 </figure>
 </div>
@@ -710,17 +712,17 @@ Par analogie seulement, on retrouve ici un concept classique en analyse démogra
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Image5c.png" class="lightbox" title="Fonction de survie et modification de la métrique temporelle" data-gallery="quarto-lightbox-gallery-3"><img src="images/Image5c.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
+<p><a href="images/Image5c.png" class="lightbox" data-gallery="quarto-lightbox-gallery-3" title="Fonction de survie et modification de la métrique temporelle"><img src="images/Image5c.png" class="img-fluid figure-img" style="width:90.0%"></a></p>
 <figcaption class="figure-caption">Fonction de survie et modification de la métrique temporelle</figcaption>
 </figure>
 </div>
 </section>
-<section id="absence-de-censures-à-droites" class="level3" data-number="4.5.2">
-<h3 data-number="4.5.2" class="anchored" data-anchor-id="absence-de-censures-à-droites"><span class="header-section-number">4.5.2</span> Absence de censures à droites</h3>
+<section id="absence-de-censures-à-droites" class="level3" data-number="4.6.2">
+<h3 data-number="4.6.2" class="anchored" data-anchor-id="absence-de-censures-à-droites"><span class="header-section-number">4.6.2</span> Absence de censures à droites</h3>
 <p>Les méthodes qui vont être présentées plus tard <strong><em>gèrent</em></strong> la présence de censures à droite. En leur absence, elles restent néanmoins parfaitement valables. L’absence de censure facilite certaines analyses, par exemple celles des fonctions de séjour où le calcul direct des durées moyennes est rendu possible. On peut alors utiliser d’autres méthodes plus, en première intentions plus simples, en analysant directement la distribution des évènement dans le temps. La durée ou une fonction de celle-ci pouvant être directement passées comme variable dépendante.</p>
 </section>
-<section id="utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues" class="level3" data-number="4.5.3">
-<h3 data-number="4.5.3" class="anchored" data-anchor-id="utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues"><span class="header-section-number">4.5.3</span> Utilisation des pondérations dans un schema retrospectif avec des biographies longues</h3>
+<section id="utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues" class="level3" data-number="4.6.3">
+<h3 data-number="4.6.3" class="anchored" data-anchor-id="utilisation-des-pondérations-dans-un-schema-retrospectif-avec-des-biographies-longues"><span class="header-section-number">4.6.3</span> Utilisation des pondérations dans un schema retrospectif avec des biographies longues</h3>
 <p>Une question assez récurrente concerne l’utilisation des poids de sondage dans les analyses de durées avec longueurs biographiques souvent assez longues. Leur utilisation ne me semble pas recommandée voire à exclure sauf exceptions. En effet les pondérations sont générées au moment de l’enquête, alors que les évènements étudiés peuvent remonter dans un passé plus ou moins lointain pour une partie de la population analysée. Si on regarde de plus près, la création de poids longitudinaux ne résoudrait pas grand chose , les pondérations devant être recalculées à chaque moment d’observation ou à chaque moment où des évènements se produisent. Par ailleurs on mélangerait régulièrement à un instant donné des personnes issues de générations différentes ce qui rend impossible tout calage sur des caractéristiques d’un population. Supposons une personne âgée de 25 ans et un personne âgée de 70 ans au moment de l’enquête en 2022, avec un début d’observation à l’âge de 18 ans . A 20 ans (<span class="math inline">\(t=2\)</span>), pour la première personne les caractéristiques de la population sont celles de 2017, pour celle de 70 ans celles de 1972. On fait comment??????</p>
 
 
@@ -734,9 +736,8 @@ Par analogie seulement, on retrouve ici un concept classique en analyse démogra
 <li id="fn1"><p>Garder en mémoire que l’analyse des durées ou de survie a été très largement développé dans un carde à durée continue<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Si on utilisee une mesure de la durée sur l’âge, on ne sait pas si l’évènement à eu lieu le lendemain de l’anniversaire ou la veille de l’anniversaire suivant<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn3"><p>Voir exemple plus haut sur le registre de la mucoviscidose<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"></li>
-<li id="fn5"><p>La relation <span class="math inline">\(h(t)=\frac{f(t)}{S(t)}\)</span> et donc <span class="math inline">\(f(t)= h(t) \times S(t)\)</span> est intéressante et importante car elle permet d’écrire la vraisemblance du processus probabiliste permettant d’estimer les paramètres des différentes analyses. On voit déjà sa proximité avec la fonction de masse de Bernouilli: <span class="math inline">\(f(y_i) = p^{y_i} \times (1-p)^{1-y_i}\)</span>. Se reporté à la section qui décrit qui la vraisemblance partielle de Cox pour s’en faire une idée plus précise.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6"><p>et une analyse plus fine pourrait s’intéresser sur l’effet du port du masque sur ce risque d’attraper le rhume<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>La relation <span class="math inline">\(h(t)=\frac{f(t)}{S(t)}\)</span> et donc <span class="math inline">\(f(t)= h(t) \times S(t)\)</span> est intéressante et importante car elle permet d’écrire la vraisemblance du processus probabiliste permettant d’estimer les paramètres des différentes analyses. On voit déjà sa proximité avec la fonction de masse de Bernouilli: <span class="math inline">\(f(y_i) = p^{y_i} \times (1-p)^{1-y_i}\)</span>. Se reporté à la section qui décrit qui la vraisemblance partielle de Cox pour s’en faire une idée plus précise.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>et une analyse plus fine pourrait s’intéresser sur l’effet du port du masque sur ce risque d’attraper le rhume<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -1158,10 +1159,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>A notr également, toujours dans un recueil prospectif, qu'un phénomène de censure à droite lié aux  *perdu.e de vue* peut se transformer en censure par intervalle lorsque la personne "réapparait" et est de nouveau incluse à l'échantillon^<span class="co">[</span><span class="ot">Voir exemple plus haut sur le registre de la mucoviscidose</span><span class="co">]</span>. </span>
 <span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>**Troncature**   </span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>Par l’exemple, on analyse la survie d’une population. Seule la survie des individus vivants à l’inclusion peut être analysée (*troncature à gauche*). On peut donc rencontré un phénomène de sélection difficement contrôlable.  On peut également avoir de la troncature à droite lorsqu’on mesure la durée à partir ou jusqu'à un certain seuil niveau. Celle-ci n'est pas forcément problématique.  </span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>Par l’exemple, on analyse la survie d’une population. Seule la survie des individus vivants à l’inclusion peut être analysée (*troncature à gauche*). On peut donc rencontrer un phénomène de sélection difficement contrôlable.  On peut également avoir de la troncature à droite lorsqu’on mesure la durée à partir ou jusqu'à un certain seuil niveau. Celle-ci n'est pas forcément problématique.  </span>
 <span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>Ces situations sont généralement plutôt bien contrôlées dans les recueils rétrospectifs, en particulier pour la censure ou la troncature à gauche. Elles sont en revanche assez courantes lorsque le recueil est de type prospectif, et certaines études passent complètement à travers. En annexe de ce support, on trouvera un examen critique d'une études publiées récemment dans Population qui ressemble, par le vocabulaire utilisé, à une analyse de type durée/survie mais qui en est pas une [<span class="co">[</span><span class="ot">lien</span><span class="co">](https://mthevenin.github.io/analyse_duree/13-annexe.html#exemple-danalyse-de-durées-canada-dry)</span>]. Je ne conseille pas de lire cette section à ce moment du support</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>Ces situations sont généralement plutôt bien contrôlées dans les recueils rétrospectifs, en particulier pour la censure ou la troncature à gauche. Elles sont en revanche assez courantes lorsque le recueil est de type prospectif, et certaines études passent complètement à travers.</span>
 <span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a></span>
@@ -1169,7 +1170,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>A l’inverse de la censure, des individus peuvent sortir de l’exposition avant la fin de la période d’observation, et il convient donc de corriger la durée de cette sortie.   </span>
 <span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Si au moment de l’enquête une femme sans enfant a 70 ans, cela n’a pas de sens de continuer de l’exposer au risque au-delà d’un certain âge. Si on ne dispose pas d’information sur l’âge à la ménopause on peut tronquer la durée un peu au-delà de l’âge le plus élevé à la première naissance observée dans les données.</span>
-<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Situation traitée dans le TP de la formation: on analyse la durée de la première séquence d'emploi ou d'une suite de séquence d'emploi sans rupture (chômage, maladie, sortie du marché du travail etc...). Il conviendra pour les personnes qui n'on pas connu de rupture (d'au moins un an par exemple) de faire sortir certaines personnes au moment de la retraite et non au moment de l'enquête, si elle sont déjà retraitées à ce moment. On pourra considérer ces âges à la retraite censures comme des censures à droites non informatives^[]</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Situation traitée dans le TP de la formation: on analyse la durée de la première séquence d'emploi ou d'une suite de séquence d'emploi sans rupture (chômage, maladie, sortie du marché du travail etc...). Il conviendra pour les personnes qui n'on pas connu de rupture (d'au moins un an par exemple) de faire sortir certaines personnes au moment de la retraite et non au moment de l'enquête, si elle sont déjà retraitées à ce moment. On pourra considérer ces âges à la retraite censures comme des censures à droites non informatives.</span>
 <span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a><span class="fu">## **Les grandeurs**</span></span>
@@ -1242,7 +1243,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a>$$f(t)=\lim\limits_{dt\to{0}}  \frac{P(t\leq{T}&lt; t + dt)}{dt}$$  </span>
 <span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="fu">### Le risque instantané $h(t)$</span></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="fu">## Le risque instantané $h(t)$</span></span>
 <span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a>Concept fondamental de l'analyse des durées:  </span>
 <span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a></span>
@@ -1379,7 +1380,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-340"><a href="#cb1-340" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom","loop":true});</script>
+<script>var lightboxQuarto = GLightbox({"loop":true,"closeEffect":"zoom","openEffect":"zoom","descPosition":"bottom","selector":".lightbox"});</script>
 
 
 

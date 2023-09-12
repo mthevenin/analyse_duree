@@ -119,10 +119,10 @@ On peut sans problème généraliser ce phénomène de censure à l'occurence: u
 A notr également, toujours dans un recueil prospectif, qu'un phénomène de censure à droite lié aux  *perdu.e de vue* peut se transformer en censure par intervalle lorsque la personne "réapparait" et est de nouveau incluse à l'échantillon^[Voir exemple plus haut sur le registre de la mucoviscidose]. 
 
 **Troncature**   
-Par l’exemple, on analyse la survie d’une population. Seule la survie des individus vivants à l’inclusion peut être analysée (*troncature à gauche*). On peut donc rencontré un phénomène de sélection difficement contrôlable.  On peut également avoir de la troncature à droite lorsqu’on mesure la durée à partir ou jusqu'à un certain seuil niveau. Celle-ci n'est pas forcément problématique.  
+Par l’exemple, on analyse la survie d’une population. Seule la survie des individus vivants à l’inclusion peut être analysée (*troncature à gauche*). On peut donc rencontrer un phénomène de sélection difficement contrôlable.  On peut également avoir de la troncature à droite lorsqu’on mesure la durée à partir ou jusqu'à un certain seuil niveau. Celle-ci n'est pas forcément problématique.  
 
 
-Ces situations sont généralement plutôt bien contrôlées dans les recueils rétrospectifs, en particulier pour la censure ou la troncature à gauche. Elles sont en revanche assez courantes lorsque le recueil est de type prospectif, et certaines études passent complètement à travers. En annexe de ce support, on trouvera un examen critique d'une études publiées récemment dans Population qui ressemble, par le vocabulaire utilisé, à une analyse de type durée/survie mais qui en est pas une [[lien](https://mthevenin.github.io/analyse_duree/13-annexe.html#exemple-danalyse-de-durées-canada-dry)]. Je ne conseille pas de lire cette section à ce moment du support
+Ces situations sont généralement plutôt bien contrôlées dans les recueils rétrospectifs, en particulier pour la censure ou la troncature à gauche. Elles sont en revanche assez courantes lorsque le recueil est de type prospectif, et certaines études passent complètement à travers.
 
 
 
@@ -130,7 +130,7 @@ Ces situations sont généralement plutôt bien contrôlées dans les recueils r
 A l’inverse de la censure, des individus peuvent sortir de l’exposition avant la fin de la période d’observation, et il convient donc de corriger la durée de cette sortie.   
 
 - Si au moment de l’enquête une femme sans enfant a 70 ans, cela n’a pas de sens de continuer de l’exposer au risque au-delà d’un certain âge. Si on ne dispose pas d’information sur l’âge à la ménopause on peut tronquer la durée un peu au-delà de l’âge le plus élevé à la première naissance observée dans les données.
-- Situation traitée dans le TP de la formation: on analyse la durée de la première séquence d'emploi ou d'une suite de séquence d'emploi sans rupture (chômage, maladie, sortie du marché du travail etc...). Il conviendra pour les personnes qui n'on pas connu de rupture (d'au moins un an par exemple) de faire sortir certaines personnes au moment de la retraite et non au moment de l'enquête, si elle sont déjà retraitées à ce moment. On pourra considérer ces âges à la retraite censures comme des censures à droites non informatives^[]
+- Situation traitée dans le TP de la formation: on analyse la durée de la première séquence d'emploi ou d'une suite de séquence d'emploi sans rupture (chômage, maladie, sortie du marché du travail etc...). Il conviendra pour les personnes qui n'on pas connu de rupture (d'au moins un an par exemple) de faire sortir certaines personnes au moment de la retraite et non au moment de l'enquête, si elle sont déjà retraitées à ce moment. On pourra considérer ces âges à la retraite censures comme des censures à droites non informatives.
 
 
 ## **Les grandeurs**
@@ -203,7 +203,7 @@ Formellement la fonction de densité $f(t)$ s'écrit:
 $$f(t)=\lim\limits_{dt\to{0}}  \frac{P(t\leq{T}< t + dt)}{dt}$$  
 
 
-### Le risque instantané $h(t)$
+## Le risque instantané $h(t)$
 
 Concept fondamental de l'analyse des durées:  
 

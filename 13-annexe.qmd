@@ -7,6 +7,7 @@ lightbox: auto
 
 # **Annexes**
 
+
 ## Tests Grambsch-Therneau OLS sur les résidus de Schoenfeld
 
 ::: callout-important
@@ -117,19 +118,6 @@ cox.zphold(fit, transform="identity")
 ```
 
 
-## Analyses avec des pseudo-observations
-
-::: callout-note
-Il s'agit d'un premier jet d'explication d'une méthode d'analyse qui fête ses 20 ans. Dans la version future du support (disons version 2024), j'essaierai d'en faire une description plus précise. On se contentera pour le moment d'une présentation rapide des concepts de base avec des élément de calculs, ainsi que les limites. Bien évidemment quelques exemples avec la base d'exemple seront montrés 
-:::
-
-
-
-
-
-
-
-
 
 ## Fragilité et immunité
 
@@ -157,64 +145,6 @@ Les modèles avec une fraction immunisée peuvent être de ***type mixte*** en a
 Enfin, les modèles à fragilité ou à fraction immunisée repose tous sur une hypothèse très forte. La fragilité ou le degré d'immunité est toujours défini (estimé) en début d'exposition, et il ne varie pas. Cela peut ne pas toujours faire sens, en particulier pour les préférences, pas forcément stables ou fixes dans le temps.
 
 
-## Exemple d'analyse de durées ***Canada Dry***
-
-En remettant en cause l'utilisation abusive de concepts empruntés à l'analyse de survie dans une étude publiée récemment, ce qui suit pourra paraître un peu polémique. Dans ce qui suit, il s'agit seulement de contester l'utilisation abusive d'une terminologie très typée et conditionnée au respect de certaines hypothèses de base, et non de remettre en cause l'ensemble des résultats obtenus, bien qu'à la lecture des quelques informations descriptives contenues dans l'étude ont peu s'interroger sur la présence assez substentielles d'affet de sélection...Ce qui n'est pas étonnant vu la manière dont a été créée l'échantillon.
-L'étude en question [[Lien](https://www.cairn.info/revue-population-2022-3-page-411.htm)] mobilise des données de suivi de stock, à savoir l'EDP (Echantillon Démographique Permanent). L'étude cherche à mettre à profit l'ajout par l'Insee de données fiscales à cet échantillon pour analyser la fécondité des femmes nullipares **au sein des couples**.  L'inclusion de cette données fiscale à cet échantillon a été initiée pour l'année 2011.
-
-***Sélection initiale de l'échantillon sur la première année d'inclusion***
-En sélectionnant l'échantillon de départ sur 2011, année d'ajout d'une nouvelle information, aucune durée d'exposition ne peut être  clairement définie pour cette première année. Ces le béaba des analyses de durée/survie, une origine commune doit être clairement définie ce qui ne peut pas être ici. Cette origine commune permet lors du suivi de construire une population initiale soumise au risque sur la ***même ligne de départ***^[Ceci ayant été écrit pendant des mondiaux d'athlétisme, dont les épreuves de courses sont pas définition des épreuves de durée, on pourra dire ici que les *faux départs* sont généralisés et autorisés]. Il n'y avait pas d'autre choix compte tenu de la problématique de prendre l'année de mise en couple (cohabitant) pour définir le point d'origine, et donc demarrer l'observation à l'année 2012. Cela aurait permis en comparant les données fiscales d'une année sur l'autre de repérer les femmes qui se sont mis en couple. Et c'est ce qui est fait pour les inclusions sur les années suivantes. 
-
-On peut noter que ce biais d'inclusion joue de manière différenciée selon l'âge de la femme en 2011: surement nul ou très faible pour les femmes les plus jeunes, et selon le rang de l'union, plus ou moins élevé pour les femmes plus âgées. Sur ce dernier point le rang de l'union qui n'est visiblement pas mesurable avec les données utilisées, constituait également une dimension de contrôle importante. 
-
-***Sélection  les années suivantes (jusqu'en 2017)***  
-Comme indiqué juste juste au dessus, les inclusions suivantes se font sur la base d'une origine commune à savoir l'année de mise en couple.
-
-Au final, on se retrouve avec un échantillon dont la logique d'inclusion repose sur des critères différents: ajout des données fiscales pour 2011, et pour les années suivantes les mises en couples observées durant l'année écoulée.
-
-***Une fausse variable de durée***
-En conservant la mise en couple comme origine, et en analysant la fécondité des femmes nullipares sur les 5 premières années, une analyse de survie reposant sur un suivi sur les 5 premières années de vie en couple cohabitant était facilement réalisable. En retranchant au âges observés durant les années de suivi l'âge de 18 ans, l'autrice, je pense en allant piocher maladroitement et partiellement dans un ouvrage de méthodologie très connu (voir encadré ci-dessous) a été conduit à créer une pseudo variable de durée dont la longueur est artificielle, et ne permet pas de mesurer proprement les durées d'exposition observées. 
-
-
-![](images/image22.png)
-
-Au final, et toujours sous l'angle revendiqué d'une analyse des durée ou de survie, aucune fonction de séjour sous jacente n'est correctement estimable, et donc par définition aucune interprétation en termes de risques instantané n'est possible. Sur le modèle présenté, la construction de la vraisemblance n'est pas compatible avec ce type d'analyse.
-
-Mais malheureusement on peut lire:
-
-* "***des modèles de risque instantané à temps discret***" [page 419].
-
-*  En note de bas de page: ***Le risque instantané est la probabilité conditionnelle que l’événement survienne entre le moment t et t + Δt, sachant qu’il n’a pas eu lieu avant t***  [page 419].
-   * Cette définition est très légère. Le risque *instantané* n'est formellement une probabilité qu'avec des durées discrètes, ce qui est effectivement le cas ici. La conditionnalité repose sur  une fonction de séjour qui n'est pas ici correctement estimable, et c'est la relation fondamentale qui lie risque (hazard rate), survie et densité qui identifie la vraisemblance d'un modèle de durée ou de survie. Cette relation est incontournable et elle n'est pas respectée ici.
-
-* "***Le deuxième modèle peut se passer de l’hypothèse des risques instantanés proportionnels***" [page 420]. 
-  - Comment peut on soulever l'hypothèse de proportionnalité lorsque les individus ne sont pas observé à des durées identiques, ????
-  - Dans l'article cette correction est faite également sur les variables dynamique. Il s'agit d'un emprunt à l'ouvrage de Singer et Willet. L'autrice n'en ait pas responsable, mais l'idée même de cette hypothèse est très contestable avec des covariables non fixes^[Avec une variable fixe une des méthodes de correction, via l'introduction d'une intéraction, consiste justement à la transformer en variable dynamique].   
-
-* "***Le quatrième modèle enfin inclut l’interaction des revenus relatifs avec le temps d’exposition au risque***" [page 421]. 
-  * Il n'y a malheureusement pas de durée d'exposition au risque clairement défini dans l'étude. On peut néanmoins concéder que pour les couples dont la femme est très jeune (18-20 ans), l'inclusion en 2011 pourrait correspondre à l'année de mis en couple. 
-  * Voir le point précédent pour l'introduction de cette intéraction.
-
-* "***L’équation suivante représente le calcul du risque continu cumulé***" [pages 421], alors qu'aucune fonction de survie, et donc de risque cumulé ne peut être correctement obtenu (je sais je me répète dans la répétition). Mais cela permet à l'autrice de justifier l'utilisation de la fonction de lien *complémentaire log-log*. Et donc de faire, sous un angle paramétrique un modèle une variante d'un modèle de Cox à durée discrète. Mais en présence de censure à gauche, massive dans l'étude, ou de troncature à gauche, il est fortement biaisé. 
-
-Au final:  
-Après de brefs échanges avec la rédaction en chef de l'Ined^[Nous étions 3 à avoir exprimé de l'étonnement sur le contenu de cet article], il a été convenu qu'il ne s'agissait pas en effet d'une analyse de durée ou de survie....Ouf!....  Mais que l'autrice, via une réponse peu inspirée d'un spécialiste de l'Ined sur les questions de fécondité, n'avait pas souhaité faire une analyse de ce type... Ha bon ^[Argument lunaire: l'autrice n'utilise pas la durée comme variable dépendante mais comme une simple covariable. Alors 1) en présence de censure à droite, c'est quand même compliquer d'introduire la durée directement comme variable dépendante, c'est le béaba et 2) l'introduction de la durée ou d'une fonction de celle-ci comme covariable ou variable d'ajustement est une caractéristique commune à toute type de modèle de durée de type paramétrique. Sur les modèles usuels, seul le modèle de Cox figure comme exception]...
-
-
-::: callout-warning 
-
-### L'ouvrage de Singer et Willet 
-
-Clairement revendiqué dans l'article, la *stratégie méthodologique* repose sur une section du fameux ouvrage de J.Singer et J.Willet ***Applied longitudinal data analysis: Modeling change and event occurrence***. Considéré comme une véritable bible des modèles à durée discrètes, il a reposé plusieurs années dans mon bureau et donc été utilisé régulièrement. Il n'en reste pas moins exempt de défauts, avec un chapitrage peu conventionnel, un côté supermarché à modèles excessif, mais également des partis pris méthodologiques non discutés comme le test et la correction contestable de la non proportionnalité des risques pour des variables dynamiques. 
-
-Il n'en reste pas moins, qu'à l'exception du dernier chapitre dédié aux temps continu, toutes la méthodologie et les applications sont réalisés dans le cadre stricte de la censure à droite non informative, et les auteurs prennent clairement le soins d'alerter les lecteurs des problèmes posés par présence de censure ou de troncature à gauche avec les données prospectives ou de suvi de stock, tel que l'EDP: 
-
-> pages 320 et 321: ***In what follows, we typically assume that all censoring occurs on the right***. In section 15.6, however, we describe what you can do when your data set includes what are known as late entrants into the risk set. You are most likely to encounter late entrants if you study stock samples, age-heterogeneous groups of people who already occupy the initial state when data collection begins—for example, a random sample of adults who have yet to experience a depressive episode. Your plan is to follow everyone for a fixed period of time—say ten years— and record whether and when sample participants experience their first episode. Because each sample member was a different age when data collection began, however, the ten years you cover do not cover the same ten years of peoples’ lives: you follow the 20-year-olds until they are 30, the 21-year-olds until they are 31, the 22-year-olds until they are 32, and so on. For an outcome like depression onset, it makes little sense to clock “time” using chronological years (2009,2010, etc). Instead, you would like to clock “time” in terms of age, but you do not observe everyone during the identical set of ages.]
-
-On trouvera également les programmes associés aux exemples de l'ouvrage [[ici](https://stats.oarc.ucla.edu/other/examples/alda/)]. 
-On trouvera dans l'ouvrage, mot pour mot, le modèle utilisé par l'autrice. Mais l'exemple utilisait des données retrospéctives avec une stricte censure à droite non informative^[On pourrait également questionner cet article paru dans Population, sur la nature non informative des ruptures d'union par rapport à la fécondité].
-
-:::
 
 
 
