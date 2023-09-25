@@ -12,28 +12,29 @@
 
 ## Principes
 
-* Dans les modèles paramétriques usuels, la durée de survie est distribuée selon une loi dont la densité $f(t)$ pleinement paramétrée.  
-* Pour utiliser l’approche paramétrique, il faut avoir de bonnes raisons de penser que durée de survie sont distribués selon une certaine loi connue plutôt qu’une autre. 
-* La majorité des distributions reposent sur une hypothèse dite AFT (**Acceleretad Failure Time**). Une autre, *Gompertz*, très utilisée en démographie (mortalité), repose seulement sur la proportionnalité des risques. Certaines peuvent reposer sur les deux comme le modèle de *Weibull*. Enfin, les modèles *log-logistique* ou *log-normal* n'ont qu'une paramétrisation de type *AFT*.
+* Dans les modèles paramétriques usuels^[Plus anciens que le modèle de Cox] ,la durée de survie est distribuée selon une loi dont la densité $f(t)$ pleinement paramétrée.  
+* Pour utiliser l’approche paramétrique, il faut avoir de bonnes raisons de penser que les durées de survie sont distribuées selon une certaine loi connue plutôt qu’une autre. 
+* La majorité des distributions reposent sur une hypothèse dite AFT (**Ac r la proportionnalité des risques. Certaines modèles peuvent reposer sur les deux comme le modèle de *Weibull*. Enfin, les modèles *log-logistique* ou *log-normal* n'ont qu'une paramétrisation de type *AFT*. Depuis une vingtaine, un modèle dit *flexible* (Parmar-Royston) ne paramétrise pas la distributions des évènement à partir d'une loi mais à partir d'un ajustement reposant sur la méthode de lissage par spline cubique^[permet un ajustement relativement proche des modèles à durée groupée mais avec des durées strictement continues].  
 
 ## Hypothèse AFT: Accelerated Failure Time
 L’hypothèse **AFT** signifie que l’effet des covariables est multiplicatif par rapport à la durée de survie/séjour.
 Par opposition, les modèles PH décrivent un effet multiplicatif par rapport au risque.
 
-Selon les caractérisques des individus, le temps *ne s'écoulent pas à la même vitesse*, ils ne partagent donc plus la même métrique temporelle. Cela renvoie a des interprétations de type *dilation/contraction* du temps, par analogie à la théorie de la relativité.  
+Selon les caractérisques des individus, le temps *ne s'écoulent pas à la même vitesse*, ils ne partagent donc plus la même métrique temporelle. Cela renvoie a des interprétations de type *dilation/contraction* du temps, par analogie à la théorie de la relativité, mais ici avec une seule dimension.  
 
 Exemple simple: la durée de vie d'un être humain et d'un chien.  
 On dit qu'une année de vie d'un être humain est équivalent à 7 années de vie d'un chien. C'est typiquement une hypothèse d'AFT.  
+
 $S_h(t) = S_c(7\times t)$. 
 
 C'est ce facteur multiplicatif qu'estime un modèle paramétrique de type AFT.
 
 $$S(t_i | X_1)=  S(\phi t_i | X_0)$$
 
-Remarque: si un modèle s'estime AFT s'estime également sous hypothèse PH comme celui de Weibull: $h(t_i | X_1)= -\rho \phi h(t_i | X_0)$
+Remarque: si un modèle s'estime AFT s'estime également sous hypothèse PH, comme celui de Weibull: $h(t_i | X_1)= -\rho \phi h(t_i | X_0)$
 
 * Avantage: l'interprétation des modèles est directement liée aux fonctions de survie. Cela s'avère donc pratique après une analyse non paramétrique de type Kaplan-Meier par exemple.
-* Inconvénient: ne permet pas l'introduction de variables dynamiques.  
+* Inconvénient: très difficile d'introduire de variables dynamiques^[Jamis testé de mon côté].  
 
 *Humain versus chien*: la probabilité qu'un être humain survive 80 ans est égale à la probabilité qu'un chien survive 11 ans (80/7). Le temps s'écoulerait donc plus vite pour le chien que pour l'être humain du point de vue d'un référentiel extérieur. Ce raisonnement peut s'appliquer aux quantile du temps de survie: le temps de survie médian d'un être humain est 7 fois plus élevé que celui d'un chien. En terme d’interprétation des paramètres estimés, si la durée de survie est plus courte, alors le risque est plus élevé.
  
@@ -128,18 +129,18 @@ Attention: on ne peut pas comparer la qualité d'un modèle paramétrique à cel
 
 ## Le modèle de Parmar-Royston
 
-* Le bon ajustement par une loi de distribution predéfinie peut s'avérer contraignante. Le modèle de Cox avait justement pour objectif de se défaire de cette contrainte, la plupart des distributions utilisée étant monotone ou unimodale (log-logistique ou log-normal). 
+* Le bon ajustement par une loi de distribution predéfinie peut s'avérer contraignante. Le modèle de Cox avait justement pour objectif de se défaire de cette contrainte, la plupart des distributions utilisées étant monotone ou unimodale (log-logistique ou log-normal). 
 * Le principe des splines peut-être rapproché de celui qui a été utilisé plus haut dans le modèle logistique à durée discrète avec l'introduction des polynomes [ $f(t)= (a_1\times t) + (a_2\times t^2) + (a_3\times t^3) + ...+ (a_k\times t^k)$. 
-  * Cette méthode brute d'ajustement consiste finalement à introduire une intéraction ou plusieurs intéractions entre la variable de durée avec elle-même.
-  * Elle est sujette à une forte sensibilité aux outliers (overfitting) au delà de $k>2$ [lors la formation il suffit de la tester pour k=3 et calculer la probabilité conditionnelle pour s'en convaincre].
-* Les **splines cubiques restreintes** propose une méthode d'ajustement et de lissage de meilleure qualité et permet de contrôler les effets overfitting.
-  * les splines cubiques sont donc basées sur des polynomes d'ordre 3 (d'où cubique) avec une estimation par morceau (intervalles). les morceaux sont définis manuellement ou par un nombre de degrés de liberté obtenu par quantile du logarithme de la fonction de survie après avoir exclu les observation censurées. 
+  * Cette méthode brute d'ajustement consiste finalement à introduire une intéraction ou plusieurs intéractions entre la variable de durée elle-même.
+  * Elle est sujette à une forte sensibilité aux outliers (overfitting) au delà de $k>2$ ^[lors la formation il suffit de la tester avec la base des TP pour k=3 et calculer la probabilité conditionnelle pour s'en convaincre].
+* Les **splines cubiques restreintes** propose une méthode d'ajustement et de lissage de meilleure qualité et permet de contenir les problèmes d'overfitting.
+  * les splines cubiques sont donc basées sur des polynomes d'ordre 3 (d'où cubique) avec une estimation par morceau (intervalles). les morceaux sont définis manuellement ou par un nombre de degrés de liberté obtenu à partir des quantiles du logarithme de la fonction de survie après avoir exclu les observation censurées. 
     * Deux degrés de liberté (1 noeud) avec un intervalle allant jusqu'au log de la moitié des survivants et un second à partir de cette seconde moitié.
     * Sur le même principe trois degrés de liberté (2 noeuds) coupe la durée en 3 intervalles sur ses terciles.
-    * En pratique, il est préférable de donner à l'application de nombre de degré de liberté plutôt que d'indiquer manuellement la position des noeuds. 
+    * En pratique, il est préférable de donner à l'application le nombre de degré de liberté plutôt que d'indiquer manuellement la position des noeuds. 
     * Il convient également de ne pas être trop gourmand sur le nombre de noeuds, un ou deux étant souvant suffisant (donc 2 ou 3 degrés de liberté).
     * On peut choisir le nombre de degrés de liberté en estimant des modèles sans covariables et comparer les AIC (vraisemblance pénalisée).
-* Contrairement aux autres modèles, et sans rentrer dans les détails, le modèle de Parmar-Royston part de la fonction de risque cumulée et non des taux de risque/hasard. Les risk ratios sont obtenus en utilisant les relations entre les différentes grandeurs (voir section *théorie).
+* Contrairement aux autres modèles, et sans rentrer dans les détails, le modèle de Parmar-Royston part de la fonction de risque cumulée et non des taux de risque/hasard. Les risk ratios sont obtenus en utilisant les relations entre les différentes grandeurs (voir section *théorie*).
 
     
 **Exemple**  
@@ -160,8 +161,4 @@ A savoir:
 
 - Avec un degré de liberté, le modèle de Parmar-Royston estime un modèle de Weibull sous paramétrisation PH.
 - Les paramètres pour les splines ne sont pas interprétables directement. Ils servent calculer la baseline du risque via l'équation du polynome (non reporté car expression bien corsée). 
-
-
-
-
-
+- De nouveau il s'agit d'un modèle à risque proportionnel.
