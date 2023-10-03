@@ -21,7 +21,7 @@ Les problématiques se basent sur les questions suivantes:
 | Analyse des transitions      | Event-history analysis         |
 
 Pour ce support, le choix de son titre me pose toujours problème pour éviter qu'il soit trop à rallonge. 
-Si j'avais à trancher, il devrait un peu s'éterniser sous l'appelation **Introduction à l'analyse biographique des durées en présence de données censurée (à droite^[ce qui est déjà bien suffisant])**.
+Si j'avais à trancher, il devrait un peu s'éterniser sous l'appelation **Introduction à l'analyse biographique des durées en présence de données censurée (à droite^[Ce qui est déjà bien suffisant])**.
 
 
 ## Exemples d'analyse 
@@ -40,7 +40,7 @@ Si j'avais à trancher, il devrait un peu s'éterniser sous l'appelation **Intro
 ## Elements nécessaire à l'analyse 
 
 1. **Un processus temporel**
-   - Une échelle de mesure ou métrique temprelle: minutes, heures, jours, mois, années....
+   - Une échelle de mesure ou métrique temporelle: minutes, heures, jours, mois, années....
    - Une origine **commune** définissant un évènement de départ ^[Attention, dans le cadre des données prospectives ou de suivi, cela ne peut pas être le moment de l'inclusion à la base données]: naissance, mariage si on analyse la séparation, ..... 
    - Une définition précise de l'évènement d'étude.  
    - Une durée entre le début et la fin de la période d'observation, si nécessaire avec la fin de la période d'exposition au risque. Cette durée doit être généralement calculée à l'aide des informations de datation. 

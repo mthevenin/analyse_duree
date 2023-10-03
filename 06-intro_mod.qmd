@@ -7,7 +7,7 @@ lightbox: auto
 ---
 
 
-# Proprortionalité des risques
+# Proprortionnalité des risques
 
 
 La spécification usuelle d'un modèle à risque proportionnel est:
