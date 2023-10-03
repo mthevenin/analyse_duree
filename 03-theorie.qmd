@@ -231,21 +231,21 @@ Néanmoins les relations entre les grandeurs, en particulier celle qui lie risqu
 
 **Illustration du concept**
 
-Cette notion de  *taux de risque* ou *hazard rate* non réductible à un probabilité, est à mon sens très bien illustré par G.Colletaz dans ces notes de cours (pages 11-12). Dans ce qui suit, j'en fait un quasi copier-coller. 
+Cette notion de  *taux de risque* ou *hazard rate* non réductible à un probabilité, est à mon sens très bien illustré par G.Colletaz dans ces notes de cours (pages 11-12). Dans ce qui suit, j'en fais un quasi copier-coller. 
 En ce positionnant sur des échelle temporelle plus facilement saisissable pour la description de phénomènes socio-démographiques (on supprime la limite des expressions données pour $f(t)$ et $h(t)$: 
 
-1. On s'intéresse au risque d'attraper un rhume durant les mois d'hiver, disons entre le 1er janvier et le 1er avril [3 mois]. Si la probabilité, constante, d'attraper un rhume chaque mois est de 48% (il s'agit bien évidemment d'un risque). Quelle est le risque d'attraper le rhume durant l'unité de temps qu'est cette saison froide de 3 mois?   
+1. On s'intéresse au risque d'attraper un rhume durant les mois d'hiver, disons entre le 1er janvier et le 1er avril [3 mois]. Si la probabilité, constante, d'attraper un rhume chaque mois est de 48% (il s'agit bien évidemment d'un risque). Quel est le risque d'attraper le rhume durant l'unité de temps qu'est cette saison froide de 3 mois?   
 $\frac{0.48}{1/3}=1.44$. On peut donc s'attendre a attraper 1.44 rhume durant la période d'hiver. 
 
-2. On passe une année en vacances dans une région, franchement pas très accueillante, où la probabilité de décéder chaque mois est évaluée à 33%. Quelle est le risque de décéder pendant cette année? 
+2. On passe une année en vacances dans une région, franchement pas très accueillante, où la probabilité de décéder chaque mois est évaluée à 33%. Quel est le risque de décéder pendant cette année? 
 $\frac{0.33}{1/12}=3.96$  
 
-On le voit, cette mesure du risque peut donc être supérieur à 1. En soit cela ne pose pas de problème comme il s'agit d'un nombre moyen d'évènements espérés, mais pour des évènements qui ne peuvent pas se répéter, évènements dits *absorbants*, l'interprétation n'est pas très intuitive.    
+On le voit, cette mesure du risque peut donc être supérieur à 1. En soit cela ne pose pas de problème comme il s'agit d'un nombre moyen d'évènements espérés, mais pour des évènements qui ne peuvent pas se répéter, évènements dits *absorbants* (par définition la mortalité), l'interprétation n'est pas très intuitive.    
 
 Le risque étant constant dans chaque intervalle (mois), on peut prendre son inverse qui va mesurer la durée moyenne (espérée) jusqu'à l'occurence de l'évènement.  
-Par analogie seulement, on retrouve ici un concept classique en analyse démographique comme l'espérance de vie (survie): la question n'est pas de savoir si on va mourir ou non, ce risque inconditionnellement à la durée étant par définition égal à 1, mais jusqu'à quand on peut espérer survivre.  
+Par analogie seulement, on retrouve ici un concept classique en analyse démographique comme l'espérance de vie (survie): la question n'est pas de savoir si on va mourir ou non, ce risque inconditionnellement à la durée étant par définition égal à 1, mais jusqu'à quand on peut espérer (sur)vivre.  
 
-- Pour le rhume, la durée moyenne est de $(1.44^{-1}=0.69$ du trimestre hivernal. On peut donc s'attendre, en moyenne, à attraper un rhume  approximativement le début du mois de mars. Bien évidemment, certain.e.s attraperons un rhume avant, certaine.s après, certain.e.s aucun^[et une analyse plus fine pourrait s'intéresser sur l'effet du port du masque sur ce risque d'attraper le rhume].
+- Pour le rhume, la durée moyenne est de $1.44^{-1}=0.69$ du trimestre hivernal. On peut donc s'attendre, en moyenne, à attraper un rhume  approximativement au début du mois de mars. Bien évidemment, certain.e.s attraperons un rhume avant, certaine.s après, certain.e.s aucun^[et une analyse plus fine pourrait s'intéresser sur l'effet du port du masque sur ce risque d'attraper le rhume].
 - Pour l'année sabbatique, la durée moyenne de survie est de $3.96^{-1}=0.25$ d'une année soit 3 mois après l'arrivée dans la région. 
 
 
