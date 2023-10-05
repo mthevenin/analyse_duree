@@ -1,0 +1,77 @@
+
+library(survival)
+library(survminer)
+library(survRM2)
+library(tidyr)
+library(gtools)
+library(jtools)
+library(RecordLinkage)
+library(cmprsk)
+library(nnet)
+library(gtsummary)
+library(nnet)
+library(muhaz)
+
+
+options(scipen=999) 
+options(show.signif.stars=FALSE)
+
+# création variables d'analyse
+
+act <- read.csv("D:/D/Marc/SMS/FORMATIONS/2022/Strasbourg/cours/a distribuer/tp/activite.csv")
+
+act$d = ifelse(act$ageinact>0, 1, 0)
+
+table(act$d)
+
+
+act$fin = ifelse(act$d==1, act$ageinact, ifelse(act$ageret>0, act$ageret, act$age_enq))
+act$dur = act$fin - act$ageact + 1 
+
+table(act$d)
+summary(act$dur)
+
+## KM
+
+km = survfit(Surv(dur,d)~1, data=act)
+summary(km) 
+km
+plot(km)
+ggsurvplot(km, risk.table=TRUE, ggtheme=theme_light(),)
+
+km = survfit(Surv(dur,d)~diplome, data=act)
+# summary(km) 
+km
+plot(km)
+ggsurvplot(km, risk.table=TRUE, ggtheme=theme_light(),)
+
+# fonction risque
+haz = muhaz(act$dur,act$d)
+plot(haz)
+
+
+
+km = survfit(Surv(dur,d)~csp, data=act)
+# summary(km) 
+km
+plot(km)
+ggsurvplot(km, risk.table=TRUE, ggtheme=theme_light(),)
+
+km = survfit(Surv(dur,d)~gene, data=act)
+
+km = survfit(Surv(dur,d)~diplome, data=act)
+ggsurvplot(km, risk.table=F, ggtheme=theme_light(),)
+
+# summary(km) 
+km
+plot(km)
+ggsurvplot(km, risk.table=TRUE, ggtheme=theme_light(),)
+
+
+## Test du log-rank (niveau de diplome)
+
+survdiff(Surv(dur,d)~diplome,data=act, rho=0)
+survdiff(Surv(dur,d)~diplome,data=act, rho=1)
+
+pairwise_survdiff(Surv(dur,d)~diplome,data=act, rho=1, p.adjust.method = "none")
+pairwise_survdiff(Surv(dur,d)~diplome,data=act, rho=1)
