@@ -1,13 +1,14 @@
 ---
-title: "**Introduction**"
+#title: "**Introduction**"
 
 filters:
   - lightbox
 lightbox: auto
 ---
 
+# Introduction aux modèles
 
-# Proprortionnalité des risques
+## Proprortionnalité des risques
 
 
 La spécification usuelle d'un modèle à risque proportionnel est:
@@ -62,7 +63,7 @@ Pour $h_{1b}(t)$, le risque augmente de manière à un rythme constant (linéair
 Si on est dans le deuxième cas de figure, un modèle à risque proportionnel estimera un rapport toujours égal à 2. Il estimera un *rapport moyen* sur la période d'observation. 
 
 
-# Les modèles
+## Les modèles usuels
 
 * **Modèle semi-paramétrique de Cox (1972)**    
 Le modèle estime directement les $b$ indépendamment de $h_0(t)$. C'est pour cela qu'il est appelé modèle ***semi-paramétrique de Cox***. Les rapports de risque ($e^{b}$) seront utilisés dans un deuxième temps pour estimer la baseline $h_0(t)$, qui peut s'avérer nécessaire pour calculer des fonctions de survie ajustées. Le respect de l’hypothèse de proportionnalité est donc importante et doit donc être analysée.
@@ -78,7 +79,7 @@ Les modèles dits de Weibull, exponentiel, Gompertz ont une spécification sous 
 * **Modèle paramétrique de Parmar-Royston** (non traité)  
 $h_0(t)$, via le risque cumulé $H(t)$, est estimé simultanément avec les rapports de risques en utilisant la méthode des *splines cubiques*. Il est maintenant implémenté dans les logiciels standards (R, Stata, Sas). Les rapports de risque obtenus sont très proches de ceux estimés par le modèle classique de Cox.  Il offre donc une alternative surement intéressante au Cox standard, et il s'est maintenant largement diffusé dans l’analyse des effets cliniques.
 
-* **Modèle à non proportionnalité**: on a bien évidemment les modèles paramétriques de type *AFT* (Accelerated Failure Time), le peut-être très prometteur modèle à *pseudo observations* d'Andersen (j'espère en faire une courte présentation rapidement après avoir évaluer son passage en durée discrète). Dans le champ du machine learning, il y a depuis son origine une version modèle de survie dans les *forêts aléatoires*.
+* **Modèle à non proportionnalité**: on a bien évidemment les modèles paramétriques de type *AFT* (Accelerated Failure Time), le peut-être  prometteur modèle à *pseudo observations* d'Andersen (en cours d'évaluation et introduit au support en 2024). Dans le domaine du machine learning, il y a depuis son origine une version modèle de survie dans les *forêts aléatoires*.
 
 
 
