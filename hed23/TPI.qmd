@@ -1,5 +1,5 @@
 ---
-title: "Introduction à l'analyse Biographique des avec R "
+title: "Introduction à l'analyse Biographique des durées avec R "
 subtitle: "Correction TPI: analyse sorties du premier emploi"
 title-block-banner: "#034E79"
 date: today
