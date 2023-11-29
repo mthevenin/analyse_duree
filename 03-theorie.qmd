@@ -217,7 +217,7 @@ $$h(t)=\lim\limits_{dt\to{0}} \frac{P(t\leq{T}< t + dt | T\geq{t})}{dt}$$
 On peut également écrire:
 
 $h(t)=\frac{f(t)}{S(t)}=\frac{F'(t)}{S(t)}=-\frac{S'(t)}{S(t)}$ ^[La relation $h(t)=\frac{f(t)}{S(t)}$ et donc $f(t)= h(t) \times S(t)$ est intéressante et importante car elle permet
-d'écrire la vraisemblance du processus probabiliste permettant d'estimer les paramètres des différentes analyses. On voit déjà sa proximité avec la fonction de masse de Bernouilli: $f(y_i) = p^{y_i} \times (1-p)^{1-y_i}$. Se reporté à la section qui décrit qui la vraisemblance partielle de Cox pour s'en faire une idée plus précise.]
+d'écrire la vraisemblance du processus probabiliste permettant d'estimer les paramètres des différentes analyses. On voit déjà sa proximité avec la fonction de masse de Bernouilli: $f(y_i) = p^{y_i} \times (1-p)^{1-y_i}$. Se reporter à la section qui décrit qui la vraisemblance partielle de Cox pour s'en faire une idée plus précise.]
 
 On remarque que cette fonction de risque (ou *hazard rate*) n’est pas une probabilité car $\frac{f(t)}{S(t)}$ ne peut pas contraindre ici la valeur obtenue à ne pas être supérieure à 1.
 
@@ -225,7 +225,7 @@ On remarque que cette fonction de risque (ou *hazard rate*) n’est pas une prob
 
 ## Grandeurs avec des durées discrètes/groupées
 
-Les expressions de la densité et du risque dit instantané se simplifie: $f(t)=P(t\leq{T}< t + dt)$ et $h(t)=P(t\leq{T}< t + dt | T\geq{t})$. Ces deux grandeurs ne sont plus des taux tel qu'ils ont été définit précedemment, mais des probabilités. En durée discrète, on aurait donc $dt=1$  
+Les expressions de la densité et du risque dit instantané se simplifient: $f(t)=P(t\leq{T}< t + dt)$ et $h(t)=P(t\leq{T}< t + dt | T\geq{t})$. Ces deux grandeurs ne sont plus des taux tel qu'ils ont été définit précedemment, mais des probabilités. En durée discrète, on aurait donc $dt=1$  
 Néanmoins les relations entre les grandeurs, en particulier celle qui lie risque, densité et survie reste toujours valable. Ceci est fondamental, car elle permet de définir la fonction de vraisemblance sur laquelle repose le calcul de tous les estimateurs 
 :::
 
@@ -240,7 +240,7 @@ $\frac{0.48}{1/3}=1.44$. On peut donc s'attendre a attraper 1.44 rhume durant la
 2. On passe une année en vacances dans une région, franchement pas très accueillante, où la probabilité de décéder chaque mois est évaluée à 33%. Quel est le risque de décéder pendant cette année? 
 $\frac{0.33}{1/12}=3.96$  
 
-On le voit, cette mesure du risque peut donc être supérieur à 1. En soit cela ne pose pas de problème comme il s'agit d'un nombre moyen d'évènements espérés, mais pour des évènements qui ne peuvent pas se répéter, évènements dits *absorbants* (par définition la mortalité), l'interprétation n'est pas très intuitive.    
+On le voit, cette mesure du risque peut donc être supérieure à 1. En soit cela ne pose pas de problème comme il s'agit d'un nombre moyen d'évènements espérés, mais pour des évènements qui ne peuvent pas se répéter, évènements dits *absorbants* (par définition la mortalité), l'interprétation n'est pas très intuitive.    
 
 Le risque étant constant dans chaque intervalle (mois), on peut prendre son inverse qui va mesurer la durée moyenne (espérée) jusqu'à l'occurence de l'évènement.  
 Par analogie seulement, on retrouve ici un concept classique en analyse démographique comme l'espérance de vie (survie): la question n'est pas de savoir si on va mourir ou non, ce risque inconditionnellement à la durée étant par définition égal à 1, mais jusqu'à quand on peut espérer (sur)vivre.  
@@ -263,7 +263,7 @@ On peut alors réécrire toutes les autres quantités à partir de celle-ci:
 
 *Exemple avec la loi exponentielle (risque constant)*  
 
-Si on pose que le risque (ou taux de risque) est strictement constant au cours du temps: $h(t)=a$, on dira que ce profilsuit une **loi exponentielle**. Cette situation est, par exemple, typique des processus dits sans mémoire comme la durée de vie des ampoules. Sans trop de difficulté, toutes les expressions peuvent être formellement définies:
+Si on pose que le risque (ou taux de risque) est strictement constant au cours du temps: $h(t)=a$, on dira qu'il suit une **loi exponentielle**. Cette situation est, par exemple, typique des processus dits sans mémoire comme la durée de vie des ampoules. Sans trop de difficulté, toutes les expressions peuvent être formellement définies:
 
 - $h(t)=a$  
 - $H(t)=a\times{t}$  
@@ -329,7 +329,7 @@ Les méthodes qui vont être présentées plus tard ***gèrent*** la présence d
 
 ### Utilisation des pondérations dans un schema retrospectif avec des biographies longues 
 
-Une question assez récurrente concerne l'utilisation des poids de sondage dans les analyses de durées avec longueurs biographiques souvent assez longues. Leur utilisation ne me semble pas recommandée voire à exclure sauf exceptions. En effet les pondérations sont générées au moment de l'enquête, alors que les évènements étudiés peuvent remonter dans un passé plus ou moins lointain pour une partie de la population analysée. Si on regarde de plus près, la création de poids longitudinaux ne résoudrait pas grand chose , les pondérations devant être recalculées à chaque moment d'observation ou à chaque moment où des évènements se produisent. Par ailleurs on mélangerait régulièrement à un instant donné des personnes issues de générations différentes ce qui rend impossible tout calage sur des caractéristiques d'un population. Supposons une personne âgée de 25 ans et un personne âgée de 70 ans au moment de l'enquête en 2022, avec un début d'observation à l'âge de 18 ans . A 20 ans ($t=2$), pour la première personne les caractéristiques de la population sont celles de 2017, pour celle de 70 ans celles de 1972. On fait comment?????? 
+Une question assez récurrente concerne l'utilisation des poids de sondage dans les analyses de durées avec longueurs biographiques souvent assez longues. Leur utilisation ne me semble pas recommandée voire à exclure sauf exceptions. En effet les pondérations sont générées au moment de l'enquête, alors que les évènements étudiés peuvent remonter dans un passé plus ou moins lointain pour une partie de la population analysée. Si on regarde de plus près, la création de poids longitudinaux ne résoudrait pas grand chose , les pondérations devant être recalculées à chaque moment d'observation ou à chaque moment où des évènements se produisent. Par ailleurs on mélangerait régulièrement à un instant donné des personnes issues de générations différentes ce qui rend impossible tout calage sur des caractéristiques d'une population. Supposons une personne âgée de 25 ans et un personne âgée de 70 ans au moment de l'enquête en 2022, avec un début d'observation à l'âge de 18 ans . A 20 ans ($t=2$), pour la première personne les caractéristiques de la population sont celles de 2017, pour celle de 70 ans celles de 1972. On fait comment?????? 
 
 
 
