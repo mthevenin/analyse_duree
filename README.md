@@ -1,9 +1,12 @@
 # Introduction analyse des durées [données biographiques]
 
+<https://mthevenin.github.io/analyse_duree/>
+
 **Principales mises à jour**
 
 **Prévision 2024**
 
+* Site de la formation déployé également sur gitlab: <https://mthevenin.gitlab.io/analyse_duree/>
 * Ajout d'une section sur les modèles à pseudo-observations (principe simple, très séduisant, mais des limites à anticiper en sciences sociales particulièrement)
 * Formations:
   * Interne Ined
