@@ -139,6 +139,8 @@ cox.zphold(coxfit)
 
 cut= unique(trans$stime[trans$died == 1])
 tvc = survSplit(data = trans, cut = cut, end = "stime", start = "stime0", event = "died")
+
+
 tvc$tvc=ifelse(tvc$transplant==1 & tvc$wait<=tvc$stime,1,0)
 
 tvcfit = coxph(formula = Surv(stime0, stime, died) ~ year + age + surgery + tvc, data = tvc)
