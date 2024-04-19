@@ -4,35 +4,55 @@
     "href": "index.html",
     "title": "Introduction à l’analyse biographique des durées",
     "section": "",
-    "text": "1 Présentation - Bibliographie - Outils"
+    "text": "1 Présentation - Bibliographie - Outils",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>**Présentation - Bibliographie - Outils**</span>"
+    ]
   },
   {
     "objectID": "index.html#le-support",
     "href": "index.html#le-support",
     "title": "Introduction à l’analyse biographique des durées",
     "section": "Le support",
-    "text": "Le support\nCe document est utilisé comme support de formation, principalement pour des formations internes à l’Ined, des formations dans le cadre d’HED, et le cours de master 2 de démographie de l’Université de Strasbourg. En terme de contenu il reste classique, il s’agit d’une introduction, même si certaines nouveautés méthodologiques (pas si récentes non plus) sont présentées comme l’estimation des RMST1. Une méthode modélisation reposant des pseudo-observations2 est en cours d’évaluation, et devrait être introduite dans le support en 20243\nPour cette version 2023, le principal ajout concerne un chapitre sur les manipulations des données biographiques [Lien]. C’est un premier jet, il ne peut pas être exhaustif ou représentatif de toutes les manipulations auxquelles on pourrait être confrontées.\nSur la forme, le support a été passé en format ouvrage (sans en avoir l’ambition je précise) et une version pdf peut-être directement téléchargée. Il est identique à la version html, sauf pour le chapitre programmation ou seulement les éléments relatifs à R sont inclus.\nUn petit mot sur l’application présente dans le support. Issu du champ de la médecine (essai clinique), soit l’analyse de la survie de personnes souffrant d’une insuffisance cardiaque, elle pourrait décevoir vu son éloignement avec des problématiques issues des sciences sociales. Cependant, cette base d’analyse permet de couvrir avec peu d’informations, la quasi totalité des points traités dans ce support. Je l’admets qu’il serait préférable de trouver un jour autre chose, ou de donner par exemple en annexe, quelques exemples d’applications plus proches des sciences sociales.\nNéanmoins pour les personnes participant à la formation, les jeux de données sont bien issus des sciences sociales.\nIl ne s’agit pas d’un support validé institutionnellement. J’assume seul et totalement les partis pris ou erreurs conceptuelles. J’en profite également pour remercier, quelques soient leur statut, l’ensemble des personnes ayant fait appel à mon assistance sur ce domaine d’analyse, ainsi que l’ensembe les participant.e.s aux formations et cours. Par leurs remarques, les problématiques traitées, ils me permettent de réviser et mettre à jour régulièrement ce document. Enfin, je remercie plus particulierement Eva Lelièvre et Arnaud Bringé pour l’ensemble du savoir qu’ils m’ont transmis."
+    "text": "Le support\n\n\n\n\n\n\nMises à jour 2024 [En cours]\n\n\n\n19 Avril 2024\nTest de Grambsch Therneau l’hypothèse de proportionnalité: version exacte versus approximation OLS\n… Ca bouge. Une contribution, à mon sens majeur, et dans un champ proche de celui des sciences sociales a été effectuée récemment Lien. L’origine des variations, souvent importantes, entre les deux versions du test à fait l’objet d’une investigation à mon sens très poussée. En faisant bref, elle repose sur la présence de corrélation même faible entre covariables, situation forcément classique en sciences sociales. La conclusion de ce travail penche plutôt vers une utilisation du test ols dans le domaine des sciences sociales. Par ailleurs, on en sait un peu plus sur les motivations qui ont poussées T.Therneau à implémenter seulement la version exacte du test depuis la version 3 (2020).\nModèles à pseudo observations\n… Ca avance. L’intégration au support ne me semblant pas prioritaire par rapport aux éléments précédent à la précédente, on peut tabler sur la fin septembre\n\n\nCe document est utilisé comme support de formation, principalement pour des formations internes à l’Ined, des formations dans le cadre d’HED, et le cours de master 2 de démographie de l’Université de Strasbourg. En terme de contenu il reste classique, il s’agit d’une introduction, même si certains apports méthodologiques plus ou moins récents sont introduits comme l’estimation des RMST1. Une méthode modélisation reposant sur des pseudo-observations2 est en cours d’évaluation, et sera introduite dans le support en 20243\nSur la forme, le support a été passé en format ouvrage (sans en avoir l’ambition il est bon de le préciser) et une version pdf peut-être directement téléchargée. elle est identique à la version html, sauf pour le chapitre programmation ou seulement les éléments relatifs à R sont présent.\nUn petit mot sur l’application présente dans le support. Issu du champ de la médecine (essai clinique), ici l’analyse de la survie de personnes souffrant d’une insuffisance cardiaque, elle peut décevoir vu son éloignement avec des problématiques issues des sciences sociales. Cependant, cette base d’analyse permet de couvrir avec peu d’informations, la quasi totalité des points traités dans ce support. Je l’admets qu’il serait préférable de trouver un jour autre chose, ou de donner par exemple en annexe, quelques exemples d’applications plus proches des sciences sociales.\nNéanmoins pour les personnes participant à la formation, les jeux de données sont bien issus des sciences sociales.\nIl ne s’agit pas d’un support validé institutionnellement. J’en assume donc totalement assume seul le contenu. J’en profite également pour remercier, quelques soient leur statut, l’ensemble des personnes ayant fait appel à mon assistance sur ce champ d’analyse, ainsi que l’ensembe les participant.e.s aux formations et cours. Par leurs remarques, les problématiques traitées, ils me permettent de réviser et mettre à jour annuellement ce document. Enfin, je remercie plus particulierement Eva Lelièvre et Arnaud Bringé.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>**Présentation - Bibliographie - Outils**</span>"
+    ]
   },
   {
     "objectID": "index.html#bibliographie",
     "href": "index.html#bibliographie",
     "title": "Introduction à l’analyse biographique des durées",
     "section": "Bibliographie",
-    "text": "Bibliographie\nLes éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est volontairement courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine, qui est ici l’espace privilégié de l’ingénierie méthodologique. On trouve également de (trop) nombreux tutoriels généraliste à dominante mise en pratique avec R, dont je ne conseille pas forcément l’utilisation.\nAccès en ligne\n\nCours Gilbert Colletaz (Université d’Orléans - Master d’économétrie).\n\nLe cours est mis à jour tous les ans, applications uniquement avec Sas.\nDernière version 2020: lien\n\nDocument de travail de Simon Quantin (Insee).\n\nCouvre l’ensemble des techniques de base d’analyse des durées en durée dite continue. Il propose surement la meilleure introduction en langue française à la problématique de la fragilité, qui sera ici seulement présenté trop brièvement.\nApplication en R seulement (Attention au passage de la v3 du package survival)\n2019 - pas de mise à jour: lien\n\nLes notes de cours de German Rodriguez (en)\n\nDémographe à l’université de Princeton.\n\nLes dernières mises à jour doivent dater de 2017-2018: lien\n\n\nOuvrage de référence en démographie:\n\nL’analyse démographique des biographies de Daniel Courgeau et Eva Lelièvre (Edition de l’Ined - 1989). Malheureusement cet ouvrage ne dispose pas de version epub ou pdf disponible en ligne 4."
+    "text": "Bibliographie\nLes éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est volontairement courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine, qui est ici l’espace privilégié de l’ingénierie méthodologique. On trouve également de (trop) nombreux tutoriels généraliste à dominante mise en pratique avec R, dont je ne conseille pas forcément l’utilisation.\nAccès en ligne\n\nCours Gilbert Colletaz (Université d’Orléans - Master d’économétrie).\n\nLe cours est mis à jour tous les ans, applications uniquement avec Sas.\nDernière version 2020: lien.\n\nDocument de travail de Simon Quantin (Insee).\n\nCouvre l’ensemble des techniques de base d’analyse des durées en durée dite continue. Il propose surement la meilleure introduction en langue française à la problématique de la fragilité, qui sera ici seulement présenté trop brièvement.\nApplication en R seulement (Attention au passage de la v3 du package survival pour la question du test de proportionnalité de Grambsh-Therneau).\n2019 - pas de mise à jour: lien.\n\nLes notes de cours de German Rodriguez (en)\n\nDémographe à l’université de Princeton.\n\nLes dernières mises à jour doivent dater de 2017-2018: lien\n\n\nOuvrage de référence en démographie:\n\nL’analyse démographique des biographies de Daniel Courgeau et Eva Lelièvre (Edition de l’Ined - 1989). Malheureusement cet ouvrage ne dispose pas de version epub ou pdf disponible en ligne 4.",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>**Présentation - Bibliographie - Outils**</span>"
+    ]
   },
   {
     "objectID": "index.html#outils",
     "href": "index.html#outils",
     "title": "Introduction à l’analyse biographique des durées",
     "section": "Outils",
-    "text": "Outils\n\nSupport réalisé sous Rstudio avec l’outil d’édition Quarto\nLangages utilisés pour la partie programmation:\n\nR\nStata v18\nSas\nPython"
+    "text": "Outils\n\nSupport réalisé sous Rstudio avec l’outil d’édition Quarto\nLangages utilisés pour la partie programmation:\n\nR\nStata v18\nSas\nPython",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>**Présentation - Bibliographie - Outils**</span>"
+    ]
   },
   {
     "objectID": "index.html#footnotes",
     "href": "index.html#footnotes",
     "title": "Introduction à l’analyse biographique des durées",
     "section": "",
-    "text": "Restricted Mean of Survival Time↩︎\nRésidus du Jackknife↩︎\nTrès intéressante comme technique de modélisation des RMST et pour palier à certaines contraintes des modèles à risques proportionnels, on peut déjà dire que sa généralisation sera compliquée dans le domaine des sciences sociales en raison de l’hypothèse d’indépendance des covariables avec la censure.↩︎\nPour les résident.e.s du campus Condorcet, l’ouvrage est disponible au GED [lien]↩︎"
+    "text": "Restricted Mean of Survival Time↩︎\nRésidus du Jackknife↩︎\nTrès intéressante comme technique de modélisation des RMST et pour palier à certaines contraintes propres aux modèles à risques proportionnels, on peut déjà dire que sa généralisation sera compliquée dans le domaine des sciences sociales en raison de l’hypothèse d’indépendance des covariables avec la censure.↩︎\nPour les résident.e.s du campus Condorcet, l’ouvrage est disponible au GED [lien]↩︎",
+    "crumbs": [
+      "Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>**Présentation - Bibliographie - Outils**</span>"
+    ]
   },
   {
     "objectID": "01-presentation.html#questions",
