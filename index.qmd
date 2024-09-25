@@ -2,50 +2,49 @@
 
 # Présentation - Bibliographie - Outils
 
+
+## Mises à jour 2024
+
+
+[Test de Grambsch Therneau l'hypothèse de proportionnalité dans un modèle de Cox: version exacte versus approximation OLS]{.box_text}  
+  
+Une contribution majeure visant à expliquer les écarts observées entre les deux versions du test a été réalisée fin 2023. [Lien](https://www.cambridge.org/core/journals/political-analysis/article/implementation-matters-evaluating-the-proportional-hazard-tests-performance/05E2657A64B18FB1E25C2BE1F7D92C3B)  Elle repose sur la présence de corrélations même limitées entre les covariables du modèle, situation classique en sciences sociales. La conclusion de ce travail penche clairement vers une utilisation du test ols (moindre carrés ordinaires) dans le domaine des sciences sociales. 
+
+Dans ce support, j'ai donc résumé le travail de S.Metzger dans la section dédiée au test de proportionnalité avec un modèle de Cox. Comme cela impacte le travail sous R j'ai également repris la section relative à la programmation, bien que j'avais déjà donné le moyen de récupérer et d'utiliser le test ols depuis mai 2022. 
+
+
+[Calcul des Rmst avec Python]{.box_text}    
+  
+Ajouté au package `lifelines` récemment, des éléments de programmation ont été ajouté dans la section Python. La syntaxe n'est pas très conviviale, mais c'est déjà ça. Le test de comparaison des Rmst n'y pas implémenté, ce qui est dommage vu sa simplicité. Plus généralement, aucune inférence de l'estimateur ne semble être présente dans la fonction. 
+
+
+[Quelques remarques complémentaires sur l'épineuse question de l'utilisation des pondérations en analyse de survie]{.box_text}  
+
+Cela fait suite à des questionnements qui m'ont été adressés par le groupe d'exploitation de l'enquête [Envie](https://envie.site.ined.fr/). Mon court argumentaire  qui reposait sur l'utilisation des pondérations avec des biographies longues a été, il faut l'avouer, un peu mis à mal, la plage d'âges étant ici de 18 à 29 ans. Cela m'a permis de faire un tour d'horizon plus complet de la problématique, et qui continue bien évidemment à me renvoyer dans le domaine de la médecine.
+
+
 ## Le support {-} 
 
-::: callout-note
+Ce document est utilisé comme support de formation, principalement pour celle dispensée à l'Ined, celle effectuée dans le cadre d'HED, ainsi que le cours de master 2 de démographie de l'Université de Strasbourg. 
+En terme de contenu il reste classique, il s'agit d'une introduction, même si certains *apports* méthodologiques plus ou moins récents  sont introduits comme l'estimation des ***RMST***^[Restricted Mean of Survival Time]. Une méthode modélisation reposant sur des pseudo-observations^[Résidus du Jackknife] est en cours d'évaluation, et pourrait être introduite dans le support fin 2024. Mais... Conceptuellement très intéressante, son application dans les sciences sociales risque de régulièrement buter sur une hypothèse restrictive, à savoir la non corrélation entre observations censurées et covariables. Elle sera souvent remise en cause lorsqu'on introduira des dimensions explicatives tels que l'âge ou la génération en début d'exposition, soit des éléments très communs dans les analyses.
 
-### Mises à jour 2024 [En cours]
+Sur la forme, le support a été passé en 2023 en format ouvrage (sans en avoir l'ambition il est bon de le préciser) et une version pdf peut-être directement téléchargée. elle est identique à la version html, sauf pour le chapitre programmation ou seulement les éléments relatifs à R sont présents. Les autres outils sont **Stata**, **Python** (Lifelines et Statmodel), et **Sas** {{<fa solid cross>}}  sont propres à la version html.
 
-19 Avril 2024
+Enfin un petit mot sur l'application présente dans le support. Issu du champ de la médecine, soit l'analyse de la survie de personnes souffrant d'une insuffisance cardiaque, elle peut décevoir vu son éloignement avec des problématiques issues des sciences sociales^[Le document de travail de l'Insee indéxé dans la bibliographie ne fait pas mieux, l'application traite du diabète]. Cependant, cette base d'analyse permet de couvrir avec peu d'informations, la quasi totalité des points traités dans ce support. Elle repose sur un nombre d'observations très limité (103), collectées il y a quand même très longtemps (fin 60 début 70), et avec seulement 4 covariables. Il y a sans aucun doute des biais un peu partout, en partie expliquée par non prise en compte de variables de contrôle, pure ou de confusion. J'admets qu'il serait préférable de trouver un jour autre chose, ou de donner par exemple en annexe, quelques exemples d'applications plus proches des sciences sociales. Néanmoins pour les personnes participant à la formation, les jeux de données utilisés pour les travaux pratiques sont bien issus des sciences sociales. 
 
-**Test de Grambsch Therneau l'hypothèse de proportionnalité: version exacte versus approximation OLS** 
-
-... Ca bouge. Une contribution, à mon sens majeur, et dans un champ proche de celui des sciences sociales a été effectuée récemment [Lien](https://www.cambridge.org/core/journals/political-analysis/article/implementation-matters-evaluating-the-proportional-hazard-tests-performance/05E2657A64B18FB1E25C2BE1F7D92C3B). L'origine des   variations, souvent importantes, entre les deux versions du test à fait l'objet d'une investigation à mon sens très poussée. A ce stade^[j'ai récupéré l'analyse que très récemment], elle repose sur la présence de corrélation même faible entre covariables, situation forcément classique en sciences sociales. La conclusion de ce travail penche plutôt vers une utilisation du test ols dans le domaine des sciences sociales. Par ailleurs, on en sait un peu plus sur les motivations qui ont poussées T.Therneau à implémenter seulement la version *exacte* du test depuis la version 3 (2020).  
-
-
-**Modèles à pseudo observations** 
-
-... Ca avance. 
-L'intégration au support ne me semblant pas prioritaire par rapport à celle liée aux éléments précédent, on peut tabler pour une maj pour la fin septembre.
-
-:::
-
-
-Ce document est utilisé comme support de formation, principalement pour des formations internes à l'Ined, des formations dans le cadre d'HED, et le cours de master 2 de démographie de l'Université de Strasbourg. 
-En terme de contenu il reste classique, il s'agit d'une introduction, même si certains *apports* méthodologiques plus ou moins récents  sont introduits comme l'estimation des ***RMST***^[Restricted Mean of Survival Time]. Une méthode modélisation reposant sur des pseudo-observations^[Résidus du Jackknife] est en cours d'évaluation, et sera introduite dans le support en 2024^[Très intéressante comme technique de modélisation des RMST et pour palier à certaines contraintes propres aux modèles à risques proportionnels, on peut déjà dire que sa généralisation sera compliquée dans le domaine des sciences sociales en raison de l'hypothèse d'indépendance des covariables avec la censure.]  
-
-
-Sur la forme, le support a été passé en format ouvrage (sans en avoir l'ambition il est bon de le préciser) et une version pdf peut-être directement téléchargée. elle est identique à la version html, sauf pour le chapitre programmation ou seulement les éléments relatifs à R sont présent.
-
-Un petit mot sur l'application présente dans le support. Issu du champ de la médecine (essai clinique),  ici l'analyse de la survie de personnes souffrant d'une insuffisance cardiaque, elle peut décevoir vu son éloignement avec des problématiques issues des sciences sociales. Cependant, cette base d'analyse permet de couvrir avec peu d'informations, la quasi totalité des points traités dans ce support. Je l'admets qu'il serait préférable de trouver un jour autre chose, ou de donner par exemple en annexe, quelques exemples d'applications plus proches des sciences sociales.  
-Néanmoins pour les personnes participant à la formation, les jeux de données sont bien issus des sciences sociales. 
-
-
-Il ne s'agit pas d'un support validé institutionnellement. J'en assume donc totalement assume seul le contenu.
-J'en profite également pour remercier, quelques soient leur statut, l'ensemble des personnes ayant fait appel à mon assistance sur ce champ d'analyse, ainsi que l'ensembe les participant.e.s aux formations et cours. Par leurs remarques, les problématiques traitées, ils me permettent de réviser et mettre à jour annuellement ce document. 
+Il ne s'agit pas d'un support validé institutionnellement. J'en assume donc totalement seul le contenu.
+J'en profite également pour remercier, quelques soient leur statut et leur fonction, l'ensemble des personnes ayant eu recours à mon assistance sur ce champ d'analyse très riche, ainsi que l'ensemble les participant.e.s aux formations et cours. Par leurs remarques, les problématiques traitées, ils me permettent de réviser et mettre à jour annuellement ce document. 
 Enfin, je remercie plus particulierement [**Eva Lelièvre**](https://www.ined.fr/fr/recherche/chercheurs/Leli%C3%A8vre+Eva) et [**Arnaud Bringé**](https://www.ined.fr/fr/recherche/chercheurs/Bring%C3%A9+Arnaud).
 
 
 ## Bibliographie {-}
 
-Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est volontairement courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine, qui est ici l'espace privilégié de l'ingénierie méthodologique. On trouve également de (trop) nombreux tutoriels généraliste à dominante *mise en pratique avec R*, dont je ne conseille pas forcément l'utilisation.  
+Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est volontairement courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine. On trouve également de trop nombreux tutoriels généraliste à dominante *mise en pratique avec R*, dont je ne conseille pas forcément l'utilisation.  
 
 **Accès en ligne**
 
 * **Cours Gilbert Colletaz** (Université d’Orléans - Master d'économétrie).
-  - Le cours est mis à jour tous les ans, applications uniquement avec Sas. 
+  - Applications uniquement avec Sas. Suite à la retraite de son auteur, le cours n'est plus mis à jour.
   - Dernière version 2020: [lien](https://www.master-esa.fr/wp-content/uploads/2021/04/Econometrie-des-donnees-de-survie.pdf). 
 
 * **Document de travail de Simon Quantin** (Insee).
@@ -70,8 +69,8 @@ Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des
 
   - [R](https://www.r-project.org/) 
   - [Stata v18](https://www.stata.com/) 
-  - [Sas](https://www.sas.com/fr_fr/home.html) 
   - [Python](https://www.python.org/) 
+  - [ {{<fa solid cross>}} Sas v9](https://www.sas.com/fr_fr/home.html)
   
   
 ![](noai.png){fig-align="center"}

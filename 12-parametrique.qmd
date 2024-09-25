@@ -5,7 +5,7 @@
 ---
 
 
-# **Modèles paramétriques**
+# Modèles paramétriques
 
 
 **Objectifs**: présenter, assez rapidement, la logique des modèles de type **AFT** (**Accelerated Failure Time**), principalement celui de *Weibull*. 
@@ -132,14 +132,14 @@ Attention: on ne peut pas comparer la qualité d'un modèle paramétrique à cel
 * Le bon ajustement par une loi de distribution predéfinie peut s'avérer contraignante. Le modèle de Cox avait justement pour objectif de se défaire de cette contrainte, la plupart des distributions utilisées étant monotone ou unimodale (log-logistique ou log-normal). 
 * Le principe des splines peut-être rapproché de celui qui a été utilisé plus haut dans le modèle logistique à durée discrète avec l'introduction des polynomes [ $f(t)= (a_1\times t) + (a_2\times t^2) + (a_3\times t^3) + ...+ (a_k\times t^k)$. 
   * Cette méthode brute d'ajustement consiste finalement à introduire une intéraction ou plusieurs intéractions entre la variable de durée elle-même.
-  * Elle est sujette à une forte sensibilité aux outliers (overfitting) au delà de $k>2$ ^[lors la formation il suffit de la tester avec la base des TP pour k=3 et calculer la probabilité conditionnelle pour s'en convaincre].
-* Les **splines cubiques restreintes** propose une méthode d'ajustement et de lissage de meilleure qualité et permet de contenir les problèmes d'overfitting.
+  * L'ajustement par des polynomes classiques est très sensible aux outliers (overfitting) au delà de $k>2$ ^[lors la formation il suffit de la tester avec la base des TP pour k=3 et calculer la probabilité conditionnelle pour s'en convaincre].
+* Du côté des **splines cubiques** la méthode d'ajustement et de lissage est de meilleure qualité et permet de mieux contenir les problèmes d'overfitting.
   * les splines cubiques sont donc basées sur des polynomes d'ordre 3 (d'où cubique) avec une estimation par morceau (intervalles). les morceaux sont définis manuellement ou par un nombre de degrés de liberté obtenu à partir des quantiles du logarithme de la fonction de survie après avoir exclu les observation censurées. 
     * Deux degrés de liberté (1 noeud) avec un intervalle allant jusqu'au log de la moitié des survivants et un second à partir de cette seconde moitié.
     * Sur le même principe trois degrés de liberté (2 noeuds) coupe la durée en 3 intervalles sur ses terciles.
     * En pratique, il est préférable de donner à l'application le nombre de degré de liberté plutôt que d'indiquer manuellement la position des noeuds. 
     * Il convient également de ne pas être trop gourmand sur le nombre de noeuds, un ou deux étant souvant suffisant (donc 2 ou 3 degrés de liberté).
-    * On peut choisir le nombre de degrés de liberté en estimant des modèles sans covariables et comparer les AIC (vraisemblance pénalisée).
+    * On peut choisir le nombre de degrés de liberté en estimant des modèles sans covariable et comparer les AIC (vraisemblance pénalisée).
 * Contrairement aux autres modèles, et sans rentrer dans les détails, le modèle de Parmar-Royston part de la fonction de risque cumulée et non des taux de risque/hasard. Les risk ratios sont obtenus en utilisant les relations entre les différentes grandeurs (voir section *théorie*).
 
     

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.551">
+<meta name="generator" content="quarto-1.4.557">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -34,7 +34,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -75,6 +75,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/all.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/fontawesome6-0.1.0/latex-fontsize.css" rel="stylesheet">
+<script src="site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -115,9 +120,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Présentation - Bibliographie - Outils</strong></span></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
+        <a class="flex-grow-1 no-decor" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+          <h1 class="quarto-secondary-nav-title">Introduction à l’analyse biographique des durées</h1>
+        </a>     
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -156,13 +161,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Présentation - Bibliographie - Outils</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Présentation - Bibliographie - Outils</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-presentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>L’analyse biographique des durées</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">L’analyse biographique des durées</span></span></a>
   </div>
 </li>
       </ul>
@@ -179,13 +184,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-donnees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Les Données</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Les Données</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-theorie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>La théorie</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">La théorie</span></span></a>
   </div>
 </li>
       </ul>
@@ -202,13 +207,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-fsurvie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>Estimations des fonctions de survie</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Estimations des fonctions de survie</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-fsurvie_comp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Tests de comparaison</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Tests de comparaison</span></span></a>
   </div>
 </li>
       </ul>
@@ -231,19 +236,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-cox.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Le modèle de Cox</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Le modèle de Cox</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-discret.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modèle à durée discrète</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-tvc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><strong>Variables dynamiques</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variables dynamiques</span></span></a>
   </div>
 </li>
       </ul>
@@ -260,25 +265,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-manipulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title"><strong>Eléments de mise en forme des données</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Eléments de mise en forme des données</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-concurrent.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title"><strong>Risques concurrents</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Risques concurrents</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-parametrique.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><strong>Modèles paramétriques</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modèles paramétriques</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-annexe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title"><strong>Annexes</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Annexes</span></span></a>
   </div>
 </li>
       </ul>
@@ -295,25 +300,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title"><strong>R</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-Stata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title"><strong>Stata</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Stata</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-Sas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title"><strong>SAS</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">In memoriam SAS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-Python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><strong>Python</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Python</span></span></a>
   </div>
 </li>
       </ul>
@@ -328,8 +333,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Sections</h2>
    
   <ul>
-  <li><a href="#présentation---bibliographie---outils" id="toc-présentation---bibliographie---outils" class="nav-link active" data-scroll-target="#présentation---bibliographie---outils"><span class="header-section-number">1</span> <strong>Présentation - Bibliographie - Outils</strong></a>
+  <li><a href="#présentation---bibliographie---outils" id="toc-présentation---bibliographie---outils" class="nav-link active" data-scroll-target="#présentation---bibliographie---outils"><span class="header-section-number">1</span> Présentation - Bibliographie - Outils</a>
   <ul class="collapse">
+  <li><a href="#mises-à-jour-2024" id="toc-mises-à-jour-2024" class="nav-link" data-scroll-target="#mises-à-jour-2024"><span class="header-section-number">1.1</span> Mises à jour 2024</a></li>
   <li><a href="#le-support" id="toc-le-support" class="nav-link" data-scroll-target="#le-support">Le support</a></li>
   <li><a href="#bibliographie" id="toc-bibliographie" class="nav-link" data-scroll-target="#bibliographie">Bibliographie</a></li>
   <li><a href="#outils" id="toc-outils" class="nav-link" data-scroll-target="#outils">Outils</a></li>
@@ -340,10 +346,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Présentation - Bibliographie - Outils</strong></span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Introduction à l’analyse biographique des durées</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-<p class="subtitle lead">Support de formation 2023</p>
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block">Introduction à l’analyse biographique des durées</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">Support de formation 2024</p>
 </div>
 
 
@@ -360,7 +366,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Date de publication</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">19 avril 2024</p>
+      <p class="date">25 septembre 2024</p>
     </div>
   </div>
   
@@ -373,40 +379,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <section id="présentation---bibliographie---outils" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> <strong>Présentation - Bibliographie - Outils</strong></h1>
+<h1 data-number="1"><span class="header-section-number">1</span> Présentation - Bibliographie - Outils</h1>
+<section id="mises-à-jour-2024" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="mises-à-jour-2024"><span class="header-section-number">1.1</span> Mises à jour 2024</h2>
+<p><span class="box_text">Test de Grambsch Therneau l’hypothèse de proportionnalité dans un modèle de Cox: version exacte versus approximation OLS</span></p>
+<p>Une contribution majeure visant à expliquer les écarts observées entre les deux versions du test a été réalisée fin 2023. <a href="https://www.cambridge.org/core/journals/political-analysis/article/implementation-matters-evaluating-the-proportional-hazard-tests-performance/05E2657A64B18FB1E25C2BE1F7D92C3B">Lien</a> Elle repose sur la présence de corrélations même limitées entre les covariables du modèle, situation classique en sciences sociales. La conclusion de ce travail penche clairement vers une utilisation du test ols (moindre carrés ordinaires) dans le domaine des sciences sociales.</p>
+<p>Dans ce support, j’ai donc résumé le travail de S.Metzger dans la section dédiée au test de proportionnalité avec un modèle de Cox. Comme cela impacte le travail sous R j’ai également repris la section relative à la programmation, bien que j’avais déjà donné le moyen de récupérer et d’utiliser le test ols depuis mai 2022.</p>
+<p><span class="box_text">Calcul des Rmst avec Python</span></p>
+<p>Ajouté au package <code>lifelines</code> récemment, des éléments de programmation ont été ajouté dans la section Python. La syntaxe n’est pas très conviviale, mais c’est déjà ça. Le test de comparaison des Rmst n’y pas implémenté, ce qui est dommage vu sa simplicité. Plus généralement, aucune inférence de l’estimateur ne semble être présente dans la fonction.</p>
+<p><span class="box_text">Quelques remarques complémentaires sur l’épineuse question de l’utilisation des pondérations en analyse de survie</span></p>
+<p>Cela fait suite à des questionnements qui m’ont été adressés par le groupe d’exploitation de l’enquête <a href="https://envie.site.ined.fr/">Envie</a>. Mon court argumentaire qui reposait sur l’utilisation des pondérations avec des biographies longues a été, il faut l’avouer, un peu mis à mal, la plage d’âges étant ici de 18 à 29 ans. Cela m’a permis de faire un tour d’horizon plus complet de la problématique, et qui continue bien évidemment à me renvoyer dans le domaine de la médecine.</p>
+</section>
 <section id="le-support" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="le-support">Le support</h2>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Mises à jour 2024 [En cours]
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>19 Avril 2024</p>
-<p><strong>Test de Grambsch Therneau l’hypothèse de proportionnalité: version exacte versus approximation OLS</strong></p>
-<p>… Ca bouge. Une contribution, à mon sens majeur, et dans un champ proche de celui des sciences sociales a été effectuée récemment <a href="https://www.cambridge.org/core/journals/political-analysis/article/implementation-matters-evaluating-the-proportional-hazard-tests-performance/05E2657A64B18FB1E25C2BE1F7D92C3B">Lien</a>. L’origine des variations, souvent importantes, entre les deux versions du test à fait l’objet d’une investigation à mon sens très poussée. En faisant bref, elle repose sur la présence de corrélation même faible entre covariables, situation forcément classique en sciences sociales. La conclusion de ce travail penche plutôt vers une utilisation du test ols dans le domaine des sciences sociales. Par ailleurs, on en sait un peu plus sur les motivations qui ont poussées T.Therneau à implémenter seulement la version <em>exacte</em> du test depuis la version 3 (2020).</p>
-<p><strong>Modèles à pseudo observations</strong></p>
-<p>… Ca avance. L’intégration au support ne me semblant pas prioritaire par rapport aux éléments précédent à la précédente, on peut tabler sur la fin septembre</p>
-</div>
-</div>
-<p>Ce document est utilisé comme support de formation, principalement pour des formations internes à l’Ined, des formations dans le cadre d’HED, et le cours de master 2 de démographie de l’Université de Strasbourg. En terme de contenu il reste classique, il s’agit d’une introduction, même si certains <em>apports</em> méthodologiques plus ou moins récents sont introduits comme l’estimation des <strong><em>RMST</em></strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Une méthode modélisation reposant sur des pseudo-observations<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> est en cours d’évaluation, et sera introduite dans le support en 2024<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
-<p>Sur la forme, le support a été passé en format ouvrage (sans en avoir l’ambition il est bon de le préciser) et une version pdf peut-être directement téléchargée. elle est identique à la version html, sauf pour le chapitre programmation ou seulement les éléments relatifs à R sont présent.</p>
-<p>Un petit mot sur l’application présente dans le support. Issu du champ de la médecine (essai clinique), ici l’analyse de la survie de personnes souffrant d’une insuffisance cardiaque, elle peut décevoir vu son éloignement avec des problématiques issues des sciences sociales. Cependant, cette base d’analyse permet de couvrir avec peu d’informations, la quasi totalité des points traités dans ce support. Je l’admets qu’il serait préférable de trouver un jour autre chose, ou de donner par exemple en annexe, quelques exemples d’applications plus proches des sciences sociales.<br>
-Néanmoins pour les personnes participant à la formation, les jeux de données sont bien issus des sciences sociales.</p>
-<p>Il ne s’agit pas d’un support validé institutionnellement. J’en assume donc totalement assume seul le contenu. J’en profite également pour remercier, quelques soient leur statut, l’ensemble des personnes ayant fait appel à mon assistance sur ce champ d’analyse, ainsi que l’ensembe les participant.e.s aux formations et cours. Par leurs remarques, les problématiques traitées, ils me permettent de réviser et mettre à jour annuellement ce document. Enfin, je remercie plus particulierement <a href="https://www.ined.fr/fr/recherche/chercheurs/Leli%C3%A8vre+Eva"><strong>Eva Lelièvre</strong></a> et <a href="https://www.ined.fr/fr/recherche/chercheurs/Bring%C3%A9+Arnaud"><strong>Arnaud Bringé</strong></a>.</p>
+<p>Ce document est utilisé comme support de formation, principalement pour celle dispensée à l’Ined, celle effectuée dans le cadre d’HED, ainsi que le cours de master 2 de démographie de l’Université de Strasbourg. En terme de contenu il reste classique, il s’agit d’une introduction, même si certains <em>apports</em> méthodologiques plus ou moins récents sont introduits comme l’estimation des <strong><em>RMST</em></strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Une méthode modélisation reposant sur des pseudo-observations<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> est en cours d’évaluation, et pourrait être introduite dans le support fin 2024. Mais… Conceptuellement très intéressante, son application dans les sciences sociales risque de régulièrement buter sur une hypothèse restrictive, à savoir la non corrélation entre observations censurées et covariables. Elle sera souvent remise en cause lorsqu’on introduira des dimensions explicatives tels que l’âge ou la génération en début d’exposition, soit des éléments très communs dans les analyses.</p>
+<p>Sur la forme, le support a été passé en 2023 en format ouvrage (sans en avoir l’ambition il est bon de le préciser) et une version pdf peut-être directement téléchargée. elle est identique à la version html, sauf pour le chapitre programmation ou seulement les éléments relatifs à R sont présents. Les autres outils sont <strong>Stata</strong>, <strong>Python</strong> (Lifelines et Statmodel), et <strong>Sas</strong> <i class="fa-solid fa-cross" aria-label="cross"></i> sont propres à la version html.</p>
+<p>Enfin un petit mot sur l’application présente dans le support. Issu du champ de la médecine, soit l’analyse de la survie de personnes souffrant d’une insuffisance cardiaque, elle peut décevoir vu son éloignement avec des problématiques issues des sciences sociales<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>. Cependant, cette base d’analyse permet de couvrir avec peu d’informations, la quasi totalité des points traités dans ce support. Elle repose sur un nombre d’observations très limité (103), collectées il y a quand même très longtemps (fin 60 début 70), et avec seulement 4 covariables. Il y a sans aucun doute des biais un peu partout, en partie expliquée par non prise en compte de variables de contrôle, pure ou de confusion. J’admets qu’il serait préférable de trouver un jour autre chose, ou de donner par exemple en annexe, quelques exemples d’applications plus proches des sciences sociales. Néanmoins pour les personnes participant à la formation, les jeux de données utilisés pour les travaux pratiques sont bien issus des sciences sociales.</p>
+<p>Il ne s’agit pas d’un support validé institutionnellement. J’en assume donc totalement seul le contenu. J’en profite également pour remercier, quelques soient leur statut et leur fonction, l’ensemble des personnes ayant eu recours à mon assistance sur ce champ d’analyse très riche, ainsi que l’ensemble les participant.e.s aux formations et cours. Par leurs remarques, les problématiques traitées, ils me permettent de réviser et mettre à jour annuellement ce document. Enfin, je remercie plus particulierement <a href="https://www.ined.fr/fr/recherche/chercheurs/Leli%C3%A8vre+Eva"><strong>Eva Lelièvre</strong></a> et <a href="https://www.ined.fr/fr/recherche/chercheurs/Bring%C3%A9+Arnaud"><strong>Arnaud Bringé</strong></a>.</p>
 </section>
 <section id="bibliographie" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="bibliographie">Bibliographie</h2>
-<p>Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est volontairement courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine, qui est ici l’espace privilégié de l’ingénierie méthodologique. On trouve également de (trop) nombreux tutoriels généraliste à dominante <em>mise en pratique avec R</em>, dont je ne conseille pas forcément l’utilisation.</p>
+<p>Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est volontairement courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine. On trouve également de trop nombreux tutoriels généraliste à dominante <em>mise en pratique avec R</em>, dont je ne conseille pas forcément l’utilisation.</p>
 <p><strong>Accès en ligne</strong></p>
 <ul>
 <li><strong>Cours Gilbert Colletaz</strong> (Université d’Orléans - Master d’économétrie).
 <ul>
-<li>Le cours est mis à jour tous les ans, applications uniquement avec Sas.</li>
+<li>Applications uniquement avec Sas. Suite à la retraite de son auteur, le cours n’est plus mis à jour.</li>
 <li>Dernière version 2020: <a href="https://www.master-esa.fr/wp-content/uploads/2021/04/Econometrie-des-donnees-de-survie.pdf">lien</a>.</li>
 </ul></li>
 <li><strong>Document de travail de Simon Quantin</strong> (Insee).
@@ -435,13 +433,13 @@ Néanmoins pour les personnes participant à la formation, les jeux de données 
 <ul>
 <li><a href="https://www.r-project.org/">R</a></li>
 <li><a href="https://www.stata.com/">Stata v18</a></li>
-<li><a href="https://www.sas.com/fr_fr/home.html">Sas</a></li>
 <li><a href="https://www.python.org/">Python</a></li>
+<li><a href="https://www.sas.com/fr_fr/home.html"><i class="fa-solid fa-cross" aria-label="cross"></i> Sas v9</a></li>
 </ul></li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="noai.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><a href="noai.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="noai.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></a></p>
 </figure>
 </div>
 
@@ -455,7 +453,7 @@ Néanmoins pour les personnes participant à la formation, les jeux de données 
 <ol>
 <li id="fn1"><p>Restricted Mean of Survival Time<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn2"><p>Résidus du Jackknife<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Très intéressante comme technique de modélisation des RMST et pour palier à certaines contraintes propres aux modèles à risques proportionnels, on peut déjà dire que sa généralisation sera compliquée dans le domaine des sciences sociales en raison de l’hypothèse d’indépendance des covariables avec la censure.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>Le document de travail de l’Insee indéxé dans la bibliographie ne fait pas mieux, l’application traite du diabète<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>Pour les résident.e.s du campus Condorcet, l’ouvrage est disponible au GED [<a href="https://campus-condorcet.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma991006553559705786&amp;context=L&amp;vid=33CCP_INST:CCP&amp;lang=fr&amp;search_scope=ALL&amp;adaptor=Local%20Search%20Engine&amp;tab=ALL&amp;query=any,contains,courgeau%20leli%C3%A8vre&amp;offset=0">lien</a>]<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
@@ -925,91 +923,115 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   <div class="nav-page nav-page-previous">
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01-presentation.html" class="pagination-link" aria-label="**L'analyse biographique des durées**">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>L’analyse biographique des durées</strong></span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./01-presentation.html" class="pagination-link" aria-label="L'analyse biographique des durées">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">L’analyse biographique des durées</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Code source</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Présentation - Bibliographie - Outils**</span></span>
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Présentation - Bibliographie - Outils</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">## Le support {-} </span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">## Mises à jour 2024</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">### Mises à jour 2024 [En cours]</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>19 Avril 2024</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Test de Grambsch Therneau l'hypothèse de proportionnalité dans un modèle de Cox: version exacte versus approximation OLS</span><span class="co">]</span>{.box_text}  </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>Une contribution majeure visant à expliquer les écarts observées entre les deux versions du test a été réalisée fin 2023. <span class="co">[</span><span class="ot">Lien</span><span class="co">](https://www.cambridge.org/core/journals/political-analysis/article/implementation-matters-evaluating-the-proportional-hazard-tests-performance/05E2657A64B18FB1E25C2BE1F7D92C3B)</span>  Elle repose sur la présence de corrélations même limitées entre les covariables du modèle, situation classique en sciences sociales. La conclusion de ce travail penche clairement vers une utilisation du test ols (moindre carrés ordinaires) dans le domaine des sciences sociales. </span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>**Test de Grambsch Therneau l'hypothèse de proportionnalité: version exacte versus approximation OLS** </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Dans ce support, j'ai donc résumé le travail de S.Metzger dans la section dédiée au test de proportionnalité avec un modèle de Cox. Comme cela impacte le travail sous R j'ai également repris la section relative à la programmation, bien que j'avais déjà donné le moyen de récupérer et d'utiliser le test ols depuis mai 2022. </span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>... Ca bouge. Une contribution, à mon sens majeur, et dans un champ proche de celui des sciences sociales a été effectuée récemment <span class="co">[</span><span class="ot">Lien</span><span class="co">](https://www.cambridge.org/core/journals/political-analysis/article/implementation-matters-evaluating-the-proportional-hazard-tests-performance/05E2657A64B18FB1E25C2BE1F7D92C3B)</span>. L'origine des   variations, souvent importantes, entre les deux versions du test à fait l'objet d'une investigation à mon sens très poussée. En faisant bref, elle repose sur la présence de corrélation même faible entre covariables, situation forcément classique en sciences sociales. La conclusion de ce travail penche plutôt vers une utilisation du test ols dans le domaine des sciences sociales. Par ailleurs, on en sait un peu plus sur les motivations qui ont poussées T.Therneau à implémenter seulement la version *exacte* du test depuis la version 3 (2020).  </span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>**Modèles à pseudo observations** </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Calcul des Rmst avec Python</span><span class="co">]</span>{.box_text}    </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>Ajouté au package <span class="in">`lifelines`</span> récemment, des éléments de programmation ont été ajouté dans la section Python. La syntaxe n'est pas très conviviale, mais c'est déjà ça. Le test de comparaison des Rmst n'y pas implémenté, ce qui est dommage vu sa simplicité. Plus généralement, aucune inférence de l'estimateur ne semble être présente dans la fonction. </span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>... Ca avance. </span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>L'intégration au support ne me semblant pas prioritaire par rapport aux éléments précédent à la précédente, on peut tabler sur la fin septembre</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Quelques remarques complémentaires sur l'épineuse question de l'utilisation des pondérations en analyse de survie</span><span class="co">]</span>{.box_text}  </span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>Cela fait suite à des questionnements qui m'ont été adressés par le groupe d'exploitation de l'enquête <span class="co">[</span><span class="ot">Envie</span><span class="co">](https://envie.site.ined.fr/)</span>. Mon court argumentaire  qui reposait sur l'utilisation des pondérations avec des biographies longues a été, il faut l'avouer, un peu mis à mal, la plage d'âges étant ici de 18 à 29 ans. Cela m'a permis de faire un tour d'horizon plus complet de la problématique, et qui continue bien évidemment à me renvoyer dans le domaine de la médecine.</span>
 <span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>Ce document est utilisé comme support de formation, principalement pour des formations internes à l'Ined, des formations dans le cadre d'HED, et le cours de master 2 de démographie de l'Université de Strasbourg. </span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>En terme de contenu il reste classique, il s'agit d'une introduction, même si certains *apports* méthodologiques plus ou moins récents  sont introduits comme l'estimation des ***RMST***^<span class="co">[</span><span class="ot">Restricted Mean of Survival Time</span><span class="co">]</span>. Une méthode modélisation reposant sur des pseudo-observations^<span class="co">[</span><span class="ot">Résidus du Jackknife</span><span class="co">]</span> est en cours d'évaluation, et sera introduite dans le support en 2024^<span class="co">[</span><span class="ot">Très intéressante comme technique de modélisation des RMST et pour palier à certaines contraintes propres aux modèles à risques proportionnels, on peut déjà dire que sa généralisation sera compliquée dans le domaine des sciences sociales en raison de l'hypothèse d'indépendance des covariables avec la censure.</span><span class="co">]</span>  </span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>Sur la forme, le support a été passé en format ouvrage (sans en avoir l'ambition il est bon de le préciser) et une version pdf peut-être directement téléchargée. elle est identique à la version html, sauf pour le chapitre programmation ou seulement les éléments relatifs à R sont présent.</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>Un petit mot sur l'application présente dans le support. Issu du champ de la médecine (essai clinique),  ici l'analyse de la survie de personnes souffrant d'une insuffisance cardiaque, elle peut décevoir vu son éloignement avec des problématiques issues des sciences sociales. Cependant, cette base d'analyse permet de couvrir avec peu d'informations, la quasi totalité des points traités dans ce support. Je l'admets qu'il serait préférable de trouver un jour autre chose, ou de donner par exemple en annexe, quelques exemples d'applications plus proches des sciences sociales.  </span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>Néanmoins pour les personnes participant à la formation, les jeux de données sont bien issus des sciences sociales. </span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Le support {-} </span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>Ce document est utilisé comme support de formation, principalement pour celle dispensée à l'Ined, celle effectuée dans le cadre d'HED, ainsi que le cours de master 2 de démographie de l'Université de Strasbourg. </span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>En terme de contenu il reste classique, il s'agit d'une introduction, même si certains *apports* méthodologiques plus ou moins récents  sont introduits comme l'estimation des ***RMST***^<span class="co">[</span><span class="ot">Restricted Mean of Survival Time</span><span class="co">]</span>. Une méthode modélisation reposant sur des pseudo-observations^<span class="co">[</span><span class="ot">Résidus du Jackknife</span><span class="co">]</span> est en cours d'évaluation, et pourrait être introduite dans le support fin 2024. Mais... Conceptuellement très intéressante, son application dans les sciences sociales risque de régulièrement buter sur une hypothèse restrictive, à savoir la non corrélation entre observations censurées et covariables. Elle sera souvent remise en cause lorsqu'on introduira des dimensions explicatives tels que l'âge ou la génération en début d'exposition, soit des éléments très communs dans les analyses.</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>Sur la forme, le support a été passé en 2023 en format ouvrage (sans en avoir l'ambition il est bon de le préciser) et une version pdf peut-être directement téléchargée. elle est identique à la version html, sauf pour le chapitre programmation ou seulement les éléments relatifs à R sont présents. Les autres outils sont **Stata**, **Python** (Lifelines et Statmodel), et **Sas** {{&lt;fa solid cross&gt;}}  sont propres à la version html.</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>Enfin un petit mot sur l'application présente dans le support. Issu du champ de la médecine, soit l'analyse de la survie de personnes souffrant d'une insuffisance cardiaque, elle peut décevoir vu son éloignement avec des problématiques issues des sciences sociales^<span class="co">[</span><span class="ot">Le document de travail de l'Insee indéxé dans la bibliographie ne fait pas mieux, l'application traite du diabète</span><span class="co">]</span>. Cependant, cette base d'analyse permet de couvrir avec peu d'informations, la quasi totalité des points traités dans ce support. Elle repose sur un nombre d'observations très limité (103), collectées il y a quand même très longtemps (fin 60 début 70), et avec seulement 4 covariables. Il y a sans aucun doute des biais un peu partout, en partie expliquée par non prise en compte de variables de contrôle, pure ou de confusion. J'admets qu'il serait préférable de trouver un jour autre chose, ou de donner par exemple en annexe, quelques exemples d'applications plus proches des sciences sociales. Néanmoins pour les personnes participant à la formation, les jeux de données utilisés pour les travaux pratiques sont bien issus des sciences sociales. </span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>Il ne s'agit pas d'un support validé institutionnellement. J'en assume donc totalement assume seul le contenu.</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>J'en profite également pour remercier, quelques soient leur statut, l'ensemble des personnes ayant fait appel à mon assistance sur ce champ d'analyse, ainsi que l'ensembe les participant.e.s aux formations et cours. Par leurs remarques, les problématiques traitées, ils me permettent de réviser et mettre à jour annuellement ce document. </span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>Enfin, je remercie plus particulierement <span class="co">[</span><span class="ot">**Eva Lelièvre**</span><span class="co">](https://www.ined.fr/fr/recherche/chercheurs/Leli%C3%A8vre+Eva)</span> et <span class="co">[</span><span class="ot">**Arnaud Bringé**</span><span class="co">](https://www.ined.fr/fr/recherche/chercheurs/Bring%C3%A9+Arnaud)</span>.</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>Il ne s'agit pas d'un support validé institutionnellement. J'en assume donc totalement seul le contenu.</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>J'en profite également pour remercier, quelques soient leur statut et leur fonction, l'ensemble des personnes ayant eu recours à mon assistance sur ce champ d'analyse très riche, ainsi que l'ensemble les participant.e.s aux formations et cours. Par leurs remarques, les problématiques traitées, ils me permettent de réviser et mettre à jour annuellement ce document. </span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>Enfin, je remercie plus particulierement <span class="co">[</span><span class="ot">**Eva Lelièvre**</span><span class="co">](https://www.ined.fr/fr/recherche/chercheurs/Leli%C3%A8vre+Eva)</span> et <span class="co">[</span><span class="ot">**Arnaud Bringé**</span><span class="co">](https://www.ined.fr/fr/recherche/chercheurs/Bring%C3%A9+Arnaud)</span>.</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bibliographie {-}</span></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est volontairement courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine, qui est ici l'espace privilégié de l'ingénierie méthodologique. On trouve également de (trop) nombreux tutoriels généraliste à dominante *mise en pratique avec R*, dont je ne conseille pas forcément l'utilisation.  </span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>**Accès en ligne**</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Cours Gilbert Colletaz** (Université d’Orléans - Master d'économétrie).</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Le cours est mis à jour tous les ans, applications uniquement avec Sas. </span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Dernière version 2020: <span class="co">[</span><span class="ot">lien</span><span class="co">](https://www.master-esa.fr/wp-content/uploads/2021/04/Econometrie-des-donnees-de-survie.pdf)</span>. </span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Document de travail de Simon Quantin** (Insee).</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Couvre l’ensemble des techniques de base d’analyse des durées en durée dite continue. Il propose surement la meilleure introduction en langue française à la problématique de la *fragilité*, qui sera ici seulement présenté trop brièvement. </span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Application en R seulement (Attention au passage de la v3 du package <span class="in">`survival`</span> pour la question du test de proportionnalité de Grambsh-Therneau).</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>2019 - pas de mise à jour: <span class="co">[</span><span class="ot">lien</span><span class="co">](https://www.insee.fr/fr/statistiques/3695681)</span>.</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Les notes de cours de German Rodriguez** (en)</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Démographe à l'université de Princeton.  </span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Les dernières mises à jour doivent dater de 2017-2018: <span class="co">[</span><span class="ot">lien</span><span class="co">](https://grodri.github.io/glms/notes/c7.pdf)</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>**Ouvrage de référence** en démographie:</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>***L'analyse démographique des biographies*** de *Daniel Courgeau* et *Eva Lelièvre* (Edition de l'Ined - 1989). Malheureusement cet ouvrage ne dispose pas de version epub ou pdf disponible en ligne ^<span class="co">[</span><span class="ot">Pour les résident.e.s du campus Condorcet, l'ouvrage est disponible au GED [[lien](https://campus-condorcet.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma991006553559705786&amp;context=L&amp;vid=33CCP_INST:CCP&amp;lang=fr&amp;search_scope=ALL&amp;adaptor=Local%20Search%20Engine&amp;tab=ALL&amp;query=any,contains,courgeau%20leli%C3%A8vre&amp;offset=0)</span><span class="co">]</span>].  </span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="fu">## Bibliographie {-}</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>Les éléments bibliographiques qui figurent ci-dessous proviennent du champ des sciences sociales. Elle est volontairement courte, mais efficace. Quelle que soit la langue, le nombre de cours ou support sont très nombreux en médecine. On trouve également de trop nombreux tutoriels généraliste à dominante *mise en pratique avec R*, dont je ne conseille pas forcément l'utilisation.  </span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>**Accès en ligne**</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Cours Gilbert Colletaz** (Université d’Orléans - Master d'économétrie).</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Applications uniquement avec Sas. Suite à la retraite de son auteur, le cours n'est plus mis à jour.</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Dernière version 2020: <span class="co">[</span><span class="ot">lien</span><span class="co">](https://www.master-esa.fr/wp-content/uploads/2021/04/Econometrie-des-donnees-de-survie.pdf)</span>. </span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Document de travail de Simon Quantin** (Insee).</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Couvre l’ensemble des techniques de base d’analyse des durées en durée dite continue. Il propose surement la meilleure introduction en langue française à la problématique de la *fragilité*, qui sera ici seulement présenté trop brièvement. </span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Application en R seulement (Attention au passage de la v3 du package <span class="in">`survival`</span> pour la question du test de proportionnalité de Grambsh-Therneau).</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>2019 - pas de mise à jour: <span class="co">[</span><span class="ot">lien</span><span class="co">](https://www.insee.fr/fr/statistiques/3695681)</span>.</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>**Les notes de cours de German Rodriguez** (en)</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Démographe à l'université de Princeton.  </span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Les dernières mises à jour doivent dater de 2017-2018: <span class="co">[</span><span class="ot">lien</span><span class="co">](https://grodri.github.io/glms/notes/c7.pdf)</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>**Ouvrage de référence** en démographie:</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>***L'analyse démographique des biographies*** de *Daniel Courgeau* et *Eva Lelièvre* (Edition de l'Ined - 1989). Malheureusement cet ouvrage ne dispose pas de version epub ou pdf disponible en ligne ^<span class="co">[</span><span class="ot">Pour les résident.e.s du campus Condorcet, l'ouvrage est disponible au GED [[lien](https://campus-condorcet.primo.exlibrisgroup.com/discovery/fulldisplay?docid=alma991006553559705786&amp;context=L&amp;vid=33CCP_INST:CCP&amp;lang=fr&amp;search_scope=ALL&amp;adaptor=Local%20Search%20Engine&amp;tab=ALL&amp;query=any,contains,courgeau%20leli%C3%A8vre&amp;offset=0)</span><span class="co">]</span>].  </span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="fu">## Outils {-}</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Support réalisé sous <span class="co">[</span><span class="ot">Rstudio</span><span class="co">](https://posit.co/)</span> avec l'outil d'édition <span class="co">[</span><span class="ot">Quarto</span><span class="co">](https://quarto.org/)</span>  </span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Langages utilisés pour la partie programmation: </span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">R</span><span class="co">](https://www.r-project.org/)</span> </span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Stata v18</span><span class="co">](https://www.stata.com/)</span> </span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Sas</span><span class="co">](https://www.sas.com/fr_fr/home.html)</span> </span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Python</span><span class="co">](https://www.python.org/)</span> </span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="fu">## Outils {-}</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Support réalisé sous <span class="co">[</span><span class="ot">Rstudio</span><span class="co">](https://posit.co/)</span> avec l'outil d'édition <span class="co">[</span><span class="ot">Quarto</span><span class="co">](https://quarto.org/)</span>  </span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Langages utilisés pour la partie programmation: </span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">R</span><span class="co">](https://www.r-project.org/)</span> </span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Stata v18</span><span class="co">](https://www.stata.com/)</span> </span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot">Python</span><span class="co">](https://www.python.org/)</span> </span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="co">[</span><span class="ot"> {{&lt;fa solid cross&gt;}} Sas v9</span><span class="co">](https://www.sas.com/fr_fr/home.html)</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="al">![](noai.png)</span>{fig-align="center"}</span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="al">![](noai.png)</span>{fig-align="center"}</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/mthevenin/analyse_duree/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","selector":".lightbox","loop":false,"openEffect":"zoom"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
 
 
 
 
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/mthevenin/analyse_duree/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li></ul></div></div></div></footer></body></html>
+</body></html>

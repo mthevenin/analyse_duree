@@ -1,37 +1,37 @@
 ---
 #title: "**Modèle à durée discrète**"
-
-filters:
-  - lightbox
-lightbox: auto
 ---
 
 
-# **Modèle à durée discrète**
+# Modèle à durée discrète
 
 On va principalement traiter du ***modèle logistique à durée discrète***.   
 
 
-*	Par définition ce n’est pas un modèle à risques proportionnels, mais à **Odds proportionnels**. Toutefois en situation de rareté (p<10%), l’Odds converge vers une probabilité, qui est une mesure du risque.
-*	Le modèle à durée discrète est de type pleinement paramétrique, il est moins contraignant que le modèle de Cox si l’hypothèse de proportionnalité n’est pas respectée, car le modèle est ajusté par une fonction de la durée.
-*	Pour être estimé, la base de données doit être préalablement transformée en format long: sur les durées d’observation directement disponibles ou sur des regroupements de celles ci éventuellement de longueur différentes, ou sur les intervalles définis à partir des moments d'évènement (Kaplan-Meier et Cox). 
+*	Par définition ce n’est pas un modèle à risques proportionnels, mais à **Odds proportionnels**. Toutefois en situation de rareté (p<0.1), l’Odds converge vers une probabilité, qui est une mesure du risque. Et donc les Odds ratio peuvent aisément se lire comme des rapports de probabilités.
+*	Le modèle à durée discrète est de type pleinement paramétrique, il est moins contraignant que le modèle de Cox si l’hypothèse de proportionnalité n’est pas respectée, car le modèle est directement ajusté par une fonction de la durée.
+*	Pour être estimé, la base de données doit être préalablement transformée en format long: sur les durées d’observation directement disponibles ou sur des regroupements de celles ci éventuellement de longueur différentes, ou sur les intervalles définis à partir des moments d'évènement lorsqu'il y a un nombre important d'évènements simultanés. (Kaplan-Meier et Cox). 
 *	Ce modèle permet d’introduire bien plus simplement qu'avec le modèle de Cox un ensemble de covariables non fixes. 
    
 Avec un lien logistique, le modèle à durée discrète, avec seulement des covariables fixes, peut s'écrire:   
 
+
+::: {.box_img}
 $$log\left[\frac{P(Y=1\ |\ t_p,X_k)}{1-P(Y=1\ |\ t_p,X_k)}\right]= a_0 + \sum_{p}a_pf(t_p)+\sum_{k}b_kX_k$$
+:::
+
 
 ::: callout-note
 
 ### Les fonctions de lien
 
-On restera ici sur la fonctions de lien logistique, mais bien évidemment les autres fonctions associées à la fonction de masse binomiale sont utilisables. La seconde qui sera rapidemment exposée mérité une attention particulière.
+On restera ici sur la fonctions de lien logistique, mais bien évidemment les autres fonctions associées à la fonction de masse binomiale sont utilisables. 
 
 - Le lien probit, est a ma connaissance très peut utilisé en analyse des durées. C'est bien évidemment lié aux lectures des paramètres estimés. On peut utiliser des formes standardisés sur l'échelle des probabilités avec des effets marginaux, mais ceux-ci ne pourront pas être généralisés sur l'ajustement de la durée se fait avec une forme quadratique ou à la présence d'une intéraction de quelque forme que ce soit (même problème si lien logistique).
 
-- Le lien complémentaire log-log, est une alternative bien plus intéressante en raison de son lien avec la relation entre fonction de séjour et risque cumulé. Son utilisation se doit néanmoins d'être réservé à des situations de rareté des probabilités conditionnelles (disons <.10), ce qui est souvent le cas en analyse de survie ^[la distribution des probabilités sous cette loi n'est pas, contrairement aux lois normale ou logistique, symétrique. Dans ce qui suit, il ne serait pas conseillé de l'utiliser dans l'application avec l'ajustement sous forme d'indicatrice avec seulement 4 intervalles]. Sous cette condition, on peut interpréter directement les estimateurs commes des rapports de risque au sens de l'analyse de survie. On pourra se reporter à l'explication de G.Rodrigez dont le support est dans la bibliographie du document. Je ferai peut-être un jour une section dédiée dans la partie annexe. La construction mathématique est plutôt intéressante. 
+- Le lien complémentaire log-log, est une alternative bien plus intéressante en raison de son lien avec la relation entre fonction de séjour et risque cumulé. Son utilisation doit être néanmoins d'être réservée à des situations de rareté des probabilités conditionnelles (disons <.10, 0.5 préconisé), ce qui est souvent le cas en analyse de survie ^[la distribution des probabilités sous cette loi n'est pas, contrairement aux lois normale ou logistique, symétriques. Dans ce qui suit, il n'est pas conseillé de l'utiliser dans l'application avec l'ajustement sous forme d'indicatrices avec seulement 4 intervalles]. Sous cette condition, on peut interpréter directement les estimateurs commes des rapports de risque au sens de l'analyse de survie. On pourra se reporter à l'explication de G.Rodrigez dont le support est en lien la bibliographie du document. Je ferai peut-être un jour une section dédiée dans la partie annexe. La construction mathématique est plutôt simple.
 
-- Pour information seulement car non testé: développés dans le domaine l'épidémiologie, il existe des algorithmes forçant  l'application du lien $log(p)$ à une vraisemblance binomiale. On parle de modèle *log-binomial*. Il s'agit bien de la fonction de lien canonique associée à la vraisemblance d'un processus poissonien (on en ai pas loin en analyse des durées) et dont les estimateurs sont idrectement interprétables en rapport de risque. Cette technique ne doit être envisagé qu'avec des probabilités d'incidences dans les intervalles de durées supérieurs à 20%. Je n'ai pas d'expérience particulière sur ce type de modèles ^[je remercie Emilie Counil et Nargès Gouhoubi pour m'avoir informé de leur existence], je ne suis pas capable de les évaluer en analyse de durée avec des données très groupées, mais au niveau application il semble que  les solutions disponibles dans des packages R comme *`logbin`* sont à privilégier.
+- Pour information seulement car non testé. Développés dans le domaine l'épidémiologie, il existe des algorithmes forçant  l'application du lien $log(p)$  à une vraisemblance de type binomiale. On parle de modèle *log-binomial*. Il s'agit bien de la fonction de lien canonique associée à la vraisemblance d'un processus poissonien^[Non traité dans ce support, une méthode d'estimation en analyse de survie se nomme *counting process* et utilise des méthodes d'estimation de type poissonien] et dont les estimateurs sont indrectement interprétables en rapport de risques. Cette technique ne doit être envisagé qu'avec des incidences supérieurs à 20%. Je n'ai pas d'expérience particulière sur ce type de modèles ^[je remercie néanmoins Emilie Counil et Nargès Gouhoubi pour l'information], je ne suis donc pas capable de les évaluer en analyse de durée avec des durées très groupées, mais au niveau outils il semble que les solutions disponibles dans des packages R comme *`logbin`* soient à privilégier.
 
 :::
 
@@ -40,7 +40,7 @@ On restera ici sur la fonctions de lien logistique, mais bien évidemment les au
 
 **Format long**   
 
-Les données doivent être en format long: pour chaque individu on a une ligne par durée observée ou par intevalle de durées jusqu'à l'évènement ou la censure. On retrouve le  *split* des données du modèle de Cox, mais généralisé à des intervalles où aucun évènement n'est observé. Avec des données de type discrètes ou groupées, phénomène classique en sciences sociales, il y a souvent peu de différence entre un allongement aux temps d'évènement et aux temps d'observation (voir encadré plus loin sur le modèle d Cox à temps discret).  
+Les données doivent être en format long: pour chaque individu, on a une ligne par durée observée ou par intevalle de durées jusqu'à l'évènement ou la censure. On retrouve le  *split* des données du modèle de Cox pour introduire une variable dynamique, mais généralisé à des intervalles où aucun évènement n'est observé. Avec des données de type discrètes ou groupées, phénomène classique en sciences sociales, il y a souvent peu de différence entre un allongement aux temps d'évènement et aux temps d'observation.  
 
 
 **Durée**  
@@ -49,10 +49,10 @@ La durée est dans un premier temps construite sous forme d'un simple compteur, 
 
 **Variable évènement/censure**  
 
-Si l'individu a connu l'évènement, elle prend la valeur 0 avant celui-ci. Au moment de l'évènement sa valeur est égale à 1. Pour les observations censurées, la variable prend toujours la valeur 0.
+Si l'individu a connu l'évènement, elle prend la valeur 0 avant celui-ci. Au moment de l'évènement sa valeur est égale à 1. Pour les observations censurées, la variable prend toujours la valeur 0. **seule la dernière ligne observées peut prendre une valeur non nulle**^[J'anticipe la version multinomiale pour les risques concurrents].
 
 **Application**  
-On reprend les données de la base *transplantation*, mais les durées ont été regroupées par période de 30 jours. Il n’y a pas de durée mesurée comme nulle, on a considéré que les 30 premiers jours représentaient, le premier mois d’exposition. Cette variable de durée se nomme *mois*.
+On reprend les données de la base *transplantation*, mais les durées ont été regroupées par période de 30 jours. Il n’y a pas de durée mesurée comme nulle, et on a considéré que les 30 premiers jours représentaient, le premier mois d’exposition. Cette variable de durée se nomme *mois*.
 
 **Format d'origine**
 
@@ -84,9 +84,9 @@ Un des principaux enjeux réside dans la paramétrisation de la durée:
 
 ## Le modèle de Cox à durée discrète/groupée
 
-Cox est également à l'origine du modèle à durée discrète (je crois également en 1972). Par rapport aux pratiques courantes, la différence repose sur les bornes intervalles, identiques à celles définies pour l'estimation de la courbe de survie KM ou du modèle semi-paramétrique, à savoir une définition sur les moments d'évènement. Avec un ajustement de la durée reposant sur des indicatrices (ajustement sur des variables discrètes), ce modèle est quasiment identique au modèle semi paramétrique.
+Cox est également à l'origine du modèle à durée discrète (1973). Par rapport aux pratiques courantes, la différence repose sur les bornes intervalles, identiques à celles définies pour l'estimation de la courbe de survie KM ou du modèle semi-paramétrique, à savoir une définition sur les moments d'évènement. Avec un ajustement de la durée reposant sur des indicatrices (ajustement sur des variables discrètes), ce modèle est quasiment identique au modèle semi paramétrique.
 
-On peut remarquer que dans les sciences sociales, avec des durées assez fortement groupées, les intervalles directement observés et les intervalles définis aux moments d'évènements sont souvent identiques et s'ils ne le sont pas c'est souvent en tout début ou en toute fin de la période d'observation/exposition. En cas d'ajustement de la durée par des indicatrices, la définition des bornes des intervalles aux moments des évènements permet de s'assurer au moins une occurence de l'évènement. 
+On peut remarquer qu'en sciences sociales, avec des durées assez fortement groupées, les intervalles directement observés et les intervalles définis aux moments d'évènements sont souvent identiques et s'ils ne le sont pas c'est souvent en tout début ou en toute fin de la période d'observation/exposition. En cas d'ajustement de la durée par des indicatrices, la définition des bornes des intervalles aux moments des évènements permet de s'assurer de la présence d'au moins une occurence . 
 
 :::
 
@@ -94,16 +94,18 @@ On peut remarquer que dans les sciences sociales, avec des durées assez forteme
 ### Ajustement avec une fonction quantitative de la durée
 
 
-Le modèle étant paramétrique, on doit trouver une fonction qui ajuste le mieux les données. Toutes transformations de la variable est possible: $f(t)=a\times t$, $f(t)=a\times log(t)$......formes quadratiques. Les ajustements sous forme de **splines cubiques**  tendent à se développer ces dernières années. 
+Le modèle étant paramétrique, on doit trouver une fonction qui ajuste le mieux les données. Toute transformation de la variable est possible: $f(t)=a\times t$, $f(t)=a\times log(t)$......formes quadratiques. Les ajustements sous forme de **splines cubiques**  tendent à se développer ces dernières années. 
 
-Pour sélectionner cette  fonction, on peut tester différents modèles sans covariable additionnelle, et sélectionner la forme dont le critère d'information de type vraisemblance pénalisée (**AIC**, **BIC**) est le plus faible, avec au moins des différences de -6 ou -8.   
+Pour sélectionner cette  fonction, on peut tester différents modèles sans covariable additionnelle [$g(y(t))=f(t)$], et sélectionner la forme dont le critère d'information de type vraisemblance pénalisée (**AIC**, **BIC**) est le plus faible, avec au moins des différences de -6 ou -8.   
 
 
 Exemple:  
 On va tester les paramétrisations suivantes: une forme linéraire stricte  $f(t)=a\times t$ et des effets quadratiques d'ordres 2 et 3: $f(t)=a_1\times t + a_2\times t^{2}$ et $f(t)=a_1\times t + a_2\times t^{2} + a_3\times t^{3}$.  
 
-
+::: {.box_img}
 ![Probabilité de décéder avec 3 ajustements de la durée](images/Image11.png){width=70%}
+:::
+
 
 **Critères AIC**   
 
@@ -113,7 +115,7 @@ On va tester les paramétrisations suivantes: une forme linéraire stricte  $f(t
 | $a_1\times t + a_2\times t^{2}$                     | 492   |  
 | $a_1\times t + a_2\times t^{2} + a_3\times t^{3}$   | 486   |   
 
-On peut utiliser la troisième forme à savoir $a_1\times t + a_2\times t^{2} + a_3\times t^{3}$ ^[Ce n'est pas le cas ici, mais si on sélectionne une forme cubique, je conseille vivement de regarder les probabilités conditionnelle obtenues, en particulier en fin de périodes d'observation/exposition si peut d'individu reste soumis au risque. On peut rencontrer des problèmes d'overfitting avec des probabilités conditionnelles estimées trop proche de 1. Pour les personnes qui suivent la formation, c'est le cas avec les données des TP].  
+On peut utiliser la troisième forme à savoir $a_1\times t + a_2\times t^{2} + a_3\times t^{3}$ ^[Ce n'est pas le cas ici, mais si on sélectionne une forme cubique, je conseille vivement de regarder les probabilités conditionnelles prédites, en particulier en fin de périodes d'observation/exposition si peu d'individus restent soumis au risque. On peut rencontrer des problèmes d'overfitting avec des probabilités conditionnelles estimées trop proche de 1. Pour les personnes qui suivent la formation, c'est le cas avec les données des TP].  
 
 **Estimation du modèle avec toutes les covariables**
 
@@ -131,7 +133,7 @@ On peut utiliser la troisième forme à savoir $a_1\times t + a_2\times t^{2} + 
 
 : Modèle logistique à durée discrète ($f(t)$ continue)
 
-*Remarque*: les variables *year* et *age* ont été centrée sur leur moyenne pour rendre la constante interprétable. La constante reporte donc l'Odds de décéder lors des 30 premiers jours d'une personne dont l'âge et l'année à l'entrée dans le registre  est égal à l'âge et à l'année moyenne et qui n'a pas été opéré préalablement.
+*Remarque*: les variables *year* et *age* ont été centrées sur leur moyenne pour rendre la constante interprétable. La constante reporte donc l'Odds de décéder lors des 30 premiers jours d'une personne dont l'âge et l'année à l'entrée dans le registre à l'âge moyen et à l'année moyenne, et qui n'a pas été opéré préalablement pour un pontage.
 
 
 Si maintenant on estime un modèle de Cox sur ces données journalières groupées, on remarque que les résultats obtenus, et ce n'est pas une surprise, sont très proches.
@@ -147,7 +149,7 @@ Si maintenant on estime un modèle de Cox sur ces données journalières groupé
 ### Ajustement discret
 
 * Il s'agit d'introduire la variable de durée dans le modèle comme une variable catégorielle (indicatrices).
-* Démarche pas conseillé si on a beaucoup de points d'observation, ce qui est le cas ici.
+* Cette option n'est pas conseillée si on a beaucoup de points d'observation, ce qui est le cas ici.
 * A l'inverse, si peu de points d'observation la paramétrisation avec une durée continue n'est pas conseillé.
 * La correction de la non proportionnalité peut être plus compliquée à mettre en oeuvre.
 
@@ -160,7 +162,7 @@ On va supposer que l'on ne dispose que de 4 intervalles d'observation. Pour l'ex
 
 On va estimer le risque globalement sur l'intervalle. La base sera plus courte que la précédente (197 observations pour 103 individus). Il ne sera plus possible ici d'interpréter les résultats en termes de rapport de probabilité, l'évènement devenant trop fréquent à l'intérieur de chaque intervalle.
 
-| Variables   | OR - RR | Std. err | z       | P\>\|z\| | 95% IC          |
+| Variables   | OR      | Std. err | z       | P\>\|z\| | 95% IC          |
 |-------------|---------|----------|---------|----------|-----------------|
 | $0-4 mois$  | 2.811   | 1.177    | +2.47   | 0.014    | 1.237 ; 6.387   |
 | $5-11 mois$ | ref     |   -      |   -     |   -      |       -         |
@@ -185,25 +187,25 @@ On trouve des résultats proches de ceux éstimés avec un ajustement continu de
 
 ::: callout-note
 
-## Lien avec des modèles usuels à durée continue
+### Lien avec des modèles usuels à durée continue
 
 Si la durée discrète/groupée sous tend une durée continue (ce qui est clairement le cas ici):  
 
-* On l'a déjà souligné, l'ajustement avec des durées sous forme  d'indicatrices correspond au modèle à durée discrète défini par Cox, et le plus proche du modèle semi-paramétrique. Il est également assimilable à un modèle de type *exponential piecewice constant* (donc un modèle de poisson).
+* L'ajustement avec des durées sous forme d'indicatrices correspond au modèle à durée discrète défini par Cox. Il est également assimilable à un modèle appelé *exponential piecewice constant* (soit un modèle de poisson).
 * Si l'ajustement se fait en utilisation une transformation de la durée par une fonction: 
-  - $f(t)= log(t)$ correspond à un modèle de Weibull à *risque proportionnel* ^[voir la courte section sur les modèle paramétriques usuels].
-* Si l'ajustement se fait avec des splines cubiques, le modèle à durée discrète correspond à un modèle de type *Parmar-Royston*. Avec une forme quadratique classique, on peut également obtenir cette correspondance.
+  - $f(t)= log(t)$ correspond à un modèle de Weibull à *risque proportionnel* ^[Voir la très courte section sur les modèles paramétriques usuels].
+* Si l'ajustement se fait avec des splines cubiques, le modèle à durée discrète correspond à un modèle de type *Parmar-Royston*.
 
 :::
 
 
 ## Proportionnalité des risques
 
-* Formellement un modèle logistique à temps discret repose sur une hypothèse d'Odds proportionnel [Odds ratios constants pendant la durée d'observation]. Contrairement au modèle de Cox, l'estimation des probabilités (risque) n'est pas biaisée si l'hypothèse PH n'est pas respectée, les paramètres estimés sont considérés au pire comme des approximation.
+* Formellement un modèle logistique à durée discrète/groupée repose sur une hypothèse d'Odds proportionnels [Odds ratios constants pendant la durée d'observation]. Contrairement au modèle de Cox, l'estimation des probabilités (risque) n'est pas biaisée si l'hypothèse PH n'est pas respectée, les paramètres estimés seront considérés au pire comme des approximation.... problématique d'intéraction oblige.
 
 * Comme pour le modèle de Cox, la correction de la non proportionnalité peut se faire en intégrant une interaction avec la durée dans le modèle.
 
-Avec un ajustement continue, on remarque de nouveau que le résultat du modèle est de nouveau très proche de celui estimé avec un modèle de Cox. 
+Avec un ajustement continue, on remarque de nouveau que le résultat du modèle est très proche de celui estimé avec un modèle de Cox. 
 
 
 | Variables         | OR - RR | Std. err | z       | P\>\|z\| | 95% CI           |
@@ -219,10 +221,12 @@ Avec un ajustement continue, on remarque de nouveau que le résultat du modèle 
 : Modèle logistique à durée discrète avec correction de la non proportionnalité
 
 
-Si on avait omis les variables *year* et *age* du modèle:
+Avec une sépcification dépendant seulement de la durée (pour le graphique:
 
+
+::: {.box_img}
 ![Probabilité de décéder après correction de la non proportionnalité pour la variable surgery](images/Image13.png){width=70%}
-
+:::
 
 
 

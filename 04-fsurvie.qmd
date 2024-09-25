@@ -1,27 +1,23 @@
 ---
 #title: "**Estimations des fonctions de survie**"
-
-filters:
-  - lightbox
-lightbox: auto
 ---
 
-# **Estimations des fonctions de survie**
+# Estimations des fonctions de survie
 
-Les méthodes non paramétriques portent généralement sur l'analyse des fonctions de survie ($S(t$)) ou sur celles des fonctions de répartitions ($F(t)$), plus rarement sur les mesures d'incidence données par le risque cumulé.
-Deux méthodes d'estimations sont proposées : la méthode dite actuarielle et la méthode dite de Kaplan & Meier. Ces deux approches sont adaptées à des mesures différentes de la durée : plutôt discrète/groupée pour la technique
-actuarielle et plutôt continue pour Kaplan-Meier (KM). Cela induit un traitement différent de la censure dans l'estimation. La seconde est de très très loin la plus utilisée, en partie en raison des tests de comparaison, plus ou moins pertinents, qu'elle permet de réaliser. 
+Les méthodes non paramétriques portent généralement sur l'analyse des fonctions de survie ($S(t$)) moins sur les fonctions de  répartitions ($F(t)$)^[malheureusement, mais cela dépendra des options des logiciels], plus rarement sur les mesures d'incidence données par le risque cumulé.
+Deux méthodes d'estimations sont proposées : la méthode dite **actuarielle** et la méthode dite de **Kaplan & Meier**. Ces deux approches sont adaptées à des mesures différentes de la durée : plutôt discrète/groupée pour la technique
+actuarielle et plutôt continue pour Kaplan-Meier (KM). Cela induit un traitement différent de la censure dans l'estimation. La seconde est de très très loin la plus utilisée, médecine oblige, et en partie en raison des tests de comparaison, plus ou moins pertinents, qu'elle permet de réaliser. 
 
 ::: callout-important
 
-- J'insiste sur la nécessité de passer par cette étape avant de se lancer *corps perdu* dans des modèles, comme ceux à durée discrète. 
-  - Les applications ont des gardes fous permettant d'alerter sur des durées d'exposition incorrecte, en particulier lorsqu'on travaille sur des données prospectives. 
-  - Egalement très utile, la comparaison graphique de courbes de séjour permet de repérer rapidement des violations fortes de l'hypothèse de proportionalité des risques, ou des situations de quasi *immunité*.
-- Concernant les tests non paramétriques, ceux utilsant la technique du *logrank*, présente à mon sens tellement de défauts qu'ils devraient être abandonné. Malheureusement encore très peu diffusée dans les sciences sociales, la comparaison des RMST (*Restricted Mean of Survival Time*) me semble une solution largement supérieure, tant au niveau statistique qu'au niveau interprétatif. 
+- J'insiste sur la nécessité de passer par cette étape avant de se lancer *corps perdu* dans des modèles, comme ceux à durée discrète/groupée. 
+
+- Egalement très utile, la comparaison graphique de courbes de séjour permet de repérer rapidement des violations fortes de l'hypothèse de proportionalité des risques, ou des situations de quasi *immunité*.
+- Concernant les tests non paramétriques, ceux utilsant la technique du *logrank*, présentent beaucoup de défauts. Malheureusement encore très peu diffusée dans les sciences sociales, la comparaison des RMST (*Restricted Mean of Survival Time*), dérivée de l'estimateur de Kaplan Meier, me semble une solution largement supérieure, tant au niveau statistique qu'au niveau interprétatif. 
 :::
 
 
-## **Les fonctions de survie/séjour**
+## Les fonctions de survie/séjour
 
 
 ### Les variables d'analyse
@@ -39,13 +35,12 @@ On a un échantillon aléatoire de $n$ individus avec:
 Rappel: La fonction de survie donne la probabilité que l'évènement
 survienne après $t_i$, soit $S(t_i)=P(T>t_i)$.
 Pour survivre en $t_i$, il faut donc  avoir survécu en $t_{i-1}$, $t_{i-2}$,
-...., $t_{1}$.\
+...., $t_{1}$.   
 La fonction de survie renvoie donc des probabilités conditionnelles:
 on survit en $t_i$ conditionnellement au fait d'y avoir survécu avant. Il
-s'agit donc d'un produit de probabilités.
+s'agit donc d'un produit de probabilités.  
 
-
-Soit $d_i=\sum e_i$ le nombre d'évènements observé en $t_i$ et $r_i$ la
+Soit $d_i=\sum e_i$ le nombre d'évènements observés en $t_i$, et $r_i$  la
 population encore soumise au risque en $i$. On peut mesurer l'intensité
 de l'évènement en $t_i$ en calculant le quotient $q(t_i)=\frac{d_i}{r_i}$. 
 
@@ -56,38 +51,40 @@ En remplaçant $S(t_{i-1})$ par sa valeur:
 $S(t_i) = (1 - \frac{d_i}{r_i})\times(1 - \frac{d_{i-1}}{r_{i-1}})\times{S(t_{i-2})}$.
 
 Au final, en remplaçant toutes les expressions de la survie jusqu'en $t_0$
-($S(0)=1$): 
+($S(0)=1$):   
 
+
+::: {.box_img}
 $$S(t_i)=\displaystyle \prod_{t_i\leq{k}} (1-q(t_i))$$
-
+:::
 
 ::: callout-note
 
 ## Application pour la suite du support
 
--   On va analyser le risque de décéder (la survie) de personnes
+*   On va analyser le risque de décéder (la survie) de personnes
     souffrant d'une insuffisance cardiaque. Le début de l'exposition est
     leur inscription dans un registre d'attente pour une greffe du
     coeur.
 
--   Les covariables sont dans un premier temps toutes fixes: l'année
+*   Les covariables sont dans un premier temps toutes fixes: l'année
     (*year*) et l'âge (*age*) à l'entrée dans le registre, et le fait
     d'avoir été opéré pour un pontage aorto-coronarien avant
     l'inscription (*surgery*). 
     
--   Le début de l'exposition au risque est l'entrée dans le registre, la durée 
+*   Le début de l'exposition au risque est l'entrée dans le registre, la durée 
     est mesurée en jour (*stime*). La variable évènement/censure est le décès (*died*).
     Les durées de la variable *stime* ont été regroupée  par période de 30 jours pour
     réaliser des analyses à durée discrete. Cette nouvelle variable de durée a été appelé *mois*.
 
--   L'introduction d'une dimension dynamique, la greffe, est donnée par
+*   L'introduction d'une dimension dynamique, la greffe, est donnée par
     les informations contenues dans les variables *transplant* et
     *wait*.
 
-- La variable *compet* est une information simulée pour réaliser des analyses en risques concurrents. 
+* La variable *compet* est une information simulée pour réaliser des analyses en risques concurrents. 
 
 
--   Les bases en format .csv, .sas7bdat et .dta sont disponibles dans ce dépôt [[lien](https://github.com/mthevenin/analyse_duree/tree/main/bases)]
+-   Les bases en format .csv, .sas7bdat^[juste pour le souvenir] et .dta sont disponibles dans ce dépôt [[lien](https://github.com/mthevenin/analyse_duree/tree/main/bases)]
 
 Extrait de la base: 
 
@@ -104,16 +101,16 @@ Extrait de la base:
 
 
 
-## **La méthode actuarielle**
+## La méthode actuarielle
 
--   Estimation sur des intervalles définies par l'utilisateur.
--   Méthode dite «continue», estimation en milieu d'intevalle.
--   Méthode apropriée lorsque la durée est mesurée de manière discrète/groupée.
--   Méthode, hélas, quasiment abandonnée dans les sciences
-    sociales où les durées sont plus rarement mesurées de manière
+*   Estimation sur des intervalles définies par l'utilisateur.
+*   Méthode dite «continue», estimation en milieu d'intevalle.
+*   Méthode apropriée lorsque la durée est mesurée de manière discrète/groupée.
+*   Méthode, hélas, quasiment abandonnée dans les sciences
+    sociales où les durées sont rarement mesurées de manière
     exacte. L'absence de test de comparaison des fonctions de survie n'y
     est pas étranger, tout comme le lien de la méthode suivante (Kaplan-Meier) avec le modèle de Cox.
--   Contrairement à la méthode de Cox, la méthode actuarielle permet de calculer les quantiles de la durée.
+-   Contrairement à la méthode de Kaplan-Meier, la méthode actuarielle permet de calculer directement les quantiles de la durée.
 
 ### Estimation
 
@@ -137,7 +134,10 @@ $t_0<t_1<...<t_J$ avec $t_{J+1}=\infty$.
 **Calcul de** $S(t_i)$\
 On applique la méthode de la section précédente avec:
 
+
+::: {.box_img}
 $$q(t_i)=\frac{d_i}{n_i - 0.5\times c_i}$$
+:::
 
 **Calcul de la durée médiane (ou autre quantiles)**  
 
@@ -155,12 +155,12 @@ point par interpolation linéaire dans l'intervalle $[t_i;t_{i+1}[$ avec
 $S(t_{i+1})\leq0.5$ et $S(t_{i})>0.5$.
 
 
-**R-Stata-Sas-Python**    
+**R-Stata-Python-Sas**    
 
 ::: panel-tabset
 #### R
 
-Les fonctions de survie avec la méthode dite actuarielle sont estimables avec le package **`discSurv`**. Avec le temps, il s'est étoffé, on peut maintenant paramatrer des intervalles (programmation pénible), mais les quantiles de la durée ne sont toujours pas estimables, ce qui est bien dommage.  
+Les fonctions de survie avec la méthode dite actuarielle sont estimables avec le package **`discSurv`**. Avec le temps, il s'est étoffé, on peut maintenant paramatrer des intervalles (programmation pénible), mais les quantiles de la durée ne sont toujours pas estimables, ce qui est bien dommage, voire rend son utilisation peu intéressante. 
 
 
 #### Stata
@@ -168,16 +168,17 @@ Les fonctions de survie avec la méthode dite actuarielle sont estimables avec l
 Commande `ltable`, avec en option la paramétrisation des intervalles de
 durées. Voir la commande externe `qlt` (MT) qui calcule les durées
 médianes (+ autres quartiles) et qui recalcule la fonction de séjour
-avec une définition des intervalles de durées identique à celle de SAS.
+avec une définition des intervalles de durées identique à celle de SAS {{< fa solid cross>}}.
 
-#### Sas
+#### Python
+
+A l'heure actuelle, aucune fonction à ma connaissance.
+
+#### Sas {{< fa solid cross>}}
 
 Sous une `proc lifetest` avec en option `method=lifetable`. On peut
 paramétrer les intervalles d'estimation avec l'option `width`.
 
-#### Python
-
-A l'heure actuelle, aucune fonction à ma connaissance
 :::
 
 
@@ -247,13 +248,15 @@ Les résultats qui suivent ont été estimés avec Stata en retenant la définit
 
 : Quantiles de la fonction de séjour type actuarielle - Bornes Sas
 
+::: {.box_img}
 ![Courbe de survie: estimation méthode actuarielle](images/Image7.png){width="70%"}
+:::
 
 Lecture des résultats: 102 jours après leur inscription dans le registre d'attente pour une
 greffe, 50% des malades sont toujours en vie. Au bout de 914 jours, 75% sont décédés.
 
 
-## **La méthode de Kaplan-Meier**
+## La méthode de Kaplan-Meier
 
 -   L'approche qui exploite toute l'information disponible est celle
     dite de **Kaplan-Meier** (*KM*).
@@ -284,21 +287,25 @@ $$r_i=r_{i-1}-d_{i-1}-c_{i-1}$$\
 **Calcul de** $q_i$\
 <br> On applique la méthode de la section précédente avec:
 
+
+::: {.box_img}
 $$q_i=\frac{d_i}{r_{i-1}-d_{i-1}-c_{i-1}}$$
+:::
+
 *Remarque*: la variance de l'estimateur est obtenu par la méthode dite de *Greenwood*. Il n'y a pas d'intérêt particulier de la décrire dans ce support. 
 
 
 **Récupération de la médiane**     
 Il n'y a pas de méthode pour calculer directement la durée médiane (ou
 tout autre quantile) contrairement à l'approche actuarielle.  
-La définition retenue est conventionnelle. 
+La définition retenue est donc conventionnelle. 
 On va prendre la valeur de la durée qui se situe juste **en dessous** de
 50% de survivant.e.s. Elle est donc définie tel que $S(t)\leq0.5$. 
 Attention, il n'est pas impossible que le % de survivant.e.s soit bien
 en deçà de 50% pour l'obtention cette durée médiane.     
 
 
-**R-Stata-Sas-Python**
+**R-Stata-Python-Sas**
 
 ::: panel-tabset
 
@@ -312,7 +319,14 @@ Après avoir appelé les variables de durée et de censure en mode
 **survival** avec **`stset`**), le tableau des estimateurs est obtenu avec la
 commande **`sts list`** et le graphique avec **`sts graph`**.
 
-#### SAS
+
+#### Python
+
+Les resultats sont donnés dans la librairie `lifeline` par des fonctions
+au nom interminable. Je conseille plutôt l'utilisation de la
+librairie **`statmodels`** (se reporter à la section dédiée à Python).
+
+#### SAS {{<fa solid cross>}}
 
 L'estimation de Kaplan-Meier est affichée par défaut par la
 `proc lifetest`. 
@@ -324,12 +338,9 @@ section SAS du chapitre programmation). On récupère pour le reste de
 l'output les valeurs de la durée pour S(t) =(.75,.5,.25) ainsi que le
 graphique, ce qui est suffisant.
 
-#### Python
 
-Les resultats sont donnés dans la librairie `lifeline` par des fonctions
-au nom interminable. Je conseille plutôt l'utilisation de la
-librairie **`statmodels`** (se reporter à la section dédiée à Python).
 :::
+
 
 ### Application
 
@@ -439,25 +450,34 @@ La durée durée médiane de survie est $t=100$. Elle correspond à $S(t)=0.4940
 
 
 
-::: {.content-visible when-format="html"}
-::: {layout-ncol=2}
+::: {.content-visible when-format="html"} 
+::: {layout-ncol=2} 
 
+::: {.box_img}
 ![Courbe de survie: estimation méthode Kaplan-Meier](images/Image8.png){width="70%"}
+:::
 
+::: {.box_img}
 ![Courbe de survie: méthode Kaplan-Meier + CI](images/Image8b.png){width="70%"}
+:::
 
 :::
 :::
+
+
 
 ::: {.content-visible when-format="pdf"}
 
+::: {.box_img}
 ![Courbe de survie: estimation méthode actuarielle](images/Image8.png){width="70%"}
-
-![Courbe de survie: estimation méthode actuarielle + CI](images/Image8b.png){width="70%"}
-
 :::
 
 
+::: {.box_img}
+![Courbe de survie: estimation méthode actuarielle + CI](images/Image8b.png){width="70%"}
+:::
+
+:::
 
 
 
@@ -470,25 +490,28 @@ Il est simplément égal à:
 
 $$H(t)=\sum_{t_i\leq k}q(t_i)$$
 
+
+::: {.box_img}
 ![Risque cumulé: estimateur Nelson-Aalen](images/Image19.png){width="70%"}
+:::
 
-
-**Le risque ou taux de hasard instantané** 
+**Le risque ou taux de hasard instantané**     
 
 Nécessite l'estimateur de risque cumulé de Nelson-Aalen. Le risque est obtenu en lissant 
 les différences - toujours positive - entre $H(t)$ par la méthode dite
 du **kernel** (cf estimation de la densité des distributions). Elle permet d'obtenir
 une fonction continue avec la durée
 (paramétrables sur les largeurs des fenêtres de lissage). D'autres méthodes de lissage
-sont maintenant possibles, et de plus en plus utilisées, en particulier celles utilisant des splines.  
+sont maintenant possibles, et de plus en plus utilisées, en particulier celles utilisant des **splines**.  
 
 
+::: {.box_img}
 ![Risque instantané: estimateur du Kernel](images/Image20.png){width="70%"}
+:::
 
 
 ::: callout-note
-Il n'est pas inutile de noter qu'il n'y a pas de *formule* toute faite pour obtenir des valeurs du risque instantané. Ce type de méthode
-par lissage est pleinement paramétrable, par exemple sa fenêtre, ce qui implique que son profil varie d'un paramétrage à l'autre. Le graphique précédent a été fait avec Stata, si on utilisait le package `muhaz` les différences de paramétrage par défaut font que les courbes ne se confondent pas.
+Il n'est pas inutile de noter qu'il n'y a pas de *formule* toute faite pour obtenir des valeurs du risque instantané. Ce type de méthode par lissage est pleinement paramétrable, par exemple sa fenêtre, ce qui implique que son profil varie d'un paramétrage à l'autre. Le graphique précédent a été fait avec Stata, si on utilisait le package `muhaz` on visualiserait une courbe différente... mais on pourrait retrouver celle qui est représenté ici en changeant les paramètres de lissage.
 :::
 
 

@@ -1,4 +1,4 @@
-# maj juin 2022
+# maj novembre 2023
 # version antérieure de cox.zph (=>cox.zphold) préférable pour durées discrètes/groupées
 
 #install.packages("survival")
@@ -29,6 +29,10 @@ library(stringr)
 library(gtsummary)
 library(nnet)
 library(muhaz)
+
+
+options(show.signif.stars=FALSE) # suppression etoile significativité
+options(scipen=999) # suppression format scientifique pour proba
 
 # installation survival v2.44-1 (30 mars 2019) => problème test Grambsch-Therneau
 #require(remotes)
@@ -73,7 +77,7 @@ a=rmst2(trans$stime, trans$died, trans$arm, tau=NULL)
 print(a)
 plot(a)
 
-# risques proportionnels
+# Risques proportionnels
 
 # Cox
 coxfit = coxph(formula = Surv(stime, died) ~ year + age + surgery, data = trans)
@@ -83,20 +87,20 @@ tbl_regression(coxfit,exponentiate=TRUE)
 
 ### Test ph attention diff v2 versus v3
 
-# Test GB (Résultat different si v3 car test exact => gls avec variances calculées à chaque t sur les résidus)
+# Test GB (Résultat different si v3 car test "exact" => gls avec variances calculées à chaque t sur les résidus)
 
 cox.zph(coxfit)
 cox.zph(coxfit, transform="identity")
 
 ### avec Récupération de l'ancienne version du test: fonction cox.zphold
 ## lien fichier: https://github.com/mthevenin/analyse_duree/tree/main/cox.zphold
-## je conseille de rester sur cette solution car reproductible avec autres applis Stats + pas de test miracle (voir 
+## je conseille de rester sur cette solution car reproductible avec autres applis Stats + test GLS pas adapté avec durées groupées + pas de test miracle (voir 
 ## le bouquin de Grambsch-Therneau)
 source("D:/D/Marc/SMS/FORMATIONS/2022/Durée2/a distribuer/cox.zphold.R")
 cox.zphold(coxfit)
 cox.zphold(coxfit, transform="identity")
 
-### methode ols: correlation residus/t =>  cox.zphold avec transform="identity"
+### pour info estimation directe ols: correlation residus/t =>  cox.zphold avec transform="identity"
 
 resid= resid(coxfit, type="scaledsch")
 varnames <- names(coxfit$coefficients)
@@ -135,6 +139,8 @@ cox.zphold(coxfit)
 
 cut= unique(trans$stime[trans$died == 1])
 tvc = survSplit(data = trans, cut = cut, end = "stime", start = "stime0", event = "died")
+
+
 tvc$tvc=ifelse(tvc$transplant==1 & tvc$wait<=tvc$stime,1,0)
 
 tvcfit = coxph(formula = Surv(stime0, stime, died) ~ year + age + surgery + tvc, data = tvc)
@@ -146,37 +152,53 @@ ggforest(tvcfit, data=trans)
 
 # logistique temps discret
 
-## duree continue
+##  fonction durée traitée comme variable quanti
 library("tidyr")
 
-###
+## mise en forme base
 dt = uncount(trans,mois)
 dt = dt[order(dt$id),]
 
-
+## variables durées
 dt$x=1
 dt$t = ave(dt$x,dt$id, FUN=cumsum)
 dt$T = ave(dt$x,dt$id, FUN=sum)
 
+## centrage des x quanti pour interprétation de la constante, sinon x=0
 
+dt$myear = mean(dt$year)
+dt$mage = mean(dt$age)
+
+dt$yearb = dt$year - mean(dt$year)
+dt$ageb = dt$age - mean(dt$age)
+
+## variable censure
 dt$died[dt$t<dt$T]=0
 
 
 dt$t2=dt$t^2
-dtfit = glm(died ~ t + t2 + year + age + surgery, data=dt, family="binomial")
-summ(dtfit)
+dt$t3=dt$t^3
+dtfit = glm(died ~ t + t2 + t3 + yearb + ageb + surgery, data=dt, family="binomial")
+summ(dtfit, digits=3, exp=TRUE)
+
+
+### si on compare avec un modèle de cox avec durée = variables mois
+
+coxfit = coxph(formula = Surv(mois, died) ~ year + age + surgery, data = trans)
+summary(coxfit)
+
 
 ## duree groupée/discrète (le debut vise pour l'exemple à regrouper les durees)
 
-### groupement des durees pour l'exemple
+### groupement des durees pour l'exemple (quartiles)
 dt$ct4 <- quantcut(dt$t)
 table(dt$ct4) 
 dt$n = ave(dt$x,dt$id, dt$ct4, FUN=cumsum)
 dt$N = ave(dt$x,dt$id, dt$ct4, FUN=sum)
 dt2 = subset(dt, n==N)
 
-fit = glm(died ~ ct4 + year + age + surgery, data=dt2, family=binomial)
-summ(fit)
+fit = glm(died ~ ct4 + yearb + ageb + surgery, data=dt2, family=binomial)
+summ(fit, exp=TRUE, digits=3)
 
 # Complements
 

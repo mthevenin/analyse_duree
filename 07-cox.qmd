@@ -1,22 +1,17 @@
 ---
-#title: "**Le modèle de Cox**"
-
-filters:
-  - lightbox
-lightbox: auto
+#title: "**Cox**"
 ---
 
-
-# **Le modèle de Cox**
+# Le modèle de Cox
 
 On peut ignorer la partie sur l’estimation du modèle. On retiendra tout de même qu'il est déconseillé d'utiliser la méthode dite *exacte* pour la correction de la vraisemblance, qui ne peut matériellement fonctionner qu’avec un nombre très limité d’évènements observés simultanément. Ce qui est plutôt rare avec des données à durées discrètes ou groupées, très fréquentes dans les sciences sociales.
 
 
-## Le modèle semi-paramétrique de Cox
+## Le modèle
 
 ### La vraisemblance partielle et estimation des paramètres 
 
-On se situe dans une situation où la durée est mesurée sur une échelle strictement continue. Il ne peut donc y avoir qu'un seul évènement observé en $t_i$ (idem pour la censure).
+On se situe dans une situation où la durée est mesurée sur une échelle strictement continue. Il ne peut donc y avoir qu'un seul évènement observé en $t_i$.
 
 
 On peut représenter le processus aléatoire d'une analyse de survie en présence de censure à droite, avec l'équation de vraisemblance suivante:
@@ -26,7 +21,9 @@ $$L_i=f(t_i)^{\delta_i}S(t_i)^{1-\delta_i}$$
 
 
 * $f(t_i)$ est la valeur de la fonction de densité en $t_i$ 
-* $S(t_i)$ est la valeur de la fonction de survie en $t_i$ 
+* $S(t_i)$ est la valeur de la fonction de survie en $t_i$  
+
+   
 * $\delta_i=1$ si l'évènement est observé: $L_i=f(t_i)$ 
 * $\delta_i=0$ si l'observation est censurée: $L_i=S(t_i)$                                                                            
 
@@ -45,10 +42,11 @@ On peut réécrire cette vraisemblance en la multipliant et en la divisant par: 
 $$L=\prod_{i=1}^{n}\left[h(t_i)\frac{\sum_{j\in R}h(t_i)}{\sum_{j\in R}h(t_i)}\right]^{\delta_i}S(t_i)= \prod_{i=1}^{n}\left[\frac{h(t_i)}{\sum_{j\in R_i}h(t_i)}\right]^{\delta_i}\sum_{j\in R_i}h(t_i)^{\delta_i}S(t_i)$$  
 
 
-La vraisemblance partielle retient seulement le premier terme de la vraisemblance, soit:   
+La vraisemblance partielle retient seulement le premier terme de la vraisemblance^[Dans un entretien en 1994, Cox a précisé qu'il avait cette manipulation pour voir, sans idée préconcue], soit:   
 
+::: {.box_img}
 $$PL=\prod_{i=1}^{n}\left[\frac{h(t_i)}{\sum_{j\in R}h(t_i)}\right]^{\delta_i}$$  
-
+:::
 
 Une fois remplacée la valeur de $h(t_i)$ par son expression en tant que modèle à risques proportionnels, la vraisemblance partielle ne dépendra plus de la durée. **Mais elle va dépendre de l'ordre d'arrivée des évènements, c'est à dire leur rang**. 
 
@@ -58,7 +56,11 @@ Une fois remplacée la valeur de $h(t_i)$ par son expression en tant que modèle
 
 En remplaçant donc $h(t_i)$ par l'expression $h_0(t)e^{X_i^{'}b}$:  
 
+
+::: {.box_img}
 $$PL=\prod_{i=1}^{n}\left[\frac{h_0(t)e^{X_{i}^{'}b}}{\sum_{j\in R_i}h_0(t)e^{X_{j}^{'}b}}\right]^{\delta_i} =\prod_{i=1}^{n}\left[\frac{e^{X_i^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}\right]^{\delta_i}$$
+:::
+
 
 L'expression $\frac{e^{Xb}}{\sum_{j\in R}e^{Xb}}$ est donc bien une probabilité, et la vraisemblance partielle est donc bien un produit de probabilités. 
 Pour un individu ayant connu l'évènement, la contribution à la vraisemblance partielle est **la probabilité que l'individu observe l'évènement en $t_i$ sachant qu'un évènement (et un seul) s'est produit**.    
@@ -85,7 +87,7 @@ On utilise la méthode habituelle, à savoir la maximisation de la log-vraisembl
 
 * Conditions de premier ordre: calcul des équations de score à partir des dérivées partielles. Solution: $\frac{\partial log(PL)}{\partial{b_k}}=0$. On ne peut pas obtenir de solution numérique directe.  
 
-Remarque: les équations de score sont utilisées pour tester la validité de l'hypothèse de constance des rapports de risque pour calculer les **résidus de Schoenfeld** (voir plus loin). 
+Remarque: les équations de score seront utilisées pour tester la validité de l'hypothèse de constance des rapports de risque pour calculer les **résidus de Schoenfeld**... Le grand sujet (voir plus loin). 
 
 * Conditions de second ordre: calcul des dérivées secondes qui permettent d'obtenir la matrice d'information de Fisher et la matrice des variances-covariances des paramètres. 
 
@@ -107,8 +109,10 @@ $$\frac{\partial pl(b)}{\partial{b_k}}=\sum_{i=1}^n\delta_i\left(X_{ik}-\sum_{j\
 
 Comme $\frac{e^{X_{j}b}}{\sum_{j\in R}e^{X_{j}b}}$ est une probabilité, et  $\sum_{j\in R}X_{ik}\times p_i$ est l'espérance (la moyenne) $E(X_k)$ d'avoir la caractéristique $X_k$ lorsqu'un évènement a été observé. Au final:  
 
-$$\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - E(X_{j\in R_i,k}) \right)$$
 
+::: {.box_img}
+$$\frac{\partial lp(b)}{\partial{b_k}}= \sum_{i=1}^n\delta_i\left(X_{ik} - E(X_{j\in R_i,k}) \right)$$
+:::
 
 Cette expression va permettre d'analyser le respect ou non de l’hypothèse de risques proportionnels via les *résidus de Schoenfeld*. 
 
@@ -116,15 +120,15 @@ Cette expression va permettre d'analyser le respect ou non de l’hypothèse de 
 
 ### Lecture des résultats
 
-Comme il s'agit d'un modèle à risque proportionnel, **les rapports de risques sont constants pendant toute la période d'observation**. Il s'agit d'une **propriété de l'estimation**.  
+Comme il s'agit d'un modèle à risque proportionnel, **les rapports de risques sont constants pendant toute la période d'observation**. Il s'agit strictement d'une **propriété de l'estimation**.  
 
 
 ***Covariable binaire (indicatrice)*** 
 $X=(0,1)$: $RR=\frac{h(t\ |\ X=1)}{h(t\ |\ X=0)}=e^b$.  
-A chaque moment de la durée $t$, le risque d'observer l'évènement est $e^b$ fois plus important/plus faible pour $X=1$ que pour $X=0$.  
+A chaque moment de la durée $t$ (jour, mois, années...), le risque d'observer l'évènement est $e^b$ fois plus important/plus faible pour $X=1$ que pour $X=0$.  
 
 
-***Covariable quantitative*** (fixe dans le temps) 
+***Covariable mesurée (quantitativement)*** (mais fixe dans le temps) 
 
 $RR=\frac{h(t\ |\ X=a+c)}{h(t\ |\ X=a)}=e^{c \times{b}}$. 
 On prendra pour illustrer une variable type âge au début de l’exposition au risque (a)  et un delta de comparaison avec un âge inférieur c.  
@@ -141,6 +145,7 @@ Si $c=1$ (résultat de l'estimation): A un âge donnée, le risque de connaitre 
 * Log-Vraisemblance: -289.30639
 
 
+::: {.box_img}
 | Variables | logRR   | Std.Err | z     | $P>|z|$| 95% IC          |
 |-----------|---------|---------|-------|--------|-----------------| 
 |      year | -0.119  | 0.0673  | -1.78 | 0.076  | -0.2516;+0.0124 |
@@ -148,8 +153,9 @@ Si $c=1$ (résultat de l'estimation): A un âge donnée, le risque de connaitre 
 |  surgery  | -0.9873 | 0.4363  | -2.26 | 0.024  | -1.8424;-0.1323 |
 
 : Cox: log Hazard Ratio (Risks Ratio) {.striped .hover}
+:::
 
-
+::: {.box_img}
 | Variables | RR      | Std.Err | z     | $P>|z|$| 95%CI            |
 |-----------|---------|---------|-------|--------|------------------| 
 |      year | 0.8872  | 0.0597  |-1.78  | 0.076  |  0.7775; 1.0124  |
@@ -157,10 +163,11 @@ Si $c=1$ (résultat de l'estimation): A un âge donnée, le risque de connaitre 
 |   surgery | 0.3726  | 0.1625  |-2.26  | 0.024  |  0.1584; 0.8761  |
 
 : Cox: Hazard Ratio (Risks Ratio) {.striped .hover}
+:::
 
-
-On retrouve les  des tests non paramétriques pour l'opération, à savoir qu’un pontage réduit les risques journaliers de décès pendant la période d’observation (augmente la durée de survie).     
+On retrouve la même lecture que lors des tests non paramétriques pour l'opération , à savoir qu’un pontage réduit les risques journaliers de décès pendant la période d’observation (ie augmente la durée de survie).     
 De la même manière, plus on entre à un âge élevé dans la liste d'attente plus le risque de décès augmente. La variable *year*, qui traduit des progrès en médecine, renvoie à une réduction plutôt modérée du risque journalier de décès durant l'attente d'une greffe.   
+Les résultats apparaissent, sans connaissance médicale très poussée, conforme à ce qu'on pourrait attendre.
 
 
 **R-Stata-Sas-Python**   
@@ -175,81 +182,107 @@ Le modèle est  estimé avec la fonction **`coxph`** de la librairie **`survival
 
 Le modèle est estimé avec la commande **`stcox`**.
 
-#### SAS
-
-Le modèle est estimé avec la **`proc phreg`**.
-
-
 #### Python
 
 Avec la librairie `lifelines`, le modèle est estimé avec la fonction **`CoxPHFitter`**. Avec la librairie `statmodels`, il est estimé avec la fonction `smf.phreg`.
-:::
 
+#### SAS {{< fa solid cross>}}
+
+Le modèle est estimé avec la **`proc phreg`**.
+
+:::
 
 
 ## Analyse de la constance des rapports de risque
 
+
 *	Les rapports de risque (RR) estimés par le modèle sont contraints à être constant sur toute la période d’observation. C’est une hypothèse forte.
 
-*	Le respect de cette hypothèse doit être analysé, en particulier pour le modèle de Cox où la baseline du risque est habituellement estimée à l’aide de ces rapports (par exemple la méthode dite de Breslow, non traitée). En post-estimation, les valeurs estimées du risque pourront présenter des valeurs aberrantes si on dévie trop de constance, en particulier en obtenant des négatives des taux de risque.
+*	Le respect de cette hypothèse doit être analysé, en particulier pour le modèle de Cox où la baseline du risque est habituellement estimée à l’aide de ces rapports (par exemple la méthode dite de Breslow, non traitée mais à faire un jour). En post-estimation, les valeurs estimées du risque pourront présenter des valeurs aberrantes , si on dévie trop de cette constance, en particulier en obtenant des négatives des taux de risque.
 
-*	Analyser cette hypothèse revient à introduire une interaction entre les rapports et la durée ou plutôt précisément une fonction de la durée).
+*	Important: analyser cette hypothèse revient à introduire une interaction entre les rapports de risque et la durée ou plutôt précisément une fonction de la durée.
 
 *	Plusieurs méthodes disponibles, on traitera  celles basées sur les **résidus de Schoenfeld**, et l'introduction directe d'une intéraction entre une fonction la durée et les covariables du modèle. Cette dernière fait également office de méthode de correction lorsque la violation de l'hypothèse est jugée trop importante ou problématique du point de vue des résultats obtenus. 
 
-
-* Si on regarde les courbes de Kaplan-Meier, leurs croisement non tardif impliquera nécessairement un problème sur cette hypothèse. 
+* Si on regarde les courbes de Kaplan-Meier, leur croisement non tardif impliquera nécessairement un problème sur cette hypothèse. Il est donc important de les analyser en amont d'un modèle.
 
 
 ### Test de Grambsch-Therneau sur les résidus de Schoenfeld
 
 Ce test a été proposé par P.Grambsch et T.Therneau ^[Il s'agit bien de la personne qui maintient le package **`survival`** dans R] dans un cadre à durée strictement continue. Il repose originellement sur une régression linéaire estimé avec les moindres carrés généralisés (GLS) correction de l'autocorrélation des erreurs avec des sér) . 
-Dans un premier temps pour des raisons plutôt pratiques (informatique), le test a une version moindres carrés ordinaires (OLS). Jusqu'en 2020, tous les logiciels ne proposaient que le test OLS. T.Therneau avec la V3 de package `survival` a substitué - assez brutalement - le test GLS au test OLS. Si les résultats sont proches dans le cadre d'une durée continue et que le test GLS peut être considéré comme un test *exact*, cela devient problématique dans une situation de durée discrète/groupée ^[Pour les personnes utilisant R, je donne un moyen pour récupérer et exécuter le test OLS sous R].  Le test OLS reste, à mon sens, la méthode à privilégier dans le cas discret.  
+Dans un premier temps pour des raisons plutôt pratiques (informatique), le test a une version moindres carrés ordinaires (OLS). Jusqu'en 2020, tous les logiciels ne proposaient que le test OLS (Sas, Stata, Python et Survival v2). T.Therneau avec la Version 3 de package `survival` a substitué - assez brutalement - un test GLS^[Moindres carrés généralisés] au test OLS. Et cela pose de gros problème, en particulier en sciences sociales. Ceci a été montré de manière très convaincante  par [Shawna K. Metzger](https://www.cambridge.org/core/journals/political-analysis/article/implementation-matters-evaluating-the-proportional-hazard-tests-performance/05E2657A64B18FB1E25C2BE1F7D92C3B).
 
-Il est également important de souligner que pour P.Grambsch et T.Therneau ^[Se reporter à leur ouvrage *Modeling Survival Data: Extending the Cox Model* (2001)] n'est qu'un moyen parmi d'autres d'analyser une violation de l'hypothèse de proportionnalité. Ce n'est pas *the solution* (comme tout autre test au passage). Le croisement des courbes de séjours peut-être suffisant pour alerter sur cette violation.  
+On doit également souligner que pour P.Grambsch et T.Therneau ^[Se reporter à leur ouvrage *Modeling Survival Data: Extending the Cox Model* (2001)] n'est qu'un moyen parmi d'autres d'analyser une violation de l'hypothèse de proportionnalité. Ce n'est pas *the solution* (comme tout autre test au passage). Le croisement des courbes de séjours peut-être suffisant pour alerter sur cette violation. Ou tout simplement bien regarder les données qu'on a en face des yeux.... par exemple pour la variable *surgery*, il y a t-il besoin de faire un test? Regardez bien.  
 
 
-***Principe du test***:  consiste à regarder la corrélation entre les **résidus de Schoenfeld** obtenus directement avec la fonction de score de la vraisemblanc partielle de Cox et une fonction de la durée.  
+***Principe du test***:  consiste à regarder la corrélation entre les **résidus de Schoenfeld** obtenus directement avec la fonction de score de la vraisemblance partielle de Cox et une fonction de la durée.  
 
 ***Principe de calcul des résidus***
 
 *	Les résidus *bruts* sont directement calculés à partir des équations de scores [voir section estimation].
 *	Ils ne sont calculés que pour les observations qui ont connues l’évènement, au moment où un évènement s’est produit.
 *	La somme des résidus pour chaque covariable est égale à 0. Il s'agit de la propriété de l’équation de score à l’équilibre.
-*	On utilise généralement les *résidus standardisés* (*remis à l'échelle* / scaled) - par leur variance -. C'est la mesure de cette variance qui distingue le test OLS du test GLS.
+*	On utilise généralement les *résidus standardisés* (*remis à l'échelle* / scaled) - par leur variance -. C'est la mesure de cette variance qui distingue le test OLS du test GLS. 
+  * OLS: variance des estimateurs du modèles
+  * GLS: calcule à chaque des variances à chaque évènement. Possible instabilité lorsque le nombre de personnes restent soumises au risque est faible. La moyenne de ces variances est égale à la variance des estimateurs du modèle.
 
 
 Pour une observation dont l’évènement s’est produit en $t_i$, le *résidu brut de Schoenfeld* pour la covariable $X_k$, après estimation du modèle, est égal à:
   
+  
+::: {.box_img}  
 $$rs_{ik}=X_{ik}- \sum_{j\in R_i}X_{jk}\frac{e^{X_{j}^{'}b}}{\sum_{j\in R_i}e^{X_{j}^{'}b}}= X_{ik} - E(X_{j\in R_i})$$
+:::
 
 * Ce résidu est formellement la contribution d'une observation ou d'un moment d'évènement au score. Il se lit comme la différence entre la valeur observée d'une covariable  et sa valeur espérée au moment où l'évènement s'est produit. 
-
-* Si la constance des rapports de risque varie peu les résidus ne doivent pas suivre une tendance précise localement ou globalement,  à la hausse ou à la baisse.  
+* Si la constance des rapports de risque varie peu dans le temps, les résidus ne doivent pas suivre une tendance précise localement ou globalement, à la hausse ou à la baisse.  
 
 Pourquoi?  
 
 Par l'exemple, sans censure à droite et en ne considérant que les résidus bruts: 
-Avec un rapport de risque strictement égal à 1 en début d'exposition, une population soumise au risque $R_i=100$ avec 50 hommes et 50 femmes. Si l'hypothèse PH (strictement) respectée, lorsqu'il reste 90 personnes soumises au risque, on devrait avoir 45 hommes et 45 femmes. Avec $R_i=50$, 25 hommes et 25 femmes,.......avec $R_i=10$, 5 hommes et 5 femmes. 	
+
+Avec un rapport de risque strictement égal à 1 en début d'exposition, une population soumise au risque ($R_0=100$) avec 50 hommes et 50 femmes. Si l'hypothèse PH est strictement respectée, lorsqu'il reste 90 personnes soumises au risque, on devrait avoir 45 hommes et 45 femmes. Avec $R_i=50$, 25 hommes et 25 femmes,.......avec $R_i=10$, 5 hommes et 5 femmes. 	
 Au final l'espérance d'avoir la caractéristique $X$ est toujours égal à 0.5 et les résidus bruts prendront toujours la valeur -.5 si $X=0$ et .5 si $X=1$. En faisant une simple régression linéaire entre les résidus, qui alternent ces deux valeurs, et $t$, le coefficient estimé sera en toute logique très proche de 0. 
 
-De manière encore plus simple, cette proportionnalité avec un risque ratio égal à 1 suggère qu'au cours de la durée d'observation, on observe une succession d'un même nombre d'hommes et de femmes qui connaissent l'évènement. Si tous les hommes ou presque  avaient observés l'évènement plutôt en début d'éxposition et si toutes les femmes  ou presque avaient observé l'évènement plutôt en fin d'exposition, l'hypothèse de proportionnalité pourraient fortement remise en cause.
+De manière encore plus simple, cette proportionnalité avec un risque ratio égal à 1 suggère qu'au cours de la durée d'observation, on observe une succession d'un même nombre d'hommes et de femmes qui connaissent l'évènement.  
+
+En revanche, si tous les hommes ou presque avaient observés l'évènement plutôt en début d'éxposition et si toutes les femmes  ou presque avaient observé l'évènement plutôt en fin d'exposition, l'hypothèse de proportionnalité pourraient fortement remise en cause. Et on obtiendrait au final un rapport de risque moyen égal à 1.
 
 
 On trouvera des éléments de calcul du test OLS [ici](https://mthevenin.github.io/analyse_duree/annexes/residusch.html) 
 
 
 ::: callout-warning
-- **Test omnibus**: Ne pas l'utiliser bien qu'il figure généralement en bas des output. Il n'a pas d'interprétation directe, et les p-value peuvent présenter des valeurs très faibles alors que ce n'est pas le cas pour les covariables prises une à une. Rester comme c'est souvent le cas à un test à un degré de liberté.
+- **Test omnibus**: Ne pas l'utiliser bien qu'il figure généralement en bas des output. Il n'a pas d'interprétation directe, et les p-values peuvent présenter des valeurs très faibles alors que ce n'est pas le cas pour les covariables prises une à une. Rester si possible le cas à un test à un degré de liberté, variable par variable.
 
-- **Transformations de la durée**: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: $g(t)=t$ (« identity »), $g(t)=log(t)$, $g(t)=KM(t)$ ou $g(t)=1- S(t$) où $S(t$) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank » est  utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple $t=(0.1,0.5,1,2.6,3)$ donne une transformation $t=(1,2,3,4)$. A savoir : $g(t)=t rend le test relativement sensible aux évènements tardifs lorsque la population restant soumise est peu nombreuse (outliers).
+- **Transformations de la durée**: n’importe quelle fonction de la durée peut être utilisée pour réaliser le test. On retient généralement les fonctions suivantes: $g(t)=t$ (« identity »), $g(t)=log(t)$, $g(t)=KM(t)$ ou $g(t)=1- S(t$) où $S(t$) est l’estimateur de Kaplan-Meier. Enfin une transformation appelée « rank » est  utilisée seulement pour les durées strictement continue ou suffisamment dispersées . Par exemple $t=(0.1,0.5,1,2.6,3)$ donne une transformation $t=(1,2,3,4,5)$. A savoir : $g(t)=t rend le test relativement sensible aux évènements tardifs lorsque la population restant soumise est peu nombreuse (outliers).
  * Par défaut Stata, Sas, Python: $g(t)=t$
  * Par défaut R: $g(t)= 1 - S(t)$ 
  
 :::
 
+::: {.box_img}
+::: {.callout-important }
 
-Pour des raisons de reproductibilité dans l'espace des logiciels et dans le temps pour les différentes versions du package `survival` de R, on ne présente ici que la version OLS. 
+#### TRES IMPORTANT: Pourquoi la version exacte (GLS) du test pose problème 
+
+* Il sagit de la version d'origine du test (1994) mais implémenté seulement en 2020 dans la version 3 du package `survival` de R. Les autres logiciels ne l'implémente pas. 
+
+* S.Metzger a effectué une décomposition complète de sa statistique dans sa version exacte [lien pour les plus acharné.e.s](https://www.cambridge.org/core/journals/political-analysis/article/implementation-matters-evaluating-the-proportional-hazard-tests-performance/05E2657A64B18FB1E25C2BE1F7D92C3B) et l'a comparé à la version appelé "approximation" (je préfère "version Ols"). Résultats:
+  * Un terme *résiduel* se situant au numérateur de la statistique, qui traduit le degré de corrélation entre les covariables est présent. Ce qui signifie:
+  * Qu'en présence de corrélations entre covariables, même limitées, la statistique du test augmente artificiellement, et produira tout aussi artificiellement mais mécaniquement des pvalues très faibles. Le test exact s'écarte alors fortement du test OLS, alors qu'il ne devrait être juste qu'un peu plus précis. Si les travaux de S.Metzger s'appuient bien sur des simulations, ses résultats sont vérifiés avec des données réelles qu'elle a également confrontée. C'est également ici le cas  avec les données du support comme celles des TP. Pour la base utilisée dans ce support, c'est la corrélation entre les variables *surgery* et *year* qui explique les forte différences pour la deuxième variable entre les deux versions du test. 
+
+* Cela signifie également que le test, qui consiste à synthétiser l'approche par l'intéraction (voir plus bas), donnera des résultats contradictoires avec cette dernière. 
+
+
+* Dans R, et seulement dans R: 
+  * T.Therneau, proprétaire du package `survival` et visiblement discutant du travail de S.Metzger, n'a toujours pas remis le test OLS dans le package, ce qui est quand même problématique au niveau reproductibilité et réplicabilité dans le temps et dans l'espace des logiciels. C'est facheux.
+  * Ne pas paniquer, j'ai récupéré le test OLS et on peut le charger et l'utiliser très facilement. Voir la section programmation dédiée à R pour le détail de la démarche (ou directement ce [lien](https://mthevenin.github.io/assistoolsms/R/assist/posts/coxzph/coxzph.html)).
+
+:::
+:::
+
+On ne présentera donc ici que la version OLS (idem Stata, Python, Sas {{<fa solid cross >}}. 
 
 **Test OLS avec $g(t)=t$**
 
@@ -274,12 +307,13 @@ Ici l'hypothèse de proportionnalité des risques est questionnable pour la vari
 
 : Test Grambsch-Therneau avec $g(t)=1- S(t)$
 
+<br>
 
-**R-Stata-Sas-Python**   
+**R-Stata-Python-Sas**     
 
 ::: panel-tabset
 
-### R
+#### R
 
 ***Attention seulement version GLS du test depuis le V3 de survival***.
 
@@ -291,14 +325,14 @@ Ici l'hypothèse de proportionnalité des risques est questionnable pour la vari
 
 Le test (OLS) est obtenu avec la commande **`estat phtest, d`**. Par défaut Stata utilise $g(t)=t$. On peut modifier cette fonction. 
 
-#### SAS
-
-Le test (OLS) est disponible depuis quelques années avec l’argument **`zph`** sur la ligne `proc lifetest`. Par défaut SAS utilise $g(t)=t$. On peut modifier cette fonction.
-
-
 #### Python
 
 Le test (OLS)  est donné avec la  fonction **`proportional_hazard_test`** de la librairie `lifelines`. La fonction utilise par défaut $g(t)=t$, mais on peut afficher les résultats pour toutes les transformations de $t$ disponibles avec l’option `time_transform=’all’`. 
+
+
+#### SAS {{<fa solid cross>}}
+
+Le test (OLS) est disponible depuis quelques années avec l’argument **`zph`** sur la ligne `proc lifetest`. Par défaut SAS utilise $g(t)=t$. On peut modifier cette fonction.
 
 :::
 
@@ -330,6 +364,7 @@ Sur l'application, avec 2 individus avec la covariable *age* (rappel: il s'agit 
 | 3   | 54       | 1    | 12  | 16  |
 
 : Base spittées sur les intervals d'évènement
+
 
 Les bornes des intervalles $[t_0;t]$ présentent des valeurs seulement lorsqu'un évènement s'est produit (principe de la vraisemblance partielle). Il n'y a donc pas de valeurs pour $t$ et $t_0$ en $t=4$ pour $id=(2,3)$et $t=7,10,11,13,14,15$ pour $id=3$.  
 Les deux individus observent l'évènement en $t=6$ pour $id=2$, et en $t=16$ pour $id=3$. Avant ce moment la valeur de la variable évènement/censure (ici $d$) prend toujours la valeur 0, et prend la valeur 1 le jour du décès.  
@@ -408,28 +443,29 @@ Exemple pour une variable quantitative (*age*)
 
 ***Ne rien faire***   
 
-On interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison). Difficilement soutenable pour l’analyse des effets cliniques, elle peut être envisagée dans d’autres domaines. Attention au nombre de variables qui ne respectent pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée si l'analyse a des visée prédictives. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme très « moyenne » sur la période d’observation. 
+On interprète le risque ratio comme un ratio moyen pendant la durée d’observation (P.Allison), c'est le principe même du modèle. Difficilement soutenable pour l’analyse des effets cliniques, il faut reconnaître que ceci peut être envisagé dans d’autres domaines, comme en sciences sociales si on ne veut pas aller plus loin. Attention au nombre de variables qui ne respectent pas l’hypothèse, l’estimation de la baseline du risque pourrait être sensiblement affectée si l'analyse a des visée prédictives. Il convient tout de même lors de l’interprétation, de préciser les variables qui seront analysées sous cette forme très « moyenne » sur la période d’observation. 
 
-On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps des écarts de risque, s’accentuent  à la hausse comme à la baisse, on peut conserver cet estimateur moyen. Mais si cette non proportionnalité conduit à un changement du sens des rapport de risque je suis moins convaincu de la pertinence de cette stratégie. Encore une fois, et il faut le rappeler, l'estimation des courbes de survie doit permette d'anticiper ce dernier cas de figure.
+On peut également adapter cette stratégie du « ne rien faire » selon sens de l’altération des rapports de risque. Si aux cours du temps des écarts de risque, s’accentuent  à la hausse comme à la baisse, on peut conserver cet estimateur moyen. La lecture des résultats ne sera pas affecté. Mais si cette non proportionnalité conduit à un changement du sens des rapport de risque je suis moins convaincu de la pertinence de cette stratégie. 
 
-Il faut également tenir compte de l’intérêt portée par les variables qui présentent un problème par rapport à l’hypothèse. Il n’est peut-être pas nécessaire de complexifier le modèle pour des variables introduites comme simples contrôles.
+Il faut également tenir compte de l’intérêt portée par les variables qui présentent un problème par rapport à l’hypothèse. Si on souhaite corriger la non proportionnalité avec une intéraction, il est inutile de complexifier le modèle pour des variables introduites comme simples contrôles... qui ne sont là que pour jouer le rôle de contrôle. Et justement la vérification de la proportionnalité peut améner à s'intérroger sur la bonne spécification du modèle.
 
-Mais plus problématique [**important**]… On sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de ***frailty*** (fragilité) lorsque cette non homogénéité n’est pas observable. Des estimations, plus complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles.  
+En effet, on sait qu’une des causes du non respect de l’hypothèse peut provenir d’effets de sélection liées à des variables omises ou non observables. En analyse de durée ce problème prend le nom de ***frailty*** (fragilité) lorsque cette non homogénéité n’est pas observable. Des estimations, plus complexes, sont possibles dans ce cas, et sont en mesure malgré leur interprétation plutôt difficile de régler le problème. Il convient donc de bien spécifier le modèle au niveau des variables de contrôle observables et disponibles. 
 
 
 ***Modèle de Cox stratifié***   
 
-Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie prédites ajustées, et si une seule covariable (binaire) présente un problème. Les HR ne seront pas estimés pour la variable qui ne respecte pas l'hypothèse.    
+Utiliser la méthode dite de « Cox stratifiée » (non traitée). Utile si l’objectif est de présenter des fonctions de survie prédites ajustées, et si une seule covariable (binaire) présente un problème. Les HR ne seront pas estimés pour la variable qui ne respecte pas l'hypothèse: Le risque de base pour chaque groupe est alors estimé en amont.   
 
 ***Intéraction***    
 
-Introduire une interaction avec la durée. Cela peut permettre en plus d’enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes de stabilité des rapports de risque, dans l'idéal une seule variable. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être strictement linéaire, ce qui est une hypothèse plutôt forte....  on introduit de nouveau une contrainte de proportionnalité dans le modèle.  
+Introduire une interaction avec la durée.   
+Cela permet d'enrichir le modèle au niveau de l’interprétation. Valable si peu de covariables présentent des problèmes d'uniformité dans le temps des rapports de risque, dans l'idéal une seule variable. Attention tout de même à la forme de la fonction, dans l’exemple on a contraint l’effet d’interaction à être strictement linéaire, cela facilité la lecture, mais c'est une hypothèse très forte....  car au final on introduit de nouveau une contrainte de proportionnalité dans le modèle.   
 
 ***Modèles alternatifs***  
 
-Utiliser un modèle alternatif: modèles paramétriques à risques proportionnels si la distribution du risque s’ajuste bien, le modèle paramétrique « flexible » de Parmar-Royston ou un modèle à temps discret. Pour la dernière solution, on peut également corriger la non proportionnalité avec l'introduction  d'une intéraction. Si on ne le fait pas, les risques prédits, par définition des probabilités conditionnelles, resteront toujours dans les bornes contrairement au modèle de Cox.      
-Utiliser un modèle non paramétrique additif dit d’Aalen ou une de ses variantes (non traité). Mais ces modèles, dont les résultats sont présentés par des graphiques, se commentent assez difficilement.  
+Utiliser un modèle alternatif: modèles paramétriques à risques proportionnels si la distribution du risque s’ajuste bien, le modèle paramétrique « flexible » de Parmar-Royston ou un modèle à durée discrète/groupée (voir section suivante). Pour la dernière solution, on peut également corriger la non proportionnalité avec l'introduction  d'une intéraction. Si on ne le fait pas, les risques prédits qui sont par définition des probabilités conditionnelles, resteront toujours dans les bonnes bornes contrairement au modèle de Cox.       
+Utiliser un modèle non paramétrique additif dit d’Aalen ou une de ses variantes (non traité). Mais ces modèles, dont les résultats seront présentés par des graphiques, se commentent assez difficilement. Et dont l'utilisation est devenue je crois plus que rare.  
 
 **Forêt aléatoire**    
-Autre méthode : les forêts aléatoires. L.Breiman a dès le départ proposé une estimation des modèles de survie par cette méthode. Par définition, pas sensible à l’hypothèse PH. Mais cela reste des méthodes à finalité prédictive, moins riche en interprétation. 
+Autre méthode : les forêts aléatoires. L.Breiman a dès le départ proposé une estimation des modèles de survie par cette méthode. Par définition, pas sensible à l’hypothèse PH. Mais cela reste des méthodes à finalité très prédictive, moins riche en interprétation. 
 

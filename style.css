@@ -1,4 +1,10 @@
 
+body {
+font-family: "Poppins", sans-serif;
+  
+}
+
+
 #quarto-sidebar  {
   background-color: white;
   border: 1px;
@@ -10,7 +16,55 @@
  border-left:1px solid #e83283;
  color:#e83283 !important
 }
+
 .sidebar nav[role=doc-toc] ul>li>a:hover,
 .sidebar nav[role=doc-toc] ul>li>ul>li>a:hover {
  color:#e83283 !important
 }
+
+a {
+  text-decoration: none;
+}
+
+
+
+
+/* blocs de codes*/
+.code-with-filename .code-with-filename-file {
+  background-color: #2c3e50;
+  border-bottom:     0px solid  #2c3e50;
+  border-top:        1px solid  #2c3e50;
+  border-left:       1px solid  #2c3e50;
+  border-right:      1px solid  #2c3e50;  
+  padding-top:       5px;
+  padding-bottom:    5px;  
+  color: #f6f4fb;
+}
+
+.code-with-filename-file pre {
+ background-color:  #2c3e50;
+ font-weight: 900;
+ font-size: 1.05rem;
+}
+
+.code-with-filename .code-with-filename-file strong {
+  font-weight: 900;
+  color:  #f6f4fb;
+}
+
+.cell-output-display pre, .cell-output-stdout pre {
+padding: .4em;
+color: #2c3e50;
+background-color:#f8f9fa;
+
+}
+
+div.sourceCode {
+ background-color: #f8f9fa;
+ border: 2px solid #2c3e50;
+ border-radius:.25rem;
+ font-size: 1.1rem;
+ font-weight: 500;
+}
+
+

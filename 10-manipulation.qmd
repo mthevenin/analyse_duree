@@ -1,13 +1,15 @@
+---
+# title: "Mise en forme"
+---
 
+# Eléments de mise en forme des données
 
-# **Eléments de mise en forme des données**
-
-Ce qui suit est un premier jet réalisé en 2023, encore très perfectible, mais j'avais bien conscience depuis très longtemps que l'absence d'une partie dédiée aux manipulations des données biographiques était problématique. 
+Ce qui suit est un premier draft réalisé en 2023, encore très perfectible, mais j'avais conscience depuis plusieurs années que l'absence d'une partie dédiée aux manipulations des données biographiques était problématique. 
 Ce qui suit ne peut pas couvrir toutes les problématiques que l'on peut rencontrer lorsqu'on met en forme ce type de données: le format de mise à disposition, l'extraction de l'information pertinente correspondant à la question analysée, voire le logiciel utilisé, rend quasiment impossible la production d'un guide clé en main.
 
 **Quelques conseils**  
 
-* Comme l'analyse des durées/survie consiste à extraire une (ou plusieurs) séquence(s) bien identifier les situations types que l'on sera conduit à rencontrer et à traiter. Ici il peut être intéressant, de manière exploratoire, à conduire une analyse de séquences au préalable. 
+* Comme l'analyse des durées/survie consiste à extraire une (ou plusieurs) séquence(s), il convient de bien identifier les situations types que l'on sera conduit à rencontrer et à traiter. Ici il peut être intéressant, de manière exploratoire, de conduire une analyse de séquences au préalable. 
 * Vérifier à chaque étape de la programmation la validité ou la cohérence des informations contenues dans les variables créées et/ou de la mise en forme.
 
 **Le format des données utilisé dans cette section** 
@@ -20,8 +22,8 @@ Ce qui suit ne peut pas couvrir toutes les problématiques que l'on peut rencont
 
 * Cette section n'est pas centrée sur la méthode de programmation, mais plutôt sur les questions que l'on doit se poser et leur résolution. 
 * Comme la formation est appliquée en R, j'ai néanmoins donné les codes que j'ai utilisé. 
-  * Les codes R sont ici largement hérité d'une programmation Stata que je maîtrise encore bien mieux. 
-  * On pourrait aller *plus vite*, mais j'applique une programmation assumée prudente. 
+  * Les codes R sont ici largement hérité d'une programmation Stata que je maîtrise  bien mieux, et particulièrement efficace dans ce domaine. 
+  * On pourrait aller *plus vite*, mais j'assume une programmation prudente. 
   * Le type de programmation applique assez massivement l'utilisation de compteurs ou de double compteurs, et si nécessaire l'utilisation de variables décalée de type *lead* ou *lag*. 
 
 

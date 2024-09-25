@@ -1,8 +1,5 @@
 ---
-filters:
-   - lightbox
-
-lightbox: auto
+#title: "R" 
 ---
 
 ```{r setup, include=FALSE}
@@ -17,7 +14,7 @@ options(show.signif.stars=FALSE)
 ```
 
 
-# **R**
+# R
 
 Programme de cette section: [Lien](programme_R.R)
 
@@ -110,7 +107,7 @@ library(nnet)
 
 
 
-## Analyse Non paramétrique
+## Analyse Non paramétrique {#sec-test}
 
 Chargement de la base transplantation
 
@@ -122,9 +119,9 @@ trans <- read.csv("https://raw.githubusercontent.com/mthevenin/analyse_duree/mas
 
 ### Méthode actuarielle
 
-La fonction disponible du paquet `discsurv`, *`lifetable`*, a des fonctionalités plutôt limitées. Si on peut depuis une MAJ récente définir des intervalles de durée, il n'y a toujours pas d'estimateurs les différents quantiles de la courbe de survie.   
+La fonction disponible du paquet `discsurv`, *`lifetable()`*, a des fonctionalités plutôt limitées. Si on peut maintenant définir des intervalles de durée, il n'y a toujours pas d'estimateurs les différents quantiles de la courbe de survie, ce qui limite fortement sont utilisation.   
 
-La programmation est rendue un peu compliquée pour pas grand chose. Je donne les codes pour info, sans plus de commentaires.
+La programmation est rendue un peu compliquée pour pas grand chose. Je donne les codes pour information, sans plus de commentaires.
 
 ```{r}
 trans = as.data.frame(trans)
@@ -159,25 +156,27 @@ lt <- lifeTable(dataShort=dis, timeColumn="timeDisc", eventColumn = "died")
 plot(lt, x = 1:dim(lt$Output)[1], y = lt$Output$S, xlab = "Intervalles dt = 30 jours", ylab="S(t)")
 ```
 
-Sur les abscisses, ce sont les valeurs des intervalles qui sont reportés: 10=300 jours. Ce n'est vraiment pas terrible. Pour ce type d'estimateurs, il est préférable d'utiliser Sas ou Stata.
+Sur les abscisses, ce sont les valeurs des intervalles qui sont reportés: 10=300 jours. Ce n'est vraiment pas terrible. Pour ce type d'estimateurs, il est donc préférable d'utiliser Stata (ou Sas {{<fa solid cross>}}.
 
 
 ### Méthode Kaplan-Meier
 
-Le package survival est le principal outil d'analyse des durée. Le package **`survminer`** permet d'améliorer la présentation des graphiques. 
+Le package **`survival`** est le principal outil d'analyse des durée. Le package **`survminer`** permet d'améliorer grandement la présentation des graphiques. 
 
 
 **Estimation des fonctions de survie**  
 
 Fonction **`survfit`**  
 
-```{r filename="syntaxe", eval=F}
-fit <- survfit(Surv(time, status) ~ x, data = base)
+```{.r filename="Syntaxe"}
+
+fit <- survfit(Surv(time, status) ~ x, data = nom_base)
 ```
 
 On peut renseigner directement les variables permettant de calculer la durée et non la variable de durée elle-même. Cette méthode est utilisée lorsqu'on introduit une variable dynamique dans un modèle semi-paramétrique de Cox (`coxph`).
 
-```{r filename="Syntaxe", eval=F}
+```{.r filename="Syntaxe"}
+
 fit <- survfit(Surv(variable_start, variable_end, status) ~ x, data = nom_base)
 ```
 
@@ -212,7 +211,7 @@ ggsurvplot(fit, conf.int = TRUE, risk.table = TRUE)
 
 ### Comparaison des S(t) méthode KM
 
-On va comparer les deuxfonctions de survie pour la variable *surgery*, celle pour les personnes non opérées et celle pour les personnes opérées.  
+On va comparer les deux fonctions de séjour pour la variable *surgery*, celle pour les personnes non opérées et celle pour les personnes opérées.  
 
 ```{r}
 fit <- survfit(Surv(stime, died) ~ surgery, data = trans)
@@ -224,7 +223,7 @@ ggsurvplot(fit, conf.int = TRUE, risk.table = TRUE)
 
 **Tests du logrank**
 
-On utilise la fonction **`survdiff`**, avec comme variante le test de Peto-Peto (`rho=1`).  
+On utilise la fonction **`survdiff`**, avec comme variante le test des frères Peto (`rho=1`).  
 La syntaxe est quasiment identique à la fonction `survdiff`.  
 
 ```{r}
@@ -248,11 +247,11 @@ plot(a)
 
 ## Modèle de Cox
 
-Ici tout est estimé de nouveau avec des fonctions du package `survival`:  
+Ici tout est estimé, de nouveau, avec des fonctions du package `survival`:  
 
 * Estimation du modèle: `coxph`.
-* Test de Grambsch-Therneau: ```cox.zph``` et `cox.oldzph`.
-* Introduction d'une variable dynamique: allongement de la base avec ```survsplit```.
+* Test de Grambsch-Therneau: `cox.zph` et `cox.oldzph`.
+* Introduction d'une variable dynamique: allongement de la base avec `survsplit`.
 
 ### Estimation du modèle
 
@@ -260,7 +259,7 @@ Par défaut, R utilise la correction d'Efron pour les évènements simultanés. 
 
 Syntaxe:
 
-```{e filename="Syntaxe", eval=FALSE}
+```{.r filename="Syntaxe"}
 coxph(Surv(time, status) ~ x1 + x2 + ....., data=base, ties="nom_correction"))
 ```
 
@@ -287,13 +286,18 @@ ggforest(coxfit)
 
 **Résidus de Schoenfeld**  
 
-On utilise la fonction **`cox.zph`** pour effectuer le test GLS (moindre carrés généralisés) qui a été substitué au test OLS (moindres carrés ordinaires) avec le passage à la v3 du package. **Je donne plus loin un moyen de récupérer et d'exécuter le test OLS, que je conseille d'utiliser en présence de durées discrètes/groupées**.
+Traditionnellement, on utilise la fonction **`cox.zph`**. 
 
-Le test peut utiliser plusieurs fonctions de la durée. Par défaut la fonction utilise $1-KM$, soit le complémentaire de l'estimateur de Kaplan-Meier (option `transform="km"`).
+Depuis la v3 du package (2020), il permet d'effectuer le test original de Grambsch-Therneau qui repose sur le calcul exact des résidus. 
+Malheureusement, celui ci pose de gros problèmes en présence de covariables corrélées, même faiblement. Situation classique dans les sciences sociales. **Je ne déconseille fortement de l'utiliser**. Il est donc préférable de rester sur le test reposant sur les moindres carrés ordinaires, implémenté jusqu'en 2023, et le seule disponible avec les autres outils: Stata, Python et Sas {{<fa solid cross>}}. On maintiendra donc une reproductibilité du test dans le temps et dans l'espace des logiciel. 
 
 
-* **Test GLS (V3 de survival)**
+Le test peut utiliser plusieurs transformation de la durée. Par défaut la fonction utilise $1-KM$, soit le complémentaire de l'estimateur de Kaplan-Meier (option `transform="km"`). Cette expression complémentaire permet juste d'avoir une suite de valeur partant de 0 (la valeur de la fonction de survie partant par définition de 1).
 
+
+[Test GLS (v3 de survival)... WARNING]{.box_warning}   
+   
+   
 Avec `transform="km"`
 
 ```{r}
@@ -306,10 +310,10 @@ Avec `transform="identity"` ($f(t)=t$)
 cox.zph(coxfit, transform="identity")
 ```
 
-Remarque: avec la v3 de survival, quelques options ont été ajoutées tel que *`terms`* qui permet pour une variable catégorielle à plus de deux modalités de choisir entre un sous test multiple sur la variable (k modalités => k-1 degré de liberté) et une série de tests à 1 degré de liberté sur chaque modalité (k-1 tests). De mon point de vue préférer la seconde solution avec **`terms=FALSE`**. le test de Grambsch-Therneau est particulièrement sensible au nombre de degré de liberté, et il convient donc d'éviter de l'utiliser dans un cadre multiple.
+Remarque: avec la v3 de survival, quelques options ont été ajoutées tel que *`terms`* qui permet pour une variable catégorielle à plus de deux modalités de choisir entre un sous test multiple sur la variable (k modalités => k-1 degré de liberté) et une série de tests à 1 degré de liberté sur chaque modalité (k-1 tests). De mon point de vue préférer la seconde solution avec **`terms=FALSE`**. Le test de Grambsch-Therneau sous sa forme multiple étant  particulièrement sensible au nombre de degrés de liberté, il est à mon sens préférable d'évaluer la proportionnalité variable par variable, donc degré de liberté par degré de liberté.
 
 
-* **Test OLS (V2 de survival - Stata - Sas - Python)**
+[Test OLS (v2 de survival - Stata - Sas - Python)...Use it]{.box_text} 
 
 ```{r filename="Récupération du test ols"}
 source("https://raw.githubusercontent.com/mthevenin/analyse_duree/main/cox.zphold/cox.zphold.R")
@@ -320,6 +324,9 @@ cox.zphold(coxfit, transform="identity")
 ```
 
 
+On voit ici clairement que le test exact accentue la déviation vers la. C'est du tout simplement à la corrélation entre la variable *surgery* et la variable *year*. Les conclusions de S.Metzger sont ici bien vérifiées.
+
+
 #### Introduction d'une intéraction
 
 Lorsque la covariable n'est pas continue, elle doit être impérativement transformée en indicatrice ^[c'est le cas ici, la variable *surgery* est bien codée (0;1)]. Penser à vérifier en amont que les résultats du modèle sont bien identiques avec le modèle estimé précédemment (ne pas oublier d'omettre le niveau en référence).  
@@ -327,7 +334,9 @@ Lorsque la covariable n'est pas continue, elle doit être impérativement transf
 La variable d'intéraction est **`tt(nom_variable)`**, la fonction de la durée (ici forme linéaire simple) est indiquée en option de la fonction: **`tt = function(x, t, ...) x*t`**. 
 
 ```{r}
-coxfit2 = coxph(formula = Surv(stime, died) ~ year + age + surgery + tt(surgery), data = trans, tt = function(x, t, ...) x*t)
+
+coxfit2 = coxph(formula = Surv(stime, died) ~ year + age + surgery + tt(surgery), 
+                data = trans, tt = function(x, t, ...) x*t)
 
 summary(coxfit2)
 
@@ -347,7 +356,8 @@ La dimension dynamique est ici le fait d'avoir été opéré pour une greffe du 
 * **Etape 3**: modifier la variable transplant (ou créer une nouvelle) à l'aide de la variable **wait** qui prend la valeur 1 à partir du jour de la greffe, 0 avant.
 
 * *Etape 1*: création de l'objet cut (vecteur), qui récupère les moments où au moins un évènement est observé.
-```{R}
+```{r}
+
 cut= unique(trans$stime[trans$died == 1])
 
 cut
@@ -356,6 +366,7 @@ cut
 *Etape 2*: allonger la base aux durées d'évènement
 
 ```{r}
+
 tvc = survSplit(data = trans, cut = cut, end = "stime", start = "stime0", event = "died")
 
 head(tvc, n=20 )
@@ -365,18 +376,23 @@ head(tvc, n=20 )
 On vérifie qu'on obtient les même résultats avec le modèle sans tvc
 
 ```{r}
+
 coxph(formula = Surv(stime0, stime, died) ~ year + age + surgery, data = tvc)
 ```
 
 * *Etape 3*: on génère la variable dynamique de sorte que les personnes n'apparaissent pas greffés avant l'opération
 
 ```{r}
+
 tvc$tvc=ifelse(tvc$transplant==1 & tvc$wait<=tvc$stime,1,0)
 ```
 
 **Estimation du modèle**  
-En format long, on doit préciser dans la formule l'intervalle de durée avec les variables stime0 (début) et stime(fin) 
+En format long, on doit préciser dans la formule l'intervalle de durée avec les variables `stime0` (le début) et `stime` (la fin). 
+
+
 ```{r}
+
 tvcfit = coxph(formula = Surv(stime0, stime, died) ~ year + age + surgery + tvc, data = tvc)
 
 summary(tvcfit)
@@ -387,18 +403,20 @@ tbl_regression(tvcfit, exponentiate = TRUE, estimate_fun = purrr::partial(style_
 
 
 ```{r}
+
 ggforest(tvcfit)
 ```
 
 
 
-## **Analyse en durée discrète**
+## Modèles à durée discrète
 
-Pour la durée, on va utiliser la variable mois (regroupement sur 30 jours).  
+Pour la durée, on va utiliser la variable *mois* (regroupement sur 30 jours de *stime*).  
 
-La fonction **`uncount`** du package ```tidyr``` permettra de splitter la base aux durées d'observation. C'est ici la principale différence avec le modèle de Cox qui est une estimation aux durées d'évènement   
+La fonction **`uncount`** du package `tidyr` permettra de splitter la base aux durées d'observation. C'est ici la principale différence avec le modèle de Cox qui est une estimation aux durées d'évènement   
 
 ```{r}
+
 trans <- read.csv("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv")
 ```
 
@@ -406,15 +424,18 @@ trans <- read.csv("https://raw.githubusercontent.com/mthevenin/analyse_duree/mas
 La variable *mois*, va être supprimée avec `uncount`. Comme on en aura besoin plus loin pour générer proprement la variable évènement, on peut créer ici une variable mirroir.
 
 ```{r}
+
 trans$T = trans$mois
 ```
 
 ```{r}
+
 dt = uncount(trans,mois)
 dt = dt[order(dt$id),]
 ```
 
 ```{r}
+
 head(dt,11) 
 ```
 
@@ -422,6 +443,7 @@ head(dt,11)
 On va générer une variable type compteur pour mesurer la durée à chaque point d'observation. 
 
 ```{r}
+
 dt$x=1
 dt$t = ave(dt$x,dt$id, FUN=cumsum)
 
@@ -432,6 +454,7 @@ head(dt, n=8)
 Si un individu est décédé, died=1 est reporté sur toute les lignes (idem qu'avec la variable dynamique). On va modifier la variable tel que *died=0 si t<T$*.
 
 ```{r}
+
 dt = arrange(dt,id,t)
 
 dt$died[dt$t<dt$T]=0
@@ -439,7 +462,7 @@ dt$died[dt$t<dt$T]=0
 head(dt, n=8)
 ```
 
-### **$f(t)$ quantitative**
+### $f(t)$ quantitative
 
 Avec un effet quadratique d'ordre 3 ^[Attention ici cela marche bien. Bien vérifier qu'il n'y a pas un problème d'overfitting, comme c'est le cas dans le TP. 
 
@@ -466,10 +489,10 @@ tbl_regression(dtfit, exponentiate = TRUE, estimate_fun = purrr::partial(style_r
 
 
 
-### **$f(t)$ en indicatrices **
+### $f(t)$ en indicatrices
 
-On va créer une variable de type dicrète regroupant la variable *t* sur ses quartiles (pour l'exemple seulement, tous types de regroupement est envisageable).  
-On va utiliser la fonction `quantcut` du package `gtools`.
+On va créer une variable de type discrète regroupant la variable *t* sur ses quartiles (pour l'exemple seulement, tous types de regroupement est envisageable).  
+On utilisera utiliser la fonction `quantcut` du package `gtools`.
 
 
 ```{r}
@@ -512,7 +535,9 @@ Pour le modèle de **Weibull** par exemple.
 
 On utilise la fonction `survreg` du package **`survival`**
 
-```{r, message=FALSE}
+```{r}
+#| message: false
+
 weibull = survreg(formula = Surv(stime, died) ~ year + age + surgery, data = trans, dist="weibull")
 summary(weibull)
 
@@ -572,7 +597,9 @@ ggcompetingrisks(fit = ic)
 
 Le test de Gray est automatiquement exécuté.
 
-```{R, message=FALSE}
+```{r}
+#| message: false
+
 ic = cuminc(compet$stime, compet$compet, group=compet$surgery, rho=1)
 ic 
 plot(ic)
@@ -580,23 +607,26 @@ plot(ic)
 
 Avec `survminer`, pour obtenir un seul graphique pour toutes les courbes ajouter l'option **`multiple_panels = F`**
 
-```{R, message=FALSE}
+```{r}
+#| message: false
+
 ggcompetingrisks(fit = ic)
 
 ggcompetingrisks(fit = ic, multiple_panels = F)
 ```
 
 
-#### **Modèles**
+#### Modèles
 
 
 On va utilisé seulement le modèle multinomial à durée discrète, le modèle *fine-gray* pendant du modèle de Cox pour les risques concurrents étant fortement critiqué. Si une analyse de type *cause-specific* est envisageable (issues concurrentes traitées comme des censures à droites) on utilise simplement la fonction `coxph` de `survival`.
 
 On va de nouveau utiliser la variable mois (durée discrète).  Le modèle sera estimé à l'aide la fonction **`multinom`** du très vieillissant package `nnet`, les p-values doivent-être programmées, l'output ne donnant que les erreurs-types.  
 
-*Mise en formae de la base*  
+*Mise en forme de la base*  
 
-```{R, message=FALSE}
+```{r}
+#| message: false
 
 compet <- read.csv("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv")
 
@@ -620,7 +650,10 @@ td$e = ifelse(td$t<td$T,0, td$compet)
 
 Pour estimer le modèle, on utilise la fonction **`mlogit`**. Les p-values seront calculées à partir d'un test bilatéral (statistique z). 
 
-```{R, message=FALSE, message=FALSE, warning=FALSE}
+```{r}
+#| message: false
+#| warning: false
+
 
 competfit = multinom(formula = e ~ t + t2 + yearb + ageb + surgery, data = td)
 

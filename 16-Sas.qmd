@@ -1,11 +1,9 @@
 ---
-filters:
-  - lightbox
-lightbox: auto
+#title: "**sas**"
 ---
 
 
-# **SAS**
+#  In memoriam SAS 
 
 ::: callout-note
 

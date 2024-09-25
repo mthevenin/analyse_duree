@@ -1,5 +1,5 @@
 
-# **L'analyse biographique des durées** 
+# L'analyse biographique des durées
 
 ## Questions 
 
@@ -19,9 +19,6 @@ Les problématiques se basent sur les questions suivantes:
 | Analyse de survie/séjour     | Survival analysis              |
 | Analyse de fiabilité         | Failure time data analysis     |
 | Analyse des transitions      | Event-history analysis         |
-
-Pour ce support, le choix de son titre me pose toujours problème pour éviter qu'il soit trop à rallonge. 
-Si j'avais à trancher, il devrait un peu s'éterniser sous l'appelation **Introduction à l'analyse biographique des durées en présence de données censurée (à droite^[Ce qui est déjà bien suffisant])**.
 
 
 ## Exemples d'analyse 
@@ -43,15 +40,15 @@ Si j'avais à trancher, il devrait un peu s'éterniser sous l'appelation **Intro
    - Une échelle de mesure ou métrique temporelle: minutes, heures, jours, mois, années....
    - Une origine **commune** définissant un évènement de départ ^[Attention, dans le cadre des données prospectives ou de suivi, cela ne peut pas être le moment de l'inclusion à la base données]: naissance, mariage si on analyse la séparation, ..... 
    - Une définition précise de l'évènement d'étude.  
-   - Une durée entre le début et la fin de la période d'observation, si nécessaire avec la fin de la période d'exposition au risque. Cette durée doit être généralement calculée à l'aide des informations de datation. 
+   - Une durée entre le début et la fin de la période d'observation, si nécessaire avec la fin de la période d'exposition au risque. Cette sortie d'exposition devrait être également calculée à l'aide des informations de datation, ce qui n'est pas toujours le cas. 
 
 2. **Une population soumise au risque** de connaître l'évènement (**Risk Set**)
 
 3. ***Des variables explicatives*** ou ***covariables***
-   - Fixes: sexe/genre, génération, niveau de diplôme le plus élevé,......
+   - Fixes: sexe/genre, génération, niveau de diplôme le plus élevé,...... Ce sont généralement des caractéristiques en début d'exposition. 
    - Dynamiques (TVC: *Time varying covariates*): 
      - Mesurées à tout moment entre le début et la sortie de l'observation: statut matrimonial, taille du ménage, statut d'activité...
-     - Pour les modèles  à l'exception du semi-paramétrique de Cox, en présence de données censurées la durée ou une transformation de celle-ci est une variable dynamique  introduite comme variable indépendante pour assurer le bon ajustement des données. L'introduction directe d'une fonction de la durée comme variable dépendante seule ne peut se faire qu'en absence d'observation censurée, en particulier à droite. Quelle que soit leur forme c'est une caractéristique propre aux modèles pleinement paramétriques.
+     - Pour les modèles,et à l'exception du semi-paramétrique de Cox,  la durée ou une transformation de celle-ci, est **une variable dynamique  introduite comme variable indépendante pour assurer le bon ajustement des données**. L'introduction directe d'une fonction de la durée comme variable dépendante seule ne peut se faire qu'en absence d'observation censurée, en particulier à droite. Il s'agit là d'une caractéristique propre aux modèles pleinement paramétriques: usuels basés sur une loi de distribution des évènements dans le temps (Weillbul, Gompertz...) ou les modèles dits à durée discrète (logit, probit...).
 
 
 

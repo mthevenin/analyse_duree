@@ -1,31 +1,25 @@
 ---
-filters:
-  - lightbox
-lightbox: auto
-
 jupyter: python3
 ---
 
 
-::: callout-note
+* Le document qui suit n'est qu'un programme fait il y a 5 ans, et non repris depuis (mais ça marche. Utilisant très peu Python, je n'ai pas documenté les fonctions, qui ont été utilisées.
 
-- Le document qui suit n'est qu'un programme fait il y a 3-4 ans. Utilisant très peu Python, je n'ai pas documenté les fonctions, plus ou moins obsures, qui ont été utilisées.
-- L'exécution a été réalisé le noyau `python3` de jupyter.
-- Le document n'a pas été compilé en PDF, seule cette version html est disponible.
-
-:::
+* J'ai essayé de réglé tant bien que mal un bug d'affichage à partir de la proportionnalité des risques, qui conduisait à un affichage en pleine page. Cette section n'étant pas très développée, je n'ai pas trop insisté (l'accès à la table des matières n'est plus disponible sur la moitié du document).
 
 
-# **Python**
-
+# Python
 
 Deux paquets d'analyse: principalement `lifelines` (km, cox, aft...) et `statsmodels``` (estimation logit en temps discret, kaplan-Meier, Cox).
 
+Le package `statsmodels` est également en mesure d'estimer des courbes de séjour de type Kaplan-Meier et des modèles à risque proportionnel de Cox. Le package `lifelines` couvre la quasi totalité des méthodes standards, à l'exception des risques concurrents. 
 
-Le package ```statsmodels``` est également ne mesure d'estimer des courbes de séjour de type Kaplan-Meier et des modèles à risque proportionnel de Cox. Le package ```lifelines``` couvre la quasi totalité des méthodes standards, à l'exception des les risques concurrents.  
+Le calcul des Rmst a été ajouté au package `lifelines` récemment. J'ai ajouté cette mise à jour.
  
  
 ```{python}
+# Penser à installer les packages: pip install nom_package
+
 import numpy  as np
 import pandas as pd
 import patsy  as pt
@@ -50,6 +44,8 @@ trans.info()
 
 
 ### Non Paramétrique: Kaplan Meier
+
+#### Calcul des estimateurs
 
 **Estimateur KM et durée médiane**
 
@@ -84,7 +80,7 @@ for name, grouped_df in trans.groupby('surgery'):
 ```
 
 
-
+#### Tests du logrank
 
 ```{python}
 from lifelines.statistics import multivariate_logrank_test
@@ -93,10 +89,81 @@ results.print_summary()
 ```
 
 
+#### Calcul des Rmst
 
-## Semi paramétrique: Cox
+::: callout-note
 
-### Estimation
+* Update 2024.
+* Programmation très lourde.
+* Pas de test de comparaison des RMST (différence ou ratio). 
+
+:::
+
+* Chargement de la fonction
+
+```{python}
+from lifelines.utils import restricted_mean_survival_time
+```
+
+
+* Définition de la valeur du groupe exposé (ici surgery égal à 1)
+
+```{python}
+ix = trans['surgery'] == 1
+```
+
+
+* Définition de la durée maximale. Ici 1407 jours (idem R par défaut)
+
+```{python}
+tmax = 1407
+```
+
+* Calcul des Rmst
+
+```{python}
+kmf_1 = KaplanMeierFitter().fit(T[ix], E[ix], label='Opérés')
+rmst_1 = restricted_mean_survival_time(kmf_1, t=tmax)
+
+kmf_0 = KaplanMeierFitter().fit(T[~ix], E[~ix], label='Non opérés')
+rmst_0 = restricted_mean_survival_time(kmf_0, t=tmax)
+```
+
+Rmst pour surgery = 0
+
+```{python}
+rmst_0
+```
+
+
+Rmst pour surgery = 1
+
+```{python}
+rmst_1
+```
+
+
+* Courbes des Rmst pour tmax = 1407
+
+```{python}
+from matplotlib import pyplot as plt
+from lifelines.plotting import rmst_plot
+
+ax = plt.subplot(311)
+rmst_plot(kmf_1, t=tmax, ax=ax)
+
+ax = plt.subplot(312)
+rmst_plot(kmf_0, t=tmax, ax=ax)
+
+ax = plt.subplot(313)
+rmst_plot(kmf_1, model2=kmf_0, t=tmax, ax=ax)
+```
+
+
+
+### Semi paramétrique: Cox
+
+#### Estimation
 
 ```{python}
 model = 'year + age + C(surgery) -1'
@@ -115,17 +182,20 @@ cph.plot()
 ```
 
 
+<div style="margin-left:350px; margin-right: 300px">
 
-### Tests hypothèse PH
+#### Tests hypothèse PH
 
-**Test PH: Schoenfeld Méthode 1**
+**Test PH: Schoenfeld Méthode 1**  
+
 
 ```{python}
 cph.check_assumptions(YX,p_value_threshold=0.05)
 ```
 
 
-**Test PH: Schoenfeld Méthode 2**
+**Test PH: Schoenfeld Méthode 2**  
+
 ```{python}
 from lifelines.statistics import  proportional_hazard_test 
 zph = proportional_hazard_test(cph, YX, time_transform='all')
@@ -140,18 +210,21 @@ from lifelines.utils import to_episodic_format
 from lifelines import CoxTimeVaryingFitter
 ```
 
-*Transformation de la base YX*
+*Transformation de la base YX*  
+
 ```{python}
 long = to_episodic_format(YX, duration_col='stime', event_col='died')
 ```
 
 
-*Création de la variable d'intéraction*
+*Création de la variable d'intéraction*  
+
 ```{python}
 long['surgery_t'] = long['C(surgery)[1]'] * long['stop']
 ```
 
-*Estimation*
+*Estimation*  
+
 ```{python}
 ctv = CoxTimeVaryingFitter()
 ctv.fit(long,
@@ -164,13 +237,13 @@ ctv.print_summary(4)
 
 
 
-### Variable dynamique binaire
+<div style="margin-left:350px; margin-right: 300px">
 
-## Modèle à temps discret
+### Modèle à temps discret
 
-### Ajustement continu
+#### Ajustement continu
 
-Modèle logistique estimé avec le paquet ```statsmodel```. La fonction ```to_episodic_format``` de ```lifelines``` permet de mettre en forme la base.  
+Modèle logistique estimé avec le paquet `statsmodel`. La fonction `to_episodic_format` de `lifelines` permet de mettre en forme la base.  
 Pour la  durée, on utilisera ici la variable **mois** (regroupement de stime par intervalle de 30 jours).
 
 ```{python}
@@ -178,7 +251,7 @@ import statsmodels.formula.api as smf #type R formule => ce qu'on utilisera#
 import statsmodels.api as sm #type python#
 ```
 
-**Transformation de la base en format long**
+**Transformation de la base en format long**  
 
 ```{python}
 td = pd.read_csv("https://raw.githubusercontent.com/mthevenin/analyse_duree/master/bases/transplantation.csv")
@@ -189,7 +262,6 @@ td = to_episodic_format(td, duration_col='mois', event_col='died')
 
 **Evaluation de l'ajustement avec des fonctions quadratiques**  
 
-
 ```{python}
 td['t2'] = td['stop']**2
 td['t3'] = td['stop']**3
@@ -198,7 +270,8 @@ fit2 = smf.glm(formula=  "died ~ stop + t2", data=td, family=sm.families.Binomia
 fit3 = smf.glm(formula=  "died ~ stop + t2 + t3", data=td, family=sm.families.Binomial()).fit()
 ```
 
-**Comparaison des AIC**
+**Comparaison des AIC**  
+
 ```{python}
 print("AIC pour ajustement t1")
 print(fit1.aic)
@@ -209,14 +282,15 @@ print(fit3.aic)
 ```
 
 
-**Estimation du modèle**
+**Estimation du modèle** 
+
 ```{python}
 tdfit = smf.glm(formula=  "died ~ stop + t2 + t3 + year + age + surgery", data=td, family=sm.families.Binomial()).fit()
 tdfit.summary()
 ```
 
 
-### Ajustement discret
+#### Ajustement discret
 
 *Création des intervalles pour l'exemple (quantile de la durée en mois)*
 
@@ -239,7 +313,7 @@ td2 =  td2.groupby(['id','ct4']).last()
 ```
 
 
-**Estimation**
+**Estimation**   
 
 ```{python}
 td2fit = smf.glm(formula=  "died ~ C(t) +  year + age + surgery", data=td2, family=sm.families.Binomial()).fit()
@@ -247,13 +321,15 @@ td2fit.summary()
 ```
 
 
-## Modèle paramétrique de type AFT
+<div style="margin-left:350px; margin-right: 300px">
+
+### Modèle paramétrique de type AFT
 
 ```{python}
 from lifelines import WeibullAFTFitter, LogLogisticAFTFitter
 ```
 
-**Weibull**
+**Weibull**    
 
 ```{python}
 aftw = WeibullAFTFitter()
@@ -261,8 +337,9 @@ aftw.fit(YX, duration_col='stime', event_col='died')
 aftw.print_summary()
 ```
 
+<div style="margin-left:350px; margin-right: 300px">
 
-**Loglogistique**
+**Loglogistique**   
 
 ```{python}
 aftl = LogLogisticAFTFitter()
@@ -271,14 +348,15 @@ aftl.print_summary()
 ```
 
 
-# Package statsmodels
+<div style="margin-left:350px; margin-right: 300px">
+## Package statsmodels
 
 
-https://www.statsmodels.org/dev/duration.html
+<https://www.statsmodels.org/dev/duration.html>
 
-Le package permet d'estimer des fonction de séjour de type Kaplan-Meier et des modèles de Cox.
+Le package permet d'estimer des fonctions de séjour de type Kaplan-Meier et des modèles de Cox.
 
-## Kaplan-Meier
+### Kaplan-Meier
 
 ```{python}
 km = sm.SurvfuncRight(trans["stime"], trans["died"])
@@ -287,7 +365,7 @@ km.summary()
  
 
 
-Les test du log-rank sont disponibles avec la fonction ```survdiff``` (nom idem R). Au niveau graphique, la programmation semble un peu
+Les test du log-rank sont disponibles avec la fonction `survdiff` (nom idem R). Au niveau graphique, la programmation semble un peu
 lourde et mériterait d'être simplifiée (donc non traitée).  
 
 **Comparaison de S(t) à partir des tests du log-rank**  
@@ -315,7 +393,7 @@ sm.duration.survdiff(trans.stime, trans.died, trans.surgery, weight_type='gb')
 sm.duration.survdiff(trans.stime, trans.died, trans.surgery, weight_type='tw')
 ```
 
-## Modèle de Cox
+### Modèle de Cox
 
 ```{python}
 mod = smf.phreg("stime ~  year + age + surgery ",trans, status='died', ties="efron")
@@ -323,6 +401,7 @@ rslt = mod.fit()
 print(rslt.summary())
 ```
 
+</div>
 
 
 

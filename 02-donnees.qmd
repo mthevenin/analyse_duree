@@ -1,51 +1,49 @@
 ---
 # title: "**Les Données**"
-
-filters:
-  - lightbox
-lightbox: auto
 ---
 
 
-# **Les Données**
+# Les Données
 
 On distingue deux types de données: les données prospectives et rétrospectives: 
 
 
-## **Données prospectives et rétrospectives**  
+## Données prospectives et rétrospectives
 
 
 ### Les données prospectives
 
--	Individus suivis à des dates successives. On parle souvent de données de stock mises à jour à intervalles de temps plus ou moins réguliers. 
--	Instrument de mesure identique à chaque vague (si possible).
+*	Individus suivis à des dates successives. On parle souvent de données de stock mises à jour à intervalles de temps plus ou moins réguliers.  
 
--	Avantages: 
-  - Qualité des données et techniquement l'absence de biais de mémoire^[Cet avantage peut se trouver contrebalancé par des phénomènes de censure par intervalles, donc de *trous* tout aussi problématiques que ceux liés à la mémoire].
-  - Si le suivi est pérenne une même analyse peut être répliquée à intervalles réguliés. 
+*	Instrument de mesure identique à chaque vague (si possible).
+
+*	**Avantages**: 
+  * Qualité des données et techniquement l'absence de biais de mémoire^[Cet avantage peut se trouver contrebalancé par des phénomènes de censure par intervalles, donc de *trous* tout aussi problématiques que ceux liés à la mémoire].
+  * Si le suivi est pérenne une même analyse peut être répliquée à intervalles réguliés. 
+
+*	Inconvénients: 
+  * Délais pour les exploiter dans une analyse. Mais à minima deux points d'observations permettent déjà sur une exposition certes très courte, de présenter quelques d résultats.  
+  * Mêmes hypothèses entre deux passages pas forcément respectées
+  * Attrition, censure ou troncature à gauche liés aux âges d'inclusion. C'est sans aucun doute le plus gros problème, et ces phénomènes demande une vigilance extrême. Sans connaissance des principes de base en analyse des durées ou de survie, on peut être amené à réaliser, évaluer ou lire des études que l'on pourrait qualifier ici d'*analyse de survie Canada dry*.
 
 
--	Inconvénients: 
-  - Délais pour les exploiter dans une analyse. Mais à minima deux points d'observations permettent déjà sur une exposition certes très courte, de présenter des résultats.  
-  - Mêmes hypothèses entre deux passages pas forcément respectées
-  - Attrition, censure ou troncature à gauche liés aux âges d'inclusion. C'est sans aucun doute le plus gros problème, et ces phénomènes demande une vigilance extrême. Sans connaissance des principes de base en analyse des durées ou de survie, on peut être amené à réaliser, évaluer ou lire des études que l'on pourrait qualifier ici d'*analyse de survie Canada dry*.
-
-
-A noter l’exploitation croissante des données administratives qui peuvent regorger d’informations biographiques. Déjà disponibles, le problème du coût de collecte est contourné^[Je ne suis par forcément à l'aise avec cet argument souvent avancé. La maintenance et l'alimentation de ce type de données  peut être également coûteuse, ne se faisant pas par magie, comme pour l'EDP de l'Insee. Malheureusement cet argument est sûrement une des raisons qui expliquent les problèmes de financement des enquêtes retrospectives]. Ce type de données comprend par exemple les informations issues des fichiers des Ressources Humaines des entreprises, qui ont été exploitées à l’Ined dans le cadre du projet « worklife » (<https://worklife.site.ined.fr/>). Une des sources de plus en plus utilisée en France est maintenant l'EDP^[Echantillon Démographique Permanent. Un bon exemple de données administrative dont le coût de production est loin d'être négligeable]. Elles engendrent en revanche des questionnements techniques liés à l’inférence (on ne travaille directement pas sur des échantillons), et à une présence potentiellement massive de problèmes de censures à gauche ou par intervalles, ou de troncature à gauche^[Se reporter par exemple à la présentation du très rigoureux guide de l'utilisateur de l'EDP: ***Les informations disponibles : des informations à géométrie variable et à trous***].  
+A noter l’exploitation croissante des données administratives qui peuvent regorger d’informations biographiques. Déjà disponibles, le problème du coût de collecte est contourné^[Je ne suis par forcément à l'aise avec cet argument souvent avancé. La maintenance et l'alimentation de ce type de données  peut être également coûteuse, ne se faisant pas par magie, comme pour l'EDP de l'Insee]. Ce type de données comprend par exemple les informations issues des fichiers des Ressources Humaines des entreprises, qui ont été exploitées à l’Ined par exemple dans le cadre du projet « worklife » (<https://worklife.site.ined.fr/>). Une des sources de plus en plus utilisée en France est maintenant l'EDP^[Echantillon Démographique Permanent. Un bon exemple de données administrative dont le coût de production est loin d'être négligeable]. Elles engendrent en revanche des questionnements techniques liés à l’inférence (on ne travaille directement pas sur des échantillons), et à une présence potentiellement massive de problèmes de censures à gauche ou par intervalles, ou de troncature à gauche^[Se reporter par exemple à la présentation du très rigoureux guide de l'utilisateur de l'EDP: ***Les informations disponibles : des informations à géométrie variable et à trous***].  
 
 
 ### Les données rétrospectives
 
--	Individus interrogés une seule fois.
--	Recueil de biographies thématiques depuis une origine jusqu’au moment de l’enquête.
--	Recueil d’informations complémentaires à la date de l’enquête (âge, sexe, csp au moment de l’enquête et/ou csp représentative). 
--	Avantages: Information longitudinale immédiatement disponible. 
--	Inconvénients:  questionnaire long, informations datées qui font appel à la mémoire de l’enquêté.e. A de rares exceptions (enfant, mariage), il est difficile d’aller chercher des datations trop fines avec une retrospectivité assez longue.
+*	Individus interrogés une seule fois.
+
+* 	Recueil de biographies thématiques depuis une origine jusqu’au moment de l’enquête.
+
+*	Recueil d’informations complémentaires à la date de l’enquête (âge, sexe, csp au moment de l’enquête et/ou csp représentative). 
+
+*	Avantages: Information longitudinale immédiatement disponible.  
+
+* Inconvénients:  questionnaire long, informations datées qui font appel à la mémoire de l’enquêté.e. A de rares exceptions (enfant, mariage), il est difficile d’aller chercher des datations trop fines avec une retrospectivité assez longue.
 
 
-Les deux types de recueil peuvent être mixés avec des enquêtes à passages répétés comprenant des informations retrospectives entre 2 vagues. Par exemple la cohorte [**Elfe**](https://www.elfe-france.fr/) de l’Ined-Inserm ou la [***Millenium-Cohort-Study***](https://cls.ucl.ac.uk/cls-studies/millennium-cohort-study/) en Grande Bretagne^[Pour avoir exploité ces données, cette cohorte souffre contrairement à Elfe de changements réguliers dans la mise à disposition des données  d'une enquête à une autre. En revanche elle a le mérite d'avoir cherché à récupérer l'attrition au cours du temps. Cela rend les données difficile à exploiter dans un cadre longitudinal, mais cela à le mérite de donner une certaine stabilisation de l'échantillon de départ.
-
-
+Les deux types de recueil peuvent être mixés avec des enquêtes à passages répétés comprenant des informations retrospectives entre 2 vagues. Par exemple la cohorte [**Elfe**](https://www.elfe-france.fr/) de l’Ined-Inserm ou la [***Millenium-Cohort-Study***](https://cls.ucl.ac.uk/cls-studies/millennium-cohort-study/) en Grande Bretagne.
 
 
 ## Grille AGEVEN
@@ -63,7 +61,7 @@ Il s’agit d’une grille âge-évènement, de type chronologique, avec des rep
 -	Vivier G, “**Comment collecter des biographies ? De la fiche Ageven aux grilles biographiques, Principes de collecte et Innovations récentes**”, Acte des colloques de l’AIDELF, 2006.
 -	GRAB, 1999, “**Biographies d’enquêtes : bilan de 14 collectes biographiques**”, Paris, INED.
 
-Exemple grille Ageven page 121: <http://retro.erudit.org/livre/aidelf/2006/001404co.pdf>  
+Exemple grille Ageven dans l'article de G.Vivier, [page 121]( <https://www.erudit.org/fr/livres/actes-des-colloques-de-lassociation-internationale-des-demographes-de-langue-francaise/population-travail-actes-colloque-aveiro-2006/001404co/)  
 :::
 
 
@@ -72,7 +70,7 @@ Exemple grille Ageven page 121: <http://retro.erudit.org/livre/aidelf/2006/00140
 La question du format des fichiers biographiques mis à disposition n’est pas neutre, en particulier au niveau des manipulations pour créer le fichier d’analyse, opération qui pourra s’avérer particulièrement chronophage et complexe si plusieurs modules doivent être appariés. On distingue trois formats d’enregistrement.   
 
 
-### Large [format individu] 
+### Large [Format individu] 
 
 Une ligne par individu qui renseigne tous les évènements liés à un domaine: les datations et  caractéristiques des évènements.
 
@@ -83,12 +81,13 @@ Une ligne par individu qui renseigne tous les évènements liés à un domaine: 
 | A   | 1979   | 1982  | décès conjoint  | 1985   | .    | .      |
 | B   | 1983   | 1984  | Séparation      | .      | .    | .      |
 
-Inconvénients: peut générer beaucoup de vecteurs colonnes avec de nombreuses valeurs manquantes. Le nombre de colonnes va dépendre du nombre maximum d’évènements. Si ce nombre concerne un seul individu, on va multiplier le nombre de colonnes pour un niveau d’information très limité. Situation classique, le nombre d’enfants, où les naissances de rang élevé deviennent de plus en plus rares.
+Inconvénients: peut générer beaucoup de vecteurs colonnes avec de nombreuses valeurs manquantes. Le nombre de colonnes va dépendre du nombre maximum d’évènements. Si ce nombre concerne un seul individu, on va multiplier le nombre de colonnes pour un niveau d’information très limité. Situation classique, le nombre d’enfants, où les naissances de rang élevé deviennent de plus en plus rares.   
 
+Remarque: pour des enquêtes non biographiques, mais avec quelques éléments de datation qui s'intéresse par exemple à la date d'une *première fois*^[J'écris cela en 2024, donc je pense par exemple à l'exploitation de l'enquête [Envie](https://envie.site.ined.fr/).
 
-### Semi-long [format individu-évènements] 
+### Semi-long [Format individu-évènements] 
 
-C’est le format le plus courant de mise à disposition des enquêtes biographiques. Si les transitions sont de type continu, par exemple le lieu de résidence (on habite toujours quelque part), la date de fin de la séquence correspond à la date de début de la séquence suivante.  Les dates de fin ne sont pas forcément renseignées sur une ligne pour des trajectoires continues, l’information peut être donnée sur la ligne suivante avec la date de début.   
+  C’est le format le plus courant de mise à disposition des enquêtes biographiques. Si les transitions sont de type continu, par exemple le lieu de résidence (on habite toujours quelque part), la date de fin de la séquence correspond à la date de début de la séquence suivante. Les dates de fin ne sont pas forcément renseignées sur une ligne pour des trajectoires continues, l’information peut être donnée sur la ligne suivante avec la date de début.   
 Pour la séquence qui se déroule au moment de l’enquête, la date de fin est souvent une valeur manquante, une fin de séquence pouvant se produire juste avant l’enquête au cours d’une même année. Il est également possible d'avoir une information qui ne s'est pas encore produite au moment de l'enquête, mais qui aura lieu peu de temps après (personne enceinte, donc une naissance probable la même année). 
 
 
@@ -101,8 +100,7 @@ Exemple précédent (trajectoires discontinues):
 | B   | 1983   | 1984  | Séparation      | 1               |
 
 
-
-### Long [format individu-périodes]
+### Long [Format individu-périodes]
 
 Typique des recueils prospectifs. Ils engendrent des lignes sans information supplémentaire par rapport à la ligne précédente. 
 
@@ -120,13 +118,11 @@ Exemple précédent:
 | B   | 1984   | Séparation      | 1               |
 
 Ici les trajectoires ne sont pas continues. Une forme continue présenterait toute la trajectoire, avec l’ajout d’un statut du type être en couple ou non. Pour ID=A, en 1983 et 1984, deux lignes « pas couple » (cohabitant ou non) pourraient être insérées avec au total 3 séquences.  
-<br>
-Remarque : pour certaines analyses (par exemple analyse en temps discret), on doit passer d’un format large ou semi-long à un format long, sur les durées observées ou sur des intervalles de durées construits.
 
 
-## **Exemples de mise à disposition**
+## Exemples de mise à disposition
 
-Deux enquêtes biographiques de type rétrospectives produite par l’Ined, avec un fichier qui fournit des informations générales sur les individus (une ligne par individu), et une série de modules biographiques en format individus-évènements.  
+Deux gros classiques d'enquêtes biographiques de type rétrospectives produite par l’Ined, avec un fichier qui fournit des informations générales sur les individus (une ligne par individu), et une série de modules biographiques en format individus-évènements.  
 
 
 ### Enquête biographie et entourage (Ined)
@@ -134,20 +130,29 @@ Deux enquêtes biographiques de type rétrospectives produite par l’Ined, avec
 <https://grab.site.ined.fr/fr/enquetes/france/biographie_entourage/>
 
 
-![Biographie et entourage: base caractéristiques individuelle](images/Image1.png)
+::: {.box_img}
+![Biographie et entourage: base caractéristiques individuelles](images/Image1.png){group="survey"}
+:::
 
 
-![Biographie et entourage: base biographique logements](images/Image2.png)
+::: {.box_img}
+![Biographie et entourage: base biographique logements](images/Image1.png){group="survey"}
+:::
 
 
 ### Enquête MAFE (Ined)
 
 
-![MAFE: base caractéristiques individuelles](images/Image3.png)
+
+::: {.box_img} 
+![MAFE: base caractéristiques individuelles](images/Image1.png){group="survey"}
+:::
 
 
+::: {.box_img}
+![MAFE: base biographique logement](images/Image4.png){group="survey"}
+:::
 
-![MAFE: base biographique logement](images/Image4.png)
 
 Quelques éléments de manipulation de ce type de données biographiques sont présentés dans le chapitre compléments^[Il s'agit d'un premier jet réalisé pour la version 2023 et qui ne peut pas viser l'exhaustivité] [[lien](https://mthevenin.github.io/analyse_duree/10-manipulation.html)]
 

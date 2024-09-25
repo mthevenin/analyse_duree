@@ -2,35 +2,69 @@
 
 // Base document colors
 
-$code-block-stdoutcolor:  #8B0000;
-$code-block-stdoutcolor-light: rgba($code-block-stdoutcolor, 0.5);
-$code-block-stdoutcolor-lighter: rgba($code-block-stdoutcolor, 0.1);
-
-
-
-//$body-bg: white ;
 @import url('https://fonts.googleapis.com/css2?family=Oswald');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css2?family=Roboto');
+@import url('https://fonts.googleapis.com/css2?family=Poppins');
 
+
+$code-block-stdoutcolor:  #e83283;
+$code-block-stdoutcolor-light: rgba($code-block-stdoutcolor, 0.5);
+$code-block-stdoutcolor-lighter: rgba($code-block-stdoutcolor, 0.1);
 
 
 /*-- scss:rules --*/
 
 .cell-output-display pre, .cell-output-stdout pre {
-    background-color: $code-block-stdoutcolor-lighter !important;
+    background-color: $code-block-stdoutcolor-lighter;
     border: 1.5px solid $code-block-stdoutcolor-light;
     border-radius: .25rem;
     border-left: 4px;
     border-left-style: solid;
     border-left-color: $code-block-stdoutcolor;
     padding: .4em;
-    color:  #8B0000
+    color:  #e83283;
 }
 
 
 .cell-output pre code {
     background-color: transparent;
 }
+
+
+.box_img {
+  color:$primary;
+  border: solid 0px ;
+  border-color: $primary;
+  border-radius: 3px ;
+  background-color:white;
+  filter:grayscale(2%);
+  overflow: hidden;
+  box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0), 0 0 0 2px rgb(255, 255, 255),
+    0.3em 0.3em 0.5em rgba(44, 62, 80, 0.5);
+  padding-left: 6px;
+  padding-top:  3px;
+  margin-bottom: 45px;
+  color: #393939;
+}
+
+
+.box_text {
+background-color: #e83283;
+color: #fefefe; 
+padding: 5px;
+border-radius: 10px;
+/*border: 1px solid #393939;*/
+}
+
+
+.box_warning {
+background-color: #d9534f;
+color:  #ffe66d; 
+padding: 5px;
+border-radius: 10px;
+/*border: 1px solid #393939;*/
+}
+
 
 

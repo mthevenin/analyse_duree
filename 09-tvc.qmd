@@ -1,26 +1,22 @@
 ---
 #title: "**Variables dynamiques**"
-
-filters:
-  - lightbox
-lightbox: auto
-
 ---
 
-# **Variables dynamiques**
+# Variables dynamiques
 
 
-Cette section sera principalement traitée par l'exemple, et on ne s'intéressera qu'aux variables de type discrète, avec un seul changement d'état.
+Cette section sera principalement traitée par l'exemple, et on ne s'intéressera qu'aux variables de type discrète, avec une covariable.
 
--   Dans un modèle de durée, une variable dynamique peut-être appréhendée comme une intéraction entre la durée et une variable quantitative.
--   Pour un modèle de Cox, l'hypothèse de risque proportionnel ne peut donc pas être testée sur ce type de variable.
--   Ne pas tenir compte du caractère dynamique d'une dimension peut conduire à des interprétations erronées.
--  ***Warning***: La façon de modéliser les dimensions dynamiques en analyse des durées peut conduire à des biais de causalité, en particulier en  sciences sociales, en omettant les *effets d'anticipation*. C'est une situation classique avec des covariables dynamiques de type discrètes. Les techniques standards ne peuvent modéliser que des *effets d'adaptation* : la cause - observée - précède l'effet.
+*   Dans un modèle de durée, une variable dynamique peut-être appréhendée comme une intéraction entre la durée et une variable quantitative.
+*   Pour un modèle de Cox, l'hypothèse de risque proportionnel ne peut donc pas être testée sur ce type de variable.
+*   Ne pas tenir compte du caractère dynamique d'une dimension peut conduire à des interprétations erronées.
+*  ***Warning***: la façon de modéliser les dimensions dynamiques en analyse des durées peut conduire à des biais de causalité, en particulier en sciences sociales, en omettant les *effets d'anticipation*. C'est une situation classique avec des covariables dynamiques de type discrètes. Les techniques standards ne peuvent modéliser que des *effets d'adaptation* : la cause - observée - précède l'effet.
 
 ## Facteur dynamique traitée de manière fixe
 
-On reprend l'exemple sur malformation cardiaque, en ajoutant la variable relative à la greffe. La question est donc de savoir si une transplantation du coeur réduitle risque journalier de décéder (ou augmente la durée de survie).  
-On a dans la base 2 variables: une variable binaire pour savoir si l'individu à été greffé ou non, **transplant**, et la variable *wait* de type continue tronquée  donnant la durée en jour jusqu'à l'opération depuis l'inscription dans le registre (0 si $transplant=0$).   
+On reprend l'exemple sur malformation cardiaque, en ajoutant la variable relative à la greffe. La question est donc de savoir si une transplantation du coeur réduit le risque journalier de décéder (ou augmente la durée journalière de survie).  
+On a dans la base 2 variables: une variable binaire pour savoir si l'individu à été greffé ou non, **transplant**, et la variable *wait* de type continue tronquée  donnant la durée en jour jusqu'à l'opération depuis l'inscription dans le registre (0 si $transplant=0$).  
+
 On va dans un premier temps estimer le modèle de Cox avec la variable fixe *transplant*.   
 
 | Variables  | HR    | Std. err | z     | P\>\|z\| | 95% CI        |
@@ -33,10 +29,9 @@ On va dans un premier temps estimer le modèle de Cox avec la variable fixe *tra
 
 : Modèle de cox avec une variable dynamique (binaire) traitée de manière fixe (estimation biaisée
 
-Interprétation: traitée de manière fixe, la greffe réduit donc sensiblement le risque journalier de décéder (RR=0.278). De même on peut admettre une certaine cohérence pour la durée jusqu'à la transplantation: plus elle est précoce et plus les personnes survivent (HR=0.992).  
+Interprétation: traitée de manière fixe, la greffe réduit donc sensiblement le risque journalier de décéder (HR=0.278). De même on peut admettre une certaine cohérence pour la durée jusqu'à la transplantation: plus elle est précoce et plus les personnes survivent (HR=0.992).  
 
 Sauf que.....
-
 
 Au niveau des données le modèle à été estimé, pour une personne greffée (ici id=70), à partir de ce mapping:
 
@@ -59,7 +54,7 @@ Au niveau des données le modèle à été estimé, pour une personne greffée (
 
 : Mapping de la base avec une variable dynamique binaire traitée de manière fixe
 
-Une personne est codée greffée avant le jour de la transplantation. L'***effet causal*** est donc mal mesuré si sa dimension temporelle a été ignorée, ici le jour exact de l'opération. C'est le même principe pour l'évènement, la personne est codée décédée (1) le jour du décès, et vivante avant (0).  
+Une personne est codée greffée avant le jour de la transplantation. Si on cherche à mesurer un ***effet causal***, il est donc mal spécifié. Sa dimension temporelle ayant été ignorée, soit ici le jour exact de l'opération. C'est le même principe pour l'évènement, la personne est codée décédée (1) le jour du décès, et vivante avant (0).  
 
 
 ## Estimation avec une variable dynamique
@@ -104,17 +99,19 @@ Si on estime maintenant le modèle avec cette variable dynamique qui indique cla
 
 L'impact de la greffe apparaît maintenant bien plus modéré sur la survie des individus. Cela ne signifie pas non plus que des personnes ont pu être *sauvée* grâce à cette opération (ou plutôt leur durée de vie augmentée), mais des complications lors de l'opération ou post-opératoire, surtout à une époque où ces techniques étaient à leurs balbutiements, ont pu également accélérer la mortalité. Il faut également garder en tête que l'état de santé des personnes est particulièrement dégradé, cette opération étant celle de la *dernière chance*.  
 
-R - Stata - Sas - Python
+R - Stata - Python - Sas 
 
 ::: panel-tabset
 
-### Sas
+#### R - Stata, Python
+
+La base doit être transformée en format long aux temps d'évènement (`survsplit` avec R, `stsplit` avec Stata) avant la création de la variable dynamique.
+:::
+
+#### Sas {{< fa solid cross>}}
 
 La base n'est pas modifiée et la création de la TVC est faite *en aveugle* dans la procédure `phreg`, après l'instruction `model`. Ce n'est franchement pas super.
 
-### R - Stata, Python
-
-La base doit être transformée en format long aux temps d'évènement (`survsplit` avec R, `stsplit` avec Stata) avant la création de la variable dynamique.
 :::
 
 
@@ -135,18 +132,16 @@ Même principe pour la construction de la variable dynamique. Pour rappel l'éch
 | $Constante$     | *0.440* | *0.110*    | *-3.29* | *0.001*   | *0.270 ; 0.718* |
 : Modèle logistique à durée discrète avec variable dynamique binaire
 
-## Précautions
 
-*   Rappel: la cause doit précèder l'effet.
+## Précautions à prendre
 
-*   Lorsque l'évènement étudié n'est pas intrinsèquement de type absorbant comme le décès, la *cause* peut se manifester ou plutôt être observée après la survenue de l'évènement étudié. Les modèles de durée standards ne peuvent pas gérer ces situations car l'observation sort du risque après la survenue de l'évènement. Il y a d'autres techniques, par exemple de type économétrique, qui sont plus à même de traiter ce genre de situations.
+* Rappel: la cause doit précèder l'effet.
 
-* Même si la cause est bien mesurée avant l'évènement d'intérêt, un *choc* n'est peut-être qu'un point final d'un processus causal antérieur: une séparation est rarement un évènement ponctuel, une phase plus ou moins longue de mésentente dans le couple lui a vraisemblablement préexister. La datation du début d'un processus causal n'est donc pas toujours facile à mesurer.
+* Lorsque l'évènement étudié n'est pas intrinsèquement de type absorbant comme le décès, la *cause* peut se manifester ou plutôt être observée après la survenue de l'évènement étudié. Les modèles de durée standards ne peuvent pas gérer ces situations car l'observation sort du risque après la survenue de l'évènement. Il y a d'autres techniques, par exemple de type économétrique, qui tente de traiter ce genre de situations (je n'en ai pas l'évaluation).
+
+* Même si la cause est bien mesurée avant l'évènement d'intérêt, un *choc* n'est peut-être qu'un point final d'un processus causal antérieur: une séparation est rarement un évènement ponctuel du jour au lendemain, une phase plus ou moins longue de mésentente dans le couple lui a vraisemblablement préexister. La datation du début d'un processus causal n'est donc pas toujours facile à mesurer.
   * **Logique d'adaptation**: la *cause* identifiée est mesurée avant l'évènement étudié.
   * **Logique d'anticipation**: la *cause* identifiée est mesurée après l'occurrence de l'évènement étudié. L'origine causale est bien antérieure à l'évènement, mais elle n'est pas directement observable.
 
--   Lorsque les variables dynamiques sont de type quantitatives/continues, le problème on doit aussi considérer avec des phénomènes d'anticipation sur les valeurs attendues de ces variables, observées postérieurement à l'évènement étudié. On peut introduire des « lags » dans le modèle pour saisir ce phénomène : par exemple $x_t= x_{t+1}$. Ce décalage des durées d'occurrence peut être aussi introduite pour les variables discrètes (naissance d'un enfant par exemple).
-
-
-
+-   Lorsque les variables dynamiques sont de type quantitatives/continues,  on doit aussi prendre en compte ces phénomènes d'anticipation sur les valeurs attendues de ces variables, observées postérieurement à l'évènement étudié. On peut introduire des « lags » dans le modèle pour saisir ce phénomène : par exemple $x_t= x_{t+1}$. Ce décalage des durées d'occurrence peut être aussi introduite pour les variables discrètes (naissance d'un enfant par exemple).
 

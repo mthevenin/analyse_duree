@@ -1,0 +1,103 @@
+project:
+  type: book
+  output-dir: docs
+  
+execute:
+  freeze: auto
+  cache: true
+
+lang: fr
+
+book:
+  title: "Introduction à l'analyse biographique des durées"
+  subtitle: "Support de formation 2024"
+  author: "**Marc Thévenin**"
+  language: fr
+  output-file: introduction_bio_durees
+  downloads: [pdf]
+  repo-url: https://github.com/mthevenin/analyse_duree
+  repo-actions: [edit]
+  date: today
+  bread-crumbs: false
+  search:
+    location: sidebar
+    type: textbox
+  reader-mode: false
+  sidebar:
+    style: "docked"
+    collapse-level: 1
+
+  chapters:
+    - part: "Introduction"
+      chapters:
+        - index.qmd
+        - 01-presentation.qmd
+    - part: "Données et théorie"
+      chapters:
+        - 02-donnees.qmd
+        - 03-theorie.qmd       
+    - part: "Méthodes non paramétrique"
+      chapters:
+        - 04-fsurvie.qmd
+        - 05-fsurvie_comp.qmd  
+    - part: "Modèles à risques proportionnels"
+      chapters:
+        - 06-intro_mod.qmd
+        - 07-cox.qmd  
+        - 08-discret.qmd  
+        - 09-tvc.qmd  
+    - part: "Compléments"
+      chapters:
+        - 10-manipulation.qmd
+        - 11-concurrent.qmd                 
+        - 12-parametrique.qmd 
+        - 13-annexe.qmd 
+    - part: "Programmation"
+      chapters:
+        - 14-R.qmd
+        - 15-Stata.qmd
+        - 16-Sas.qmd
+        - 17-Python.qmd
+format:
+  html:
+    theme: [zephyr, style.scss]
+    css: style.css
+    highlight-style: zenburn
+    linkcolor: "#e83283"
+    code-background: true
+    code-copy: true
+    toc: true
+    toc-depth: 3
+    toc-title: "Sections"
+    code-tools:
+      source: true
+    grid:
+      sidebar-width: 350px
+      body-width: 950px
+      margin-width: 300px
+      gutter-width: 1.5rem
+
+  pdf:
+    fontsize: 12pt
+    documentclass: scrreprt
+    classoption: ["onepage", "openany"]
+    number-sections: true
+    toc: true
+    lot: true
+    lof: true
+    cap-location: top
+    colorlinks: true
+    highlight-style: zenburn
+    fontfamily: cabin 
+    toc-depth: 4
+    geometry: 
+      - top=20mm
+      - left=15mm
+      - right=15mm
+      - bottom=20mm      
+
+lightbox: true
+
+
+
+  

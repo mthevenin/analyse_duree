@@ -4,12 +4,13 @@ project:
   
 execute:
   freeze: auto
+  cache: true
 
 lang: fr
 
 book:
   title: "Introduction à l'analyse biographique des durées"
-  subtitle: "Support de formation 2023"
+  subtitle: "Support de formation 2024"
   author: "**Marc Thévenin**"
   language: fr
   output-file: introduction_bio_durees
@@ -17,6 +18,7 @@ book:
   repo-url: https://github.com/mthevenin/analyse_duree
   repo-actions: [edit]
   date: today
+  bread-crumbs: false
   search:
     location: sidebar
     type: textbox
@@ -60,7 +62,7 @@ format:
   html:
     theme: [zephyr, style.scss]
     css: style.css
-    highlight-style: zenburn
+    highlight-style: atom-one
     linkcolor: "#e83283"
     code-background: true
     code-copy: true
@@ -74,23 +76,10 @@ format:
       body-width: 950px
       margin-width: 300px
       gutter-width: 1.5rem
+    
 
-  pdf:
-    fontsize: 12pt
-    documentclass: scrreprt
-    classoption: ["onepage", "openany"]
-    number-sections: true
-    toc: true
-    lot: true
-    lof: true
-    cap-location: top
-    colorlinks: true
-    highlight-style: zenburn
-    fontfamily: cabin 
-    toc-depth: 4
-    geometry: 
-      - top=20mm
-      - left=15mm
-      - right=15mm
-      - bottom=20mm      
+lightbox: true
 
+
+
+  

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="fr" xml:lang="fr"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.557">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -33,7 +33,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -84,7 +84,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "start",
   "type": "textbox",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "Pas de résultats",
     "search-matching-documents-text": "documents trouvés",
@@ -93,14 +98,42 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "correspondance de plus dans ce document",
     "search-more-matches-text": "correspondances de plus dans ce document",
     "search-clear-button-title": "Effacer",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Annuler",
     "search-submit-button-title": "Envoyer",
     "search-label": "Recherche"
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -111,12 +144,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./06-intro_mod.html">Modèles à risques proportionnels</a></li><li class="breadcrumb-item"><a href="./08-discret.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">**Modèle à durée discrète**</span></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <a class="flex-grow-1 no-decor" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Basculer la barre latérale" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+          <h1 class="quarto-secondary-nav-title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modèle à durée discrète</span></h1>
+        </a>     
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
         <i class="bi bi-search"></i>
       </button>
@@ -126,13 +159,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
       <a href="./">Introduction à l’analyse biographique des durées</a> 
         <div class="sidebar-tools-main">
-    <a href="https://github.com/mthevenin/analyse_duree" rel="" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
-    <a href="./introduction_bio_durees.pdf" rel="" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="https://github.com/mthevenin/analyse_duree" title="Code source" class="quarto-navigation-tool px-1" aria-label="Code source"><i class="bi bi-github"></i></a>
+    <a href="./introduction_bio_durees.pdf" title="Download PDF" class="quarto-navigation-tool px-1" aria-label="Download PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -155,13 +188,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./index.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title"><strong>Présentation - Bibliographie - Outils</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Présentation - Bibliographie - Outils</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./01-presentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title"><strong>L’analyse biographique des durées</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">L’analyse biographique des durées</span></span></a>
   </div>
 </li>
       </ul>
@@ -178,13 +211,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./02-donnees.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title"><strong>Les Données</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Les Données</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./03-theorie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title"><strong>La théorie</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">La théorie</span></span></a>
   </div>
 </li>
       </ul>
@@ -201,13 +234,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04-fsurvie.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title"><strong>Estimations des fonctions de survie</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Estimations des fonctions de survie</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./05-fsurvie_comp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title"><strong>Tests de comparaison</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Tests de comparaison</span></span></a>
   </div>
 </li>
       </ul>
@@ -224,25 +257,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./06-intro_mod.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title"><strong>Introduction</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Introduction aux modèles</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./07-cox.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Le modèle de Cox</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Le modèle de Cox</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08-discret.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modèle à durée discrète</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./09-tvc.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><strong>Variables dynamiques</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variables dynamiques</span></span></a>
   </div>
 </li>
       </ul>
@@ -259,25 +292,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./10-manipulation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title"><strong>Eléments de mise en forme des données</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Eléments de mise en forme des données</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./11-concurrent.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title"><strong>Risques concurrents</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Risques concurrents</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./12-parametrique.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title"><strong>Modèles paramétriques</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Modèles paramétriques</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./13-annexe.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title"><strong>Annexes</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Annexes</span></span></a>
   </div>
 </li>
       </ul>
@@ -294,25 +327,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./14-R.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title"><strong>R</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">R</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./15-Stata.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title"><strong>Stata</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Stata</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./16-Sas.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title"><strong>SAS</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">In memoriam SAS</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./17-Python.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title"><strong>Python</strong></span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Python</span></span></a>
   </div>
 </li>
       </ul>
@@ -320,7 +353,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -335,14 +368,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#proportionnalité-des-risques" id="toc-proportionnalité-des-risques" class="nav-link" data-scroll-target="#proportionnalité-des-risques"><span class="header-section-number">9.3</span> Proportionnalité des risques</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/mthevenin/analyse_duree/edit/main/08-discret.qmd" class="toc-action">Modifier cette page</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/mthevenin/analyse_duree/edit/main/08-discret.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title"><strong>Modèle à durée discrète</strong></span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title d-none d-lg-block"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Modèle à durée discrète</span></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 </div>
 
 
@@ -355,17 +388,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </div>
   
 
+
 </header>
+
 
 <p>On va principalement traiter du <strong><em>modèle logistique à durée discrète</em></strong>.</p>
 <ul>
-<li>Par définition ce n’est pas un modèle à risques proportionnels, mais à <strong>Odds proportionnels</strong>. Toutefois en situation de rareté (p&lt;10%), l’Odds converge vers une probabilité, qui est une mesure du risque.</li>
-<li>Le modèle à durée discrète est de type pleinement paramétrique, il est moins contraignant que le modèle de Cox si l’hypothèse de proportionnalité n’est pas respectée, car le modèle est ajusté par une fonction de la durée.</li>
-<li>Pour être estimé, la base de données doit être préalablement transformée en format long: sur les durées d’observation directement disponibles ou sur des regroupements de celles ci éventuellement de longueur différentes, ou sur les intervalles définis à partir des moments d’évènement (Kaplan-Meier et Cox).</li>
+<li>Par définition ce n’est pas un modèle à risques proportionnels, mais à <strong>Odds proportionnels</strong>. Toutefois en situation de rareté (p&lt;0.1), l’Odds converge vers une probabilité, qui est une mesure du risque. Et donc les Odds ratio peuvent aisément se lire comme des rapports de probabilités.</li>
+<li>Le modèle à durée discrète est de type pleinement paramétrique, il est moins contraignant que le modèle de Cox si l’hypothèse de proportionnalité n’est pas respectée, car le modèle est directement ajusté par une fonction de la durée.</li>
+<li>Pour être estimé, la base de données doit être préalablement transformée en format long: sur les durées d’observation directement disponibles ou sur des regroupements de celles ci éventuellement de longueur différentes, ou sur les intervalles définis à partir des moments d’évènement lorsqu’il y a un nombre important d’évènements simultanés. (Kaplan-Meier et Cox).</li>
 <li>Ce modèle permet d’introduire bien plus simplement qu’avec le modèle de Cox un ensemble de covariables non fixes.</li>
 </ul>
 <p>Avec un lien logistique, le modèle à durée discrète, avec seulement des covariables fixes, peut s’écrire:</p>
+<div class="box_img">
 <p><span class="math display">\[log\left[\frac{P(Y=1\ |\ t_p,X_k)}{1-P(Y=1\ |\ t_p,X_k)}\right]= a_0 + \sum_{p}a_pf(t_p)+\sum_{k}b_kX_k\]</span></p>
+</div>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -376,26 +413,26 @@ Les fonctions de lien
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>On restera ici sur la fonctions de lien logistique, mais bien évidemment les autres fonctions associées à la fonction de masse binomiale sont utilisables. La seconde qui sera rapidemment exposée mérité une attention particulière.</p>
+<p>On restera ici sur la fonctions de lien logistique, mais bien évidemment les autres fonctions associées à la fonction de masse binomiale sont utilisables.</p>
 <ul>
 <li><p>Le lien probit, est a ma connaissance très peut utilisé en analyse des durées. C’est bien évidemment lié aux lectures des paramètres estimés. On peut utiliser des formes standardisés sur l’échelle des probabilités avec des effets marginaux, mais ceux-ci ne pourront pas être généralisés sur l’ajustement de la durée se fait avec une forme quadratique ou à la présence d’une intéraction de quelque forme que ce soit (même problème si lien logistique).</p></li>
-<li><p>Le lien complémentaire log-log, est une alternative bien plus intéressante en raison de son lien avec la relation entre fonction de séjour et risque cumulé. Son utilisation se doit néanmoins d’être réservé à des situations de rareté des probabilités conditionnelles (disons &lt;.10), ce qui est souvent le cas en analyse de survie <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Sous cette condition, on peut interpréter directement les estimateurs commes des rapports de risque au sens de l’analyse de survie. On pourra se reporter à l’explication de G.Rodrigez dont le support est dans la bibliographie du document. Je ferai peut-être un jour une section dédiée dans la partie annexe. La construction mathématique est plutôt intéressante.</p></li>
-<li><p>Pour information seulement car non testé: développés dans le domaine l’épidémiologie, il existe des algorithmes forçant l’application du lien <span class="math inline">\(log(p)\)</span> à une vraisemblance binomiale. On parle de modèle <em>log-binomial</em>. Il s’agit bien de la fonction de lien canonique associée à la vraisemblance d’un processus poissonien (on en ai pas loin en analyse des durées) et dont les estimateurs sont idrectement interprétables en rapport de risque. Cette technique ne doit être envisagé qu’avec des probabilités d’incidences dans les intervalles de durées supérieurs à 20%. Je n’ai pas d’expérience particulière sur ce type de modèles <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>, je ne suis pas capable de les évaluer en analyse de durée avec des données très groupées, mais au niveau application il semble que les solutions disponibles dans des packages R comme <em><code>logbin</code></em> sont à privilégier.</p></li>
+<li><p>Le lien complémentaire log-log, est une alternative bien plus intéressante en raison de son lien avec la relation entre fonction de séjour et risque cumulé. Son utilisation doit être néanmoins d’être réservée à des situations de rareté des probabilités conditionnelles (disons &lt;.10, 0.5 préconisé), ce qui est souvent le cas en analyse de survie <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. Sous cette condition, on peut interpréter directement les estimateurs commes des rapports de risque au sens de l’analyse de survie. On pourra se reporter à l’explication de G.Rodrigez dont le support est en lien la bibliographie du document. Je ferai peut-être un jour une section dédiée dans la partie annexe. La construction mathématique est plutôt simple.</p></li>
+<li><p>Pour information seulement car non testé. Développés dans le domaine l’épidémiologie, il existe des algorithmes forçant l’application du lien <span class="math inline">\(log(p)\)</span> à une vraisemblance de type binomiale. On parle de modèle <em>log-binomial</em>. Il s’agit bien de la fonction de lien canonique associée à la vraisemblance d’un processus poissonien<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> et dont les estimateurs sont indrectement interprétables en rapport de risques. Cette technique ne doit être envisagé qu’avec des incidences supérieurs à 20%. Je n’ai pas d’expérience particulière sur ce type de modèles <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>, je ne suis donc pas capable de les évaluer en analyse de durée avec des durées très groupées, mais au niveau outils il semble que les solutions disponibles dans des packages R comme <em><code>logbin</code></em> soient à privilégier.</p></li>
 </ul>
 </div>
 </div>
 <section id="organisation-des-données" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="organisation-des-données"><span class="header-section-number">9.1</span> Organisation des données</h2>
 <p><strong>Format long</strong></p>
-<p>Les données doivent être en format long: pour chaque individu on a une ligne par durée observée ou par intevalle de durées jusqu’à l’évènement ou la censure. On retrouve le <em>split</em> des données du modèle de Cox, mais généralisé à des intervalles où aucun évènement n’est observé. Avec des données de type discrètes ou groupées, phénomène classique en sciences sociales, il y a souvent peu de différence entre un allongement aux temps d’évènement et aux temps d’observation (voir encadré plus loin sur le modèle d Cox à temps discret).</p>
+<p>Les données doivent être en format long: pour chaque individu, on a une ligne par durée observée ou par intevalle de durées jusqu’à l’évènement ou la censure. On retrouve le <em>split</em> des données du modèle de Cox pour introduire une variable dynamique, mais généralisé à des intervalles où aucun évènement n’est observé. Avec des données de type discrètes ou groupées, phénomène classique en sciences sociales, il y a souvent peu de différence entre un allongement aux temps d’évènement et aux temps d’observation.</p>
 <p><strong>Durée</strong></p>
 <p>La durée est dans un premier temps construite sous forme d’un simple compteur, par exemple <span class="math inline">\(t=1,2,3,4,5...\)</span> (des valeurs non entières sont possibles). Le choix de la forme fonctionnelle de la durée sera présentée plus tard.</p>
 <p><strong>Variable évènement/censure</strong></p>
-<p>Si l’individu a connu l’évènement, elle prend la valeur 0 avant celui-ci. Au moment de l’évènement sa valeur est égale à 1. Pour les observations censurées, la variable prend toujours la valeur 0.</p>
+<p>Si l’individu a connu l’évènement, elle prend la valeur 0 avant celui-ci. Au moment de l’évènement sa valeur est égale à 1. Pour les observations censurées, la variable prend toujours la valeur 0. <strong>seule la dernière ligne observées peut prendre une valeur non nulle</strong><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</p>
 <p><strong>Application</strong><br>
-On reprend les données de la base <em>transplantation</em>, mais les durées ont été regroupées par période de 30 jours. Il n’y a pas de durée mesurée comme nulle, on a considéré que les 30 premiers jours représentaient, le premier mois d’exposition. Cette variable de durée se nomme <em>mois</em>.</p>
+On reprend les données de la base <em>transplantation</em>, mais les durées ont été regroupées par période de 30 jours. Il n’y a pas de durée mesurée comme nulle, et on a considéré que les 30 premiers jours représentaient, le premier mois d’exposition. Cette variable de durée se nomme <em>mois</em>.</p>
 <p><strong>Format d’origine</strong></p>
-<table class="table">
+<table class="caption-top table">
 <caption>Durée discrète: données en format d’origine</caption>
 <thead>
 <tr class="header">
@@ -420,7 +457,7 @@ On reprend les données de la base <em>transplantation</em>, mais les durées on
 </table>
 <p>La personne décède lors du deuxième intervalle de 30 jours</p>
 <p><strong>Format long et variables pour l’analyse</strong></p>
-<table class="table">
+<table class="caption-top table">
 <caption>Durée discrète: données en format long</caption>
 <thead>
 <tr class="header">
@@ -472,24 +509,26 @@ Le modèle de Cox à durée discrète/groupée
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Cox est également à l’origine du modèle à durée discrète (je crois également en 1972). Par rapport aux pratiques courantes, la différence repose sur les bornes intervalles, identiques à celles définies pour l’estimation de la courbe de survie KM ou du modèle semi-paramétrique, à savoir une définition sur les moments d’évènement. Avec un ajustement de la durée reposant sur des indicatrices (ajustement sur des variables discrètes), ce modèle est quasiment identique au modèle semi paramétrique.</p>
-<p>On peut remarquer que dans les sciences sociales, avec des durées assez fortement groupées, les intervalles directement observés et les intervalles définis aux moments d’évènements sont souvent identiques et s’ils ne le sont pas c’est souvent en tout début ou en toute fin de la période d’observation/exposition. En cas d’ajustement de la durée par des indicatrices, la définition des bornes des intervalles aux moments des évènements permet de s’assurer au moins une occurence de l’évènement.</p>
+<p>Cox est également à l’origine du modèle à durée discrète (1973). Par rapport aux pratiques courantes, la différence repose sur les bornes intervalles, identiques à celles définies pour l’estimation de la courbe de survie KM ou du modèle semi-paramétrique, à savoir une définition sur les moments d’évènement. Avec un ajustement de la durée reposant sur des indicatrices (ajustement sur des variables discrètes), ce modèle est quasiment identique au modèle semi paramétrique.</p>
+<p>On peut remarquer qu’en sciences sociales, avec des durées assez fortement groupées, les intervalles directement observés et les intervalles définis aux moments d’évènements sont souvent identiques et s’ils ne le sont pas c’est souvent en tout début ou en toute fin de la période d’observation/exposition. En cas d’ajustement de la durée par des indicatrices, la définition des bornes des intervalles aux moments des évènements permet de s’assurer de la présence d’au moins une occurence .</p>
 </div>
 </div>
 <section id="ajustement-avec-une-fonction-quantitative-de-la-durée" class="level3" data-number="9.2.1">
 <h3 data-number="9.2.1" class="anchored" data-anchor-id="ajustement-avec-une-fonction-quantitative-de-la-durée"><span class="header-section-number">9.2.1</span> Ajustement avec une fonction quantitative de la durée</h3>
-<p>Le modèle étant paramétrique, on doit trouver une fonction qui ajuste le mieux les données. Toutes transformations de la variable est possible: <span class="math inline">\(f(t)=a\times t\)</span>, <span class="math inline">\(f(t)=a\times log(t)\)</span>……formes quadratiques. Les ajustements sous forme de <strong>splines cubiques</strong> tendent à se développer ces dernières années.</p>
-<p>Pour sélectionner cette fonction, on peut tester différents modèles sans covariable additionnelle, et sélectionner la forme dont le critère d’information de type vraisemblance pénalisée (<strong>AIC</strong>, <strong>BIC</strong>) est le plus faible, avec au moins des différences de -6 ou -8.</p>
+<p>Le modèle étant paramétrique, on doit trouver une fonction qui ajuste le mieux les données. Toute transformation de la variable est possible: <span class="math inline">\(f(t)=a\times t\)</span>, <span class="math inline">\(f(t)=a\times log(t)\)</span>……formes quadratiques. Les ajustements sous forme de <strong>splines cubiques</strong> tendent à se développer ces dernières années.</p>
+<p>Pour sélectionner cette fonction, on peut tester différents modèles sans covariable additionnelle [<span class="math inline">\(g(y(t))=f(t)\)</span>], et sélectionner la forme dont le critère d’information de type vraisemblance pénalisée (<strong>AIC</strong>, <strong>BIC</strong>) est le plus faible, avec au moins des différences de -6 ou -8.</p>
 <p>Exemple:<br>
 On va tester les paramétrisations suivantes: une forme linéraire stricte <span class="math inline">\(f(t)=a\times t\)</span> et des effets quadratiques d’ordres 2 et 3: <span class="math inline">\(f(t)=a_1\times t + a_2\times t^{2}\)</span> et <span class="math inline">\(f(t)=a_1\times t + a_2\times t^{2} + a_3\times t^{3}\)</span>.</p>
+<div class="box_img">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Image11.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1" title="Probabilité de décéder avec 3 ajustements de la durée"><img src="images/Image11.png" class="img-fluid figure-img" style="width:70.0%"></a></p>
-<figcaption class="figure-caption">Probabilité de décéder avec 3 ajustements de la durée</figcaption>
+<p><a href="images/Image11.png" class="lightbox" data-glightbox="description: .lightbox-desc-1" data-gallery="quarto-lightbox-gallery-1" title="Probabilité de décéder avec 3 ajustements de la durée"><img src="images/Image11.png" class="img-fluid figure-img" style="width:70.0%" alt="Probabilité de décéder avec 3 ajustements de la durée"></a></p>
+<figcaption>Probabilité de décéder avec 3 ajustements de la durée</figcaption>
 </figure>
 </div>
+</div>
 <p><strong>Critères AIC</strong></p>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th><span class="math inline">\(f(t)\)</span></th>
@@ -511,9 +550,9 @@ On va tester les paramétrisations suivantes: une forme linéraire stricte <span
 </tr>
 </tbody>
 </table>
-<p>On peut utiliser la troisième forme à savoir <span class="math inline">\(a_1\times t + a_2\times t^{2} + a_3\times t^{3}\)</span> <a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
+<p>On peut utiliser la troisième forme à savoir <span class="math inline">\(a_1\times t + a_2\times t^{2} + a_3\times t^{3}\)</span> <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.</p>
 <p><strong>Estimation du modèle avec toutes les covariables</strong></p>
-<table class="table">
+<table class="caption-top table">
 <caption>Modèle logistique à durée discrète (<span class="math inline">\(f(t)\)</span> continue)</caption>
 <colgroup>
 <col style="width: 19%">
@@ -600,9 +639,9 @@ On va tester les paramétrisations suivantes: une forme linéraire stricte <span
 </tr>
 </tbody>
 </table>
-<p><em>Remarque</em>: les variables <em>year</em> et <em>age</em> ont été centrée sur leur moyenne pour rendre la constante interprétable. La constante reporte donc l’Odds de décéder lors des 30 premiers jours d’une personne dont l’âge et l’année à l’entrée dans le registre est égal à l’âge et à l’année moyenne et qui n’a pas été opéré préalablement.</p>
+<p><em>Remarque</em>: les variables <em>year</em> et <em>age</em> ont été centrées sur leur moyenne pour rendre la constante interprétable. La constante reporte donc l’Odds de décéder lors des 30 premiers jours d’une personne dont l’âge et l’année à l’entrée dans le registre à l’âge moyen et à l’année moyenne, et qui n’a pas été opéré préalablement pour un pontage.</p>
 <p>Si maintenant on estime un modèle de Cox sur ces données journalières groupées, on remarque que les résultats obtenus, et ce n’est pas une surprise, sont très proches.</p>
-<table class="table">
+<table class="caption-top table">
 <caption>Modèle de Cox</caption>
 <colgroup>
 <col style="width: 19%">
@@ -654,7 +693,7 @@ On va tester les paramétrisations suivantes: une forme linéraire stricte <span
 <h3 data-number="9.2.2" class="anchored" data-anchor-id="ajustement-discret"><span class="header-section-number">9.2.2</span> Ajustement discret</h3>
 <ul>
 <li>Il s’agit d’introduire la variable de durée dans le modèle comme une variable catégorielle (indicatrices).</li>
-<li>Démarche pas conseillé si on a beaucoup de points d’observation, ce qui est le cas ici.</li>
+<li>Cette option n’est pas conseillée si on a beaucoup de points d’observation, ce qui est le cas ici.</li>
 <li>A l’inverse, si peu de points d’observation la paramétrisation avec une durée continue n’est pas conseillé.</li>
 <li>La correction de la non proportionnalité peut être plus compliquée à mettre en oeuvre.</li>
 </ul>
@@ -666,7 +705,7 @@ On va tester les paramétrisations suivantes: une forme linéraire stricte <span
 <li><span class="math inline">\(t=4\)</span>: 24 mois et plus.</li>
 </ul>
 <p>On va estimer le risque globalement sur l’intervalle. La base sera plus courte que la précédente (197 observations pour 103 individus). Il ne sera plus possible ici d’interpréter les résultats en termes de rapport de probabilité, l’évènement devenant trop fréquent à l’intérieur de chaque intervalle.</p>
-<table class="table">
+<table class="caption-top table">
 <caption>Modèle logistique à durée discrète (<span class="math inline">\(f(t)\)</span> indicatrices)</caption>
 <colgroup>
 <col style="width: 19%">
@@ -679,7 +718,7 @@ On va tester les paramétrisations suivantes: une forme linéraire stricte <span
 <thead>
 <tr class="header">
 <th>Variables</th>
-<th>OR - RR</th>
+<th>OR</th>
 <th>Std. err</th>
 <th>z</th>
 <th>P&gt;|z|</th>
@@ -762,7 +801,7 @@ On va tester les paramétrisations suivantes: une forme linéraire stricte <span
 </tbody>
 </table>
 <p>On trouve des résultats proches de ceux éstimés avec un ajustement continu de la durée. C’est normal, la dirée fait office de variable d’ajustement peu ou pas corrélée avec les autres variables introduites.</p>
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th>Variables</th>
@@ -800,12 +839,12 @@ Lien avec des modèles usuels à durée continue
 <div class="callout-body-container callout-body">
 <p>Si la durée discrète/groupée sous tend une durée continue (ce qui est clairement le cas ici):</p>
 <ul>
-<li>On l’a déjà souligné, l’ajustement avec des durées sous forme d’indicatrices correspond au modèle à durée discrète défini par Cox, et le plus proche du modèle semi-paramétrique. Il est également assimilable à un modèle de type <em>exponential piecewice constant</em> (donc un modèle de poisson).</li>
+<li>L’ajustement avec des durées sous forme d’indicatrices correspond au modèle à durée discrète défini par Cox. Il est également assimilable à un modèle appelé <em>exponential piecewice constant</em> (soit un modèle de poisson).</li>
 <li>Si l’ajustement se fait en utilisation une transformation de la durée par une fonction:
 <ul>
-<li><span class="math inline">\(f(t)= log(t)\)</span> correspond à un modèle de Weibull à <em>risque proportionnel</em> <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>.</li>
+<li><span class="math inline">\(f(t)= log(t)\)</span> correspond à un modèle de Weibull à <em>risque proportionnel</em> <a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>.</li>
 </ul></li>
-<li>Si l’ajustement se fait avec des splines cubiques, le modèle à durée discrète correspond à un modèle de type <em>Parmar-Royston</em>. Avec une forme quadratique classique, on peut également obtenir cette correspondance.</li>
+<li>Si l’ajustement se fait avec des splines cubiques, le modèle à durée discrète correspond à un modèle de type <em>Parmar-Royston</em>.</li>
 </ul>
 </div>
 </div>
@@ -814,11 +853,11 @@ Lien avec des modèles usuels à durée continue
 <section id="proportionnalité-des-risques" class="level2" data-number="9.3">
 <h2 data-number="9.3" class="anchored" data-anchor-id="proportionnalité-des-risques"><span class="header-section-number">9.3</span> Proportionnalité des risques</h2>
 <ul>
-<li><p>Formellement un modèle logistique à temps discret repose sur une hypothèse d’Odds proportionnel [Odds ratios constants pendant la durée d’observation]. Contrairement au modèle de Cox, l’estimation des probabilités (risque) n’est pas biaisée si l’hypothèse PH n’est pas respectée, les paramètres estimés sont considérés au pire comme des approximation.</p></li>
+<li><p>Formellement un modèle logistique à durée discrète/groupée repose sur une hypothèse d’Odds proportionnels [Odds ratios constants pendant la durée d’observation]. Contrairement au modèle de Cox, l’estimation des probabilités (risque) n’est pas biaisée si l’hypothèse PH n’est pas respectée, les paramètres estimés seront considérés au pire comme des approximation…. problématique d’intéraction oblige.</p></li>
 <li><p>Comme pour le modèle de Cox, la correction de la non proportionnalité peut se faire en intégrant une interaction avec la durée dans le modèle.</p></li>
 </ul>
-<p>Avec un ajustement continue, on remarque de nouveau que le résultat du modèle est de nouveau très proche de celui estimé avec un modèle de Cox.</p>
-<table class="table">
+<p>Avec un ajustement continue, on remarque de nouveau que le résultat du modèle est très proche de celui estimé avec un modèle de Cox.</p>
+<table class="caption-top table">
 <caption>Modèle logistique à durée discrète avec correction de la non proportionnalité</caption>
 <colgroup>
 <col style="width: 25%">
@@ -905,25 +944,33 @@ Lien avec des modèles usuels à durée continue
 </tr>
 </tbody>
 </table>
-<p>Si on avait omis les variables <em>year</em> et <em>age</em> du modèle:</p>
+<p>Avec une sépcification dépendant seulement de la durée (pour le graphique:</p>
+<div class="box_img">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="images/Image13.png" class="lightbox" data-gallery="quarto-lightbox-gallery-2" title="Probabilité de décéder après correction de la non proportionnalité pour la variable surgery"><img src="images/Image13.png" class="img-fluid figure-img" style="width:70.0%"></a></p>
-<figcaption class="figure-caption">Probabilité de décéder après correction de la non proportionnalité pour la variable surgery</figcaption>
+<p><a href="images/Image13.png" class="lightbox" data-glightbox="description: .lightbox-desc-2" data-gallery="quarto-lightbox-gallery-2" title="Probabilité de décéder après correction de la non proportionnalité pour la variable surgery"><img src="images/Image13.png" class="img-fluid figure-img" style="width:70.0%" alt="Probabilité de décéder après correction de la non proportionnalité pour la variable surgery"></a></p>
+<figcaption>Probabilité de décéder après correction de la non proportionnalité pour la variable surgery</figcaption>
 </figure>
+</div>
 </div>
 
 
 <!-- -->
 
+<div class="hidden" aria-hidden="true">
+<span class="glightbox-desc lightbox-desc-1">Probabilité de décéder avec 3 ajustements de la durée</span>
+<span class="glightbox-desc lightbox-desc-2">Probabilité de décéder après correction de la non proportionnalité pour la variable surgery</span>
+</div>
 </section>
 <section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn1"><p>la distribution des probabilités sous cette loi n’est pas, contrairement aux lois normale ou logistique, symétrique. Dans ce qui suit, il ne serait pas conseillé de l’utiliser dans l’application avec l’ajustement sous forme d’indicatrice avec seulement 4 intervalles<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2"><p>je remercie Emilie Counil et Nargès Gouhoubi pour m’avoir informé de leur existence<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3"><p>Ce n’est pas le cas ici, mais si on sélectionne une forme cubique, je conseille vivement de regarder les probabilités conditionnelle obtenues, en particulier en fin de périodes d’observation/exposition si peut d’individu reste soumis au risque. On peut rencontrer des problèmes d’overfitting avec des probabilités conditionnelles estimées trop proche de 1. Pour les personnes qui suivent la formation, c’est le cas avec les données des TP<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4"><p>voir la courte section sur les modèle paramétriques usuels<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn1"><p>la distribution des probabilités sous cette loi n’est pas, contrairement aux lois normale ou logistique, symétriques. Dans ce qui suit, il n’est pas conseillé de l’utiliser dans l’application avec l’ajustement sous forme d’indicatrices avec seulement 4 intervalles<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Non traité dans ce support, une méthode d’estimation en analyse de survie se nomme <em>counting process</em> et utilise des méthodes d’estimation de type poissonien<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>je remercie néanmoins Emilie Counil et Nargès Gouhoubi pour l’information<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>J’anticipe la version multinomiale pour les risques concurrents<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>Ce n’est pas le cas ici, mais si on sélectionne une forme cubique, je conseille vivement de regarder les probabilités conditionnelles prédites, en particulier en fin de périodes d’observation/exposition si peu d’individus restent soumis au risque. On peut rencontrer des problèmes d’overfitting avec des probabilités conditionnelles estimées trop proche de 1. Pour les personnes qui suivent la formation, c’est le cas avec les données des TP<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn6"><p>Voir la très courte section sur les modèles paramétriques usuels<a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 
@@ -1058,10 +1105,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1071,8 +1135,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1084,7 +1157,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1128,6 +1324,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1153,6 +1350,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1214,50 +1437,50 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./07-cox.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title"><strong>Le modèle de Cox</strong></span></span>
+      <a href="./07-cox.html" class="pagination-link" aria-label="Le modèle de Cox">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Le modèle de Cox</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./09-tvc.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title"><strong>Variables dynamiques</strong></span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./09-tvc.html" class="pagination-link" aria-label="Variables dynamiques">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Variables dynamiques</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Code source</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#title: "**Modèle à durée discrète**"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">filters:</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - lightbox</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">lightbox:</span><span class="co"> auto</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu"># Modèle à durée discrète</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>On va principalement traiter du ***modèle logistique à durée discrète***.   </span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu"># **Modèle à durée discrète**</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>On va principalement traiter du ***modèle logistique à durée discrète***.   </span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Par définition ce n’est pas un modèle à risques proportionnels, mais à **Odds proportionnels**. Toutefois en situation de rareté (p&lt;10%), l’Odds converge vers une probabilité, qui est une mesure du risque.</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Le modèle à durée discrète est de type pleinement paramétrique, il est moins contraignant que le modèle de Cox si l’hypothèse de proportionnalité n’est pas respectée, car le modèle est ajusté par une fonction de la durée.</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Pour être estimé, la base de données doit être préalablement transformée en format long: sur les durées d’observation directement disponibles ou sur des regroupements de celles ci éventuellement de longueur différentes, ou sur les intervalles définis à partir des moments d'évènement (Kaplan-Meier et Cox). </span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Ce modèle permet d’introduire bien plus simplement qu'avec le modèle de Cox un ensemble de covariables non fixes. </span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>Avec un lien logistique, le modèle à durée discrète, avec seulement des covariables fixes, peut s'écrire:   </span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>$$log\left<span class="co">[</span><span class="ot">\frac{P(Y=1\ |\ t_p,X_k)}{1-P(Y=1\ |\ t_p,X_k)}\right</span><span class="co">]</span>= a_0 + \sum_{p}a_pf(t_p)+\sum_{k}b_kX_k$$</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Par définition ce n’est pas un modèle à risques proportionnels, mais à **Odds proportionnels**. Toutefois en situation de rareté (p&lt;0.1), l’Odds converge vers une probabilité, qui est une mesure du risque. Et donc les Odds ratio peuvent aisément se lire comme des rapports de probabilités.</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Le modèle à durée discrète est de type pleinement paramétrique, il est moins contraignant que le modèle de Cox si l’hypothèse de proportionnalité n’est pas respectée, car le modèle est directement ajusté par une fonction de la durée.</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Pour être estimé, la base de données doit être préalablement transformée en format long: sur les durées d’observation directement disponibles ou sur des regroupements de celles ci éventuellement de longueur différentes, ou sur les intervalles définis à partir des moments d'évènement lorsqu'il y a un nombre important d'évènements simultanés. (Kaplan-Meier et Cox). </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ss">*   </span>Ce modèle permet d’introduire bien plus simplement qu'avec le modèle de Cox un ensemble de covariables non fixes. </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>Avec un lien logistique, le modèle à durée discrète, avec seulement des covariables fixes, peut s'écrire:   </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>::: {.box_img}</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>$$log\left<span class="co">[</span><span class="ot">\frac{P(Y=1\ |\ t_p,X_k)}{1-P(Y=1\ |\ t_p,X_k)}\right</span><span class="co">]</span>= a_0 + \sum_{p}a_pf(t_p)+\sum_{k}b_kX_k$$</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">### Les fonctions de lien</span></span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>On restera ici sur la fonctions de lien logistique, mais bien évidemment les autres fonctions associées à la fonction de masse binomiale sont utilisables. La seconde qui sera rapidemment exposée mérité une attention particulière.</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>On restera ici sur la fonctions de lien logistique, mais bien évidemment les autres fonctions associées à la fonction de masse binomiale sont utilisables. </span>
 <span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Le lien probit, est a ma connaissance très peut utilisé en analyse des durées. C'est bien évidemment lié aux lectures des paramètres estimés. On peut utiliser des formes standardisés sur l'échelle des probabilités avec des effets marginaux, mais ceux-ci ne pourront pas être généralisés sur l'ajustement de la durée se fait avec une forme quadratique ou à la présence d'une intéraction de quelque forme que ce soit (même problème si lien logistique).</span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Le lien complémentaire log-log, est une alternative bien plus intéressante en raison de son lien avec la relation entre fonction de séjour et risque cumulé. Son utilisation se doit néanmoins d'être réservé à des situations de rareté des probabilités conditionnelles (disons &lt;.10), ce qui est souvent le cas en analyse de survie ^<span class="co">[</span><span class="ot">la distribution des probabilités sous cette loi n'est pas, contrairement aux lois normale ou logistique, symétrique. Dans ce qui suit, il ne serait pas conseillé de l'utiliser dans l'application avec l'ajustement sous forme d'indicatrice avec seulement 4 intervalles</span><span class="co">]</span>. Sous cette condition, on peut interpréter directement les estimateurs commes des rapports de risque au sens de l'analyse de survie. On pourra se reporter à l'explication de G.Rodrigez dont le support est dans la bibliographie du document. Je ferai peut-être un jour une section dédiée dans la partie annexe. La construction mathématique est plutôt intéressante. </span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Le lien complémentaire log-log, est une alternative bien plus intéressante en raison de son lien avec la relation entre fonction de séjour et risque cumulé. Son utilisation doit être néanmoins d'être réservée à des situations de rareté des probabilités conditionnelles (disons &lt;.10, 0.5 préconisé), ce qui est souvent le cas en analyse de survie ^<span class="co">[</span><span class="ot">la distribution des probabilités sous cette loi n'est pas, contrairement aux lois normale ou logistique, symétriques. Dans ce qui suit, il n'est pas conseillé de l'utiliser dans l'application avec l'ajustement sous forme d'indicatrices avec seulement 4 intervalles</span><span class="co">]</span>. Sous cette condition, on peut interpréter directement les estimateurs commes des rapports de risque au sens de l'analyse de survie. On pourra se reporter à l'explication de G.Rodrigez dont le support est en lien la bibliographie du document. Je ferai peut-être un jour une section dédiée dans la partie annexe. La construction mathématique est plutôt simple.</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pour information seulement car non testé: développés dans le domaine l'épidémiologie, il existe des algorithmes forçant  l'application du lien $log(p)$ à une vraisemblance binomiale. On parle de modèle *log-binomial*. Il s'agit bien de la fonction de lien canonique associée à la vraisemblance d'un processus poissonien (on en ai pas loin en analyse des durées) et dont les estimateurs sont idrectement interprétables en rapport de risque. Cette technique ne doit être envisagé qu'avec des probabilités d'incidences dans les intervalles de durées supérieurs à 20%. Je n'ai pas d'expérience particulière sur ce type de modèles ^[je remercie Emilie Counil et Nargès Gouhoubi pour m'avoir informé de leur existence], je ne suis pas capable de les évaluer en analyse de durée avec des données très groupées, mais au niveau application il semble que  les solutions disponibles dans des packages R comme *`logbin`* sont à privilégier.</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pour information seulement car non testé. Développés dans le domaine l'épidémiologie, il existe des algorithmes forçant  l'application du lien $log(p)$  à une vraisemblance de type binomiale. On parle de modèle *log-binomial*. Il s'agit bien de la fonction de lien canonique associée à la vraisemblance d'un processus poissonien^[Non traité dans ce support, une méthode d'estimation en analyse de survie se nomme *counting process* et utilise des méthodes d'estimation de type poissonien] et dont les estimateurs sont indrectement interprétables en rapport de risques. Cette technique ne doit être envisagé qu'avec des incidences supérieurs à 20%. Je n'ai pas d'expérience particulière sur ce type de modèles ^[je remercie néanmoins Emilie Counil et Nargès Gouhoubi pour l'information], je ne suis donc pas capable de les évaluer en analyse de durée avec des durées très groupées, mais au niveau outils il semble que les solutions disponibles dans des packages R comme *`logbin`* soient à privilégier.</span>
 <span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
@@ -1266,7 +1489,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>**Format long**   </span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>Les données doivent être en format long: pour chaque individu on a une ligne par durée observée ou par intevalle de durées jusqu'à l'évènement ou la censure. On retrouve le  *split* des données du modèle de Cox, mais généralisé à des intervalles où aucun évènement n'est observé. Avec des données de type discrètes ou groupées, phénomène classique en sciences sociales, il y a souvent peu de différence entre un allongement aux temps d'évènement et aux temps d'observation (voir encadré plus loin sur le modèle d Cox à temps discret).  </span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>Les données doivent être en format long: pour chaque individu, on a une ligne par durée observée ou par intevalle de durées jusqu'à l'évènement ou la censure. On retrouve le  *split* des données du modèle de Cox pour introduire une variable dynamique, mais généralisé à des intervalles où aucun évènement n'est observé. Avec des données de type discrètes ou groupées, phénomène classique en sciences sociales, il y a souvent peu de différence entre un allongement aux temps d'évènement et aux temps d'observation.  </span>
 <span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>**Durée**  </span>
@@ -1275,10 +1498,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>**Variable évènement/censure**  </span>
 <span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>Si l'individu a connu l'évènement, elle prend la valeur 0 avant celui-ci. Au moment de l'évènement sa valeur est égale à 1. Pour les observations censurées, la variable prend toujours la valeur 0.</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>Si l'individu a connu l'évènement, elle prend la valeur 0 avant celui-ci. Au moment de l'évènement sa valeur est égale à 1. Pour les observations censurées, la variable prend toujours la valeur 0. **seule la dernière ligne observées peut prendre une valeur non nulle**^<span class="co">[</span><span class="ot">J'anticipe la version multinomiale pour les risques concurrents</span><span class="co">]</span>.</span>
 <span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>**Application**  </span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>On reprend les données de la base *transplantation*, mais les durées ont été regroupées par période de 30 jours. Il n’y a pas de durée mesurée comme nulle, on a considéré que les 30 premiers jours représentaient, le premier mois d’exposition. Cette variable de durée se nomme *mois*.</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>On reprend les données de la base *transplantation*, mais les durées ont été regroupées par période de 30 jours. Il n’y a pas de durée mesurée comme nulle, et on a considéré que les 30 premiers jours représentaient, le premier mois d’exposition. Cette variable de durée se nomme *mois*.</span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>**Format d'origine**</span>
 <span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
@@ -1310,9 +1533,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="fu">## Le modèle de Cox à durée discrète/groupée</span></span>
 <span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>Cox est également à l'origine du modèle à durée discrète (je crois également en 1972). Par rapport aux pratiques courantes, la différence repose sur les bornes intervalles, identiques à celles définies pour l'estimation de la courbe de survie KM ou du modèle semi-paramétrique, à savoir une définition sur les moments d'évènement. Avec un ajustement de la durée reposant sur des indicatrices (ajustement sur des variables discrètes), ce modèle est quasiment identique au modèle semi paramétrique.</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>Cox est également à l'origine du modèle à durée discrète (1973). Par rapport aux pratiques courantes, la différence repose sur les bornes intervalles, identiques à celles définies pour l'estimation de la courbe de survie KM ou du modèle semi-paramétrique, à savoir une définition sur les moments d'évènement. Avec un ajustement de la durée reposant sur des indicatrices (ajustement sur des variables discrètes), ce modèle est quasiment identique au modèle semi paramétrique.</span>
 <span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>On peut remarquer que dans les sciences sociales, avec des durées assez fortement groupées, les intervalles directement observés et les intervalles définis aux moments d'évènements sont souvent identiques et s'ils ne le sont pas c'est souvent en tout début ou en toute fin de la période d'observation/exposition. En cas d'ajustement de la durée par des indicatrices, la définition des bornes des intervalles aux moments des évènements permet de s'assurer au moins une occurence de l'évènement. </span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>On peut remarquer qu'en sciences sociales, avec des durées assez fortement groupées, les intervalles directement observés et les intervalles définis aux moments d'évènements sont souvent identiques et s'ils ne le sont pas c'est souvent en tout début ou en toute fin de la période d'observation/exposition. En cas d'ajustement de la durée par des indicatrices, la définition des bornes des intervalles aux moments des évènements permet de s'assurer de la présence d'au moins une occurence . </span>
 <span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
@@ -1320,144 +1543,173 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ajustement avec une fonction quantitative de la durée</span></span>
 <span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>Le modèle étant paramétrique, on doit trouver une fonction qui ajuste le mieux les données. Toutes transformations de la variable est possible: $f(t)=a\times t$, $f(t)=a\times log(t)$......formes quadratiques. Les ajustements sous forme de **splines cubiques**  tendent à se développer ces dernières années. </span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>Le modèle étant paramétrique, on doit trouver une fonction qui ajuste le mieux les données. Toute transformation de la variable est possible: $f(t)=a\times t$, $f(t)=a\times log(t)$......formes quadratiques. Les ajustements sous forme de **splines cubiques**  tendent à se développer ces dernières années. </span>
 <span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>Pour sélectionner cette  fonction, on peut tester différents modèles sans covariable additionnelle, et sélectionner la forme dont le critère d'information de type vraisemblance pénalisée (**AIC**, **BIC**) est le plus faible, avec au moins des différences de -6 ou -8.   </span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>Pour sélectionner cette  fonction, on peut tester différents modèles sans covariable additionnelle <span class="co">[</span><span class="ot">$g(y(t))=f(t)$</span><span class="co">]</span>, et sélectionner la forme dont le critère d'information de type vraisemblance pénalisée (**AIC**, **BIC**) est le plus faible, avec au moins des différences de -6 ou -8.   </span>
 <span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>Exemple:  </span>
 <span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>On va tester les paramétrisations suivantes: une forme linéraire stricte  $f(t)=a\times t$ et des effets quadratiques d'ordres 2 et 3: $f(t)=a_1\times t + a_2\times t^{2}$ et $f(t)=a_1\times t + a_2\times t^{2} + a_3\times t^{3}$.  </span>
 <span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>::: {.box_img}</span>
 <span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a><span class="al">![Probabilité de décéder avec 3 ajustements de la durée](images/Image11.png)</span>{width=70%}</span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>**Critères AIC**   </span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>| $f(t)$                                              | AIC   |                      </span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>| --------------------------------------------------- | ----- | </span>
-<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>| $a\times t$                                         | 504   |</span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>| $a_1\times t + a_2\times t^{2}$                     | 492   |  </span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>| $a_1\times t + a_2\times t^{2} + a_3\times t^{3}$   | 486   |   </span>
-<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>On peut utiliser la troisième forme à savoir $a_1\times t + a_2\times t^{2} + a_3\times t^{3}$ ^<span class="co">[</span><span class="ot">Ce n'est pas le cas ici, mais si on sélectionne une forme cubique, je conseille vivement de regarder les probabilités conditionnelle obtenues, en particulier en fin de périodes d'observation/exposition si peut d'individu reste soumis au risque. On peut rencontrer des problèmes d'overfitting avec des probabilités conditionnelles estimées trop proche de 1. Pour les personnes qui suivent la formation, c'est le cas avec les données des TP</span><span class="co">]</span>.  </span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>**Critères AIC**   </span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>| $f(t)$                                              | AIC   |                      </span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>| --------------------------------------------------- | ----- | </span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>| $a\times t$                                         | 504   |</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>| $a_1\times t + a_2\times t^{2}$                     | 492   |  </span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>| $a_1\times t + a_2\times t^{2} + a_3\times t^{3}$   | 486   |   </span>
 <span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>**Estimation du modèle avec toutes les covariables**</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>On peut utiliser la troisième forme à savoir $a_1\times t + a_2\times t^{2} + a_3\times t^{3}$ ^<span class="co">[</span><span class="ot">Ce n'est pas le cas ici, mais si on sélectionne une forme cubique, je conseille vivement de regarder les probabilités conditionnelles prédites, en particulier en fin de périodes d'observation/exposition si peu d'individus restent soumis au risque. On peut rencontrer des problèmes d'overfitting avec des probabilités conditionnelles estimées trop proche de 1. Pour les personnes qui suivent la formation, c'est le cas avec les données des TP</span><span class="co">]</span>.  </span>
 <span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>| Variables   | OR - RR | Std. err | z       | P<span class="sc">\&gt;</span>\|z\| | 95% IC          |</span>
-<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>|-------------|---------|----------|---------|----------|-----------------|</span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>| $t$         | 0.678   | 0.057    | -4.52   | 0.000    | 0.587 ; 0.810   |</span>
-<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>| $t^2$       | 1.014   | 0.005    | +2.83   | 0.005    | 1.004 ; 1.024   |</span>
-<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>| $t^3$       | 1.000   | 0.000    | -2.11   | 0.035    | 1.000 ; 1.000   |</span>
-<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>| $year$      | 0.876   | 0.015    | -1.80   | 0.072    | 0.758 ; 1.012   |</span>
-<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>| $age$       | 1.034   | 0.163    | +2.27   | 0.023    | 1.005 ; 1.064   |</span>
-<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>| $surgery$   | 0.364   | 0.110    | -2.25   | 0.024    | 0.151 ; 0.877   |</span>
-<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>|             |         |          |         |          |                 |</span>
-<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>| *Constante* | *0.440* | *0.110*  | *-3.29* | *0.001*  | *0.270 ; 0.718* |</span>
-<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>: Modèle logistique à durée discrète ($f(t)$ continue)</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>**Estimation du modèle avec toutes les covariables**</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>| Variables   | OR - RR | Std. err | z       | P<span class="sc">\&gt;</span>\|z\| | 95% IC          |</span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>|-------------|---------|----------|---------|----------|-----------------|</span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>| $t$         | 0.678   | 0.057    | -4.52   | 0.000    | 0.587 ; 0.810   |</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>| $t^2$       | 1.014   | 0.005    | +2.83   | 0.005    | 1.004 ; 1.024   |</span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>| $t^3$       | 1.000   | 0.000    | -2.11   | 0.035    | 1.000 ; 1.000   |</span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>| $year$      | 0.876   | 0.015    | -1.80   | 0.072    | 0.758 ; 1.012   |</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>| $age$       | 1.034   | 0.163    | +2.27   | 0.023    | 1.005 ; 1.064   |</span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>| $surgery$   | 0.364   | 0.110    | -2.25   | 0.024    | 0.151 ; 0.877   |</span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>|             |         |          |         |          |                 |</span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>| *Constante* | *0.440* | *0.110*  | *-3.29* | *0.001*  | *0.270 ; 0.718* |</span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>*Remarque*: les variables *year* et *age* ont été centrée sur leur moyenne pour rendre la constante interprétable. La constante reporte donc l'Odds de décéder lors des 30 premiers jours d'une personne dont l'âge et l'année à l'entrée dans le registre  est égal à l'âge et à l'année moyenne et qui n'a pas été opéré préalablement.</span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>: Modèle logistique à durée discrète ($f(t)$ continue)</span>
 <span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>Si maintenant on estime un modèle de Cox sur ces données journalières groupées, on remarque que les résultats obtenus, et ce n'est pas une surprise, sont très proches.</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>*Remarque*: les variables *year* et *age* ont été centrées sur leur moyenne pour rendre la constante interprétable. La constante reporte donc l'Odds de décéder lors des 30 premiers jours d'une personne dont l'âge et l'année à l'entrée dans le registre à l'âge moyen et à l'année moyenne, et qui n'a pas été opéré préalablement pour un pontage.</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>| Variables   | OR - RR | Std. err | z       | P<span class="sc">\&gt;</span>\|z\| | 95% IC          |</span>
-<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>|-------------|---------|----------|---------|----------|-----------------|</span>
-<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>| $year$      | 0.878   | 0.059    | -1.93   | 0.053    | 0.769 ; 1.002   |</span>
-<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>| $age$       | 1.029   | 0.014    | +2.13   | 0.033    | 1.002 ; 1.057   |</span>
-<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>| $surgery$   | 0.379   | 0.165    | -2.22   | 0.026    | 0.111 ; 0.892   |</span>
-<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>: Modèle de Cox</span>
-<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ajustement discret</span></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>Si maintenant on estime un modèle de Cox sur ces données journalières groupées, on remarque que les résultats obtenus, et ce n'est pas une surprise, sont très proches.</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>| Variables   | OR - RR | Std. err | z       | P<span class="sc">\&gt;</span>\|z\| | 95% IC          |</span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>|-------------|---------|----------|---------|----------|-----------------|</span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>| $year$      | 0.878   | 0.059    | -1.93   | 0.053    | 0.769 ; 1.002   |</span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>| $age$       | 1.029   | 0.014    | +2.13   | 0.033    | 1.002 ; 1.057   |</span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>| $surgery$   | 0.379   | 0.165    | -2.22   | 0.026    | 0.111 ; 0.892   |</span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>: Modèle de Cox</span>
 <span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Il s'agit d'introduire la variable de durée dans le modèle comme une variable catégorielle (indicatrices).</span>
-<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Démarche pas conseillé si on a beaucoup de points d'observation, ce qui est le cas ici.</span>
-<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>A l'inverse, si peu de points d'observation la paramétrisation avec une durée continue n'est pas conseillé.</span>
-<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>La correction de la non proportionnalité peut être plus compliquée à mettre en oeuvre.</span>
-<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>On va supposer que l'on ne dispose que de 4 intervalles d'observation. Pour l'exemple, on va créer ces points à partir des quartiles de la durée, et conserver pour chaque personne une seule observation par intervalle.  </span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a><span class="fu">### Ajustement discret</span></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Il s'agit d'introduire la variable de durée dans le modèle comme une variable catégorielle (indicatrices).</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Cette option n'est pas conseillée si on a beaucoup de points d'observation, ce qui est le cas ici.</span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>A l'inverse, si peu de points d'observation la paramétrisation avec une durée continue n'est pas conseillé.</span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>La correction de la non proportionnalité peut être plus compliquée à mettre en oeuvre.</span>
 <span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$t=1$: Entre le début de l'exposition et 4 mois.</span>
-<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$t=2$: Entre 5 mois et 11 mois .</span>
-<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$t=3$: Entre 12 mois et 23 mois.</span>
-<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$t=4$: 24 mois et plus.</span>
-<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>On va estimer le risque globalement sur l'intervalle. La base sera plus courte que la précédente (197 observations pour 103 individus). Il ne sera plus possible ici d'interpréter les résultats en termes de rapport de probabilité, l'évènement devenant trop fréquent à l'intérieur de chaque intervalle.</span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>On va supposer que l'on ne dispose que de 4 intervalles d'observation. Pour l'exemple, on va créer ces points à partir des quartiles de la durée, et conserver pour chaque personne une seule observation par intervalle.  </span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$t=1$: Entre le début de l'exposition et 4 mois.</span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$t=2$: Entre 5 mois et 11 mois .</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$t=3$: Entre 12 mois et 23 mois.</span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>$t=4$: 24 mois et plus.</span>
 <span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>| Variables   | OR - RR | Std. err | z       | P<span class="sc">\&gt;</span>\|z\| | 95% IC          |</span>
-<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>|-------------|---------|----------|---------|----------|-----------------|</span>
-<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>| $0-4 mois$  | 2.811   | 1.177    | +2.47   | 0.014    | 1.237 ; 6.387   |</span>
-<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>| $5-11 mois$ | ref     |   -      |   -     |   -      |       -         |</span>
-<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>| $12-23 mois$| 0.559   | 0.346    | -0.94   | 0.347    | 0.166 ; 1.881   |</span>
-<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>| $24-46 mois$| 1.741   | 1.159    | +0.83   | 0.405    | 0.472 ; 6.417   |</span>
-<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>| $year$      | 0.816   | 0.076    | -2.18   | 0.029    | 0.680 ; 0.980   |</span>
-<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>| $age$       | 1.048   | 0.019    | +2.53   | 0.011    | 1.011 ; 1.087   |</span>
-<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>| $surgery$   | 0.330   | 0.166    | -2.21   | 0.027    | 0.123 ; 0.882   |</span>
-<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>|             |         |          |         |          |                 |</span>
-<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>| *Constante* | *0.407* | *0.151*  | *2.43*  | *0.015*  | *0.198 ; 0.840* |</span>
-<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>: Modèle logistique à durée discrète ($f(t)$ indicatrices)</span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>On va estimer le risque globalement sur l'intervalle. La base sera plus courte que la précédente (197 observations pour 103 individus). Il ne sera plus possible ici d'interpréter les résultats en termes de rapport de probabilité, l'évènement devenant trop fréquent à l'intérieur de chaque intervalle.</span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>| Variables   | OR      | Std. err | z       | P<span class="sc">\&gt;</span>\|z\| | 95% IC          |</span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>|-------------|---------|----------|---------|----------|-----------------|</span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>| $0-4 mois$  | 2.811   | 1.177    | +2.47   | 0.014    | 1.237 ; 6.387   |</span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>| $5-11 mois$ | ref     |   -      |   -     |   -      |       -         |</span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>| $12-23 mois$| 0.559   | 0.346    | -0.94   | 0.347    | 0.166 ; 1.881   |</span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>| $24-46 mois$| 1.741   | 1.159    | +0.83   | 0.405    | 0.472 ; 6.417   |</span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>| $year$      | 0.816   | 0.076    | -2.18   | 0.029    | 0.680 ; 0.980   |</span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>| $age$       | 1.048   | 0.019    | +2.53   | 0.011    | 1.011 ; 1.087   |</span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>| $surgery$   | 0.330   | 0.166    | -2.21   | 0.027    | 0.123 ; 0.882   |</span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>|             |         |          |         |          |                 |</span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>| *Constante* | *0.407* | *0.151*  | *2.43*  | *0.015*  | *0.198 ; 0.840* |</span>
 <span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>On trouve des résultats proches de ceux éstimés avec un ajustement continu de la durée. C'est normal, la dirée fait office de variable d'ajustement peu ou pas corrélée avec les autres variables introduites.</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>: Modèle logistique à durée discrète ($f(t)$ indicatrices)</span>
 <span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>| Variables   | Ajustement discret | Ajustement continu |</span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>|-------------|--------------------|--------------------|</span>
-<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>| $year$      | 0.816              |  0.876             | </span>
-<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>| $age$       | 1.048              |  1.034             | </span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>| $surgery$   | 0.330              |  0.364             |</span>
-<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>On trouve des résultats proches de ceux éstimés avec un ajustement continu de la durée. C'est normal, la dirée fait office de variable d'ajustement peu ou pas corrélée avec les autres variables introduites.</span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>| Variables   | Ajustement discret | Ajustement continu |</span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>|-------------|--------------------|--------------------|</span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>| $year$      | 0.816              |  0.876             | </span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>| $age$       | 1.048              |  1.034             | </span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>| $surgery$   | 0.330              |  0.364             |</span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a><span class="fu">## Lien avec des modèles usuels à durée continue</span></span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>::: callout-note</span>
 <span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>Si la durée discrète/groupée sous tend une durée continue (ce qui est clairement le cas ici):  </span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a><span class="fu">### Lien avec des modèles usuels à durée continue</span></span>
 <span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>On l'a déjà souligné, l'ajustement avec des durées sous forme  d'indicatrices correspond au modèle à durée discrète défini par Cox, et le plus proche du modèle semi-paramétrique. Il est également assimilable à un modèle de type *exponential piecewice constant* (donc un modèle de poisson).</span>
-<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si l'ajustement se fait en utilisation une transformation de la durée par une fonction: </span>
-<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>$f(t)= log(t)$ correspond à un modèle de Weibull à *risque proportionnel* ^<span class="co">[</span><span class="ot">voir la courte section sur les modèle paramétriques usuels</span><span class="co">]</span>.</span>
-<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si l'ajustement se fait avec des splines cubiques, le modèle à durée discrète correspond à un modèle de type *Parmar-Royston*. Avec une forme quadratique classique, on peut également obtenir cette correspondance.</span>
-<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>Si la durée discrète/groupée sous tend une durée continue (ce qui est clairement le cas ici):  </span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>L'ajustement avec des durées sous forme d'indicatrices correspond au modèle à durée discrète défini par Cox. Il est également assimilable à un modèle appelé *exponential piecewice constant* (soit un modèle de poisson).</span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si l'ajustement se fait en utilisation une transformation de la durée par une fonction: </span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>$f(t)= log(t)$ correspond à un modèle de Weibull à *risque proportionnel* ^<span class="co">[</span><span class="ot">Voir la très courte section sur les modèles paramétriques usuels</span><span class="co">]</span>.</span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Si l'ajustement se fait avec des splines cubiques, le modèle à durée discrète correspond à un modèle de type *Parmar-Royston*.</span>
 <span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a><span class="fu">## Proportionnalité des risques</span></span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Formellement un modèle logistique à temps discret repose sur une hypothèse d'Odds proportionnel <span class="co">[</span><span class="ot">Odds ratios constants pendant la durée d'observation</span><span class="co">]</span>. Contrairement au modèle de Cox, l'estimation des probabilités (risque) n'est pas biaisée si l'hypothèse PH n'est pas respectée, les paramètres estimés sont considérés au pire comme des approximation.</span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a><span class="fu">## Proportionnalité des risques</span></span>
 <span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Comme pour le modèle de Cox, la correction de la non proportionnalité peut se faire en intégrant une interaction avec la durée dans le modèle.</span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Formellement un modèle logistique à durée discrète/groupée repose sur une hypothèse d'Odds proportionnels <span class="co">[</span><span class="ot">Odds ratios constants pendant la durée d'observation</span><span class="co">]</span>. Contrairement au modèle de Cox, l'estimation des probabilités (risque) n'est pas biaisée si l'hypothèse PH n'est pas respectée, les paramètres estimés seront considérés au pire comme des approximation.... problématique d'intéraction oblige.</span>
 <span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>Avec un ajustement continue, on remarque de nouveau que le résultat du modèle est de nouveau très proche de celui estimé avec un modèle de Cox. </span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="ss">* </span>Comme pour le modèle de Cox, la correction de la non proportionnalité peut se faire en intégrant une interaction avec la durée dans le modèle.</span>
 <span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a>| Variables         | OR - RR | Std. err | z       | P<span class="sc">\&gt;</span>\|z\| | 95% CI           |</span>
-<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>|-------------------|---------|----------|---------|----------|------------------|</span>
-<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a>| $t$               | 0.702   | 0.059    | -4.2    | 0.000    | 0.595 ; 0.828    |</span>
-<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>| $surgery(t=0)$    | 0.155   | 0.108    | -2.67   | 0.008    | 0.039 ; 0.609    |</span>
-<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>| $surgery\times t$ | 1.072   | 0.036    | 2.08    | 0.037    | 1.004 ; 1.145    |</span>
-<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>| $t^2$             | 1.013   | 0.005    | 2.37    | 0.018    | 1.002 ; 1.023    |</span>
-<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>| $t^3$             | 1.00    | 0.000    | -1.71   | 0.086    | 1.000 ; 1.000    |</span>
-<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>| $year$            | 0.872   | 0.064    | -1.86   | 0.062    |  0.755 ; 1.007   |</span>
-<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>| $age$             | 1.033   | 0.015    | 2.23    | 0.026    | 1.004 ; 1.063    |</span>
-<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a>| $constante$       | *0.445* | *0.112*  | *-3.22* | *0.001*  | *0.272 ; 0.728*  |</span>
-<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>: Modèle logistique à durée discrète avec correction de la non proportionnalité</span>
-<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a>Si on avait omis les variables *year* et *age* du modèle:</span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a>Avec un ajustement continue, on remarque de nouveau que le résultat du modèle est très proche de celui estimé avec un modèle de Cox. </span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a>| Variables         | OR - RR | Std. err | z       | P<span class="sc">\&gt;</span>\|z\| | 95% CI           |</span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>|-------------------|---------|----------|---------|----------|------------------|</span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>| $t$               | 0.702   | 0.059    | -4.2    | 0.000    | 0.595 ; 0.828    |</span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>| $surgery(t=0)$    | 0.155   | 0.108    | -2.67   | 0.008    | 0.039 ; 0.609    |</span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>| $surgery\times t$ | 1.072   | 0.036    | 2.08    | 0.037    | 1.004 ; 1.145    |</span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>| $t^2$             | 1.013   | 0.005    | 2.37    | 0.018    | 1.002 ; 1.023    |</span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>| $t^3$             | 1.00    | 0.000    | -1.71   | 0.086    | 1.000 ; 1.000    |</span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a>| $year$            | 0.872   | 0.064    | -1.86   | 0.062    |  0.755 ; 1.007   |</span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>| $age$             | 1.033   | 0.015    | 2.23    | 0.026    | 1.004 ; 1.063    |</span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>| $constante$       | *0.445* | *0.112*  | *-3.22* | *0.001*  | *0.272 ; 0.728*  |</span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>: Modèle logistique à durée discrète avec correction de la non proportionnalité</span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a><span class="al">![Probabilité de décéder après correction de la non proportionnalité pour la variable surgery](images/Image13.png)</span>{width=70%}</span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>Avec une sépcification dépendant seulement de la durée (pour le graphique:</span>
 <span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a>::: {.box_img}</span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a><span class="al">![Probabilité de décéder après correction de la non proportionnalité pour la variable surgery](images/Image13.png)</span>{width=70%}</span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a></span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","loop":true,"selector":".lightbox","descPosition":"bottom","closeEffect":"zoom"});</script>
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/mthevenin/analyse_duree/edit/main/08-discret.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"openEffect":"zoom","closeEffect":"zoom","descPosition":"bottom","loop":false,"selector":".lightbox"});
+window.onload = () => {
+  lightboxQuarto.on('slide_before_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    const href = trigger.getAttribute('href');
+    if (href !== null) {
+      const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+      if (imgEl !== null) {
+        const srcAttr = imgEl.getAttribute("src");
+        if (srcAttr && srcAttr.startsWith("data:")) {
+          slideConfig.href = srcAttr;
+        }
+      }
+    } 
+  });
+
+  lightboxQuarto.on('slide_after_load', (data) => {
+    const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+    if (window.Quarto?.typesetMath) {
+      window.Quarto.typesetMath(slideNode);
+    }
+  });
+
+};
+          </script>
+
 
 
 

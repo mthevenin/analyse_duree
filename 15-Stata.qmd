@@ -1,13 +1,9 @@
 ---
-filters:
-  - lightbox
-lightbox: auto
-
 jupyter: nbstata
 ---
 
 
-# **Stata**
+# Stata
 
 
 ::: callout-note
@@ -420,7 +416,7 @@ streg year age surgery , dist(weibull) time nolog noheader
 
 ### Non paramétrique: estimation des IC
 
-Installer les commandes ```stcompet``` et ```stcomlist``` 
+Installer les commandes `stcompet` et `stcomlist` 
 
 ```{stata}
 *| eval: FALSE

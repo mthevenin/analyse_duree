@@ -1,15 +1,8 @@
 ---
 # title: "Risques concurrents"
-
-filters:
-  - lightbox
-lightbox: auto
-
-jupyter: nbstata
-
 ---
 
-# **Risques concurrents**
+# Risques concurrents
 
 Le problème des événements multiples dans les analyses de survie a été posé dans les années 1970 avec la notion de **risques concurrents** (*competing risks*) : il s'agit d'événements survenant au cours de la période d'observations et qui *empêchent* l'occurence de l'événement d'intérêt. 
 

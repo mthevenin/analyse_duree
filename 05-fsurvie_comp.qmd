@@ -1,13 +1,9 @@
 ---
 #title: "**Tests de comparaison**"
-
-filters:
-  - lightbox
-lightbox: auto
 ---
 
 
-# **Tests de comparaison**
+# Tests de comparaison
 
 - Les tests d'égalités des fonctions de survie entre différentes valeurs d'une covariable sont calculés à partir de la méthode de Kaplan Meier. 
 - L'utilisation du test correspond à la nécessité de déterminer si une même distribution gouverne les évènements observés dans les différentes strates.  
@@ -17,14 +13,14 @@ lightbox: auto
 Deux méthodes sont utilisées:  
 
 * La plus ancienne, la plus diffusée, et peut-être la moins bonne: test dits du **log-rank**). 
-* Plus récente et (hélas) moins difusée: comparaison des **RMST** (*Restricted Mean of Survival Time*).
+* Plus récente et (hélas) moins difusée: comparaison des **RMST** (*Restricted Mean of Survival Time*). 
 
 
 ## Tests du log-rank
 
-Il s'agit d'une série de tests qui répondent à la même logique, la seule différence réside dans le poids accordé au début ou à la fin de la période d'observation. Par ailleurs ces différents tests sont plus ou moins sensibles à la distribution des censures à droites entre les sous échantillons et à la non proportionalité des risques.     
+Il s'agit d'une série de tests qui répondent à la même logique, la seule différence réside dans le poids accordé au début ou à la fin de la période d'observation. Par ailleurs ces différents tests sont plus ou moins sensibles à la distribution des censures à droites entre les sous échantillons et à l'hypothèses de proportionnalité des risques.     
 
-Dans leur logique, ces tests entrent dans le cadre des tests d'indépendance du Khi2, même si formellement ils relèvent des techniques dites de rang.     
+Dans leur logique, ces tests entrent dans le cadre des tests d'indépendance du Khi2, même si formellement ils relèvent des techniques dites de **rang** (d'où le nom).     
 Il s'agira donc de comparer des effectifs observés à des effectifs espérés à chaque moment d'évènement. La principale différence réside dans le calcul de la variance de la statistique du test qui, ici, suit assez logiquement une loi hypergéométrique [proche loi binomiale mais avec tirage avec remise].  
 
 ### Principe de calcul de la statistique de test
@@ -38,11 +34,11 @@ Si on teste simultanément la différence de $g$ fonctions de survie, ce qui n'e
 
 ### Les principaux tests log-rank
 
-Le principe de construction des effectifs observés et espérés reste le même dans chaque test, les différences résident dans les pondérations ($w_i$) qui prennent en compte, de manière différente, la taille de la population soumise au risque à chaque durée où au moins un évènement est observé.    
+Le principe de construction des effectifs observés et espérés reste strictement le même dans chaque test, les différences résident dans les pondérations ($w_i$) qui prennent en compte, de manière différente, la taille de la population encore soumise au risque à chaque durée où au moins un évènement est observé.    
 
 
 * **Test du log-rank**: $w_i=1$  
-  Il accorde le même poids à toutes les durées d'évènement. C'est le test standard, le plus utilisé. 
+  Il accorde le même poids à toutes les durées d'évènement. C'est le test standard, le plus utilisé. Il n'y a donc pas de pondération au final.
 
 * **Test de Wilconxon-Breslow-Grehan**: $w_i=R_i$    
   Les écarts entre effectifs observés et espérés sont pondérés par la population soumise à risque en $t_i$. Le test accorde plus de poids au début de la période analysée, et il est sensible aux différences de distributions entre les strates des observations censurées.
@@ -54,16 +50,20 @@ Le principe de construction des effectifs observés et espérés reste le même 
   La pondération est une variante de la fonction de survie KM (avec $R_i=R_i+1$). Le test n'est pas sensible au problème de distribution des censures. 
 
 * **Test de Fleming-Harington**: $w_i=(S_i)^p\times(1-S_i)^{q}$ avec $0\leq{p}\leq{1}$ 
-  Il permet de paramétrer le poids accordé au début où à la fin de temps d'observation. Si $p=q=0$ on retrouve le test de base non pondéré.    
+  Il permet de paramétrer le poids accordé au début où à la fin de temps d'observation. Si $p=q=0$ on retrouve le test de base non pondéré^[A ma connaissance il n'est pas implémenté dans R].    
 
 **En pratique/remarques**:  
 
-*	Les tests du log-rank sont sensibles à l’hypothèse de risques proportionnels (voir **modèle semi-paramétrique de Cox**). En pratique si des courbes de séjours se croisent, il est fortement déconseillé de les utiliser. Cela ne signifie pas que si les courbes ne se croisent pas, l’hypothèse de proportionalité des risques est respectée : des rapports de risque peuvent au cours du temps s'intensifier, se réduire ou, le cas échant s’inverser, ce qui est typique d’un croisement.
+*	Les tests du log-rank sont sensibles à l’hypothèse de risques proportionnels (voir **modèle semi-paramétrique de Cox**). En pratique si des courbes de séjours se croisent, il est fortement déconseillé de les utiliser analystiquement. Cela ne signifie pas que si les courbes ne se croisent pas, l’hypothèse de proportionalité des risques est respectée : des rapports de risque peuvent au cours du temps s'intensifier, se réduire ou, le cas échant s’inverser, ce qui est typique d’un croisement.
 
-*	Effectuer un test global (multiple/omnibus) sur un nombre important de groupes (ou >2) peut rendre le test très facilement significatif. Il peut être intéressant de tester des courbes deux à deux (idem qu’une régression avec covariable discrète), en conservant un seul degré de liberté. Des méthodes de correction du test multiple sont possibles ou disponibles si on utilise R. 
+*	Effectuer un test global (multiple/omnibus) sur un nombre important de groupes (ou >2) peut rendre les p-value artificiellement très basses (idem test classique d'indépendance). Il peut être intéressant de tester des courbes deux à deux (idem qu’une régression avec covariable discrète), en conservant un seul degré de liberté. Des méthodes de correction du test multiple sont possibles ou disponibles si on utilise R, bien que la bonne méthode n'a jamais fait consensus chez les statisticiens. 
 
 
-**R-Stata-Sas-Python**    
+::: callout-note
+Cette question de test multiple ne se pose pas dans le support. Mais c'est le cas avec la formation *en live* pour les données traitées dans les TP
+:::
+
+**R-Stata-Python-Sas**    
   
 ::: panel-tabset
 
@@ -77,15 +77,15 @@ Je conseille de rester sur l'option ***Peto-Peto*** et dans le cas d'une variabl
 
 On utilise la commande **`sts test`** avec le nom de la version du test: `peto`, `wilcoxon` . Sans préciser le nom de la variante, le test non pondéré est exécuté.
 
-#### Sas
-
-Le test non pondéré et la version Wilcoxon sont données avec l’option **`strata`** de la `proc lifetest`. Attention : ne jamais utiliser la version *LR Test* qui est biaisée. Pour obtenir d’autres versions du test du log-rank, on ajoute **`/test=all`** à l’option `strata`.
-
 
 #### Python
 
 Avec la librairie `lifelines`, on utilise la fonction **`logrank_test`**. Quatre variantes sont disponibles (Wilcoxon, Tarone-Ware, Peto-Peto et Fleming-Harrigton). On peut également utiliser la fonction **`duration.survdiff`** de `statmodels` (non pondéré, Wilcoxon - appelé ici Breslow- et Tarone-Ware).  
 
+
+#### Sas {{< fa solid cross>}}
+
+Le test non pondéré et la version Wilcoxon sont données avec l’option **`strata`** de la `proc lifetest`. Attention : ne jamais utiliser la version *LR Test* qui est biaisée. Pour obtenir d’autres versions du test du log-rank, on ajoute **`/test=all`** à l’option `strata`.
 :::
 
 
@@ -93,7 +93,11 @@ Avec la librairie `lifelines`, on utilise la fonction **`logrank_test`**. Quatre
 
 On compare ici l'effet du pontage coronarien sur le risque de décéder depuis l'inscription dans le registre de greffe. 
 
+
+::: {.box_img}
 ![](images/Image9.png){width=70%}
+:::
+
 
 | **Test**               | **df** | **Chi2** | **P>Chi2**  |
 |------------------------|--------|----------|-------------|
@@ -121,14 +125,14 @@ La comparaison des RMST est une alternative pertinente aux tests du log-rank car
 **Principe**  
 
 *	L’aire sous la fonction de survie représente la durée moyenne d’attente jusqu'à l’évènement, soit une espérance de survie.
-* En présence de censure à droite, il faut borner la durée maximale $t^*<\infty$. L'espérance de survie s'interprète donc sur un horizon fini.  On est très proche d’une mesure en analyse démographique type « espérance de vie partielle ».
+* En présence de censure à droite, il faut borner la durée maximale $t^*<\infty$. Cette espérance de survie ou de séjour s'interprète donc sur un horizon fini.  On est très proche d’une mesure en analyse démographique type « espérance de vie partielle ».
 * $RMST =\int_0^{t^*}S(t)dt$. 
 * On peut facilement comparer les RMST de deux groupes, en termes de différence ou de ratio. 
 * Par défaut on définit généralement $t^*$ à partir le temps du dernier évènement observé.  Il est néanmoins possible de calculer le RMST sur des intervalles plus court, ce qui lui permet une véritable souplesse au niveau de l’analyse. 
 
 
 
-**R-Stata-Sas-Python**     
+**R-Stata-Python-Sas**     
  
 Attention, selon les logiciels la durée max par défaut n'est pas la
 même. Pour R et Sas, il s'agit du dernier évènement 
@@ -139,28 +143,26 @@ Pour l'exemple, la durée maximale utilisée par R est de 1407 jours alors que p
 
 #### R  
 
-Librairie **`SurvRm2`**. Programmée par les mêmes personnes que la commande Stata, la fonction proposée n'est pas très souple.
+Librairie **`SurvRm2`**. Programmée par les mêmes personnes que la commande Stata, la fonction proposée n'est pas très souple malheureusement.
 
 #### Stata
 
 Commande externe **`strmst2`**. La plus ancienne fonction proposée par les logiciels. Au final plus limitée que la solution Sas. J’ai programmé une commande, `diffrmst`, qui représente graphiquement les estimations des Rmst pour chaque temps d’évènement, leurs différences et les p-value issues des comparaisons. 
-
-
-#### SAS 
-
-Disponible depuis la version 15.1 de SAS/Stat (fin 2018). Les estimations et le résultat du test de comparaison sont récupérables très simplement dans une `proc lifetest`, avec en option **`plots=(rmst)**` . Bien que sortie tardivement par rapport Stata et R, les résultats sont particulièrement complets.
-
 
 #### Python
 
 Estimation un peu pénible. A partir de l'estimateur KM obtenu avec la fonction `KaplanMeierFitter` de `lifelines`, on peut obtenir les RMST avec la fonction  `restricted_mean_survival_time`. 
 On peut tracer les fonctions, en revanche le test de comparaison n'est pas implémenté.
 
+
+#### SAS {{< fa solid cross>}} 
+
+Disponible depuis la version 15.1 de SAS/Stat (fin 2018). Les estimations et le résultat du test de comparaison sont récupérables très simplement dans une `proc lifetest`, avec en option **`plots=(rmst)**` . Bien que sortie tardivement par rapport Stata et R, les résultats sont particulièrement complets.
+
 :::
 
 
 **Application**  
-
 
 Avec $tmax=1407$:
 
@@ -178,7 +180,6 @@ Avec $tmax=1407$:
 : Différences entre Rmst pour la variable surgery
 
 
-
 Ici $t^*$ est égal à 1407 jours, soit la durée qui correspond au dernier décès observé.  
 Sur un horizon de 1407 jours, ces individus opérés d'un pontage peuvent espérer vivre 884 jours en moyenne, contre 379 jours pour les autres.  La durée moyenne de survie est donc 2.3 fois plus importante pour les personnes opérées (rapport des Rmst = 2.3 ), ce qui correspond à une différence de 379 jours.
 
@@ -189,7 +190,7 @@ Comme le premier décès observé pour les personnes opéré se situe le 165eme 
 
 
 ::: callout-note
-Pour la version pdf, seulement une dizaine de points a été sélectionné en raison de la longueur du tableau
+Pour la version pdf, seulement une grosse dizaine de points a été sélectionné en raison de la longueur du tableau.
 :::
 
 
@@ -311,6 +312,8 @@ Pour la version pdf, seulement une dizaine de points a été sélectionné en ra
 ::: {.content-visible when-format="pdf"}
 ```{r eval=FALSE}
 
+# Seulement une partie de l'output: se reporter à la version html
+
   +--------------------------------------------------------------------------+
   | _time     _rmst1     _rmst0      _diff    95%CI lower 95%CI upper  pvalue|
   |--------------------------------------------------------------------------|
@@ -337,5 +340,6 @@ Pour la version pdf, seulement une dizaine de points a été sélectionné en ra
 :::
 
 
-
+::: {.box_img}
 ![Comparaison des Rmst à chaque jour où au moins un décès est observé](images/image9rmst.png){width=70%}
+:::
