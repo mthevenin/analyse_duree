@@ -6,7 +6,7 @@
 ## Mises à jour 2024
 
 
-[Test de Grambsch Therneau l'hypothèse de proportionnalité dans un modèle de Cox: version exacte versus approximation OLS]{.box_text}  
+[Tests de Grambsch Therneau: versions exacte versus ols]{.box_text}  
   
 Une contribution majeure visant à expliquer les écarts observées entre les deux versions du test a été réalisée fin 2023. [Lien](https://www.cambridge.org/core/journals/political-analysis/article/implementation-matters-evaluating-the-proportional-hazard-tests-performance/05E2657A64B18FB1E25C2BE1F7D92C3B)  Elle repose sur la présence de corrélations même limitées entre les covariables du modèle, situation classique en sciences sociales. La conclusion de ce travail penche clairement vers une utilisation du test ols (moindre carrés ordinaires) dans le domaine des sciences sociales. 
 
