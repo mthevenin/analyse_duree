@@ -8,20 +8,24 @@
 
 [Tests de Grambsch Therneau: versions exacte versus ols]{.box_text}  
   
-Une contribution majeure visant à expliquer les écarts observées entre les deux versions du test a été réalisée fin 2023. [Lien](https://www.cambridge.org/core/journals/political-analysis/article/implementation-matters-evaluating-the-proportional-hazard-tests-performance/05E2657A64B18FB1E25C2BE1F7D92C3B)  Elle repose sur la présence de corrélations même limitées entre les covariables du modèle, situation classique en sciences sociales. La conclusion de ce travail penche clairement vers une utilisation du test ols (moindre carrés ordinaires) dans le domaine des sciences sociales. 
+Une contribution majeure visant à expliquer les écarts observées entre les deux versions du test a été réalisée fin 2023 [[Lien](https://www.cambridge.org/core/journals/political-analysis/article/implementation-matters-evaluating-the-proportional-hazard-tests-performance/05E2657A64B18FB1E25C2BE1F7D92C3B)].  Elle repose sur la présence de corrélations même limitées entre les covariables du modèle, situation classique en sciences sociales. La conclusion de ce travail penche clairement vers une utilisation du test ols (moindre carrés ordinaires) dans le domaine des sciences sociales. 
 
 Dans ce support, j'ai donc résumé le travail de S.Metzger dans la section dédiée au test de proportionnalité avec un modèle de Cox. Comme cela impacte le travail sous R j'ai également repris la section relative à la programmation, bien que j'avais déjà donné le moyen de récupérer et d'utiliser le test ols depuis mai 2022. 
 
+[{{<fa solid right-to-bracket>}}](07-cox.qmd#test)
 
 [Calcul des Rmst avec Python]{.box_text}    
   
 Ajouté au package `lifelines` récemment, des éléments de programmation ont été ajouté dans la section Python. La syntaxe n'est pas très conviviale, mais c'est déjà ça. Le test de comparaison des Rmst n'y pas implémenté, ce qui est dommage vu sa simplicité. Plus généralement, aucune inférence de l'estimateur ne semble être présente dans la fonction. 
 
 
-[Quelques remarques complémentaires sur l'épineuse question de l'utilisation des pondérations en analyse de survie]{.box_text}  
+[{{<fa solid right-to-bracket>}}](17-Python.qmd#rmst)
+
+[Quelques ajouts sur  les pondérations en analyse de survie]{.box_text}  
 
 Cela fait suite à des questionnements qui m'ont été adressés par le groupe d'exploitation de l'enquête [Envie](https://envie.site.ined.fr/). Mon court argumentaire  qui reposait sur l'utilisation des pondérations avec des biographies longues a été, il faut l'avouer, un peu mis à mal, la plage d'âges étant ici de 18 à 29 ans. Cela m'a permis de faire un tour d'horizon plus complet de la problématique, et qui continue bien évidemment à me renvoyer dans le domaine de la médecine.
 
+[{{<fa solid right-to-bracket>}}](03-theorie.qmd#ponderation)
 
 ## Le support {-} 
 

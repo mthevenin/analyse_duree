@@ -343,7 +343,7 @@ Par anticipation, on peut déjà signalée que les fonctions de séjours qui son
 Les méthodes qui vont être présentées plus tard ***gèrent*** la présence de censures à droite. En leur absence, elles restent néanmoins parfaitement valables. L'absence de censure facilite certaines analyses, par exemple celles des fonctions de séjour où le calcul direct des durées moyennes est rendu possible. On peut alors utiliser d'autres méthodes plus, en première intentions plus simples, en analysant directement la distribution des évènement dans le temps. La durée ou une fonction de celle-ci pouvant être directement passées comme variable dépendante.
 
 
-### Utilisation des pondérations dans un schema retrospectif avec des biographies longues 
+### Utilisation des pondérations dans un schema retrospectif avec des biographies longues {#ponderation}
 
 ::: {.callout-important}
 

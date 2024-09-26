@@ -207,7 +207,7 @@ Le modèle est estimé avec la **`proc phreg`**.
 * Si on regarde les courbes de Kaplan-Meier, leur croisement non tardif impliquera nécessairement un problème sur cette hypothèse. Il est donc important de les analyser en amont d'un modèle.
 
 
-### Test de Grambsch-Therneau sur les résidus de Schoenfeld
+### Test de Grambsch-Therneau sur les résidus de Schoenfeld {#test}
 
 Ce test a été proposé par P.Grambsch et T.Therneau ^[Il s'agit bien de la personne qui maintient le package **`survival`** dans R] dans un cadre à durée strictement continue. Il repose originellement sur une régression linéaire estimé avec les moindres carrés généralisés (GLS) correction de l'autocorrélation des erreurs avec des sér) . 
 Dans un premier temps pour des raisons plutôt pratiques (informatique), le test a une version moindres carrés ordinaires (OLS). Jusqu'en 2020, tous les logiciels ne proposaient que le test OLS (Sas, Stata, Python et Survival v2). T.Therneau avec la Version 3 de package `survival` a substitué - assez brutalement - un test GLS^[Moindres carrés généralisés] au test OLS. Et cela pose de gros problème, en particulier en sciences sociales. Ceci a été montré de manière très convaincante  par [Shawna K. Metzger](https://www.cambridge.org/core/journals/political-analysis/article/implementation-matters-evaluating-the-proportional-hazard-tests-performance/05E2657A64B18FB1E25C2BE1F7D92C3B).
