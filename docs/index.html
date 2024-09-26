@@ -335,7 +335,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#présentation---bibliographie---outils" id="toc-présentation---bibliographie---outils" class="nav-link active" data-scroll-target="#présentation---bibliographie---outils"><span class="header-section-number">1</span> Présentation - Bibliographie - Outils</a>
   <ul class="collapse">
-  <li><a href="#mises-à-jour-2024" id="toc-mises-à-jour-2024" class="nav-link" data-scroll-target="#mises-à-jour-2024"><span class="header-section-number">1.1</span> Mises à jour 2024</a></li>
+  <li><a href="#mises-à-jour-2024" id="toc-mises-à-jour-2024" class="nav-link" data-scroll-target="#mises-à-jour-2024">Mises à jour 2024</a></li>
   <li><a href="#le-support" id="toc-le-support" class="nav-link" data-scroll-target="#le-support">Le support</a></li>
   <li><a href="#bibliographie" id="toc-bibliographie" class="nav-link" data-scroll-target="#bibliographie">Bibliographie</a></li>
   <li><a href="#outils" id="toc-outils" class="nav-link" data-scroll-target="#outils">Outils</a></li>
@@ -380,8 +380,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="présentation---bibliographie---outils" class="level1" data-number="1">
 <h1 data-number="1"><span class="header-section-number">1</span> Présentation - Bibliographie - Outils</h1>
-<section id="mises-à-jour-2024" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="mises-à-jour-2024"><span class="header-section-number">1.1</span> Mises à jour 2024</h2>
+<section id="mises-à-jour-2024" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="mises-à-jour-2024">Mises à jour 2024</h2>
 <p><span class="box_text">Tests de Grambsch Therneau: versions exacte versus ols</span></p>
 <p>Une contribution majeure visant à expliquer les écarts observées entre les deux versions du test a été réalisée fin 2023 [<a href="https://www.cambridge.org/core/journals/political-analysis/article/implementation-matters-evaluating-the-proportional-hazard-tests-performance/05E2657A64B18FB1E25C2BE1F7D92C3B">Lien</a>]. Elle repose sur la présence de corrélations même limitées entre les covariables du modèle, situation classique en sciences sociales. La conclusion de ce travail penche clairement vers une utilisation du test ols (moindre carrés ordinaires) dans le domaine des sciences sociales.</p>
 <p>Dans ce support, j’ai donc résumé le travail de S.Metzger dans la section dédiée au test de proportionnalité avec un modèle de Cox. Comme cela impacte le travail sous R j’ai également repris la section relative à la programmation, bien que j’avais déjà donné le moyen de récupérer et d’utiliser le test ols depuis mai 2022.</p>
@@ -934,7 +934,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Présentation - Bibliographie - Outils</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">## Mises à jour 2024</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">## Mises à jour 2024 {-} </span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Tests de Grambsch Therneau: versions exacte versus ols</span><span class="co">]</span>{.box_text}  </span>
@@ -1012,7 +1012,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/mthevenin/analyse_duree/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/mthevenin/analyse_duree/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","descPosition":"bottom","loop":false,"openEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;
