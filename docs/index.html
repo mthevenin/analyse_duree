@@ -387,7 +387,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Dans ce support, j’ai donc résumé le travail de S.Metzger dans la section dédiée au test de proportionnalité avec un modèle de Cox. Comme cela impacte le travail sous R j’ai également repris la section relative à la programmation, bien que j’avais déjà donné le moyen de récupérer et d’utiliser le test ols depuis mai 2022.</p>
 <p><a href="./07-cox.html#test"><i class="fa-solid fa-right-to-bracket" aria-label="right-to-bracket"></i></a></p>
 <p><span class="box_text">Calcul des Rmst avec Python</span></p>
-<p>Ajouté au package <code>lifelines</code> récemment, des éléments de programmation ont été ajouté dans la section Python. La syntaxe n’est pas très conviviale, mais c’est déjà ça. Le test de comparaison des Rmst n’y pas implémenté, ce qui est dommage vu sa simplicité. Plus généralement, aucune inférence de l’estimateur ne semble être présente dans la fonction.</p>
+<p>Implémenté au package <code>lifelines</code> récemment, des éléments de programmation ont été ajoutés dans la section Python. La syntaxe n’est pas très conviviale, mais c’est déjà ça. Le test de comparaison des Rmst n’y pas présente, ce qui est dommage vu sa simplicité, et je n’ai pas trouvé d’éléments d’inférence dans la fonction.</p>
 <p><a href="./17-Python.html#rmst"><i class="fa-solid fa-right-to-bracket" aria-label="right-to-bracket"></i></a></p>
 <p><span class="box_text">Quelques ajouts sur les pondérations en analyse de survie</span></p>
 <p>Cela fait suite à des questionnements qui m’ont été adressés par le groupe d’exploitation de l’enquête <a href="https://envie.site.ined.fr/">Envie</a>. Mon court argumentaire qui reposait sur l’utilisation des pondérations avec des biographies longues a été, il faut l’avouer, un peu mis à mal, la plage d’âges étant ici de 18 à 29 ans. Cela m’a permis de faire un tour d’horizon plus complet de la problématique, et qui continue bien évidemment à me renvoyer dans le domaine de la médecine.</p>
@@ -947,7 +947,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Calcul des Rmst avec Python</span><span class="co">]</span>{.box_text}    </span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Ajouté au package <span class="in">`lifelines`</span> récemment, des éléments de programmation ont été ajouté dans la section Python. La syntaxe n'est pas très conviviale, mais c'est déjà ça. Le test de comparaison des Rmst n'y pas implémenté, ce qui est dommage vu sa simplicité. Plus généralement, aucune inférence de l'estimateur ne semble être présente dans la fonction. </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Implémenté au package <span class="in">`lifelines`</span> récemment, des éléments de programmation ont été ajoutés dans la section Python. La syntaxe n'est pas très conviviale, mais c'est déjà ça. Le test de comparaison des Rmst n'y pas présente, ce qui est dommage vu sa simplicité, et je n'ai pas trouvé d'éléments d'inférence dans la fonction. </span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">{{&lt;fa solid right-to-bracket&gt;}}</span><span class="co">](17-Python.qmd#rmst)</span></span>
@@ -1012,7 +1012,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>  </span></code><button title="Copier vers le presse-papier" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
-<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/mthevenin/analyse_duree/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"descPosition":"bottom","selector":".lightbox","openEffect":"zoom","loop":false,"closeEffect":"zoom"});
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/mthevenin/analyse_duree/edit/main/index.qmd" class="toc-action"><i class="bi bi-github"></i>Modifier cette page</a></li></ul></div></div></div></footer><script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"closeEffect":"zoom","descPosition":"bottom","openEffect":"zoom"});
 window.onload = () => {
   lightboxQuarto.on('slide_before_load', (data) => {
     const { slideIndex, slideNode, slideConfig, player, trigger } = data;

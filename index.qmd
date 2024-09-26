@@ -16,7 +16,7 @@ Dans ce support, j'ai donc résumé le travail de S.Metzger dans la section déd
 
 [Calcul des Rmst avec Python]{.box_text}    
   
-Ajouté au package `lifelines` récemment, des éléments de programmation ont été ajouté dans la section Python. La syntaxe n'est pas très conviviale, mais c'est déjà ça. Le test de comparaison des Rmst n'y pas implémenté, ce qui est dommage vu sa simplicité. Plus généralement, aucune inférence de l'estimateur ne semble être présente dans la fonction. 
+Implémenté au package `lifelines` récemment, des éléments de programmation ont été ajoutés dans la section Python. La syntaxe n'est pas très conviviale, mais c'est déjà ça. Le test de comparaison des Rmst n'y pas présente, ce qui est dommage vu sa simplicité, et je n'ai pas trouvé d'éléments d'inférence dans la fonction. 
 
 
 [{{<fa solid right-to-bracket>}}](17-Python.qmd#rmst)
