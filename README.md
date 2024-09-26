@@ -4,7 +4,7 @@
 
 **Principales mises à jour**
 
-**Prévision 2024**
+**2024**
 
 * Maj:
   * Versions du test de Grambsch-Therneau: Gls (warning) versus Ols (à privilégier)
