@@ -64,6 +64,7 @@ Programme de cette section: [Lien](programme_R.R)
 |                                         |     -   `multinom`                                    |
 +-----------------------------------------+-------------------------------------------------------+
 | **Autres (graphiques - mise en forme)** | -   `survminer`                                       |
+|                                         | -   `ggsurvfit` (new 2024)                            |
 |                                         |                                                       |
 |                                         | -   `jtools`                                          |
 |                                         |                                                       |
@@ -71,9 +72,14 @@ Programme de cette section: [Lien](programme_R.R)
 +-----------------------------------------+-------------------------------------------------------+
 
 
-**Installation**
+::: callout-note
 
-Les dernières versions de certains packages peuvent être installées via Github (ex: `survminer`). Pour les récupérer, passer par le package ```devtools```.  
+#### Package ggsurvfit
+ 
+Pour les représentations graphiques, grâce aux infos et conseils de Nicolas Robette, je vais commencer à substituer les fonctions du package de **`survminer`** par celles du package `ggsurvfit`.    
+Dans un premier temps, cette mise à jour est effetuée pour les estimateurs de Kaplan Meier. Pour les risques concurrents, également pris en charge par `ggsurvfit`, il faudra également changer de package pour l'estimation, en utilisant [**`tidycmprsk`**](https://mskcc-epi-bio.github.io/tidycmprsk/reference/cuminc.html) plutôt que le vieillissant `cmprsk`.   
+
+:::
 
 
 ```{r, message=FALSE, warning=FALSE}
@@ -92,6 +98,7 @@ Les dernières versions de certains packages peuvent être installées via Githu
 
 library(survival)
 library(survminer)
+library(ggsurvfit)
 library(flexsurv)
 library(survRM2)
 library(tidyr)
@@ -196,16 +203,18 @@ plot(fit)
 Le premier output `fit` permet d'obtenir la durée médiane, ici égale à 100 ($S(100)=0.494$). Le second  avec la fonction **`summary`** permet d'obtenir une table des estimateurs. La fonction de survie peut être tracée avec la fonction **`plot`** (en pointillés les intervalles de confiance).  
 
 
-On peut obtenir des graphes de  meilleur qualité avec la librairie **`survminer`**, avec la fonction **`ggsurvplot`**
+On peut obtenir des graphes demeilleur qualité avec le package **`ggsurvfit`**^[Changement avec la version précédente qui utilisait le package **`survminer`**]
 
 ```{r}
-ggsurvplot(fit, conf.int = TRUE)
+ggsurvfit(fit) 
 ```
 
-On peut ajouter la population encore soumise au risque à plusieurs points d'observation avec l'argument `risk.table = TRUE`
+On peut ajouter la population encore soumise au risque à plusieurs points d'observation avec l'argument `risk.table = TRUE`, les intervalles de confiances.
 
 ```{r}
-ggsurvplot(fit, conf.int = TRUE, risk.table = TRUE)
+ggsurvfit(fit) +
+add_confidence_interval() +  
+    add_risktable()
 ```
 
 
@@ -217,7 +226,9 @@ On va comparer les deux fonctions de séjour pour la variable *surgery*, celle p
 fit <- survfit(Surv(stime, died) ~ surgery, data = trans)
 fit
 
-ggsurvplot(fit, conf.int = TRUE, risk.table = TRUE)
+ggsurvfit(fit) +
+add_confidence_interval() +  
+    add_risktable()
 ```
 
 
@@ -558,6 +569,15 @@ weibullph
 
 
 ## Risques concurrents
+
+
+::: callout-important
+Mise à jour des packages prévues pour la fin de l'année: 
+
+* `cmprsk`    => `tidycmprsk`
+* `survminer` => `ggsurvfit` 
+
+:::
 
 Le package `cmprsk` pour l'analyse non paramétrique et le modèle de Fine-Gray (non traité).  
 

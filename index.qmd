@@ -14,6 +14,11 @@ Dans ce support, j'ai donc résumé le travail de S.Metzger dans la section déd
 
 [{{<fa solid right-to-bracket>}}](07-cox.qmd#test)
 
+[R: Graphiques avec **`ggsurvfit`**]{.box_text}  
+
+Grâce aux informations et conseils de Nicolas Robette, que je remercie, j'ai commencé à remplacer les fonctions de `survminer`, package qui n'est plus mis à jour de puis fort longtemps, par celles de [`ggsurvfit`](https://www.danieldsjoberg.com/ggsurvfit/). Ce package est co-développé par Daniel D.Sjoberg (`gtsummary`).  
+
+
 [Calcul des Rmst avec Python]{.box_text}    
   
 Implémenté au package `lifelines` récemment, des éléments de programmation ont été ajoutés dans la section Python. La syntaxe n'est pas très conviviale, mais c'est déjà ça. Le test de comparaison des Rmst n'y pas présente, ce qui est dommage vu sa simplicité, et je n'ai pas trouvé d'éléments d'inférence dans la fonction. 
