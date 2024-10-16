@@ -136,7 +136,7 @@ Deux gros classiques d'enquêtes biographiques de type rétrospectives produite 
 
 
 ::: {.box_img}
-![Biographie et entourage: base biographique logements](images/Image1.png){group="survey"}
+![Biographie et entourage: base biographique logements](images/Image2.png){group="survey"}
 :::
 
 
@@ -145,7 +145,7 @@ Deux gros classiques d'enquêtes biographiques de type rétrospectives produite 
 
 
 ::: {.box_img} 
-![MAFE: base caractéristiques individuelles](images/Image1.png){group="survey"}
+![MAFE: base caractéristiques individuelles](images/Image3.png){group="survey"}
 :::
 
 

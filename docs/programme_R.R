@@ -2,7 +2,7 @@
 # version antérieure de cox.zph (=>cox.zphold) préférable pour durées discrètes/groupées
 
 #install.packages("survival")
-#install.packages("survminer")
+#install.packages("ggsurvfit")
 #install.packages("flexsurv")
 #install.packages("survRM2")
 #install.packages("tidyr")
@@ -15,8 +15,10 @@
 #install.packages("gtsummary")
 #install.packages("nnet")
 #install.packages("muhaz")
+#install.packages("survminer")
 library(survival)
 library(survminer)
+library(ggsurvfit)
 library(flexsurv)
 library(survRM2)
 library(gtools)
@@ -52,8 +54,12 @@ fit
 summary(fit)
 plot(fit)
 
-ggsurvplot(fit, conf.int = TRUE)
-ggsurvplot(fit, conf.int = TRUE, risk.table = TRUE)
+ggsurvfit(fit) 
+
+ggsurvfit(fit) +
+  add_confidence_interval() +  
+  add_risktable()
+
 
 # estimation et visualisation de la fonction de risque
 # technique de lissage avec de nombreux paramètres. Ici paramètres par défaut.
@@ -64,7 +70,10 @@ plot(haz)
 ### comparaison
 fit <- survfit(Surv(stime, died) ~ surgery, data = trans)
 fit
-ggsurvplot(fit, conf.int = TRUE, risk.table = TRUE)
+
+ggsurvfit(fit) +
+  add_confidence_interval() +  
+  add_risktable()
 
 #### test log rank
 survdiff(Surv(stime, died) ~ surgery, rho=1, data = trans)
